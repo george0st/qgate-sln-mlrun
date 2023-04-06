@@ -4,5 +4,9 @@ Quality Gate for solution MLRun. The main aims of the project are:
 - cover gaps in tests which MLRun does not cover
 - identification of compatibility issues
 - automatization of standard tests
+=======
+- publish these tests for all
+- cover complex tests
+>>>>>>> Stashed changes
 - etc.
 
