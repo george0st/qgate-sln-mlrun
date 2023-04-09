@@ -1,0 +1,59 @@
+{
+  "name": "basic-party",
+  "description": "Party detail",
+  "targets": "parquet",
+  "entities": [
+    {
+      "name": "party-id",
+      "description": "Unigue party identificator",
+      "value_type": "string"
+    }
+  ],
+  "features": [
+    {
+      "name": "creat-date",
+      "description": "Date for party creation",
+      "value_type": "timestamp"
+    },
+    {
+      "name": "state",
+      "description": "Party state (e.g. prospect, lead, active-client, etc.)",
+      "value_type": "int"
+    },
+    {
+      "name": "parent-partyid",
+      "description": "Party parent identificator (e.g. lead->active-client)",
+      "value_type": "string"
+    },
+    {
+      "name": "residence",
+      "description": "Party residence (e.g. city, etc.)",
+      "value_type": "string"
+    },
+    {
+      "name": "income",
+      "description": "Monthly income in local currency",
+      "value_type": "int"
+    },
+    {
+      "name": "people-household",
+      "description": "Number of people in household",
+      "value_type": "int"
+    },
+    {
+      "name": "income-household",
+      "description": "Monthly income in local currency for household",
+      "value_type": "int"
+    },
+    {
+      "name": "expenses-household",
+      "description": "Monthly expenses (insurence, loans, etc.) for household",
+      "value_type": "int"
+    },
+    {
+      "name": "record-date",
+      "description": "The date when the record was created",
+      "value_type": "timestamp"
+    }
+  ]
+}

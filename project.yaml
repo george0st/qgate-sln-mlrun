@@ -1,0 +1,11 @@
+kind: project
+metadata:
+  name: gate
+spec:
+  functions: []
+  workflows: []
+  artifacts: []
+  conda: ''
+  source: git://github.com/george0st/qgate-mlrun.git#refs/heads/master
+  origin_url: git://github.com/george0st/qgate-mlrun.git#refs/heads/master
+  desired_state: online
