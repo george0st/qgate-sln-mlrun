@@ -84,10 +84,11 @@ class Project:
         project = mlrun.get_or_create_project(projectName, context="./", user_project=False)
 
         # create feature sets based on /assets/{projectName}*.json templates
-        for file in glob.glob(os.path.join(os.getcwd(),"assets",f"{projectName}*.json")):
-            self.__get_or_createFeatureSet(projectName, file, force)
-            with mlrun.get_or_create_ctx(projectName) as context:
-                context.logger.info(f"Create feature set based on '{os.path.basename(file)}'")
+        with mlrun.get_or_create_ctx(projectName) as context:
+            for file in glob.glob(os.path.join(os.getcwd(),"assets",f"{projectName}*.json")):
+                context.logger.info(f"Start, create feature set '{os.path.basename(file)}'")
+                self.__get_or_createFeatureSet(projectName, file, force)
+                context.logger.info(f"End, created feature set '{os.path.basename(file)}'")
 
     def delete(self):
         for prj in self.projects:

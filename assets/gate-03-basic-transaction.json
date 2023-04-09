@@ -21,14 +21,19 @@
   ],
   "features": [
     {
-      "name": "value",
+      "name": "transaction-value",
       "description": "Transaction value",
       "value_type": "double"
     },
     {
-      "name": "currency",
+      "name": "transaction-currency",
       "description": "Transaction currency",
       "value_type": "int"
+    },
+    {
+      "name": "transaction-date",
+      "description": "Transaction date",
+      "value_type": "timestamp"
     },
     {
       "name": "record-date",

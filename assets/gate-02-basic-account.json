@@ -16,17 +16,17 @@
   ],
   "features": [
     {
-      "name": "type",
+      "name": "account-type",
       "description": "Type of party account (saving account, current account, etc.)",
       "value_type": "int"
     },
     {
-      "name": "open-date",
-      "description": "Account opening date",
+      "name": "account-createdate",
+      "description": "Date for account creation",
       "value_type": "timestamp"
     },
     {
-      "name": "state",
+      "name": "account-state",
       "description": "Account state (e.g. active, closed, etc.)",
       "value_type": "int"
     },
