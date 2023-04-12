@@ -11,38 +11,68 @@
   ],
   "features": [
     {
-      "name": "party-createdate",
-      "description": "Date for party type creation (data for change of the state)",
+      "name": "party-establishment",
+      "description": "Date of establishment of the party (e.g. birthday for client, etc.",
       "value_type": "timestamp"
     },
     {
-      "name": "party-year",
-      "description": "Date of establishment (birthday) of the party (value in year)",
-      "value_type": "int"
+      "name": "party-type",
+      "description": "Party state (e.g. prospect, lead, client, etc.)",
+      "value_type": "string"
     },
     {
-      "name": "party-state",
-      "description": "Party state (e.g. prospect, lead, active-client, etc.)",
+      "name": "party-typedate",
+      "description": "Date for party type creation (data for change of the state to the prospect or client)",
+      "value_type": "timestamp"
+    },
+    {
+      "name": "party-gender",
+      "description": "Party gender",
+      "value_type": "string"
+    },
+    {
+      "name": "party-education",
+      "description": "Party education (e.g. university, high-school, etc.)",
+      "value_type": "string"
+    },
+    {
+      "name": "party-familystatus",
+      "description": "Family status for party (e.g. xxx, etc.)",
+      "value_type": "string"
+    },
+    {
+      "name": "party-nchild",
+      "description": "Count of children",
       "value_type": "int"
     },
     {
       "name": "party-industry",
       "description": "Party industry (e.g. IT, Medical, Finance, etc.)",
-      "value_type": "int"
+      "value_type": "string"
     },
     {
       "name": "party-industryposition",
       "description": "Party position in industry (e.g. IT-developer, IT-admin, Finance-Accountant, etc.)",
-      "value_type": "int"
+      "value_type": "string"
     },
     {
-      "name": "party-residence",
+      "name": "party-residencecountry",
+      "description": "Party residence (e.g. country, etc.)",
+      "value_type": "string"
+    },
+    {
+      "name": "party-residencecity",
       "description": "Party residence (e.g. city, etc.)",
       "value_type": "string"
     },
     {
       "name": "party-income",
       "description": "Monthly income in local currency",
+      "value_type": "int"
+    },
+    {
+      "name": "party-incometype",
+      "description": "Type in income",
       "value_type": "int"
     },
     {
