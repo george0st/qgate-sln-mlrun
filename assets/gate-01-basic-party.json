@@ -86,7 +86,7 @@
       "value_type": "int"
     },
     {
-      "name": "party-expenseshousehold",
+        "name": "party-expenseshousehold",
       "description": "Monthly expenses (insurence, loans, etc.) for household",
       "value_type": "int"
     },
