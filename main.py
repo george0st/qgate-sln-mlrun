@@ -1,7 +1,8 @@
-import qgate.project as prj
-
+import qgate.solution as sln
 
 if __name__ == '__main__':
-    aa=prj.Project("mlrun-nonprod.env")
-    aa.createProject("gate",force=True)
-    aa.delete()
+    aa=sln.Solution("mlrun-nonprod.env")
+    try:
+        aa.create(force=True)
+    finally:
+        aa.delete()
