@@ -1,4 +1,11 @@
 /project.yaml
 **/__pycache__/
 /venv/
+*.pyc
+.aws-secrets
+.idea/
+.pytest_cache/
+.vscode/
+.bin
+*venv*
 
