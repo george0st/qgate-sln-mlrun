@@ -20,6 +20,7 @@ class Solution:
 
         self._mlrun_env_file=mlrun_env_file
         self._model_dir=model_dir
+        self._variables={}
         self._projects=[]
 
     def _create_featureset(self, featureset_name, featureset_desc, json_spec):
@@ -146,7 +147,7 @@ class Solution:
         """
 
         # setup environment
-        mlrun.set_env_from_file(self._mlrun_env_file)
+        self._variables=mlrun.set_env_from_file(self._mlrun_env_file, return_dict=True)
 
         # create projects
         self._get_or_create_projects(force)
