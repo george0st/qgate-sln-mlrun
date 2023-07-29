@@ -11,10 +11,10 @@ import os
 class Solution:
     """Create solution"""
 
-    def __init__(self, mlrun_env_file: str, model_dir: str="qgate-fs-model"):
+    def __init__(self, mlrun_env_file: list[str], model_dir: str="qgate-fs-model"):
         """Create solution
 
-        :param mlrun_env_file:  path to *.env
+        :param mlrun_env_file:  path to *.env files
         :param model_dir:       path do the 'qgate-fs-model'
         """
 
@@ -147,7 +147,10 @@ class Solution:
         """
 
         # setup environment
-        self._variables=mlrun.set_env_from_file(self._mlrun_env_file, return_dict=True)
+        for env_file in self._mlrun_env_file:
+            if os.path.isfile(env_file):
+                self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
+                break
 
         # create projects
         self._get_or_create_projects(force)
