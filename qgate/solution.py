@@ -156,7 +156,7 @@ class Solution:
 
         for prj_name in self._projects:
             mlrun.get_run_db().delete_project(prj_name, mlrun.api.schemas.constants.DeletionStrategy.cascade)
-            self._log(f"Deleted project '{prj_name}'")
+            self._log(f"!!! Deleted project '{prj_name}'")
 
 
 
