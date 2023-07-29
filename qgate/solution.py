@@ -154,8 +154,9 @@ class Solution:
     def delete(self):
         """Delete solution"""
 
-        for prj in self._projects:
-            mlrun.get_run_db().delete_project(prj, mlrun.api.schemas.constants.DeletionStrategy.cascade)
+        for prj_name in self._projects:
+            mlrun.get_run_db().delete_project(prj_name, mlrun.api.schemas.constants.DeletionStrategy.cascade)
+            self._log(f"Deleted project '{prj_name}'")
 
 
 
