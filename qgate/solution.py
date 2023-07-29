@@ -11,16 +11,23 @@ import os
 class Solution:
     """Create solution"""
 
-    def __init__(self, mlrun_env_file: list[str], model_dir: str="qgate-fs-model"):
+    def __init__(self, mlrun_env_file: list[str]):
         """Create solution
 
         :param mlrun_env_file:  path to *.env files
         :param model_dir:       path do the 'qgate-fs-model'
         """
 
-        self._mlrun_env_file=mlrun_env_file
-        self._model_dir=model_dir
-        self._variables={}
+        # set variables
+        for env_file in mlrun_env_file:
+            if os.path.isfile(env_file):
+                self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
+                break
+
+        # set model dir
+        self._model_dir=self._variables['QGATE-FS-MODEL']
+
+        # set projects
         self._projects=[]
 
     def _create_featureset(self, featureset_name, featureset_desc, json_spec):
@@ -145,12 +152,6 @@ class Solution:
 
         :param force:   create parts of solution in each case, default is True
         """
-
-        # setup environment
-        for env_file in self._mlrun_env_file:
-            if os.path.isfile(env_file):
-                self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
-                break
 
         # create projects
         self._get_or_create_projects(force)

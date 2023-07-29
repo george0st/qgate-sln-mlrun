@@ -1,13 +1,8 @@
-import qgate.solution as qgatesln
+import qgate.solution as qgate
 import os.path
 
 if __name__ == '__main__':
 
-    sln=qgatesln.Solution(["qgate-mlrun-private.env", "qgate-mlrun.env"],
-                          os.path.join("..", "qgate-fs-model"))
-    try:
-        sln.create(force=True)
-    except Exception as ex:
-        print(ex)
-    finally:
-        sln.delete()
+    sln=qgate.Solution(["qgate-mlrun-private.env", "qgate-mlrun.env"])
+    sln.create(force=True)
+    sln.delete()
