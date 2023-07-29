@@ -4,31 +4,36 @@ from mlrun.features import Feature
 from mlrun.data_types.data_types import spark_to_value_type
 from mlrun.projects.project import MlrunProject
 import json
-import os, glob
+import glob
+import os
 
 
 class Solution:
     """Create solution"""
 
-    def __init__(self, mlrun_env_file: str, model_dir: str=f"qgate-fs-model"):
-        """Create project
+    def __init__(self, mlrun_env_file: str, model_dir: str="qgate-fs-model"):
+        """Create solution
 
-        :param mlrun_env_file: path to *.env
+        :param mlrun_env_file:  path to *.env
+        :param model_dir:       path do the 'qgate-fs-model'
         """
-        self.mlrun_env_file=mlrun_env_file
-        self.model_dir=model_dir
-        self.projects=[]
 
-    def _create_featureset(self, feature_name, feature_desc, json_spec):
+        self._mlrun_env_file=mlrun_env_file
+        self._model_dir=model_dir
+        self._projects=[]
+
+    def _create_featureset(self, featureset_name, featureset_desc, json_spec):
         """
-        Create feature set based on json spec
-        :param json_spec:  Json content
-        :return:
+        Create featureset based on json spec
+
+        :param featureset_name:    feature name
+        :param featureset_desc:    feature description
+        :param json_spec:  Json specification for this featureset
         """
 
         fs = fstore.FeatureSet(
-            name=feature_name,
-            description=feature_desc
+            name=featureset_name,
+            description=featureset_desc
         )
 
         # define entities
@@ -56,29 +61,42 @@ class Solution:
         fs.save()
 
 
-    def _get_or_create_featureset(self, project_name: str, spec: list[str], force: bool):
-        dir=os.path.join(os.getcwd(), "..", self.model_dir, "01-model", "02-feature-set", "*.json")
+    def _get_or_create_featuresets(self, project_name: str, project_spec: list[str], force: bool):
+        """ Get or create featuresets
+
+        :param project_name:    project name
+        :param project_spec:    project specification
+        :param force:           create in each case, default is True
+        """
+        dir=os.path.join(os.getcwd(), self._model_dir, "01-model", "02-feature-set", "*.json")
         for file in glob.glob(dir):
 
-            # check only relevant items
+            # iterate cross all featureset definitions
             with open(file, "r") as json_file:
                 json_content = json.load(json_file)
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
                 if kind=="feature-set":
-                    if name in spec:
+                    if name in project_spec:        # build only featuresets based on project spec
                         if force:
                             # create feature set, independent on exiting one
                             self._create_featureset(name, desc, json_content['spec'])
+                            self._log(f"  Created featureset '{name}'")
                         else:
                             # create feature set only in case that it does not exist
                             try:
                                 fstore.get_feature_set(f"{project_name}/{name}")
+                                self._log(f"  Used featureset '{name}'")
                             except:
                                 self._create_featureset(name, desc, json_content['spec'])
-
+                                self._log(f"  Created featureset '{name}'")
 
     def _get_json_header(self, json_content):
+        """ Get common header
+
+        :param json_content: jsou content
+        :return: name, description, labeles and kind from header
+        """
         name = json_content['name']
         desc = json_content['description']
         kind = json_content['kind']
@@ -87,14 +105,18 @@ class Solution:
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
 
-    def log(self, info):
+    def _log(self, info):
+        """ Logging
+
+        :param info: message
+        """
         #        context=mlrun.get_or_create_ctx("gate")
         #        context.logger.info(info)
         print(info)
 
-    def _get_or_create_project(self, force: bool):
+    def _get_or_create_projects(self, force: bool):
         # create projects
-        dir=os.path.join(os.getcwd(), "..", self.model_dir, "01-model", "01-project", "*.json")
+        dir=os.path.join(os.getcwd(), self._model_dir, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with open(file, "r") as json_file:
                 json_content = json.load(json_file)
@@ -103,8 +125,8 @@ class Solution:
                 #TODO: asset kind
 
                 # create project
-                self.log(f"Init, project '{name}'")
-                self.projects.append(name)
+                self._log(f"Creating project '{name}'")
+                self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
                 for lbl in lbls:
@@ -112,21 +134,27 @@ class Solution:
                 prj.save()
 
                 # create featureset
-                self._get_or_create_featureset(name, json_content['spec'], force)
+                self._get_or_create_featuresets(name, json_content['spec'], force)
 
-                self.log(f"Created, project '{name}'")
+                self._log(f"Created project '{name}'")
 
 
     def create(self, force: bool):
+        """Create solution
+
+        :param force:   create parts of solution in each case, default is True
+        """
 
         # setup environment
-        mlrun.set_env_from_file(self.mlrun_env_file)
+        mlrun.set_env_from_file(self._mlrun_env_file)
 
         # create projects
-        self._get_or_create_project(force)
+        self._get_or_create_projects(force)
 
     def delete(self):
-        for prj in self.projects:
+        """Delete solution"""
+
+        for prj in self._projects:
             mlrun.get_run_db().delete_project(prj, mlrun.api.schemas.constants.DeletionStrategy.cascade)
 
 

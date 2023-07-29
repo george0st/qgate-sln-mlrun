@@ -1,8 +1,10 @@
-import qgate.solution as sln
+import qgate.solution as qgatesln
+import os.path
 
 if __name__ == '__main__':
-    aa=sln.Solution("mlrun-nonprod.env")
+
+    sln=qgatesln.Solution("mlrun-nonprod.env", os.path.join("..","qgate-fs-model"))
     try:
-        aa.create(force=True)
+        sln.create(force=True)
     finally:
-        aa.delete()
+        sln.delete()
