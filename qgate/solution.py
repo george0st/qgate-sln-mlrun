@@ -68,7 +68,6 @@ class Solution:
 
         fs.save()
 
-
     def _get_or_create_featuresets(self, project_name: str, project_spec: list[str], force: bool):
         """ Get or create featuresets
 
@@ -145,7 +144,6 @@ class Solution:
                 self._get_or_create_featuresets(name, json_content['spec'], force)
 
                 self._log(f"Created project '{name}'")
-
 
     def create(self, force: bool):
         """Create solution
