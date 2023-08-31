@@ -132,7 +132,7 @@ class Solution:
                 #TODO: asset kind
 
                 # create project
-                self._log(f"Creating project '{name}'")
+                self._log(f"Creating project '{name}'...")
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
