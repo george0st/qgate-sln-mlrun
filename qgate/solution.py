@@ -6,12 +6,13 @@ from mlrun.projects.project import MlrunProject
 import json
 import glob
 import os
+import pandas as pd
 
 
 class Solution:
     """Create solution"""
 
-    def __init__(self, mlrun_env_file: list[str]):
+    def __init__(self, data_size, mlrun_env_file: list[str]):
         """Create solution
 
         :param mlrun_env_file:  path to *.env files
@@ -32,6 +33,7 @@ class Solution:
 
         # set projects
         self._projects=[]
+        self._data_size=data_size
 
     def _create_featureset(self, featureset_name, featureset_desc, json_spec):
         """
@@ -70,6 +72,7 @@ class Solution:
         fs.set_targets(targets, with_defaults=False)
 
         fs.save()
+        return fs
 
     def _get_or_create_featuresets(self, project_name: str, project_spec: list[str], force: bool):
         """ Get or create featuresets
@@ -90,16 +93,21 @@ class Solution:
                     if name in project_spec:        # build only featuresets based on project spec
                         if force:
                             # create feature set, independent on exiting one
-                            self._create_featureset(name, desc, json_content['spec'])
-                            self._log(f"  Created featureset '{name}'")
+                            fs=self._create_featureset(name, desc, json_content['spec'])
+                            self._log(f"  Created featureset '{name}'...")
                         else:
                             # create feature set only in case that it does not exist
                             try:
-                                fstore.get_feature_set(f"{project_name}/{name}")
-                                self._log(f"  Used featureset '{name}'")
+                                fs=fstore.get_feature_set(f"{project_name}/{name}")
+                                self._log(f"  Used featureset '{name}'...")
                             except:
-                                self._create_featureset(name, desc, json_content['spec'])
-                                self._log(f"  Created featureset '{name}'")
+                                fs=self._create_featureset(name, desc, json_content['spec'])
+                                self._log(f"  Created featureset '{name}'...")
+
+                        # load data for specific featureset
+                        self._load_data(name, fs)
+
+
 
     def _get_json_header(self, json_content):
         """ Get common header
@@ -157,12 +165,34 @@ class Solution:
         # create projects
         self._get_or_create_projects(force)
 
+
     def delete(self):
         """Delete solution"""
 
         for prj_name in self._projects:
             mlrun.get_run_db().delete_project(prj_name,"cascade")
-            self._log(f"!!! Deleted project '{prj_name}'")
+            self._log(f"Deleted project '{prj_name}' !!!")
+
+    def _load_data(self, featureset_name: str, featureset: mlrun.feature_store.feature_set):
+
+        dir=os.path.join(os.getcwd(), self._model_dir, "02-data", self._data_size, f"*-{featureset_name}.csv.gz")
+        for file in glob.glob(dir):
+            self._log("    Load data...")
+            data_frm=pd.read_csv(file,
+                                 sep=";",
+                                 header="infer",
+                                 decimal=",",
+                                 compression="gzip",
+                                 encoding="utf-8")
+
+            fstore.ingest(featureset,
+                          data_frm,
+                          overwrite=True,
+                          return_df=False,
+                          infer_options=mlrun.data_types.data_types.InferOptions.default())
+            #print(data_frm)
+
+
 
 
 
