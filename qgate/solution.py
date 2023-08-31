@@ -18,6 +18,9 @@ class Solution:
         :param model_dir:       path do the 'qgate-fs-model'
         """
 
+        # logging MLRun version
+        self._log(f"Mlrun version: {mlrun.get_version()}")
+
         # set variables
         for env_file in mlrun_env_file:
             if os.path.isfile(env_file):
@@ -158,7 +161,7 @@ class Solution:
         """Delete solution"""
 
         for prj_name in self._projects:
-            mlrun.get_run_db().delete_project(prj_name, mlrun.api.schemas.constants.DeletionStrategy.cascade)
+            mlrun.get_run_db().delete_project(prj_name,"cascade")
             self._log(f"!!! Deleted project '{prj_name}'")
 
 
