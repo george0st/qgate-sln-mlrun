@@ -10,3 +10,4 @@
 *venv*
 qgate-sln-mlrun-private.env
 
+*.pyc
