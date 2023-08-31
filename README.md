@@ -1,5 +1,5 @@
-# QGate-MLRun
-Quality Gate for solution MLRun and Iguazio. The main aims of the project are:
+# QGate-Sln-MLRun
+Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
 - independent quality test (function, integration, acceptance, performance, ... tests) of MLRun/Iguazio versions
 - identification of compatibility issues
 - deeper quality checks
@@ -13,15 +13,15 @@ The tests use these key components:
 ## Usage
 You can easy use this solution in three steps:
 1. Download content of these two GIT repositories to your local environment
-    - [qgate-mlrun](https://github.com/george0st/qgate-mlrun)
+    - [qgate-sln-mlrun](https://github.com/george0st/qgate-sln-mlrun)
     - [qgate-model](https://github.com/george0st/qgate-model)
-2. Update file `qgate-mlrun.env` from qgate-model
+2. Update file `qgate-sln-mlrun.env` from qgate-model
    - Update variables for MLRun/Iguazio, see `MLRUN_DBPATH`, `V3IO_USERNAME`, `V3IO_ACCESS_KEY`, `V3IO_API`
    - Update variables for QGate, see `qgate-model`
 3. Run from QGate-MLRun
    - **python main.py**
 
-Precondition: You have available MLRun or Iguazio solution, see [installation steps](https://docs.mlrun.org/en/latest/install.html)
+Precondition: You have available MLRun (tested with >= 1.3.0) or Iguazio solution (MLRun is part of that), see [installation steps](https://docs.mlrun.org/en/latest/install.html)
 
 ## Use cases
 Quality Gate covers these use cases, TBD.

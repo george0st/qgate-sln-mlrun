@@ -8,5 +8,5 @@
 .vscode/
 .bin
 *venv*
-qgate-mlrun-private.env
+qgate-sln-mlrun-private.env
 

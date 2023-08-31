@@ -3,7 +3,7 @@ import os.path
 
 if __name__ == '__main__':
 
-    sln = qgate.Solution(["qgate-mlrun-private.env", "qgate-mlrun.env"])
+    sln = qgate.Solution(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
     try:
         sln.create(force=True)
     finally:
