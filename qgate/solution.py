@@ -154,8 +154,6 @@ class Solution:
                 # create featureset
                 self._get_or_create_featuresets(name, json_content['spec'], force)
 
-                self._log(f"Created project '{name}'")
-
     def create(self, force: bool):
         """Create solution
 
@@ -169,9 +167,10 @@ class Solution:
     def delete(self):
         """Delete solution"""
 
+        self._log(f"Deleted ALL")
         for prj_name in self._projects:
             mlrun.get_run_db().delete_project(prj_name,"cascade")
-            self._log(f"Deleted project '{prj_name}' !!!")
+            self._log(f"  Deleted project '{prj_name}' !!!")
 
     def _load_data(self, featureset_name: str, featureset: mlrun.feature_store.feature_set):
 
