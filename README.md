@@ -7,17 +7,17 @@ Quality Gate for solution MLRun and Iguazio. The main aims of the project are:
 - etc.
 
 The tests use these key components:
- - MLRun solution (used in Iguazio solution also), see **[GIT MLRun](https://github.com/mlrun/mlrun)**
- - Sample data model, see **[GIT QGate-FS-Model](https://github.com/george0st/qgate-fs-model)**
+ - MLRun solution (used in Iguazio solution also), see **[GIT mlrun](https://github.com/mlrun/mlrun)**
+ - Sample data model, see **[GIT qgate-model](https://github.com/george0st/qgate-model)**
 
 ## Usage
 You can easy use this solution in three steps:
 1. Download content of these two GIT repositories to your local environment
-    - [QGate-MLRun](https://github.com/george0st/qgate-mlrun)
-    - [QGate-FS-Model](https://github.com/george0st/qgate-fs-model)
-2. Update file `qgate-mlrun.env` from QGate-FS-Model
+    - [qgate-mlrun](https://github.com/george0st/qgate-mlrun)
+    - [qgate-model](https://github.com/george0st/qgate-model)
+2. Update file `qgate-mlrun.env` from qgate-model
    - Update variables for MLRun/Iguazio, see `MLRUN_DBPATH`, `V3IO_USERNAME`, `V3IO_ACCESS_KEY`, `V3IO_API`
-   - Update variables for QGate, see `QGATE-FS-MODEL`
+   - Update variables for QGate, see `qgate-model`
 3. Run from QGate-MLRun
    - **python main.py**
 

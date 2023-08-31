@@ -25,7 +25,7 @@ class Solution:
                 break
 
         # set model dir
-        self._model_dir=self._variables['QGATE-FS-MODEL']
+        self._model_dir=self._variables['QGATE-MODEL']
 
         # set projects
         self._projects=[]
