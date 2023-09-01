@@ -188,7 +188,7 @@ class Solution:
                           data_frm,
                           overwrite=True,
                           return_df=False,
-                          infer_options=mlrun.data_types.data_types.InferOptions.default())
+                          infer_options=mlrun.data_types.data_types.InferOptions.Null)
             #print(data_frm)
 
 
