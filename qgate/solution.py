@@ -177,19 +177,21 @@ class Solution:
         dir=os.path.join(os.getcwd(), self._model_dir, "02-data", self._data_size, f"*-{featureset_name}.csv.gz")
         for file in glob.glob(dir):
             self._log("    Load data...")
-            data_frm=pd.read_csv(file,
-                                 sep=";",
-                                 header="infer",
-                                 decimal=",",
-                                 compression="gzip",
-                                 encoding="utf-8")
 
-            fstore.ingest(featureset,
-                          data_frm,
-                          overwrite=True,
-                          return_df=False,
-                          infer_options=mlrun.data_types.data_types.InferOptions.Null)
-            #print(data_frm)
+            for data_frm in pd.read_csv(file,
+                                     sep=";",
+                                     header="infer",
+                                     decimal=",",
+                                     compression="gzip",
+                                     encoding="utf-8",
+                                     chunksize=10000):
+                fstore.ingest(featureset,
+                              data_frm,
+                              overwrite=False,
+                              return_df=False,
+                              infer_options=mlrun.data_types.data_types.InferOptions.Null)
+
+
 
 
 
