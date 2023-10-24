@@ -31,14 +31,19 @@ Quality Gate covers these use cases:
    - UC102: Delete projects
  - **Feature Set**
    - UC201: Create feature sets (with entities, features, targets)
+   - UC202: Create feature vector
  - **Ingest data**
    - UC301: Ingest data to feature sets
+ - **Feature vector**
+   - UC401: Join data from one feature set
+   - UC402: Join data from two feature sets
+   - UC403: Join data from four feature sets
 
 ## Test with
 The project was test with these versions:
- - Iguazio
+ - Iguazio (k8s, on-prem with VM with VMware)
    - Iguazio 3.5.3 (with MLRun 1.4.1)
    - Iguazio 3.5.1 (with MLRun 1.3.0)
  - MLRun (in Desktop Docker)
-   - MLRun 1.4.1
-   - MLRun 1.3.0
+   - MLRun 1.5.0
+   - MLRun 1.4.1, 1.3.0
