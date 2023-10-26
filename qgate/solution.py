@@ -29,7 +29,8 @@ class Solution:
                 break
 
         # set model dir
-        self._model_dir=self._variables['QGATE-MODEL']
+        self._model_definition=self._variables['QGATE_DEFINITION']
+        self._model_output=self._variables['QGATE_OUTPUT']
 
         # set projects
         self._projects=[]
@@ -81,7 +82,7 @@ class Solution:
         :param project_spec:    project specification
         :param force:           create in each case, default is True
         """
-        dir=os.path.join(os.getcwd(), self._model_dir, "01-model", "02-feature-set", "*.json")
+        dir=os.path.join(os.getcwd(), self._model_definition, "01-model", "02-feature-set", "*.json")
         for file in glob.glob(dir):
 
             # iterate cross all featureset definitions
@@ -134,7 +135,7 @@ class Solution:
 
     def _get_or_create_projects(self, force: bool):
         # create projects
-        dir=os.path.join(os.getcwd(), self._model_dir, "01-model", "01-project", "*.json")
+        dir=os.path.join(os.getcwd(), self._model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with open(file, "r") as json_file:
                 json_content = json.load(json_file)
@@ -174,7 +175,7 @@ class Solution:
 
     def _load_data(self, featureset_name: str, featureset: mlrun.feature_store.feature_set):
 
-        dir=os.path.join(os.getcwd(), self._model_dir, "02-data", self._data_size, f"*-{featureset_name}.csv.gz")
+        dir=os.path.join(os.getcwd(), self._model_definition, "02-data", self._data_size, f"*-{featureset_name}.csv.gz")
         for file in glob.glob(dir):
             self._log("    Load data...")
 
