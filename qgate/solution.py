@@ -69,6 +69,7 @@ class Solution:
             )
 
         # define targets
+        # TODO: change target location based on 'QGATE_OUTPUT'
         targets=json_spec['targets']
         fs.set_targets(targets, with_defaults=False)
 
