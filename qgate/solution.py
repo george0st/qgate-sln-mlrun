@@ -2,6 +2,7 @@ import mlrun
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.data_types.data_types import spark_to_value_type
+from mlrun.datastore import ParquetTarget
 from mlrun.projects.project import MlrunProject
 import json
 import glob
@@ -69,9 +70,18 @@ class Solution:
             )
 
         # define targets
-        # TODO: change target location based on 'QGATE_OUTPUT'
-        targets=json_spec['targets']
-        fs.set_targets(targets, with_defaults=False)
+        count=0
+        target_providers=[]
+        for target in json_spec['targets']:
+            if target.lower().strip()=="parquet":
+                # support more parquet targets
+                target_name=f"target_{count}"
+                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self._model_output,target_name)))
+            else:
+                # TODO: Add support other targets for MLRun CE e.g. RedisTarget
+                raise NotImplementedError()
+            count+=1
+        fs.set_targets(target_providers, with_defaults=False)
 
         fs.save()
         return fs
@@ -173,6 +183,8 @@ class Solution:
         for prj_name in self._projects:
             mlrun.get_run_db().delete_project(prj_name,"cascade")
             self._log(f"  Deleted project '{prj_name}' !!!")
+
+        # TODO: clean output directory (self._model_output)
 
     def _load_data(self, featureset_name: str, featureset: mlrun.feature_store.feature_set):
 
