@@ -8,6 +8,7 @@ import json
 import glob
 import os
 import pandas as pd
+import shutil
 
 
 class Solution:
@@ -75,6 +76,7 @@ class Solution:
         for target in json_spec['targets']:
             if target.lower().strip()=="parquet":
                 # support more parquet targets
+                # TODO: reflect project in path
                 target_name=f"target_{count}"
                 target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self._model_output,target_name)))
             else:
@@ -179,12 +181,15 @@ class Solution:
     def delete(self):
         """Delete solution"""
 
+        # clean projects
         self._log(f"Deleted ALL")
         for prj_name in self._projects:
             mlrun.get_run_db().delete_project(prj_name,"cascade")
             self._log(f"  Deleted project '{prj_name}' !!!")
 
-        # TODO: clean output directory (self._model_output)
+        # clean output directory
+        if os.path.exists(self._model_output):
+            shutil.rmtree(self._model_output, True)
 
     def _load_data(self, featureset_name: str, featureset: mlrun.feature_store.feature_set):
 
