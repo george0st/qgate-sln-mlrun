@@ -38,12 +38,13 @@ class Solution:
         self._projects=[]
         self._data_size=data_size
 
-    def _create_featureset(self, featureset_name, featureset_desc, json_spec):
+    def _create_featureset(self, project_name, featureset_name, featureset_desc, json_spec):
         """
         Create featureset based on json spec
 
-        :param featureset_name:    feature name
-        :param featureset_desc:    feature description
+        :param project_name:        project name
+        :param featureset_name:     feature name
+        :param featureset_desc:     feature description
         :param json_spec:  Json specification for this featureset
         """
 
@@ -75,10 +76,9 @@ class Solution:
         target_providers=[]
         for target in json_spec['targets']:
             if target.lower().strip()=="parquet":
-                # support more parquet targets
-                # TODO: reflect project in path
+                # support more parquet targets (each target has different path)
                 target_name=f"target_{count}"
-                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self._model_output,target_name)))
+                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self._model_output,project_name, target_name)))
             else:
                 # TODO: Add support other targets for MLRun CE e.g. RedisTarget
                 raise NotImplementedError()
@@ -107,7 +107,7 @@ class Solution:
                     if name in project_spec:        # build only featuresets based on project spec
                         if force:
                             # create feature set, independent on exiting one
-                            fs=self._create_featureset(name, desc, json_content['spec'])
+                            fs=self._create_featureset(project_name, name, desc, json_content['spec'])
                             self._log(f"  Created featureset '{name}'...")
                         else:
                             # create feature set only in case that it does not exist
@@ -115,7 +115,7 @@ class Solution:
                                 fs=fstore.get_feature_set(f"{project_name}/{name}")
                                 self._log(f"  Used featureset '{name}'...")
                             except:
-                                fs=self._create_featureset(name, desc, json_content['spec'])
+                                fs=self._create_featureset(project_name, name, desc, json_content['spec'])
                                 self._log(f"  Created featureset '{name}'...")
 
                         # load data for specific featureset
