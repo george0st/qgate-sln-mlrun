@@ -18,7 +18,7 @@ You can easy use this solution in three steps:
 2. Update file `qgate-sln-mlrun.env` from qgate-model
    - Update variables for MLRun/Iguazio, see `MLRUN_DBPATH`, `V3IO_USERNAME`, `V3IO_ACCESS_KEY`, `V3IO_API`
      - setting of `V3IO_*` is needed only in case of Iguazio installation (not for pure free MLRun)
-   - Update variables for QGate, see `QGATE_DEFINITION` and 'QGATE_OUTPUT'
+   - Update variables for QGate, see `QGATE_*`
 3. Run from `qgate-sln-mlrun`
    - **python main.py**
 
@@ -40,7 +40,7 @@ Quality Gate covers these use cases:
    - UC403: Join data from four feature sets
 
 ## Test with
-The project was test with these versions:
+The project was test with these versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - Iguazio (k8s, on-prem with VM with VMware)
    - Iguazio 3.5.3 (with MLRun 1.4.1)
    - Iguazio 3.5.1 (with MLRun 1.3.0)
