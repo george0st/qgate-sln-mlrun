@@ -1,14 +1,15 @@
 # QGate-Sln-MLRun
 Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
 - independent quality test (function, integration, acceptance, ... tests)
-- deeper quality checks before rollout to company environments
-- identification of compatibility issues
-- external test coverage
+- deeper quality checks before rollout/use in company environments
+- identification of compatibility issues (if any)
+- external and independent test coverage
 - etc.
 
 The tests use these key components:
  - MLRun solution (used in Iguazio solution also), see **[GIT mlrun](https://github.com/mlrun/mlrun)**
- - Sample data model, see **[GIT qgate-model](https://github.com/george0st/qgate-model)**
+ - Sample meta-data model, see **[GIT qgate-model](https://github.com/george0st/qgate-model)**
+ - This project
 
 ## Usage
 You can easy use this solution in three steps:
@@ -27,17 +28,17 @@ Precondition: You have available MLRun or Iguazio solution (MLRun is part of tha
 ## Use cases
 Quality Gate covers these use cases:
  - **Project**
-   - UC101: Create projects
-   - UC102: Delete projects
- - **Feature Set**
-   - UC201: Create feature sets (with entities, features, targets)
-   - UC202: Create feature vector
+   - [ ] UC101: Create project
+   - [ ] UC102: Delete project
+ - **Feature set**
+   - [ ] UC201: Create feature sets (with entities, features, targets) 
+   - [ ] UC202: Create feature vector
  - **Ingest data**
-   - UC301: Ingest data to feature sets
+   - [ ] UC301: Ingest data to feature sets
  - **Feature vector**
-   - UC401: Join data from one feature set
-   - UC402: Join data from two feature sets
-   - UC403: Join data from four feature sets
+   - [ ] UC401: Get data from one feature set
+   - [ ] UC402: Join data from two feature sets
+   - [ ] UC403: Join data from four feature sets
 
 ## Tested with
 The project was test with these versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
