@@ -1,7 +1,7 @@
 # QGate-Sln-MLRun
 Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
 - independent quality test (function, integration, acceptance, ... tests)
-- deeper quality checks before rollout/use in company environments
+- deeper quality checks before full rollout/use in company environments
 - identification of compatibility issues (if any)
 - external and independent test coverage
 - etc.
@@ -47,5 +47,5 @@ The project was test with these versions (see [change log](https://docs.mlrun.or
    - Iguazio 3.5.1 (with MLRun 1.3.0)
  - MLRun (in Desktop Docker)
    - MLRun 1.5.1, 1.5.0
-   - MLRun 1.4.1 
+   - MLRun 1.4.1
    - MLRun 1.3.0
