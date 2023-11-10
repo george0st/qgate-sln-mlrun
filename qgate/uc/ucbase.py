@@ -1,4 +1,5 @@
 
+from qgate.uc.ucsetup import UCSetup
 from dotenv import dotenv_values
 import mlrun
 import mlrun.feature_store as fstore
@@ -17,8 +18,9 @@ class UCBase:
     Base class for all use cases
     """
 
-    def __init__(self, name):
-        self._label=name
+    def __init__(self, setup: UCSetup, name):
+        self._setup=setup
+        self._name=name
 
 
     def _get_json_header(self, json_content):
@@ -37,7 +39,7 @@ class UCBase:
 
     @property
     def label(self):
-        return self._label
+        return self._name
 
     @staticmethod
     def str2bool(v):

@@ -20,7 +20,7 @@ class UCOutput:
     def _headr(self):
         pass
 
-    def output(self, uc_name, *args, **kwargs):
+    def usecase_output(self, uc_name, *args, **kwargs):
         self._file.write(uc_name + str.format(args, kwargs) + '\n')
 
 

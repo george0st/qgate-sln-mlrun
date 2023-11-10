@@ -4,6 +4,7 @@
 
 import mlrun
 from qgate.uc.ucbase import UCBase
+from qgate.uc.ucsetup import UCSetup
 import os
 import glob
 import json
@@ -11,8 +12,8 @@ import json
 
 class UC101(UCBase):
 
-    def __init__(self, environment):
-        super().__init__(environment, self.__class__.__name__)
+    def __init__(self, setup: UCSetup):
+        super().__init__(setup, self.__class__.__name__)
 
     def exec(self):
 

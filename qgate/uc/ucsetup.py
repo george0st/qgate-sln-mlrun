@@ -11,7 +11,7 @@ class UCSetup:
     def __init__(self, data_size, mlrun_env_file: list[str], output: UCOutput):
 
         self._output=output
-        self._log(f"Mlrun version: {mlrun.get_version()}")
+        #self._log(f"Mlrun version: {mlrun.get_version()}")
 
         # set variables based on environment files
         for env_file in mlrun_env_file:
