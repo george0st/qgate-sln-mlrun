@@ -22,6 +22,9 @@ class UCBase:
         self._setup=setup
         self._name=name
 
+    @property
+    def desc(self):
+        raise NotImplemented()
 
     def _get_json_header(self, json_content):
         """ Get common header from config files
@@ -38,7 +41,7 @@ class UCBase:
         return name, desc, lbls, kind
 
     @property
-    def label(self):
+    def name(self):
         return self._name
 
     @staticmethod

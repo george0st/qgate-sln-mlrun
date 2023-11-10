@@ -1,5 +1,4 @@
 
-from qgate.uc.ucoutput import UCOutput
 import mlrun
 import os
 
@@ -8,11 +7,7 @@ class UCSetup:
     Shared setup as singleton for all use cases
     """
 
-    def __init__(self, data_size, mlrun_env_file: list[str], output: UCOutput):
-
-        self._output=output
-        #self._log(f"Mlrun version: {mlrun.get_version()}")
-
+    def __init__(self, data_size, mlrun_env_file: list[str]):
         # set variables based on environment files
         for env_file in mlrun_env_file:
             if os.path.isfile(env_file):
@@ -26,3 +21,13 @@ class UCSetup:
         # set projects
         self._projects=[]
         self._data_size=data_size
+
+    def __str__(self):
+        ret=""
+        for key in self._variables.keys():
+            ret+=key+ " = "+ "'" + self._variables[key] + "'\n"
+        return ret
+
+    @property
+    def model_output(self):
+        return self._model_output

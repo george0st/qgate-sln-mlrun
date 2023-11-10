@@ -15,6 +15,10 @@ class UC101(UCBase):
     def __init__(self, setup: UCSetup):
         super().__init__(setup, self.__class__.__name__)
 
+    @property
+    def desc(self):
+        return "Create project"
+
     def exec(self):
 
         # create projects
