@@ -1,23 +1,43 @@
 
 from dotenv import dotenv_values
+import mlrun
+import mlrun.feature_store as fstore
+from mlrun.features import Feature
+from mlrun.data_types.data_types import spark_to_value_type
+from mlrun.datastore import ParquetTarget
+import json
+import glob
+import os
+import pandas as pd
+import shutil
+
 
 class UCBase:
+    """
+    Base class for all use cases
+    """
 
-    def __init__(self, environment, name):
-        self._env=environment
+    def __init__(self, name):
         self._label=name
-        self._config = self.load_env()
 
-    @property
-    def env(self):
-        return self._env
+
+    def _get_json_header(self, json_content):
+        """ Get common header from config files
+
+        :param json_content:    json content
+        :return:                name, description, labels and kind from header
+        """
+        name = json_content['name']
+        desc = json_content['description']
+        kind = json_content['kind']
+
+        # optional labels
+        lbls = None if json_content.get('labels') is None else json_content.get('labels')
+        return name, desc, lbls, kind
+
     @property
     def label(self):
         return self._label
-
-    @property
-    def config(self):
-        return self._config
 
     @staticmethod
     def str2bool(v):
@@ -36,18 +56,3 @@ class UCBase:
                 bulk = []
             bulks.append(bulk)
         return bulks
-
-    def load_env(self):
-
-        pass
-        # # load .env
-        # perfsetup = dotenv_values(f"perfsetup-{self.env}.env")
-        #
-        # # replace global keys based on specific keys
-        # lbl=f"{self.label}_"
-        # for key in perfsetup.keys():
-        #     if key.lower().startswith(lbl):
-        #         extract=key[len(lbl):]
-        #         perfsetup[extract]=perfsetup[key]
-        # return perfsetup
-
