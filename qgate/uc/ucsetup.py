@@ -25,8 +25,8 @@ class UCSetup:
     def __str__(self):
         ret=""
         for key in self._variables.keys():
-            ret+=key+ " = "+ "'" + self._variables[key] + "'\n"
-        return ret
+            ret+=key+ ": "+ "'" + self._variables[key] + "'\n"
+        return ret[:-1]
 
     @property
     def model_output(self):
