@@ -22,7 +22,7 @@ class UC101(UCBase):
     def exec(self):
 
         # create projects
-        dir=os.path.join(os.getcwd(), self._model_definition, "01-model", "01-project", "*.json")
+        dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with open(file, "r") as json_file:
                 json_content = json.load(json_file)

@@ -23,7 +23,18 @@ class UCBase:
         self._name=name
 
     @property
+    def setup(self):
+        return self._setup
+
+    @property
     def desc(self):
+        raise NotImplemented()
+
+    @property
+    def name(self):
+        return self._name
+
+    def exec(self):
         raise NotImplemented()
 
     def _get_json_header(self, json_content):
@@ -39,10 +50,6 @@ class UCBase:
         # optional labels
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
-
-    @property
-    def name(self):
-        return self._name
 
     @staticmethod
     def str2bool(v):
