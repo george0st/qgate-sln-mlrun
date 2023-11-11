@@ -36,9 +36,8 @@ class UCOutput(metaclass=Singleton):
         self._file.close()
 
     def _headr(self):
-        self._print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         self._print("QGate version: " + __version__)
-
+        self._print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
     def _footer(self):
         total, free = self._memory()

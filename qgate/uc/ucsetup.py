@@ -31,3 +31,7 @@ class UCSetup:
     @property
     def model_output(self):
         return self._model_output
+
+    @property
+    def model_definition(self):
+        return self._model_definition
