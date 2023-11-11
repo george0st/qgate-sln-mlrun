@@ -28,7 +28,7 @@ Precondition: You have available MLRun or Iguazio solution (MLRun is part of tha
 ## Use cases
 Quality Gate covers these use cases:
  - **Project**
-   - [ ] UC101: Create project
+   - [x] UC101: Create project
    - [ ] UC102: Delete project
  - **Feature set**
    - [ ] UC201: Create feature sets (with entities, features, targets) 

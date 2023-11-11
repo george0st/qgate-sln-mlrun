@@ -2,6 +2,7 @@ import qgate.solution as qgate
 import os.path
 from qgate.uc.uc101 import UC101
 from qgate.uc import ucsetup, ucoutput
+import sys
 
 def test():
     setup= ucsetup.UCSetup("0-size-100",
@@ -13,11 +14,13 @@ def test():
 
 if __name__ == '__main__':
 
-#    test()
-
-    sln = qgate.Solution("0-size-100",
-                         ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
-    try:
-        sln.create(force=True)
-    finally:
-        sln.delete()
+    args = sys.argv[1:]
+    if args[0]=="test":
+        test()
+    else:
+        sln = qgate.Solution("0-size-100",
+                             ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+        try:
+            sln.create(force=True)
+        finally:
+            sln.delete()

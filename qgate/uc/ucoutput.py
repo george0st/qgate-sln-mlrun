@@ -41,6 +41,7 @@ class UCOutput(metaclass=Singleton):
 
     def _footer(self):
         total, free = self._memory()
+        self._print("-----------------------")
         self._print("Host: " + self._host())
         self._print("RAM total/free: " + total + "/" + free)
         self._print("CPU: " + str(multiprocessing.cpu_count()))
