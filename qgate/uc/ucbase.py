@@ -1,6 +1,7 @@
 
 from qgate.uc.ucsetup import UCSetup
-from qgate.solution import Solution
+from qgate.uc.ucoutput import UCOutput
+#from qgate.solution import Solution
 from dotenv import dotenv_values
 import mlrun
 import mlrun.feature_store as fstore
@@ -19,17 +20,18 @@ class UCBase:
     Base class for all use cases
     """
 
-    def __init__(self, sln: Solution, name):
-        self._name=name
+    def __init__(self, sln, output, name):
         self._sln=sln
+        self._output=output
+        self._name=name
 
     @property
     def sln(self):
         return self._sln
 
     @property
-    def setup(self):
-        return self._sln._setup
+    def output(self):
+        return self._output
 
     @property
     def desc(self):
@@ -42,4 +44,5 @@ class UCBase:
     def exec(self):
         raise NotImplemented()
 
-
+    def log(self, *args, **kwargs):
+        self.output.log(self.name + ": ", *args, **kwargs)
