@@ -14,7 +14,9 @@ class Singleton (type):
         return cls._instances[cls]
 
 
-class UCOutput(metaclass=Singleton):
+#class UCOutput(metaclass=Singleton):
+class UCOutput():
+
     """
     Management reports/outputs from use cases
     """
@@ -36,24 +38,24 @@ class UCOutput(metaclass=Singleton):
         self._file.close()
 
     def _headr(self):
-        self._print("QGate version: " + __version__)
-        self._print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        self._log("QGate version: " + __version__)
+        self._log(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
     def _footer(self):
         total, free = self._memory()
-        self._print("-----------------------")
-        self._print("Host: " + self._host())
-        self._print("RAM total/free: " + total + "/" + free)
-        self._print("CPU: " + str(multiprocessing.cpu_count()))
-        self._print("-----------------------")
-        self._print("MLRun: " + mlrun.get_version() + " (https://docs.mlrun.org/en/latest/change-log/index.html)")
-        self._print("Python: " + sys.version)
-        self._print("System: " + platform.system() + " " + platform.version() + " (" + platform.platform() + ")")
-        self._print("Platform: " + platform.machine()+ " (" + platform.processor() + ")")
-        self._print("-----------------------")
+        self._log("-----------------------")
+        self._log("Host: " + self._host())
+        self._log("RAM total/free: " + total + "/" + free)
+        self._log("CPU: " + str(multiprocessing.cpu_count()))
+        self._log("-----------------------")
+        self._log("MLRun: " + mlrun.get_version() + " (https://docs.mlrun.org/en/latest/change-log/index.html)")
+        self._log("Python: " + sys.version)
+        self._log("System: " + platform.system() + " " + platform.version() + " (" + platform.platform() + ")")
+        self._log("Platform: " + platform.machine() + " (" + platform.processor() + ")")
+        self._log("-----------------------")
 
-        self._print("DIR: '" + os.getcwd() + "'")
-        self._print(str(self._setup).replace('\n',"\n" + UCOutput.COMMENT))
+        self._log("DIR: '" + os.getcwd() + "'")
+        self._log(str(self._setup).replace('\n', "\n" + UCOutput.COMMENT))
 
     def _memory(self):
 
@@ -78,10 +80,10 @@ class UCOutput(metaclass=Singleton):
             host = f"{host_name}/{ip}"
         return host
 
-    def print(self, uc_name, *args, **kwargs):
-        self._print(uc_name + str.format(args, kwargs), False)
+    def log(self, uc_name, *args, **kwargs):
+        self._log(uc_name + str.format(*args, **kwargs), False)
 
-    def _print(self, text=None, comment: bool=True):
+    def _log(self, text=None, comment: bool=True):
         if comment:
             self._file.write(UCOutput.COMMENT)
         self._file.write((text if text else "") + '\n')

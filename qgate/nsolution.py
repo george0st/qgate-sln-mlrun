@@ -13,33 +13,14 @@ from qgate.uc.ucsetup import UCSetup
 from qgate.uc.ucoutput import UCOutput
 from qgate.uc.ucbase import UCBase
 
-class Solution:
+class NSolution:
     """Create solution"""
 
-    def __init__(self, data_size, mlrun_env_file: list[str]):
-        """Create solution
 
-        :param mlrun_env_file:  path to *.env files
-        :param model_dir:       path do the 'qgate-fs-model'
-        """
+    def __init__(self, setup: UCSetup):
+        self._setup=setup
 
-        # logging MLRun version
-        self._log(f"Mlrun version: {mlrun.get_version()}")
-
-        # set variables
-        for env_file in mlrun_env_file:
-            if os.path.isfile(env_file):
-                self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
-                break
-
-        # set model dir
-        self._model_definition=self._variables['QGATE_DEFINITION']
-        self._model_output=self._variables['QGATE_OUTPUT']
-
-        # set projects
         self._projects=[]
-        self._data_size=data_size
-
 
     def create_projects(self, uc: UCBase):
         # create projects
