@@ -7,11 +7,13 @@ import sys
 def test():
     setup = ucsetup.UCSetup("0-size-100",
                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+    output=ucoutput.UCOutput(setup)
 
-    ucoutput.UCOutput(setup)
+    sln=qgate.Solution(setup, output)
+
     usecases=[uc101.UC101, uc102.UC102]
     for usecase in usecases:
-        instance=usecase(setup)
+        instance=usecase(sln)
         instance.exec()
 
 if __name__ == '__main__':

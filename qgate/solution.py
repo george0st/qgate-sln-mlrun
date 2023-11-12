@@ -9,7 +9,8 @@ import glob
 import os
 import pandas as pd
 import shutil
-
+from qgate.uc.ucsetup import UCSetup
+from qgate.uc.ucoutput import UCOutput
 
 class Solution:
     """Create solution"""
@@ -37,6 +38,51 @@ class Solution:
         # set projects
         self._projects=[]
         self._data_size=data_size
+
+    def __init__(self, setup: UCSetup, output: UCOutput):
+        self._setup=setup
+        self._output=output
+
+        self._projects=[]
+
+    def create_projects(self):
+        # create projects
+        dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
+        for file in glob.glob(dir):
+            with open(file, "r") as json_file:
+                json_content = json.load(json_file)
+                name, desc, lbls, kind=self._get_json_header(json_content)
+
+                # create project
+                #self._log(f"Creating project '{name}'...")
+                self._projects.append(name)
+                prj=mlrun.get_or_create_project(name, context="./", user_project=False)
+                prj.description=desc
+                for lbl in lbls:
+                    prj.metadata.labels[lbl]=lbls[lbl]
+                prj.save()
+
+    def delete_projects(self):
+        """Delete projects"""
+
+        # clean projects
+        #self._log(f"Deleted ALL")
+        for prj_name in self._projects:
+            mlrun.get_run_db().delete_project(prj_name,"cascade")
+            #self._log(f"  Deleted project '{prj_name}' !!!")
+
+        # clean output directory
+        # if os.path.exists(self.setup.model_output):
+        #     shutil.rmtree(self.setup.model_output, True)
+
+    @property
+    def setup(self):
+        return self._setup
+
+
+
+
+
 
     def _create_featureset(self, project_name, featureset_name, featureset_desc, json_spec):
         """
