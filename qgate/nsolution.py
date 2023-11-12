@@ -33,13 +33,14 @@ class NSolution:
                 # create project
                 #self._log(f"Creating project '{name}'...")
                 #self._output.print()
-                uc.log("Creating project '{0}'...", name)
+                uc.logh(" '{0}' ... ", name)
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
                 for lbl in lbls:
                     prj.metadata.labels[lbl]=lbls[lbl]
                 prj.save()
+                uc.logln("DONE")
 
     def delete_projects(self, uc: UCBase):
         """Delete projects"""
@@ -47,8 +48,9 @@ class NSolution:
         # clean projects
         #self._log(f"Deleted ALL")
         for prj_name in self._projects:
+            uc.logh(" '{0}' ... ", prj_name)
             mlrun.get_run_db().delete_project(prj_name,"cascade")
-            #self._log(f"  Deleted project '{prj_name}' !!!")
+            uc.logln("DONE")
 
         # clean output directory
         # if os.path.exists(self.setup.model_output):

@@ -38,24 +38,24 @@ class UCOutput():
         self._file.close()
 
     def _headr(self):
-        self._log("QGate version: " + __version__)
-        self._log(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        self._logln("QGate version: " + __version__)
+        self._logln(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
     def _footer(self):
         total, free = self._memory()
-        self._log("-----------------------")
-        self._log("Host: " + self._host())
-        self._log("RAM total/free: " + total + "/" + free)
-        self._log("CPU: " + str(multiprocessing.cpu_count()))
-        self._log("-----------------------")
-        self._log("MLRun: " + mlrun.get_version() + " (https://docs.mlrun.org/en/latest/change-log/index.html)")
-        self._log("Python: " + sys.version)
-        self._log("System: " + platform.system() + " " + platform.version() + " (" + platform.platform() + ")")
-        self._log("Platform: " + platform.machine() + " (" + platform.processor() + ")")
-        self._log("-----------------------")
+        self._logln("-----------------------")
+        self._logln("Host: " + self._host())
+        self._logln("RAM total/free: " + total + "/" + free)
+        self._logln("CPU: " + str(multiprocessing.cpu_count()))
+        self._logln("-----------------------")
+        self._logln("MLRun: " + mlrun.get_version() + " (https://docs.mlrun.org/en/latest/change-log/index.html)")
+        self._logln("Python: " + sys.version)
+        self._logln("System: " + platform.system() + " " + platform.version() + " (" + platform.platform() + ")")
+        self._logln("Platform: " + platform.machine() + " (" + platform.processor() + ")")
+        self._logln("-----------------------")
 
-        self._log("DIR: '" + os.getcwd() + "'")
-        self._log(str(self._setup).replace('\n', "\n" + UCOutput.COMMENT))
+        self._logln("DIR: '" + os.getcwd() + "'")
+        self._logln(str(self._setup).replace('\n', "\n" + UCOutput.COMMENT))
 
     def _memory(self):
 
@@ -83,9 +83,14 @@ class UCOutput():
     def log(self, uc_name, *args, **kwargs):
         self._log(uc_name + str.format(*args, **kwargs), False)
 
-    def _log(self, text=None, comment: bool=True):
+    def logln(self, uc_name, *args, **kwargs):
+        self._logln(uc_name + str.format(*args, **kwargs), False)
+
+    def _logln(self, text = None, comment: bool = True):
+        self._log((text if text else "") + '\n', comment)
+
+    def _log(self, text = None, comment: bool = True):
         if comment:
             self._file.write(UCOutput.COMMENT)
-        self._file.write((text if text else "") + '\n')
-
+        self._file.write((text if text else ""))
 

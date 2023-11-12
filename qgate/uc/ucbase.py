@@ -45,4 +45,14 @@ class UCBase:
         raise NotImplemented()
 
     def log(self, *args, **kwargs):
-        self.output.log(self.name + ": ", *args, **kwargs)
+        self.output.log("", *args, **kwargs)
+
+    def logh(self, *args, **kwargs):
+        self.output.log(self.name + ": " + self.desc, *args, **kwargs)
+
+    def logln(self, *args, **kwargs):
+        self.output.logln("", *args, **kwargs)
+
+    def loghln(self, *args, **kwargs):
+        self.output.logln(self.name + ": " + self.desc, *args, **kwargs)
+
