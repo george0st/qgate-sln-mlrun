@@ -19,3 +19,4 @@ class UC102(UCBase):
 
     def exec(self):
         self.sln.delete_projects(self)
+

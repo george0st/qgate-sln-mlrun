@@ -24,16 +24,18 @@ class NSolution:
 
     def create_projects(self, uc: UCBase):
         # create projects
+        uc.loghln()
+
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
-            with open(file, "r") as json_file:
+            with (open(file, "r") as json_file):
                 json_content = json.load(json_file)
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
                 # create project
                 #self._log(f"Creating project '{name}'...")
                 #self._output.print()
-                uc.logh(" '{0}' ... ", name)
+                uc.log("\t{0} ... ", name)
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
@@ -45,10 +47,12 @@ class NSolution:
     def delete_projects(self, uc: UCBase):
         """Delete projects"""
 
+        uc.loghln()
+
         # clean projects
         #self._log(f"Deleted ALL")
         for prj_name in self._projects:
-            uc.logh(" '{0}' ... ", prj_name)
+            uc.log("\t{0} ... ", prj_name)
             mlrun.get_run_db().delete_project(prj_name,"cascade")
             uc.logln("DONE")
 

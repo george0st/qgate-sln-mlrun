@@ -15,6 +15,7 @@ import pandas as pd
 import shutil
 from enum import Enum
 
+
 class UCState(Enum):
     NoExecution = 1
     OK = 2
@@ -61,12 +62,9 @@ class UCBase:
     def log(self, *args, **kwargs):
         self.output.log("", *args, **kwargs)
 
-    def logh(self, *args, **kwargs):
-        self.output.log(self.name + ": " + self.desc, *args, **kwargs)
-
     def logln(self, *args, **kwargs):
         self.output.logln("", *args, **kwargs)
 
-    def loghln(self, *args, **kwargs):
-        self.output.logln(self.name + ": " + self.desc, *args, **kwargs)
+    def loghln(self):
+        self.output.logln(self.name + ": " + self.desc)
 
