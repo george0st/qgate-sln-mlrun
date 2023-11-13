@@ -2,7 +2,7 @@ import qgate.solution as qgate
 from qgate.nsolution import NSolution
 import os.path
 from qgate.uc import uc101, uc102
-from qgate.uc import ucsetup, ucoutput
+from qgate.uc import ucsetup, ucoutput, ucbase
 import sys
 
 def test():
@@ -12,10 +12,15 @@ def test():
 
     sln=NSolution(setup)
 
-    usecases=[ uc101.UC101, uc102.UC102]
-    for usecase in usecases:
-        instance=usecase(sln, output)
-        instance.exec()
+    usecase_fns=[ uc101.UC101, uc102.UC102]
+    for usecase_fn in usecase_fns:
+        uc=usecase_fn(sln, output)
+        try:
+            uc.exec()
+            uc.state=ucbase.UCState.OK
+        except Exception as ex:
+            uc.state=ucbase.UCState.Error
+            uc.loghln("{0}: {1}", type(ex).__name__, str(ex))
 
 if __name__ == '__main__':
 

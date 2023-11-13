@@ -81,13 +81,15 @@ class UCOutput():
         return host
 
     def log(self, uc_name, *args, **kwargs):
-        self._log(uc_name + str.format(*args, **kwargs), False)
+        self._log(uc_name + str.format(*args, **kwargs) if args else uc_name, False)
 
     def logln(self, uc_name, *args, **kwargs):
-        self._logln(uc_name + str.format(*args, **kwargs), False)
+        self._logln(uc_name + str.format(*args, **kwargs) if args else uc_name, False)
 
     def _logln(self, text = None, comment: bool = True):
-        self._log((text if text else "") + '\n', comment)
+        if comment:
+            self._file.write(UCOutput.COMMENT)
+        self._file.write(text+'\n' if text else '\n')
 
     def _log(self, text = None, comment: bool = True):
         if comment:
