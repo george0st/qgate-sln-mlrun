@@ -89,10 +89,11 @@ class UCOutput():
     def _logln(self, text = None, comment: bool = True):
         if comment:
             self._file.write(UCOutput.COMMENT)
-        self._file.write(text+'\n' if text else '\n')
+        self._file.write(text + '\n')
 
     def _log(self, text = None, comment: bool = True):
         if comment:
             self._file.write(UCOutput.COMMENT)
-        self._file.write((text if text else ""))
+        if text:
+            self._file.write(text)
 
