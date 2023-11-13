@@ -18,7 +18,7 @@ class UC101(UCBase):
         super().__init__(sln, output, self.__class__.__name__)
 
     @property
-    def desc(self):
+    def desc(self) -> str:
         return "Create project(s)"
 
     def exec(self):

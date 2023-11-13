@@ -13,7 +13,12 @@ import glob
 import os
 import pandas as pd
 import shutil
+from enum import Enum
 
+class UCState(Enum):
+    NoExecution = 1
+    OK = 2
+    Error = 3
 
 class UCBase:
     """
@@ -24,6 +29,7 @@ class UCBase:
         self._sln=sln
         self._output=output
         self._name=name
+        self._state = UCState.NoExecution
 
     @property
     def sln(self):
@@ -38,6 +44,14 @@ class UCBase:
         raise NotImplemented()
 
     @property
+    def state(self):
+        return self._state
+
+    @state.setter
+    def state(self, a):
+        self._state = a
+
+    @property
     def name(self):
         return self._name
 
@@ -45,4 +59,14 @@ class UCBase:
         raise NotImplemented()
 
     def log(self, *args, **kwargs):
-        self.output.log(self.name + ": ", *args, **kwargs)
+        self.output.log("", *args, **kwargs)
+
+    def logh(self, *args, **kwargs):
+        self.output.log(self.name + ": " + self.desc, *args, **kwargs)
+
+    def logln(self, *args, **kwargs):
+        self.output.logln("", *args, **kwargs)
+
+    def loghln(self, *args, **kwargs):
+        self.output.logln(self.name + ": " + self.desc, *args, **kwargs)
+
