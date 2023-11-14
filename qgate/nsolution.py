@@ -21,6 +21,7 @@ class NSolution:
         self._setup=setup
 
         self._projects=[]
+        self._project_specs={}
 
     def create_projects(self, uc: UCBase):
         # create projects
@@ -42,6 +43,7 @@ class NSolution:
                 for lbl in lbls:
                     prj.metadata.labels[lbl]=lbls[lbl]
                 prj.save()
+                self._project_specs[name] = json_content['spec']
                 uc.logln("DONE")
 
     def delete_projects(self, uc: UCBase):
@@ -59,6 +61,31 @@ class NSolution:
         # clean output directory
         # if os.path.exists(self.setup.model_output):
         #     shutil.rmtree(self.setup.model_output, True)
+
+
+    def create_featureset(self, uc: UCBase):
+        """ Get or create featuresets
+        """
+        uc.loghln()
+        for project_name in self._projects:
+            dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "02-feature-set", "*.json")
+            for file in glob.glob(dir):
+
+                # iterate cross all featureset definitions
+                with open(file, "r") as json_file:
+                    json_content = json.load(json_file)
+                    name, desc, lbls, kind=self._get_json_header(json_content)
+
+                    if kind=="feature-set":
+                        if name in self._project_specs[project_name]:        # build only featuresets based on project spec
+                            uc.log('\t{0}/{1} create ... ', project_name, name)
+                            # create feature set only in case that it does not exist
+                            try:
+                                fs=fstore.get_feature_set(f"{project_name}/{name}")
+                            except:
+                                fs=self._create_featureset(project_name, name, desc, json_content['spec'])
+                            uc.logln("DONE")
+
 
     @property
     def setup(self) -> UCSetup:
@@ -112,7 +139,7 @@ class NSolution:
             if target.lower().strip()=="parquet":
                 # support more parquet targets (each target has different path)
                 target_name=f"target_{count}"
-                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self._model_output,project_name, target_name)))
+                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup._model_output, project_name, target_name)))
             else:
                 # TODO: Add support other targets for MLRun CE e.g. RedisTarget
                 raise NotImplementedError()
