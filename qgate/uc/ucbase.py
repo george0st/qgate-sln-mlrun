@@ -60,11 +60,11 @@ class UCBase:
         raise NotImplemented()
 
     def log(self, *args, **kwargs):
-        self.output.log("", *args, **kwargs)
+        self.output.log(*args, **kwargs)
 
     def logln(self, *args, **kwargs):
-        self.output.logln("", *args, **kwargs)
+        self.output.logln(*args, **kwargs)
 
     def loghln(self):
-        self.output.logln(self.name + ": " + self.desc)
+        self.output.loghln(self.name + ": " + self.desc)
 

@@ -16,7 +16,6 @@ class Singleton (type):
 
 #class UCOutput(metaclass=Singleton):
 class UCOutput():
-
     """
     Management reports/outputs from use cases
     """
@@ -28,14 +27,14 @@ class UCOutput():
         self._setup=setup
         if not os.path.exists(self._setup.model_output):
             os.makedirs(self._setup.model_output)
-        self._file = open(os.path.join(self._setup.model_output, "qgate-sln-mlrun.txt"), 'w+t')
+        self._log_file = open(os.path.join(self._setup.model_output, "qgate-sln-mlrun.txt"), 'w+t')
 
         self._headr()
         self._footer()
 
     def __del__(self):
         self._footer()
-        self._file.close()
+        self._log_file.close()
 
     def _headr(self):
         self._logln("QGate version: " + __version__)
@@ -80,20 +79,23 @@ class UCOutput():
             host = f"{host_name}/{ip}"
         return host
 
-    def log(self, uc_name, *args, **kwargs):
-        self._log(uc_name + str.format(*args, **kwargs) if args else uc_name, False)
+    def log(self, *args, **kwargs):
+        self._log(str.format(*args, **kwargs), False)
 
-    def logln(self, uc_name, *args, **kwargs):
-        self._logln(uc_name + str.format(*args, **kwargs) if args else uc_name, False)
+    def logln(self, *args, **kwargs):
+       self._logln(str.format(*args, **kwargs), False)
+
+    def loghln(self, uc_name):
+        self._log_file.write(uc_name + '\n')
 
     def _logln(self, text = None, comment: bool = True):
         if comment:
-            self._file.write(UCOutput.COMMENT)
-        self._file.write(text + '\n')
+            self._log_file.write(UCOutput.COMMENT)
+        self._log_file.write(text + '\n')
 
     def _log(self, text = None, comment: bool = True):
         if comment:
-            self._file.write(UCOutput.COMMENT)
+            self._log_file.write(UCOutput.COMMENT)
         if text:
-            self._file.write(text)
+            self._log_file.write(text)
 
