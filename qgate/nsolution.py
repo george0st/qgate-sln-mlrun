@@ -94,11 +94,6 @@ class NSolution:
     def output(self) -> UCOutput:
         return self._output
 
-
-
-
-
-
     def _create_featureset(self, project_name, featureset_name, featureset_desc, json_spec):
         """
         Create featureset based on json spec
@@ -149,40 +144,6 @@ class NSolution:
         fs.save()
         return fs
 
-    def _get_or_create_featuresets(self, project_name: str, project_spec: list[str], force: bool):
-        """ Get or create featuresets
-
-        :param project_name:    project name
-        :param project_spec:    project specification
-        :param force:           create in each case, default is True
-        """
-        dir=os.path.join(os.getcwd(), self._model_definition, "01-model", "02-feature-set", "*.json")
-        for file in glob.glob(dir):
-
-            # iterate cross all featureset definitions
-            with open(file, "r") as json_file:
-                json_content = json.load(json_file)
-                name, desc, lbls, kind=self._get_json_header(json_content)
-
-                if kind=="feature-set":
-                    if name in project_spec:        # build only featuresets based on project spec
-                        if force:
-                            # create feature set, independent on exiting one
-                            fs=self._create_featureset(project_name, name, desc, json_content['spec'])
-                            self._log(f"  Created featureset '{name}'...")
-                        else:
-                            # create feature set only in case that it does not exist
-                            try:
-                                fs=fstore.get_feature_set(f"{project_name}/{name}")
-                                self._log(f"  Used featureset '{name}'...")
-                            except:
-                                fs=self._create_featureset(project_name, name, desc, json_content['spec'])
-                                self._log(f"  Created featureset '{name}'...")
-
-                        # load data for specific featureset
-                        self._load_data(name, fs)
-
-
 
     def _get_json_header(self, json_content):
         """ Get common header
@@ -198,59 +159,6 @@ class NSolution:
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
 
-    def _log(self, info):
-        """ Logging
-
-        :param info: message
-        """
-        #        context=mlrun.get_or_create_ctx("gate")
-        #        context.logger.info(info)
-        print(info)
-
-    def _get_or_create_projects(self, force: bool):
-        # create projects
-        dir=os.path.join(os.getcwd(), self._model_definition, "01-model", "01-project", "*.json")
-        for file in glob.glob(dir):
-            with open(file, "r") as json_file:
-                json_content = json.load(json_file)
-                name, desc, lbls, kind=self._get_json_header(json_content)
-
-                #TODO: asset kind
-
-                # create project
-                self._log(f"Creating project '{name}'...")
-                self._projects.append(name)
-                prj=mlrun.get_or_create_project(name, context="./", user_project=False)
-                prj.description=desc
-                for lbl in lbls:
-                    prj.metadata.labels[lbl]=lbls[lbl]
-                prj.save()
-
-                # create featureset
-                self._get_or_create_featuresets(name, json_content['spec'], force)
-
-    def create(self, force: bool):
-        """Create solution
-
-        :param force:   create parts of solution in each case, default is True
-        """
-
-        # create projects
-        self._get_or_create_projects(force)
-
-
-    def delete(self):
-        """Delete solution"""
-
-        # clean projects
-        self._log(f"Deleted ALL")
-        for prj_name in self._projects:
-            mlrun.get_run_db().delete_project(prj_name,"cascade")
-            self._log(f"  Deleted project '{prj_name}' !!!")
-
-        # clean output directory
-        if os.path.exists(self._model_output):
-            shutil.rmtree(self._model_output, True)
 
     def _load_data(self, featureset_name: str, featureset: mlrun.feature_store.feature_set):
 
