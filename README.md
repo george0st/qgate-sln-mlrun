@@ -29,7 +29,7 @@ Precondition: You have available MLRun or Iguazio solution (MLRun is part of tha
 Quality Gate covers these use cases:
  - **Project**
    - [x] UC101: Create project
-   - [ ] UC102: Delete project
+   - [x] UC102: Delete project
  - **Feature set**
    - [ ] UC201: Create feature sets (with entities, features, targets) 
    - [ ] UC202: Create feature vector
