@@ -1,5 +1,5 @@
 """
-  UC102: Delete project
+  UC201: Create feature set(s)
 """
 
 from qgate.uc.ucbase import UCBase

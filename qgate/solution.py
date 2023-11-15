@@ -216,7 +216,7 @@ class Solution:
                 self._get_or_create_featuresets(name, json_content['spec'], force)
 
     def create(self, force: bool):
-        """Create solution
+        """ Create solution
 
         :param force:   create parts of solution in each case, default is True
         """

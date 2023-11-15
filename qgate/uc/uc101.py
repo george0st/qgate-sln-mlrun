@@ -1,5 +1,5 @@
 """
-  UC101: Create project
+  UC101: Create project(s)
 """
 
 import mlrun

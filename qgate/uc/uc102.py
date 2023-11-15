@@ -1,5 +1,5 @@
 """
-  UC102: Delete project
+  UC102: Delete project(s)
 """
 
 from qgate.uc.ucbase import UCBase
