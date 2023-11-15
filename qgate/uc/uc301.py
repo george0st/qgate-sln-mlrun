@@ -1,5 +1,5 @@
 """
-  UC102: Delete project
+  UC301: Ingest data to feature set(s)
 """
 
 from qgate.uc.ucbase import UCBase
