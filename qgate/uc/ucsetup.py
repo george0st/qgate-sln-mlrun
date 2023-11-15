@@ -35,3 +35,7 @@ class UCSetup:
     @property
     def model_definition(self):
         return self._model_definition
+
+    @property
+    def data_size(self):
+        return self._data_size

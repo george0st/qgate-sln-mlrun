@@ -20,7 +20,7 @@ def test():
             uc.state=ucbase.UCState.OK
         except Exception as ex:
             uc.state=ucbase.UCState.Error
-            uc.loghln("{0}: {1}", type(ex).__name__, str(ex))
+            uc.logln("{0}: {1}", type(ex).__name__, str(ex))
 
 if __name__ == '__main__':
 

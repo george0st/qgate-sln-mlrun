@@ -1,18 +1,6 @@
 
-from qgate.uc.ucsetup import UCSetup
 from qgate.uc.ucoutput import UCOutput
-#from qgate.solution import Solution
-from dotenv import dotenv_values
-import mlrun
-import mlrun.feature_store as fstore
-from mlrun.features import Feature
-from mlrun.data_types.data_types import spark_to_value_type
-from mlrun.datastore import ParquetTarget
-import json
-import glob
-import os
-import pandas as pd
-import shutil
+#from qgate.nsolution import NSolution
 from enum import Enum
 
 
@@ -26,7 +14,7 @@ class UCBase:
     Base class for all use cases
     """
 
-    def __init__(self, sln, output, name):
+    def __init__(self, sln, output: UCOutput, name: str):
         self._sln=sln
         self._output=output
         self._name=name

@@ -16,17 +16,21 @@ from qgate.uc.ucbase import UCBase
 class NSolution:
     """Create solution"""
 
-
     def __init__(self, setup: UCSetup):
-        self._setup=setup
+        """ Init
 
+        :param setup:   Setup for the solution
+        """
+        self._setup=setup
         self._projects=[]
         self._project_specs={}
 
     def create_projects(self, uc: UCBase):
-        # create projects
-        uc.loghln()
+        """ Create projects
 
+        :param uc:      Use case
+        """
+        uc.loghln()
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with (open(file, "r") as json_file):
@@ -47,12 +51,12 @@ class NSolution:
                 uc.logln("DONE")
 
     def delete_projects(self, uc: UCBase):
-        """Delete projects"""
+        """Delete projects
+
+        :param uc:      Use case
+        """
 
         uc.loghln()
-
-        # clean projects
-        #self._log(f"Deleted ALL")
         for prj_name in self._projects:
             uc.log("\t{0} ... ", prj_name)
             mlrun.get_run_db().delete_project(prj_name,"cascade")
@@ -65,6 +69,8 @@ class NSolution:
 
     def create_featureset(self, uc: UCBase):
         """ Get or create featuresets
+
+        :param uc:      Use case
         """
         uc.loghln()
         for project_name in self._projects:
@@ -134,7 +140,7 @@ class NSolution:
             if target.lower().strip()=="parquet":
                 # support more parquet targets (each target has different path)
                 target_name=f"target_{count}"
-                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup._model_output, project_name, target_name)))
+                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name)))
             else:
                 # TODO: Add support other targets for MLRun CE e.g. RedisTarget
                 raise NotImplementedError()
@@ -160,31 +166,40 @@ class NSolution:
         return name, desc, lbls, kind
 
 
-    def _load_data(self, featureset_name: str, featureset: mlrun.feature_store.feature_set):
+    def ingest_data(self, uc: UCBase):
+        """ Data ingest
 
-        dir=os.path.join(os.getcwd(), self._model_definition, "02-data", self._data_size, f"*-{featureset_name}.csv.gz")
-        for file in glob.glob(dir):
-            self._log("    Load data...")
+        :param uc:  Use case
+        """
+        uc.loghln()
+        for project_name in self._projects:
+            for featureset_name in self._project_specs[project_name]:
+                # create possible file for load
+                source_file=os.path.join(os.getcwd(),
+                                         self.setup.model_definition,
+                                         "02-data",
+                                         self.setup.data_size,
+                                         f"*-{featureset_name}.csv.gz")
 
-            for data_frm in pd.read_csv(file,
-                                     sep=";",
-                                     header="infer",
-                                     decimal=",",
-                                     compression="gzip",
-                                     encoding="utf-8",
-                                     chunksize=10000):
-                fstore.ingest(featureset,
-                              data_frm,
-                              overwrite=False,
-                              return_df=False,
-                              infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                # check existing data set
+                for file in glob.glob(source_file):
+                    uc.log("\t{0}/{1} ... ", project_name, featureset_name)
+                    #self._log("    Load data...")
 
+                    # get existing feature set (feature set have to be created in previous use case)
+                    featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
-
-
-
-
-
-
-
-
+                    # ingest data with bundl/chunk
+                    for data_frm in pd.read_csv(file,
+                                             sep=";",
+                                             header="infer",
+                                             decimal=",",
+                                             compression="gzip",
+                                             encoding="utf-8",
+                                             chunksize=10000):
+                        fstore.ingest(featureset,
+                                      data_frm,
+                                      overwrite=False,
+                                      return_df=False,
+                                      infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                    uc.logln("DONE")
