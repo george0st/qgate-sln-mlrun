@@ -85,6 +85,10 @@ class NSolution:
                     if kind=="feature-set":
                         if name in self._project_specs[project_name]:        # build only featuresets based on project spec
                             uc.log('\t{0}/{1} create ... ', project_name, name)
+
+                            # switch to relevant project
+                            mlrun.get_or_create_project(project_name, context="./", user_project=False)
+
                             # create feature set only in case that it does not exist
                             try:
                                 fs=fstore.get_feature_set(f"{project_name}/{name}")
