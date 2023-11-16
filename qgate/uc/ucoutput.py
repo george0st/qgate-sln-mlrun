@@ -30,7 +30,7 @@ class UCOutput():
         self._log_file = open(os.path.join(self._setup.model_output, "qgate-sln-mlrun.txt"), 'w+t')
 
         self._headr()
-        self._footer()
+#        self._footer()
 
     def __del__(self):
         self.Close()
