@@ -6,7 +6,7 @@ import mlrun
 from qgate.uc.ucbase import UCBase
 from qgate.uc.ucsetup import UCSetup
 from qgate.uc.ucoutput import UCOutput
-from qgate.nsolution import NSolution
+from qgate.solution import Solution
 import os
 import glob
 import json
@@ -14,7 +14,7 @@ import json
 
 class UC101(UCBase):
 
-    def __init__(self, sln: NSolution, output: UCOutput):
+    def __init__(self, sln: Solution, output: UCOutput):
         super().__init__(sln, output, self.__class__.__name__)
 
     @property
