@@ -51,20 +51,25 @@ class NSolution:
                 uc.logln("DONE")
 
     def delete_projects(self, uc: UCBase):
-        """Delete projects
+        """
+        Delete projects
 
         :param uc:      Use case
         """
-
         uc.loghln()
-        for prj_name in self._projects:
-            uc.log("\t{0} ... ", prj_name)
-            mlrun.get_run_db().delete_project(prj_name,"cascade")
+        for project_name in self._projects:
+            uc.log("\t{0} ... ", project_name)
+
+            # delete project
+            mlrun.get_run_db().delete_project(project_name, "cascade")
+
+            # delete project in FS
+            project_dir=os.path.join(self.setup.model_output, project_name)
+            if os.path.exists(project_dir):
+                shutil.rmtree(project_dir, True)
+
             uc.logln("DONE")
 
-        # clean output directory
-        # if os.path.exists(self.setup.model_output):
-        #     shutil.rmtree(self.setup.model_output, True)
 
 
     def create_featureset(self, uc: UCBase):
@@ -85,6 +90,7 @@ class NSolution:
                     if kind=="feature-set":
                         if name in self._project_specs[project_name]:        # build only featuresets based on project spec
                             uc.log('\t{0}/{1} create ... ', project_name, name)
+
                             # create feature set only in case that it does not exist
                             try:
                                 fs=fstore.get_feature_set(f"{project_name}/{name}")
@@ -109,6 +115,11 @@ class NSolution:
         :param featureset_desc:     feature description
         :param json_spec:  Json specification for this featureset
         """
+
+        # switch to proper project if the current project is different
+        if mlrun.get_current_project().name != project_name:
+            mlrun.load_project(name=project_name, context="./", user_project=False)
+            #mlrun.get_or_create_project(project_name, context="./", user_project=False)
 
         fs = fstore.FeatureSet(
             name=featureset_name,
