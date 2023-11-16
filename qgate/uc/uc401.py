@@ -1,5 +1,5 @@
 """
-  UC202: Create feature vector(s)
+  UC401: Create feature vector(s)
 """
 
 from qgate.uc.ucbase import UCBase
@@ -7,7 +7,7 @@ from qgate.solution import Solution
 from qgate.uc.ucoutput import UCOutput
 
 
-class UC202(UCBase):
+class UC401(UCBase):
 
     def __init__(self, sln: Solution, output: UCOutput):
         super().__init__(sln, output, self.__class__.__name__)
