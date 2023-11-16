@@ -34,7 +34,7 @@ Quality Gate covers these use cases:
    - [x] UC201: Create feature sets (with entities, features, targets) 
    - [ ] UC202: Create feature vector
  - **Ingest data**
-   - [ ] UC301: Ingest data to feature sets
+   - [x] UC301: Ingest data to feature sets
  - **Feature vector**
    - [ ] UC401: Get data from one feature set
    - [ ] UC402: Join data from two feature sets
