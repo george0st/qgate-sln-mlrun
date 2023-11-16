@@ -33,8 +33,14 @@ class UCOutput():
         self._footer()
 
     def __del__(self):
-        self._footer()
-        self._log_file.close()
+        self.Close()
+
+    def Close(self):
+        if self._log_file:
+            self._footer()
+            self._log_file.close()
+            self._log_file=None
+
 
     def _headr(self):
         self._logln("QGate version: " + __version__)

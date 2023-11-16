@@ -16,62 +16,88 @@ from qgate.uc.ucbase import UCBase
 class Solution:
     """Create solution"""
 
-    def __init__(self, data_size, mlrun_env_file: list[str]):
-        """Create solution
+    def __init__(self, setup: UCSetup):
+        """ Init
 
-        :param mlrun_env_file:  path to *.env files
-        :param model_dir:       path do the 'qgate-fs-model'
+        :param setup:   Setup for the solution
         """
-
-        # logging MLRun version
-        self._log(f"Mlrun version: {mlrun.get_version()}")
-
-        # set variables
-        for env_file in mlrun_env_file:
-            if os.path.isfile(env_file):
-                self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
-                break
-
-        # set model dir
-        self._model_definition=self._variables['QGATE_DEFINITION']
-        self._model_output=self._variables['QGATE_OUTPUT']
-
-        # set projects
+        self._setup=setup
         self._projects=[]
-        self._data_size=data_size
-
+        self._project_specs={}
 
     def create_projects(self, uc: UCBase):
-        # create projects
+        """ Create projects
+
+        :param uc:      Use case
+        """
+        uc.loghln()
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
-            with open(file, "r") as json_file:
+            with (open(file, "r") as json_file):
                 json_content = json.load(json_file)
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
                 # create project
                 #self._log(f"Creating project '{name}'...")
                 #self._output.print()
-                uc.log("Creating project '{0}'...", name)
+                uc.log("\t{0} ... ", name)
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
                 for lbl in lbls:
                     prj.metadata.labels[lbl]=lbls[lbl]
                 prj.save()
+                self._project_specs[name] = json_content['spec']
+                uc.logln("DONE")
 
     def delete_projects(self, uc: UCBase):
-        """Delete projects"""
+        """
+        Delete projects
 
-        # clean projects
-        #self._log(f"Deleted ALL")
-        for prj_name in self._projects:
-            mlrun.get_run_db().delete_project(prj_name,"cascade")
-            #self._log(f"  Deleted project '{prj_name}' !!!")
+        :param uc:      Use case
+        """
+        uc.loghln()
+        for project_name in self._projects:
+            uc.log("\t{0} ... ", project_name)
 
-        # clean output directory
-        # if os.path.exists(self.setup.model_output):
-        #     shutil.rmtree(self.setup.model_output, True)
+            # delete project
+            mlrun.get_run_db().delete_project(project_name, "cascade")
+
+            # delete project in FS
+            project_dir=os.path.join(self.setup.model_output, project_name)
+            if os.path.exists(project_dir):
+                shutil.rmtree(project_dir, True)
+
+            uc.logln("DONE")
+
+
+
+    def create_featureset(self, uc: UCBase):
+        """ Get or create featuresets
+
+        :param uc:      Use case
+        """
+        uc.loghln()
+        for project_name in self._projects:
+            dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "02-feature-set", "*.json")
+            for file in glob.glob(dir):
+
+                # iterate cross all featureset definitions
+                with open(file, "r") as json_file:
+                    json_content = json.load(json_file)
+                    name, desc, lbls, kind=self._get_json_header(json_content)
+
+                    if kind=="feature-set":
+                        if name in self._project_specs[project_name]:        # build only featuresets based on project spec
+                            uc.log('\t{0}/{1} create ... ', project_name, name)
+
+                            # create feature set only in case that it does not exist
+                            try:
+                                fs=fstore.get_feature_set(f"{project_name}/{name}")
+                            except:
+                                fs=self._create_featureset(project_name, name, desc, json_content['spec'])
+                            uc.logln("DONE")
+
 
     @property
     def setup(self) -> UCSetup:
@@ -79,11 +105,6 @@ class Solution:
 
     def output(self) -> UCOutput:
         return self._output
-
-
-
-
-
 
     def _create_featureset(self, project_name, featureset_name, featureset_desc, json_spec):
         """
@@ -94,6 +115,11 @@ class Solution:
         :param featureset_desc:     feature description
         :param json_spec:  Json specification for this featureset
         """
+
+        # switch to proper project if the current project is different
+        if mlrun.get_current_project().name != project_name:
+            mlrun.load_project(name=project_name, context="./", user_project=False)
+            #mlrun.get_or_create_project(project_name, context="./", user_project=False)
 
         fs = fstore.FeatureSet(
             name=featureset_name,
@@ -125,7 +151,7 @@ class Solution:
             if target.lower().strip()=="parquet":
                 # support more parquet targets (each target has different path)
                 target_name=f"target_{count}"
-                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self._model_output,project_name, target_name)))
+                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name)))
             else:
                 # TODO: Add support other targets for MLRun CE e.g. RedisTarget
                 raise NotImplementedError()
@@ -134,40 +160,6 @@ class Solution:
 
         fs.save()
         return fs
-
-    def _get_or_create_featuresets(self, project_name: str, project_spec: list[str], force: bool):
-        """ Get or create featuresets
-
-        :param project_name:    project name
-        :param project_spec:    project specification
-        :param force:           create in each case, default is True
-        """
-        dir=os.path.join(os.getcwd(), self._model_definition, "01-model", "02-feature-set", "*.json")
-        for file in glob.glob(dir):
-
-            # iterate cross all featureset definitions
-            with open(file, "r") as json_file:
-                json_content = json.load(json_file)
-                name, desc, lbls, kind=self._get_json_header(json_content)
-
-                if kind=="feature-set":
-                    if name in project_spec:        # build only featuresets based on project spec
-                        if force:
-                            # create feature set, independent on exiting one
-                            fs=self._create_featureset(project_name, name, desc, json_content['spec'])
-                            self._log(f"  Created featureset '{name}'...")
-                        else:
-                            # create feature set only in case that it does not exist
-                            try:
-                                fs=fstore.get_feature_set(f"{project_name}/{name}")
-                                self._log(f"  Used featureset '{name}'...")
-                            except:
-                                fs=self._create_featureset(project_name, name, desc, json_content['spec'])
-                                self._log(f"  Created featureset '{name}'...")
-
-                        # load data for specific featureset
-                        self._load_data(name, fs)
-
 
 
     def _get_json_header(self, json_content):
@@ -184,85 +176,41 @@ class Solution:
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
 
-    def _log(self, info):
-        """ Logging
 
-        :param info: message
+    def ingest_data(self, uc: UCBase):
+        """ Data ingest
+
+        :param uc:  Use case
         """
-        #        context=mlrun.get_or_create_ctx("gate")
-        #        context.logger.info(info)
-        print(info)
+        uc.loghln()
+        for project_name in self._projects:
+            for featureset_name in self._project_specs[project_name]:
+                # create possible file for load
+                source_file=os.path.join(os.getcwd(),
+                                         self.setup.model_definition,
+                                         "02-data",
+                                         self.setup.data_size,
+                                         f"*-{featureset_name}.csv.gz")
 
-    def _get_or_create_projects(self, force: bool):
-        # create projects
-        dir=os.path.join(os.getcwd(), self._model_definition, "01-model", "01-project", "*.json")
-        for file in glob.glob(dir):
-            with open(file, "r") as json_file:
-                json_content = json.load(json_file)
-                name, desc, lbls, kind=self._get_json_header(json_content)
+                # check existing data set
+                for file in glob.glob(source_file):
+                    uc.log("\t{0}/{1} ... ", project_name, featureset_name)
+                    #self._log("    Load data...")
 
-                #TODO: asset kind
+                    # get existing feature set (feature set have to be created in previous use case)
+                    featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
-                # create project
-                self._log(f"Creating project '{name}'...")
-                self._projects.append(name)
-                prj=mlrun.get_or_create_project(name, context="./", user_project=False)
-                prj.description=desc
-                for lbl in lbls:
-                    prj.metadata.labels[lbl]=lbls[lbl]
-                prj.save()
-
-                # create featureset
-                self._get_or_create_featuresets(name, json_content['spec'], force)
-
-    def create(self, force: bool):
-        """ Create solution
-
-        :param force:   create parts of solution in each case, default is True
-        """
-
-        # create projects
-        self._get_or_create_projects(force)
-
-
-    def delete(self):
-        """Delete solution"""
-
-        # clean projects
-        self._log(f"Deleted ALL")
-        for prj_name in self._projects:
-            mlrun.get_run_db().delete_project(prj_name,"cascade")
-            self._log(f"  Deleted project '{prj_name}' !!!")
-
-        # clean output directory
-        if os.path.exists(self._model_output):
-            shutil.rmtree(self._model_output, True)
-
-    def _load_data(self, featureset_name: str, featureset: mlrun.feature_store.feature_set):
-
-        dir=os.path.join(os.getcwd(), self._model_definition, "02-data", self._data_size, f"*-{featureset_name}.csv.gz")
-        for file in glob.glob(dir):
-            self._log("    Load data...")
-
-            for data_frm in pd.read_csv(file,
-                                     sep=";",
-                                     header="infer",
-                                     decimal=",",
-                                     compression="gzip",
-                                     encoding="utf-8",
-                                     chunksize=10000):
-                fstore.ingest(featureset,
-                              data_frm,
-                              overwrite=False,
-                              return_df=False,
-                              infer_options=mlrun.data_types.data_types.InferOptions.Null)
-
-
-
-
-
-
-
-
-
-
+                    # ingest data with bundl/chunk
+                    for data_frm in pd.read_csv(file,
+                                             sep=";",
+                                             header="infer",
+                                             decimal=",",
+                                             compression="gzip",
+                                             encoding="utf-8",
+                                             chunksize=10000):
+                        fstore.ingest(featureset,
+                                      data_frm,
+                                      overwrite=False,
+                                      return_df=False,
+                                      infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                    uc.logln("DONE")

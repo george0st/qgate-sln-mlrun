@@ -1,6 +1,6 @@
 
 from qgate.uc.ucoutput import UCOutput
-#from qgate.nsolution import NSolution
+#from qgate.solution import Solution
 from enum import Enum
 
 
