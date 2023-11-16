@@ -51,20 +51,25 @@ class NSolution:
                 uc.logln("DONE")
 
     def delete_projects(self, uc: UCBase):
-        """Delete projects
+        """
+        Delete projects
 
         :param uc:      Use case
         """
-
         uc.loghln()
-        for prj_name in self._projects:
-            uc.log("\t{0} ... ", prj_name)
-            mlrun.get_run_db().delete_project(prj_name,"cascade")
+        for project_name in self._projects:
+            uc.log("\t{0} ... ", project_name)
+
+            # delete project
+            mlrun.get_run_db().delete_project(project_name, "cascade")
+
+            # delete project in FS
+            project_dir=os.path.join(self.setup.model_output, project_name)
+            if os.path.exists(project_dir):
+                shutil.rmtree(project_dir, True)
+
             uc.logln("DONE")
 
-        # clean output directory
-        # if os.path.exists(self.setup.model_output):
-        #     shutil.rmtree(self.setup.model_output, True)
 
 
     def create_featureset(self, uc: UCBase):
