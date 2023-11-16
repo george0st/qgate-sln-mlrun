@@ -38,8 +38,6 @@ class Solution:
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
                 # create project
-                #self._log(f"Creating project '{name}'...")
-                #self._output.print()
                 uc.log("\t{0} ... ", name)
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
@@ -71,7 +69,6 @@ class Solution:
             uc.logln("DONE")
 
 
-
     def create_featureset(self, uc: UCBase):
         """ Get or create featuresets
 
@@ -98,13 +95,50 @@ class Solution:
                                 fs=self._create_featureset(project_name, name, desc, json_content['spec'])
                             uc.logln("DONE")
 
+    def create_featurevector(self):
+        pass
+
+    def ingest_data(self, uc: UCBase):
+        """
+        Data ingest
+
+        :param uc:  Use case
+        """
+        uc.loghln()
+        for project_name in self._projects:
+            for featureset_name in self._project_specs[project_name]:
+                # create possible file for load
+                source_file=os.path.join(os.getcwd(),
+                                         self.setup.model_definition,
+                                         "02-data",
+                                         self.setup.data_size,
+                                         f"*-{featureset_name}.csv.gz")
+
+                # check existing data set
+                for file in glob.glob(source_file):
+                    uc.log("\t{0}/{1} ... ", project_name, featureset_name)
+
+                    # get existing feature set (feature set have to be created in previous use case)
+                    featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+
+                    # ingest data with bundl/chunk
+                    for data_frm in pd.read_csv(file,
+                                             sep=";",
+                                             header="infer",
+                                             decimal=",",
+                                             compression="gzip",
+                                             encoding="utf-8",
+                                             chunksize=10000):
+                        fstore.ingest(featureset,
+                                      data_frm,
+                                      overwrite=False,
+                                      return_df=False,
+                                      infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                    uc.logln("DONE")
 
     @property
     def setup(self) -> UCSetup:
         return self._setup
-
-    def output(self) -> UCOutput:
-        return self._output
 
     def _create_featureset(self, project_name, featureset_name, featureset_desc, json_spec):
         """
@@ -119,7 +153,6 @@ class Solution:
         # switch to proper project if the current project is different
         if mlrun.get_current_project().name != project_name:
             mlrun.load_project(name=project_name, context="./", user_project=False)
-            #mlrun.get_or_create_project(project_name, context="./", user_project=False)
 
         fs = fstore.FeatureSet(
             name=featureset_name,
@@ -161,12 +194,11 @@ class Solution:
         fs.save()
         return fs
 
-
     def _get_json_header(self, json_content):
         """ Get common header
 
-        :param json_content: jsou content
-        :return: name, description, labeles and kind from header
+        :param json_content:    jsou content
+        :return:                name, description, labeles and kind from header
         """
         name = json_content['name']
         desc = json_content['description']
@@ -175,42 +207,3 @@ class Solution:
         # optional labels
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
-
-
-    def ingest_data(self, uc: UCBase):
-        """ Data ingest
-
-        :param uc:  Use case
-        """
-        uc.loghln()
-        for project_name in self._projects:
-            for featureset_name in self._project_specs[project_name]:
-                # create possible file for load
-                source_file=os.path.join(os.getcwd(),
-                                         self.setup.model_definition,
-                                         "02-data",
-                                         self.setup.data_size,
-                                         f"*-{featureset_name}.csv.gz")
-
-                # check existing data set
-                for file in glob.glob(source_file):
-                    uc.log("\t{0}/{1} ... ", project_name, featureset_name)
-                    #self._log("    Load data...")
-
-                    # get existing feature set (feature set have to be created in previous use case)
-                    featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
-
-                    # ingest data with bundl/chunk
-                    for data_frm in pd.read_csv(file,
-                                             sep=";",
-                                             header="infer",
-                                             decimal=",",
-                                             compression="gzip",
-                                             encoding="utf-8",
-                                             chunksize=10000):
-                        fstore.ingest(featureset,
-                                      data_frm,
-                                      overwrite=False,
-                                      return_df=False,
-                                      infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                    uc.logln("DONE")

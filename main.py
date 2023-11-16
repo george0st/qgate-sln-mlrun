@@ -11,12 +11,10 @@ if __name__ == '__main__':
     setup = ucsetup.UCSetup("0-size-100",
                             ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
     output = ucoutput.UCOutput(setup)
-
     sln = Solution(setup)
 
     usecase_fns = [uc101.UC101, uc201.UC201, uc301.UC301, uc102.UC102]
     #    usecase_fns=[uc101.UC101, uc201.UC201, uc301.UC301]
-
     for usecase_fn in usecase_fns:
         uc = usecase_fn(sln, output)
         try:
