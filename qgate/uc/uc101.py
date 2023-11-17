@@ -21,6 +21,9 @@ class UC101(UCBase):
     def desc(self) -> str:
         return "Create project(s)"
 
+    def long_desc(self):
+        return "Create project(s) with setting name, desription and tags"
+
     def exec(self):
         self.sln.create_projects(self)
 
