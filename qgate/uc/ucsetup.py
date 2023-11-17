@@ -4,7 +4,7 @@ import os
 
 class UCSetup:
     """
-    Shared setup as singleton for all use cases
+    Setup for solution
     """
 
     def __init__(self, data_size, mlrun_env_file: list[str]):
@@ -14,12 +14,11 @@ class UCSetup:
                 self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
                 break
 
-        # set model dir
+        # set model dirs
         self._model_definition=self._variables['QGATE_DEFINITION']
         self._model_output=self._variables['QGATE_OUTPUT']
 
-        # set projects
-        self._projects=[]
+        # set data set size
         self._data_size=data_size
 
     def __str__(self):

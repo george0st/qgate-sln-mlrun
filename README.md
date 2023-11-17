@@ -28,17 +28,16 @@ Precondition: You have available MLRun or Iguazio solution (MLRun is part of tha
 ## Use cases
 Quality Gate covers these use cases:
  - **Project**
-   - [x] UC101: Create project
-   - [x] UC102: Delete project
+   - [x] UC101: Create project(s)
+   - [x] UC102: Delete project(s)
  - **Feature set**
-   - [x] UC201: Create feature sets (with entities, features, targets) 
-   - [ ] UC202: Create feature vector
+   - [x] UC201: Create feature set(s) 
  - **Ingest data**
-   - [x] UC301: Ingest data to feature sets
+   - [x] UC301: Ingest data to feature set(s)
  - **Feature vector**
-   - [ ] UC401: Get data from one feature set
-   - [ ] UC402: Join data from two feature sets
-   - [ ] UC403: Join data from four feature sets
+   - [ ] UC401: Create feature vector(s)
+ - **Get data**
+   - [ ] UC501: Get data from feature set(s)
 
 ## Tested with
 The project was test with these versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
