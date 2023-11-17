@@ -68,6 +68,23 @@ class Solution:
 
             uc.logln("DONE")
 
+    def _has_featureset(self, name, generic_collection):
+        # Support two different collections
+        if isinstance(generic_collection, dict):
+            return name in generic_collection["feature-sets"]
+        elif isinstance(generic_collection, list):
+            return name in generic_collection
+        else:
+            raise Exception("Unsupported type")
+
+    def _get_featureset_list(self, generic_collection):
+        # Support two different collections
+        if isinstance(generic_collection, dict):
+            return generic_collection["feature-sets"]
+        elif isinstance(generic_collection, list):
+            return generic_collection
+        else:
+            raise Exception("Unsupported type")
 
     def create_featureset(self, uc: UCBase):
         """ Get or create featuresets
@@ -85,7 +102,7 @@ class Solution:
                     name, desc, lbls, kind=self._get_json_header(json_content)
 
                     if kind=="feature-set":
-                        if name in self._project_specs[project_name]:        # build only featuresets based on project spec
+                        if self._has_featureset(name, self._project_specs[project_name]): # build only featuresets based on project spec
                             uc.log('\t{0}/{1} create ... ', project_name, name)
 
                             # create feature set only in case that it does not exist
@@ -106,7 +123,7 @@ class Solution:
         """
         uc.loghln()
         for project_name in self._projects:
-            for featureset_name in self._project_specs[project_name]:
+            for featureset_name in self._get_featureset_list(self._project_specs[project_name]):
                 # create possible file for load
                 source_file=os.path.join(os.getcwd(),
                                          self.setup.model_definition,
