@@ -68,23 +68,30 @@ class Solution:
 
             uc.logln("DONE")
 
-    def _has_featureset(self, name, generic_collection):
+    def _has_featureset(self, name, project_spec):
         # Support two different collections
-        if isinstance(generic_collection, dict):
-            return name in generic_collection["feature-sets"]
-        elif isinstance(generic_collection, list):
-            return name in generic_collection
+        if isinstance(project_spec, dict):
+            return name in project_spec["feature-sets"]
+        elif isinstance(project_spec, list):
+            return name in project_spec
         else:
             raise Exception("Unsupported type")
 
-    def _get_featureset_list(self, generic_collection):
+    def _get_featuresets(self, project_spec):
         # Support two different collections
-        if isinstance(generic_collection, dict):
-            return generic_collection["feature-sets"]
-        elif isinstance(generic_collection, list):
-            return generic_collection
+        if isinstance(project_spec, dict):
+            return project_spec["feature-sets"]
+        elif isinstance(project_spec, list):
+            return project_spec
         else:
             raise Exception("Unsupported type")
+
+    def _get_featurevectors(self, project_spec):
+        # Support two different collections
+        if isinstance(project_spec, dict):
+            return project_spec["feature-vectors"]
+        return []
+
 
     def create_featureset(self, uc: UCBase):
         """ Get or create featuresets
@@ -93,6 +100,8 @@ class Solution:
         """
         uc.loghln()
         for project_name in self._projects:
+
+            # TODO: change iteration base on feature vector (it is faster way)
             dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "02-feature-set", "*.json")
             for file in glob.glob(dir):
 
@@ -105,15 +114,42 @@ class Solution:
                         if self._has_featureset(name, self._project_specs[project_name]): # build only featuresets based on project spec
                             uc.log('\t{0}/{1} create ... ', project_name, name)
 
-                            # create feature set only in case that it does not exist
+                            # create feature set only in case not exist
                             try:
-                                fs=fstore.get_feature_set(f"{project_name}/{name}")
+                                fstore.get_feature_set(f"{project_name}/{name}")
                             except:
-                                fs=self._create_featureset(project_name, name, desc, json_content['spec'])
+                                self._create_featureset(project_name, name, desc, json_content['spec'])
                             uc.logln("DONE")
 
-    def create_featurevector(self):
-        pass
+    def create_featurevector(self, uc: UCBase):
+        # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
+
+        uc.loghln()
+        for project_name in self._projects:
+            for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
+                # create file with definition of vector
+                source_file = os.path.join(os.getcwd(),
+                                           self.setup.model_definition,
+                                           "01-model",
+                                           "03-feature-vector",
+                                           f"*-{featurevector_name}.json")
+
+                # check existing data set
+                for file in glob.glob(source_file):
+                    uc.log("\t{0}/{1} ... ", project_name, featurevector_name)
+
+                    # iterate cross all featureset definitions
+                    with open(file, "r") as json_file:
+                        json_content = json.load(json_file)
+                        name, desc, lbls, kind = self._get_json_header(json_content)
+
+                        # create feature vector only in case not exist
+                        try:
+                            fstore.get_feature_vector(f"{project_name}/{name}")
+                        except:
+                            self._create_featurevector(project_name, featurevector_name, desc, json_content['spec'])
+
+                    uc.logln("DONE")
 
     def ingest_data(self, uc: UCBase):
         """
@@ -123,7 +159,7 @@ class Solution:
         """
         uc.loghln()
         for project_name in self._projects:
-            for featureset_name in self._get_featureset_list(self._project_specs[project_name]):
+            for featureset_name in self._get_featuresets(self._project_specs[project_name]):
                 # create possible file for load
                 source_file=os.path.join(os.getcwd(),
                                          self.setup.model_definition,
@@ -156,6 +192,18 @@ class Solution:
     @property
     def setup(self) -> UCSetup:
         return self._setup
+
+    def _create_featurevector(self, project_name, featurevector_name, featurevector_desc, json_spec):
+        # switch to proper project if the current project is different
+        if mlrun.get_current_project().name != project_name:
+            mlrun.load_project(name=project_name, context="./", user_project=False)
+
+        features = json_spec['features']
+
+        # create feature vector
+        vector = fstore.FeatureVector(featurevector_name, features)
+        vector.save()
+
 
     def _create_featureset(self, project_name, featureset_name, featureset_desc, json_spec):
         """
@@ -214,7 +262,7 @@ class Solution:
     def _get_json_header(self, json_content):
         """ Get common header
 
-        :param json_content:    jsou content
+        :param json_content:    json content
         :return:                name, description, labeles and kind from header
         """
         name = json_content['name']
