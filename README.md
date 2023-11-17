@@ -35,9 +35,9 @@ Quality Gate covers these use cases:
  - **Ingest data**
    - [x] UC301: Ingest data to feature set(s)
  - **Feature vector**
-   - [ ] UC401: Create feature vector(s)
+   - [x] UC401: Create feature vector(s)
  - **Get data**
-   - [ ] UC501: Get data from feature set(s)
+   - [ ] UC501: Get data from feature vector(s)
 
 ## Tested with
 The project was test with these versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
