@@ -201,7 +201,7 @@ class Solution:
         features = json_spec['features']
 
         # create feature vector
-        vector = fstore.FeatureVector(featurevector_name, features)
+        vector = fstore.FeatureVector(featurevector_name, features, description=featurevector_desc)
         vector.save()
 
 
