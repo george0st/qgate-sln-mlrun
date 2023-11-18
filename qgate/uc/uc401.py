@@ -17,6 +17,10 @@ class UC401(UCBase):
     def desc(self) -> str:
         return "Create feature vector(s)"
 
+    @property
+    def long_desc(self):
+        return "Create feature vector(s) as join of relevant feature set(s)"
+
     def exec(self):
         self.sln.create_featurevector(self)
 

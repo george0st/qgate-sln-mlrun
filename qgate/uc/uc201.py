@@ -17,6 +17,10 @@ class UC201(UCBase):
     def desc(self) -> str:
         return "Create feature set(s)"
 
+    @property
+    def long_desc(self):
+        return "Create feature set(s) with name, description, entitie(s), feature(s) and target(s)"
+
     def exec(self):
         self.sln.create_featureset(self)
 

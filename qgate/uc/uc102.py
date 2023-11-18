@@ -17,6 +17,7 @@ class UC102(UCBase):
     def desc(self) -> str:
         return "Delete project(s)"
 
+    @property
     def long_desc(self):
         return "Delete project(s) include all content and targets"
 

@@ -32,6 +32,7 @@ class UCBase:
     def desc(self):
         raise NotImplemented()
 
+    @property
     def long_desc(self):
         raise NotImplemented()
 
