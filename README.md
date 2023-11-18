@@ -31,7 +31,7 @@ Quality Gate covers these use cases:
    - [x] UC101: Create project(s)
    - [x] UC102: Delete project(s)
  - **Feature set**
-   - [x] UC201: Create feature set(s) 
+   - [x] UC201: Create feature set(s)
  - **Ingest data**
    - [x] UC301: Ingest data to feature set(s)
  - **Feature vector**
