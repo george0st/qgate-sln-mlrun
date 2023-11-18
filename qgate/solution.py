@@ -272,3 +272,9 @@ class Solution:
         # optional labels
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
+
+    def get_data_offline(self, uc: UCBase):
+        """
+        Get data from off-line feature vector
+        """
+        pass
