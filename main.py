@@ -14,7 +14,12 @@ if __name__ == '__main__':
     sln = Solution(setup)
 
     usecase_fns = [uc101.UC101, uc201.UC201, uc301.UC301, uc401.UC401, uc102.UC102]
-    #usecase_fns=[uc101.UC101, uc201.UC201, uc301.UC301, uc401.UC401]
+
+    # support parametr 'NoDelete' for switch-off the UC102: Delete project(s)
+    if len(sys.argv)>1:
+        if sys.argv[1]=="NoDelete":
+            usecase_fns.remove(uc102.UC102)
+
     for usecase_fn in usecase_fns:
         uc = usecase_fn(sln, output)
         try:
