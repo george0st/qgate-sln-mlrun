@@ -1,7 +1,7 @@
 import qgate.solution as qgate
 from qgate.solution import Solution
 import os.path
-from qgate.uc import uc101, uc102, uc201, uc301, uc401
+from qgate.uc import uc101, uc102, uc201, uc301, uc401, uc501
 from qgate.uc import ucsetup, ucoutput, ucbase
 import sys
 
@@ -13,12 +13,20 @@ if __name__ == '__main__':
     output = ucoutput.UCOutput(setup)
     sln = Solution(setup)
 
-    usecase_fns = [uc101.UC101, uc201.UC201, uc301.UC301, uc401.UC401, uc102.UC102]
+    usecase_fns = [uc101.UC101, uc201.UC201, uc301.UC301, uc401.UC401]
+    usecase_test = uc501.UC501
+    NoDelete=False
 
-    # support parametr 'NoDelete' for switch-off the UC102: Delete project(s)
+    # support parametr 'NoDelete' and 'Test' for switch-off the UC102: Delete project(s)
     if len(sys.argv)>1:
-        if sys.argv[1]=="NoDelete":
-            usecase_fns.remove(uc102.UC102)
+        for arg in sys.argv:
+            arg=arg.lower()
+            if arg=="nodelete":
+                NoDelete=True
+            elif arg=="test":
+                usecase_fns.append(usecase_test)
+    if NoDelete == False:
+        usecase_fns.append(uc102.UC102)
 
     for usecase_fn in usecase_fns:
         uc = usecase_fn(sln, output)
