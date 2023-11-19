@@ -277,4 +277,23 @@ class Solution:
         """
         Get data from off-line feature vector
         """
-        pass
+        uc.loghln()
+        for project_name in self._projects:
+            for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
+
+                uc.log("\t{0}/{1} ... ", project_name, featurevector_name)
+
+                if mlrun.get_current_project().name != project_name:
+                    mlrun.load_project(name=project_name, context="./", user_project=False)
+
+                vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
+
+                resp = fstore.get_offline_features(vector)
+                resp.to_dataframe()
+                uc.logln("DONE")
+
+        # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
+        # resp.to_dataframe()
+        #
+        # svc = fs.get_online_feature_service("store://feature-vectors/gate-alfa/vector-partycontact:latest")
+        # resp = svc.get([{"customer_id": "42"}, {"customer_id": "50"}])
