@@ -291,3 +291,9 @@ class Solution:
                 resp = fstore.get_offline_features(vector)
                 resp.to_dataframe()
                 uc.logln("DONE")
+
+        # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
+        # resp.to_dataframe()
+        #
+        # svc = fs.get_online_feature_service("store://feature-vectors/gate-alfa/vector-partycontact:latest")
+        # resp = svc.get([{"customer_id": "42"}, {"customer_id": "50"}])
