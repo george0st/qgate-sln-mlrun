@@ -23,7 +23,7 @@ class UC101(UCBase):
 
     @property
     def long_desc(self):
-        return "Create project(s) with setting name, description and tags"
+        return "Create project with setting name, description and tags"
 
     def exec(self):
         self.sln.create_projects(self)

@@ -19,7 +19,7 @@ class UC102(UCBase):
 
     @property
     def long_desc(self):
-        return "Delete project(s) include all content and targets"
+        return "Delete project include all contents and targets (such as Parquet files, etc.)"
 
     def exec(self):
         self.sln.delete_projects(self)

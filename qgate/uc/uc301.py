@@ -18,7 +18,7 @@ class UC301(UCBase):
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set(s) from data source to target(s) based on feature set(s)"
+        return "Ingest data to feature set from data source to targets based on feature set definition"
 
     def exec(self):
         self.sln.ingest_data(self)

@@ -18,7 +18,7 @@ class UC501(UCBase):
 
     @property
     def long_desc(self):
-        return "Get data from off-line feature vector(s)"
+        return "Get data from off-line feature vector"
 
     def exec(self):
         self.sln.get_data_offline(self)

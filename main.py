@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     # support parametr 'NoDelete' and 'Test' for switch-off the UC102: Delete project(s)
     if len(sys.argv)>1:
-        for arg in sys.argv:
+        for arg in sys.argv[1:]:
             arg=arg.lower()
             if arg=="nodelete":
                 NoDelete=True
