@@ -25,7 +25,7 @@ if __name__ == '__main__':
                 NoDelete=True
             elif arg=="test":
                 usecase_fns.append(usecase_test)
-    if NoDelete == False:
+    if not NoDelete:
         usecase_fns.append(uc102.UC102)
 
     for usecase_fn in usecase_fns:
