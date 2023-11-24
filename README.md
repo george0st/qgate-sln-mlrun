@@ -37,7 +37,7 @@ Quality Gate covers these use cases:
  - **Feature vector**
    - [x] UC401: Create feature vector(s)
  - **Get data**
-   - [ ] UC501: Get data from off-line feature vector(s)
+   - [x] UC501: Get data from off-line feature vector(s)
    - [ ] UC502: Get data from on-line feature vector(s)
  - **Serving ML score**
    - [ ] UC601: Serving score from CART
