@@ -221,7 +221,8 @@ class Solution:
 
         fs = fstore.FeatureSet(
             name=featureset_name,
-            description=featureset_desc
+            description=featureset_desc,
+            relations=json_spec.get('relations')
         )
 
         # define entities
@@ -289,7 +290,8 @@ class Solution:
                 vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
                 resp = fstore.get_offline_features(vector)
-                resp.to_dataframe()
+                frm=resp.to_dataframe()
+                uc.log("get {0} items ... ", len(frm.index))
                 uc.logln("DONE")
 
         # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
