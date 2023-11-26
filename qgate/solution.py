@@ -2,7 +2,7 @@ import mlrun
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.data_types.data_types import spark_to_value_type
-from mlrun.datastore import ParquetTarget
+from mlrun.datastore import ParquetTarget,CSVTarget
 from mlrun.projects.project import MlrunProject
 import json
 import glob
@@ -67,6 +67,13 @@ class Solution:
                 shutil.rmtree(project_dir, True)
 
             uc.logln("DONE")
+
+        # delete other things (generated from e.g. CSVTargets)
+        dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
+        for file in glob.glob(dir):
+            if os.path.isdir(file):
+                shutil.rmtree(file, True)
+
 
     def _has_featureset(self, name, project_spec):
         # Support two different collections
@@ -184,7 +191,7 @@ class Solution:
                                              chunksize=10000):
                         fstore.ingest(featureset,
                                       data_frm,
-                                      overwrite=False,
+                                      #overwrite=False,
                                       return_df=False,
                                       infer_options=mlrun.data_types.data_types.InferOptions.Null)
                     uc.logln("DONE")
@@ -247,10 +254,12 @@ class Solution:
         count=0
         target_providers=[]
         for target in json_spec['targets']:
+            target_name = f"target_{count}"
             if target.lower().strip()=="parquet":
                 # support more parquet targets (each target has different path)
-                target_name=f"target_{count}"
                 target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name)))
+            elif target.lower().strip()=="csv":
+                target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
             else:
                 # TODO: Add support other targets for MLRun CE e.g. RedisTarget
                 raise NotImplementedError()

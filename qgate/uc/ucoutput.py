@@ -21,14 +21,24 @@ class UCOutput():
     """
 
     COMMENT = "# "
+    OUTPUT_FILE = "qgate-sln-mlrun-{0}.txt"
 
     def __init__(self, setup: UCSetup):
 
         self._setup=setup
+        self._file_name=str.format(UCOutput.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+
         if not os.path.exists(self._setup.model_output):
             os.makedirs(self._setup.model_output)
-        self._log_file = open(os.path.join(self._setup.model_output, "qgate-sln-mlrun.txt"), 'w+t')
+        self._log_file = open(os.path.join(self._setup.model_output, self._file_name), 'w+t')
         self._headr()
+
+    @property
+    def file_pattern(self):
+        return UCOutput.OUTPUT_FILE
+    @property
+    def file_name(self):
+        return self._file_name
 
     def __del__(self):
         self.Close()
