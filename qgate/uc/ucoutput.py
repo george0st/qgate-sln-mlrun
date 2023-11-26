@@ -21,7 +21,7 @@ class UCOutput():
     """
 
     COMMENT = "# "
-    OUTPUT_FILE = "qgate-sln-mlrun-{0}.txt"
+    OUTPUT_FILE = "qg-mlrun-{0}.txt"
 
     def __init__(self, setup: UCSetup):
 
