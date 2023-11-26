@@ -308,3 +308,6 @@ class Solution:
         #
         # svc = fs.get_online_feature_service("store://feature-vectors/gate-alfa/vector-partycontact:latest")
         # resp = svc.get([{"customer_id": "42"}, {"customer_id": "50"}])
+
+    def serving_score(self, uc: UCBase):
+        uc.loghln()
