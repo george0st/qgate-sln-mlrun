@@ -310,4 +310,14 @@ class Solution:
         # resp = svc.get([{"customer_id": "42"}, {"customer_id": "50"}])
 
     def serving_score(self, uc: UCBase):
+        """
+        Serve score
+        """
         uc.loghln()
+
+        # prepare model
+
+        # store pickl file
+
+        # add model
+

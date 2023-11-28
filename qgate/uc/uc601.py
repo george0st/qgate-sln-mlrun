@@ -18,7 +18,12 @@ class UC601(UCBase):
 
     @property
     def long_desc(self):
-        return "Serving score from CART"
+        """
+        Long description, more information see these sources:
+         - https://www.datacamp.com/tutorial/decision-tree-classification-python
+         - https://scikit-learn.org/stable/modules/tree.html
+        """
+        return "Serving score from CART (Classification and Regression Tree) from Scikit-Learn"
 
     def exec(self):
         self.sln.serving_score(self)
