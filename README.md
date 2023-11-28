@@ -41,6 +41,10 @@ Quality Gate covers these use cases:
    - [ ] UC502: Get data from on-line feature vector(s)
  - **Serving ML score**
    - [ ] UC601: Serving score from CART
+   - [ ] UC602: Serving score from XGBoost
+   - [ ] UC603: Serving score from DNN
+
+
 
 ## Tested with
 The project was test with these versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
