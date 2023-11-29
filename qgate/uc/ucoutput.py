@@ -18,7 +18,7 @@ class Singleton (type):
 #class UCOutput(metaclass=Singleton):
 class UCOutput():
     """
-    Management reports/outputs from use cases
+    Management reports/outputs based on templates.
     """
 
     COMMENT = "# "
@@ -26,11 +26,18 @@ class UCOutput():
     JINJA_TEMPLATE = "./asset/qg-template.html"
     JINJA_OUTPUT_FILE = "qg-mlrun-{0}.html"
 
-    def __init__(self, setup: UCSetup):
+    def __init__(self, setup: UCSetup, templates: [str]=None):
+        """
+        Initial
+
+        :param setup:       specific usecase
+        :param templates:   list of templates for generation outputs
+        """
 
         self._setup=setup
         self._file_name=str.format(UCOutput.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
         self._data={}
+        self._templates=templates
 
         if not os.path.exists(self._setup.model_output):
             os.makedirs(self._setup.model_output)
@@ -44,7 +51,7 @@ class UCOutput():
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
         jinja=Template(UCOutput.JINJA_TEMPLATE)
         output=jinja.render(self._data)
-        
+
         # TODO: save based on JINJA_OUTPUT_FILE
         print(output)
 
