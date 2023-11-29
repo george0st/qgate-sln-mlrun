@@ -5,6 +5,7 @@ import mlrun
 from qgate.uc.ucsetup import UCSetup
 from contextlib import suppress
 from qgate.version import __version__
+from jinja2 import Template
 
 class Singleton (type):
     _instances = {}
@@ -22,6 +23,8 @@ class UCOutput():
 
     COMMENT = "# "
     OUTPUT_FILE = "qg-mlrun-{0}.txt"
+    JINJA_TEMPLATE = "./asset/qg-template.html"
+    JINJA_OUTPUT_FILE = "qg-mlrun-{0}.html"
 
     def __init__(self, setup: UCSetup):
 
@@ -32,6 +35,15 @@ class UCOutput():
             os.makedirs(self._setup.model_output)
         self._log_file = open(os.path.join(self._setup.model_output, self._file_name), 'w+t')
         self._headr()
+
+
+    def _render(self):
+        # https://zetcode.com/python/jinja/
+        # https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/
+        data={}
+        jinja=Template(UCOutput.JINJA_TEMPLATE)
+        jinja.render(data)
+        # TODO: save based on JINJA_OUTPUT_FILE
 
     @property
     def file_pattern(self):
