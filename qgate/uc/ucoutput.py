@@ -23,8 +23,6 @@ class UCOutput():
 
     COMMENT = "# "
     OUTPUT_FILE = "qg-mlrun-{0}.txt"
-    JINJA_TEMPLATE = "./asset/qg-template.html"
-    JINJA_OUTPUT_FILE = "qg-mlrun-{0}.html"
 
     def __init__(self, setup: UCSetup, templates: [str]=None):
         """
@@ -49,11 +47,23 @@ class UCOutput():
         # https://zetcode.com/python/jinja/
         # https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
-        jinja=Template(UCOutput.JINJA_TEMPLATE)
-        output=jinja.render(self._data)
+        for template in self._templates:
 
-        # TODO: save based on JINJA_OUTPUT_FILE
-        print(output)
+            with open(os.path.join(template), 'r+t') as input_file:
+                template_content=input_file.read()
+
+            jinja=Template(template_content)
+            output=jinja.render(data=self._data)
+
+            path=os.path.split(template)
+            file_name=path[-1:]
+            extension=os.path.splitext(file_name[0])
+            file_name=str.format("{0}-{1}{2}",extension[0], datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"), extension[1])
+            if not os.path.exists(self._setup.model_output):
+                os.makedirs(self._setup.model_output)
+
+            with open(os.path.join(self._setup.model_output, file_name), 'w+t') as output_file:
+                output_file.write(output)
 
     @property
     def file_pattern(self):
@@ -68,6 +78,7 @@ class UCOutput():
     def Close(self):
         if self._log_file:
             self._footer()
+            self._render()
             self._log_file.close()
             self._log_file=None
 
@@ -92,8 +103,7 @@ class UCOutput():
         self._data["python"] = sys.version
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
-        self._data["dir"] = os.getcwd()
-        self._data["variables"] = str(self._setup).replace('\n', "\n" + UCOutput.COMMENT)
+        self._data["variables"] = self._setup.variables
 
         # output
         self._logln("-----------------------")
@@ -106,9 +116,7 @@ class UCOutput():
         self._logln("System: " + self._data["system"])
         self._logln("Platform: " + self._data["platform"])
         self._logln("-----------------------")
-
-        self._logln("DIR: '" + self._data["dir"] + "'")
-        self._logln(self._data["variables"])
+        #self._logln(self._data["variables"])
 
     def _memory(self):
 

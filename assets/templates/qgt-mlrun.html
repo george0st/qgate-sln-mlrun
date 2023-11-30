@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+html, body { 
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
+}
+
+table {
+  margin: 1px;
+  overflow-x: auto;
+  border-spacing: 0;
+  font-family: courier new, courier, serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+tbody {
+  white-space: nowrap;
+}
+
+td {
+  padding: 5px 5px;
+  border-top-width: 0;
+  border-left-width: 0;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 16px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 12px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+</style>
+<script>
+
+function myFunction(element) {
+  var x = document.getElementById(element);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+</script>
+<body>
+	<h1>Quality report for MLRun</h1>
+	<!--
+	<h2 class="collapsible" onclick="myFunction('myDIV')">Execution detail ...</h2>
+	
+	https://www.w3schools.com/howto/howto_js_collapsible.asp
+	-->
+	
+
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution detail</button>	
+	<div id="myDIV" style="display: none;" class="content">
+	  <p>This is my DIV element.</p>
+	</div>
+
+		
+	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Output</button>	
+	<div id="myDIV3" style="display: none;" class="content">
+		<table>
+			<tr><td>UseCase</td><td>Detail</td><td>State</td></tr>
+			<tr><td>UC101</td><td></td><td></td></tr>
+			<tr><td></td><td>hkjhkhkjh...</td><td>DONE</td></tr>
+			<tr><td></td><td>hjgjhgjg...</td><td>DONE</td></tr>
+			<tr><td>UC101</td><td></td><td></td></tr>
+			<tr><td></td><td>hkjhkhkjh...</td><td>DONE</td></tr>
+			<tr><td></td><td>hjgjhgjg...</td><td>DONE</td></tr>
+			<tr><td>UC101</td><td></td><td></td></tr>
+			<tr><td></td><td>hkjhkhkjh...</td><td>DONE</td></tr>
+			<tr><td></td><td>hjgjhgjg...</td><td>DONE</td></tr>
+
+		</table>
+	</div>
+		{% for EMPLOYEE in EMPLOYEES %}
+		| {{ EMPLOYEE.name }} | {{ EMPLOYEE.age }}  | {{ EMPLOYEE.gender }} |
+		{% endfor %}
+
+	<p>sdsdsd</p>
+	<!--
+{# https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/ #}
+{# https://docs.apitemplate.io/reference/learn-jinja2.html#templating-basics #}
+	-->
+</body>
+</html>
