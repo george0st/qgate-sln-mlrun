@@ -18,7 +18,7 @@ class Singleton (type):
 #class UCOutput(metaclass=Singleton):
 class UCOutput():
     """
-    Management reports/outputs from use cases
+    Management reports/outputs based on templates.
     """
 
     COMMENT = "# "
@@ -26,10 +26,18 @@ class UCOutput():
     JINJA_TEMPLATE = "./asset/qg-template.html"
     JINJA_OUTPUT_FILE = "qg-mlrun-{0}.html"
 
-    def __init__(self, setup: UCSetup):
+    def __init__(self, setup: UCSetup, templates: [str]=None):
+        """
+        Initial
+
+        :param setup:       specific usecase
+        :param templates:   list of templates for generation outputs
+        """
 
         self._setup=setup
         self._file_name=str.format(UCOutput.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+        self._data={}
+        self._templates=templates
 
         if not os.path.exists(self._setup.model_output):
             os.makedirs(self._setup.model_output)
@@ -40,10 +48,12 @@ class UCOutput():
     def _render(self):
         # https://zetcode.com/python/jinja/
         # https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/
-        data={}
+        # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
         jinja=Template(UCOutput.JINJA_TEMPLATE)
-        jinja.render(data)
+        output=jinja.render(self._data)
+
         # TODO: save based on JINJA_OUTPUT_FILE
+        print(output)
 
     @property
     def file_pattern(self):
@@ -63,24 +73,42 @@ class UCOutput():
 
 
     def _headr(self):
-        self._logln("QGate version: " + __version__)
-        self._logln(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        self._data["version"] = __version__
+        self._data["datetime"] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        # output
+        self._logln("QGate version: " + self._data["version"])
+        self._logln(self._data["datetime"])
 
     def _footer(self):
+
         total, free = self._memory()
+
+        self._data["memory_total"] = total
+        self._data["memory_free"] = free
+        self._data["host"] = self._host()
+        self._data["cpu"] = str(multiprocessing.cpu_count())
+        self._data["mlrun"] = mlrun.get_version()
+        self._data["python"] = sys.version
+        self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
+        self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
+        self._data["dir"] = os.getcwd()
+        self._data["variables"] = str(self._setup).replace('\n', "\n" + UCOutput.COMMENT)
+
+        # output
         self._logln("-----------------------")
-        self._logln("Host: " + self._host())
-        self._logln("RAM total/free: " + total + "/" + free)
-        self._logln("CPU: " + str(multiprocessing.cpu_count()))
+        self._logln("Host: " + self._data["host"])
+        self._logln("RAM total/free: " + self._data["memory_total"] + "/" + self._data["memory_free"])
+        self._logln("CPU: " + self._data["cpu"])
         self._logln("-----------------------")
-        self._logln("MLRun: " + mlrun.get_version() + " (https://docs.mlrun.org/en/latest/change-log/index.html)")
-        self._logln("Python: " + sys.version)
-        self._logln("System: " + platform.system() + " " + platform.version() + " (" + platform.platform() + ")")
-        self._logln("Platform: " + platform.machine() + " (" + platform.processor() + ")")
+        self._logln("MLRun: " + self._data["mlrun"] + " (https://docs.mlrun.org/en/latest/change-log/index.html)")
+        self._logln("Python: " + self._data["python"])
+        self._logln("System: " + self._data["system"])
+        self._logln("Platform: " + self._data["platform"])
         self._logln("-----------------------")
 
-        self._logln("DIR: '" + os.getcwd() + "'")
-        self._logln(str(self._setup).replace('\n', "\n" + UCOutput.COMMENT))
+        self._logln("DIR: '" + self._data["dir"] + "'")
+        self._logln(self._data["variables"])
 
     def _memory(self):
 
