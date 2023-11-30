@@ -5,7 +5,7 @@ import mlrun
 from qgate.uc.ucsetup import UCSetup
 from contextlib import suppress
 from qgate.version import __version__
-from jinja2 import Template, Environment, FileSystemLoader
+from jinja2 import Template
 
 class Singleton (type):
     _instances = {}
