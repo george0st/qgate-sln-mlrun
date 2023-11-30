@@ -14,6 +14,8 @@ class UCSetup:
                 self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
                 break
 
+        self._variables["DIR"]=os.getcwd()
+
         # set model dirs
         self._model_definition=self._variables['QGATE_DEFINITION']
         self._model_output=self._variables['QGATE_OUTPUT']
@@ -26,6 +28,16 @@ class UCSetup:
         for key in self._variables.keys():
             ret+=key+ ": "+ "'" + self._variables[key] + "'\n"
         return ret[:-1]
+
+    @property
+    def variables(self):
+        variable_list=[]
+        for key in self._variables.keys():
+            itm = {}
+            itm['key']=key
+            itm['value']=self._variables[key]
+            variable_list.append(itm)
+        return variable_list
 
     @property
     def model_output(self):

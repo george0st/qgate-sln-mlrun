@@ -1,0 +1,52 @@
+# QGate version: {{ data.version }}
+# {{ data.datetime }}
+UC101: Create project(s)
+	gate-alfa ... DONE
+	gate-bravo ... DONE
+UC201: Create feature set(s)
+	gate-alfa/basic-party create ... DONE
+	gate-alfa/basic-contact create ... DONE
+	gate-alfa/basic-relation create ... DONE
+	gate-alfa/basic-account create ... DONE
+	gate-alfa/basic-transaction create ... DONE
+	gate-alfa/basic-event create ... DONE
+	gate-alfa/aggregate-party create ... DONE
+	gate-alfa/aggregate-account create ... DONE
+	gate-alfa/aggregate-transaction create ... DONE
+	gate-bravo/basic-contact create ... DONE
+	gate-bravo/basic-account create ... DONE
+	gate-bravo/aggregate-account create ... DONE
+UC301: Ingest data to feature set(s)
+	gate-alfa/basic-party ... DONE
+	gate-alfa/basic-contact ... DONE
+	gate-alfa/basic-relation ... DONE
+	gate-alfa/basic-account ... DONE
+	gate-alfa/basic-transaction ... DONE
+	gate-alfa/basic-event ... DONE
+	gate-bravo/basic-account ... DONE
+	gate-bravo/basic-contact ... DONE
+UC401: Create feature vector(s)
+	gate-alfa/vector-party ... DONE
+	gate-alfa/vector-partycontact ... DONE
+	gate-alfa/vector-partyaccount ... DONE
+	gate-alfa/vector-partycontactaccount ... DONE
+UC501: Get data from off-line feature vector(s)
+	gate-alfa/vector-party ... get 100 items ... DONE
+	gate-alfa/vector-partycontact ... get 102 items ... DONE
+	gate-alfa/vector-partyaccount ... get 25 items ... DONE
+	gate-alfa/vector-partycontactaccount ... get 27 items ... DONE
+UC102: Delete project(s)
+	gate-alfa ... DONE
+	gate-bravo ... DONE
+# -----------------------
+# Host: {{ data.host }}
+# RAM total/free: {{ data.memory_total }}/{{ data.memory_free }}
+# CPU: {{ data.cpu }}
+# -----------------------
+# MLRun: {{ data.mlrun }} (https://docs.mlrun.org/en/latest/change-log/index.html)
+# Python: {{ data.python }}
+# System: {{ data.system }}
+# Platform: {{ data.platform }}
+# ----------------------- {% for variable in data.variables %}
+# {{ variable.key }}: '{{ variable.value }}' {% endfor %}
+
