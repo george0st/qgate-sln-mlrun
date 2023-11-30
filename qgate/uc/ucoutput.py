@@ -23,8 +23,6 @@ class UCOutput():
 
     COMMENT = "# "
     OUTPUT_FILE = "qg-mlrun-{0}.txt"
-    JINJA_TEMPLATE = "./asset/qg-template.html"
-    JINJA_OUTPUT_FILE = "qg-mlrun-{0}.html"
 
     def __init__(self, setup: UCSetup, templates: [str]=None):
         """
@@ -67,8 +65,6 @@ class UCOutput():
             with open(os.path.join(self._setup.model_output, file_name), 'w+t') as output_file:
                 output_file.write(output)
 
-
-
     @property
     def file_pattern(self):
         return UCOutput.OUTPUT_FILE
@@ -107,7 +103,6 @@ class UCOutput():
         self._data["python"] = sys.version
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
-#        self._data["variables"] = str(self._setup).replace('\n', "\n" + UCOutput.COMMENT)
         self._data["variables"] = self._setup.variables
 
         # output
