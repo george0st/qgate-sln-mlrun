@@ -38,7 +38,7 @@ class Solution:
 
                 # create project
                 uc.log("\t{0} ... ", name)
-                uc.usecase_detail(f"{name} ...")
+                uc.usecase_detail(f"{name}")
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
@@ -56,8 +56,10 @@ class Solution:
         :param uc:      Use case
         """
         uc.loghln()
+        uc.new_usecase()
         for project_name in self._projects:
             uc.log("\t{0} ... ", project_name)
+            uc.usecase_detail(project_name)
 
             # delete project
             mlrun.get_run_db().delete_project(project_name, "cascade")
@@ -68,6 +70,7 @@ class Solution:
                 shutil.rmtree(project_dir, True)
 
             uc.logln("DONE")
+            uc.usecase_state("DONE")
 
         # delete other things (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")

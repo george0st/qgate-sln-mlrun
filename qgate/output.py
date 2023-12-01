@@ -48,7 +48,6 @@ class Output():
         new_uc['desc'] = uc_description
         new_uc['details']=[]
         if self._data.get("usecases"):
-            self._data["usecases"]=[]
             self._data["usecases"].append(new_uc)
         else:
             self._data["usecases"]=[]
