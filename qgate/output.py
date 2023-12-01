@@ -16,7 +16,7 @@ class Singleton (type):
 
 
 #class UCOutput(metaclass=Singleton):
-class OutputTemplate():
+class Output():
     """
     Management reports/outputs based on templates.
     """
@@ -33,7 +33,7 @@ class OutputTemplate():
         """
 
         self._setup=setup
-        self._file_name=str.format(OutputTemplate.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+        self._file_name=str.format(Output.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
         self._data={}
         self._templates=templates
 
@@ -67,7 +67,7 @@ class OutputTemplate():
 
     @property
     def file_pattern(self):
-        return OutputTemplate.OUTPUT_FILE
+        return Output.OUTPUT_FILE
     @property
     def file_name(self):
         return self._file_name
@@ -152,12 +152,12 @@ class OutputTemplate():
 
     def _logln(self, text = None, comment: bool = True):
         if comment:
-            self._log_file.write(OutputTemplate.COMMENT)
+            self._log_file.write(Output.COMMENT)
         self._log_file.write(text + '\n')
 
     def _log(self, text = None, comment: bool = True):
         if comment:
-            self._log_file.write(OutputTemplate.COMMENT)
+            self._log_file.write(Output.COMMENT)
         if text:
             self._log_file.write(text)
 

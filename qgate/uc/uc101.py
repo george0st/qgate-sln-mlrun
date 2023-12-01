@@ -3,13 +3,13 @@
 """
 
 from qgate.uc.ucbase import UCBase
-from qgate.output_template import OutputTemplate
+from qgate.output import Output
 from qgate.solution import Solution
 
 
 class UC101(UCBase):
 
-    def __init__(self, sln: Solution, output: OutputTemplate):
+    def __init__(self, sln: Solution, output: Output):
         super().__init__(sln, output, self.__class__.__name__)
 
     @property
