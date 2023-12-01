@@ -42,6 +42,32 @@ class Output():
         self._log_file = open(os.path.join(self._setup.model_output, self._file_name), 'w+t')
         self._headr()
 
+    def new_usecase(self, uc_name, uc_description):
+        new_uc = {}
+        new_uc['name'] = uc_name
+        new_uc['desc'] = uc_description
+        new_uc['details']=[]
+        if self._data.get("usecases"):
+            self._data["usecases"]=[]
+            self._data["usecases"].append(new_uc)
+        else:
+            self._data["usecases"]=[]
+            self._data["usecases"].append(new_uc)
+
+
+
+    def usecase_detail(self, detail):
+        dtl={}
+        dtl['detail']=detail
+        dtl['state']=None
+
+        uc=self._data["usecases"][-1]
+        uc['details'].append(dtl)
+
+    def usecase_state(self, state):
+        uc=self._data["usecases"][-1]
+        dtl=uc['details'][-1]
+        dtl['state']=state
 
     def _render(self):
         # https://zetcode.com/python/jinja/

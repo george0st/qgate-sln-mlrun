@@ -29,6 +29,7 @@ class Solution:
         :param uc:      Use case
         """
         uc.loghln()
+        uc.new_usecase()
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with (open(file, "r") as json_file):
@@ -37,6 +38,7 @@ class Solution:
 
                 # create project
                 uc.log("\t{0} ... ", name)
+                uc.usecase_detail(f"{name} ...")
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
@@ -45,6 +47,7 @@ class Solution:
                 prj.save()
                 self._project_specs[name] = json_content['spec']
                 uc.logln("DONE")
+                uc.usecase_state("DONE")
 
     def delete_projects(self, uc: UCBase):
         """
