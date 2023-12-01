@@ -2,14 +2,9 @@
   UC101: Create project(s)
 """
 
-import mlrun
 from qgate.uc.ucbase import UCBase
-from qgate.uc.ucsetup import UCSetup
-from qgate.uc.output_template import OutputTemplate
+from qgate.output_template import OutputTemplate
 from qgate.solution import Solution
-import os
-import glob
-import json
 
 
 class UC101(UCBase):

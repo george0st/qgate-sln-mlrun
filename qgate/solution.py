@@ -3,14 +3,12 @@ import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.data_types.data_types import spark_to_value_type
 from mlrun.datastore import ParquetTarget,CSVTarget
-from mlrun.projects.project import MlrunProject
 import json
 import glob
 import os
 import pandas as pd
 import shutil
 from qgate.uc.ucsetup import UCSetup
-from qgate.uc.output_template import OutputTemplate
 from qgate.uc.ucbase import UCBase
 
 class Solution:

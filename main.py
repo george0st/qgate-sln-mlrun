@@ -1,8 +1,7 @@
-import qgate.solution as qgate
 from qgate.solution import Solution
-import os.path
 from qgate.uc import uc101, uc102, uc201, uc301, uc401, uc501, uc601
-from qgate.uc import ucsetup, output_template, ucbase
+from qgate.uc import ucsetup, ucbase
+from qgate import output_template
 import sys
 
 

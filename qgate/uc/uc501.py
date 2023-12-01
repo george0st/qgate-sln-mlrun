@@ -4,7 +4,7 @@
 
 from qgate.uc.ucbase import UCBase
 from qgate.solution import Solution
-from qgate.uc.output_template import OutputTemplate
+from qgate.output_template import OutputTemplate
 
 
 class UC501(UCBase):

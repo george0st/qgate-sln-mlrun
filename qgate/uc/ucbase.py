@@ -1,5 +1,5 @@
 
-from qgate.uc.output_template import OutputTemplate
+from qgate.output_template import OutputTemplate
 #from qgate.solution import Solution
 from enum import Enum
 
