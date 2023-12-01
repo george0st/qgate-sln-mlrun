@@ -2,7 +2,7 @@ import datetime
 import multiprocessing
 import os, platform, sys
 import mlrun
-from qgate.uc.ucsetup import UCSetup
+from qgate.setup import Setup
 from contextlib import suppress
 from qgate.version import __version__
 from jinja2 import Template
@@ -16,7 +16,7 @@ class Singleton (type):
 
 
 #class UCOutput(metaclass=Singleton):
-class UCOutput():
+class Output():
     """
     Management reports/outputs based on templates.
     """
@@ -24,7 +24,7 @@ class UCOutput():
     COMMENT = "# "
     OUTPUT_FILE = "qg-mlrun-{0}.txt"
 
-    def __init__(self, setup: UCSetup, templates: [str]=None):
+    def __init__(self, setup: Setup, templates: [str]=None):
         """
         Initial
 
@@ -33,7 +33,7 @@ class UCOutput():
         """
 
         self._setup=setup
-        self._file_name=str.format(UCOutput.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+        self._file_name=str.format(Output.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
         self._data={}
         self._templates=templates
 
@@ -67,7 +67,7 @@ class UCOutput():
 
     @property
     def file_pattern(self):
-        return UCOutput.OUTPUT_FILE
+        return Output.OUTPUT_FILE
     @property
     def file_name(self):
         return self._file_name
@@ -152,12 +152,12 @@ class UCOutput():
 
     def _logln(self, text = None, comment: bool = True):
         if comment:
-            self._log_file.write(UCOutput.COMMENT)
+            self._log_file.write(Output.COMMENT)
         self._log_file.write(text + '\n')
 
     def _log(self, text = None, comment: bool = True):
         if comment:
-            self._log_file.write(UCOutput.COMMENT)
+            self._log_file.write(Output.COMMENT)
         if text:
             self._log_file.write(text)
 

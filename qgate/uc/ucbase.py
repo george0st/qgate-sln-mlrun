@@ -1,5 +1,5 @@
 
-from qgate.uc.ucoutput import UCOutput
+from qgate.output import Output
 #from qgate.solution import Solution
 from enum import Enum
 
@@ -14,7 +14,7 @@ class UCBase:
     Base class for all use cases
     """
 
-    def __init__(self, sln, output: UCOutput, name: str):
+    def __init__(self, sln, output: Output, name: str):
         self._sln=sln
         self._output=output
         self._name=name

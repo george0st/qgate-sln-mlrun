@@ -3,20 +3,18 @@ import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.data_types.data_types import spark_to_value_type
 from mlrun.datastore import ParquetTarget,CSVTarget
-from mlrun.projects.project import MlrunProject
 import json
 import glob
 import os
 import pandas as pd
 import shutil
-from qgate.uc.ucsetup import UCSetup
-from qgate.uc.ucoutput import UCOutput
+from qgate.setup import Setup
 from qgate.uc.ucbase import UCBase
 
 class Solution:
     """Create solution"""
 
-    def __init__(self, setup: UCSetup):
+    def __init__(self, setup: Setup):
         """ Init
 
         :param setup:   Setup for the solution
@@ -197,7 +195,7 @@ class Solution:
                     uc.logln("DONE")
 
     @property
-    def setup(self) -> UCSetup:
+    def setup(self) -> Setup:
         return self._setup
 
     def _create_featurevector(self, project_name, featurevector_name, featurevector_desc, json_spec):
