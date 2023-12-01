@@ -8,13 +8,13 @@ import glob
 import os
 import pandas as pd
 import shutil
-from qgate.uc.ucsetup import UCSetup
+from qgate.setup import Setup
 from qgate.uc.ucbase import UCBase
 
 class Solution:
     """Create solution"""
 
-    def __init__(self, setup: UCSetup):
+    def __init__(self, setup: Setup):
         """ Init
 
         :param setup:   Setup for the solution
@@ -195,7 +195,7 @@ class Solution:
                     uc.logln("DONE")
 
     @property
-    def setup(self) -> UCSetup:
+    def setup(self) -> Setup:
         return self._setup
 
     def _create_featurevector(self, project_name, featurevector_name, featurevector_desc, json_spec):

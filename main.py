@@ -1,14 +1,14 @@
 from qgate.solution import Solution
 from qgate.uc import uc101, uc102, uc201, uc301, uc401, uc501, uc601
-from qgate.uc import ucsetup, ucbase
-from qgate import output
+from qgate.uc import ucbase
+from qgate import output, setup
 import sys
 
 
 if __name__ == '__main__':
 
-    setup = ucsetup.UCSetup("0-size-100",
-                            ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+    setup = setup.Setup("0-size-100",
+                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
     output = output.Output(setup, ['./assets/templates/qgt-mlrun.txt'])
     sln = Solution(setup)
 

@@ -2,7 +2,7 @@ import datetime
 import multiprocessing
 import os, platform, sys
 import mlrun
-from qgate.uc.ucsetup import UCSetup
+from qgate.setup import Setup
 from contextlib import suppress
 from qgate.version import __version__
 from jinja2 import Template
@@ -24,7 +24,7 @@ class Output():
     COMMENT = "# "
     OUTPUT_FILE = "qg-mlrun-{0}.txt"
 
-    def __init__(self, setup: UCSetup, templates: [str]=None):
+    def __init__(self, setup: Setup, templates: [str]=None):
         """
         Initial
 
