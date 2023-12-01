@@ -10,7 +10,7 @@ import os
 import pandas as pd
 import shutil
 from qgate.uc.ucsetup import UCSetup
-from qgate.uc.ucoutput import UCOutput
+from qgate.uc.output_template import OutputTemplate
 from qgate.uc.ucbase import UCBase
 
 class Solution:

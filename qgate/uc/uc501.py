@@ -4,12 +4,12 @@
 
 from qgate.uc.ucbase import UCBase
 from qgate.solution import Solution
-from qgate.uc.ucoutput import UCOutput
+from qgate.uc.output_template import OutputTemplate
 
 
 class UC501(UCBase):
 
-    def __init__(self, sln: Solution, output: UCOutput):
+    def __init__(self, sln: Solution, output: OutputTemplate):
         super().__init__(sln, output, self.__class__.__name__)
 
     @property
