@@ -9,9 +9,7 @@
 .bin
 *venv*
 qgate-sln-mlrun-private.env
-*.pyc
 /qgate/__pycache__/*.pyc
 /output/
 /.coverage
-
 *.pyc
