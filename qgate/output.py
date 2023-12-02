@@ -68,7 +68,7 @@ class Output():
         dtl = uc['details'][-1]
         dtl['detail'] = f"{dtl['detail']} {detail}"
 
-    def usecase_state(self, state):
+    def usecase_state(self, state="DONE"):
         uc=self._data["usecases"][-1]
         dtl=uc['details'][-1]
         dtl['state']=state

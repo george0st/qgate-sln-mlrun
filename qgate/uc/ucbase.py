@@ -69,7 +69,7 @@ class UCBase:
     def usecase_detailext(self, detail):
         self.output.usecase_detailext(detail)
 
-    def usecase_state(self, state):
+    def usecase_state(self, state="DONE"):
         self.output.usecase_state(state)
 
 
