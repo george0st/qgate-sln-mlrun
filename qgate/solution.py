@@ -139,6 +139,7 @@ class Solution:
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
 
         uc.loghln()
+        uc.new_usecase()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
                 # create file with definition of vector
@@ -151,6 +152,7 @@ class Solution:
                 # check existing data set
                 for file in glob.glob(source_file):
                     uc.log("\t{0}/{1} ... ", project_name, featurevector_name)
+                    uc.usecase_detail(f"{project_name}/{featurevector_name}")
 
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
@@ -164,6 +166,7 @@ class Solution:
                             self._create_featurevector(project_name, featurevector_name, desc, json_content['spec'])
 
                     uc.logln("DONE")
+                    uc.usecase_state("DONE")
 
     def ingest_data(self, uc: UCBase):
         """
