@@ -1,5 +1,9 @@
 # QGate version: {{ data.version }}
 # {{ data.datetime }}
+# ----------------------- {% for usecase in data.usecases %}
+{{ usecase.name }}: {{ usecase.desc }}{% for detail in usecase.details %}
+    {{ detail.detail }} ... {{ detail.state }}{% endfor %}{% endfor %}
+-----
 UC101: Create project(s)
 	gate-alfa ... DONE
 	gate-bravo ... DONE

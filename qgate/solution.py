@@ -29,6 +29,7 @@ class Solution:
         :param uc:      Use case
         """
         uc.loghln()
+        uc.usecase_new()
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with (open(file, "r") as json_file):
@@ -37,6 +38,7 @@ class Solution:
 
                 # create project
                 uc.log("\t{0} ... ", name)
+                uc.usecase_detail(f"{name}")
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
@@ -45,6 +47,7 @@ class Solution:
                 prj.save()
                 self._project_specs[name] = json_content['spec']
                 uc.logln("DONE")
+                uc.usecase_state("DONE")
 
     def delete_projects(self, uc: UCBase):
         """
@@ -53,8 +56,10 @@ class Solution:
         :param uc:      Use case
         """
         uc.loghln()
+        uc.usecase_new()
         for project_name in self._projects:
             uc.log("\t{0} ... ", project_name)
+            uc.usecase_detail(project_name)
 
             # delete project
             mlrun.get_run_db().delete_project(project_name, "cascade")
@@ -65,6 +70,7 @@ class Solution:
                 shutil.rmtree(project_dir, True)
 
             uc.logln("DONE")
+            uc.usecase_state("DONE")
 
         # delete other things (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
@@ -104,6 +110,7 @@ class Solution:
         :param uc:      Use case
         """
         uc.loghln()
+        uc.usecase_new()
         for project_name in self._projects:
 
             # TODO: change iteration base on feature vector (it is faster way)
@@ -118,6 +125,7 @@ class Solution:
                     if kind=="feature-set":
                         if self._has_featureset(name, self._project_specs[project_name]): # build only featuresets based on project spec
                             uc.log('\t{0}/{1} create ... ', project_name, name)
+                            uc.usecase_detail(f'{project_name}/{name} create')
 
                             # create feature set only in case not exist
                             try:
@@ -125,11 +133,13 @@ class Solution:
                             except:
                                 self._create_featureset(project_name, name, desc, json_content['spec'])
                             uc.logln("DONE")
+                            uc.usecase_state("DONE")
 
     def create_featurevector(self, uc: UCBase):
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
 
         uc.loghln()
+        uc.usecase_new()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
                 # create file with definition of vector
@@ -142,6 +152,7 @@ class Solution:
                 # check existing data set
                 for file in glob.glob(source_file):
                     uc.log("\t{0}/{1} ... ", project_name, featurevector_name)
+                    uc.usecase_detail(f"{project_name}/{featurevector_name}")
 
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
@@ -155,6 +166,7 @@ class Solution:
                             self._create_featurevector(project_name, featurevector_name, desc, json_content['spec'])
 
                     uc.logln("DONE")
+                    uc.usecase_state("DONE")
 
     def ingest_data(self, uc: UCBase):
         """
@@ -163,6 +175,7 @@ class Solution:
         :param uc:  Use case
         """
         uc.loghln()
+        uc.usecase_new()
         for project_name in self._projects:
             for featureset_name in self._get_featuresets(self._project_specs[project_name]):
                 # create possible file for load
@@ -175,6 +188,7 @@ class Solution:
                 # check existing data set
                 for file in glob.glob(source_file):
                     uc.log("\t{0}/{1} ... ", project_name, featureset_name)
+                    uc.usecase_detail(f"{project_name}/{featureset_name}")
 
                     # get existing feature set (feature set have to be created in previous use case)
                     featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
@@ -193,6 +207,7 @@ class Solution:
                                       return_df=False,
                                       infer_options=mlrun.data_types.data_types.InferOptions.Null)
                     uc.logln("DONE")
+                    uc.usecase_state("DONE")
 
     @property
     def setup(self) -> Setup:
@@ -286,10 +301,12 @@ class Solution:
         Get data from off-line feature vector
         """
         uc.loghln()
+        uc.usecase_new()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
 
                 uc.log("\t{0}/{1} ... ", project_name, featurevector_name)
+                uc.usecase_detail(f"{project_name}/{featurevector_name}")
 
                 if mlrun.get_current_project().name != project_name:
                     mlrun.load_project(name=project_name, context="./", user_project=False)
@@ -299,7 +316,9 @@ class Solution:
                 resp = fstore.get_offline_features(vector)
                 frm=resp.to_dataframe()
                 uc.log("get {0} items ... ", len(frm.index))
+                uc.usecase_detailext(f"get {len(frm.index)} items")
                 uc.logln("DONE")
+                uc.usecase_state("DONE")
 
         # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
         # resp.to_dataframe()
