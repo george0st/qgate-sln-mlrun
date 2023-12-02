@@ -44,7 +44,7 @@ class Solution:
                     prj.metadata.labels[lbl]=lbls[lbl]
                 prj.save()
                 self._project_specs[name] = json_content['spec']
-                uc.usecase_state("DONE")
+                uc.usecase_state()
 
     def delete_projects(self, uc: UCBase):
         """
@@ -64,7 +64,7 @@ class Solution:
             if os.path.exists(project_dir):
                 shutil.rmtree(project_dir, True)
 
-            uc.usecase_state("DONE")
+            uc.usecase_state()
 
         # delete other things (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
@@ -124,7 +124,7 @@ class Solution:
                                 fstore.get_feature_set(f"{project_name}/{name}")
                             except:
                                 self._create_featureset(project_name, name, desc, json_content['spec'])
-                            uc.usecase_state("DONE")
+                            uc.usecase_state()
 
     def create_featurevector(self, uc: UCBase):
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
@@ -154,7 +154,7 @@ class Solution:
                         except:
                             self._create_featurevector(project_name, featurevector_name, desc, json_content['spec'])
 
-                    uc.usecase_state("DONE")
+                    uc.usecase_state()
 
     def ingest_data(self, uc: UCBase):
         """
@@ -192,7 +192,7 @@ class Solution:
                                       #overwrite=False,
                                       return_df=False,
                                       infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                    uc.usecase_state("DONE")
+                    uc.usecase_state()
 
     @property
     def setup(self) -> Setup:
@@ -299,7 +299,7 @@ class Solution:
                 resp = fstore.get_offline_features(vector)
                 frm=resp.to_dataframe()
                 uc.usecase_detailext(f"... get {len(frm.index)} items")
-                uc.usecase_state("DONE")
+                uc.usecase_state()
 
         # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
         # resp.to_dataframe()
