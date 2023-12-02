@@ -60,11 +60,14 @@ class UCBase:
     def loghln(self):
         self.output.loghln(self.name + ": " + self.desc)
 
-    def new_usecase(self):
+    def usecase_new(self):
         self.output.new_usecase(self.name, self.desc)
 
     def usecase_detail(self, detail):
         self.output.usecase_detail(detail)
+
+    def usecase_detailext(self, detail):
+        self.output.usecase_detailext(detail)
 
     def usecase_state(self, state):
         self.output.usecase_state(state)

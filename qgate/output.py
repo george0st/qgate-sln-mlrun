@@ -63,6 +63,15 @@ class Output():
         uc=self._data["usecases"][-1]
         uc['details'].append(dtl)
 
+    def usecase_detailext(self, detail):
+        dtl={}
+        dtl['detail']=detail
+        dtl['state']=None
+
+        uc=self._data["usecases"][-1]
+        old_detail=uc['details'][-1]
+        uc['details'][-1]=f"{old_detail}{detail}"
+
     def usecase_state(self, state):
         uc=self._data["usecases"][-1]
         dtl=uc['details'][-1]

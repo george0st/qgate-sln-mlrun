@@ -29,7 +29,7 @@ class Solution:
         :param uc:      Use case
         """
         uc.loghln()
-        uc.new_usecase()
+        uc.usecase_new()
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with (open(file, "r") as json_file):
@@ -56,7 +56,7 @@ class Solution:
         :param uc:      Use case
         """
         uc.loghln()
-        uc.new_usecase()
+        uc.usecase_new()
         for project_name in self._projects:
             uc.log("\t{0} ... ", project_name)
             uc.usecase_detail(project_name)
@@ -110,7 +110,7 @@ class Solution:
         :param uc:      Use case
         """
         uc.loghln()
-        uc.new_usecase()
+        uc.usecase_new()
         for project_name in self._projects:
 
             # TODO: change iteration base on feature vector (it is faster way)
@@ -139,7 +139,7 @@ class Solution:
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
 
         uc.loghln()
-        uc.new_usecase()
+        uc.usecase_new()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
                 # create file with definition of vector
@@ -175,7 +175,7 @@ class Solution:
         :param uc:  Use case
         """
         uc.loghln()
-        uc.new_usecase()
+        uc.usecase_new()
         for project_name in self._projects:
             for featureset_name in self._get_featuresets(self._project_specs[project_name]):
                 # create possible file for load
@@ -301,10 +301,12 @@ class Solution:
         Get data from off-line feature vector
         """
         uc.loghln()
+        uc.usecase_new()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
 
                 uc.log("\t{0}/{1} ... ", project_name, featurevector_name)
+                uc.usecase_detail(f"{project_name}/{featurevector_name}")
 
                 if mlrun.get_current_project().name != project_name:
                     mlrun.load_project(name=project_name, context="./", user_project=False)
@@ -314,7 +316,9 @@ class Solution:
                 resp = fstore.get_offline_features(vector)
                 frm=resp.to_dataframe()
                 uc.log("get {0} items ... ", len(frm.index))
+                uc.usecase_detail(f"get {len(frm.index)} items")
                 uc.logln("DONE")
+                uc.usecase_state("DONE")
 
         # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
         # resp.to_dataframe()
