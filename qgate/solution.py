@@ -316,7 +316,7 @@ class Solution:
                 resp = fstore.get_offline_features(vector)
                 frm=resp.to_dataframe()
                 uc.log("get {0} items ... ", len(frm.index))
-                uc.usecase_detail(f"get {len(frm.index)} items")
+                uc.usecase_detailext(f"get {len(frm.index)} items")
                 uc.logln("DONE")
                 uc.usecase_state("DONE")
 
