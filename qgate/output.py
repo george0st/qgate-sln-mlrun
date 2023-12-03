@@ -116,6 +116,7 @@ class Output():
         self._data["cpu"] = str(multiprocessing.cpu_count())
         self._data["mlrun"] = mlrun.get_version()
         self._data["python"] = sys.version
+
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
         self._data["variables"] = self._setup.variables
