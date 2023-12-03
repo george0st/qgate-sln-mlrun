@@ -89,7 +89,8 @@ class Output():
             path=os.path.split(template)
             file_name=path[-1:]
             extension=os.path.splitext(file_name[0])
-            file_name=str.format("{0}-{1}{2}",extension[0], datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"), extension[1])
+            file_name=str.format("{0}-{1}{2}",extension[0],str.replace(self._data["datetime"],':','-'),
+                                 extension[1])
             if not os.path.exists(self._setup.model_output):
                 os.makedirs(self._setup.model_output)
 
