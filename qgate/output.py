@@ -33,14 +33,14 @@ class Output():
         """
 
         self._setup=setup
-        self._file_name=str.format(Output.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+        # self._file_name=str.format(Output.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
         self._data={}
         self._templates=templates
 
-        if not os.path.exists(self._setup.model_output):
-            os.makedirs(self._setup.model_output)
-        self._log_file = open(os.path.join(self._setup.model_output, self._file_name), 'w+t')
-        self._headr()
+        # if not os.path.exists(self._setup.model_output):
+        #     os.makedirs(self._setup.model_output)
+        # self._log_file = open(os.path.join(self._setup.model_output, self._file_name), 'w+t')
+        self._system_info()
 
     def new_usecase(self, uc_name, uc_description):
         new_uc = {}
@@ -52,8 +52,6 @@ class Output():
         else:
             self._data["usecases"]=[]
             self._data["usecases"].append(new_uc)
-
-
 
     def usecase_detail(self, detail):
         dtl={}
@@ -73,25 +71,30 @@ class Output():
         dtl=uc['details'][-1]
         dtl['state']=state
 
-    def _render(self):
+    def render(self):
         # https://zetcode.com/python/jinja/
         # https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
         for template in self._templates:
 
+            # get template
             with open(os.path.join(template), 'r+t') as input_file:
                 template_content=input_file.read()
 
+            # render
             jinja=Template(template_content)
             output=jinja.render(data=self._data)
 
+            # prepare output file
             path=os.path.split(template)
             file_name=path[-1:]
             extension=os.path.splitext(file_name[0])
-            file_name=str.format("{0}-{1}{2}",extension[0], datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"), extension[1])
+            file_name=str.format("{0}-{1}{2}",extension[0],str.replace(self._data["datetime"],':','-'),
+                                 extension[1])
             if not os.path.exists(self._setup.model_output):
                 os.makedirs(self._setup.model_output)
 
+            # write output
             with open(os.path.join(self._setup.model_output, file_name), 'w+t') as output_file:
                 output_file.write(output)
 
@@ -103,30 +106,18 @@ class Output():
         return self._file_name
 
     def __del__(self):
-        self.Close()
+        self.close()
 
-    def Close(self):
-        if self._log_file:
-            self._footer()
-            self._render()
-            self._log_file.close()
-            self._log_file=None
+    def close(self):
+        if self._data:
+            del self._data
+            self._data = None
 
-
-    def _headr(self):
+    def _system_info(self):
         self._data["version"] = __version__
         self._data["datetime"] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        # output
-        self._logln("QGate version: " + self._data["version"])
-        self._logln(self._data["datetime"])
-
-    def _footer(self):
-
-        total, free = self._memory()
-
-        self._data["memory_total"] = total
-        self._data["memory_free"] = free
+        self._data["memory_total"], self._data["memory_free"] = self._memory()
         self._data["host"] = self._host()
         self._data["cpu"] = str(multiprocessing.cpu_count())
         self._data["mlrun"] = mlrun.get_version()
@@ -135,18 +126,6 @@ class Output():
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
         self._data["variables"] = self._setup.variables
 
-        # output
-        self._logln("-----------------------")
-        self._logln("Host: " + self._data["host"])
-        self._logln("RAM total/free: " + self._data["memory_total"] + "/" + self._data["memory_free"])
-        self._logln("CPU: " + self._data["cpu"])
-        self._logln("-----------------------")
-        self._logln("MLRun: " + self._data["mlrun"] + " (https://docs.mlrun.org/en/latest/change-log/index.html)")
-        self._logln("Python: " + self._data["python"])
-        self._logln("System: " + self._data["system"])
-        self._logln("Platform: " + self._data["platform"])
-        self._logln("-----------------------")
-        #self._logln(self._data["variables"])
 
     def _memory(self):
 
@@ -171,23 +150,23 @@ class Output():
             host = f"{host_name}/{ip}"
         return host
 
-    def log(self, *args, **kwargs):
-        self._log(str.format(*args, **kwargs), False)
-
-    def logln(self, *args, **kwargs):
-       self._logln(str.format(*args, **kwargs), False)
-
-    def loghln(self, uc_name):
-        self._log_file.write(uc_name + '\n')
-
-    def _logln(self, text = None, comment: bool = True):
-        if comment:
-            self._log_file.write(Output.COMMENT)
-        self._log_file.write(text + '\n')
-
-    def _log(self, text = None, comment: bool = True):
-        if comment:
-            self._log_file.write(Output.COMMENT)
-        if text:
-            self._log_file.write(text)
+    # def log(self, *args, **kwargs):
+    #     self._log(str.format(*args, **kwargs), False)
+    #
+    # def logln(self, *args, **kwargs):
+    #    self._logln(str.format(*args, **kwargs), False)
+    #
+    # def loghln(self, uc_name):
+    #     self._log_file.write(uc_name + '\n')
+    #
+    # def _logln(self, text = None, comment: bool = True):
+    #     if comment:
+    #         self._log_file.write(Output.COMMENT)
+    #     self._log_file.write(text + '\n')
+    #
+    # def _log(self, text = None, comment: bool = True):
+    #     if comment:
+    #         self._log_file.write(Output.COMMENT)
+    #     if text:
+    #         self._log_file.write(text)
 

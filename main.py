@@ -35,7 +35,7 @@ if __name__ == '__main__':
             uc.state = ucbase.UCState.OK
         except Exception as ex:
             uc.state = ucbase.UCState.Error
-            #uc.logln("{0}: {1}", type(ex).__name__, str(ex))
             uc.usecase_detail(f"{type(ex).__name__}: {str(ex)}")
             uc.usecase_state("Error")
-    output.Close()
+    output.render()
+    output.close()
