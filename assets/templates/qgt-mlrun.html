@@ -2,14 +2,16 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="Windows-1252">
 </head>
 <style>
 html, body { 
   font-family: Helvetica, Arial, sans-serif;
+  background-color: #E5E5E5;
 }
 
 table, th, td {
-  border: 0px solid;
+  border: 1px solid;
 }
 
 table {
@@ -78,8 +80,8 @@ function myFunction(element) {
 
 </script>
 <body>
-	<h1>Quality report for MLRun ({{ data.datetime }})</h1>
-	<p>QGate version: {{ data.version }}</p>
+	<h2>Quality report for MLRun</h2>
+	<p><b>{{ data.datetime }}</b>, QGate version: {{ data.version }}</p>
 	<!--
 	<h2 class="collapsible" onclick="myFunction('myDIV')">Execution detail ...</h2>
 	
@@ -113,7 +115,7 @@ function myFunction(element) {
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for usecase in data.usecases %}
 			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
-				<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
+				<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{% if detail.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
 		</table>
 		<!--
 		<p>
@@ -137,6 +139,6 @@ function myFunction(element) {
 		-->
 	</div>
 	<hr>
-	<p class="footer">See the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">GitHub</a></p>
+	<p class="footer">Source see the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
 </body>
 </html>
