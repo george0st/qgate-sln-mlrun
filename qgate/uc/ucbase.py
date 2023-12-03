@@ -51,15 +51,6 @@ class UCBase:
     def exec(self):
         raise NotImplemented()
 
-    def log(self, *args, **kwargs):
-        self.output.log(*args, **kwargs)
-
-    def logln(self, *args, **kwargs):
-        self.output.logln(*args, **kwargs)
-
-    def loghln(self):
-        self.output.loghln(self.name + ": " + self.desc)
-
     def usecase_new(self):
         self.output.new_usecase(self.name, self.desc)
 
