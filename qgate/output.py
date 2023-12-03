@@ -31,15 +31,9 @@ class Output():
         :param setup:       specific usecase
         :param templates:   list of templates for generation outputs
         """
-
         self._setup=setup
-        # self._file_name=str.format(Output.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
         self._data={}
         self._templates=templates
-
-        # if not os.path.exists(self._setup.model_output):
-        #     os.makedirs(self._setup.model_output)
-        # self._log_file = open(os.path.join(self._setup.model_output, self._file_name), 'w+t')
         self._system_info()
 
     def new_usecase(self, uc_name, uc_description):
@@ -125,7 +119,6 @@ class Output():
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
         self._data["variables"] = self._setup.variables
-
 
     def _memory(self):
 
