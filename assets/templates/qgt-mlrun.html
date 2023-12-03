@@ -82,12 +82,6 @@ function myFunction(element) {
 <body>
 	<h2>Quality report for MLRun</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version: {{ data.version }}</p>
-	<!--
-	<h2 class="collapsible" onclick="myFunction('myDIV')">Execution detail ...</h2>
-	
-	https://www.w3schools.com/howto/howto_js_collapsible.asp
-	-->
-	
 
 	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content">
@@ -110,33 +104,12 @@ function myFunction(element) {
 		</p>
 	</div>
 
-		
 	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Report outputs ...</button>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for usecase in data.usecases %}
 			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
 				<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{% if detail.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
 		</table>
-		<!--
-		<p>
-		{% for usecase in data.usecases %}<b>{{ usecase.name }}: {{ usecase.desc }}</b></br>
-			{% for detail in usecase.details %}&nbsp;&nbsp;{{ detail.detail }} ... {{ detail.state }}</br>{% endfor %}{% endfor %}
-		</p>
-		-->
-		<!--
-		<table>
-			<tr><td>UseCase</td><td>Detail</td><td>State</td></tr>
-			<tr><td>UC101</td><td></td><td></td></tr>
-			<tr><td></td><td>hkjhkhkjh...</td><td>DONE</td></tr>
-			<tr><td></td><td>hjgjhgjg...</td><td>DONE</td></tr>
-			<tr><td>UC101</td><td></td><td></td></tr>
-			<tr><td></td><td>hkjhkhkjh...</td><td>DONE</td></tr>
-			<tr><td></td><td>hjgjhgjg...</td><td>DONE</td></tr>
-			<tr><td>UC101</td><td></td><td></td></tr>
-			<tr><td></td><td>hkjhkhkjh...</td><td>DONE</td></tr>
-			<tr><td></td><td>hjgjhgjg...</td><td>DONE</td></tr>
-		</table>
-		-->
 	</div>
 	<hr>
 	<p class="footer">Source see the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
