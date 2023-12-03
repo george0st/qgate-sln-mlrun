@@ -110,10 +110,9 @@ function myFunction(element) {
 		
 	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Output</button>	
 	<div id="myDIV3" style="display: none;" class="content">
-		<table>
-			<tr><td>UseCase/Detail</td><td>State</td></tr>{% for usecase in data.usecases %}
-				<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
-					<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
+		<table>{% for usecase in data.usecases %}
+			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
+				<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
 		</table>
 		<!--
 		<p>
@@ -136,7 +135,7 @@ function myFunction(element) {
 		</table>
 		-->
 	</div>
-	</hr>
+	<hr>
 	<p class="footer">See the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">GitHub</a></p>
 </body>
 </html>
