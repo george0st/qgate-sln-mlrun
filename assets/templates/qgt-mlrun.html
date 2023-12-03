@@ -82,23 +82,32 @@ function myFunction(element) {
 	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution detail</button>	
 	<div id="myDIV" style="display: none;" class="content">
 		<p>
-			<b>Host:</b> {{ data.host }}</br>
-			<b>RAM total/free:</b> {{ data.memory_total }}/{{ data.memory_free }}</br>
-			<b>CPU:</b> {{ data.cpu }}</br>
-			<b>MLRun:</b> {{ data.mlrun }} (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)</br>
-			<b>Python:</b> {{ data.python }}</br>
-			<b>System:</b> {{ data.system }}</br>
-			<b>Platform:</b> {{ data.platform }}</br>
+			<b>System information:</b></br>
+			&nbsp;&nbsp;<b>MLRun:</b> {{ data.mlrun }} (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)</br>
+			&nbsp;&nbsp;<b>Python:</b> {{ data.python }}</br>
+			&nbsp;&nbsp;<b>System:</b> {{ data.system }}</br>
+			&nbsp;&nbsp;<b>Platform:</b> {{ data.platform }}</br>
 		</p>
 		<p>
 			<b>Variables:</b></br>{% for variable in data.variables %}
 		 	&nbsp;&nbsp;<b>{{ variable.key }}:</b> '{{ variable.value }}'</br> {% endfor %}
+		</p>
+		<p>
+			<b>Hardware information:</b></br>
+			&nbsp;&nbsp;<b>CPU:</b> {{ data.cpu }}</br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> {{ data.memory_total }}/{{ data.memory_free }}</br>
+			&nbsp;&nbsp;<b>Host:</b> {{ data.host }}</br>
 		</p>
 	</div>
 
 		
 	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Output</button>	
 	<div id="myDIV3" style="display: none;" class="content">
+		<p>
+		{% for usecase in data.usecases %}<b>{{ usecase.name }}: {{ usecase.desc }}</b></br>
+			{% for detail in usecase.details %}&nbsp;&nbsp;{{ detail.detail }} ... {{ detail.state }}</br>{% endfor %}{% endfor %}
+		</p>
+		<!--
 		<table>
 			<tr><td>UseCase</td><td>Detail</td><td>State</td></tr>
 			<tr><td>UC101</td><td></td><td></td></tr>
@@ -110,17 +119,9 @@ function myFunction(element) {
 			<tr><td>UC101</td><td></td><td></td></tr>
 			<tr><td></td><td>hkjhkhkjh...</td><td>DONE</td></tr>
 			<tr><td></td><td>hjgjhgjg...</td><td>DONE</td></tr>
-
 		</table>
+		-->
 	</div>
-		{% for EMPLOYEE in EMPLOYEES %}
-		| {{ EMPLOYEE.name }} | {{ EMPLOYEE.age }}  | {{ EMPLOYEE.gender }} |
-		{% endfor %}
 
-	<p>sdsdsd</p>
-	<!--
-{# https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/ #}
-{# https://docs.apitemplate.io/reference/learn-jinja2.html#templating-basics #}
-	-->
 </body>
 </html>
