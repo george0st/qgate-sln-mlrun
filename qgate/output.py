@@ -33,7 +33,7 @@ class Output():
         """
 
         self._setup=setup
-        self._file_name=str.format(Output.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+        # self._file_name=str.format(Output.OUTPUT_FILE, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
         self._data={}
         self._templates=templates
 
@@ -52,8 +52,6 @@ class Output():
         else:
             self._data["usecases"]=[]
             self._data["usecases"].append(new_uc)
-
-
 
     def usecase_detail(self, detail):
         dtl={}
@@ -117,10 +115,6 @@ class Output():
         self._data["version"] = __version__
         self._data["datetime"] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        # output
-        self._logln("QGate version: " + self._data["version"])
-        self._logln(self._data["datetime"])
-
     def _footer(self):
 
         total, free = self._memory()
@@ -134,19 +128,6 @@ class Output():
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
         self._data["variables"] = self._setup.variables
-
-        # output
-        self._logln("-----------------------")
-        self._logln("Host: " + self._data["host"])
-        self._logln("RAM total/free: " + self._data["memory_total"] + "/" + self._data["memory_free"])
-        self._logln("CPU: " + self._data["cpu"])
-        self._logln("-----------------------")
-        self._logln("MLRun: " + self._data["mlrun"] + " (https://docs.mlrun.org/en/latest/change-log/index.html)")
-        self._logln("Python: " + self._data["python"])
-        self._logln("System: " + self._data["system"])
-        self._logln("Platform: " + self._data["platform"])
-        self._logln("-----------------------")
-        #self._logln(self._data["variables"])
 
     def _memory(self):
 
@@ -171,23 +152,23 @@ class Output():
             host = f"{host_name}/{ip}"
         return host
 
-    def log(self, *args, **kwargs):
-        self._log(str.format(*args, **kwargs), False)
-
-    def logln(self, *args, **kwargs):
-       self._logln(str.format(*args, **kwargs), False)
-
-    def loghln(self, uc_name):
-        self._log_file.write(uc_name + '\n')
-
-    def _logln(self, text = None, comment: bool = True):
-        if comment:
-            self._log_file.write(Output.COMMENT)
-        self._log_file.write(text + '\n')
-
-    def _log(self, text = None, comment: bool = True):
-        if comment:
-            self._log_file.write(Output.COMMENT)
-        if text:
-            self._log_file.write(text)
+    # def log(self, *args, **kwargs):
+    #     self._log(str.format(*args, **kwargs), False)
+    #
+    # def logln(self, *args, **kwargs):
+    #    self._logln(str.format(*args, **kwargs), False)
+    #
+    # def loghln(self, uc_name):
+    #     self._log_file.write(uc_name + '\n')
+    #
+    # def _logln(self, text = None, comment: bool = True):
+    #     if comment:
+    #         self._log_file.write(Output.COMMENT)
+    #     self._log_file.write(text + '\n')
+    #
+    # def _log(self, text = None, comment: bool = True):
+    #     if comment:
+    #         self._log_file.write(Output.COMMENT)
+    #     if text:
+    #         self._log_file.write(text)
 
