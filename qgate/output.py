@@ -149,24 +149,3 @@ class Output():
             ip = socket.gethostbyname(host_name)
             host = f"{host_name}/{ip}"
         return host
-
-    # def log(self, *args, **kwargs):
-    #     self._log(str.format(*args, **kwargs), False)
-    #
-    # def logln(self, *args, **kwargs):
-    #    self._logln(str.format(*args, **kwargs), False)
-    #
-    # def loghln(self, uc_name):
-    #     self._log_file.write(uc_name + '\n')
-    #
-    # def _logln(self, text = None, comment: bool = True):
-    #     if comment:
-    #         self._log_file.write(Output.COMMENT)
-    #     self._log_file.write(text + '\n')
-    #
-    # def _log(self, text = None, comment: bool = True):
-    #     if comment:
-    #         self._log_file.write(Output.COMMENT)
-    #     if text:
-    #         self._log_file.write(text)
-
