@@ -8,19 +8,17 @@ html, body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-table,
-th,
-td {
-  border: 1px solid;
+table, th, td {
+  border: 0px solid;
 }
 
 table {
-  margin: 1px;
+  margin: 0px;
   overflow-x: auto;
   border-spacing: 0;
   font-family: courier new, courier, serif;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 tbody {
@@ -28,7 +26,7 @@ tbody {
 }
 
 td {
-  padding: 5px 5px;
+  padding: 2px 2px;
   border-top-width: 0;
   border-left-width: 0;
 }
@@ -54,6 +52,16 @@ td {
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+  font-family: courier new, courier, serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.footer{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: right;
 }
 
 </style>
@@ -79,12 +87,12 @@ function myFunction(element) {
 	-->
 	
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution detail</button>	
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content">
 		<p>
 			<b>System information:</b></br>
-			&nbsp;&nbsp;<b>MLRun:</b> {{ data.mlrun }} (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)</br>
-			&nbsp;&nbsp;<b>Python:</b> {{ data.python }}</br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun: {{ data.mlrun }}</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)</br>
+			&nbsp;&nbsp;<b style="color:blue;">Python: {{ data.python }}</b></br>
 			&nbsp;&nbsp;<b>System:</b> {{ data.system }}</br>
 			&nbsp;&nbsp;<b>Platform:</b> {{ data.platform }}</br>
 		</p>
@@ -94,19 +102,25 @@ function myFunction(element) {
 		</p>
 		<p>
 			<b>Hardware information:</b></br>
-			&nbsp;&nbsp;<b>CPU:</b> {{ data.cpu }}</br>
+			&nbsp;&nbsp;<b>CPU:</b> {{ data.cpu }} cores</br>
 			&nbsp;&nbsp;<b>RAM total/free:</b> {{ data.memory_total }}/{{ data.memory_free }}</br>
 			&nbsp;&nbsp;<b>Host:</b> {{ data.host }}</br>
 		</p>
 	</div>
 
 		
-	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Output</button>	
+	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Report outputs ...</button>
 	<div id="myDIV3" style="display: none;" class="content">
+		<table>{% for usecase in data.usecases %}
+			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
+				<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
+		</table>
+		<!--
 		<p>
 		{% for usecase in data.usecases %}<b>{{ usecase.name }}: {{ usecase.desc }}</b></br>
 			{% for detail in usecase.details %}&nbsp;&nbsp;{{ detail.detail }} ... {{ detail.state }}</br>{% endfor %}{% endfor %}
 		</p>
+		-->
 		<!--
 		<table>
 			<tr><td>UseCase</td><td>Detail</td><td>State</td></tr>
@@ -122,6 +136,7 @@ function myFunction(element) {
 		</table>
 		-->
 	</div>
-
+	<hr>
+	<p class="footer">See the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">GitHub</a></p>
 </body>
 </html>
