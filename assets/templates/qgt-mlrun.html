@@ -87,7 +87,7 @@ function myFunction(element) {
 	-->
 	
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution details</button>
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content">
 		<p>
 			<b>System information:</b></br>
@@ -109,7 +109,7 @@ function myFunction(element) {
 	</div>
 
 		
-	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Report outputs</button>
+	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Report outputs ...</button>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for usecase in data.usecases %}
 			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
