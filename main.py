@@ -9,7 +9,8 @@ if __name__ == '__main__':
 
     setup = setup.Setup("0-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
-    output = output.Output(setup, ['./assets/templates/qgt-mlrun.txt'])
+    output = output.Output(setup, ['./assets/templates/qgt-mlrun.txt',
+                                   './assets/templates/qgt-mlrun.html'])
     sln = Solution(setup)
 
     usecase_fns = [uc101.UC101, uc201.UC201, uc301.UC301, uc401.UC401, uc501.UC501]

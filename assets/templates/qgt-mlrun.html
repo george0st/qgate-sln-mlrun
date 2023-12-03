@@ -70,7 +70,8 @@ function myFunction(element) {
 
 </script>
 <body>
-	<h1>Quality report for MLRun</h1>
+	<h1>Quality report for MLRun ({{ data.datetime }})</h1>
+	<p>QGate version: {{ data.version }}</p>
 	<!--
 	<h2 class="collapsible" onclick="myFunction('myDIV')">Execution detail ...</h2>
 	
@@ -80,7 +81,20 @@ function myFunction(element) {
 
 	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution detail</button>	
 	<div id="myDIV" style="display: none;" class="content">
-	  <p>This is my DIV element.</p>
+		<p>
+			<b>Host:</b> {{ data.host }}</br>
+			<b>RAM total/free:</b> {{ data.memory_total }}/{{ data.memory_free }}</br>
+			<b>CPU:</b> {{ data.cpu }}</br>
+			<b>MLRun:</b> {{ data.mlrun }} (https://docs.mlrun.org/en/latest/change-log/index.html)</br>
+			<b>Python:</b> {{ data.python }}</br>
+			<b>System:</b> {{ data.system }}</br>
+			<b>Platform:</b> {{ data.platform }}</br>
+		</p>
+		<p>
+			<b>Variables:</b></br>
+			{% for variable in data.variables %}
+		 	&nbsp;&nbsp;<b>{{ variable.key }}:</b> '{{ variable.value }}'</br> {% endfor %}
+		</p>
 	</div>
 
 		
