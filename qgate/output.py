@@ -37,10 +37,10 @@ class Output():
         self._data={}
         self._templates=templates
 
-        if not os.path.exists(self._setup.model_output):
-            os.makedirs(self._setup.model_output)
-        self._log_file = open(os.path.join(self._setup.model_output, self._file_name), 'w+t')
-        self._headr()
+        # if not os.path.exists(self._setup.model_output):
+        #     os.makedirs(self._setup.model_output)
+        # self._log_file = open(os.path.join(self._setup.model_output, self._file_name), 'w+t')
+        self._system_info()
 
     def new_usecase(self, uc_name, uc_description):
         new_uc = {}
@@ -71,18 +71,21 @@ class Output():
         dtl=uc['details'][-1]
         dtl['state']=state
 
-    def _render(self):
+    def render(self):
         # https://zetcode.com/python/jinja/
         # https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
         for template in self._templates:
 
+            # get template
             with open(os.path.join(template), 'r+t') as input_file:
                 template_content=input_file.read()
 
+            # render
             jinja=Template(template_content)
             output=jinja.render(data=self._data)
 
+            # prepare output file
             path=os.path.split(template)
             file_name=path[-1:]
             extension=os.path.splitext(file_name[0])
@@ -90,6 +93,7 @@ class Output():
             if not os.path.exists(self._setup.model_output):
                 os.makedirs(self._setup.model_output)
 
+            # write output
             with open(os.path.join(self._setup.model_output, file_name), 'w+t') as output_file:
                 output_file.write(output)
 
@@ -101,26 +105,18 @@ class Output():
         return self._file_name
 
     def __del__(self):
-        self.Close()
+        self.close()
 
-    def Close(self):
-        if self._log_file:
-            self._footer()
-            self._render()
-            self._log_file.close()
-            self._log_file=None
+    def close(self):
+        if self._data:
+            del self._data
+            self._data = None
 
-
-    def _headr(self):
+    def _system_info(self):
         self._data["version"] = __version__
         self._data["datetime"] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    def _footer(self):
-
-        total, free = self._memory()
-
-        self._data["memory_total"] = total
-        self._data["memory_free"] = free
+        self._data["memory_total"], self._data["memory_free"] = self._memory()
         self._data["host"] = self._host()
         self._data["cpu"] = str(multiprocessing.cpu_count())
         self._data["mlrun"] = mlrun.get_version()
@@ -128,6 +124,7 @@ class Output():
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
         self._data["variables"] = self._setup.variables
+
 
     def _memory(self):
 
