@@ -48,10 +48,10 @@ Quality Gate covers these use cases:
 
 ## Tested with
 The project was test with these versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
- - Iguazio (k8s, on-prem with VM with VMware)
-   - Iguazio 3.5.3 (with MLRun 1.4.1)
-   - Iguazio 3.5.1 (with MLRun 1.3.0)
  - MLRun (in Desktop Docker)
    - MLRun 1.5.2, 1.5.1, 1.5.0
    - MLRun 1.4.1
    - MLRun 1.3.0
+ - Iguazio (k8s, on-prem with VM with VMware)
+   - Iguazio 3.5.3 (with MLRun 1.4.1)
+   - Iguazio 3.5.1 (with MLRun 1.3.0)
