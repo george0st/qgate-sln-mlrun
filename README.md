@@ -28,21 +28,21 @@ Precondition: You have available MLRun or Iguazio solution (MLRun is part of tha
 ## Use cases
 Quality Gate covers these use cases:
  - **Project**
-   - [x] UC101: Create project(s)
-   - [x] UC102: Delete project(s)
+   - ✅ UC101: Create project(s)
+   - ✅ UC102: Delete project(s)
  - **Feature set**
-   - [x] UC201: Create feature set(s)
+   - ✅ UC201: Create feature set(s)
  - **Ingest data**
-   - [x] UC301: Ingest data to feature set(s)
+   - ✅ UC301: Ingest data to feature set(s)
  - **Feature vector**
-   - [x] UC401: Create feature vector(s)
+   - ✅ UC401: Create feature vector(s)
  - **Get data**
-   - [x] UC501: Get data from off-line feature vector(s)
-   - [ ] UC502: Get data from on-line feature vector(s)
+   - ✅ UC501: Get data from off-line feature vector(s)
+   - ❌ UC502: Get data from on-line feature vector(s)
  - **Serving ML score**
-   - [ ] UC601: Serving score from CART
-   - [ ] UC602: Serving score from XGBoost
-   - [ ] UC603: Serving score from DNN
+   - ❌ UC601: Serving score from CART
+   - ❌ UC602: Serving score from XGBoost
+   - ❌ UC603: Serving score from DNN
 
 
 ## Tested with
