@@ -109,6 +109,11 @@ class Output():
 
     def _system_info(self):
         self._data["version"] = __version__
+
+        # import mlrun
+        # run_db_factory = mlrun.db.factory.RunDBFactory()
+        # print(run_db_factory)
+
         self._data["datetime"] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         self._data["memory_total"], self._data["memory_free"] = self._memory()

@@ -37,12 +37,12 @@ td {
   background-color: #777;
   color: white;
   cursor: pointer;
-  padding: 12px;
+  padding: 6px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .active, .collapsible:hover {
@@ -50,7 +50,7 @@ td {
 }
 
 .content {
-  padding: 0 12px;
+  padding: 0 10px;
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
@@ -83,7 +83,7 @@ function myFunction(element) {
 	<h2>Quality report for MLRun</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version: {{ data.version }}</p>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV')">Execution details ...</button>
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img src="../assets/imgs/icons8-info-16.png">&nbsp;Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content">
 		<p>
 			<b>System information:</b></br>
@@ -104,7 +104,7 @@ function myFunction(element) {
 		</p>
 	</div>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">Report outputs ...</button>
+	<button type="button" class="collapsible" onclick="myFunction('myDIV3')"><img src="../assets/imgs/icons8-check-16-3.png"><img src="../assets/imgs/icons8-error-16-3.png">Report outputs ...</button>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for usecase in data.usecases %}
 			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}

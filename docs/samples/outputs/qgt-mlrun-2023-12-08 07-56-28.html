@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="Windows-1252">
+</head>
+<style>
+html, body { 
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #E5E5E5;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+
+table {
+  margin: 0px;
+  overflow-x: auto;
+  border-spacing: 0;
+  font-family: courier new, courier, serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+tbody {
+  white-space: nowrap;
+}
+
+td {
+  padding: 2px 2px;
+  border-top-width: 0;
+  border-left-width: 0;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 6px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 10px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  font-family: courier new, courier, serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.footer{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: right;
+}
+
+</style>
+<script>
+
+function myFunction(element) {
+  var x = document.getElementById(element);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+</script>
+<body>
+	<h2>Quality report for MLRun</h2>
+	<p><b>2023-12-08 07:56:28</b>, QGate version: 0.0.4</p>
+
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img src="../assets/imgs/icons8-info-16.png">&nbsp;Execution details ...</button>
+	<div id="myDIV" style="display: none;" class="content">
+		<p>
+			<b>System information:</b></br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun: 1.5.2</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)</br>
+			&nbsp;&nbsp;<b style="color:blue;">Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]</b></br>
+			&nbsp;&nbsp;<b>System:</b> Windows 10.0.22000 (Windows-10-10.0.22000-SP0)</br>
+			&nbsp;&nbsp;<b>Platform:</b> AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)</br>
+		</p>
+		<p>
+			<b>Variables:</b></br>
+		 	&nbsp;&nbsp;<b>MLRUN_DBPATH:</b> 'http://localhost:8080'</br> 
+		 	&nbsp;&nbsp;<b>QGATE_DEFINITION:</b> '../qgate-model/'</br> 
+		 	&nbsp;&nbsp;<b>QGATE_OUTPUT:</b> './output/'</br> 
+		 	&nbsp;&nbsp;<b>DIR:</b> 'C:\Python\qgate-sln-mlrun'</br> 
+		</p>
+		<p>
+			<b>Hardware information:</b></br>
+			&nbsp;&nbsp;<b>CPU:</b> 12 cores</br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/0.4 GB</br>
+			&nbsp;&nbsp;<b>Host:</b> HCI-L3204/172.25.224.1</br>
+		</p>
+	</div>
+
+	<button type="button" class="collapsible" onclick="myFunction('myDIV3')"><img src="../assets/imgs/icons8-check-16-3.png"><img src="../assets/imgs/icons8-error-16-3.png">Report outputs ...</button>
+	<div id="myDIV3" style="display: none;" class="content">
+		<table>
+			<tr><td colspan="2"><b>UC101: Create project(s)</b></td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-bravo</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+			<tr><td colspan="2"><b>UC201: Create feature set(s)</b></td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-party create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-contact create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-relation create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-account create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-transaction create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-event create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-communication create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/aggregate-party create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/aggregate-account create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/aggregate-transaction create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-bravo/basic-contact create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-bravo/basic-account create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-bravo/aggregate-account create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+			<tr><td colspan="2"><b>UC301: Ingest data to feature set(s)</b></td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-party</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-contact</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-relation</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-account</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-transaction</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-event</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/basic-communication</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-bravo/basic-account</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-bravo/basic-contact</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+			<tr><td colspan="2"><b>UC401: Create feature vector(s)</b></td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/vector-party</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partycontact</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partyaccount</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partycontactaccount</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+			<tr><td colspan="2"><b>UC501: Get data from off-line feature vector(s)</b></td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/vector-party ... get 100 items</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partycontact ... get 103 items</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partyaccount ... get 16 items</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partycontactaccount ... get 19 items</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+			<tr><td colspan="2"><b>UC102: Delete project(s)</b></td></tr>
+				<tr><td>&nbsp;&nbsp;gate-alfa</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;&nbsp;gate-bravo</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+		</table>
+	</div>
+	<hr>
+	<p class="footer">Source see the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
+</body>
+</html>

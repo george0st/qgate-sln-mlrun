@@ -1,0 +1,57 @@
+# QGate version: 0.0.4
+# 2023-12-08 07:56:28
+# ----------------------- 
+UC101: Create project(s)
+    gate-alfa ... DONE
+    gate-bravo ... DONE
+UC201: Create feature set(s)
+    gate-alfa/basic-party create ... DONE
+    gate-alfa/basic-contact create ... DONE
+    gate-alfa/basic-relation create ... DONE
+    gate-alfa/basic-account create ... DONE
+    gate-alfa/basic-transaction create ... DONE
+    gate-alfa/basic-event create ... DONE
+    gate-alfa/basic-communication create ... DONE
+    gate-alfa/aggregate-party create ... DONE
+    gate-alfa/aggregate-account create ... DONE
+    gate-alfa/aggregate-transaction create ... DONE
+    gate-bravo/basic-contact create ... DONE
+    gate-bravo/basic-account create ... DONE
+    gate-bravo/aggregate-account create ... DONE
+UC301: Ingest data to feature set(s)
+    gate-alfa/basic-party ... DONE
+    gate-alfa/basic-contact ... DONE
+    gate-alfa/basic-relation ... DONE
+    gate-alfa/basic-account ... DONE
+    gate-alfa/basic-transaction ... DONE
+    gate-alfa/basic-event ... DONE
+    gate-alfa/basic-communication ... DONE
+    gate-bravo/basic-account ... DONE
+    gate-bravo/basic-contact ... DONE
+UC401: Create feature vector(s)
+    gate-alfa/vector-party ... DONE
+    gate-alfa/vector-partycontact ... DONE
+    gate-alfa/vector-partyaccount ... DONE
+    gate-alfa/vector-partycontactaccount ... DONE
+UC501: Get data from off-line feature vector(s)
+    gate-alfa/vector-party ... get 100 items ... DONE
+    gate-alfa/vector-partycontact ... get 103 items ... DONE
+    gate-alfa/vector-partyaccount ... get 16 items ... DONE
+    gate-alfa/vector-partycontactaccount ... get 19 items ... DONE
+UC102: Delete project(s)
+    gate-alfa ... DONE
+    gate-bravo ... DONE
+# -----------------------
+# Host: HCI-L3204/172.25.224.1
+# RAM total/free: 15.2 GB/0.4 GB
+# CPU: 12
+# -----------------------
+# MLRun: 1.5.2 (https://docs.mlrun.org/en/latest/change-log/index.html)
+# Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]
+# System: Windows 10.0.22000 (Windows-10-10.0.22000-SP0)
+# Platform: AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)
+# ----------------------- 
+# MLRUN_DBPATH: 'http://localhost:8080' 
+# QGATE_DEFINITION: '../qgate-model/' 
+# QGATE_OUTPUT: './output/' 
+# DIR: 'C:\Python\qgate-sln-mlrun' 
