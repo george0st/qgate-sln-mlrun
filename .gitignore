@@ -13,3 +13,5 @@ qgate-sln-mlrun-private.env
 /output/
 /.coverage
 *.pyc
+/tests/
+
