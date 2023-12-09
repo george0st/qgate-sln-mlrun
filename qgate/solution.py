@@ -108,20 +108,23 @@ class Solution:
         """
         uc.usecase_new()
         for project_name in self._projects:
+            for featureset_name in self._get_featuresets(self._project_specs.get(project_name)):
+                # create file with definition of vector
+                source_file = os.path.join(os.getcwd(),
+                                           self.setup.model_definition,
+                                           "01-model",
+                                           "02-feature-set",
+                                           f"*-{featureset_name}.json")
 
-            # TODO: change iteration base on feature vector (it is faster way)
-            dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "02-feature-set", "*.json")
-            for file in glob.glob(dir):
+                for file in glob.glob(source_file):
+                    uc.testcase_new(f'{project_name}/{featureset_name}')
 
-                # iterate cross all featureset definitions
-                with open(file, "r") as json_file:
-                    json_content = json.load(json_file)
-                    name, desc, lbls, kind=self._get_json_header(json_content)
+                    # iterate cross all featureset definitions
+                    with open(file, "r") as json_file:
+                        json_content = json.load(json_file)
+                        name, desc, lbls, kind=self._get_json_header(json_content)
 
-                    if kind=="feature-set":
-                        if self._has_featureset(name, self._project_specs.get(project_name)): # build only featuresets based on project spec
-                            uc.testcase_new(f'{project_name}/{name}')
-
+                        if kind=="feature-set":
                             # create feature set only in case not exist
                             try:
                                 fstore.get_feature_set(f"{project_name}/{name}")
@@ -150,6 +153,9 @@ class Solution:
                     with open(file, "r") as json_file:
                         json_content = json.load(json_file)
                         name, desc, lbls, kind = self._get_json_header(json_content)
+
+                        # TODO: add check to feature vector
+                        # if kind == "feature-vector":
 
                         # create feature vector only in case not exist
                         try:
