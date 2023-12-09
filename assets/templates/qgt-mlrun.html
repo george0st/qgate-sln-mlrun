@@ -49,6 +49,19 @@ td {
   background-color: #555;
 }
 
+.content-tiny {
+  padding: 0 8px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  font-family: courier new, courier, serif;
+  font-size: 12px;
+  font-weight: normal;
+  width:inherit;
+  height: 100px;
+  overflow: auto;
+}
+
 .content {
   padding: 0 10px;
   display: none;
@@ -57,6 +70,9 @@ td {
   font-family: courier new, courier, serif;
   font-size: 14px;
   font-weight: normal;
+  width:inherit;
+  height: 400px;
+  overflow: auto;
 }
 
 .footer{
@@ -83,8 +99,16 @@ function myFunction(element) {
 	<h2>Quality report for MLRun</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version: {{ data.version }}</p>
 
+	<button type="button" class="collapsible" onclick="myFunction('myDIV3')"><img src="../assets/imgs/icons8-check-16-3.png"><img src="../assets/imgs/icons8-error-16-3.png">Report outputs ...</button>
+	<div id="myDIV3" style="display: none;" class="content">
+		<table>{% for usecase in data.usecases %}
+			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
+				<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{% if detail.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
+		</table>
+	</div>
+
 	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img src="../assets/imgs/icons8-info-16.png">&nbsp;Execution details ...</button>
-	<div id="myDIV" style="display: none;" class="content">
+	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b></br>
 			&nbsp;&nbsp;<b style="color:blue;">MLRun: {{ data.mlrun }}</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)</br>
@@ -104,13 +128,6 @@ function myFunction(element) {
 		</p>
 	</div>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV3')"><img src="../assets/imgs/icons8-check-16-3.png"><img src="../assets/imgs/icons8-error-16-3.png">Report outputs ...</button>
-	<div id="myDIV3" style="display: none;" class="content">
-		<table>{% for usecase in data.usecases %}
-			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
-				<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{% if detail.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
-		</table>
-	</div>
 	<hr>
 	<p class="footer">Source see the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
 </body>
