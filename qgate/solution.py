@@ -37,7 +37,6 @@ class Solution:
 
                 # create project
                 uc.testcase_new(name)
-#                uc.testcase_detail(f"{name}")
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
@@ -76,22 +75,26 @@ class Solution:
 
 
     def _has_featureset(self, name, project_spec):
-        # Support two different collections
-        if isinstance(project_spec, dict):
-            return name in project_spec["feature-sets"]
-        elif isinstance(project_spec, list):
-            return name in project_spec
-        else:
-            raise Exception("Unsupported type")
+        if project_spec:
+            # Support two different collections
+            if isinstance(project_spec, dict):
+                return name in project_spec["feature-sets"]
+            elif isinstance(project_spec, list):
+                return name in project_spec
+            else:
+                raise Exception("Unsupported type")
+        return False
 
     def _get_featuresets(self, project_spec):
-        # Support two different collections
-        if isinstance(project_spec, dict):
-            return project_spec["feature-sets"]
-        elif isinstance(project_spec, list):
-            return project_spec
-        else:
-            raise Exception("Unsupported type")
+        if project_spec:
+            # Support two different collections
+            if isinstance(project_spec, dict):
+                return project_spec["feature-sets"]
+            elif isinstance(project_spec, list):
+                return project_spec
+            else:
+                raise Exception("Unsupported type")
+        return []
 
     def _get_featurevectors(self, project_spec):
         # Support two different collections
@@ -99,6 +102,10 @@ class Solution:
             return project_spec["feature-vectors"]
         return []
 
+    # def _get_project_sped(self,project_name):
+    #
+    #     self._project_specs.get()
+    #     self._project_specs[project_name]
 
     def create_featureset(self, uc: UCBase):
         """ Get or create featuresets
@@ -118,7 +125,7 @@ class Solution:
                     name, desc, lbls, kind=self._get_json_header(json_content)
 
                     if kind=="feature-set":
-                        if self._has_featureset(name, self._project_specs[project_name]): # build only featuresets based on project spec
+                        if self._has_featureset(name, self._project_specs.get(project_name)): # build only featuresets based on project spec
                             uc.testcase_new(f'{project_name}/{name}')
                             #uc.testcase_detail(f'{project_name}/{name} create')
 
@@ -134,7 +141,7 @@ class Solution:
 
         uc.usecase_new()
         for project_name in self._projects:
-            for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
+            for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
                 # create file with definition of vector
                 source_file = os.path.join(os.getcwd(),
                                            self.setup.model_definition,
@@ -168,7 +175,7 @@ class Solution:
         """
         uc.usecase_new()
         for project_name in self._projects:
-            for featureset_name in self._get_featuresets(self._project_specs[project_name]):
+            for featureset_name in self._get_featuresets(self._project_specs.get(project_name)):
                 # create possible file for load
                 source_file=os.path.join(os.getcwd(),
                                          self.setup.model_definition,
@@ -292,7 +299,7 @@ class Solution:
         """
         uc.usecase_new()
         for project_name in self._projects:
-            for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
+            for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
 
                 uc.testcase_new(f"{project_name}/{featurevector_name}")
                 #uc.testcase_detail(f"{project_name}/{featurevector_name}")
