@@ -49,7 +49,7 @@ class Output():
 
     def testcase_new(self, name):
         testcase={}
-        testcase['testcase']=name
+        testcase['name']=name
         testcase['detail']=None
         testcase['state']=None
 
