@@ -55,7 +55,6 @@ class Solution:
         uc.usecase_new()
         for project_name in self._projects:
             uc.testcase_new(project_name)
-            #uc.testcase_detail(project_name)
 
             # delete project
             mlrun.get_run_db().delete_project(project_name, "cascade")
@@ -102,11 +101,6 @@ class Solution:
             return project_spec["feature-vectors"]
         return []
 
-    # def _get_project_sped(self,project_name):
-    #
-    #     self._project_specs.get()
-    #     self._project_specs[project_name]
-
     def create_featureset(self, uc: UCBase):
         """ Get or create featuresets
 
@@ -127,7 +121,6 @@ class Solution:
                     if kind=="feature-set":
                         if self._has_featureset(name, self._project_specs.get(project_name)): # build only featuresets based on project spec
                             uc.testcase_new(f'{project_name}/{name}')
-                            #uc.testcase_detail(f'{project_name}/{name} create')
 
                             # create feature set only in case not exist
                             try:
@@ -152,7 +145,6 @@ class Solution:
                 # check existing data set
                 for file in glob.glob(source_file):
                     uc.testcase_new(f"{project_name}/{featurevector_name}")
-                    #uc.testcase_detail(f"{project_name}/{featurevector_name}")
 
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
@@ -186,7 +178,6 @@ class Solution:
                 # check existing data set
                 for file in glob.glob(source_file):
                     uc.testcase_new(f"{project_name}/{featureset_name}")
-                    #uc.testcase_detail(f"{project_name}/{featureset_name}")
 
                     # get existing feature set (feature set have to be created in previous use case)
                     featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
@@ -302,7 +293,6 @@ class Solution:
             for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
 
                 uc.testcase_new(f"{project_name}/{featurevector_name}")
-                #uc.testcase_detail(f"{project_name}/{featurevector_name}")
 
                 if mlrun.get_current_project().name != project_name:
                     mlrun.load_project(name=project_name, context="./", user_project=False)
@@ -311,7 +301,6 @@ class Solution:
 
                 resp = fstore.get_offline_features(vector)
                 frm=resp.to_dataframe()
-                #uc.testcase_detailext(f"... get {len(frm.index)} items")
                 uc.testcase_detail(f"... get {len(frm.index)} items")
                 uc.testcase_state()
 
