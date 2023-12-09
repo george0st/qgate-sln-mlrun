@@ -36,34 +36,43 @@ class Output():
         self._templates=templates
         self._system_info()
 
-    def new_usecase(self, uc_name, uc_description):
+    def usecase_new(self, uc_name, uc_description):
         new_uc = {}
         new_uc['name'] = uc_name
         new_uc['desc'] = uc_description
-        new_uc['details']=[]
+        new_uc['testcases']=[]
         if self._data.get("usecases"):
             self._data["usecases"].append(new_uc)
         else:
             self._data["usecases"]=[]
             self._data["usecases"].append(new_uc)
 
-    def usecase_detail(self, detail):
-        dtl={}
-        dtl['detail']=detail
-        dtl['state']=None
+    def testcase_new(self, name):
+        testcase={}
+        testcase['testcase']=name
+        testcase['detail']=None
+        testcase['state']=None
 
         uc=self._data["usecases"][-1]
-        uc['details'].append(dtl)
+        uc['testcases'].append(testcase)
 
-    def usecase_detailext(self, detail):
+    def testcase_detail(self, detail):
+
+        uc=self._data["usecases"][-1]
+        if len(uc['testcases'])==0:
+            self.testcase_new("GLOBAL")
+        testcase = uc['testcases'][-1]
+        testcase['detail']=detail
+
+    def testcase_detailext(self, detail):
         uc = self._data["usecases"][-1]
-        dtl = uc['details'][-1]
-        dtl['detail'] = f"{dtl['detail']} {detail}"
+        testcase = uc['testcases'][-1]
+        testcase['detail'] = f"{testcase['detail']} {detail}"
 
-    def usecase_state(self, state="DONE"):
+    def testcase_state(self, state="DONE"):
         uc=self._data["usecases"][-1]
-        dtl=uc['details'][-1]
-        dtl['state']=state
+        testcase=uc['testcases'][-1]
+        testcase['state']=state
 
     def render(self):
         # https://zetcode.com/python/jinja/

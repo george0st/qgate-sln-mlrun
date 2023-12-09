@@ -36,7 +36,8 @@ class Solution:
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
                 # create project
-                uc.usecase_detail(f"{name}")
+                uc.testcase_new(name)
+#                uc.testcase_detail(f"{name}")
                 self._projects.append(name)
                 prj=mlrun.get_or_create_project(name, context="./", user_project=False)
                 prj.description=desc
@@ -44,7 +45,7 @@ class Solution:
                     prj.metadata.labels[lbl]=lbls[lbl]
                 prj.save()
                 self._project_specs[name] = json_content['spec']
-                uc.usecase_state()
+                uc.testcase_state()
 
     def delete_projects(self, uc: UCBase):
         """
@@ -54,7 +55,8 @@ class Solution:
         """
         uc.usecase_new()
         for project_name in self._projects:
-            uc.usecase_detail(project_name)
+            uc.testcase_new(project_name)
+            #uc.testcase_detail(project_name)
 
             # delete project
             mlrun.get_run_db().delete_project(project_name, "cascade")
@@ -64,7 +66,7 @@ class Solution:
             if os.path.exists(project_dir):
                 shutil.rmtree(project_dir, True)
 
-            uc.usecase_state()
+            uc.testcase_state()
 
         # delete other things (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
@@ -117,14 +119,15 @@ class Solution:
 
                     if kind=="feature-set":
                         if self._has_featureset(name, self._project_specs[project_name]): # build only featuresets based on project spec
-                            uc.usecase_detail(f'{project_name}/{name} create')
+                            uc.testcase_new(f'{project_name}/{name}')
+                            #uc.testcase_detail(f'{project_name}/{name} create')
 
                             # create feature set only in case not exist
                             try:
                                 fstore.get_feature_set(f"{project_name}/{name}")
                             except:
                                 self._create_featureset(project_name, name, desc, json_content['spec'])
-                            uc.usecase_state()
+                            uc.testcase_state()
 
     def create_featurevector(self, uc: UCBase):
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
@@ -141,7 +144,8 @@ class Solution:
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    uc.usecase_detail(f"{project_name}/{featurevector_name}")
+                    uc.testcase_new(f"{project_name}/{featurevector_name}")
+                    #uc.testcase_detail(f"{project_name}/{featurevector_name}")
 
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
@@ -154,7 +158,7 @@ class Solution:
                         except:
                             self._create_featurevector(project_name, featurevector_name, desc, json_content['spec'])
 
-                    uc.usecase_state()
+                    uc.testcase_state()
 
     def ingest_data(self, uc: UCBase):
         """
@@ -174,7 +178,8 @@ class Solution:
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    uc.usecase_detail(f"{project_name}/{featureset_name}")
+                    uc.testcase_new(f"{project_name}/{featureset_name}")
+                    #uc.testcase_detail(f"{project_name}/{featureset_name}")
 
                     # get existing feature set (feature set have to be created in previous use case)
                     featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
@@ -192,7 +197,7 @@ class Solution:
                                       #overwrite=False,
                                       return_df=False,
                                       infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                    uc.usecase_state()
+                    uc.testcase_state()
 
     @property
     def setup(self) -> Setup:
@@ -289,7 +294,8 @@ class Solution:
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs[project_name]):
 
-                uc.usecase_detail(f"{project_name}/{featurevector_name}")
+                uc.testcase_new(f"{project_name}/{featurevector_name}")
+                #uc.testcase_detail(f"{project_name}/{featurevector_name}")
 
                 if mlrun.get_current_project().name != project_name:
                     mlrun.load_project(name=project_name, context="./", user_project=False)
@@ -298,8 +304,9 @@ class Solution:
 
                 resp = fstore.get_offline_features(vector)
                 frm=resp.to_dataframe()
-                uc.usecase_detailext(f"... get {len(frm.index)} items")
-                uc.usecase_state()
+                #uc.testcase_detailext(f"... get {len(frm.index)} items")
+                uc.testcase_detail(f"... get {len(frm.index)} items")
+                uc.testcase_state()
 
         # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
         # resp.to_dataframe()
