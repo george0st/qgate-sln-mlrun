@@ -2,7 +2,7 @@
 # {{ data.datetime }}
 # ----------------------- {% for usecase in data.usecases %}
 {{ usecase.name }}: {{ usecase.desc }}{% for testcase in usecase.testcases %}
-    '{{ testcase.name }}': {{ testcase.detail }} ... {{ testcase.state }}{% endfor %}{% endfor %}
+    '{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %} ... {{ testcase.state }}{% endfor %}{% endfor %}
 # -----------------------
 # Host: {{ data.host }}
 # RAM total/free: {{ data.memory_total }}/{{ data.memory_free }}
