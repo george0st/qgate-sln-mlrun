@@ -52,16 +52,19 @@ class UCBase:
         raise NotImplemented()
 
     def usecase_new(self):
-        self.output.new_usecase(self.name, self.desc)
+        self.output.usecase_new(self.name, self.desc)
 
-    def usecase_detail(self, detail):
-        self.output.usecase_detail(detail)
+    def testcase_new(self, name):
+        self.output.testcase_new(name)
 
-    def usecase_detailext(self, detail):
-        self.output.usecase_detailext(detail)
+    def testcase_detail(self, detail):
+        self.output.testcase_detail(detail)
 
-    def usecase_state(self, state="DONE"):
-        self.output.usecase_state(state)
+    def testcase_detailext(self, detail):
+        self.output.testcase_detailext(detail)
+
+    def testcase_state(self, state="DONE"):
+        self.output.testcase_state(state)
 
 
 

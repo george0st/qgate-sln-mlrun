@@ -102,8 +102,8 @@ function myFunction(element) {
 	<button type="button" class="collapsible" onclick="myFunction('myDIV3')"><img src="../assets/imgs/icons8-check-16-3.png"><img src="../assets/imgs/icons8-error-16-3.png">Report outputs ...</button>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for usecase in data.usecases %}
-			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for detail in usecase.details %}
-				<tr><td>&nbsp;&nbsp;{{ detail.detail }}</td><td>{% if detail.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ detail.state }}</td></tr>{% endfor %}{% endfor %}
+			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for testcase in usecase.testcases %}
+				<tr><td>&nbsp;&nbsp;'{{ testcase.name }}': {{ testcase.detail }}</td><td>{% if testcase.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ testcase.state }}</td></tr>{% endfor %}{% endfor %}
 		</table>
 	</div>
 

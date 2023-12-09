@@ -1,8 +1,8 @@
 # QGate version: {{ data.version }}
 # {{ data.datetime }}
 # ----------------------- {% for usecase in data.usecases %}
-{{ usecase.name }}: {{ usecase.desc }}{% for detail in usecase.details %}
-    {{ detail.detail }} ... {{ detail.state }}{% endfor %}{% endfor %}
+{{ usecase.name }}: {{ usecase.desc }}{% for testcase in usecase.testcases %}
+    '{{ testcase.name }}': {{ testcase.detail }} ... {{ testcase.state }}{% endfor %}{% endfor %}
 # -----------------------
 # Host: {{ data.host }}
 # RAM total/free: {{ data.memory_total }}/{{ data.memory_free }}
