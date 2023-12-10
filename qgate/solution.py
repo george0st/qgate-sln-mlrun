@@ -67,24 +67,13 @@ class Solution:
         return True
 
     def delete_projects(self, uc: UCBase):
-        """
-        Delete projects
+        """Delete projects
 
         :param uc:      Use case
         """
         uc.usecase_new()
         for project_name in self._projects:
-            uc.testcase_new(project_name)
-
-            # delete project
-            mlrun.get_run_db().delete_project(project_name, "cascade")
-
-            # delete project in FS
-            project_dir=os.path.join(self.setup.model_output, project_name)
-            if os.path.exists(project_dir):
-                shutil.rmtree(project_dir, True)
-
-            uc.testcase_state()
+            self._delete_project(uc, project_name)
 
         # delete other things (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
@@ -92,6 +81,15 @@ class Solution:
             if os.path.isdir(file):
                 shutil.rmtree(file, True)
 
+    @handler_testcase
+    def _delete_project(self, uc, name):
+        """Delete project"""
+        mlrun.get_run_db().delete_project(name, "cascade")
+
+        # delete project in FS
+        project_dir = os.path.join(self.setup.model_output, name)
+        if os.path.exists(project_dir):
+            shutil.rmtree(project_dir, True)
 
     def _has_featureset(self, name, project_spec):
         if project_spec:
