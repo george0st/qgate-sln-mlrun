@@ -147,7 +147,7 @@ class Solution:
         name, desc, lbls, kind = self._get_json_header(json_content)
 
         if kind == "feature-set":
-            # create feature set only in case not exist
+            # create feature set only in case, if not exist
             try:
                 fstore.get_feature_set(f"{project_name}/{name}")
             except:
