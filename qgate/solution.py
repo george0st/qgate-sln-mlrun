@@ -10,6 +10,7 @@ import pandas as pd
 import shutil
 from qgate.setup import Setup
 from qgate.uc.ucbase import UCBase
+from qgate.uc import ucbase
 
 class Solution:
     """Create solution"""
@@ -23,6 +24,22 @@ class Solution:
         self._projects=[]
         self._project_specs={}
 
+    def handler_testcase(func):
+        """Error handler for test case, mandatory arguments 'uc' and 'name'"""
+        def wrapper(self, uc: UCBase, name: str, *args, **kwargs):
+
+            try:
+                uc.testcase_new(name)
+                ret=func(self, uc, name, *args, **kwargs)
+                uc.testcase_state()
+                return ret
+            except Exception as ex:
+                uc.state = ucbase.UCState.Error
+                uc.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
+                uc.testcase_state("Error")
+                return False
+        return wrapper
+
     def create_projects(self, uc: UCBase):
         """ Create projects
 
@@ -35,16 +52,19 @@ class Solution:
                 json_content = json.load(json_file)
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
-                # create project
-                uc.testcase_new(name)
                 self._projects.append(name)
-                prj=mlrun.get_or_create_project(name, context="./", user_project=False)
-                prj.description=desc
-                for lbl in lbls:
-                    prj.metadata.labels[lbl]=lbls[lbl]
-                prj.save()
-                self._project_specs[name] = json_content['spec']
-                uc.testcase_state()
+                if self.create_project(uc, name, desc, lbls, kind):
+                    self._project_specs[name] = json_content['spec']
+
+    @handler_testcase
+    def create_project(self, uc: UCBase, name, desc, lbls, kind):
+        # create project
+        prj = mlrun.get_or_create_project(name, context="./", user_project=False)
+        prj.description = desc
+        for lbl in lbls:
+            prj.metadata.labels[lbl] = lbls[lbl]
+        prj.save()
+        return True
 
     def delete_projects(self, uc: UCBase):
         """
