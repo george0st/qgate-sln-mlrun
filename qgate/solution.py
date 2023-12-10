@@ -24,13 +24,15 @@ class Solution:
         self._projects=[]
         self._project_specs={}
 
+        # TODO: add region
+
     def handler_testcase(func):
         """Error handler for test case, mandatory arguments 'uc' and 'name'"""
-        def wrapper(self, uc: UCBase, name: str, *args, **kwargs):
+        def wrapper(self, uc: UCBase, testcase_name: str, *args, **kwargs):
 
             try:
-                uc.testcase_new(name)
-                ret=func(self, uc, name, *args, **kwargs)
+                uc.testcase_new(testcase_name)
+                ret=func(self, uc, testcase_name, *args, **kwargs)
                 uc.testcase_state()
                 return ret
             except Exception as ex:
@@ -119,7 +121,7 @@ class Solution:
             return project_spec["feature-vectors"]
         return []
 
-    def create_featureset(self, uc: UCBase):
+    def create_featuresets(self, uc: UCBase):
         """ Get or create featuresets
 
         :param uc:      Use case
@@ -135,20 +137,22 @@ class Solution:
                                            f"*-{featureset_name}.json")
 
                 for file in glob.glob(source_file):
-                    uc.testcase_new(f'{project_name}/{featureset_name}')
-
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
                         json_content = json.load(json_file)
-                        name, desc, lbls, kind=self._get_json_header(json_content)
+                        self._create_featureset(uc, f'{project_name}/{featureset_name}', project_name, json_content)
 
-                        if kind=="feature-set":
-                            # create feature set only in case not exist
-                            try:
-                                fstore.get_feature_set(f"{project_name}/{name}")
-                            except:
-                                self._create_featureset(project_name, name, desc, json_content['spec'])
-                            uc.testcase_state()
+    @handler_testcase
+    def _create_featureset(self, uc: UCBase, testcase_name, project_name, json_content):
+        name, desc, lbls, kind = self._get_json_header(json_content)
+
+        if kind == "feature-set":
+            # create feature set only in case not exist
+            try:
+                fstore.get_feature_set(f"{project_name}/{name}")
+            except:
+                self._create_featureset_content(project_name, name, desc, json_content['spec'])
+
 
     def create_featurevector(self, uc: UCBase):
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
@@ -236,7 +240,7 @@ class Solution:
         vector.save()
 
 
-    def _create_featureset(self, project_name, featureset_name, featureset_desc, json_spec):
+    def _create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
         """
         Create featureset based on json spec
 
