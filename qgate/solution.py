@@ -10,6 +10,7 @@ import pandas as pd
 import shutil
 from qgate.setup import Setup
 from qgate.uc.ucbase import UCBase
+from qgate.uc import ucbase
 
 class Solution:
     """Create solution"""
@@ -23,8 +24,24 @@ class Solution:
         self._projects=[]
         self._project_specs={}
 
+    def handler_testcase(func):
+        """Error handler for test case, mandatory arguments 'uc' and 'name'"""
+        def wrapper(self, uc: UCBase, name: str, *args, **kwargs):
+
+            try:
+                uc.testcase_new(name)
+                ret=func(self, uc, name, *args, **kwargs)
+                uc.testcase_state()
+                return ret
+            except Exception as ex:
+                uc.state = ucbase.UCState.Error
+                uc.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
+                uc.testcase_state("Error")
+                return False
+        return wrapper
+
     def create_projects(self, uc: UCBase):
-        """ Create projects
+        """ Create projects based on json definition
 
         :param uc:      Use case
         """
@@ -35,36 +52,28 @@ class Solution:
                 json_content = json.load(json_file)
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
-                # create project
-                uc.testcase_new(name)
                 self._projects.append(name)
-                prj=mlrun.get_or_create_project(name, context="./", user_project=False)
-                prj.description=desc
-                for lbl in lbls:
-                    prj.metadata.labels[lbl]=lbls[lbl]
-                prj.save()
-                self._project_specs[name] = json_content['spec']
-                uc.testcase_state()
+                if self._create_project(uc, name, desc, lbls, kind):
+                    self._project_specs[name] = json_content['spec']
+
+    @handler_testcase
+    def _create_project(self, uc: UCBase, name, desc, lbls, kind):
+        """Create project"""
+        prj = mlrun.get_or_create_project(name, context="./", user_project=False)
+        prj.description = desc
+        for lbl in lbls:
+            prj.metadata.labels[lbl] = lbls[lbl]
+        prj.save()
+        return True
 
     def delete_projects(self, uc: UCBase):
-        """
-        Delete projects
+        """Delete projects
 
         :param uc:      Use case
         """
         uc.usecase_new()
         for project_name in self._projects:
-            uc.testcase_new(project_name)
-
-            # delete project
-            mlrun.get_run_db().delete_project(project_name, "cascade")
-
-            # delete project in FS
-            project_dir=os.path.join(self.setup.model_output, project_name)
-            if os.path.exists(project_dir):
-                shutil.rmtree(project_dir, True)
-
-            uc.testcase_state()
+            self._delete_project(uc, project_name)
 
         # delete other things (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
@@ -72,6 +81,15 @@ class Solution:
             if os.path.isdir(file):
                 shutil.rmtree(file, True)
 
+    @handler_testcase
+    def _delete_project(self, uc, name):
+        """Delete project"""
+        mlrun.get_run_db().delete_project(name, "cascade")
+
+        # delete project in FS
+        project_dir = os.path.join(self.setup.model_output, name)
+        if os.path.exists(project_dir):
+            shutil.rmtree(project_dir, True)
 
     def _has_featureset(self, name, project_spec):
         if project_spec:
