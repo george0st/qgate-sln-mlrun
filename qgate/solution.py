@@ -75,7 +75,7 @@ class Solution:
         for project_name in self._projects:
             self._delete_project(uc, project_name)
 
-        # delete other things (generated from e.g. CSVTargets)
+        # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
         for file in glob.glob(dir):
             if os.path.isdir(file):
@@ -184,8 +184,7 @@ class Solution:
                     uc.testcase_state()
 
     def ingest_data(self, uc: UCBase):
-        """
-        Data ingest
+        """Data ingest
 
         :param uc:  Use case
         """
