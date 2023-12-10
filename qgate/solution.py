@@ -41,7 +41,7 @@ class Solution:
         return wrapper
 
     def create_projects(self, uc: UCBase):
-        """ Create projects
+        """ Create projects based on json definition
 
         :param uc:      Use case
         """
@@ -53,12 +53,12 @@ class Solution:
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
                 self._projects.append(name)
-                if self.create_project(uc, name, desc, lbls, kind):
+                if self._create_project(uc, name, desc, lbls, kind):
                     self._project_specs[name] = json_content['spec']
 
     @handler_testcase
-    def create_project(self, uc: UCBase, name, desc, lbls, kind):
-        # create project
+    def _create_project(self, uc: UCBase, name, desc, lbls, kind):
+        """Create project"""
         prj = mlrun.get_or_create_project(name, context="./", user_project=False)
         prj.description = desc
         for lbl in lbls:
