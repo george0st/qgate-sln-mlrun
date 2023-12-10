@@ -22,5 +22,5 @@ class UC201(UCBase):
         return "Create feature set with name, description, entities, features and targets"
 
     def exec(self):
-        self.sln.create_featureset(self)
+        self.sln.create_featuresets(self)
 
