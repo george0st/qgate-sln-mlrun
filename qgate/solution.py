@@ -260,20 +260,28 @@ class Solution:
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
                         json_content = json.load(json_file)
-                        name, desc, lbls, kind = self._get_json_header(json_content)
+                    #     name, desc, lbls, kind = self._get_json_header(json_content)
+                    #
+                    #     if kind == "feature-set":
+                    #         # create feature vector only in case not exist
+                    #         try:
+                    #             fstore.get_feature_vector(f"{project_name}/{name}")
+                    #         except:
+                    #             self._create_featurevector_content(project_name, featurevector_name, desc, json_content['spec'])
+                    #
+                    # uc.testcase_state()
 
-                        # TODO: add check to feature vector
-                        # if kind == "feature-vector":
+    def _create_featurevector(self, uc: UCBase, testcase_name, project_name, json_content):
+        name, desc, lbls, kind = self._get_json_header(json_content)
 
-                        # create feature vector only in case not exist
-                        try:
-                            fstore.get_feature_vector(f"{project_name}/{name}")
-                        except:
-                            self._create_featurevector(project_name, featurevector_name, desc, json_content['spec'])
+        if kind == "feature-set":
+            # create feature vector only in case not exist
+            try:
+                fstore.get_feature_vector(f"{project_name}/{name}")
+            except:
+                self._create_featurevector_content(project_name, name, desc, json_content['spec'])
 
-                    uc.testcase_state()
-
-    def _create_featurevector(self, project_name, featurevector_name, featurevector_desc, json_spec):
+    def _create_featurevector_content(self, project_name, featurevector_name, featurevector_desc, json_spec):
         # switch to proper project if the current project is different
         if mlrun.get_current_project().name != project_name:
             mlrun.load_project(name=project_name, context="./", user_project=False)
