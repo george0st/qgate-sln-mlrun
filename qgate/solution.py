@@ -255,11 +255,12 @@ class Solution:
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    uc.testcase_new(f"{project_name}/{featurevector_name}")
+                    #uc.testcase_new(f"{project_name}/{featurevector_name}")
 
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
                         json_content = json.load(json_file)
+                        self._create_featurevector(uc, f"{project_name}/{featurevector_name}", project_name, json_content=)
                     #     name, desc, lbls, kind = self._get_json_header(json_content)
                     #
                     #     if kind == "feature-set":
@@ -271,6 +272,7 @@ class Solution:
                     #
                     # uc.testcase_state()
 
+    @handler_testcase
     def _create_featurevector(self, uc: UCBase, testcase_name, project_name, json_content):
         name, desc, lbls, kind = self._get_json_header(json_content)
 
