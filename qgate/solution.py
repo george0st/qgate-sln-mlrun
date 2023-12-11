@@ -42,6 +42,56 @@ class Solution:
                 return False
         return wrapper
 
+    @property
+    def setup(self) -> Setup:
+        return self._setup
+
+# region Internal functions
+    def _has_featureset(self, name, project_spec):
+        if project_spec:
+            # Support two different collections
+            if isinstance(project_spec, dict):
+                return name in project_spec["feature-sets"]
+            elif isinstance(project_spec, list):
+                return name in project_spec
+            else:
+                raise Exception("Unsupported type")
+        return False
+
+    def _get_featuresets(self, project_spec):
+        if project_spec:
+            # Support two different collections
+            if isinstance(project_spec, dict):
+                return project_spec["feature-sets"]
+            elif isinstance(project_spec, list):
+                return project_spec
+            else:
+                raise Exception("Unsupported type")
+        return []
+
+    def _get_featurevectors(self, project_spec):
+        # Support two different collections
+        if isinstance(project_spec, dict):
+            return project_spec["feature-vectors"]
+        return []
+
+    def _get_json_header(self, json_content):
+        """ Get common header
+
+        :param json_content:    json content
+        :return:                name, description, labeles and kind from header
+        """
+        name = json_content['name']
+        desc = json_content['description']
+        kind = json_content['kind']
+
+        # optional labels
+        lbls = None if json_content.get('labels') is None else json_content.get('labels')
+        return name, desc, lbls, kind
+
+
+# endregion
+
 # region CREATE PROJECT
     def create_projects(self, uc: UCBase):
         """ Create projects based on json definition
@@ -96,34 +146,6 @@ class Solution:
         if os.path.exists(project_dir):
             shutil.rmtree(project_dir, True)
 # endregion
-
-    def _has_featureset(self, name, project_spec):
-        if project_spec:
-            # Support two different collections
-            if isinstance(project_spec, dict):
-                return name in project_spec["feature-sets"]
-            elif isinstance(project_spec, list):
-                return name in project_spec
-            else:
-                raise Exception("Unsupported type")
-        return False
-
-    def _get_featuresets(self, project_spec):
-        if project_spec:
-            # Support two different collections
-            if isinstance(project_spec, dict):
-                return project_spec["feature-sets"]
-            elif isinstance(project_spec, list):
-                return project_spec
-            else:
-                raise Exception("Unsupported type")
-        return []
-
-    def _get_featurevectors(self, project_spec):
-        # Support two different collections
-        if isinstance(project_spec, dict):
-            return project_spec["feature-vectors"]
-        return []
 
 # region CREATE FEATURE SET
     def create_featuresets(self, uc: UCBase):
@@ -303,26 +325,10 @@ class Solution:
                     uc.testcase_state()
 # endregion
 
-    @property
-    def setup(self) -> Setup:
-        return self._setup
 
 
 
 
-    def _get_json_header(self, json_content):
-        """ Get common header
-
-        :param json_content:    json content
-        :return:                name, description, labeles and kind from header
-        """
-        name = json_content['name']
-        desc = json_content['description']
-        kind = json_content['kind']
-
-        # optional labels
-        lbls = None if json_content.get('labels') is None else json_content.get('labels')
-        return name, desc, lbls, kind
 
     def get_data_offline(self, uc: UCBase):
         """
