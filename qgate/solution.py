@@ -260,7 +260,8 @@ class Solution:
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
                         json_content = json.load(json_file)
-                        self._create_featurevector(uc, f"{project_name}/{featurevector_name}", project_name, json_content=)
+                        self._create_featurevector(uc, f"{project_name}/{featurevector_name}", project_name, json_content)
+
                     #     name, desc, lbls, kind = self._get_json_header(json_content)
                     #
                     #     if kind == "feature-set":
@@ -276,7 +277,7 @@ class Solution:
     def _create_featurevector(self, uc: UCBase, testcase_name, project_name, json_content):
         name, desc, lbls, kind = self._get_json_header(json_content)
 
-        if kind == "feature-set":
+        if kind == "feature-vector":
             # create feature vector only in case not exist
             try:
                 fstore.get_feature_vector(f"{project_name}/{name}")
@@ -356,11 +357,6 @@ class Solution:
                 uc.testcase_detail(f"... get {len(frm.index)} items")
                 uc.testcase_state()
 
-        # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
-        # resp.to_dataframe()
-        #
-        # svc = fs.get_online_feature_service("store://feature-vectors/gate-alfa/vector-partycontact:latest")
-        # resp = svc.get([{"customer_id": "42"}, {"customer_id": "50"}])
 # endregion
 
 
