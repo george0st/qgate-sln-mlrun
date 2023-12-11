@@ -255,25 +255,25 @@ class Solution:
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    uc.testcase_new(f"{project_name}/{featurevector_name}")
+                    #uc.testcase_new(f"{project_name}/{featurevector_name}")
 
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
                         json_content = json.load(json_file)
-                        name, desc, lbls, kind = self._get_json_header(json_content)
+                        self._create_featurevector(uc, f"{project_name}/{featurevector_name}", project_name, json_content)
 
-                        # TODO: add check to feature vector
-                        # if kind == "feature-vector":
+    @handler_testcase
+    def _create_featurevector(self, uc: UCBase, testcase_name, project_name, json_content):
+        name, desc, lbls, kind = self._get_json_header(json_content)
 
-                        # create feature vector only in case not exist
-                        try:
-                            fstore.get_feature_vector(f"{project_name}/{name}")
-                        except:
-                            self._create_featurevector(project_name, featurevector_name, desc, json_content['spec'])
+        if kind == "feature-vector":
+            # create feature vector only in case not exist
+            try:
+                fstore.get_feature_vector(f"{project_name}/{name}")
+            except:
+                self._create_featurevector_content(project_name, name, desc, json_content['spec'])
 
-                    uc.testcase_state()
-
-    def _create_featurevector(self, project_name, featurevector_name, featurevector_desc, json_spec):
+    def _create_featurevector_content(self, project_name, featurevector_name, featurevector_desc, json_spec):
         # switch to proper project if the current project is different
         if mlrun.get_current_project().name != project_name:
             mlrun.load_project(name=project_name, context="./", user_project=False)
@@ -346,11 +346,6 @@ class Solution:
                 uc.testcase_detail(f"... get {len(frm.index)} items")
                 uc.testcase_state()
 
-        # resp = fs.get_offline_features("store://feature-vectors/gate-alfa/vector-partycontact:latest")
-        # resp.to_dataframe()
-        #
-        # svc = fs.get_online_feature_service("store://feature-vectors/gate-alfa/vector-partycontact:latest")
-        # resp = svc.get([{"customer_id": "42"}, {"customer_id": "50"}])
 # endregion
 
 
