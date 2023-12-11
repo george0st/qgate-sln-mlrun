@@ -46,7 +46,7 @@ class Solution:
     def setup(self) -> Setup:
         return self._setup
 
-# region Internal functions
+# region INTERNAL
     def _has_featureset(self, name, project_spec):
         if project_spec:
             # Support two different collections
@@ -325,11 +325,7 @@ class Solution:
                     uc.testcase_state()
 # endregion
 
-
-
-
-
-
+# region GET DATA
     def get_data_offline(self, uc: UCBase):
         """
         Get data from off-line feature vector
@@ -355,16 +351,15 @@ class Solution:
         #
         # svc = fs.get_online_feature_service("store://feature-vectors/gate-alfa/vector-partycontact:latest")
         # resp = svc.get([{"customer_id": "42"}, {"customer_id": "50"}])
+# endregion
 
+
+# region GET3 DATA
     def serving_score(self, uc: UCBase):
         """
         Serve score
         """
         uc.loghln()
 
-        # prepare model
-
-        # store pickl file
-
-        # add model
+# endregion
 
