@@ -130,6 +130,7 @@ class Output():
                     count_testcases_done += 1
             count_testcases+=len(usecase["testcases"])
 
+        self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "Error"
         self._data["summary"]["count_testcases"]=count_testcases
         self._data["summary"]["count_testcases_done"]=count_testcases_done
         self._data["summary"]["count_testcases_err"]=count_testcases-count_testcases_done

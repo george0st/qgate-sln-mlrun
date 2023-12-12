@@ -99,7 +99,18 @@ function myFunction(element) {
 	<h2>Quality report for MLRun</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version: {{ data.version }}</p>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV3')"><img src="../assets/imgs/icons8-check-16-3.png"><img src="../assets/imgs/icons8-error-16-3.png">Report outputs ...</button>
+	<!--
+	 	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">
+	 	<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
+	 		<tr>
+	 			<td style="border: 0px"><img src="../assets/imgs/icons8-error-16-3.png">Report outputs ...</td>
+	 			<td style="border: 0px; font-size: 12px;">35 DONE/1 Error</td>
+	 		</tr>
+	 	</table>
+	 	</button>
+	-->
+
+	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">{% if data.summary.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}Report outputs ... {{ data.summary.count_testcases_done }} DONE/{{ data.summary.count_testcases_err }} Error</button>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for usecase in data.usecases %}
 			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for testcase in usecase.testcases %}
