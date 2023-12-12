@@ -304,25 +304,46 @@ class Solution:
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    uc.testcase_new(f"{project_name}/{featureset_name}")
+                    #uc.testcase_new(f"{project_name}/{featureset_name}")
+                    self._ingest_data(uc, f"{project_name}/{featureset_name}", project_name, featureset_name, file )
 
-                    # get existing feature set (feature set have to be created in previous use case)
-                    featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+                    # # get existing feature set (feature set have to be created in previous use case)
+                    # featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+                    #
+                    # # ingest data with bundl/chunk
+                    # for data_frm in pd.read_csv(file,
+                    #                          sep=";",
+                    #                          header="infer",
+                    #                          decimal=",",
+                    #                          compression="gzip",
+                    #                          encoding="utf-8",
+                    #                          chunksize=10000):
+                    #     fstore.ingest(featureset,
+                    #                   data_frm,
+                    #                   #overwrite=False,
+                    #                   return_df=False,
+                    #                   infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                    # uc.testcase_state()
 
-                    # ingest data with bundl/chunk
-                    for data_frm in pd.read_csv(file,
-                                             sep=";",
-                                             header="infer",
-                                             decimal=",",
-                                             compression="gzip",
-                                             encoding="utf-8",
-                                             chunksize=10000):
-                        fstore.ingest(featureset,
-                                      data_frm,
-                                      #overwrite=False,
-                                      return_df=False,
-                                      infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                    uc.testcase_state()
+    @handler_testcase
+    def _ingest_data(self, uc: UCBase, testcase_name, project_name, featureset_name, file):
+        # get existing feature set (feature set have to be created in previous use case)
+        featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+
+        # ingest data with bundl/chunk
+        for data_frm in pd.read_csv(file,
+                                    sep=";",
+                                    header="infer",
+                                    decimal=",",
+                                    compression="gzip",
+                                    encoding="utf-8",
+                                    chunksize=10000):
+            fstore.ingest(featureset,
+                          data_frm,
+                          # overwrite=False,
+                          return_df=False,
+                          infer_options=mlrun.data_types.data_types.InferOptions.Null)
+
 # endregion
 
 # region GET DATA
@@ -349,12 +370,12 @@ class Solution:
 # endregion
 
 
-# region GET3 DATA
+# region SERVE DATA
     def serving_score(self, uc: UCBase):
         """
         Serve score
         """
-        uc.loghln()
+        pass
 
 # endregion
 
