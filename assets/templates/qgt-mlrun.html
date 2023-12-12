@@ -103,7 +103,7 @@ function myFunction(element) {
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for usecase in data.usecases %}
 			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for testcase in usecase.testcases %}
-				<tr><td>&nbsp;&nbsp;{% if testcase.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ testcase.state }}</td><td>'{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}</td></tr>{% endfor %}{% endfor %}
+				<tr><td>&nbsp;{% if testcase.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ testcase.state }}</td><td>'{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}</td></tr>{% endfor %}{% endfor %}
 		</table>
 	</div>
 
