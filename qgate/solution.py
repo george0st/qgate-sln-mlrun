@@ -112,6 +112,7 @@ class Solution:
     @handler_testcase
     def _create_project(self, uc: UCBase, name, desc, lbls, kind):
         """Create project"""
+
         prj = mlrun.get_or_create_project(name, context="./", user_project=False)
         prj.description = desc
         for lbl in lbls:
@@ -166,11 +167,11 @@ class Solution:
                 for file in glob.glob(source_file):
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
-                        json_content = json.load(json_file)
-                        self._create_featureset(uc, f'{project_name}/{featureset_name}', project_name, json_content)
+                        self._create_featureset(uc, f'{project_name}/{featureset_name}', project_name, json_file)
 
     @handler_testcase
-    def _create_featureset(self, uc: UCBase, testcase_name, project_name, json_content):
+    def _create_featureset(self, uc: UCBase, testcase_name, project_name, json_file):
+        json_content = json.load(json_file)
         name, desc, lbls, kind = self._get_json_header(json_content)
 
         if kind == "feature-set":
@@ -255,15 +256,13 @@ class Solution:
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    #uc.testcase_new(f"{project_name}/{featurevector_name}")
-
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
-                        json_content = json.load(json_file)
-                        self._create_featurevector(uc, f"{project_name}/{featurevector_name}", project_name, json_content)
+                        self._create_featurevector(uc, f"{project_name}/{featurevector_name}", project_name, json_file)
 
     @handler_testcase
-    def _create_featurevector(self, uc: UCBase, testcase_name, project_name, json_content):
+    def _create_featurevector(self, uc: UCBase, testcase_name, project_name, json_file):
+        json_content = json.load(json_file)
         name, desc, lbls, kind = self._get_json_header(json_content)
 
         if kind == "feature-vector":
