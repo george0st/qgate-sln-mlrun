@@ -335,19 +335,8 @@ class Solution:
         uc.usecase_new()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
-
                 self._get_data_offline(uc, f"{project_name}/{featurevector_name}", project_name, featurevector_name)
-                # uc.testcase_new(f"{project_name}/{featurevector_name}")
-                #
-                # if mlrun.get_current_project().name != project_name:
-                #     mlrun.load_project(name=project_name, context="./", user_project=False)
-                #
-                # vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
-                #
-                # resp = fstore.get_offline_features(vector)
-                # frm=resp.to_dataframe()
-                # uc.testcase_detail(f"... get {len(frm.index)} items")
-                # uc.testcase_state()
+
 
     @handler_testcase
     def _get_data_offline(self, uc: UCBase, testcase_name, project_name, featurevector_name):
