@@ -304,25 +304,27 @@ class Solution:
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    uc.testcase_new(f"{project_name}/{featureset_name}")
+                    self._ingest_data(uc, f"{project_name}/{featureset_name}", project_name, featureset_name, file )
 
-                    # get existing feature set (feature set have to be created in previous use case)
-                    featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+    @handler_testcase
+    def _ingest_data(self, uc: UCBase, testcase_name, project_name, featureset_name, file):
+        # get existing feature set (feature set have to be created in previous use case)
+        featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
-                    # ingest data with bundl/chunk
-                    for data_frm in pd.read_csv(file,
-                                             sep=";",
-                                             header="infer",
-                                             decimal=",",
-                                             compression="gzip",
-                                             encoding="utf-8",
-                                             chunksize=10000):
-                        fstore.ingest(featureset,
-                                      data_frm,
-                                      #overwrite=False,
-                                      return_df=False,
-                                      infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                    uc.testcase_state()
+        # ingest data with bundl/chunk
+        for data_frm in pd.read_csv(file,
+                                    sep=";",
+                                    header="infer",
+                                    decimal=",",
+                                    compression="gzip",
+                                    encoding="utf-8",
+                                    chunksize=10000):
+            fstore.ingest(featureset,
+                          data_frm,
+                          # overwrite=False,
+                          return_df=False,
+                          infer_options=mlrun.data_types.data_types.InferOptions.Null)
+
 # endregion
 
 # region GET DATA
@@ -333,28 +335,29 @@ class Solution:
         uc.usecase_new()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
-
-                uc.testcase_new(f"{project_name}/{featurevector_name}")
-
-                if mlrun.get_current_project().name != project_name:
-                    mlrun.load_project(name=project_name, context="./", user_project=False)
-
-                vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
-
-                resp = fstore.get_offline_features(vector)
-                frm=resp.to_dataframe()
-                uc.testcase_detail(f"... get {len(frm.index)} items")
-                uc.testcase_state()
-
-# endregion
+                self._get_data_offline(uc, f"{project_name}/{featurevector_name}", project_name, featurevector_name)
 
 
-# region GET3 DATA
+    @handler_testcase
+    def _get_data_offline(self, uc: UCBase, testcase_name, project_name, featurevector_name):
+        if mlrun.get_current_project().name != project_name:
+            mlrun.load_project(name=project_name, context="./", user_project=False)
+
+        vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
+
+        resp = fstore.get_offline_features(vector)
+        frm = resp.to_dataframe()
+        uc.testcase_detail(f"... get {len(frm.index)} items")
+
+    # endregion
+
+
+# region SERVE DATA
     def serving_score(self, uc: UCBase):
         """
         Serve score
         """
-        uc.loghln()
+        pass
 
 # endregion
 
