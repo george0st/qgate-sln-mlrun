@@ -78,6 +78,8 @@ class Output():
         # https://zetcode.com/python/jinja/
         # https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
+
+        self._summary()
         for template in self._templates:
 
             # get template
@@ -115,6 +117,24 @@ class Output():
         if self._data:
             del self._data
             self._data = None
+
+    def _summary(self):
+        self._data["summary"]={}
+        count_testcases=0
+        count_testcases_done=0
+
+        self._data["summary"]["count_usecases"]=len(self._data["usecases"])
+        for usecase in self._data["usecases"]:
+            for testcase in usecase["testcases"]:
+                if testcase['state']=="DONE":
+                    count_testcases_done += 1
+            count_testcases+=len(usecase["testcases"])
+
+        self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "Error"
+        self._data["summary"]["count_testcases"]=count_testcases
+        self._data["summary"]["count_testcases_done"]=count_testcases_done
+        self._data["summary"]["count_testcases_err"]=count_testcases-count_testcases_done
+
 
     def _system_info(self):
         self._data["version"] = __version__
