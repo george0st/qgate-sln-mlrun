@@ -1,49 +1,53 @@
 # QGate version: 0.0.4
-# 2023-12-09 12:42:33
-# ----------------------- 
-UC101: Create project(s)
-    gate-alfa ... DONE
-    gate-bravo ... DONE
-UC201: Create feature set(s)
-    gate-alfa/basic-party create ... DONE
-    gate-alfa/basic-contact create ... DONE
-    gate-alfa/basic-relation create ... DONE
-    gate-alfa/basic-account create ... DONE
-    gate-alfa/basic-transaction create ... DONE
-    gate-alfa/basic-event create ... DONE
-    gate-alfa/basic-communication create ... DONE
-    gate-alfa/aggregate-party create ... DONE
-    gate-alfa/aggregate-account create ... DONE
-    gate-alfa/aggregate-transaction create ... DONE
-    gate-bravo/basic-contact create ... DONE
-    gate-bravo/basic-account create ... DONE
-    gate-bravo/aggregate-account create ... DONE
-UC301: Ingest data to feature set(s)
-    gate-alfa/basic-party ... DONE
-    gate-alfa/basic-contact ... DONE
-    gate-alfa/basic-relation ... DONE
-    gate-alfa/basic-account ... DONE
-    gate-alfa/basic-transaction ... DONE
-    gate-alfa/basic-event ... DONE
-    gate-alfa/basic-communication ... DONE
-    gate-bravo/basic-account ... DONE
-    gate-bravo/basic-contact ... DONE
-UC401: Create feature vector(s)
-    gate-alfa/vector-party ... DONE
-    gate-alfa/vector-partycontact ... DONE
-    gate-alfa/vector-partyaccount ... DONE
-    gate-alfa/vector-partycontactaccount ... DONE
-UC501: Get data from off-line feature vector(s)
-    gate-alfa/vector-party ... get 100 items ... DONE
-    gate-alfa/vector-partycontact ... get 105 items ... DONE
-    gate-alfa/vector-partyaccount ... get 28 items ... DONE
-    gate-alfa/vector-partycontactaccount ... get 33 items ... DONE
-UC102: Delete project(s)
-    gate-alfa ... DONE
-    gate-bravo ... DONE
+# 2023-12-14 22:38:33
 # -----------------------
-# Host: HCI-L3204/172.25.224.1
-# RAM total/free: 15.2 GB/1.1 GB
+Summary, test cases: 35/1 [DONE/Error]
+# -----------------------
+UC101: Create project(s)
+  DONE ... 'gate-alfa'
+  DONE ... 'gate-bravo'
+UC201: Create feature set(s)
+  DONE ... 'gate-alfa/basic-party'
+  DONE ... 'gate-alfa/basic-contact'
+  DONE ... 'gate-alfa/basic-relation'
+  DONE ... 'gate-alfa/basic-account'
+  DONE ... 'gate-alfa/basic-transaction'
+  DONE ... 'gate-alfa/basic-event'
+  DONE ... 'gate-alfa/basic-communication'
+  DONE ... 'gate-alfa/aggregate-party'
+  DONE ... 'gate-alfa/aggregate-account'
+  DONE ... 'gate-alfa/aggregate-transaction'
+  DONE ... 'gate-bravo/basic-account'
+  DONE ... 'gate-bravo/basic-contact'
+  DONE ... 'gate-bravo/aggregate-account'
+UC301: Ingest data to feature set(s)
+  DONE ... 'gate-alfa/basic-party'
+  DONE ... 'gate-alfa/basic-contact'
+  DONE ... 'gate-alfa/basic-relation'
+  DONE ... 'gate-alfa/basic-account'
+  DONE ... 'gate-alfa/basic-transaction'
+  DONE ... 'gate-alfa/basic-event'
+  DONE ... 'gate-alfa/basic-communication'
+  DONE ... 'gate-bravo/basic-account'
+  DONE ... 'gate-bravo/basic-contact'
+UC401: Create feature vector(s)
+  DONE ... 'gate-alfa/vector-party'
+  DONE ... 'gate-alfa/vector-partycontact'
+  DONE ... 'gate-alfa/vector-partyaccount'
+  DONE ... 'gate-alfa/vector-partycontactaccount'
+  DONE ... 'gate-alfa/vector-accounttransaction'
+UC501: Get data from off-line feature vector(s)
+  DONE ... 'gate-alfa/vector-party': ... get 100 items
+  DONE ... 'gate-alfa/vector-partycontact': ... get 105 items
+  DONE ... 'gate-alfa/vector-partyaccount': ... get 28 items
+  DONE ... 'gate-alfa/vector-partycontactaccount': ... get 33 items
+  Error ... 'gate-alfa/vector-accounttransaction': MLRunRuntimeError: Failed to merge
+UC102: Delete project(s)
+  DONE ... 'gate-alfa'
+  DONE ... 'gate-bravo'
+# -----------------------
+# Host: HCI-L3204/172.20.112.1
+# RAM total/free: 15.2 GB/2.8 GB
 # CPU: 12
 # -----------------------
 # MLRun: 1.5.2 (https://docs.mlrun.org/en/latest/change-log/index.html)
