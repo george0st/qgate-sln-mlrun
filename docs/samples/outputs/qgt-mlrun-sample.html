@@ -82,6 +82,16 @@ td {
   text-align: right;
 }
 
+#img-check {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIhSURBVDhPTVJNaBNREP72ZZPdjdntZtNIPCgoSOnFige9FtSjQg+FVgU9ePGgNwXxpFAQKh4KIt4UWtoeBIu3WvAqxYOeWgQVTbEm1SabbNL9e2+dza5J5jEwb3a+7307MxISk85vnLmkKdqMklOFiCIIwXseUdxzOlwIBKHP6L7y/uKnt4SL+gST704vVawjs6ZuQmZymo6NoILAkYAfenAOHDSd5vL65ObV+CNLigDGJKHmVBh5HWZhBEW9CMuwUCS3RkowDQMlo4S8qkHOyCKFoU8QR0IiiXSEFNGdXmZURxq7cHAiN45b5XsYUyZQC7+moCECzgVC4UOOsuhyBy4/gMdd2Hwfo6yCKWMWBWZgL/gNHvYFDAh2xWeMZSdwp/wAp7LnUAuqaAZ/oQgNV4ybyEHBy/pzbLkfcUiUU9QQQR4VVP3vcKlR0+Y1nJUvoB02cV2/jTIpeLX3Ah+6G1AjgxoapqghgkJmFD+CbTzdfYgdZwfThRu4q8/jKDuO1foi1p1laEJPwNL/4Q0IojinQsdP7wse1+6j2qrimDiJtfprLNrzULkFn1ODaZyM9WDU6SEFcbtDEUAOVfzyvmHhzxye1Z5gqbUAJSjC931yl2o4mDSA9SMvcFm7Q0vSasKzI2zZm1jdf4S23UHLdtCwG2i0bTiddq82hcVTTmz8zeHLpG6GMiLOxqubiExMiv+RFpfWOEPhyvZUfQ0A/gHnZ/hPVPci4gAAAABJRU5ErkJggg==');
+}
+#img-error {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAI3SURBVDhPRVLfS1RBFP5m7p179+6uu1ZPEYSlWeybGbKkQeCCRW/1GASJ+BC+RNmLCeuT/SKQXnqL/oMCo7BMsXoxKCjLiCIoMQzCsm137517Zzozu+aBO8w935xvvvOdYWhG5eRAmR8sjjJXuDoKFRyngSWJBudgjDNoBZ0ksVqYKWdnF28Y2B76O3R6J2/f/zmZfxRASkqsA0EOcAShGlAJEFYpl7UlvPvwBoKgNz0xucQNgV79puG6LoQH8/EjJ+hwBpAhKYhhFPBCty22hC05H1rTYYLs0taRpdsYKr/A93TCHx6Bd+4SUN8AfryFGL4A//wYYQeAaoU4iERKYm4SaKUU3aSQykAtv0b84hlETxHe2E2I8bvwjpYQv3sD9WUZSKVtiVlMWAIqjm2f5pe7kFcGEU3fhyj2wSsdQzT3GHLijDGUcAfwfc5yeTJpk8BxOMnSSMhAchpeK3kQWAgkjpl9ZpfdWx/CkCbjuAa2BCy3LYAiVTER0A3i8m14/QOIns4genCPlPTCG58ikhZSIcHIVF2vkUGbCkyY4tofcrsLbtchRPOzkJMjkFeHED2chtO+D7yjQMaSiQ61kcSmZ1gZqFUl8q0M6TzUxyWEt65DvX8FbG8jeXsh70whXngC/fUTjXCHbVmvfd9SoNZWfuv1n3XLTErUy7lGv6ZNkmuM1R+I0OSM2XEc887CblO79ZT7ey7yvlKZpVLN52fW/9NqBGMMQuhk8fk1cfxU2T87qP4BUynZGRyUizgAAAAASUVORK5CYII=');
+}
+#img-info {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA6klEQVR4nJ2TPQ7CMAyFswAXYSoxDJyziAoE4gogByYWfi4BHISW0VaQU7VqaYLaWoqUIX55z/mi1E/B0QIYTrShp0b6uOX2vJyi1SpU47MdaeQNGGIwbH1LGyJteB3t7bDRDIbvocamEN9qIoC89R0syiuEvKpkJu4qIHFmBztRMrC21j1RFgqQXv9uD0bIXTwUGMr6CgBSKg7S0IEWAu9ghDYCLoJGXvZ3wLESPOVJus5BeqKTjRwLgmePQSYliYKlRr52YOAy39lB7T+IiOAZilPYlpsbzdUSPIUwmXDOCGVujxyXmSv1BSkyfPXWvaHkAAAAAElFTkSuQmCC');
+}
+
 </style>
 <script>
 
@@ -97,55 +107,64 @@ function myFunction(element) {
 </script>
 <body>
 	<h2>Quality report for MLRun</h2>
-	<p><b>2023-12-09 12:42:33</b>, QGate version: 0.0.4</p>
+	<p><b>2023-12-14 22:31:02</b>, QGate version: 0.0.4</p>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV3')"><img src="../assets/imgs/icons8-check-16-3.png"><img src="../assets/imgs/icons8-error-16-3.png">Report outputs ...</button>
+	<button type="button" class="collapsible" style="background-color: #FF006E;"  onclick="myFunction('myDIV3')">
+		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
+			<tr>
+				<td style="border: 0px; font-weight: bold;"><img id="img-check"">Report outputs ...</td>
+				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;"> 1 Error & 35 DONE </td>
+			</tr>
+		</table>
+	</button>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>
 			<tr><td colspan="2"><b>UC101: Create project(s)</b></td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-bravo</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo'</td></tr>
 			<tr><td colspan="2"><b>UC201: Create feature set(s)</b></td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-party create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-contact create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-relation create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-account create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-transaction create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-event create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-communication create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/aggregate-party create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/aggregate-account create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/aggregate-transaction create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-bravo/basic-contact create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-bravo/basic-account create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-bravo/aggregate-account create</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-party'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-contact'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-relation'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-account'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-transaction'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-event'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-communication'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/aggregate-party'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/aggregate-account'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/aggregate-transaction'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/basic-account'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/basic-contact'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/aggregate-account'</td></tr>
 			<tr><td colspan="2"><b>UC301: Ingest data to feature set(s)</b></td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-party</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-contact</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-relation</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-account</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-transaction</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-event</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/basic-communication</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-bravo/basic-account</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-bravo/basic-contact</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-party'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-contact'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-relation'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-account'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-transaction'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-event'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-communication'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/basic-account'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/basic-contact'</td></tr>
 			<tr><td colspan="2"><b>UC401: Create feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/vector-party</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partycontact</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partyaccount</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partycontactaccount</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-party'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontact'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partyaccount'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontactaccount'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-accounttransaction'</td></tr>
 			<tr><td colspan="2"><b>UC501: Get data from off-line feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/vector-party ... get 100 items</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partycontact ... get 105 items</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partyaccount ... get 28 items</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa/vector-partycontactaccount ... get 33 items</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-party': ... get 100 items</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontact': ... get 105 items</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partyaccount': ... get 28 items</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontactaccount': ... get 33 items</td></tr>
+				<tr><td>&nbsp;<img id="img-error">Error</td><td>'gate-alfa/vector-accounttransaction': MLRunRuntimeError: Failed to merge</td></tr>
 			<tr><td colspan="2"><b>UC102: Delete project(s)</b></td></tr>
-				<tr><td>&nbsp;&nbsp;gate-alfa</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
-				<tr><td>&nbsp;&nbsp;gate-bravo</td><td><img src="../assets/imgs/icons8-check-16-3.png">DONE</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo'</td></tr>
 		</table>
 	</div>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img src="../assets/imgs/icons8-info-16.png">&nbsp;Execution details ...</button>
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img id="img-info">&nbsp;Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b></br>
@@ -164,8 +183,8 @@ function myFunction(element) {
 		<p>
 			<b>Hardware information:</b></br>
 			&nbsp;&nbsp;<b>CPU:</b> 12 cores</br>
-			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/1.1 GB</br>
-			&nbsp;&nbsp;<b>Host:</b> HCI-L3204/172.25.224.1</br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/1.7 GB</br>
+			&nbsp;&nbsp;<b>Host:</b> HCI-L3204/172.20.112.1</br>
 		</p>
 	</div>
 
