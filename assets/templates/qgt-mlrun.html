@@ -102,7 +102,7 @@ function myFunction(element) {
 	<button type="button" class="collapsible" onclick="myFunction('myDIV3')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
-				{% if data.summary.state == 'DONE' %}<td style="border: 0px;"><img src="../assets/imgs/icons8-check-16-3.png">{% else %}<td style="border: 0px; color: red; font-weight: bold;"><img src="../assets/imgs/icons8-error-16-3.png">{% endif %}Report outputs ...</td>
+				{% if data.summary.state == 'DONE' %}<td style="border: 0px; font-weight: bold;"><img src="../assets/imgs/icons8-check-16-3.png">{% else %}<td style="border: 0px; color: red; font-weight: bold;"><img src="../assets/imgs/icons8-error-16-3.png">{% endif %}Report outputs ...</td>
 				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">{% if data.summary.state == 'DONE' %}{{ data.summary.count_testcases_done }} DONE {% else %} {{ data.summary.count_testcases_err }} Error & {{ data.summary.count_testcases_done }} DONE {% endif %}</td>
 			</tr>
 		</table>
