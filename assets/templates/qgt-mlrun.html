@@ -82,6 +82,16 @@ td {
   text-align: right;
 }
 
+#img-check {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIhSURBVDhPTVJNaBNREP72ZZPdjdntZtNIPCgoSOnFige9FtSjQg+FVgU9ePGgNwXxpFAQKh4KIt4UWtoeBIu3WvAqxYOeWgQVTbEm1SabbNL9e2+dza5J5jEwb3a+7307MxISk85vnLmkKdqMklOFiCIIwXseUdxzOlwIBKHP6L7y/uKnt4SL+gST704vVawjs6ZuQmZymo6NoILAkYAfenAOHDSd5vL65ObV+CNLigDGJKHmVBh5HWZhBEW9CMuwUCS3RkowDQMlo4S8qkHOyCKFoU8QR0IiiXSEFNGdXmZURxq7cHAiN45b5XsYUyZQC7+moCECzgVC4UOOsuhyBy4/gMdd2Hwfo6yCKWMWBWZgL/gNHvYFDAh2xWeMZSdwp/wAp7LnUAuqaAZ/oQgNV4ybyEHBy/pzbLkfcUiUU9QQQR4VVP3vcKlR0+Y1nJUvoB02cV2/jTIpeLX3Ah+6G1AjgxoapqghgkJmFD+CbTzdfYgdZwfThRu4q8/jKDuO1foi1p1laEJPwNL/4Q0IojinQsdP7wse1+6j2qrimDiJtfprLNrzULkFn1ODaZyM9WDU6SEFcbtDEUAOVfzyvmHhzxye1Z5gqbUAJSjC931yl2o4mDSA9SMvcFm7Q0vSasKzI2zZm1jdf4S23UHLdtCwG2i0bTiddq82hcVTTmz8zeHLpG6GMiLOxqubiExMiv+RFpfWOEPhyvZUfQ0A/gHnZ/hPVPci4gAAAABJRU5ErkJggg==');
+}
+#img-error {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHNSURBVDhPlVJNaxNRFD3zJjNpmkQUwU1WJX7USBZBKYUqCAlU8D+4EMlCAirWbmIWXalQiu7c+g9aaBGUGEHcGFAwmLgQCoIbRQIaYzozfdNz501CA248cHnv3Tn3vPvOXAsxBuWFe1xuMWYYWnL/gGKMGI8zzXfrkogEWHyMS4eRQxgCf/pA6ghgO0zxrPeBvSFzGZ6jkm/MFzPNdl8UBcKcQciLHRfq0lWS04C/B+wHvFdBFc6TIsUUjLq0ErIZC0hW4+9vqLnTSFZrcG+ustlfwPcOnOpdJO/U+W0eGA6EP3niWMAglYXufUDw9g2chUW49Q04jWdwL1cQfPoIvdvj3bOGG2NawOJRJeA/vA5vewvO4kW4lSvwWi/hr13jc+iFsmOywbSAQHxwj7KblDlrDUv26Vy0j02cYFpA3OYNzv2ncMvL8F69gLezyU6W4DaeUCTLLvyYbDAtICYWSkiULsB73YT/oAb/0Q14z7dh509BnSzQ2MjECcZzcIJLlzNwHAkH6kwRuvvevFl80QGs/DmEX7+YZ1jWT/LPcph+xB2E0teIH4DAh263DNHmr+YMiLHhZwqaYingNIYckEOOsIsVLrcZ/zHKwAFVIJOmG5nR+gAAAABJRU5ErkJggg==');
+}
+#img-info {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA6klEQVR4nJ2TPQ7CMAyFswAXYSoxDJyziAoE4gogByYWfi4BHISW0VaQU7VqaYLaWoqUIX55z/mi1E/B0QIYTrShp0b6uOX2vJyi1SpU47MdaeQNGGIwbH1LGyJteB3t7bDRDIbvocamEN9qIoC89R0syiuEvKpkJu4qIHFmBztRMrC21j1RFgqQXv9uD0bIXTwUGMr6CgBSKg7S0IEWAu9ghDYCLoJGXvZ3wLESPOVJus5BeqKTjRwLgmePQSYliYKlRr52YOAy39lB7T+IiOAZilPYlpsbzdUSPIUwmXDOCGVujxyXmSv1BSkyfPXWvaHkAAAAAElFTkSuQmCC');
+}
+
 </style>
 <script>
 
@@ -110,11 +120,11 @@ function myFunction(element) {
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for usecase in data.usecases %}
 			<tr><td colspan="2"><b>{{ usecase.name }}: {{ usecase.desc }}</b></td></tr>{% for testcase in usecase.testcases %}
-				<tr><td>&nbsp;{% if testcase.state == 'DONE' %}<img src="../assets/imgs/icons8-check-16-3.png">{% else %}<img src="../assets/imgs/icons8-error-16-3.png">{% endif %}{{ testcase.state }}</td><td>'{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}</td></tr>{% endfor %}{% endfor %}
+				<tr><td>&nbsp;{% if testcase.state == 'DONE' %}<img id="img-check">{% else %}<img id="img-error">{% endif %}{{ testcase.state }}</td><td>'{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}</td></tr>{% endfor %}{% endfor %}
 		</table>
 	</div>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img src="../assets/imgs/icons8-info-16.png">&nbsp;Execution details ...</button>
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img id="img-info">&nbsp;Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b></br>
