@@ -131,7 +131,7 @@ class Output():
                     count_testcases_done += 1
                 else:
                     if first_error=="":
-                        first_error=f"{testcase['name']}:{testcase['detail']}"
+                        first_error=f"FIRST ERROR<br><br>CASE: {usecase['name']}<br>TEST: {testcase['name']}<br><br>{testcase['detail']}"
             count_testcases+=len(usecase["testcases"])
 
         self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "Error"
