@@ -122,18 +122,23 @@ class Output():
         self._data["summary"]={}
         count_testcases=0
         count_testcases_done=0
+        first_error=""
 
         self._data["summary"]["count_usecases"]=len(self._data["usecases"])
         for usecase in self._data["usecases"]:
             for testcase in usecase["testcases"]:
                 if testcase['state']=="DONE":
                     count_testcases_done += 1
+                else:
+                    if first_error=="":
+                        first_error=f"{testcase['name']}:{testcase['detail']}"
             count_testcases+=len(usecase["testcases"])
 
         self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "Error"
         self._data["summary"]["count_testcases"]=count_testcases
         self._data["summary"]["count_testcases_done"]=count_testcases_done
         self._data["summary"]["count_testcases_err"]=count_testcases-count_testcases_done
+        self._data["summary"]["first_error"]=first_error
 
 
     def _system_info(self):
