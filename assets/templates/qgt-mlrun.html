@@ -109,7 +109,7 @@ function myFunction(element) {
 	<h2>Quality report for MLRun</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version: {{ data.version }}</p>
 
-	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #FF006E;" {% endif %} onclick="myFunction('myDIV3')">
+	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;" {% endif %} onclick="myFunction('myDIV3')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;">{% if data.summary.state == 'DONE' %}<img id="img-check">{% else %}<img id="img-error">{% endif %}Report outputs ...</td>
