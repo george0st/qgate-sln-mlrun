@@ -132,13 +132,13 @@ function myFunction(element) {
 </script>
 <body>
 	<h2>Quality report for MLRun</h2>
-	<p><b>2023-12-16 12:31:49</b>, QGate version: 0.0.4</p>
+	<p><b>2023-12-16 12:24:03</b>, QGate version: 0.0.4</p>
 
-	<button type="button" class="collapsible" style="background-color: green;" onclick="myFunction('myDIV3')">
+	<button type="button" class="collapsible" style="background-color: #E20074;"  onclick="myFunction('myDIV3')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
-				<td style="border: 0px; font-weight: bold;"><img id="img-check">Report outputs ...</td>
-				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">34x DONE </td>
+				<td style="border: 0px; font-weight: bold;"><img id="img-error">Report outputs ...</td>
+				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;"><div class="tooltip">1x Error<span class="tooltiptext">FIRST ERROR<br><br>CASE: UC501<br>TEST: gate-alfa/vector-accounttransaction<br><br>MLRunRuntimeError: Failed to merge</span></div> & 35x DONE </td>
 			</tr>
 		</table>
 	</button>
@@ -176,11 +176,13 @@ function myFunction(element) {
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontact'</td></tr>
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partyaccount'</td></tr>
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontactaccount'</td></tr>
+				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-accounttransaction'</td></tr>
 			<tr><td colspan="2"><b>UC501: Get data from off-line feature vector(s)</b></td></tr>
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-party': ... get 100 items</td></tr>
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontact': ... get 105 items</td></tr>
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partyaccount': ... get 28 items</td></tr>
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontactaccount': ... get 33 items</td></tr>
+				<tr><td>&nbsp;<img id="img-error">Error</td><td>'gate-alfa/vector-accounttransaction': MLRunRuntimeError: Failed to merge</td></tr>
 			<tr><td colspan="2"><b>UC102: Delete project(s)</b></td></tr>
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa'</td></tr>
 				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo'</td></tr>

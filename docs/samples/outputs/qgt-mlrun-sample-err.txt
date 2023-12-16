@@ -1,7 +1,7 @@
 # QGate version: 0.0.4
-# 2023-12-16 12:31:49
+# 2023-12-16 12:24:03
 # -----------------------
-Summary, test cases: 34/0 [DONE/Error]
+Summary, test cases: 35/1 [DONE/Error]
 # -----------------------
 UC101: Create project(s)
   DONE ... 'gate-alfa'
@@ -35,11 +35,13 @@ UC401: Create feature vector(s)
   DONE ... 'gate-alfa/vector-partycontact'
   DONE ... 'gate-alfa/vector-partyaccount'
   DONE ... 'gate-alfa/vector-partycontactaccount'
+  DONE ... 'gate-alfa/vector-accounttransaction'
 UC501: Get data from off-line feature vector(s)
   DONE ... 'gate-alfa/vector-party': ... get 100 items
   DONE ... 'gate-alfa/vector-partycontact': ... get 105 items
   DONE ... 'gate-alfa/vector-partyaccount': ... get 28 items
   DONE ... 'gate-alfa/vector-partycontactaccount': ... get 33 items
+  Error ... 'gate-alfa/vector-accounttransaction': MLRunRuntimeError: Failed to merge
 UC102: Delete project(s)
   DONE ... 'gate-alfa'
   DONE ... 'gate-bravo'
