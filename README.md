@@ -11,6 +11,12 @@ The tests use these key components:
  - Sample meta-data model, see **[GIT qgate-model](https://github.com/george0st/qgate-model)**
  - This project
 
+## Outputs
+
+Sample of outputs:
+ - ![Tests without error](./assets/imgs/qgt-mlrun-sample.png)
+ - ![Tests with error(s)](./assets/imgs/qgt-mlrun-sample-err.png)
+
 ## Usage
 You can easy use this solution in three steps:
 1. Download content of these two GIT repositories to your local environment
