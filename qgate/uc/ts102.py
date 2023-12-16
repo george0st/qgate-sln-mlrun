@@ -1,13 +1,13 @@
 """
-  UC102: Delete project(s)
+  TS102: Delete project(s)
 """
 
-from qgate.uc.ucbase import UCBase
+from qgate.uc.tsbase import TSBase
 from qgate.solution import Solution
 from qgate.output import Output
 
 
-class UC102(UCBase):
+class TS102(TSBase):
 
     def __init__(self, sln: Solution, output: Output):
         super().__init__(sln, output, self.__class__.__name__)

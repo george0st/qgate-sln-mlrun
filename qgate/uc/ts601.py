@@ -1,13 +1,13 @@
 """
-  UC601: Serving score from CART
+  TS601: Serving score from CART
 """
 
-from qgate.uc.ucbase import UCBase
+from qgate.uc.tsbase import TSBase
 from qgate.solution import Solution
 from qgate.output import Output
 
 
-class UC601(UCBase):
+class TS601(TSBase):
 
     def __init__(self, sln: Solution, output: Output):
         super().__init__(sln, output, self.__class__.__name__)

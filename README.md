@@ -29,23 +29,23 @@ You can easy use this solution in three steps:
 Precondition: You have available MLRun or Iguazio solution (MLRun is part of that), see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 
 ## Use cases
-Quality Gate covers these use cases:
+Quality Gate covers these test scenarios:
  - **Project**
-   - ✅ UC101: Create project(s)
-   - ✅ UC102: Delete project(s)
+   - ✅ TS101: Create project(s)
+   - ✅ TS102: Delete project(s)
  - **Feature set**
-   - ✅ UC201: Create feature set(s)
+   - ✅ TS201: Create feature set(s)
  - **Ingest data**
-   - ✅ UC301: Ingest data to feature set(s)
+   - ✅ TS301: Ingest data to feature set(s)
  - **Feature vector**
-   - ✅ UC401: Create feature vector(s)
+   - ✅ TS401: Create feature vector(s)
  - **Get data**
-   - ✅ UC501: Get data from off-line feature vector(s)
-   - ❌ UC502: Get data from on-line feature vector(s)
+   - ✅ TS501: Get data from off-line feature vector(s)
+   - ❌ TS502: Get data from on-line feature vector(s)
  - **Serving ML score**
-   - ❌ UC601: Serving score from CART
-   - ❌ UC602: Serving score from XGBoost
-   - ❌ UC603: Serving score from DNN
+   - ❌ TS601: Serving score from CART
+   - ❌ TS602: Serving score from XGBoost
+   - ❌ TS603: Serving score from DNN
 
 
 ## Tested with

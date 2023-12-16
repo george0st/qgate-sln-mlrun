@@ -1,13 +1,13 @@
 """
-  UC101: Create project(s)
+  TS101: Create project(s)
 """
 
-from qgate.uc.ucbase import UCBase
+from qgate.uc.tsbase import TSBase
 from qgate.output import Output
 from qgate.solution import Solution
 
 
-class UC101(UCBase):
+class TS101(TSBase):
 
     def __init__(self, sln: Solution, output: Output):
         super().__init__(sln, output, self.__class__.__name__)
