@@ -13,7 +13,7 @@ The tests use these key components:
 
 ## Sample of outputs
 
-![Output of outputs](./assets/imgs/qgt-mlrun-samples.png)
+![Sample of outputs](./assets/imgs/qgt-mlrun-samples.png)
 
 
 ## Usage
