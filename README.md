@@ -11,11 +11,10 @@ The tests use these key components:
  - Sample meta-data model, see **[GIT qgate-model](https://github.com/george0st/qgate-model)**
  - This project
 
-## Outputs
+## Sample of outputs
 
-Sample of outputs:
- - ![Output of tests](./assets/imgs/qgt-mlrun-sample.png)
- - ![Output of tests with Error(s)](./assets/imgs/qgt-mlrun-sample-err.png)
+![Output of outputs](./assets/imgs/qgt-mlrun-samples.png)
+
 
 ## Usage
 You can easy use this solution in three steps:
