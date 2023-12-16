@@ -2,20 +2,19 @@
 Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
 - independent quality test (function, integration, acceptance, ... tests)
 - deeper quality checks before full rollout/use in company environments
-- identification of compatibility issues (if any)
+- identification of possible compatibility issues (if any)
 - external and independent test coverage
 - etc.
 
-The tests use these key components:
- - MLRun solution (used in Iguazio solution also), see **[GIT mlrun](https://github.com/mlrun/mlrun)**
- - Sample meta-data model, see **[GIT qgate-model](https://github.com/george0st/qgate-model)**
- - This project
+The tests use these key components, MLRun solution see **[GIT mlrun](https://github.com/mlrun/mlrun)**, 
+sample meta-data model see **[GIT qgate-model](https://github.com/george0st/qgate-model)** and this project.
 
 ## Sample of outputs
 
 ![Sample of outputs](./assets/imgs/qgt-mlrun-samples.png)
 
 ## Usage
+
 You can easy use this solution in three steps:
 1. Download content of these two GIT repositories to your local environment
     - [qgate-sln-mlrun](https://github.com/george0st/qgate-sln-mlrun)
