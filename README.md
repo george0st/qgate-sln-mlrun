@@ -14,8 +14,8 @@ The tests use these key components:
 ## Outputs
 
 Sample of outputs:
- - ![Tests without error](./assets/imgs/qgt-mlrun-sample.png)
- - ![Tests with error(s)](./assets/imgs/qgt-mlrun-sample-err.png)
+ - ![Output of tests](./assets/imgs/qgt-mlrun-sample.png)
+ - ![Output of tests with Error(s)](./assets/imgs/qgt-mlrun-sample-err.png)
 
 ## Usage
 You can easy use this solution in three steps:
