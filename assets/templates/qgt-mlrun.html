@@ -134,11 +134,11 @@ function myFunction(element) {
 	<h2>Quality report for MLRun</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version: {{ data.version }}</p>
 
-	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;" {% endif %} onclick="myFunction('myDIV3')">
+	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;">{% if data.summary.state == 'DONE' %}<img id="img-check">{% else %}<img id="img-error">{% endif %}Report outputs ...</td>
-				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">{% if data.summary.state == 'DONE' %}{{ data.summary.count_testcases_done }}x DONE {% else %}<div class="tooltip">{{ data.summary.count_testcases_err }}x Error<span class="tooltiptext">{{ data.summary.first_error }}</span></div> & {{ data.summary.count_testcases_done }}x DONE {% endif %}</td>
+				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">{% if data.summary.state == 'DONE' %}{{ data.summary.count_testcases_done }}x DONE {% else %}<div class="tooltip">{{ data.summary.count_testcases_err }}x Error<span class="tooltiptext">{{ data.summary.first_errors }}</span></div> & {{ data.summary.count_testcases_done }}x DONE {% endif %}</td>
 			</tr>
 		</table>
 	</button>

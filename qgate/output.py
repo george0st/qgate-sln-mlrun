@@ -122,7 +122,7 @@ class Output():
         self._data["summary"]={}
         count_testcases=0
         count_testcases_done=0
-        first_error=""
+        first_errors= ""
         error_count=0
 
         self._data["summary"]["count_usecases"]=len(self._data["usecases"])
@@ -133,16 +133,16 @@ class Output():
                 else:
                     if error_count < 3:
                         error_count+=1
-                        if first_error != "":
-                            first_error=first_error+"<br><br>"
-                        first_error=first_error + f"#{error_count} CASE: {usecase['name']}<br>TEST: {testcase['name']}<br>{testcase['detail']}"
+                        if first_errors != "":
+                            first_errors= first_errors + "<br><br>"
+                        first_errors= first_errors + f"#{error_count} CASE: {usecase['name']}<br>TEST: {testcase['name']}<br>{testcase['detail']}"
             count_testcases+=len(usecase["testcases"])
 
         self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "Error"
         self._data["summary"]["count_testcases"]=count_testcases
         self._data["summary"]["count_testcases_done"]=count_testcases_done
         self._data["summary"]["count_testcases_err"]=count_testcases-count_testcases_done
-        self._data["summary"]["first_error"]=first_error
+        self._data["summary"]["first_errors"]=first_errors
 
 
     def _system_info(self):
