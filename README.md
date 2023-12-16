@@ -15,7 +15,6 @@ The tests use these key components:
 
 ![Sample of outputs](./assets/imgs/qgt-mlrun-samples.png)
 
-
 ## Usage
 You can easy use this solution in three steps:
 1. Download content of these two GIT repositories to your local environment
