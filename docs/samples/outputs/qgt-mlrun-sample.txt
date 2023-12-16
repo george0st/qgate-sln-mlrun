@@ -1,5 +1,5 @@
 # QGate version: 0.0.4
-# 2023-12-15 09:47:32
+# 2023-12-16 12:24:03
 # -----------------------
 Summary, test cases: 35/1 [DONE/Error]
 # -----------------------
@@ -46,8 +46,8 @@ UC102: Delete project(s)
   DONE ... 'gate-alfa'
   DONE ... 'gate-bravo'
 # -----------------------
-# Host: HCI-L3204/172.20.112.1
-# RAM total/free: 15.2 GB/2.4 GB
+# Host: HCI-L3204/192.168.96.1
+# RAM total/free: 15.2 GB/1.9 GB
 # CPU: 12
 # -----------------------
 # MLRun: 1.5.2 (https://docs.mlrun.org/en/latest/change-log/index.html)
