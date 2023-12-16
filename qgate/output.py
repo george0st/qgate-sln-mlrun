@@ -36,16 +36,16 @@ class Output():
         self._templates=templates
         self._system_info()
 
-    def usecase_new(self, uc_name, uc_description):
-        new_uc = {}
-        new_uc['name'] = uc_name
-        new_uc['desc'] = uc_description
-        new_uc['testcases']=[]
-        if self._data.get("usecases"):
-            self._data["usecases"].append(new_uc)
+    def testscenario_new(self, ts_name, ts_description):
+        new_ts = {}
+        new_ts['name'] = ts_name
+        new_ts['desc'] = ts_description
+        new_ts['testcases']=[]
+        if self._data.get("testscenarios"):
+            self._data["testscenarios"].append(new_ts)
         else:
-            self._data["usecases"]=[]
-            self._data["usecases"].append(new_uc)
+            self._data["testscenarios"]=[]
+            self._data["testscenarios"].append(new_ts)
 
     def testcase_new(self, name):
         testcase={}
@@ -53,25 +53,24 @@ class Output():
         testcase['detail']=None
         testcase['state']=None
 
-        uc=self._data["usecases"][-1]
-        uc['testcases'].append(testcase)
+        ts=self._data["testscenarios"][-1]
+        ts['testcases'].append(testcase)
 
     def testcase_detail(self, detail):
-
-        uc=self._data["usecases"][-1]
-        if len(uc['testcases'])==0:
+        ts=self._data["testscenarios"][-1]
+        if len(ts['testcases'])==0:
             self.testcase_new("GLOBAL")
-        testcase = uc['testcases'][-1]
+        testcase = ts['testcases'][-1]
         testcase['detail']=detail
 
     def testcase_detailext(self, detail):
-        uc = self._data["usecases"][-1]
-        testcase = uc['testcases'][-1]
+        ts = self._data["testscenarios"][-1]
+        testcase = ts['testcases'][-1]
         testcase['detail'] = f"{testcase['detail']} {detail}"
 
     def testcase_state(self, state="DONE"):
-        uc=self._data["usecases"][-1]
-        testcase=uc['testcases'][-1]
+        ts=self._data["testscenarios"][-1]
+        testcase=ts['testcases'][-1]
         testcase['state']=state
 
     def render(self):
@@ -125,9 +124,9 @@ class Output():
         first_errors= ""
         error_count=0
 
-        self._data["summary"]["count_usecases"]=len(self._data["usecases"])
-        for usecase in self._data["usecases"]:
-            for testcase in usecase["testcases"]:
+        self._data["summary"]["count_testscenarios"]=len(self._data["testscenarios"])
+        for testscenario in self._data["testscenarios"]:
+            for testcase in testscenario["testcases"]:
                 if testcase['state']=="DONE":
                     count_testcases_done += 1
                 else:
@@ -135,8 +134,8 @@ class Output():
                         error_count+=1
                         if first_errors != "":
                             first_errors= first_errors + "<br><br>"
-                        first_errors= first_errors + f"#{error_count} CASE: {usecase['name']}<br>TEST: {testcase['name']}<br>{testcase['detail']}"
-            count_testcases+=len(usecase["testcases"])
+                        first_errors= first_errors + f"#{error_count} SCENARIO: {testscenario['name']}<br>TEST: {testcase['name']}<br>{testcase['detail']}"
+            count_testcases+=len(testscenario["testcases"])
 
         self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "Error"
         self._data["summary"]["count_testcases"]=count_testcases

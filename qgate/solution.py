@@ -9,8 +9,8 @@ import os
 import pandas as pd
 import shutil
 from qgate.setup import Setup
-from qgate.uc.ucbase import UCBase
-from qgate.uc import ucbase
+from qgate.uc.tsbase import TSBase
+from qgate.uc import tsbase
 
 class Solution:
     """Create solution"""
@@ -28,17 +28,17 @@ class Solution:
 
     def handler_testcase(func):
         """Error handler for test case, mandatory arguments 'uc' and 'name'"""
-        def wrapper(self, uc: UCBase, testcase_name: str, *args, **kwargs):
+        def wrapper(self, ts: TSBase, testcase_name: str, *args, **kwargs):
 
             try:
-                uc.testcase_new(testcase_name)
-                ret=func(self, uc, testcase_name, *args, **kwargs)
-                uc.testcase_state()
+                ts.testcase_new(testcase_name)
+                ret=func(self, ts, testcase_name, *args, **kwargs)
+                ts.testcase_state()
                 return ret
             except Exception as ex:
-                uc.state = ucbase.UCState.Error
-                uc.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
-                uc.testcase_state("Error")
+                ts.state = tsbase.TSState.Error
+                ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
+                ts.testcase_state("Error")
                 return False
         return wrapper
 
@@ -93,12 +93,12 @@ class Solution:
 # endregion
 
 # region CREATE PROJECT
-    def create_projects(self, uc: UCBase):
+    def create_projects(self, ts: TSBase):
         """ Create projects based on json definition
 
-        :param uc:      Use case
+        :param ts:      Test scenario
         """
-        uc.usecase_new()
+        ts.testscenario_new()
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with (open(file, "r") as json_file):
@@ -106,11 +106,11 @@ class Solution:
                 name, desc, lbls, kind=self._get_json_header(json_content)
 
                 self._projects.append(name)
-                if self._create_project(uc, name, desc, lbls, kind):
+                if self._create_project(ts, name, desc, lbls, kind):
                     self._project_specs[name] = json_content['spec']
 
     @handler_testcase
-    def _create_project(self, uc: UCBase, name, desc, lbls, kind):
+    def _create_project(self, ts: TSBase, name, desc, lbls, kind):
         """Create project"""
 
         prj = mlrun.get_or_create_project(name, context="./", user_project=False)
@@ -122,14 +122,14 @@ class Solution:
 # endregion
 
 # region DELETE PROJECT
-    def delete_projects(self, uc: UCBase):
+    def delete_projects(self, ts: TSBase):
         """Delete projects
 
-        :param uc:      Use case
+        :param ts:      Test scenario
         """
-        uc.usecase_new()
+        ts.testscenario_new()
         for project_name in self._projects:
-            self._delete_project(uc, project_name)
+            self._delete_project(ts, project_name)
 
         # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
@@ -138,7 +138,7 @@ class Solution:
                 shutil.rmtree(file, True)
 
     @handler_testcase
-    def _delete_project(self, uc, name):
+    def _delete_project(self, ts, name):
         """Delete project"""
         mlrun.get_run_db().delete_project(name, "cascade")
 
@@ -149,12 +149,12 @@ class Solution:
 # endregion
 
 # region CREATE FEATURE SET
-    def create_featuresets(self, uc: UCBase):
+    def create_featuresets(self, ts: TSBase):
         """ Get or create featuresets
 
-        :param uc:      Use case
+        :param ts:      Test scenario
         """
-        uc.usecase_new()
+        ts.testscenario_new()
         for project_name in self._projects:
             for featureset_name in self._get_featuresets(self._project_specs.get(project_name)):
                 # create file with definition of vector
@@ -167,10 +167,10 @@ class Solution:
                 for file in glob.glob(source_file):
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
-                        self._create_featureset(uc, f'{project_name}/{featureset_name}', project_name, json_file)
+                        self._create_featureset(ts, f'{project_name}/{featureset_name}', project_name, json_file)
 
     @handler_testcase
-    def _create_featureset(self, uc: UCBase, testcase_name, project_name, json_file):
+    def _create_featureset(self, ts: TSBase, testcase_name, project_name, json_file):
         json_content = json.load(json_file)
         name, desc, lbls, kind = self._get_json_header(json_content)
 
@@ -241,10 +241,10 @@ class Solution:
 # endregion
 
 # region CREATE FEATURE VECTOR
-    def create_featurevector(self, uc: UCBase):
+    def create_featurevector(self, ts: TSBase):
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
 
-        uc.usecase_new()
+        ts.testscenario_new()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
                 # create file with definition of vector
@@ -258,10 +258,10 @@ class Solution:
                 for file in glob.glob(source_file):
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
-                        self._create_featurevector(uc, f"{project_name}/{featurevector_name}", project_name, json_file)
+                        self._create_featurevector(ts, f"{project_name}/{featurevector_name}", project_name, json_file)
 
     @handler_testcase
-    def _create_featurevector(self, uc: UCBase, testcase_name, project_name, json_file):
+    def _create_featurevector(self, ts: TSBase, testcase_name, project_name, json_file):
         json_content = json.load(json_file)
         name, desc, lbls, kind = self._get_json_header(json_content)
 
@@ -286,12 +286,12 @@ class Solution:
 # endregion
 
 # region INGEST DATA
-    def ingest_data(self, uc: UCBase):
+    def ingest_data(self, ts: TSBase):
         """Data ingest
 
-        :param uc:  Use case
+        :param ts:  Test scenario
         """
-        uc.usecase_new()
+        ts.testscenario_new()
         for project_name in self._projects:
             for featureset_name in self._get_featuresets(self._project_specs.get(project_name)):
                 # create possible file for load
@@ -303,11 +303,11 @@ class Solution:
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    self._ingest_data(uc, f"{project_name}/{featureset_name}", project_name, featureset_name, file )
+                    self._ingest_data(ts, f"{project_name}/{featureset_name}", project_name, featureset_name, file)
 
     @handler_testcase
-    def _ingest_data(self, uc: UCBase, testcase_name, project_name, featureset_name, file):
-        # get existing feature set (feature set have to be created in previous use case)
+    def _ingest_data(self, ts: TSBase, testcase_name, project_name, featureset_name, file):
+        # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # ingest data with bundl/chunk
@@ -327,18 +327,18 @@ class Solution:
 # endregion
 
 # region GET DATA
-    def get_data_offline(self, uc: UCBase):
+    def get_data_offline(self, ts: TSBase):
         """
         Get data from off-line feature vector
         """
-        uc.usecase_new()
+        ts.testscenario_new()
         for project_name in self._projects:
             for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
-                self._get_data_offline(uc, f"{project_name}/{featurevector_name}", project_name, featurevector_name)
+                self._get_data_offline(ts, f"{project_name}/{featurevector_name}", project_name, featurevector_name)
 
 
     @handler_testcase
-    def _get_data_offline(self, uc: UCBase, testcase_name, project_name, featurevector_name):
+    def _get_data_offline(self, ts: TSBase, testcase_name, project_name, featurevector_name):
         if mlrun.get_current_project().name != project_name:
             mlrun.load_project(name=project_name, context="./", user_project=False)
 
@@ -346,13 +346,13 @@ class Solution:
 
         resp = fstore.get_offline_features(vector)
         frm = resp.to_dataframe()
-        uc.testcase_detail(f"... get {len(frm.index)} items")
+        ts.testcase_detail(f"... get {len(frm.index)} items")
 
     # endregion
 
 
 # region SERVE DATA
-    def serving_score(self, uc: UCBase):
+    def serving_score(self, ts: TSBase):
         """
         Serve score
         """

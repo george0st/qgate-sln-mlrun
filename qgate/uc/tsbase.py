@@ -4,21 +4,21 @@ from qgate.output import Output
 from enum import Enum
 
 
-class UCState(Enum):
+class TSState(Enum):
     NoExecution = 1
     OK = 2
     Error = 3
 
-class UCBase:
+class TSBase:
     """
-    Base class for all use cases
+    Base class for all test scenarios
     """
 
     def __init__(self, sln, output: Output, name: str):
         self._sln=sln
         self._output=output
         self._name=name
-        self._state = UCState.NoExecution
+        self._state = TSState.NoExecution
 
     @property
     def sln(self):
@@ -51,8 +51,8 @@ class UCBase:
     def exec(self):
         raise NotImplemented()
 
-    def usecase_new(self):
-        self.output.usecase_new(self.name, self.desc)
+    def testscenario_new(self):
+        self.output.testscenario_new(self.name, self.desc)
 
     def testcase_new(self, name):
         self.output.testcase_new(name)

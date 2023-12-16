@@ -1,6 +1,6 @@
 from qgate.solution import Solution
-from qgate.uc import uc101, uc102, uc201, uc301, uc401, uc501, uc601
-from qgate.uc import ucbase
+from qgate.uc import ts101, ts102, ts201, ts301, ts401, ts501, ts601
+from qgate.uc import tsbase
 from qgate import output, setup
 import sys
 
@@ -13,8 +13,8 @@ if __name__ == '__main__':
                                    './assets/templates/qgt-mlrun.html'])
     sln = Solution(setup)
 
-    usecase_fns = [uc101.UC101, uc201.UC201, uc301.UC301, uc401.UC401, uc501.UC501]
-    usecase_test = uc601.UC601
+    usecase_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]
+    usecase_test = ts601.TS601
     NoDelete=False
 
     # support parametr 'NoDelete' and 'Test' for switch-off the UC102: Delete project(s)
@@ -26,16 +26,16 @@ if __name__ == '__main__':
             elif arg=="test":
                 usecase_fns.append(usecase_test)
     if not NoDelete:
-        usecase_fns.append(uc102.UC102)
+        usecase_fns.append(ts102.TS102)
 
     for usecase_fn in usecase_fns:
         if usecase_fn:
             uc = usecase_fn(sln, output)
         try:
             uc.exec()
-            uc.state = ucbase.UCState.OK
+            uc.state = tsbase.TSState.OK
         except Exception as ex:
-            uc.state = ucbase.UCState.Error
+            uc.state = tsbase.TSState.Error
             uc.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
             uc.testcase_state("Error")
     output.render()

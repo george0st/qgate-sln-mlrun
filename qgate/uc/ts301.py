@@ -1,13 +1,13 @@
 """
-  UC301: Ingest data to feature set(s)
+  TS301: Ingest data to feature set(s)
 """
 
-from qgate.uc.ucbase import UCBase
+from qgate.uc.tsbase import TSBase
 from qgate.solution import Solution
 from qgate.output import Output
 
 
-class UC301(UCBase):
+class TS301(TSBase):
 
     def __init__(self, sln: Solution, output: Output):
         super().__init__(sln, output, self.__class__.__name__)
