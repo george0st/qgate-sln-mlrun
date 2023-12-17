@@ -49,7 +49,7 @@ Quality Gate covers these test scenarios:
 
 
 ## Tested with
-The project was test with these versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
+The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - **MLRun** (in Desktop Docker)
    - MLRun 1.5.2, 1.5.1, 1.5.0
    - MLRun 1.4.1

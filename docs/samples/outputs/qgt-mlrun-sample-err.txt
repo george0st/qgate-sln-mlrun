@@ -1,12 +1,12 @@
 # QGate version: 0.0.4
-# 2023-12-16 12:24:03
+# 2023-12-16 22:09:59
 # -----------------------
-Summary, test cases: 35/1 [DONE/Error]
+Summary, test scenarios: 35/1 [DONE/Error]
 # -----------------------
-UC101: Create project(s)
+TS101: Create project(s)
   DONE ... 'gate-alfa'
   DONE ... 'gate-bravo'
-UC201: Create feature set(s)
+TS201: Create feature set(s)
   DONE ... 'gate-alfa/basic-party'
   DONE ... 'gate-alfa/basic-contact'
   DONE ... 'gate-alfa/basic-relation'
@@ -20,7 +20,7 @@ UC201: Create feature set(s)
   DONE ... 'gate-bravo/basic-account'
   DONE ... 'gate-bravo/basic-contact'
   DONE ... 'gate-bravo/aggregate-account'
-UC301: Ingest data to feature set(s)
+TS301: Ingest data to feature set(s)
   DONE ... 'gate-alfa/basic-party'
   DONE ... 'gate-alfa/basic-contact'
   DONE ... 'gate-alfa/basic-relation'
@@ -30,24 +30,24 @@ UC301: Ingest data to feature set(s)
   DONE ... 'gate-alfa/basic-communication'
   DONE ... 'gate-bravo/basic-account'
   DONE ... 'gate-bravo/basic-contact'
-UC401: Create feature vector(s)
+TS401: Create feature vector(s)
   DONE ... 'gate-alfa/vector-party'
   DONE ... 'gate-alfa/vector-partycontact'
   DONE ... 'gate-alfa/vector-partyaccount'
   DONE ... 'gate-alfa/vector-partycontactaccount'
   DONE ... 'gate-alfa/vector-accounttransaction'
-UC501: Get data from off-line feature vector(s)
+TS501: Get data from off-line feature vector(s)
   DONE ... 'gate-alfa/vector-party': ... get 100 items
   DONE ... 'gate-alfa/vector-partycontact': ... get 105 items
   DONE ... 'gate-alfa/vector-partyaccount': ... get 28 items
   DONE ... 'gate-alfa/vector-partycontactaccount': ... get 33 items
   Error ... 'gate-alfa/vector-accounttransaction': MLRunRuntimeError: Failed to merge
-UC102: Delete project(s)
+TS102: Delete project(s)
   DONE ... 'gate-alfa'
   DONE ... 'gate-bravo'
 # -----------------------
 # Host: HCI-L3204/192.168.96.1
-# RAM total/free: 15.2 GB/1.9 GB
+# RAM total/free: 15.2 GB/2.9 GB
 # CPU: 12
 # -----------------------
 # MLRun: 1.5.2 (https://docs.mlrun.org/en/latest/change-log/index.html)
