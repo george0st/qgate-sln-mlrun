@@ -9,26 +9,7 @@ Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
 The tests use these key components, MLRun solution see **[GIT mlrun](https://github.com/mlrun/mlrun)**, 
 sample meta-data model see **[GIT qgate-model](https://github.com/george0st/qgate-model)** and this project.
 
-## Sample of outputs
-
-![Sample of outputs](./assets/imgs/qgt-mlrun-samples.png)
-
-## Usage
-
-You can easy use this solution in three steps:
-1. Download content of these two GIT repositories to your local environment
-    - [qgate-sln-mlrun](https://github.com/george0st/qgate-sln-mlrun)
-    - [qgate-model](https://github.com/george0st/qgate-model)
-2. Update file `qgate-sln-mlrun.env` from qgate-model
-   - Update variables for MLRun/Iguazio, see `MLRUN_DBPATH`, `V3IO_USERNAME`, `V3IO_ACCESS_KEY`, `V3IO_API`
-     - setting of `V3IO_*` is needed only in case of Iguazio installation (not for pure free MLRun)
-   - Update variables for QGate, see `QGATE_*`
-3. Run from `qgate-sln-mlrun`
-   - **python main.py**
-
-Precondition: You have available MLRun or Iguazio solution (MLRun is part of that), see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
-
-## Use cases
+## Test scenarios
 Quality Gate covers these test scenarios:
  - **Project**
    - ✅ TS101: Create project(s)
@@ -47,6 +28,24 @@ Quality Gate covers these test scenarios:
    - ❌ TS602: Serving score from XGBoost
    - ❌ TS603: Serving score from DNN
 
+## Sample of outputs
+
+![Sample of outputs](./assets/imgs/qgt-mlrun-samples.png)
+
+## Usage
+
+You can easy use this solution in three steps:
+1. Download content of these two GIT repositories to your local environment
+    - [qgate-sln-mlrun](https://github.com/george0st/qgate-sln-mlrun)
+    - [qgate-model](https://github.com/george0st/qgate-model)
+2. Update file `qgate-sln-mlrun.env` from qgate-model
+   - Update variables for MLRun/Iguazio, see `MLRUN_DBPATH`, `V3IO_USERNAME`, `V3IO_ACCESS_KEY`, `V3IO_API`
+     - setting of `V3IO_*` is needed only in case of Iguazio installation (not for pure free MLRun)
+   - Update variables for QGate, see `QGATE_*`
+3. Run from `qgate-sln-mlrun`
+   - **python main.py**
+
+Precondition: You have available MLRun or Iguazio solution (MLRun is part of that), see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 
 ## Tested with
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):

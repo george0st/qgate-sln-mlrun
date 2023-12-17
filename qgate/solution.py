@@ -24,8 +24,6 @@ class Solution:
         self._projects=[]
         self._project_specs={}
 
-        # TODO: add region
-
     def handler_testcase(func):
         """Error handler for test case, mandatory arguments 'uc' and 'name'"""
         def wrapper(self, ts: TSBase, testcase_name: str, *args, **kwargs):
