@@ -1,25 +1,26 @@
 """
-  TS301: Ingest data to feature set(s)
+  TS102: Delete project(s)
 """
 
-from qgate.uc.tsbase import TSBase
+from qgate.ts.tsbase import TSBase
 from qgate.solution import Solution
 from qgate.output import Output
 
 
-class TS301(TSBase):
+class TS102(TSBase):
 
     def __init__(self, sln: Solution, output: Output):
         super().__init__(sln, output, self.__class__.__name__)
 
+
     @property
     def desc(self) -> str:
-        return "Ingest data to feature set(s)"
+        return "Delete project(s)"
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set from data source to targets based on feature set definition"
+        return "Delete project include all contents and targets (such as Parquet files, etc.)"
 
     def exec(self):
-        self.sln.ingest_data(self)
+        self.sln.delete_projects(self)
 

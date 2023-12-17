@@ -9,8 +9,8 @@ import os
 import pandas as pd
 import shutil
 from qgate.setup import Setup
-from qgate.uc.tsbase import TSBase
-from qgate.uc import tsbase
+from qgate.ts.tsbase import TSBase
+from qgate.ts import tsbase
 
 class Solution:
     """Create solution"""
@@ -25,7 +25,7 @@ class Solution:
         self._project_specs={}
 
     def handler_testcase(func):
-        """Error handler for test case, mandatory arguments 'uc' and 'name'"""
+        """Error handler for test case, mandatory arguments 'ts' and 'name'"""
         def wrapper(self, ts: TSBase, testcase_name: str, *args, **kwargs):
 
             try:

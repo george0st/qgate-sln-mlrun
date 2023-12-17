@@ -2,7 +2,7 @@
   TS601: Serving score from CART
 """
 
-from qgate.uc.tsbase import TSBase
+from qgate.ts.tsbase import TSBase
 from qgate.solution import Solution
 from qgate.output import Output
 
