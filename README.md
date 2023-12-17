@@ -10,7 +10,7 @@ The tests use these key components, MLRun solution see **[GIT mlrun](https://git
 sample meta-data model see **[GIT qgate-model](https://github.com/george0st/qgate-model)** and this project.
 
 ## Test scenarios
-Quality Gate covers these test scenarios:
+Quality Gate covers these test scenarios (✅ done, ❌ planned):
  - **Project**
    - ✅ TS101: Create project(s)
    - ✅ TS102: Delete project(s)
