@@ -9,6 +9,25 @@ Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
 The tests use these key components, MLRun solution see **[GIT mlrun](https://github.com/mlrun/mlrun)**, 
 sample meta-data model see **[GIT qgate-model](https://github.com/george0st/qgate-model)** and this project.
 
+## Test scenarios
+Quality Gate covers these test scenarios (✅ done, ❌ planned):
+ - **Project**
+   - ✅ TS101: Create project(s)
+   - ✅ TS102: Delete project(s)
+ - **Feature set**
+   - ✅ TS201: Create feature set(s)
+ - **Ingest data**
+   - ✅ TS301: Ingest data to feature set(s)
+ - **Feature vector**
+   - ✅ TS401: Create feature vector(s)
+ - **Get data**
+   - ✅ TS501: Get data from off-line feature vector(s)
+   - ❌ TS502: Get data from on-line feature vector(s)
+ - **Serving ML score**
+   - ❌ TS601: Serving score from CART
+   - ❌ TS602: Serving score from XGBoost
+   - ❌ TS603: Serving score from DNN
+
 ## Sample of outputs
 
 ![Sample of outputs](./assets/imgs/qgt-mlrun-samples.png)
@@ -27,26 +46,6 @@ You can easy use this solution in three steps:
    - **python main.py**
 
 Precondition: You have available MLRun or Iguazio solution (MLRun is part of that), see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
-
-## Use cases
-Quality Gate covers these test scenarios:
- - **Project**
-   - ✅ TS101: Create project(s)
-   - ✅ TS102: Delete project(s)
- - **Feature set**
-   - ✅ TS201: Create feature set(s)
- - **Ingest data**
-   - ✅ TS301: Ingest data to feature set(s)
- - **Feature vector**
-   - ✅ TS401: Create feature vector(s)
- - **Get data**
-   - ✅ TS501: Get data from off-line feature vector(s)
-   - ❌ TS502: Get data from on-line feature vector(s)
- - **Serving ML score**
-   - ❌ TS601: Serving score from CART
-   - ❌ TS602: Serving score from XGBoost
-   - ❌ TS603: Serving score from DNN
-
 
 ## Tested with
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):

@@ -1,10 +1,10 @@
 # QGate version: {{ data.version }}
 # {{ data.datetime }}
 # -----------------------
-Summary, test scenarios: {{ data.summary.count_testcases_done }}/{{ data.summary.count_testcases_err }} [DONE/Error]
+Summary, test scenarios: {{ data.summary.count_testcases_done }}/{{ data.summary.count_testcases_err }} [DONE/ERR]
 # -----------------------{% for testscenario in data.testscenarios %}
 {{ testscenario.name }}: {{ testscenario.desc }}{% for testcase in testscenario.testcases %}
-  {{ testcase.state }} ... '{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}{% endfor %}{% endfor %}
+  {% if testcase.state == 'DONE' %}{{ testcase.state }} {% else %}{{ testcase.state }}  {% endif %}... '{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}{% endfor %}{% endfor %}
 # -----------------------
 # Host: {{ data.host }}
 # RAM total/free: {{ data.memory_total }}/{{ data.memory_free }}

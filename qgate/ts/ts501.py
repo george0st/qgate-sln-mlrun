@@ -1,26 +1,25 @@
 """
-  TS201: Create feature set(s)
+  TS501: Get data from off-line feature vector(s)
 """
 
-from qgate.uc.tsbase import TSBase
+from qgate.ts.tsbase import TSBase
 from qgate.solution import Solution
 from qgate.output import Output
 
 
-class TS201(TSBase):
+class TS501(TSBase):
 
     def __init__(self, sln: Solution, output: Output):
         super().__init__(sln, output, self.__class__.__name__)
 
-
     @property
     def desc(self) -> str:
-        return "Create feature set(s)"
+        return "Get data from off-line feature vector(s)"
 
     @property
     def long_desc(self):
-        return "Create feature set with name, description, entities, features and targets"
+        return "Get data from off-line feature vector"
 
     def exec(self):
-        self.sln.create_featuresets(self)
+        self.sln.get_data_offline(self)
 

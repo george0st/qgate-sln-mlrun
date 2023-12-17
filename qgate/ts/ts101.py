@@ -2,7 +2,7 @@
   TS101: Create project(s)
 """
 
-from qgate.uc.tsbase import TSBase
+from qgate.ts.tsbase import TSBase
 from qgate.output import Output
 from qgate.solution import Solution
 

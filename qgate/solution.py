@@ -9,8 +9,8 @@ import os
 import pandas as pd
 import shutil
 from qgate.setup import Setup
-from qgate.uc.tsbase import TSBase
-from qgate.uc import tsbase
+from qgate.ts.tsbase import TSBase
+from qgate.ts import tsbase
 
 class Solution:
     """Create solution"""
@@ -24,10 +24,8 @@ class Solution:
         self._projects=[]
         self._project_specs={}
 
-        # TODO: add region
-
     def handler_testcase(func):
-        """Error handler for test case, mandatory arguments 'uc' and 'name'"""
+        """Error handler for test case, mandatory arguments 'ts' and 'name'"""
         def wrapper(self, ts: TSBase, testcase_name: str, *args, **kwargs):
 
             try:
@@ -36,9 +34,9 @@ class Solution:
                 ts.testcase_state()
                 return ret
             except Exception as ex:
-                ts.state = tsbase.TSState.Error
+                ts.state = tsbase.TSState.ERR
                 ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
-                ts.testcase_state("Error")
+                ts.testcase_state("ERR")
                 return False
         return wrapper
 

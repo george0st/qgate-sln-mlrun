@@ -6,8 +6,8 @@ from enum import Enum
 
 class TSState(Enum):
     NoExecution = 1
-    OK = 2
-    Error = 3
+    DONE = 2
+    ERR = 3
 
 class TSBase:
     """
