@@ -33,10 +33,10 @@ if __name__ == '__main__':
             ts = testscenario_fn(sln, output)
         try:
             ts.exec()
-            ts.state = tsbase.TSState.OK
+            ts.state = tsbase.TSState.DONE
         except Exception as ex:
-            ts.state = tsbase.TSState.Error
+            ts.state = tsbase.TSState.ERR
             ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
-            ts.testcase_state("Error")
+            ts.testcase_state("ERR")
     output.render()
     output.close()

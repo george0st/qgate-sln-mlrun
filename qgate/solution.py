@@ -34,9 +34,9 @@ class Solution:
                 ts.testcase_state()
                 return ret
             except Exception as ex:
-                ts.state = tsbase.TSState.Error
+                ts.state = tsbase.TSState.ERR
                 ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
-                ts.testcase_state("Error")
+                ts.testcase_state("ERR")
                 return False
         return wrapper
 
