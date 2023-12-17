@@ -137,7 +137,7 @@ class Output():
                         first_errors= first_errors + f"#{error_count} SCENARIO: {testscenario['name']}<br>TEST: {testcase['name']}<br>{testcase['detail']}"
             count_testcases+=len(testscenario["testcases"])
 
-        self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "Error"
+        self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "ERR"
         self._data["summary"]["count_testcases"]=count_testcases
         self._data["summary"]["count_testcases_done"]=count_testcases_done
         self._data["summary"]["count_testcases_err"]=count_testcases-count_testcases_done
