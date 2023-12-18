@@ -6,12 +6,20 @@ from qgate.ts.tsbase import TSBase
 from qgate.modelsolution import ModelSolution
 from qgate.output import Output
 from qgate.setup import Setup
+import mlrun
+import mlrun.feature_store as fstore
+from mlrun.data_types.data_types import spark_to_value_type
+import pandas as pd
+import json
+import glob
+import os
 
 
 class TS301(TSBase):
 
     def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
         super().__init__(solution, output, self.__class__.__name__)
+        self.setup=setup
 
     @property
     def desc(self) -> str:
@@ -22,5 +30,44 @@ class TS301(TSBase):
         return "Ingest data to feature set from data source to targets based on feature set definition"
 
     def exec(self):
-        self.solution.ingest_data(self)
+        self.ingest_data()
+
+    def ingest_data(self):
+        """Data ingest
+
+        :param ts:  Test scenario
+        """
+        self.testscenario_new()
+        for project_name in self.solution._projects:
+            for featureset_name in self.get_featuresets(self.solution._project_specs.get(project_name)):
+                # create possible file for load
+                source_file=os.path.join(os.getcwd(),
+                                         self.setup.model_definition,
+                                         "02-data",
+                                         self.setup.data_size,
+                                         f"*-{featureset_name}.csv.gz")
+
+                # check existing data set
+                for file in glob.glob(source_file):
+                    self._ingest_data( f"{project_name}/{featureset_name}", project_name, featureset_name, file)
+
+    @TSBase.handler_testcase
+    def _ingest_data(self, testcase_name, project_name, featureset_name, file):
+        # get existing feature set (feature set have to be created in previous test scenario)
+        featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+
+        # ingest data with bundl/chunk
+        for data_frm in pd.read_csv(file,
+                                    sep=";",
+                                    header="infer",
+                                    decimal=",",
+                                    compression="gzip",
+                                    encoding="utf-8",
+                                    chunksize=10000):
+            fstore.ingest(featureset,
+                          data_frm,
+                          # overwrite=False,
+                          return_df=False,
+                          infer_options=mlrun.data_types.data_types.InferOptions.Null)
+
 
