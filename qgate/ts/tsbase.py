@@ -22,17 +22,17 @@ class TSBase:
 
     def handler_testcase(func):
         """Error handler for test case, mandatory arguments 'ts' and 'name'"""
-        def wrapper(self, ts: TSBase, testcase_name: str, *args, **kwargs):
+        def wrapper(self, testcase_name: str, *args, **kwargs):
 
             try:
-                ts.testcase_new(testcase_name)
-                ret=func(self, ts, testcase_name, *args, **kwargs)
-                ts.testcase_state()
+                self.testcase_new(testcase_name)
+                ret=func(self, testcase_name, *args, **kwargs)
+                self.testcase_state()
                 return ret
             except Exception as ex:
-                ts.state = TSState.ERR
-                ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
-                ts.testcase_state("ERR")
+                self.state = TSState.ERR
+                self.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
+                self.testcase_state("ERR")
                 return False
         return wrapper
 
