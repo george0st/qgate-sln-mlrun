@@ -5,11 +5,13 @@
 from qgate.ts.tsbase import TSBase
 from qgate.solution import Solution
 from qgate.output import Output
+from qgate.setup import Setup
+
 
 
 class TS102(TSBase):
 
-    def __init__(self, sln: Solution, output: Output):
+    def __init__(self, sln: Solution, output: Output, setup: Setup=None):
         super().__init__(sln, output, self.__class__.__name__)
 
 

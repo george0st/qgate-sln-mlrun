@@ -20,6 +20,68 @@ class TSBase:
         self._name=name
         self._state = TSState.NoExecution
 
+    def handler_testcase(func):
+        """Error handler for test case, mandatory arguments 'ts' and 'name'"""
+        def wrapper(self, ts: TSBase, testcase_name: str, *args, **kwargs):
+
+            try:
+                ts.testcase_new(testcase_name)
+                ret=func(self, ts, testcase_name, *args, **kwargs)
+                ts.testcase_state()
+                return ret
+            except Exception as ex:
+                ts.state = TSState.ERR
+                ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
+                ts.testcase_state("ERR")
+                return False
+        return wrapper
+
+    # region INTERNAL
+
+    def _has_featureset(self, name, project_spec):
+        if project_spec:
+            # Support two different collections
+            if isinstance(project_spec, dict):
+                return name in project_spec["feature-sets"]
+            elif isinstance(project_spec, list):
+                return name in project_spec
+            else:
+                raise Exception("Unsupported type")
+        return False
+
+    def _get_featuresets(self, project_spec):
+        if project_spec:
+            # Support two different collections
+            if isinstance(project_spec, dict):
+                return project_spec["feature-sets"]
+            elif isinstance(project_spec, list):
+                return project_spec
+            else:
+                raise Exception("Unsupported type")
+        return []
+
+    def _get_featurevectors(self, project_spec):
+        # Support two different collections
+        if isinstance(project_spec, dict):
+            return project_spec["feature-vectors"]
+        return []
+
+    def _get_json_header(self, json_content):
+        """ Get common header
+
+        :param json_content:    json content
+        :return:                name, description, labeles and kind from header
+        """
+        name = json_content['name']
+        desc = json_content['description']
+        kind = json_content['kind']
+
+        # optional labels
+        lbls = None if json_content.get('labels') is None else json_content.get('labels')
+        return name, desc, lbls, kind
+
+# endregion
+
     @property
     def sln(self):
         return self._sln

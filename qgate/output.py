@@ -36,6 +36,7 @@ class Output():
         self._templates=templates
         self._system_info()
 
+# region TEST SCENARIOS
     def testscenario_new(self, ts_name, ts_description):
         new_ts = {}
         new_ts['name'] = ts_name
@@ -72,6 +73,8 @@ class Output():
         ts=self._data["testscenarios"][-1]
         testcase=ts['testcases'][-1]
         testcase['state']=state
+
+# endregion
 
     def render(self):
         # https://zetcode.com/python/jinja/
