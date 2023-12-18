@@ -11,8 +11,8 @@ from qgate.setup import Setup
 
 class TS102(TSBase):
 
-    def __init__(self, sln: Solution, output: Output, setup: Setup=None):
-        super().__init__(sln, output, self.__class__.__name__)
+    def __init__(self, solution: Solution, output: Output, setup: Setup=None):
+        super().__init__(solution, output, self.__class__.__name__)
 
 
     @property

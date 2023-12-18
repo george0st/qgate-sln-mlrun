@@ -14,8 +14,8 @@ class TSBase:
     Base class for all test scenarios
     """
 
-    def __init__(self, sln, output: Output, name: str):
-        self._sln=sln
+    def __init__(self, solution, output: Output, name: str):
+        self._solution=solution
         self._output=output
         self._name=name
         self._state = TSState.NoExecution
@@ -38,7 +38,7 @@ class TSBase:
 
     # region INTERNAL
 
-    def _has_featureset(self, name, project_spec):
+    def has_featureset(self, name, project_spec):
         if project_spec:
             # Support two different collections
             if isinstance(project_spec, dict):
@@ -49,7 +49,7 @@ class TSBase:
                 raise Exception("Unsupported type")
         return False
 
-    def _get_featuresets(self, project_spec):
+    def get_featuresets(self, project_spec):
         if project_spec:
             # Support two different collections
             if isinstance(project_spec, dict):
@@ -60,13 +60,13 @@ class TSBase:
                 raise Exception("Unsupported type")
         return []
 
-    def _get_featurevectors(self, project_spec):
+    def get_featurevectors(self, project_spec):
         # Support two different collections
         if isinstance(project_spec, dict):
             return project_spec["feature-vectors"]
         return []
 
-    def _get_json_header(self, json_content):
+    def get_json_header(self, json_content):
         """ Get common header
 
         :param json_content:    json content
@@ -83,8 +83,8 @@ class TSBase:
 # endregion
 
     @property
-    def sln(self):
-        return self._sln
+    def solution(self):
+        return self._solution
 
     @property
     def output(self):
