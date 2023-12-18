@@ -3,14 +3,15 @@
 """
 
 from qgate.ts.tsbase import TSBase
-from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
 from qgate.output import Output
+from qgate.setup import Setup
 
 
 class TS401(TSBase):
 
-    def __init__(self, sln: Solution, output: Output):
-        super().__init__(sln, output, self.__class__.__name__)
+    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
+        super().__init__(solution, output, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
@@ -21,5 +22,5 @@ class TS401(TSBase):
         return "Create feature vectors as join of relevant feature sets"
 
     def exec(self):
-        self.sln.create_featurevector(self)
+        self.solution.create_featurevector(self)
 

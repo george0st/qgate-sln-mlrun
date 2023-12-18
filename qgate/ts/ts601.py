@@ -3,14 +3,15 @@
 """
 
 from qgate.ts.tsbase import TSBase
-from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
 from qgate.output import Output
+from qgate.setup import Setup
 
 
 class TS601(TSBase):
 
-    def __init__(self, sln: Solution, output: Output):
-        super().__init__(sln, output, self.__class__.__name__)
+    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
+        super().__init__(solution, output, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
@@ -26,5 +27,5 @@ class TS601(TSBase):
         return "Serving score from CART (Classification and Regression Tree) from Scikit-Learn"
 
     def exec(self):
-        self.sln.serving_score(self)
+        self.solution.serving_score(self)
 

@@ -1,4 +1,4 @@
-from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
 from qgate.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts601
 from qgate.ts import tsbase
 from qgate import output, setup
@@ -11,7 +11,7 @@ if __name__ == '__main__':
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
     output = output.Output(setup, ['./assets/templates/qgt-mlrun.txt',
                                    './assets/templates/qgt-mlrun.html'])
-    sln = Solution(setup)
+    sln = ModelSolution(setup)
 
     testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]
     testscenario_test = ts601.TS601
@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     for testscenario_fn in testscenario_fns:
         if testscenario_fn:
-            ts = testscenario_fn(sln, output)
+            ts = testscenario_fn(sln, output, setup)
         try:
             ts.exec()
             ts.state = tsbase.TSState.DONE

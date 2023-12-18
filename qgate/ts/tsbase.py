@@ -14,15 +14,77 @@ class TSBase:
     Base class for all test scenarios
     """
 
-    def __init__(self, sln, output: Output, name: str):
-        self._sln=sln
+    def __init__(self, solution, output: Output, name: str):
+        self._solution=solution
         self._output=output
         self._name=name
         self._state = TSState.NoExecution
 
+    def handler_testcase(func):
+        """Error handler for test case, mandatory arguments 'ts' and 'name'"""
+        def wrapper(self, testcase_name: str, *args, **kwargs):
+
+            try:
+                self.testcase_new(testcase_name)
+                ret=func(self, testcase_name, *args, **kwargs)
+                self.testcase_state()
+                return ret
+            except Exception as ex:
+                self.state = TSState.ERR
+                self.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
+                self.testcase_state("ERR")
+                return False
+        return wrapper
+
+    # region INTERNAL
+
+    def has_featureset(self, name, project_spec):
+        if project_spec:
+            # Support two different collections
+            if isinstance(project_spec, dict):
+                return name in project_spec["feature-sets"]
+            elif isinstance(project_spec, list):
+                return name in project_spec
+            else:
+                raise Exception("Unsupported type")
+        return False
+
+    def get_featuresets(self, project_spec):
+        if project_spec:
+            # Support two different collections
+            if isinstance(project_spec, dict):
+                return project_spec["feature-sets"]
+            elif isinstance(project_spec, list):
+                return project_spec
+            else:
+                raise Exception("Unsupported type")
+        return []
+
+    def get_featurevectors(self, project_spec):
+        # Support two different collections
+        if isinstance(project_spec, dict):
+            return project_spec["feature-vectors"]
+        return []
+
+    def get_json_header(self, json_content):
+        """ Get common header
+
+        :param json_content:    json content
+        :return:                name, description, labeles and kind from header
+        """
+        name = json_content['name']
+        desc = json_content['description']
+        kind = json_content['kind']
+
+        # optional labels
+        lbls = None if json_content.get('labels') is None else json_content.get('labels')
+        return name, desc, lbls, kind
+
+# endregion
+
     @property
-    def sln(self):
-        return self._sln
+    def solution(self):
+        return self._solution
 
     @property
     def output(self):
