@@ -119,32 +119,32 @@ class ModelSolution:
 #         return True
 # # endregion
 
-# region DELETE PROJECT
-    def delete_projects(self, ts: TSBase):
-        """Delete projects
-
-        :param ts:      Test scenario
-        """
-        ts.testscenario_new()
-        for project_name in self._projects:
-            self._delete_project(ts, project_name)
-
-        # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
-        dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
-        for file in glob.glob(dir):
-            if os.path.isdir(file):
-                shutil.rmtree(file, True)
-
-    @handler_testcase
-    def _delete_project(self, ts, name):
-        """Delete project"""
-        mlrun.get_run_db().delete_project(name, "cascade")
-
-        # delete project in FS
-        project_dir = os.path.join(self.setup.model_output, name)
-        if os.path.exists(project_dir):
-            shutil.rmtree(project_dir, True)
-# endregion
+# # region DELETE PROJECT
+#     def delete_projects(self, ts: TSBase):
+#         """Delete projects
+#
+#         :param ts:      Test scenario
+#         """
+#         ts.testscenario_new()
+#         for project_name in self._projects:
+#             self._delete_project(ts, project_name)
+#
+#         # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
+#         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
+#         for file in glob.glob(dir):
+#             if os.path.isdir(file):
+#                 shutil.rmtree(file, True)
+#
+#     @handler_testcase
+#     def _delete_project(self, ts, name):
+#         """Delete project"""
+#         mlrun.get_run_db().delete_project(name, "cascade")
+#
+#         # delete project in FS
+#         project_dir = os.path.join(self.setup.model_output, name)
+#         if os.path.exists(project_dir):
+#             shutil.rmtree(project_dir, True)
+# # endregion
 
 # region CREATE FEATURE SET
     def create_featuresets(self, ts: TSBase):
