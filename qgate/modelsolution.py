@@ -238,50 +238,50 @@ class ModelSolution:
 #
 # # endregion
 
-# region CREATE FEATURE VECTOR
-    def create_featurevector(self, ts: TSBase):
-        # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
-
-        ts.testscenario_new()
-        for project_name in self._projects:
-            for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
-                # create file with definition of vector
-                source_file = os.path.join(os.getcwd(),
-                                           self.setup.model_definition,
-                                           "01-model",
-                                           "03-feature-vector",
-                                           f"*-{featurevector_name}.json")
-
-                # check existing data set
-                for file in glob.glob(source_file):
-                    # iterate cross all featureset definitions
-                    with open(file, "r") as json_file:
-                        self._create_featurevector(ts, f"{project_name}/{featurevector_name}", project_name, json_file)
-
-    @handler_testcase
-    def _create_featurevector(self, ts: TSBase, testcase_name, project_name, json_file):
-        json_content = json.load(json_file)
-        name, desc, lbls, kind = self._get_json_header(json_content)
-
-        if kind == "feature-vector":
-            # create feature vector only in case not exist
-            try:
-                fstore.get_feature_vector(f"{project_name}/{name}")
-            except:
-                self._create_featurevector_content(project_name, name, desc, json_content['spec'])
-
-    def _create_featurevector_content(self, project_name, featurevector_name, featurevector_desc, json_spec):
-        # switch to proper project if the current project is different
-        if mlrun.get_current_project().name != project_name:
-            mlrun.load_project(name=project_name, context="./", user_project=False)
-
-        features = json_spec['features']
-
-        # create feature vector
-        vector = fstore.FeatureVector(featurevector_name, features, description=featurevector_desc)
-        vector.save()
-
-# endregion
+# # region CREATE FEATURE VECTOR
+#     def create_featurevector(self, ts: TSBase):
+#         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
+#
+#         ts.testscenario_new()
+#         for project_name in self._projects:
+#             for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
+#                 # create file with definition of vector
+#                 source_file = os.path.join(os.getcwd(),
+#                                            self.setup.model_definition,
+#                                            "01-model",
+#                                            "03-feature-vector",
+#                                            f"*-{featurevector_name}.json")
+#
+#                 # check existing data set
+#                 for file in glob.glob(source_file):
+#                     # iterate cross all featureset definitions
+#                     with open(file, "r") as json_file:
+#                         self._create_featurevector(ts, f"{project_name}/{featurevector_name}", project_name, json_file)
+#
+#     @handler_testcase
+#     def _create_featurevector(self, ts: TSBase, testcase_name, project_name, json_file):
+#         json_content = json.load(json_file)
+#         name, desc, lbls, kind = self._get_json_header(json_content)
+#
+#         if kind == "feature-vector":
+#             # create feature vector only in case not exist
+#             try:
+#                 fstore.get_feature_vector(f"{project_name}/{name}")
+#             except:
+#                 self._create_featurevector_content(project_name, name, desc, json_content['spec'])
+#
+#     def _create_featurevector_content(self, project_name, featurevector_name, featurevector_desc, json_spec):
+#         # switch to proper project if the current project is different
+#         if mlrun.get_current_project().name != project_name:
+#             mlrun.load_project(name=project_name, context="./", user_project=False)
+#
+#         features = json_spec['features']
+#
+#         # create feature vector
+#         vector = fstore.FeatureVector(featurevector_name, features, description=featurevector_desc)
+#         vector.save()
+#
+# # endregion
 
 # # region INGEST DATA
 #     def ingest_data(self, ts: TSBase):
