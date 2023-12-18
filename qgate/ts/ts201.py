@@ -6,13 +6,21 @@ from qgate.ts.tsbase import TSBase
 from qgate.modelsolution import ModelSolution
 from qgate.output import Output
 from qgate.setup import Setup
+import mlrun
+import mlrun.feature_store as fstore
+from mlrun.features import Feature
+from mlrun.data_types.data_types import spark_to_value_type
+from mlrun.datastore import ParquetTarget,CSVTarget
+import os
+import json
+import glob
 
 
 class TS201(TSBase):
 
     def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
         super().__init__(solution, output, self.__class__.__name__)
-
+        self.setup = setup
 
     @property
     def desc(self) -> str:
@@ -23,5 +31,94 @@ class TS201(TSBase):
         return "Create feature set with name, description, entities, features and targets"
 
     def exec(self):
-        self.solution.create_featuresets(self)
+        self.create_featuresets()
+
+    def create_featuresets(self):
+        """ Get or create featuresets
+
+        :param ts:      Test scenario
+        """
+        self.testscenario_new()
+        for project_name in self.solution._projects:
+            for featureset_name in self.get_featuresets(self.solution._project_specs.get(project_name)):
+                # create file with definition of vector
+                source_file = os.path.join(os.getcwd(),
+                                           self.setup.model_definition,
+                                           "01-model",
+                                           "02-feature-set",
+                                           f"*-{featureset_name}.json")
+
+                for file in glob.glob(source_file):
+                    # iterate cross all featureset definitions
+                    with open(file, "r") as json_file:
+                        self._create_featureset(f'{project_name}/{featureset_name}', project_name, json_file)
+
+    @TSBase.handler_testcase
+    def _create_featureset(self, testcase_name, project_name, json_file):
+        json_content = json.load(json_file)
+        name, desc, lbls, kind = self.get_json_header(json_content)
+
+        if kind == "feature-set":
+            # create feature set only in case, if not exist
+            try:
+                fstore.get_feature_set(f"{project_name}/{name}")
+            except:
+                self._create_featureset_content(project_name, name, desc, json_content['spec'])
+
+    def _create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
+        """
+        Create featureset based on json spec
+
+        :param project_name:        project name
+        :param featureset_name:     feature name
+        :param featureset_desc:     feature description
+        :param json_spec:  Json specification for this featureset
+        """
+
+        # switch to proper project if the current project is different
+        if mlrun.get_current_project().name != project_name:
+            mlrun.load_project(name=project_name, context="./", user_project=False)
+
+        fs = fstore.FeatureSet(
+            name=featureset_name,
+            description=featureset_desc,
+            relations=json_spec.get('relations')
+        )
+
+        # define entities
+        for item in json_spec['entities']:
+            fs.add_entity(
+                name=item['name'],
+                value_type=spark_to_value_type(item['type']),
+                description=item['description']
+            )
+
+        # define features
+        for item in json_spec['features']:
+            fs.add_feature(
+                name=item['name'],
+                feature=Feature(
+                    value_type=spark_to_value_type(item['type']),
+                    description=item['description']
+                )
+            )
+
+        # define targets
+        count=0
+        target_providers=[]
+        for target in json_spec['targets']:
+            target_name = f"target_{count}"
+            if target.lower().strip()=="parquet":
+                # support more parquet targets (each target has different path)
+                target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name)))
+            elif target.lower().strip()=="csv":
+                target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
+            else:
+                # TODO: Add support other targets for MLRun CE e.g. RedisTarget
+                raise NotImplementedError()
+            count+=1
+        fs.set_targets(target_providers, with_defaults=False)
+
+        fs.save()
+        return fs
 
