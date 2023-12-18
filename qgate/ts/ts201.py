@@ -3,14 +3,14 @@
 """
 
 from qgate.ts.tsbase import TSBase
-from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
 from qgate.output import Output
 from qgate.setup import Setup
 
 
 class TS201(TSBase):
 
-    def __init__(self, solution: Solution, output: Output, setup: Setup=None):
+    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
         super().__init__(solution, output, self.__class__.__name__)
 
 
@@ -23,5 +23,5 @@ class TS201(TSBase):
         return "Create feature set with name, description, entities, features and targets"
 
     def exec(self):
-        self.sln.create_featuresets(self)
+        self.solution.create_featuresets(self)
 

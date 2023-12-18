@@ -3,14 +3,14 @@
 """
 
 from qgate.ts.tsbase import TSBase
-from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
 from qgate.output import Output
 from qgate.setup import Setup
 
 
 class TS301(TSBase):
 
-    def __init__(self, solution: Solution, output: Output, setup: Setup=None):
+    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
         super().__init__(solution, output, self.__class__.__name__)
 
     @property
@@ -22,5 +22,5 @@ class TS301(TSBase):
         return "Ingest data to feature set from data source to targets based on feature set definition"
 
     def exec(self):
-        self.sln.ingest_data(self)
+        self.solution.ingest_data(self)
 

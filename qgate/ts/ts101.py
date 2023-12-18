@@ -4,7 +4,7 @@
 
 from qgate.ts.tsbase import TSBase
 from qgate.output import Output
-from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
 import mlrun
 import os
 import json
@@ -14,7 +14,7 @@ from qgate.setup import Setup
 
 class TS101(TSBase):
 
-    def __init__(self, solution: Solution, output: Output, setup: Setup=None):
+    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
         super().__init__(solution, output, self.__class__.__name__)
         self.setup=setup
 
@@ -43,9 +43,9 @@ class TS101(TSBase):
                 json_content = json.load(json_file)
                 name, desc, lbls, kind = self.get_json_header(json_content)
 
-                self.sln._projects.append(name)
+                self.solution._projects.append(name)
                 if self._create_project(ts, name, desc, lbls, kind):
-                    self.sln._project_specs[name] = json_content['spec']
+                    self.solution._project_specs[name] = json_content['spec']
 
     @TSBase.handler_testcase
     def _create_project(self, ts: TSBase, name, desc, lbls, kind):

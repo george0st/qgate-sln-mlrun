@@ -12,7 +12,7 @@ from qgate.setup import Setup
 from qgate.ts.tsbase import TSBase
 from qgate.ts import tsbase
 
-class Solution:
+class ModelSolution:
     """Create solution"""
 
     def __init__(self, setup: Setup):

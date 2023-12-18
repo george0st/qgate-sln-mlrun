@@ -3,14 +3,14 @@
 """
 
 from qgate.ts.tsbase import TSBase
-from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
 from qgate.output import Output
 from qgate.setup import Setup
 
 
 class TS501(TSBase):
 
-    def __init__(self, solution: Solution, output: Output, setup: Setup=None):
+    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
         super().__init__(solution, output, self.__class__.__name__)
 
     @property
@@ -22,5 +22,5 @@ class TS501(TSBase):
         return "Get data from off-line feature vector"
 
     def exec(self):
-        self.sln.get_data_offline(self)
+        self.solution.get_data_offline(self)
 
