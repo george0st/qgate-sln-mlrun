@@ -324,29 +324,29 @@ class ModelSolution:
 #
 # # endregion
 
-# region GET DATA
-    def get_data_offline(self, ts: TSBase):
-        """
-        Get data from off-line feature vector
-        """
-        ts.testscenario_new()
-        for project_name in self._projects:
-            for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
-                self._get_data_offline(ts, f"{project_name}/{featurevector_name}", project_name, featurevector_name)
-
-
-    @handler_testcase
-    def _get_data_offline(self, ts: TSBase, testcase_name, project_name, featurevector_name):
-        if mlrun.get_current_project().name != project_name:
-            mlrun.load_project(name=project_name, context="./", user_project=False)
-
-        vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
-
-        resp = fstore.get_offline_features(vector)
-        frm = resp.to_dataframe()
-        ts.testcase_detail(f"... get {len(frm.index)} items")
-
-    # endregion
+# # region GET DATA
+#     def get_data_offline(self, ts: TSBase):
+#         """
+#         Get data from off-line feature vector
+#         """
+#         ts.testscenario_new()
+#         for project_name in self._projects:
+#             for featurevector_name in self._get_featurevectors(self._project_specs.get(project_name)):
+#                 self._get_data_offline(ts, f"{project_name}/{featurevector_name}", project_name, featurevector_name)
+#
+#
+#     @handler_testcase
+#     def _get_data_offline(self, ts: TSBase, testcase_name, project_name, featurevector_name):
+#         if mlrun.get_current_project().name != project_name:
+#             mlrun.load_project(name=project_name, context="./", user_project=False)
+#
+#         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
+#
+#         resp = fstore.get_offline_features(vector)
+#         frm = resp.to_dataframe()
+#         ts.testcase_detail(f"... get {len(frm.index)} items")
+#
+#     # endregion
 
 
 # region SERVE DATA
