@@ -10,7 +10,7 @@ Summary, test scenarios: {{ data.summary.count_testcases_done }}/{{ data.summary
 # RAM total/free: {{ data.memory_total }}/{{ data.memory_free }}
 # CPU: {{ data.cpu }}
 # -----------------------
-# MLRun: {{ data.mlrun }} (https://docs.mlrun.org/en/latest/change-log/index.html)
+# MLRun (client/server): {{ data.mlrun }}/{{ data.mlrun_server }} (https://docs.mlrun.org/en/latest/change-log/index.html)
 # Python: {{ data.python }}
 # System: {{ data.system }}
 # Platform: {{ data.platform }}
