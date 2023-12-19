@@ -1,6 +1,7 @@
 
 from qgate.output import Output
 #from qgate.solution import Solution
+from qgate.setup import Setup
 from enum import Enum
 
 
@@ -85,6 +86,9 @@ class TSBase:
     @property
     def solution(self):
         return self._solution
+
+    def setup(self):
+        return self._solution.setup
 
     @property
     def output(self):

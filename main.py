@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     for testscenario_fn in testscenario_fns:
         if testscenario_fn:
-            ts = testscenario_fn(sln, output, setup)
+            ts = testscenario_fn(sln, output)
         try:
             ts.exec()
             ts.state = tsbase.TSState.DONE

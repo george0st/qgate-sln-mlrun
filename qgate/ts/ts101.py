@@ -9,7 +9,6 @@ import mlrun
 import os
 import json
 import glob
-from qgate.setup import Setup
 
 
 class TS101(TSBase):
@@ -35,7 +34,7 @@ class TS101(TSBase):
         :param ts:      Test scenario
         """
         self.testscenario_new()
-        dir=os.path.join(os.getcwd(), self.solution.setup.model_definition, "01-model", "01-project", "*.json")
+        dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with (open(file, "r") as json_file):
                 json_content = json.load(json_file)
