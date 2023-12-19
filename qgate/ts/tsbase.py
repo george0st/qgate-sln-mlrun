@@ -38,7 +38,7 @@ class TSBase:
                 return False
         return wrapper
 
-    # region INTERNAL
+# region INTERNAL
 
     def has_featureset(self, name, project_spec):
         if project_spec:
