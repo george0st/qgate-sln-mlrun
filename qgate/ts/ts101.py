@@ -14,10 +14,8 @@ from qgate.setup import Setup
 
 class TS101(TSBase):
 
-    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
+    def __init__(self, solution: ModelSolution, output: Output):
         super().__init__(solution, output, self.__class__.__name__)
-        self.setup=setup
-
 
     @property
     def desc(self) -> str:
@@ -37,7 +35,7 @@ class TS101(TSBase):
         :param ts:      Test scenario
         """
         self.testscenario_new()
-        dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
+        dir=os.path.join(os.getcwd(), self.solution.setup.model_definition, "01-model", "01-project", "*.json")
         for file in glob.glob(dir):
             with (open(file, "r") as json_file):
                 json_content = json.load(json_file)
