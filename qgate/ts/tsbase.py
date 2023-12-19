@@ -88,6 +88,7 @@ class TSBase:
     def solution(self):
         return self._solution
 
+    @property
     def setup(self) -> Setup:
         return self._setup
 
