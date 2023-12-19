@@ -1,6 +1,6 @@
 
 from qgate.output import Output
-#from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
 from qgate.setup import Setup
 from enum import Enum
 
@@ -85,7 +85,7 @@ class TSBase:
 # endregion
 
     @property
-    def solution(self):
+    def solution(self) -> ModelSolution:
         return self._solution
 
     @property
@@ -93,7 +93,7 @@ class TSBase:
         return self._setup
 
     @property
-    def output(self):
+    def output(self) -> Output:
         return self._output
 
     @property
