@@ -2,16 +2,17 @@ from qgate.modelsolution import ModelSolution
 from qgate.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts601
 from qgate.ts import tsbase
 from qgate import output, setup
-import sys
+import sys, os
 
 
-if __name__ == '__main__':
+def run_testing():
 
-    setup = setup.Setup("0-size-100",
+    print(os.getcwd())
+    stp = setup.Setup("0-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
-    output = output.Output(setup, ['./assets/templates/qgt-mlrun.txt',
+    out = output.Output(stp, ['./assets/templates/qgt-mlrun.txt',
                                    './assets/templates/qgt-mlrun.html'])
-    sln = ModelSolution(setup)
+    sln = ModelSolution(stp)
 
     testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]
     testscenario_test = ts601.TS601
@@ -30,13 +31,16 @@ if __name__ == '__main__':
 
     for testscenario_fn in testscenario_fns:
         if testscenario_fn:
-            ts = testscenario_fn(sln, output)
-        try:
-            ts.exec()
-            ts.state = tsbase.TSState.DONE
-        except Exception as ex:
-            ts.state = tsbase.TSState.ERR
-            ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
-            ts.testcase_state("ERR")
-    output.render()
-    output.close()
+            ts = testscenario_fn(sln, out)
+            try:
+                ts.exec()
+                ts.state = tsbase.TSState.DONE
+            except Exception as ex:
+                ts.state = tsbase.TSState.ERR
+                ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
+                ts.testcase_state("ERR")
+    out.render()
+    out.close()
+
+if __name__ == '__main__':
+    run_testing()

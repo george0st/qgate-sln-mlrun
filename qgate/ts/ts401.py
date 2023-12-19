@@ -61,10 +61,8 @@ class TS401(TSBase):
                 self._create_featurevector_content(project_name, name, desc, json_content['spec'])
 
     def _create_featurevector_content(self, project_name, featurevector_name, featurevector_desc, json_spec):
-        # switch to proper project if the current project is different
-        if mlrun.get_current_project().name != project_name:
-            mlrun.load_project(name=project_name, context="./", user_project=False)
 
+        self.project_switch(project_name)
         features = json_spec['features']
 
         # create feature vector

@@ -41,9 +41,7 @@ class TS501(TSBase):
 
     @TSBase.handler_testcase
     def _get_data_offline(self, testcase_name, project_name, featurevector_name):
-        if mlrun.get_current_project().name != project_name:
-            mlrun.load_project(name=project_name, context="./", user_project=False)
-
+        self.project_switch(project_name)
         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
         resp = fstore.get_offline_features(vector)

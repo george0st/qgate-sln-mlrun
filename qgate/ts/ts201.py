@@ -74,10 +74,7 @@ class TS201(TSBase):
         :param json_spec:  Json specification for this featureset
         """
 
-        # switch to proper project if the current project is different
-        if mlrun.get_current_project().name != project_name:
-            mlrun.load_project(name=project_name, context="./", user_project=False)
-
+        self.project_switch(project_name)
         fs = fstore.FeatureSet(
             name=featureset_name,
             description=featureset_desc,
