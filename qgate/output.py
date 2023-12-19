@@ -160,11 +160,21 @@ class Output():
         self._data["host"] = self._host()
         self._data["cpu"] = str(multiprocessing.cpu_count())
         self._data["mlrun"] = mlrun.get_version()
+        self._data["mlrun_server"] = self._mlrun_server()
         self._data["python"] = sys.version
 
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
         self._data["variables"] = self._setup.variables
+
+    def _mlrun_server(self):
+        # Return server MLRun version
+
+        server_version=""
+        with suppress(Exception):
+            run_db_factory = mlrun.db.factory.RunDBFactory()
+            server_version = run_db_factory._run_db.server_version
+        return server_version
 
     def _memory(self):
 
