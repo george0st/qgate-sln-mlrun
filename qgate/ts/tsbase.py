@@ -3,6 +3,7 @@ from qgate.output import Output
 from qgate.modelsolution import ModelSolution
 from qgate.setup import Setup
 from enum import Enum
+import mlrun
 
 
 class TSState(Enum):
@@ -118,6 +119,11 @@ class TSBase:
 
     def exec(self):
         raise NotImplemented()
+
+    def project_switch(self, project_name):
+        # switch to proper project if the current project is different
+        if mlrun.get_current_project().name != project_name:
+            mlrun.load_project(name=project_name, context="./", user_project=False)
 
     def testscenario_new(self):
         self.output.testscenario_new(self.name, self.desc)

@@ -5,16 +5,17 @@ import os
 
 class TestProjects(unittest.TestCase):
 
+    INPUT_FILE = "qgate-sln-mlrun.env"
+
     @classmethod
     def setUpClass(cls):
-        pass
 
         #os.chdir(os.path.dirname(os.getcwd()))
 
         # setup relevant path
-        # prefix = "."
-        # if not os.path.isfile(path.join(prefix, TestCaseBasic.INPUT_FILE)):
-        #     prefix=".."
+        if not os.path.isfile(os.path.join(".", TestProjects.INPUT_FILE)):
+            os.chdir(os.path.dirname(os.getcwd()))
+
 
     @classmethod
     def tearDownClass(cls):
