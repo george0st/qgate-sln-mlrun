@@ -2,10 +2,12 @@ from qgate.modelsolution import ModelSolution
 from qgate.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts601
 from qgate.ts import tsbase
 from qgate import output, setup
-import sys
+import sys, os
 
 
 def run_testing():
+
+    print(os.getcwd())
     stp = setup.Setup("0-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
     out = output.Output(stp, ['./assets/templates/qgt-mlrun.txt',

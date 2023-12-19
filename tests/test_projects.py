@@ -1,14 +1,25 @@
 import unittest
 import main
+import os
+
 
 class TestProjects(unittest.TestCase):
 
-    def setUp(self):
-        self.aa=""
+    @classmethod
+    def setUpClass(cls):
+        pass
 
-    def tearDown(self):
-        self.aa=None
+        #os.chdir(os.path.dirname(os.getcwd()))
 
-    def test_root(self):
-        print("aa")
+        # setup relevant path
+        # prefix = "."
+        # if not os.path.isfile(path.join(prefix, TestCaseBasic.INPUT_FILE)):
+        #     prefix=".."
+
+    @classmethod
+    def tearDownClass(cls):
+        pass
+
+    def test_main(self):
+        main.run_testing()
 
