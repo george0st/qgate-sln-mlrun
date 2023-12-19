@@ -17,3 +17,10 @@ class ModelSolution:
     def setup(self) -> Setup:
         return self._setup
 
+    @property
+    def projects(self) -> list:
+        return self._projects
+
+    @property
+    def project_specs(self) -> dict:
+        return self._project_specs

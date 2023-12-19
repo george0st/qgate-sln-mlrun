@@ -10,7 +10,7 @@ from qgate.setup import Setup
 
 class TS601(TSBase):
 
-    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
+    def __init__(self, solution: ModelSolution, output: Output):
         super().__init__(solution, output, self.__class__.__name__)
 
     @property

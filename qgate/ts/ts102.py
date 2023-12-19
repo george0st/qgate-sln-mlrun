@@ -5,7 +5,6 @@
 from qgate.ts.tsbase import TSBase
 from qgate.modelsolution import ModelSolution
 from qgate.output import Output
-from qgate.setup import Setup
 import mlrun
 import os
 import json
@@ -16,10 +15,8 @@ import shutil
 
 class TS102(TSBase):
 
-    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
+    def __init__(self, solution: ModelSolution, output: Output):
         super().__init__(solution, output, self.__class__.__name__)
-        self.setup = setup
-
 
     @property
     def desc(self) -> str:
@@ -39,7 +36,7 @@ class TS102(TSBase):
         :param ts:      Test scenario
         """
         self.testscenario_new()
-        for project_name in self.solution._projects:
+        for project_name in self.solution.projects:
             self._delete_project(project_name)
 
         # cleaning/delete other things in output directory (generated from e.g. CSVTargets)

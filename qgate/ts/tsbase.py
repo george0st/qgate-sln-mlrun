@@ -1,6 +1,7 @@
 
 from qgate.output import Output
-#from qgate.solution import Solution
+from qgate.modelsolution import ModelSolution
+from qgate.setup import Setup
 from enum import Enum
 
 
@@ -16,6 +17,7 @@ class TSBase:
 
     def __init__(self, solution, output: Output, name: str):
         self._solution=solution
+        self._setup=solution.setup
         self._output=output
         self._name=name
         self._state = TSState.NoExecution
@@ -36,7 +38,7 @@ class TSBase:
                 return False
         return wrapper
 
-    # region INTERNAL
+# region INTERNAL
 
     def has_featureset(self, name, project_spec):
         if project_spec:
@@ -83,11 +85,15 @@ class TSBase:
 # endregion
 
     @property
-    def solution(self):
+    def solution(self) -> ModelSolution:
         return self._solution
 
     @property
-    def output(self):
+    def setup(self) -> Setup:
+        return self._setup
+
+    @property
+    def output(self) -> Output:
         return self._output
 
     @property
