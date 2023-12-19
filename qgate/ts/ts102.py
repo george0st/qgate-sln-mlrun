@@ -27,7 +27,6 @@ class TS102(TSBase):
         return "Delete project include all contents and targets (such as Parquet files, etc.)"
 
     def exec(self):
-        #self.solution.delete_projects(self)
         self.delete_projects()
 
     def delete_projects(self):

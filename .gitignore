@@ -12,7 +12,4 @@ qgate-sln-mlrun-private.env
 /qgate/__pycache__/*.pyc
 /output/
 /.coverage
-*.pyc
-/tests/
-
-*.pyc
+/tests/__pycache__/*.pyc

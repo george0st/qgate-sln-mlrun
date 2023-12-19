@@ -26,7 +26,6 @@ class TS101(TSBase):
 
     def exec(self):
         self.create_projects()
-        #self.sln.create_projects(self)
 
     def create_projects(self):
         """ Create projects based on json definition
