@@ -18,7 +18,7 @@ class ModelSolution:
         return self._setup
 
     @property
-    def project(self) -> list:
+    def projects(self) -> list:
         return self._projects
 
     @property
