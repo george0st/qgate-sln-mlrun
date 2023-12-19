@@ -15,7 +15,7 @@ import os
 
 class TS501(TSBase):
 
-    def __init__(self, solution: ModelSolution, output: Output, setup: Setup=None):
+    def __init__(self, solution: ModelSolution, output: Output):
         super().__init__(solution, output, self.__class__.__name__)
 
     @property
@@ -34,8 +34,8 @@ class TS501(TSBase):
         Get data from off-line feature vector
         """
         self.testscenario_new()
-        for project_name in self.solution._projects:
-            for featurevector_name in self.get_featurevectors(self.solution._project_specs.get(project_name)):
+        for project_name in self.solution.projects:
+            for featurevector_name in self.get_featurevectors(self.solution.project_specs.get(project_name)):
                 self._get_data_offline(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
 
 

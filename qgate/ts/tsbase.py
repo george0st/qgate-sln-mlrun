@@ -17,6 +17,7 @@ class TSBase:
 
     def __init__(self, solution, output: Output, name: str):
         self._solution=solution
+        self._setup=solution.setup
         self._output=output
         self._name=name
         self._state = TSState.NoExecution
@@ -87,8 +88,8 @@ class TSBase:
     def solution(self):
         return self._solution
 
-    def setup(self):
-        return self._solution.setup
+    def setup(self) -> Setup:
+        return self._setup
 
     @property
     def output(self):
