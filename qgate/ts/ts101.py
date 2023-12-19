@@ -41,9 +41,9 @@ class TS101(TSBase):
                 json_content = json.load(json_file)
                 name, desc, lbls, kind = self.get_json_header(json_content)
 
-                self.solution._projects.append(name)
+                self.solution.projects.append(name)
                 if self._create_project(name, desc, lbls, kind):
-                    self.solution._project_specs[name] = json_content['spec']
+                    self.solution.project_specs[name] = json_content['spec']
 
     @TSBase.handler_testcase
     def _create_project(self, name, desc, lbls, kind):
