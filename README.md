@@ -5,7 +5,7 @@
 ![GitHub release](https://img.shields.io/github/v/release/george0st/qgate-sln-mlrun)
 
 # QGate-Sln-MLRun
-Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
+The Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
 - independent quality test (function, integration, acceptance, ... tests)
 - deeper quality checks before full rollout/use in company environments
 - identification of possible compatibility issues (if any)
