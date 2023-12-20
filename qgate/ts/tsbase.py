@@ -41,16 +41,16 @@ class TSBase:
 
 # region INTERNAL
 
-    def has_featureset(self, name, project_spec):
-        if project_spec:
-            # Support two different collections
-            if isinstance(project_spec, dict):
-                return name in project_spec["feature-sets"]
-            elif isinstance(project_spec, list):
-                return name in project_spec
-            else:
-                raise Exception("Unsupported type")
-        return False
+    # def has_featureset(self, name, project_spec):
+    #     if project_spec:
+    #         # Support two different collections
+    #         if isinstance(project_spec, dict):
+    #             return name in project_spec["feature-sets"]
+    #         elif isinstance(project_spec, list):
+    #             return name in project_spec
+    #         else:
+    #             raise Exception("Unsupported type")
+    #     return False
 
     def get_featuresets(self, project_spec):
         if project_spec:
