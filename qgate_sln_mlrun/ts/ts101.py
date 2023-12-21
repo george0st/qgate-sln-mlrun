@@ -2,9 +2,9 @@
   TS101: Create project(s)
 """
 
-from qgate.ts.tsbase import TSBase
-from qgate.output import Output
-from qgate.modelsolution import ModelSolution
+from qgate_sln_mlrun.ts.tsbase import TSBase
+from qgate_sln_mlrun.output import Output
+from qgate_sln_mlrun.modelsolution import ModelSolution
 import mlrun
 import os
 import json

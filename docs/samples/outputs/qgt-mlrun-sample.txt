@@ -54,6 +54,6 @@ TS102: Delete project(s)
 # Platform: AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)
 # ----------------------- 
 # MLRUN_DBPATH: 'http://localhost:8080' 
-# QGATE_DEFINITION: '../qgate-model/' 
+# QGATE_DEFINITION: '../qgate_sln_mlrun-model/'
 # QGATE_OUTPUT: './output/' 
-# DIR: 'C:\Python\qgate-sln-mlrun' 
+# DIR: 'C:\Python\qgate_sln_mlrun-sln-mlrun'

@@ -1,15 +1,15 @@
-from qgate.modelsolution import ModelSolution
-from qgate.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts601
-from qgate.ts import tsbase
-from qgate import output, setup
+from qgate_sln_mlrun.modelsolution import ModelSolution
+from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts601
+from qgate_sln_mlrun.ts import tsbase
+from qgate_sln_mlrun import output, modelsetup
 import sys, os
 
 
 def run_testing():
-    stp = setup.Setup("0-size-100",
-                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
-    out = output.Output(stp, ['./qgate/templates/qgt-mlrun.txt',
-                                   './qgate/templates/qgt-mlrun.html'])
+    stp = modelsetup.ModelSetup("0-size-100",
+                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+    out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
+                                   './qgate_sln_mlrun/templates/qgt-mlrun.html'])
     sln = ModelSolution(stp)
 
     testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]

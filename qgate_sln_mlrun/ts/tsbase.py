@@ -1,7 +1,7 @@
 
-from qgate.output import Output
-from qgate.modelsolution import ModelSolution
-from qgate.setup import Setup
+from qgate_sln_mlrun.output import Output
+from qgate_sln_mlrun.modelsolution import ModelSolution
+from qgate_sln_mlrun.modelsetup import ModelSetup
 from enum import Enum
 import mlrun
 
@@ -90,7 +90,7 @@ class TSBase:
         return self._solution
 
     @property
-    def setup(self) -> Setup:
+    def setup(self) -> ModelSetup:
         return self._setup
 
     @property

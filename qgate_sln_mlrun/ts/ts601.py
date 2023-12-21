@@ -2,10 +2,10 @@
   TS601: Serving score from CART
 """
 
-from qgate.ts.tsbase import TSBase
-from qgate.modelsolution import ModelSolution
-from qgate.output import Output
-from qgate.setup import Setup
+from qgate_sln_mlrun.ts.tsbase import TSBase
+from qgate_sln_mlrun.modelsolution import ModelSolution
+from qgate_sln_mlrun.output import Output
+from qgate_sln_mlrun.modelsetup import ModelSetup
 
 
 class TS601(TSBase):
