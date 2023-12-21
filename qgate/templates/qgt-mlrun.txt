@@ -1,0 +1,18 @@
+# QGate version: {{ data.version }}
+# {{ data.datetime }}
+# -----------------------
+Summary, test scenarios: {{ data.summary.count_testcases_done }}/{{ data.summary.count_testcases_err }} [DONE/ERR]
+# -----------------------{% for testscenario in data.testscenarios %}
+{{ testscenario.name }}: {{ testscenario.desc }}{% for testcase in testscenario.testcases %}
+  {% if testcase.state == 'DONE' %}{{ testcase.state }} {% else %}{{ testcase.state }}  {% endif %}... '{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}{% endfor %}{% endfor %}
+# -----------------------
+# MLRun (client/server): {{ data.mlrun }}/{{ data.mlrun_server }} (https://docs.mlrun.org/en/latest/change-log/index.html)
+# Python: {{ data.python }}
+# System: {{ data.system }}
+# Platform: {{ data.platform }}
+# ----------------------- {% for variable in data.variables %}
+# {{ variable.key }}: '{{ variable.value }}' {% endfor %}
+# -----------------------
+# CPU: {{ data.cpu }}
+# RAM total/free: {{ data.memory_total }}/{{ data.memory_free }}
+# Host: {{ data.host }}

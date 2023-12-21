@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="Windows-1252">
+</head>
+<style>
+html, body { 
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #E5E5E5;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+
+table {
+  margin: 0px;
+  overflow-x: auto;
+  border-spacing: 0;
+  font-family: courier new, courier, serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+tbody {
+  white-space: nowrap;
+}
+
+td {
+  padding: 2px 2px;
+  border-top-width: 0;
+  border-left-width: 0;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 6px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content-tiny {
+  padding: 0 8px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  font-family: courier new, courier, serif;
+  font-size: 12px;
+  font-weight: normal;
+  width:inherit;
+  height: 100px;
+  overflow: auto;
+}
+
+.content {
+  padding: 0 10px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  font-family: courier new, courier, serif;
+  font-size: 14px;
+  font-weight: normal;
+  width:inherit;
+  height: 400px;
+  overflow: auto;
+}
+
+.footer{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: right;
+}
+
+#img-check {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIhSURBVDhPTVJNaBNREP72ZZPdjdntZtNIPCgoSOnFige9FtSjQg+FVgU9ePGgNwXxpFAQKh4KIt4UWtoeBIu3WvAqxYOeWgQVTbEm1SabbNL9e2+dza5J5jEwb3a+7307MxISk85vnLmkKdqMklOFiCIIwXseUdxzOlwIBKHP6L7y/uKnt4SL+gST704vVawjs6ZuQmZymo6NoILAkYAfenAOHDSd5vL65ObV+CNLigDGJKHmVBh5HWZhBEW9CMuwUCS3RkowDQMlo4S8qkHOyCKFoU8QR0IiiXSEFNGdXmZURxq7cHAiN45b5XsYUyZQC7+moCECzgVC4UOOsuhyBy4/gMdd2Hwfo6yCKWMWBWZgL/gNHvYFDAh2xWeMZSdwp/wAp7LnUAuqaAZ/oQgNV4ybyEHBy/pzbLkfcUiUU9QQQR4VVP3vcKlR0+Y1nJUvoB02cV2/jTIpeLX3Ah+6G1AjgxoapqghgkJmFD+CbTzdfYgdZwfThRu4q8/jKDuO1foi1p1laEJPwNL/4Q0IojinQsdP7wse1+6j2qrimDiJtfprLNrzULkFn1ODaZyM9WDU6SEFcbtDEUAOVfzyvmHhzxye1Z5gqbUAJSjC931yl2o4mDSA9SMvcFm7Q0vSasKzI2zZm1jdf4S23UHLdtCwG2i0bTiddq82hcVTTmz8zeHLpG6GMiLOxqubiExMiv+RFpfWOEPhyvZUfQ0A/gHnZ/hPVPci4gAAAABJRU5ErkJggg==');
+}
+#img-error {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAI3SURBVDhPRVLfS1RBFP5m7p179+6uu1ZPEYSlWeybGbKkQeCCRW/1GASJ+BC+RNmLCeuT/SKQXnqL/oMCo7BMsXoxKCjLiCIoMQzCsm137517Zzozu+aBO8w935xvvvOdYWhG5eRAmR8sjjJXuDoKFRyngSWJBudgjDNoBZ0ksVqYKWdnF28Y2B76O3R6J2/f/zmZfxRASkqsA0EOcAShGlAJEFYpl7UlvPvwBoKgNz0xucQNgV79puG6LoQH8/EjJ+hwBpAhKYhhFPBCty22hC05H1rTYYLs0taRpdsYKr/A93TCHx6Bd+4SUN8AfryFGL4A//wYYQeAaoU4iERKYm4SaKUU3aSQykAtv0b84hlETxHe2E2I8bvwjpYQv3sD9WUZSKVtiVlMWAIqjm2f5pe7kFcGEU3fhyj2wSsdQzT3GHLijDGUcAfwfc5yeTJpk8BxOMnSSMhAchpeK3kQWAgkjpl9ZpfdWx/CkCbjuAa2BCy3LYAiVTER0A3i8m14/QOIns4genCPlPTCG58ikhZSIcHIVF2vkUGbCkyY4tofcrsLbtchRPOzkJMjkFeHED2chtO+D7yjQMaSiQ61kcSmZ1gZqFUl8q0M6TzUxyWEt65DvX8FbG8jeXsh70whXngC/fUTjXCHbVmvfd9SoNZWfuv1n3XLTErUy7lGv6ZNkmuM1R+I0OSM2XEc887CblO79ZT7ey7yvlKZpVLN52fW/9NqBGMMQuhk8fk1cfxU2T87qP4BUynZGRyUizgAAAAASUVORK5CYII=');
+}
+#img-info {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA6klEQVR4nJ2TPQ7CMAyFswAXYSoxDJyziAoE4gogByYWfi4BHISW0VaQU7VqaYLaWoqUIX55z/mi1E/B0QIYTrShp0b6uOX2vJyi1SpU47MdaeQNGGIwbH1LGyJteB3t7bDRDIbvocamEN9qIoC89R0syiuEvKpkJu4qIHFmBztRMrC21j1RFgqQXv9uD0bIXTwUGMr6CgBSKg7S0IEWAu9ghDYCLoJGXvZ3wLESPOVJus5BeqKTjRwLgmePQSYliYKlRr52YOAy39lB7T+IiOAZilPYlpsbzdUSPIUwmXDOCGVujxyXmSv1BSkyfPXWvaHkAAAAAElFTkSuQmCC');
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted white;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 270px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  padding: 5px 3px;
+  border-radius: 6px;
+  white-space: pre-wrap;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+</style>
+<script>
+
+function myFunction(element) {
+  var x = document.getElementById(element);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+</script>
+<body>
+	<h2>Quality report for MLRun</h2>
+	<p><b>{{ data.datetime }}</b>, QGate version: {{ data.version }}</p>
+
+	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3')">
+		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
+			<tr>
+				<td style="border: 0px; font-weight: bold;">{% if data.summary.state == 'DONE' %}<img id="img-check">{% else %}<img id="img-error">{% endif %}Report outputs ...</td>
+				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">{% if data.summary.state == 'DONE' %}{{ data.summary.count_testcases_done }}x DONE {% else %}<div class="tooltip">{{ data.summary.count_testcases_err }}x ERR<span class="tooltiptext">{{ data.summary.first_errors }}</span></div> & {{ data.summary.count_testcases_done }}x DONE {% endif %}</td>
+			</tr>
+		</table>
+	</button>
+	<div id="myDIV3" style="display: none;" class="content">
+		<table>{% for testscenario in data.testscenarios %}
+			<tr><td colspan="2"><b>{{ testscenario.name }}: {{ testscenario.desc }}</b></td></tr>{% for testcase in testscenario.testcases %}
+				<tr><td>&nbsp;{% if testcase.state == 'DONE' %}<img id="img-check">{% else %}<img id="img-error">{% endif %}{{ testcase.state }}</td><td>'{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}</td></tr>{% endfor %}{% endfor %}
+		</table>
+	</div>
+
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img id="img-info">&nbsp;Execution details ...</button>
+	<div id="myDIV" style="display: none;" class="content-tiny">
+		<p>
+			<b>System information:</b></br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun (client/server): {{ data.mlrun }}/{{ data.mlrun_server }}</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)</br>
+			&nbsp;&nbsp;<b style="color:blue;">Python: {{ data.python }}</b></br>
+			&nbsp;&nbsp;<b>System:</b> {{ data.system }}</br>
+			&nbsp;&nbsp;<b>Platform:</b> {{ data.platform }}</br>
+		</p>
+		<p>
+			<b>Variables:</b></br>{% for variable in data.variables %}
+		 	&nbsp;&nbsp;<b>{{ variable.key }}:</b> '{{ variable.value }}'</br> {% endfor %}
+		</p>
+		<p>
+			<b>Hardware information:</b></br>
+			&nbsp;&nbsp;<b>CPU:</b> {{ data.cpu }} cores</br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> {{ data.memory_total }}/{{ data.memory_free }}</br>
+			&nbsp;&nbsp;<b>Host:</b> {{ data.host }}</br>
+		</p>
+	</div>
+
+	<hr>
+	<p class="footer">Source see the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
+</body>
+</html>

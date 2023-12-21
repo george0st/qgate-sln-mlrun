@@ -6,12 +6,10 @@ import sys, os
 
 
 def run_testing():
-
-    print(os.getcwd())
     stp = setup.Setup("0-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
-    out = output.Output(stp, ['./assets/templates/qgt-mlrun.txt',
-                                   './assets/templates/qgt-mlrun.html'])
+    out = output.Output(stp, ['./qgate/templates/qgt-mlrun.txt',
+                                   './qgate/templates/qgt-mlrun.html'])
     sln = ModelSolution(stp)
 
     testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]

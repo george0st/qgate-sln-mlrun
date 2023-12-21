@@ -105,13 +105,6 @@ class Output():
             with open(os.path.join(self._setup.model_output, file_name), 'w+t') as output_file:
                 output_file.write(output)
 
-    # @property
-    # def file_pattern(self):
-    #     return Output.OUTPUT_FILE
-    # @property
-    # def file_name(self):
-    #     return self._file_name
-
     def __del__(self):
         self.close()
 
