@@ -1,4 +1,8 @@
-/project.yaml
+/dist/
+/build/
+.project.yaml
+/qgate_sln_mlrun.egg-info/
+**/__pycache__/
 **/__pycache__/
 /venv/
 *.pyc
@@ -9,7 +13,7 @@
 .bin
 *venv*
 qgate-sln-mlrun-private.env
-/qgate/__pycache__/*.pyc
+/qgate_sln_mlrun/__pycache__/*.pyc
 /output/
 /.coverage
 /tests/__pycache__/*.pyc

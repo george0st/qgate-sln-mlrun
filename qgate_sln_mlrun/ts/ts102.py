@@ -2,9 +2,9 @@
   TS102: Delete project(s)
 """
 
-from qgate.ts.tsbase import TSBase
-from qgate.modelsolution import ModelSolution
-from qgate.output import Output
+from qgate_sln_mlrun.ts.tsbase import TSBase
+from qgate_sln_mlrun.modelsolution import ModelSolution
+from qgate_sln_mlrun.output import Output
 import mlrun
 import os
 import json

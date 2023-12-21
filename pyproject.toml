@@ -1,0 +1,80 @@
+[project]
+
+name = "qgate_sln_mlrun"  # Required
+
+dynamic = ["version", "readme", "dependencies", "optional-dependencies"]
+
+description = "The quality gate for testing MLRun/Iguazio solution."  # Optional
+
+requires-python = ">=3.6"
+
+license = {text = "MIT"}
+#license = {file = "LICENSE"}
+
+keywords = ["testing", "data-science", "machine-learning", "quality-assurance", "quality-assessment", "iguazio", "mlrun",
+  "mlops", "quality-gate", "feature-store"]    # Optional
+
+authors = [
+  {name = "Jiri Steuer", email = "steuer.jiri@gmail.com" }      # Optional
+]
+maintainers = [
+  {name = "Jiri Steuer", email = "steuer.jiri@gmail.com" }      # Optional
+]
+
+classifiers = [  # Optional
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Software Development :: Libraries",
+]
+
+#[project]
+#name = "my_package"
+#authors = [
+#    {name = "Josiah Carberry", email = "josiah_carberry@brown.edu"},
+#]
+[project.urls]  # Optional
+homepage='https://github.com/george0st/qgate-sln-mlrun/'
+repository='https://pypi.org/project/qgate-sln-mlrun/'
+#"Homepage" = 'https://github.com/george0st/qgate-perf/'
+#download_url='https://pypi.org/project/qgate_perf/'
+#"Source" = "https://github.com/pypa/sampleproject/"
+
+[tool.setuptools]
+packages = ["qgate_sln_mlrun", "qgate_sln_mlrun.ts", "qgate_sln_mlrun.templates"]
+include-package-data = true
+
+# it has relation only to --wheel
+#[tool.setuptools.packages.find]
+#where = ["qgate_sln_mlrun"]
+##include = ["qgate_sln_mlrun"]
+##exclude = ["input*", "output*", "tests*"]
+
+#[tool.setuptools.package-data]
+#templates = ["*.txt", "*.html"]
+#qgate_sln_mlrun.templates = ["*.txt", "*.html"]
+##"*" = ["*.txt", "*.html"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+version = {attr = "qgate_sln_mlrun.__version__"}
+dependencies = { file = ["requirements.txt"] }
+optional-dependencies.dev = { file = ["dev-requirements.txt"] }
+

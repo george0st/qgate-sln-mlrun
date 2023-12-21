@@ -5,7 +5,7 @@ import os
 
 class TestProjects(unittest.TestCase):
 
-    INPUT_FILE = "qgate-sln-mlrun.env"
+    INPUT_FILE = "qgate_sln_mlrun-sln-mlrun.env"
 
     @classmethod
     def setUpClass(cls):

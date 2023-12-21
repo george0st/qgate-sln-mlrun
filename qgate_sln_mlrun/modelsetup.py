@@ -2,7 +2,7 @@
 import mlrun
 import os
 
-class Setup:
+class ModelSetup:
     """
     Setup for solution
     """
