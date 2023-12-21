@@ -41,11 +41,6 @@ classifiers = [  # Optional
   "Topic :: Software Development :: Libraries",
 ]
 
-#[project]
-#name = "my_package"
-#authors = [
-#    {name = "Josiah Carberry", email = "josiah_carberry@brown.edu"},
-#]
 [project.urls]  # Optional
 homepage='https://github.com/george0st/qgate-sln-mlrun/'
 repository='https://pypi.org/project/qgate-sln-mlrun/'
@@ -55,18 +50,8 @@ repository='https://pypi.org/project/qgate-sln-mlrun/'
 
 [tool.setuptools]
 packages = ["qgate_sln_mlrun", "qgate_sln_mlrun.ts", "qgate_sln_mlrun.templates"]
-include-package-data = true
+include-package-data = true     # true - add other data such as *.txt, *.html, etc. under all packages
 
-# it has relation only to --wheel
-#[tool.setuptools.packages.find]
-#where = ["qgate_sln_mlrun"]
-##include = ["qgate_sln_mlrun"]
-##exclude = ["input*", "output*", "tests*"]
-
-#[tool.setuptools.package-data]
-#templates = ["*.txt", "*.html"]
-#qgate_sln_mlrun.templates = ["*.txt", "*.html"]
-##"*" = ["*.txt", "*.html"]
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
