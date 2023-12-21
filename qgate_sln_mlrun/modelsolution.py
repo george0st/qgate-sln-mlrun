@@ -1,10 +1,10 @@
-from qgate_sln_mlrun.modelsetup import ModelSetup
+from qgate_sln_mlrun.setup import Setup
 
 
 class ModelSolution:
     """Create solution"""
 
-    def __init__(self, setup: ModelSetup):
+    def __init__(self, setup: Setup):
         """ Init
 
         :param setup:   Setup for the solution
@@ -14,7 +14,7 @@ class ModelSolution:
         self._project_specs={}
 
     @property
-    def setup(self) -> ModelSetup:
+    def setup(self) -> Setup:
         return self._setup
 
     @property
