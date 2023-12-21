@@ -3,7 +3,7 @@ rem pip install --upgrade twine
 
 rmdir /S /Q dist
 rmdir /S /Q build
-rmdir /S /Q qgate.egg-info
+rmdir /S /Q qgate_sln_mlrun.egg-info
 
 rem helper 'https://www.scivision.dev/python-minimal-package/'
 rem https://pypa-build.readthedocs.io/en/latest/
@@ -14,4 +14,4 @@ twine upload dist/* --verbose -u__token__
 
 rmdir /S /Q dist
 rmdir /S /Q build
-rmdir /S /Q qgate.egg-info
+rmdir /S /Q qgate_sln_mlrun.egg-info
