@@ -49,7 +49,7 @@ repository='https://pypi.org/project/qgate-sln-mlrun/'
 #"Source" = "https://github.com/pypa/sampleproject/"
 
 [tool.setuptools]
-include-package-data = false
+include-package-data = true
 
 # it has relation only to --wheel
 [tool.setuptools.packages.find]
