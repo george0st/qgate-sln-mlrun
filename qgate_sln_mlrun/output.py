@@ -21,10 +21,11 @@ class Output():
     Management reports/outputs based on templates.
     """
 
-    COMMENT = "# "
-    OUTPUT_FILE = "qg-mlrun-{0}.txt"
+    DEFAULT_TEMPLATE_HTML= '#qgate_sln_mlrun.templates#qgt-mlrun.html'
+    DEFAULT_TEMPLATE_TXT = '#qgate_sln_mlrun.templates#qgt-mlrun.txt'
 
-    def __init__(self, setup: Setup, templates: [str]=None):
+    def __init__(self, setup: Setup, templates: [str]=[DEFAULT_TEMPLATE_HTML,
+                                                       DEFAULT_TEMPLATE_TXT]):
         """
         Initial
 
@@ -85,8 +86,22 @@ class Output():
         for template in self._templates:
 
             # get template
-            with open(os.path.join(template), 'r+t') as input_file:
-                template_content=input_file.read()
+            if template[0]=='#':
+                # get template from package
+                # format '#package#resource' e.g. #qgate_sln_mlrun.templates#qgt-mlrun.txt'
+                import importlib.resources
+
+                index=template.rindex('#')
+                package=template[1:index]
+                resource=template[index+1:]
+
+                with importlib.resources.open_text(package, resource) as input_file:
+                    template_content = input_file.read()
+                template=resource
+            else:
+                # get template from file
+                with open(os.path.join(template), 'r+t') as input_file:
+                    template_content=input_file.read()
 
             # render
             jinja=Template(template_content)

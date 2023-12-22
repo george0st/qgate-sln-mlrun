@@ -17,3 +17,4 @@ qgate-sln-mlrun-private.env
 /output/
 /.coverage
 /tests/__pycache__/*.pyc
+project.yaml
