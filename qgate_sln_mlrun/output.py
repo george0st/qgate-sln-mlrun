@@ -24,9 +24,6 @@ class Output():
     DEFAULT_TEMPLATE_HTML= '#qgate_sln_mlrun.templates#qgt-mlrun.html'
     DEFAULT_TEMPLATE_TXT = '#qgate_sln_mlrun.templates#qgt-mlrun.txt'
 
-    COMMENT = "# "
-    OUTPUT_FILE = "qg-mlrun-{0}.txt"
-
     def __init__(self, setup: Setup, templates: [str]=[DEFAULT_TEMPLATE_HTML,
                                                        DEFAULT_TEMPLATE_TXT]):
         """
