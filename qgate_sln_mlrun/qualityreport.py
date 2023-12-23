@@ -15,6 +15,9 @@ class QualityReport:
         self._setup=setup
         self._output=output
 
+        self._projects=[]
+        self._project_specs={}
+
     def execute(self):
         sln = ModelSolution(self._setup)
 
@@ -46,4 +49,15 @@ class QualityReport:
         self._output.render()
         self._output.close()
 
+    @property
+    def setup(self) -> Setup:
+        return self._setup
+
+    @property
+    def projects(self) -> list:
+        return self._projects
+
+    @property
+    def project_specs(self) -> dict:
+        return self._project_specs
 

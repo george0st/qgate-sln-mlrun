@@ -1,4 +1,5 @@
 from qgate_sln_mlrun.modelsolution import ModelSolution
+from qgate_sln_mlrun.qualityreport import QualityReport
 from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts601
 from qgate_sln_mlrun.ts import tsbase
 from qgate_sln_mlrun import output, setup
@@ -41,4 +42,10 @@ def run_testing():
     out.close()
 
 if __name__ == '__main__':
-    run_testing()
+    stp = setup.Setup("0-size-100",
+                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+    out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
+                                   './qgate_sln_mlrun/templates/qgt-mlrun.html'])
+    report=QualityReport(stp,out)
+    report.execute()
+    #run_testing()

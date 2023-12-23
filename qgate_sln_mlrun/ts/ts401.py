@@ -4,6 +4,7 @@
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 from qgate_sln_mlrun.modelsolution import ModelSolution
+from qgate_sln_mlrun.qualityreport import QualityReport
 from qgate_sln_mlrun.output import Output
 from qgate_sln_mlrun.setup import Setup
 import mlrun
@@ -15,7 +16,7 @@ import os
 
 class TS401(TSBase):
 
-    def __init__(self, solution: ModelSolution, output: Output):
+    def __init__(self, solution: QualityReport, output: Output):
         super().__init__(solution, output, self.__class__.__name__)
 
     @property
