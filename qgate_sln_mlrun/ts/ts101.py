@@ -1,10 +1,7 @@
 """
   TS101: Create project(s)
 """
-
 from qgate_sln_mlrun.ts.tsbase import TSBase
-from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.modelsolution import ModelSolution
 import mlrun
 import os
 import json
@@ -13,8 +10,8 @@ import glob
 
 class TS101(TSBase):
 
-    def __init__(self, solution: ModelSolution, output: Output):
-        super().__init__(solution, output, self.__class__.__name__)
+    def __init__(self, solution):
+        super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
@@ -39,9 +36,11 @@ class TS101(TSBase):
                 json_content = json.load(json_file)
                 name, desc, lbls, kind = self.get_json_header(json_content)
 
-                self.solution.projects.append(name)
+                #self.solution.projects.append(name)
+                self.projects.append(name)
                 if self._create_project(name, desc, lbls, kind):
-                    self.solution.project_specs[name] = json_content['spec']
+                    #self.solution.project_specs[name] = json_content['spec']
+                    self.project_specs[name] = json_content['spec']
 
     @TSBase.handler_testcase
     def _create_project(self, name, desc, lbls, kind):
@@ -53,5 +52,3 @@ class TS101(TSBase):
             prj.metadata.labels[lbl] = lbls[lbl]
         prj.save()
         return True
-
-

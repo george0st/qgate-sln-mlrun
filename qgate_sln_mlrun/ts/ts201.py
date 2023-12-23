@@ -3,9 +3,6 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-from qgate_sln_mlrun.modelsolution import ModelSolution
-from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.setup import Setup
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
@@ -18,8 +15,8 @@ import glob
 
 class TS201(TSBase):
 
-    def __init__(self, solution: ModelSolution, output: Output):
-        super().__init__(solution, output, self.__class__.__name__)
+    def __init__(self, solution):
+        super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
@@ -38,8 +35,8 @@ class TS201(TSBase):
         :param ts:      Test scenario
         """
         self.testscenario_new()
-        for project_name in self.solution.projects:
-            for featureset_name in self.get_featuresets(self.solution.project_specs.get(project_name)):
+        for project_name in self.projects:
+            for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
                 # create file with definition of vector
                 source_file = os.path.join(os.getcwd(),
                                            self.setup.model_definition,

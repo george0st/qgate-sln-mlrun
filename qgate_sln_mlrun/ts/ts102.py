@@ -3,11 +3,8 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-from qgate_sln_mlrun.modelsolution import ModelSolution
-from qgate_sln_mlrun.output import Output
 import mlrun
 import os
-import json
 import glob
 import shutil
 
@@ -15,8 +12,8 @@ import shutil
 
 class TS102(TSBase):
 
-    def __init__(self, solution: ModelSolution, output: Output):
-        super().__init__(solution, output, self.__class__.__name__)
+    def __init__(self, solution):
+        super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
@@ -35,7 +32,7 @@ class TS102(TSBase):
         :param ts:      Test scenario
         """
         self.testscenario_new()
-        for project_name in self.solution.projects:
+        for project_name in self.projects:
             self._delete_project(project_name)
 
         # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
