@@ -17,11 +17,8 @@ class TSBase:
 
     def __init__(self, solution, name: str):
         self._solution=solution
-        # self._setup=solution.setup
-        # self._output=solution.output
         self._name=name
         self._state = TSState.NoExecution
-
 
     @property
     def projects(self) -> list:
