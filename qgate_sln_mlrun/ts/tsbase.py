@@ -23,6 +23,23 @@ class TSBase:
         self._name=name
         self._state = TSState.NoExecution
 
+
+    @property
+    def projects(self) -> list:
+        return self._solution._projects
+
+    @property
+    def project_specs(self) -> dict:
+        return self._solution._project_specs
+
+    @property
+    def setup(self) -> Setup:
+        return self.solution.setup
+
+    @property
+    def output(self) -> Output:
+        return self.solution.output
+
     def handler_testcase(func):
         """Error handler for test case, mandatory arguments 'ts' and 'name'"""
         def wrapper(self, testcase_name: str, *args, **kwargs):
@@ -39,18 +56,7 @@ class TSBase:
                 return False
         return wrapper
 
-# region INTERNAL
-
-    # def has_featureset(self, name, project_spec):
-    #     if project_spec:
-    #         # Support two different collections
-    #         if isinstance(project_spec, dict):
-    #             return name in project_spec["feature-sets"]
-    #         elif isinstance(project_spec, list):
-    #             return name in project_spec
-    #         else:
-    #             raise Exception("Unsupported type")
-    #     return False
+    # region INTERNAL
 
     def get_featuresets(self, project_spec):
         if project_spec:
@@ -83,27 +89,12 @@ class TSBase:
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
 
-# endregion
+    def project_switch(self, project_name):
+        # switch to proper project if the current project is different
+        if mlrun.get_current_project().name != project_name:
+            mlrun.load_project(name=project_name, context="./", user_project=False)
 
-    @property
-    def solution(self): # -> QualityReport:
-        return self._solution
-
-    @property
-    def projects(self) -> list:
-        return self._solution._projects
-
-    @property
-    def project_specs(self) -> dict:
-        return self._solution._project_specs
-
-    @property
-    def setup(self) -> Setup:
-        return self.solution.setup
-
-    @property
-    def output(self) -> Output:
-        return self.solution.output
+    # endregion
 
     @property
     def desc(self):
@@ -128,11 +119,7 @@ class TSBase:
     def exec(self):
         raise NotImplemented()
 
-    def project_switch(self, project_name):
-        # switch to proper project if the current project is different
-        if mlrun.get_current_project().name != project_name:
-            mlrun.load_project(name=project_name, context="./", user_project=False)
-
+    # region TEST_SCENARIOS
     def testscenario_new(self):
         self.output.testscenario_new(self.name, self.desc)
 
@@ -147,3 +134,6 @@ class TSBase:
 
     def testcase_state(self, state="DONE"):
         self.output.testcase_state(state)
+
+    # endregion
+
