@@ -35,8 +35,8 @@ class TS501(TSBase):
         Get data from off-line feature vector
         """
         self.testscenario_new()
-        for project_name in self.solution.projects:
-            for featurevector_name in self.get_featurevectors(self.solution.project_specs.get(project_name)):
+        for project_name in self.projects:
+            for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
                 self._get_data_offline(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
 
 
