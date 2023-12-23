@@ -1,7 +1,6 @@
 
 from qgate_sln_mlrun.output import Output
-#from qgate_sln_mlrun.modelsolution import ModelSolution
-from qgate_sln_mlrun.qualityreport import QualityReport
+#from qgate_sln_mlrun.qualityreport import QualityReport
 from qgate_sln_mlrun.setup import Setup
 from enum import Enum
 import mlrun
@@ -17,10 +16,10 @@ class TSBase:
     Base class for all test scenarios
     """
 
-    def __init__(self, solution, output: Output, name: str):
+    def __init__(self, solution, name: str):
         self._solution=solution
-        self._setup=solution.setup
-        self._output=output
+        # self._setup=solution.setup
+        # self._output=solution.output
         self._name=name
         self._state = TSState.NoExecution
 
@@ -87,16 +86,16 @@ class TSBase:
 # endregion
 
     @property
-    def solution(self) -> QualityReport:
+    def solution(self): # -> QualityReport:
         return self._solution
 
     @property
     def setup(self) -> Setup:
-        return self._setup
+        return self.solution.setup
 
     @property
     def output(self) -> Output:
-        return self._output
+        return self.solution.output
 
     @property
     def desc(self):
@@ -140,6 +139,3 @@ class TSBase:
 
     def testcase_state(self, state="DONE"):
         self.output.testcase_state(state)
-
-
-

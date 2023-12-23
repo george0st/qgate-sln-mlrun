@@ -1,7 +1,7 @@
 import os
 from qgate_sln_mlrun.setup import Setup
 from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.modelsolution import ModelSolution
+#from qgate_sln_mlrun.modelsolution import ModelSolution
 from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts601
 from qgate_sln_mlrun.ts import tsbase
 import sys
@@ -19,7 +19,7 @@ class QualityReport:
         self._project_specs={}
 
     def execute(self):
-        sln = ModelSolution(self._setup)
+#        sln = ModelSolution(self._setup)
 
         testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]
         testscenario_test = ts601.TS601
@@ -38,7 +38,7 @@ class QualityReport:
 
         for testscenario_fn in testscenario_fns:
             if testscenario_fn:
-                ts = testscenario_fn(sln, self._output)
+                ts = testscenario_fn(self)
                 try:
                     ts.exec()
                     ts.state = tsbase.TSState.DONE
@@ -52,6 +52,10 @@ class QualityReport:
     @property
     def setup(self) -> Setup:
         return self._setup
+
+    @property
+    def output(self) -> Output:
+        return self._output
 
     @property
     def projects(self) -> list:

@@ -1,11 +1,7 @@
 """
   TS101: Create project(s)
 """
-
 from qgate_sln_mlrun.ts.tsbase import TSBase
-from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.modelsolution import ModelSolution
-from qgate_sln_mlrun.qualityreport import QualityReport
 import mlrun
 import os
 import json
@@ -14,8 +10,8 @@ import glob
 
 class TS101(TSBase):
 
-    def __init__(self, solution: QualityReport, output: Output):
-        super().__init__(solution, output, self.__class__.__name__)
+    def __init__(self, solution):
+        super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
