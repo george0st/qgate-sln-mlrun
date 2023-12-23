@@ -1,6 +1,5 @@
 
 from qgate_sln_mlrun.output import Output
-#from qgate_sln_mlrun.qualityreport import QualityReport
 from qgate_sln_mlrun.setup import Setup
 from enum import Enum
 import mlrun
@@ -34,11 +33,11 @@ class TSBase:
 
     @property
     def setup(self) -> Setup:
-        return self.solution.setup
+        return self._solution.setup
 
     @property
     def output(self) -> Output:
-        return self.solution.output
+        return self._solution.output
 
     def handler_testcase(func):
         """Error handler for test case, mandatory arguments 'ts' and 'name'"""

@@ -3,12 +3,8 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-#from qgate_sln_mlrun.modelsolution import ModelSolution
-#from qgate_sln_mlrun.qualityreport import QualityReport
-#from qgate_sln_mlrun.output import Output
 import mlrun
 import os
-import json
 import glob
 import shutil
 
