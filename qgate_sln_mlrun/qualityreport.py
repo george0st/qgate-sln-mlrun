@@ -18,22 +18,13 @@ class QualityReport:
         self._projects=[]
         self._project_specs={}
 
-    def execute(self):
-#        sln = ModelSolution(self._setup)
-
+    def execute(self, delete_scenario=True, test_scenario=True):
         testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]
         testscenario_test = ts601.TS601
-        NoDelete = False
 
-        # support parametr 'NoDelete' and 'Test' for switch-off the UC102: Delete project(s)
-        if len(sys.argv) > 1:
-            for arg in sys.argv[1:]:
-                arg = arg.lower()
-                if arg == "nodelete":
-                    NoDelete = True
-                elif arg == "test":
-                    testscenario_fns.append(testscenario_test)
-        if not NoDelete:
+        if test_scenario:
+            testscenario_fns.append(testscenario_test)
+        if delete_scenario:
             testscenario_fns.append(ts102.TS102)
 
         for testscenario_fn in testscenario_fns:
