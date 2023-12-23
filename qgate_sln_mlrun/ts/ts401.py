@@ -34,8 +34,8 @@ class TS401(TSBase):
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
 
         self.testscenario_new()
-        for project_name in self.solution.projects:
-            for featurevector_name in self.get_featurevectors(self.solution.project_specs.get(project_name)):
+        for project_name in self.projects:
+            for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
                 # create file with definition of vector
                 source_file = os.path.join(os.getcwd(),
                                            self.setup.model_definition,
