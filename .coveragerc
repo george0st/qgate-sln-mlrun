@@ -27,6 +27,5 @@ exclude_lines =
 
 omit:
     ./tests/*
-    setup.py
     dependencies.py
     main.py

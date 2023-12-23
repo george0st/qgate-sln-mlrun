@@ -22,11 +22,11 @@ class TSBase:
 
     @property
     def projects(self) -> list:
-        return self._solution._projects
+        return self._solution.projects
 
     @property
     def project_specs(self) -> dict:
-        return self._solution._project_specs
+        return self._solution.project_specs
 
     @property
     def setup(self) -> Setup:
