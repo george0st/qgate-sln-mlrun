@@ -39,8 +39,8 @@ class TS201(TSBase):
         :param ts:      Test scenario
         """
         self.testscenario_new()
-        for project_name in self.solution.projects:
-            for featureset_name in self.get_featuresets(self.solution.project_specs.get(project_name)):
+        for project_name in self.projects:
+            for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
                 # create file with definition of vector
                 source_file = os.path.join(os.getcwd(),
                                            self.setup.model_definition,

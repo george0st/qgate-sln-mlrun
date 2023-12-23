@@ -36,7 +36,7 @@ class TS102(TSBase):
         :param ts:      Test scenario
         """
         self.testscenario_new()
-        for project_name in self.solution.projects:
+        for project_name in self.projects:
             self._delete_project(project_name)
 
         # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
