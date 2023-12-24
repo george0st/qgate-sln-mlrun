@@ -1,5 +1,6 @@
 from qgate_sln_mlrun.qualityreport import QualityReport
 from qgate_sln_mlrun import output, setup
+import sys
 
 
 if __name__ == '__main__':
@@ -9,17 +10,16 @@ if __name__ == '__main__':
                                    './qgate_sln_mlrun/templates/qgt-mlrun.html'])
     report=QualityReport(stp,out)
 
-    # NoDelete = False
-    #
-    # # support parametr 'NoDelete' and 'Test' for switch-off the UC102: Delete project(s)
-    # if len(sys.argv) > 1:
-    #     for arg in sys.argv[1:]:
-    #         arg = arg.lower()
-    #         if arg == "nodelete":
-    #             NoDelete = True
-    #         elif arg == "test":
-    #             testscenario_fns.append(testscenario_test)
-    # if not NoDelete:
-    #     testscenario_fns.append(ts102.TS102)
+    delete_scenario = True
+    test_scenario = False
 
-    report.execute()
+    # support parametr 'NoDelete' and 'Test' for switch-off the UC102: Delete project(s)
+    if len(sys.argv) > 1:
+        for arg in sys.argv[1:]:
+            arg = arg.lower()
+            if arg == "nodelete":
+                delete = False
+            elif arg == "test":
+                test_scenario=True
+
+    report.execute(delete_scenario, test_scenario)
