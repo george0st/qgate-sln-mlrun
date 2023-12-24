@@ -10,12 +10,6 @@ class TestProjects(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-
-        # prefix = "."
-        # if not os.path.isfile(path.join(prefix, TestCaseBasic.INPUT_FILE)):
-        #     prefix=".."
-
-
         # setup relevant path
         if not os.path.isfile(os.path.join(".", TestProjects.INPUT_FILE)):
             os.chdir(os.path.dirname(os.getcwd()))
@@ -35,7 +29,7 @@ class TestProjects(unittest.TestCase):
     def test_template_embeded(self):
         stp = setup.Setup("0-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
-        out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML])
+        out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
         report.execute(True, True)
 
