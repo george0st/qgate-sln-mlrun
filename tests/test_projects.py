@@ -30,11 +30,11 @@ class TestProjects(unittest.TestCase):
         out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
                                   './qgate_sln_mlrun/templates/qgt-mlrun.html'])
         report = QualityReport(stp, out)
-        report.execute()
+        report.execute(True, True)
 
     def test_template_embeded(self):
         stp = setup.Setup("0-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML])
         report = QualityReport(stp, out)
-        report.execute()
+        report.execute(True, True)

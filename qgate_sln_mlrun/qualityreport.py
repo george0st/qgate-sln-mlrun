@@ -18,7 +18,7 @@ class QualityReport:
         self._projects=[]
         self._project_specs={}
 
-    def execute(self, delete_scenario=True, test_scenario=True):
+    def execute(self, delete_scenario=True, test_scenario=False):
         testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]
         testscenario_test = ts601.TS601
 
