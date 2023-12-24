@@ -38,3 +38,8 @@ class TestProjects(unittest.TestCase):
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML])
         report = QualityReport(stp, out)
         report.execute(True, True)
+
+    def test_common(self):
+        stp = setup.Setup("0-size-100",
+                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+        print(str(stp))
