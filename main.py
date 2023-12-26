@@ -18,7 +18,7 @@ if __name__ == '__main__':
         for arg in sys.argv[1:]:
             arg = arg.lower()
             if arg == "nodelete":
-                delete = False
+                delete_scenario = False
             elif arg == "test":
                 test_scenario=True
 
