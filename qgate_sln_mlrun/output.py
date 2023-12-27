@@ -157,9 +157,8 @@ class Output():
 
 
     def _system_info(self):
-        #self._data["version"] = __version__
-        from qgate_sln_mlrun.ts.tsbase import TSBase
-        self._data["version"] = TSBase.get_model_info(self._setup.model_definition)
+        self._data["version"] = __version__
+        self._data["model_version"] = self._get_model_version()
 
         # import mlrun
         # run_db_factory = mlrun.db.factory.RunDBFactory()
@@ -177,6 +176,10 @@ class Output():
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
         self._data["variables"] = self._setup.variables
+
+    def _get_model_version(self):
+        from qgate_sln_mlrun.ts.tsbase import TSBase
+        return TSBase.get_model_info(self._setup.model_definition)
 
     def _mlrun_server(self):
         # Return server MLRun version

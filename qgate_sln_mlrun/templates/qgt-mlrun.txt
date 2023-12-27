@@ -1,4 +1,4 @@
-# QGate version: {{ data.version }}
+# QGate version/model: {{ data.version }}/{{ data.model_version }}
 # {{ data.datetime }}
 # -----------------------
 Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.summary.count_testcases_done }}/{{ data.summary.count_testcases_err }} [DONE/ERR])
