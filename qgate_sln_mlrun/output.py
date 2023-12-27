@@ -160,10 +160,6 @@ class Output():
         self._data["version"] = __version__
         self._data["model_version"] = self._get_model_version()
 
-        # import mlrun
-        # run_db_factory = mlrun.db.factory.RunDBFactory()
-        # print(run_db_factory)
-
         self._data["datetime"] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         self._data["memory_total"], self._data["memory_free"] = self._memory()
