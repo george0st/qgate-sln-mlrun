@@ -34,7 +34,7 @@ class TS101(TSBase):
         for file in glob.glob(dir):
             with (open(file, "r") as json_file):
                 json_content = json.load(json_file)
-                name, desc, lbls, kind = self.get_json_header(json_content)
+                name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
                 #self.solution.projects.append(name)
                 self.projects.append(name)

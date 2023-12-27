@@ -52,7 +52,7 @@ class TS201(TSBase):
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, json_file):
         json_content = json.load(json_file)
-        name, desc, lbls, kind = self.get_json_header(json_content)
+        name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "feature-set":
             # create feature set only in case, if not exist

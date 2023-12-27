@@ -155,8 +155,11 @@ class Output():
         self._data["summary"]["first_errors"]=first_errors
 
 
+
     def _system_info(self):
-        self._data["version"] = __version__
+        #self._data["version"] = __version__
+        from qgate_sln_mlrun.ts.tsbase import TSBase
+        self._data["version"] = TSBase.get_model_info(self._setup.model_definition)
 
         # import mlrun
         # run_db_factory = mlrun.db.factory.RunDBFactory()
