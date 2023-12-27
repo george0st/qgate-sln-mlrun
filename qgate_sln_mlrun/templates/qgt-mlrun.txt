@@ -1,7 +1,7 @@
 # QGate version/model: {{ data.version }}/{{ data.model_version }}
 # {{ data.datetime }}
 # -----------------------
-Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.summary.count_testcases_done }}/{{ data.summary.count_testcases_err }} [DONE/ERR])
+Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.summary.count_testcases_err }}/{{ data.summary.count_testcases_done }} [ERR/DONE])
 # -----------------------{% for testscenario in data.testscenarios %}
 {{ testscenario.name }}: {{ testscenario.desc }}{% for testcase in testscenario.testcases %}
   {% if testcase.state == 'DONE' %}{{ testcase.state }} {% else %}{{ testcase.state }}  {% endif %}... '{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}{% endfor %}{% endfor %}
