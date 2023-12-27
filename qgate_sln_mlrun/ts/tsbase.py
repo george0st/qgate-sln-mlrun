@@ -3,6 +3,8 @@ from qgate_sln_mlrun.output import Output
 from qgate_sln_mlrun.setup import Setup
 from enum import Enum
 import mlrun
+import os
+import json
 
 
 class TSState(Enum):
@@ -71,7 +73,8 @@ class TSBase:
             return project_spec["feature-vectors"]
         return []
 
-    def get_json_header(self, json_content):
+    @staticmethod
+    def get_json_header(json_content):
         """ Get common header
 
         :param json_content:    json content
@@ -84,6 +87,18 @@ class TSBase:
         # optional labels
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
+
+    @staticmethod
+    def get_model_info(model_definition):
+        file = os.path.join(os.getcwd(),
+                            model_definition,
+                            "01-model",
+                            "model.json")
+        with open(file, "r") as json_file:
+            json_content = json.load(json_file)
+            name, desc, lbls, kind = TSBase.get_json_header(json_content)
+            return json_content['spec']['version']
+        return "n/a"
 
     def project_switch(self, project_name):
         # switch to proper project if the current project is different
