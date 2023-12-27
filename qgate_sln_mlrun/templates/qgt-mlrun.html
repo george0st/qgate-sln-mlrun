@@ -132,7 +132,7 @@ function myFunction(element) {
 </script>
 <body>
 	<h2>Quality report for MLRun</h2>
-	<p><b>{{ data.datetime }}</b>, QGate version/model: {{ data.version }}/{{ data.model_version }}</p>
+	<p><b>{{ data.datetime }}</b>, QGate version/model: v{{ data.version }}/v{{ data.model_version }}</p>
 
 	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
