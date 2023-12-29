@@ -2,7 +2,7 @@ import os
 from qgate_sln_mlrun.setup import Setup
 from qgate_sln_mlrun.output import Output
 #from qgate_sln_mlrun.modelsolution import ModelSolution
-from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts601
+from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts502, ts601
 from qgate_sln_mlrun.ts import tsbase
 import sys
 
@@ -20,10 +20,11 @@ class QualityReport:
 
     def execute(self, delete_scenario=True, test_scenario=False):
         testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]
-        testscenario_test = ts601.TS601
+        testscenario_tests = [ts502.TS502, ts601.TS601]
 
         if test_scenario:
-            testscenario_fns.append(testscenario_test)
+            for testscenario_test in testscenario_tests:
+                testscenario_fns.append(testscenario_test)
         if delete_scenario:
             testscenario_fns.append(ts102.TS102)
 
