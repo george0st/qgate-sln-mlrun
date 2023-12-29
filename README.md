@@ -39,8 +39,8 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
 ![Sample of outputs](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-samples.png?raw=true)
 
 The reports in original form, see:
- - all DONE - [HTML](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.html?raw=true), [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.txt?raw=true)
- - with ERR - [HTML](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.html?raw=true), [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.txt?raw=true)
+ - all DONE - [HTML](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-sample.png?raw=true), [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.txt?raw=true)
+ - with ERR - [HTML](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-sample-err.png?raw=true), [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.txt?raw=true)
 
 ## Usage
 
