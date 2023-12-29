@@ -106,8 +106,12 @@ class TS201(TSBase):
                 target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name)))
             elif target.lower().strip()=="csv":
                 target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
+            elif target.lower().strip()=="redis":
+                pass
+                # TODO: add redis
+                #target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
             else:
-                # TODO: Add support other targets for MLRun CE e.g. RedisTarget
+                # TODO: Add support other targets for MLRun CE
                 raise NotImplementedError()
             count+=1
         fs.set_targets(target_providers, with_defaults=False)
