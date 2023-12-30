@@ -76,8 +76,7 @@ class TS201(TSBase):
         self.project_switch(project_name)
         fs = fstore.FeatureSet(
             name=featureset_name,
-            description=featureset_desc,
-            relations=json_spec.get('relations')
+            description=featureset_desc
         )
 
         # define entities
