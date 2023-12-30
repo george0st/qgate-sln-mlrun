@@ -17,8 +17,8 @@ class Setup:
         self._variables["DIR"]=os.getcwd()
 
         # set model dirs
-        self._model_definition=self._variables['QGATE_DEFINITION']
-        self._model_output=self._variables['QGATE_OUTPUT']
+        #self._model_definition=self._variables['QGATE_DEFINITION']
+        #self._model_output=self._variables['QGATE_OUTPUT']
 
         # set data set size
         self._data_size=data_size
@@ -41,12 +41,19 @@ class Setup:
 
     @property
     def model_output(self):
-        return self._model_output
+        return self._variables['QGATE_OUTPUT']
+        #return self._model_output
 
     @property
     def model_definition(self):
-        return self._model_definition
+        return self._variables['QGATE_DEFINITION']
+        #return self._model_definition
 
     @property
     def data_size(self):
         return self._data_size
+
+    @property
+    def redis(self):
+        return self._variables.get('QGATE_REDIS', None)
+        #return self._variables['QGATE_REDIS']

@@ -7,7 +7,8 @@ import mlrun
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.data_types.data_types import spark_to_value_type
-from mlrun.datastore import ParquetTarget,CSVTarget
+#from mlrun.datastore import ParquetTarget, CSVTarget
+from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget
 import os
 import json
 import glob
@@ -107,9 +108,12 @@ class TS201(TSBase):
             elif target.lower().strip()=="csv":
                 target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
             elif target.lower().strip()=="redis":
-                pass
-                # TODO: add redis
-                #target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
+                if self.setup.redis:
+                    #target_providers.append(RedisNoSqlTarget(name=target_name, path=self.setup.redis))
+                    pass
+                else:
+                    # TODO: generate warning
+                    pass
             else:
                 # TODO: Add support other targets for MLRun CE
                 raise NotImplementedError()
