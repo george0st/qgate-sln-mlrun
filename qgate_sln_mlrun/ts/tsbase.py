@@ -31,6 +31,10 @@ class TSBase:
         return self._solution.project_specs
 
     @property
+    def vectors(self) -> dict:
+        return self._solution.vectors
+
+    @property
     def setup(self) -> Setup:
         return self._solution.setup
 

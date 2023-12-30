@@ -62,6 +62,9 @@ class TS401(TSBase):
         self.project_switch(project_name)
         features = json_spec['features']
 
+        # store information about vector testing
+        #self.vectors[featurevector_name]=json_spec['test']
+
         # create feature vector
         vector = fstore.FeatureVector(featurevector_name, features, description=featurevector_desc)
         vector.save()
