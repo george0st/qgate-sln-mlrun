@@ -24,24 +24,22 @@ class TS502(TSBase):
         self.get_data_online()
 
     def get_data_online(self):
-        pass
         """
         Get data from on-line feature vector
         """
         self.testscenario_new()
         for project_name in self.projects:
             for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
-                self._get_data_online(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
-
+                if featurevector_name in self.vectors:
+                    if self.vectors[featurevector_name] == "online":
+                        self._get_data_online(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
 
     @TSBase.handler_testcase
     def _get_data_online(self, testcase_name, project_name, featurevector_name):
         self.project_switch(project_name)
         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
-        svc=fstore.get_online_feature_service(vector)
-        # Define the wanted entities
-        entities = [{"source": 1}]
-        # Get the feature vectors from the service
-        resp=svc.get(entities,as_list=True)
-        self.testcase_detail(f"... get xxx items")
+        with fstore.get_online_feature_service(vector) as svc:
+            entities = [{"party-id": "d68fe603-7cb1-44e4-9013-7330a050a6be"}]
+            resp=svc.get(entities, as_list=True)
+
