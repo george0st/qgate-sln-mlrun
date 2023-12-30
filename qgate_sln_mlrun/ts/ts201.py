@@ -109,8 +109,7 @@ class TS201(TSBase):
                 target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
             elif target.lower().strip()=="redis":
                 if self.setup.redis:
-                    #target_providers.append(RedisNoSqlTarget(name=target_name, path=self.setup.redis))
-                    pass
+                    target_providers.append(RedisNoSqlTarget(name=target_name, path=self.setup.redis))
                 else:
                     # TODO: generate warning
                     pass
