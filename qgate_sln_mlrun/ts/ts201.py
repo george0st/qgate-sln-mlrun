@@ -112,8 +112,7 @@ class TS201(TSBase):
                 if self.setup.redis:
                     target_providers.append(RedisNoSqlTarget(name=target_name, path=self.setup.redis))
                 else:
-                    # TODO: generate warning
-                    pass
+                    raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
             else:
                 # TODO: Add support other targets for MLRun CE
                 raise NotImplementedError()
