@@ -24,6 +24,7 @@ class TS502(TSBase):
         self.get_data_online()
 
     def get_data_online(self):
+        pass
         """
         Get data from on-line feature vector
         """

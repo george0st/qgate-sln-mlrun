@@ -7,6 +7,7 @@ import mlrun
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.data_types.data_types import spark_to_value_type
+from mlrun.data_types.data_types import ValueType
 #from mlrun.datastore import ParquetTarget, CSVTarget
 from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget
 import os
@@ -83,7 +84,7 @@ class TS201(TSBase):
         for item in json_spec['entities']:
             fs.add_entity(
                 name=item['name'],
-                value_type=spark_to_value_type(item['type']),
+                value_type=TS201.type_to_mlrun_type(item['type']),
                 description=item['description']
             )
 
@@ -92,7 +93,7 @@ class TS201(TSBase):
             fs.add_feature(
                 name=item['name'],
                 feature=Feature(
-                    value_type=spark_to_value_type(item['type']),
+                    value_type=TS201.type_to_mlrun_type(item['type']),
                     description=item['description']
                 )
             )
@@ -122,3 +123,23 @@ class TS201(TSBase):
         fs.save()
         return fs
 
+    @staticmethod
+    def type_to_mlrun_type(data_type):
+        type_map = {
+            "int": ValueType.INT64,
+            "int64": ValueType.INT64,
+            "uint64": ValueType.UINT64,
+            "int128": ValueType.INT128,
+            "uint128": ValueType.UINT128,
+            "float": ValueType.FLOAT,
+            "double": ValueType.DOUBLE,
+            "boolean": ValueType.BOOL,
+            "bool": ValueType.BOOL,
+            "timestamp": ValueType.DATETIME,
+            "datetime": ValueType.DATETIME,
+            "string": ValueType.STRING,
+            "list": ValueType.STRING_LIST,
+        }
+        if data_type in type_map:
+            return type_map[data_type]
+        return data_type
