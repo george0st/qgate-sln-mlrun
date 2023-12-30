@@ -64,6 +64,8 @@ class TS301(TSBase):
                           data_frm,
                           # overwrite=False,
                           return_df=False,
-                          infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                          #infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                          infer_options=mlrun.data_types.data_types.InferOptions.default())
+
 
 
