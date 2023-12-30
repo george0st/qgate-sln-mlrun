@@ -124,7 +124,7 @@ class TS201(TSBase):
         return fs
 
     @staticmethod
-    def type_to_mlrun_type(data_type):
+    def type_to_mlrun_type(data_type) -> ValueType:
         type_map = {
             "int": ValueType.INT64,
             "int64": ValueType.INT64,
@@ -140,6 +140,6 @@ class TS201(TSBase):
             "string": ValueType.STRING,
             "list": ValueType.STRING_LIST,
         }
-        if data_type in type_map:
-            return type_map[data_type]
-        return data_type
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
