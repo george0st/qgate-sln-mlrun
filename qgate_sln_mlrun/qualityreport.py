@@ -20,8 +20,8 @@ class QualityReport:
         self._vectors = {}
 
     def execute(self, delete_scenario=True, test_scenario=False):
-        testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501]
-        testscenario_tests = [ts502.TS502, ts601.TS601]
+        testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501, ts502.TS502]
+        testscenario_tests = [ts601.TS601]
 
         if test_scenario:
             for testscenario_test in testscenario_tests:
