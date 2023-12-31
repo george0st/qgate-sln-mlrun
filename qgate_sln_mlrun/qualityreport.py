@@ -1,3 +1,5 @@
+import glob
+import json
 import os
 from qgate_sln_mlrun.setup import Setup
 from qgate_sln_mlrun.output import Output
@@ -21,7 +23,9 @@ class QualityReport:
 
         self._projects = []
         self._project_specs = {}
-        self._vectors = {}
+        self._test_setting = {}
+
+        self.load_test_setting()
 
     def build_scenarios_functions(self, delete_scenario=True, experiment_scenario=False) -> list[tsbase.TSBase]:
         test_scenario_functions = list(QualityReport.TEST_SCENARIOS)
@@ -54,6 +58,21 @@ class QualityReport:
         self._output.render()
         self._output.close()
 
+    def load_test_setting(self):
+        """Load setting for test execution from model\03-test\* """
+
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "03-test",
+                                   f"*-vector.json")
+
+        # check existing data set
+        for file in glob.glob(source_file):
+            # iterate cross all featureset definitions
+            with open(file, "r") as json_file:
+                json_content = json.load(json_file)
+                self._test_setting['vector']=json_content["spec"]
+
     @property
     def setup(self) -> Setup:
         return self._setup
@@ -71,6 +90,5 @@ class QualityReport:
         return self._project_specs
 
     @property
-    def vectors(self) -> dict:
-        return self._vectors
-
+    def test_setting(self) -> dict:
+        return self._test_setting
