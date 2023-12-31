@@ -24,7 +24,7 @@ class TS601(TSBase):
         return "Serving score from CART (Classification and Regression Tree) from Scikit-Learn"
 
     def exec(self):
-        self.serving_score(self)
+        self.serving_score()
 
     def serving_score(self):
         """

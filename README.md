@@ -28,7 +28,7 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
    - ✅ TS401: Create feature vector(s)
  - **Get data**
    - ✅ TS501: Get data from off-line feature vector(s)
-   - ❌ TS502: Get data from on-line feature vector(s)
+   - ✅ TS502: Get data from on-line feature vector(s)
  - **Serving ML score**
    - ❌ TS601: Serving score from CART
    - ❌ TS602: Serving score from XGBoost

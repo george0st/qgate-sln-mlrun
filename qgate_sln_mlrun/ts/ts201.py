@@ -76,8 +76,7 @@ class TS201(TSBase):
         self.project_switch(project_name)
         fs = fstore.FeatureSet(
             name=featureset_name,
-            description=featureset_desc,
-            relations=json_spec.get('relations')
+            description=featureset_desc
         )
 
         # define entities
@@ -112,8 +111,7 @@ class TS201(TSBase):
                 if self.setup.redis:
                     target_providers.append(RedisNoSqlTarget(name=target_name, path=self.setup.redis))
                 else:
-                    # TODO: generate warning
-                    pass
+                    raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
             else:
                 # TODO: Add support other targets for MLRun CE
                 raise NotImplementedError()
@@ -124,7 +122,7 @@ class TS201(TSBase):
         return fs
 
     @staticmethod
-    def type_to_mlrun_type(data_type):
+    def type_to_mlrun_type(data_type) -> ValueType:
         type_map = {
             "int": ValueType.INT64,
             "int64": ValueType.INT64,
@@ -140,6 +138,6 @@ class TS201(TSBase):
             "string": ValueType.STRING,
             "list": ValueType.STRING_LIST,
         }
-        if data_type in type_map:
-            return type_map[data_type]
-        return data_type
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
