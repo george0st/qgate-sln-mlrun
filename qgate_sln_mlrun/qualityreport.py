@@ -11,6 +11,10 @@ class QualityReport:
     Quality reportn
     """
 
+    TEST_SCENARIOS = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501, ts502.TS502]
+    TEST_EXPERIMENTS = [ts601.TS601]
+    TEST_SCENARIO_DELETE = ts102.TS102
+
     def __init__(self, setup: Setup, output: Output):
         self._setup = setup
         self._output = output
@@ -19,19 +23,27 @@ class QualityReport:
         self._project_specs = {}
         self._vectors = {}
 
-    def execute(self, delete_scenario=True, test_scenario=False):
-        testscenario_fns = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501, ts502.TS502]
-        testscenario_tests = [ts601.TS601]
+    def build_scenarios_functions(self, delete_scenario=True, experiment_scenario=False) -> list:
+        test_scenario_functions = list(QualityReport.TEST_SCENARIOS)
 
-        if test_scenario:
-            for testscenario_test in testscenario_tests:
-                testscenario_fns.append(testscenario_test)
+        # add experiments
+        if experiment_scenario:
+            for experiment in QualityReport.TEST_EXPERIMENTS:
+                test_scenario_functions.append(experiment)
+
+        # add delete
         if delete_scenario:
-            testscenario_fns.append(ts102.TS102)
+            test_scenario_functions.append(QualityReport.TEST_SCENARIO_DELETE)
 
-        for testscenario_fn in testscenario_fns:
-            if testscenario_fn:
-                ts = testscenario_fn(self)
+        return test_scenario_functions
+
+    def execute(self, delete_scenario=True, experiment_scenario=False):
+
+        test_scenario_functions = self.build_scenarios_functions(delete_scenario, experiment_scenario)
+
+        for test_scenario_fn in test_scenario_functions:
+            if test_scenario_fn:
+                ts = test_scenario_fn(self)
                 try:
                     ts.exec()
                     ts.state = tsbase.TSState.DONE
