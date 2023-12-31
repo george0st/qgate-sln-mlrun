@@ -28,10 +28,16 @@ class TS502(TSBase):
         Get data from on-line feature vector
         """
         self.testscenario_new()
-        for project_name in self.projects:
-            for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
-                if featurevector_name in self.vectors:
-                    if self.vectors[featurevector_name] == "online":
+
+        vectors=None
+        if self.test_setting.get('vector'):
+            if self.test_setting['vector'].get('online'):
+                vectors=self.test_setting['vector']['online']
+
+        if vectors:
+            for project_name in self.projects:
+                for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
+                    if featurevector_name in vectors:
                         self._get_data_online(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
 
     @TSBase.handler_testcase
