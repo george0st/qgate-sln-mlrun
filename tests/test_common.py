@@ -4,31 +4,32 @@ import unittest
 import os
 
 
-class TestProjects(unittest.TestCase):
-
+class TestCommon(unittest.TestCase):
     INPUT_FILE = "qgate-sln-mlrun.env"
 
     @classmethod
     def setUpClass(cls):
         # setup relevant path
-        if not os.path.isfile(os.path.join(".", TestProjects.INPUT_FILE)):
+        if not os.path.isfile(os.path.join(".", TestCommon.INPUT_FILE)):
             os.chdir(os.path.dirname(os.getcwd()))
 
     @classmethod
     def tearDownClass(cls):
         pass
 
-    def test_template_file(self):
+    def test_setup_str(self):
         stp = setup.Setup("0-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
-        out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
-                                  './qgate_sln_mlrun/templates/qgt-mlrun.html'])
-        report = QualityReport(stp, out)
-        report.execute(True, True)
+        print(str(stp))
 
-    def test_template_embeded(self):
+    def test_basic_scenarios(self):
         stp = setup.Setup("0-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
-        report.execute(True, True)
+        test_fns=report.build_scenarios_functions(True, True)
+
+        for tst_fn in test_fns:
+            tst = tst_fn(self)
+            print(f"{tst.name}: {tst.desc}: {tst.long_desc}")
+

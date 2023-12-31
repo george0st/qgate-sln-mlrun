@@ -23,7 +23,7 @@ class QualityReport:
         self._project_specs = {}
         self._vectors = {}
 
-    def build_scenarios_functions(self, delete_scenario=True, experiment_scenario=False) -> list:
+    def build_scenarios_functions(self, delete_scenario=True, experiment_scenario=False) -> list[tsbase.TSBase]:
         test_scenario_functions = list(QualityReport.TEST_SCENARIOS)
 
         # add experiments
