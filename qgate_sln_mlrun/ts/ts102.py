@@ -21,7 +21,7 @@ class TS102(TSBase):
 
     @property
     def long_desc(self):
-        return "Delete project include all contents and targets (such as Parquet files, etc.)"
+        return "Delete project include all contents and targets (such as Parquet/CSV files, etc.)"
 
     def exec(self):
         self.delete_projects()
