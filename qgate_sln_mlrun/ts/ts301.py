@@ -23,7 +23,7 @@ class TS301(TSBase):
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set from data source to targets based on feature set definition"
+        return "Ingest data to feature set(s) from data source"
 
     def exec(self):
         self.ingest_data()

@@ -46,6 +46,7 @@ class TS502(TSBase):
         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
         with fstore.get_online_feature_service(vector) as svc:
+            # TODO add valid party-id from data
             entities = [{"party-id": "d68fe603-7cb1-44e4-9013-7330a050a6be"}]
             resp=svc.get(entities, as_list=True)
 
