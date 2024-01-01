@@ -44,7 +44,7 @@ The reports in original form, see:
 
 ## Usage
 
-You can easy use this solution in three steps:
+You can easy use this solution in four steps:
 1. Download content of these two GIT repositories to your local environment
     - [qgate-sln-mlrun](https://github.com/george0st/qgate-sln-mlrun)
     - [qgate-model](https://github.com/george0st/qgate-model)
@@ -54,6 +54,9 @@ You can easy use this solution in three steps:
    - Update variables for QGate, see `QGATE_*`
 3. Run from `qgate-sln-mlrun`
    - **python main.py**
+4. See outputs
+   - './output/qgt-mlrun-*.html'
+   - './output/qgt-mlrun-*.txt'
 
 Precondition: You have available MLRun or Iguazio solution (MLRun is part of that), see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 
