@@ -30,7 +30,7 @@ class Output():
         Initial
 
         :param setup:       specific usecase
-        :param templates:   list of templates for generation outputs
+        :param templates:   list of templates for generation outputs (support templetes as file of embeded templates)
         """
         self._setup=setup
         self._data={}
@@ -78,6 +78,7 @@ class Output():
 # endregion
 
     def render(self):
+        """Generate/Render final outputs basen on templates"""
         # https://zetcode.com/python/jinja/
         # https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
@@ -154,8 +155,6 @@ class Output():
         self._data["summary"]["count_testcases_err"]=count_testcases-count_testcases_done
         self._data["summary"]["first_errors"]=first_errors
 
-
-
     def _system_info(self):
         self._data["version"] = __version__
         self._data["model_version"] = self._get_model_version()
@@ -178,8 +177,7 @@ class Output():
         return TSBase.get_model_info(self._setup.model_definition)
 
     def _mlrun_server(self):
-        # Return server MLRun version
-
+        """Return server MLRun version"""
         server_version=""
         with suppress(Exception):
             run_db_factory = mlrun.db.factory.RunDBFactory()
@@ -187,7 +185,7 @@ class Output():
         return server_version
 
     def _memory(self):
-
+        """Return size of memory"""
         mem_total, mem_free = "", ""
         with suppress(Exception):
             import psutil
