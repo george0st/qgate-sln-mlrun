@@ -4,7 +4,7 @@ import sys
 
 
 if __name__ == '__main__':
-    stp = setup.Setup("0-size-100",
+    stp = setup.Setup("01-size-100",
                            ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
     out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
                                    './qgate_sln_mlrun/templates/qgt-mlrun.html'])
