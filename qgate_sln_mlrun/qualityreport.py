@@ -59,7 +59,7 @@ class QualityReport:
         self._output.close()
 
     def load_test_setting(self):
-        """Load setting for test execution from model\03-test\* """
+        """Load setting for test execution from model\03-test\*-vector.json """
 
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
