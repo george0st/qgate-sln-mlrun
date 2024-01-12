@@ -40,7 +40,7 @@ class TS301(TSBase):
                 source_file=os.path.join(os.getcwd(),
                                          self.setup.model_definition,
                                          "02-data",
-                                         self.setup.data_size,
+                                         self.setup.dataset_name,
                                          f"*-{featureset_name}.csv.gz")
 
                 # check existing data set

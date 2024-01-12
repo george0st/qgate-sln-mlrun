@@ -5,6 +5,8 @@
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
+import os
+import json
 
 
 class TS502(TSBase):
@@ -45,8 +47,24 @@ class TS502(TSBase):
         self.project_switch(project_name)
         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
+        #test
+        self._get_data_hint()
+
         with fstore.get_online_feature_service(vector) as svc:
             # TODO add valid party-id from data
             entities = [{"party-id": "d68fe603-7cb1-44e4-9013-7330a050a6be"}]
             resp=svc.get(entities, as_list=True)
+
+    def _get_data_hint(self):
+
+        file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "03-test",
+                                   f"{self.setup.dataset_name}.json")
+
+        with open(file, "r") as json_file:
+            json_content = json.load(json_file)
+            name, desc, lbls, kind = TSBase.get_json_header(json_content)
+
+        print(json_content)
 
