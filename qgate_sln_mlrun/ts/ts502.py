@@ -59,7 +59,12 @@ class TS502(TSBase):
                 entities.append(itm)
 
             resp=svc.get(entities, as_list=False)
+
             # TODO add compare of value
+            if len(resp)>0:
+                for feature_name in test_features:
+                    if resp[0][feature_name] != test_data[feature_name]:
+                        print("ERR")
 
     def _get_test_setting(self,featurevector_name):
         test_detail=self.test_setting['vector']['test'][featurevector_name]
