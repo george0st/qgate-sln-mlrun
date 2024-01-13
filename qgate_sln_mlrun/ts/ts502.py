@@ -64,7 +64,8 @@ class TS502(TSBase):
             if len(resp)>0:
                 for feature_name in test_features:
                     if resp[0][feature_name] != test_data[feature_name]:
-                        print("ERR")
+                        raise ValueError(f"Invalid value during get data, expected '{test_data[feature_name]}' but "
+                                         f"feature vector return '{resp[0][feature_name]}'")
 
     def _get_test_setting(self,featurevector_name):
         test_detail=self.test_setting['vector']['test'][featurevector_name]
