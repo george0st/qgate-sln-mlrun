@@ -59,9 +59,9 @@ class TS502(TSBase):
                 entities.append(itm)
 
             resp=svc.get(entities, as_list=False)
-
-            # TODO add compare of value
-            if len(resp)>0:
+            if len(resp)!=1:
+                raise ValueError("Feature vector did not return value.")
+            else:
                 for feature_name in test_features:
                     if resp[0][feature_name] != test_data[feature_name]:
                         raise ValueError(f"Invalid value during get data, expected '{test_data[feature_name]}' but "
