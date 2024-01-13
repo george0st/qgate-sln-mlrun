@@ -52,7 +52,6 @@ class TS502(TSBase):
         test_data=self._get_data_hint(featurevector_name, test_featureset)
 
         with fstore.get_online_feature_service(vector) as svc:
-            # TODO add valid party-id from data
             entities=[]
             itm={}
             for test_entity in test_entities:
@@ -60,7 +59,7 @@ class TS502(TSBase):
                 entities.append(itm)
 
             resp=svc.get(entities, as_list=False)
-            print(resp)
+            # TODO add compare of value
 
     def _get_test_setting(self,featurevector_name):
         test_detail=self.test_setting['vector']['test'][featurevector_name]
