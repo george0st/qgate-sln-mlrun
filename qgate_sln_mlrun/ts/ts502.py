@@ -20,7 +20,7 @@ class TS502(TSBase):
 
     @property
     def long_desc(self):
-        return "Get data from on-line feature vector"
+        return "Get data from on-line feature vector(s), focus on target Redis"
 
     def exec(self):
         self.get_data_online()
@@ -68,6 +68,7 @@ class TS502(TSBase):
                                          f"feature vector return '{resp[0][feature_name]}'")
 
     def _get_test_setting(self,featurevector_name):
+        # get information for testing (feature set, entities and features)
         test_detail=self.test_setting['vector']['test'][featurevector_name]
 
         test_featureset=test_detail['feature-set']
@@ -76,7 +77,7 @@ class TS502(TSBase):
         return test_featureset, test_entities, test_features
 
     def _get_data_hint(self, featurevector_name, test_featureset):
-
+        # get data hint for testing
         file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
                                    "03-test",
