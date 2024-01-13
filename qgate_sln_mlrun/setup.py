@@ -7,7 +7,7 @@ class Setup:
     Setup for solution
     """
 
-    def __init__(self, data_size, mlrun_env_file: list[str]):
+    def __init__(self, dataset_name, mlrun_env_file: list[str]):
         # set variables based on environment files
         for env_file in mlrun_env_file:
             if os.path.isfile(env_file):
@@ -21,7 +21,7 @@ class Setup:
         #self._model_output=self._variables['QGATE_OUTPUT']
 
         # set data set size
-        self._data_size=data_size
+        self._dataset_name=dataset_name
 
     def __str__(self):
         ret=""
@@ -50,8 +50,8 @@ class Setup:
         #return self._model_definition
 
     @property
-    def data_size(self):
-        return self._data_size
+    def dataset_name(self):
+        return self._dataset_name
 
     @property
     def redis(self):

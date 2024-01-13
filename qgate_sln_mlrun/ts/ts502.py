@@ -5,6 +5,8 @@
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
+import os
+import json
 
 
 class TS502(TSBase):
@@ -45,8 +47,39 @@ class TS502(TSBase):
         self.project_switch(project_name)
         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
+        #test
+        test_featureset, test_entities, test_features=self._get_test_setting(featurevector_name)
+        test_data=self._get_data_hint(featurevector_name, test_featureset)
+
         with fstore.get_online_feature_service(vector) as svc:
-            # TODO add valid party-id from data
-            entities = [{"party-id": "d68fe603-7cb1-44e4-9013-7330a050a6be"}]
-            resp=svc.get(entities, as_list=True)
+            entities=[]
+            itm={}
+            for test_entity in test_entities:
+                itm[test_entity]=test_data[test_entity]
+                entities.append(itm)
+
+            resp=svc.get(entities, as_list=False)
+            # TODO add compare of value
+
+    def _get_test_setting(self,featurevector_name):
+        test_detail=self.test_setting['vector']['test'][featurevector_name]
+
+        test_featureset=test_detail['feature-set']
+        test_entities=test_detail['entities']
+        test_features=test_detail['features']
+        return test_featureset, test_entities, test_features
+
+    def _get_data_hint(self, featurevector_name, test_featureset):
+
+        file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "03-test",
+                                   f"{self.setup.dataset_name}.json")
+
+        with open(file, "r") as json_file:
+            json_content = json.load(json_file)
+            name, desc, lbls, kind = TSBase.get_json_header(json_content)
+
+        test_data=json_content['spec']['DataHint-0'][test_featureset]
+        return test_data
 
