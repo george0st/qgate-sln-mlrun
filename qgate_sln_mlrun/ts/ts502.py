@@ -53,8 +53,14 @@ class TS502(TSBase):
 
         with fstore.get_online_feature_service(vector) as svc:
             # TODO add valid party-id from data
-            entities = [{"party-id": "d68fe603-7cb1-44e4-9013-7330a050a6be"}]
-            resp=svc.get(entities, as_list=True)
+            entities=[]
+            itm={}
+            for test_entity in test_entities:
+                itm[test_entity]=test_data[test_entity]
+                entities.append(itm)
+
+            resp=svc.get(entities, as_list=False)
+            print(resp)
 
     def _get_test_setting(self,featurevector_name):
         test_detail=self.test_setting['vector']['test'][featurevector_name]
