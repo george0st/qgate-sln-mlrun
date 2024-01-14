@@ -29,7 +29,8 @@ class TestProjects(unittest.TestCase):
 
     def test_template_embeded(self):
         stp = setup.Setup("01-size-100",
-                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
+                          {"QGATE_OUTPUT": "./test_output/"})
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
         report.execute(True, True)

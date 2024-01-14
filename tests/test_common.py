@@ -22,6 +22,12 @@ class TestCommon(unittest.TestCase):
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
         print(str(stp))
 
+    def test_setup_str2(self):
+        stp = setup.Setup("01-size-100",
+                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
+                          {"QGATE_OUTPUT": "./test_output/"})
+        print(str(stp))
+
     def test_scenarios_name_desc(self):
         stp = setup.Setup("01-size-100",
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
