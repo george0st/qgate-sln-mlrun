@@ -7,12 +7,17 @@ class Setup:
     Setup for solution
     """
 
-    def __init__(self, dataset_name, mlrun_env_file: list[str]):
+    def __init__(self, dataset_name, mlrun_env_file: list[str], hard_variables: dict=None):
         # set variables based on environment files
         for env_file in mlrun_env_file:
             if os.path.isfile(env_file):
                 self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
                 break
+
+        # create new or rewrite variables
+        if hard_variables:
+            for key in hard_variables.keys():
+                self._variables[key]=hard_variables[key]
 
         self._variables["DIR"]=os.getcwd()
 
@@ -42,12 +47,10 @@ class Setup:
     @property
     def model_output(self):
         return self._variables['QGATE_OUTPUT']
-        #return self._model_output
 
     @property
     def model_definition(self):
         return self._variables['QGATE_DEFINITION']
-        #return self._model_definition
 
     @property
     def dataset_name(self):
@@ -56,4 +59,3 @@ class Setup:
     @property
     def redis(self):
         return self._variables.get('QGATE_REDIS', None)
-        #return self._variables['QGATE_REDIS']
