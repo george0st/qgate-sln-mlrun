@@ -3,10 +3,8 @@ import json
 import os
 from qgate_sln_mlrun.setup import Setup
 from qgate_sln_mlrun.output import Output
-#from qgate_sln_mlrun.modelsolution import ModelSolution
 from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts502, ts601
 from qgate_sln_mlrun.ts import tsbase
-import sys
 
 class QualityReport:
     """
