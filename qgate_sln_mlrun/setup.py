@@ -8,6 +8,13 @@ class Setup:
     """
 
     def __init__(self, dataset_name, mlrun_env_file: list[str], hard_variables: dict=None):
+        """Define setting for testing
+
+        :param dataset_name:    name of data set e.g. "01-size-100"
+        :param mlrun_env_file:  list of *.env files, first valid file will be
+                                used e.g. ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"]
+        :param hard_variables:  new or replacement of variables from *.env file
+        """
         # set variables based on environment files
         for env_file in mlrun_env_file:
             if os.path.isfile(env_file):

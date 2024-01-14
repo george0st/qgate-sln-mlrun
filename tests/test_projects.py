@@ -20,7 +20,8 @@ class TestProjects(unittest.TestCase):
 
     def test_template_file(self):
         stp = setup.Setup("01-size-100",
-                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
+                          {"QGATE_OUTPUT": "./test_output/"})
         out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
                                   './qgate_sln_mlrun/templates/qgt-mlrun.html'])
         report = QualityReport(stp, out)
