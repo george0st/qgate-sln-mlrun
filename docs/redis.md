@@ -3,7 +3,7 @@
 ## 1. Preconditions for OS Windows
 
 1. Installed **Docker Desktop with WSL 2**
-2. You test success installation
+2. You can test success installation
    - check Docker Dektop, cmd `docker --version`
    - check WSL2, cmd `wsl --status` (expected info 'Default Version: 2')
    - check instlled distributions, cmd `wsl -l` (expected info 'docker-desktop' and 'docker-desktop-data')
@@ -28,5 +28,5 @@
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_REDIS`
    - see `QGATE_REDIS = redis://localhost:6379`
  - Note
-   - Port is based on container see **6379**, you can use also different protocol see **rediss**, more informations see [Redis targes store](https://docs.mlrun.org/en/latest/data-prep/ingest-data-fs.html#redis-target-store)
+   - Port is based on container see **6379**, you can use also different protocol see **rediss**, more informations see [Redis targes store from MLRun](https://docs.mlrun.org/en/latest/data-prep/ingest-data-fs.html#redis-target-store)
 
