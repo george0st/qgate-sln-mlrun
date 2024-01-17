@@ -51,8 +51,8 @@ You can easy use this solution in four steps:
 2. Update file `qgate-sln-mlrun.env` from qgate-model
    - Update variables for MLRun/Iguazio, see `MLRUN_DBPATH`, `V3IO_USERNAME`, `V3IO_ACCESS_KEY`, `V3IO_API`
      - setting of `V3IO_*` is needed only in case of Iguazio installation (not for pure free MLRun)
-   - Update variables for QGate, see `QGATE_*` (full description in *.env)
-     - setup [Redis for on-line feature store](./docs/redis.md)
+   - Update variables for QGate, see `QGATE_*` (basic description directly in *.env)
+     - detail setup [configuration](./docs/configuration.md)
 3. Run from `qgate-sln-mlrun`
    - **python main.py**
 4. See outputs
