@@ -59,7 +59,8 @@ You can easy use this solution in four steps:
    - './output/qgt-mlrun-*.html'
    - './output/qgt-mlrun-*.txt'
 
-Precondition: You have available MLRun or Iguazio solution (MLRun is part of that), see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
+Precondition: You have available MLRun or Iguazio solution (MLRun is part of that),
+see official [installation steps](https://docs.mlrun.org/en/latest/install.html), or directly installation for [Desktop Docker](https://docs.mlrun.org/en/latest/install/local-docker.html). 
 
 ## Tested with
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
