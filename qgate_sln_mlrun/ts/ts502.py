@@ -59,7 +59,7 @@ class TS502(TSBase):
                 entities.append(itm)
 
             resp=svc.get(entities, as_list=False)
-            if len(resp)!=1:
+            if len(resp) == 0:
                 raise ValueError("Feature vector did not return value.")
             else:
                 for feature_name in test_features:
