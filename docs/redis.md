@@ -29,5 +29,5 @@
    - see `QGATE_REDIS = redis://localhost:6379`
  - Note
    - Port is based on container see **6379**, you can use also different 
-   protocol see **rediss**, more informations see [Redis targes store from MLRun](https://docs.mlrun.org/en/latest/data-prep/ingest-data-fs.html#redis-target-store)
+   protocol see **rediss**, more information see [Redis targes store from MLRun](https://docs.mlrun.org/en/latest/data-prep/ingest-data-fs.html#redis-target-store)
 
