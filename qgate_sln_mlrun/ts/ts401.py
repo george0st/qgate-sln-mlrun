@@ -63,7 +63,7 @@ class TS401(TSBase):
         features = json_spec['features']
 
         # create feature vector
-        vector = fstore.FeatureVector(featurevector_name, features, description=featurevector_desc)
+        vector = fstore.FeatureVector(featurevector_name, features, description = featurevector_desc, with_indexes = True)
         vector.save()
 
 
