@@ -49,11 +49,15 @@ class TS502(TSBase):
 
         #test
         test_featureset, test_entities, test_features=self._get_test_setting(featurevector_name)
+
+        # TODO: add testing for more data sets
         test_data=self._get_data_hint(featurevector_name, test_featureset)
 
         with fstore.get_online_feature_service(vector) as svc:
             entities=[]
             itm={}
+
+            # prepare "query"
             for test_entity in test_entities:
                 itm[test_entity]=test_data[test_entity]
                 entities.append(itm)
