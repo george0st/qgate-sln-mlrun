@@ -69,7 +69,7 @@ class TS502(TSBase):
 
     def _get_test_setting(self,featurevector_name):
         # get information for testing (feature set, entities and features)
-        test_detail=self.test_setting['vector']['test'][featurevector_name]
+        test_detail=self.test_setting['vector']['tests'][featurevector_name]
 
         test_featureset=test_detail['feature-set']
         test_entities=test_detail['entities']
