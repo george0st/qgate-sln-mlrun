@@ -33,7 +33,9 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
    - ❌ TS601: Serving score from CART
    - ❌ TS602: Serving score from XGBoost
    - ❌ TS603: Serving score from DNN
-
+   
+NOTE: Each test scenario contains addition specific test cases.
+    
 ## Sample of outputs
 
 ![Sample of outputs](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-samples.png?raw=true)
