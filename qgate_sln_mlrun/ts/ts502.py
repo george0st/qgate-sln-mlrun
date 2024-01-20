@@ -47,12 +47,11 @@ class TS502(TSBase):
         self.project_switch(project_name)
         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
-        #test
+        # information for testing
         test_featureset, test_entities, test_features=self._get_test_setting(featurevector_name)
 
         # TODO: add testing for more data sets
         test_sets =self._get_data_hint(featurevector_name, test_featureset)
-
         for test_data in test_sets:
             with fstore.get_online_feature_service(vector) as svc:
                 entities=[]
@@ -95,6 +94,5 @@ class TS502(TSBase):
         test_sets=[]
         for test_set in json_content['spec']:
             test_sets.append(json_content['spec'][test_set][test_featureset])
-        #test_data=json_content['spec']['DataHint-0'][test_featureset]
         return test_sets
 
