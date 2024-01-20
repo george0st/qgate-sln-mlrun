@@ -67,6 +67,7 @@ class TS502(TSBase):
                     raise ValueError("Feature vector did not return value.")
                 else:
                     for feature_name in test_features:
+                        # TODO: this conversion type can be removed in case InferOptions.Null (where types will be equal]
                         if isinstance(test_data[feature_name], str):
                             if str(resp[0][feature_name]) != test_data[feature_name]:
                                 raise ValueError(f"Invalid value for '{feature_name}', expected '{test_data[feature_name]}' but "
