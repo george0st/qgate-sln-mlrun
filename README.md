@@ -33,14 +33,18 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
    - ❌ TS601: Serving score from CART
    - ❌ TS602: Serving score from XGBoost
    - ❌ TS603: Serving score from DNN
-
+   
+NOTE: Each test scenario contains addition specific test cases.
+    
 ## Sample of outputs
 
 ![Sample of outputs](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-samples.png?raw=true)
 
 The reports in original form, see:
- - all DONE - [HTML](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-sample.png?raw=true), [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.txt?raw=true)
- - with ERR - [HTML](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-sample-err.png?raw=true), [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.txt?raw=true)
+ - all DONE - [HTML](https://htmlpreview.github.io/?https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.html), 
+   [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.txt?raw=true)
+ - with ERR - [HTML](https://htmlpreview.github.io/?https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.html),
+   [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.txt?raw=true)
 
 ## Usage
 
