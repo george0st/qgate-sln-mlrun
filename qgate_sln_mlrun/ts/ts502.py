@@ -60,7 +60,7 @@ class TS502(TSBase):
                 # prepare "query"
                 for test_entity in test_entities:
                     itm[test_entity]=test_data[test_entity]
-                    entities.append(itm)
+                entities.append(itm)
 
                 resp=svc.get(entities, as_list=False)
                 if len(resp) == 0:
