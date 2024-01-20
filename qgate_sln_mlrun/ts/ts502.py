@@ -50,7 +50,7 @@ class TS502(TSBase):
         # information for testing
         test_featureset, test_entities, test_features=self._get_test_setting(featurevector_name)
 
-        # TODO: add testing for more data sets
+        # own testing
         test_sets =self._get_data_hint(featurevector_name, test_featureset)
         for test_data in test_sets:
             with fstore.get_online_feature_service(vector) as svc:
