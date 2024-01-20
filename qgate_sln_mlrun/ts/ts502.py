@@ -60,7 +60,7 @@ class TS502(TSBase):
                 # prepare "query"
                 for test_entity in test_entities:
                     itm[test_entity]=test_data[test_entity]
-                    entities.append(itm)
+                entities.append(itm)
 
                 resp=svc.get(entities, as_list=False)
                 if len(resp) == 0:
@@ -68,7 +68,7 @@ class TS502(TSBase):
                 else:
                     for feature_name in test_features:
                         if resp[0][feature_name] != test_data[feature_name]:
-                            raise ValueError(f"Invalid value, expected '{test_data[feature_name]}' but "
+                            raise ValueError(f"Invalid value for '{feature_name}', expected '{test_data[feature_name]}' but "
                                              f"got '{resp[0][feature_name]}'")
 
     def _get_test_setting(self,featurevector_name):
