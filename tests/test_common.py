@@ -33,7 +33,7 @@ class TestCommon(unittest.TestCase):
                           ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
-        test_fns=report.build_scenarios_functions(True, True)
+        test_fns = report.build_scenarios_functions(True, True)
 
         for tst_fn in test_fns:
             tst = tst_fn(self)

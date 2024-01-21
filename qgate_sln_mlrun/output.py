@@ -1,11 +1,14 @@
 import datetime
 import multiprocessing
-import os, platform, sys
+import os
+import platform
+import sys
 import mlrun
 from qgate_sln_mlrun.setup import Setup
 from contextlib import suppress
 from qgate_sln_mlrun.version import __version__
 from jinja2 import Template
+
 
 class Singleton (type):
     _instances = {}
@@ -21,10 +24,10 @@ class Output():
     Management reports/outputs based on templates.
     """
 
-    DEFAULT_TEMPLATE_HTML= '#qgate_sln_mlrun.templates#qgt-mlrun.html'
+    DEFAULT_TEMPLATE_HTML = '#qgate_sln_mlrun.templates#qgt-mlrun.html'
     DEFAULT_TEMPLATE_TXT = '#qgate_sln_mlrun.templates#qgt-mlrun.txt'
 
-    def __init__(self, setup: Setup, templates: [str]=[DEFAULT_TEMPLATE_HTML,
+    def __init__(self, setup: Setup, templates: [str] = [DEFAULT_TEMPLATE_HTML,
                                                        DEFAULT_TEMPLATE_TXT]):
         """
         Initial
@@ -32,9 +35,9 @@ class Output():
         :param setup:       specific usecase
         :param templates:   list of templates for generation outputs (support templetes as file of embeded templates)
         """
-        self._setup=setup
-        self._data={}
-        self._templates=templates
+        self._setup = setup
+        self._data = {}
+        self._templates = templates
         self._system_info()
 
 # region TEST SCENARIOS
@@ -42,20 +45,20 @@ class Output():
         new_ts = {}
         new_ts['name'] = ts_name
         new_ts['desc'] = ts_description
-        new_ts['testcases']=[]
+        new_ts['testcases'] = []
         if self._data.get("testscenarios"):
             self._data["testscenarios"].append(new_ts)
         else:
-            self._data["testscenarios"]=[]
+            self._data["testscenarios"] = []
             self._data["testscenarios"].append(new_ts)
 
     def testcase_new(self, name):
-        testcase={}
-        testcase['name']=name
-        testcase['detail']=None
-        testcase['state']=None
+        testcase = {}
+        testcase['name'] = name
+        testcase['detail'] = None
+        testcase['state'] = None
 
-        ts=self._data["testscenarios"][-1]
+        ts = self._data["testscenarios"][-1]
         ts['testcases'].append(testcase)
 
     def testcase_detail(self, detail):

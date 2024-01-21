@@ -6,9 +6,10 @@ from qgate_sln_mlrun.output import Output
 from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts502, ts601
 from qgate_sln_mlrun.ts import tsbase
 
+
 class QualityReport:
     """
-    Quality reportn
+    Quality report
     """
 
     TEST_SCENARIOS = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501, ts502.TS502]
@@ -69,7 +70,7 @@ class QualityReport:
             # iterate cross all featureset definitions
             with open(file, "r") as json_file:
                 json_content = json.load(json_file)
-                self._test_setting['vector']=json_content["spec"]
+                self._test_setting['vector'] = json_content["spec"]
 
     @property
     def setup(self) -> Setup:

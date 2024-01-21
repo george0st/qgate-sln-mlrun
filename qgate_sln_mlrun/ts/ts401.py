@@ -3,7 +3,6 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-import mlrun
 import mlrun.feature_store as fstore
 import json
 import glob
@@ -63,7 +62,10 @@ class TS401(TSBase):
         features = json_spec['features']
 
         # create feature vector
-        vector = fstore.FeatureVector(featurevector_name, features, description = featurevector_desc, with_indexes = True)
+        vector = fstore.FeatureVector(featurevector_name,
+                                      features,
+                                      description = featurevector_desc,
+                                      with_indexes = True)
         vector.save()
 
 

@@ -3,7 +3,6 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-import mlrun
 import mlrun.feature_store as fstore
 import os
 import json
@@ -31,10 +30,10 @@ class TS502(TSBase):
         """
         self.testscenario_new()
 
-        vectors=None
+        vectors = None
         if self.test_setting.get('vector'):
             if self.test_setting['vector'].get('online'):
-                vectors=self.test_setting['vector']['online']
+                vectors = self.test_setting['vector']['online']
 
         if vectors:
             for project_name in self.projects:
@@ -48,21 +47,21 @@ class TS502(TSBase):
         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
         # information for testing
-        test_featureset, test_entities, test_features=self._get_test_setting(featurevector_name)
+        test_featureset, test_entities, test_features = self._get_test_setting(featurevector_name)
 
         # own testing
-        test_sets =self._get_data_hint(featurevector_name, test_featureset)
+        test_sets = self._get_data_hint(featurevector_name, test_featureset)
         for test_data in test_sets:
             with fstore.get_online_feature_service(vector) as svc:
-                entities=[]
-                itm={}
+                entities = []
+                itm = {}
 
                 # prepare "query"
                 for test_entity in test_entities:
-                    itm[test_entity]=test_data[test_entity]
+                    itm[test_entity] = test_data[test_entity]
                 entities.append(itm)
 
-                resp=svc.get(entities, as_list=False)
+                resp = svc.get(entities, as_list=False)
                 if len(resp) == 0:
                     raise ValueError("Feature vector did not return value.")
                 else:
@@ -77,13 +76,13 @@ class TS502(TSBase):
                                 raise ValueError(f"Invalid value for '{feature_name}', expected '{test_data[feature_name]}' but "
                                                  f"got '{resp[0][feature_name]}'")
 
-    def _get_test_setting(self,featurevector_name):
+    def _get_test_setting(self, featurevector_name):
         # get information for testing (feature set, entities and features)
         test_detail=self.test_setting['vector']['tests'][featurevector_name]
 
-        test_featureset=test_detail['feature-set']
-        test_entities=test_detail['entities']
-        test_features=test_detail['features']
+        test_featureset = test_detail['feature-set']
+        test_entities = test_detail['entities']
+        test_features = test_detail['features']
         return test_featureset, test_entities, test_features
 
     def _get_data_hint(self, featurevector_name, test_featureset):
