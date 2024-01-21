@@ -99,6 +99,7 @@ class TS502(TSBase):
 
         test_sets=[]
         for test_set in json_content['spec']:
-            test_sets.append(json_content['spec'][test_set][test_featureset])
+            if test_set.startswith("HintLast"):
+                test_sets.append(json_content['spec'][test_set][test_featureset])
         return test_sets
 
