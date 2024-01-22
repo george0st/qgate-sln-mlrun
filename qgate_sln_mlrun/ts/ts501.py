@@ -3,7 +3,6 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-import mlrun
 import mlrun.feature_store as fstore
 
 

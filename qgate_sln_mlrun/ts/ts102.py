@@ -28,8 +28,6 @@ class TS102(TSBase):
 
     def delete_projects(self):
         """Delete projects
-
-        :param ts:      Test scenario
         """
         self.testscenario_new()
         for project_name in self.projects:

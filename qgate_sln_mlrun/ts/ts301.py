@@ -7,7 +7,6 @@ import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import spark_to_value_type
 import pandas as pd
-import json
 import glob
 import os
 
@@ -30,8 +29,6 @@ class TS301(TSBase):
 
     def ingest_data(self):
         """Data ingest
-
-        :param ts:  Test scenario
         """
         self.testscenario_new()
         for project_name in self.projects:

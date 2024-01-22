@@ -26,8 +26,6 @@ class TS101(TSBase):
 
     def create_projects(self):
         """ Create projects based on json definition
-
-        :param ts:      Test scenario
         """
         self.testscenario_new()
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")

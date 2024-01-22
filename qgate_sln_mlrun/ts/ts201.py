@@ -3,12 +3,9 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-import mlrun
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
-from mlrun.data_types.data_types import spark_to_value_type
 from mlrun.data_types.data_types import ValueType
-#from mlrun.datastore import ParquetTarget, CSVTarget
 from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget
 import os
 import json
@@ -34,8 +31,6 @@ class TS201(TSBase):
 
     def create_featuresets(self):
         """ Get or create featuresets
-
-        :param ts:      Test scenario
         """
         self.testscenario_new()
         for project_name in self.projects:
