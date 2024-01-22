@@ -5,6 +5,7 @@ from qgate_sln_mlrun.setup import Setup
 from qgate_sln_mlrun.output import Output
 from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts502, ts601
 from qgate_sln_mlrun.ts import tsbase
+import logging
 
 
 class QualityReport:
@@ -44,24 +45,12 @@ class QualityReport:
 
         test_scenario_functions = self.build_scenarios_functions(delete_scenario, experiment_scenario)
 
+        logger = logging.getLogger("mlrun")
         for test_scenario_fn in test_scenario_functions:
             if test_scenario_fn:
                 ts = test_scenario_fn(self)
                 try:
-                    # TODO: add standart logger
-                    print(f"{ts.name}: {ts.desc} ...")
-
-                    # import logging
-                    #
-                    # logger.warning(
-                    #     f"Current "
-                    # )
-                    #
-                    # logging.log(
-                    #     logging.WARN,
-                    #     f"xxxx"
-                    # )
-
+                    logger.info(f"{ts.name}: {ts.desc} ...")
                     ts.exec()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:

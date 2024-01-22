@@ -8,5 +8,6 @@ The list of expected/future improvements:
       - Ability to focus on MLRun client usage/development under OS Windows without
       neccessity to use WSL (ability to use PyCharm Community version)
  2. **remove transition structure from Model/Project**
-    - Why? Simplification, better test coverage
+    - Why? 
+      - Simplification, better test coverage
  3. etc.
