@@ -50,6 +50,18 @@ class QualityReport:
                 try:
                     # TODO: add standart logger
                     print(f"{ts.name}: {ts.desc} ...")
+
+                    # import logging
+                    #
+                    # logger.warning(
+                    #     f"Current "
+                    # )
+                    #
+                    # logging.log(
+                    #     logging.WARN,
+                    #     f"xxxx"
+                    # )
+
                     ts.exec()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:
