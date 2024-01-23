@@ -26,10 +26,23 @@ class TS601(TSBase):
     def exec(self):
         self.serving_score()
 
+    def _build_model(self):
+        # Get data
+
+        # Feature selection
+
+        # Split data
+
+        # Building Decision Tree Model
+        pass
+
+
     def serving_score(self):
         """
         Serve score
         """
+
+        # Evaluating the Model
         pass
 
 
