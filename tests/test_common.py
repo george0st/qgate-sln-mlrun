@@ -18,19 +18,16 @@ class TestCommon(unittest.TestCase):
         pass
 
     def test_setup_str(self):
-        stp = setup.Setup("01-size-100",
-                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+        stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
         print(str(stp))
 
     def test_setup_str2(self):
-        stp = setup.Setup("01-size-100",
-                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
+        stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
                           {"QGATE_OUTPUT": "./tests_output/"})
         print(str(stp))
 
     def test_scenarios_name_desc(self):
-        stp = setup.Setup("01-size-100",
-                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
+        stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
         test_fns = report.build_scenarios_functions(True, True)
