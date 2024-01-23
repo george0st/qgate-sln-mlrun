@@ -1,7 +1,7 @@
-# QGate version/model: v0.1.2/v0.1.3
-# 2023-12-29 13:25:22
+# QGate version/model: v0.1.5/v0.1.5
+# 2024-01-23 16:24:31
 # -----------------------
-Summary, test scenarios: 35 [TOTAL] (0/35 [ERR/DONE])
+Summary, test scenarios: 50 [TOTAL] (0/50 [ERR/DONE])
 # -----------------------
 TS101: Create project(s)
   DONE ... 'gate-alfa'
@@ -33,28 +33,47 @@ TS301: Ingest data to feature set(s)
   DONE ... 'gate-bravo/basic-contact'
 TS401: Create feature vector(s)
   DONE ... 'gate-alfa/vector-party'
+  DONE ... 'gate-alfa/vector-contact'
   DONE ... 'gate-alfa/vector-partycontact'
+  DONE ... 'gate-alfa/vector-partycontact-02'
+  DONE ... 'gate-alfa/vector-account'
   DONE ... 'gate-alfa/vector-partyaccount'
+  DONE ... 'gate-alfa/vector-partyaccount-02'
   DONE ... 'gate-alfa/vector-partycontactaccount'
 TS501: Get data from off-line feature vector(s)
   DONE ... 'gate-alfa/vector-party': ... get 100 items
-  DONE ... 'gate-alfa/vector-partycontact': ... get 105 items
-  DONE ... 'gate-alfa/vector-partyaccount': ... get 30 items
-  DONE ... 'gate-alfa/vector-partycontactaccount': ... get 35 items
+  DONE ... 'gate-alfa/vector-contact': ... get 103 items
+  DONE ... 'gate-alfa/vector-partycontact': ... get 103 items
+  DONE ... 'gate-alfa/vector-partycontact-02': ... get 103 items
+  DONE ... 'gate-alfa/vector-account': ... get 13 items
+  DONE ... 'gate-alfa/vector-partyaccount': ... get 13 items
+  DONE ... 'gate-alfa/vector-partyaccount-02': ... get 13 items
+  DONE ... 'gate-alfa/vector-partycontactaccount': ... get 16 items
+TS502: Get data from on-line feature vector(s)
+  DONE ... 'gate-alfa/vector-party'
+  DONE ... 'gate-alfa/vector-contact'
+  DONE ... 'gate-alfa/vector-partycontact'
+  DONE ... 'gate-alfa/vector-partycontact-02'
+  DONE ... 'gate-alfa/vector-account'
+  DONE ... 'gate-alfa/vector-partyaccount'
+  DONE ... 'gate-alfa/vector-partyaccount-02'
 TS102: Delete project(s)
   DONE ... 'gate-alfa'
   DONE ... 'gate-bravo'
 # -----------------------
 # MLRun (client/server): 1.5.2/1.5.2 (https://docs.mlrun.org/en/latest/change-log/index.html)
+# MLRun support: ['>=1.5.0', '<=1.5.2']
 # Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]
-# System: Windows 10.0.22000 (Windows-10-10.0.22000-SP0)
+# System: Windows 10.0.22621 (Windows-10-10.0.22621-SP0)
 # Platform: AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)
 # ----------------------- 
 # MLRUN_DBPATH: 'http://localhost:8080' 
 # QGATE_DEFINITION: '../qgate-model/' 
+# QGATE_DATASET: '01-size-100' 
 # QGATE_OUTPUT: './output/' 
+# QGATE_REDIS: 'redis://localhost:6379' 
 # DIR: 'C:\Python\qgate-sln-mlrun' 
 # -----------------------
 # CPU: 12
-# RAM total/free: 15.2 GB/1.1 GB
-# Host: HCI-L3204/172.19.64.1
+# RAM total/free: 15.2 GB/2.4 GB
+# Host: HCI-L3204/172.18.224.1
