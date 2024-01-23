@@ -19,8 +19,7 @@ class TestProjects(unittest.TestCase):
         pass
 
     def test_template_file(self):
-        stp = setup.Setup("01-size-100",
-                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
+        stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
                           {"QGATE_OUTPUT": "./tests_output/"})
         out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
                                   './qgate_sln_mlrun/templates/qgt-mlrun.html'])
@@ -28,8 +27,7 @@ class TestProjects(unittest.TestCase):
         report.execute(True, True)
 
     def test_template_embeded(self):
-        stp = setup.Setup("01-size-100",
-                          ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
+        stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
                           {"QGATE_OUTPUT": "./tests_output/"})
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
