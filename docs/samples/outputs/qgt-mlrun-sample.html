@@ -82,13 +82,13 @@ td {
   text-align: right;
 }
 
-#img-check {
+.img-check {
     content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIhSURBVDhPTVJNaBNREP72ZZPdjdntZtNIPCgoSOnFige9FtSjQg+FVgU9ePGgNwXxpFAQKh4KIt4UWtoeBIu3WvAqxYOeWgQVTbEm1SabbNL9e2+dza5J5jEwb3a+7307MxISk85vnLmkKdqMklOFiCIIwXseUdxzOlwIBKHP6L7y/uKnt4SL+gST704vVawjs6ZuQmZymo6NoILAkYAfenAOHDSd5vL65ObV+CNLigDGJKHmVBh5HWZhBEW9CMuwUCS3RkowDQMlo4S8qkHOyCKFoU8QR0IiiXSEFNGdXmZURxq7cHAiN45b5XsYUyZQC7+moCECzgVC4UOOsuhyBy4/gMdd2Hwfo6yCKWMWBWZgL/gNHvYFDAh2xWeMZSdwp/wAp7LnUAuqaAZ/oQgNV4ybyEHBy/pzbLkfcUiUU9QQQR4VVP3vcKlR0+Y1nJUvoB02cV2/jTIpeLX3Ah+6G1AjgxoapqghgkJmFD+CbTzdfYgdZwfThRu4q8/jKDuO1foi1p1laEJPwNL/4Q0IojinQsdP7wse1+6j2qrimDiJtfprLNrzULkFn1ODaZyM9WDU6SEFcbtDEUAOVfzyvmHhzxye1Z5gqbUAJSjC931yl2o4mDSA9SMvcFm7Q0vSasKzI2zZm1jdf4S23UHLdtCwG2i0bTiddq82hcVTTmz8zeHLpG6GMiLOxqubiExMiv+RFpfWOEPhyvZUfQ0A/gHnZ/hPVPci4gAAAABJRU5ErkJggg==');
 }
-#img-error {
+.img-error {
     content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAI3SURBVDhPRVLfS1RBFP5m7p179+6uu1ZPEYSlWeybGbKkQeCCRW/1GASJ+BC+RNmLCeuT/SKQXnqL/oMCo7BMsXoxKCjLiCIoMQzCsm137517Zzozu+aBO8w935xvvvOdYWhG5eRAmR8sjjJXuDoKFRyngSWJBudgjDNoBZ0ksVqYKWdnF28Y2B76O3R6J2/f/zmZfxRASkqsA0EOcAShGlAJEFYpl7UlvPvwBoKgNz0xucQNgV79puG6LoQH8/EjJ+hwBpAhKYhhFPBCty22hC05H1rTYYLs0taRpdsYKr/A93TCHx6Bd+4SUN8AfryFGL4A//wYYQeAaoU4iERKYm4SaKUU3aSQykAtv0b84hlETxHe2E2I8bvwjpYQv3sD9WUZSKVtiVlMWAIqjm2f5pe7kFcGEU3fhyj2wSsdQzT3GHLijDGUcAfwfc5yeTJpk8BxOMnSSMhAchpeK3kQWAgkjpl9ZpfdWx/CkCbjuAa2BCy3LYAiVTER0A3i8m14/QOIns4genCPlPTCG58ikhZSIcHIVF2vkUGbCkyY4tofcrsLbtchRPOzkJMjkFeHED2chtO+D7yjQMaSiQ61kcSmZ1gZqFUl8q0M6TzUxyWEt65DvX8FbG8jeXsh70whXngC/fUTjXCHbVmvfd9SoNZWfuv1n3XLTErUy7lGv6ZNkmuM1R+I0OSM2XEc887CblO79ZT7ey7yvlKZpVLN52fW/9NqBGMMQuhk8fk1cfxU2T87qP4BUynZGRyUizgAAAAASUVORK5CYII=');
 }
-#img-info {
+.img-info {
     content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA6klEQVR4nJ2TPQ7CMAyFswAXYSoxDJyziAoE4gogByYWfi4BHISW0VaQU7VqaYLaWoqUIX55z/mi1E/B0QIYTrShp0b6uOX2vJyi1SpU47MdaeQNGGIwbH1LGyJteB3t7bDRDIbvocamEN9qIoC89R0syiuEvKpkJu4qIHFmBztRMrC21j1RFgqQXv9uD0bIXTwUGMr6CgBSKg7S0IEWAu9ghDYCLoJGXvZ3wLESPOVJus5BeqKTjRwLgmePQSYliYKlRr52YOAy39lB7T+IiOAZilPYlpsbzdUSPIUwmXDOCGVujxyXmSv1BSkyfPXWvaHkAAAAAElFTkSuQmCC');
 }
 
@@ -107,8 +107,6 @@ td {
   padding: 5px 3px;
   border-radius: 6px;
   white-space: pre-wrap;
-
-  /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
 }
@@ -132,83 +130,102 @@ function myFunction(element) {
 </script>
 <body>
 	<h2>Quality report for MLRun</h2>
-	<p><b>2023-12-29 13:25:22</b>, QGate version/model: v0.1.2/v0.1.3</p>
+	<p><b>2024-01-23 16:24:31</b>, QGate version/model: v0.1.5/v0.1.5</p>
 
 	<button type="button" class="collapsible" style="background-color: green;" onclick="myFunction('myDIV3')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
-				<td style="border: 0px; font-weight: bold;"><img id="img-check">Report outputs ...</td>
-				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">35x TOTAL (35x DONE)</td>
+				<td style="border: 0px; font-weight: bold;"><img class="img-check" src="">Report outputs ...</td>
+				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">50x TOTAL (50x DONE)</td>
 			</tr>
 		</table>
 	</button>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>
 			<tr><td colspan="2"><b>TS101: Create project(s)</b></td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo'</td></tr>
 			<tr><td colspan="2"><b>TS201: Create feature set(s)</b></td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-party'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-contact'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-relation'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-account'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-transaction'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-event'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-communication'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/aggregate-party'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/aggregate-account'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/aggregate-transaction'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/aggregate-circle'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/basic-account'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/basic-contact'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/aggregate-account'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-party'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-contact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-relation'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-account'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-transaction'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-event'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-communication'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/aggregate-party'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/aggregate-account'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/aggregate-transaction'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/aggregate-circle'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/basic-account'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/basic-contact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/aggregate-account'</td></tr>
 			<tr><td colspan="2"><b>TS301: Ingest data to feature set(s)</b></td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-party'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-contact'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-relation'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-account'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-transaction'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-event'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/basic-communication'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/basic-account'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo/basic-contact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-party'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-contact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-relation'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-account'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-transaction'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-event'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-communication'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/basic-account'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/basic-contact'</td></tr>
 			<tr><td colspan="2"><b>TS401: Create feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-party'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontact'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partyaccount'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontactaccount'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-party'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-contact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact-02'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-account'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount-02'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontactaccount'</td></tr>
 			<tr><td colspan="2"><b>TS501: Get data from off-line feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-party': ... get 100 items</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontact': ... get 105 items</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partyaccount': ... get 30 items</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa/vector-partycontactaccount': ... get 35 items</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-party': ... get 100 items</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-contact': ... get 103 items</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact': ... get 103 items</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact-02': ... get 103 items</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-account': ... get 13 items</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount': ... get 13 items</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount-02': ... get 13 items</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontactaccount': ... get 16 items</td></tr>
+			<tr><td colspan="2"><b>TS502: Get data from on-line feature vector(s)</b></td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-party'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-contact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact-02'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-account'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount-02'</td></tr>
 			<tr><td colspan="2"><b>TS102: Delete project(s)</b></td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-alfa'</td></tr>
-				<tr><td>&nbsp;<img id="img-check">DONE</td><td>'gate-bravo'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo'</td></tr>
 		</table>
 	</div>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img id="img-info">&nbsp;Execution details ...</button>
+	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img class="img-info" src="">&nbsp;Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
-			<b>System information:</b></br>
-			&nbsp;&nbsp;<b style="color:blue;">MLRun (client/server): 1.5.2/1.5.2</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)</br>
-			&nbsp;&nbsp;<b style="color:blue;">Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]</b></br>
-			&nbsp;&nbsp;<b>System:</b> Windows 10.0.22000 (Windows-10-10.0.22000-SP0)</br>
-			&nbsp;&nbsp;<b>Platform:</b> AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)</br>
+			<b>System information:</b><br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun (client/server): 1.5.2/1.5.2</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)<br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun support:</b> ['>=1.5.0', '<=1.5.2']<br>
+			&nbsp;&nbsp;<b style="color:blue;">Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]</b><br>
+			&nbsp;&nbsp;<b>System:</b> Windows 10.0.22621 (Windows-10-10.0.22621-SP0)<br>
+			&nbsp;&nbsp;<b>Platform:</b> AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)<br>
 		</p>
 		<p>
-			<b>Variables:</b></br>
-		 	&nbsp;&nbsp;<b>MLRUN_DBPATH:</b> 'http://localhost:8080'</br> 
-		 	&nbsp;&nbsp;<b>QGATE_DEFINITION:</b> '../qgate-model/'</br> 
-		 	&nbsp;&nbsp;<b>QGATE_OUTPUT:</b> './output/'</br> 
-		 	&nbsp;&nbsp;<b>DIR:</b> 'C:\Python\qgate-sln-mlrun'</br> 
+			<b>Variables:</b><br>
+		 	&nbsp;&nbsp;<b>MLRUN_DBPATH:</b> 'http://localhost:8080'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_DEFINITION:</b> '../qgate-model/'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_DATASET:</b> '01-size-100'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_OUTPUT:</b> './output/'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_REDIS:</b> 'redis://localhost:6379'<br> 
+		 	&nbsp;&nbsp;<b>DIR:</b> 'C:\Python\qgate-sln-mlrun'<br> 
 		</p>
 		<p>
-			<b>Hardware information:</b></br>
-			&nbsp;&nbsp;<b>CPU:</b> 12 cores</br>
-			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/1.1 GB</br>
-			&nbsp;&nbsp;<b>Host:</b> HCI-L3204/172.19.64.1</br>
+			<b>Hardware information:</b><br>
+			&nbsp;&nbsp;<b>CPU:</b> 12 cores<br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/2.4 GB<br>
+			&nbsp;&nbsp;<b>Host:</b> HCI-L3204/172.18.224.1<br>
 		</p>
 	</div>
 
