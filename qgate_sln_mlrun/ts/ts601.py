@@ -27,7 +27,7 @@ class TS601(TSBase):
         self.serving_score()
 
     def _build_model(self):
-        # Get data
+        # Get off-line data
 
         # Feature selection
 
