@@ -7,12 +7,12 @@ class Setup:
     Setup for solution
     """
 
-    def __init__(self, dataset_name, mlrun_env_file: list[str], hard_variables: dict=None):
+    def __init__(self, mlrun_env_file: list[str], dataset_name = None, hard_variables: dict=None):
         """Define setting for testing
 
-        :param dataset_name:    name of data set e.g. "01-size-100"
         :param mlrun_env_file:  list of *.env files, first valid file will be
                                 used e.g. ["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"]
+        :param dataset_name:    name of data set e.g. "01-size-100"
         :param hard_variables:  new or replacement of variables from *.env file
         """
         # set variables based on environment files
@@ -20,6 +20,10 @@ class Setup:
             if os.path.isfile(env_file):
                 self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
                 break
+
+        # push dataset name
+        if dataset_name:
+            self._variables["QGATE_DATASET"] = dataset_name
 
         # create new or rewrite variables
         if hard_variables:
@@ -31,9 +35,6 @@ class Setup:
         # set model dirs
         #self._model_definition=self._variables['QGATE_DEFINITION']
         #self._model_output=self._variables['QGATE_OUTPUT']
-
-        # set data set size
-        self._dataset_name=dataset_name
 
     def __str__(self):
         ret=""
@@ -61,7 +62,7 @@ class Setup:
 
     @property
     def dataset_name(self):
-        return self._dataset_name
+        return self._variables["QGATE_DATASET"]
 
     @property
     def redis(self):
