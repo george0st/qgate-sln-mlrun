@@ -1,5 +1,5 @@
 """
-  TS601: Serving score from CART
+  TS601: Build model for CART
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -24,9 +24,9 @@ class TS601(TSBase):
         return "Serving score from CART (Classification and Regression Tree) from Scikit-Learn"
 
     def exec(self):
-        self.serving_score()
+        self.build_model()
 
-    def _build_model(self):
+    def build_model(self):
         # Get off-line data
 
         # Feature selection
@@ -35,14 +35,4 @@ class TS601(TSBase):
 
         # Building Decision Tree Model
         pass
-
-
-    def serving_score(self):
-        """
-        Serve score
-        """
-
-        # Evaluating the Model
-        pass
-
 
