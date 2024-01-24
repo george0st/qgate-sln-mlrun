@@ -1,5 +1,5 @@
 """
-  TS601: Serving score from CART
+  TS701: Serving score from CART
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -25,17 +25,6 @@ class TS601(TSBase):
 
     def exec(self):
         self.serving_score()
-
-    def _build_model(self):
-        # Get off-line data
-
-        # Feature selection
-
-        # Split data
-
-        # Building Decision Tree Model
-        pass
-
 
     def serving_score(self):
         """
