@@ -3,6 +3,7 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
+import mlrun.feature_store as fstore
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
@@ -41,9 +42,9 @@ class TS601(TSBase):
 
 
         # Feature selection
-        feature_cols = ['pregnant', 'insulin', 'bmi', 'age', 'glucose', 'bp', 'pedigree']
-        X = pima[feature_cols]  # Features
-        y = pima.label  # Target variable
+        # feature_cols = ['pregnant', 'insulin', 'bmi', 'age', 'glucose', 'bp', 'pedigree']
+        # X = pima[feature_cols]  # Features
+        # y = pima.label  # Target variable
 
         # Split data
 
