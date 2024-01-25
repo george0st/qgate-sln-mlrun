@@ -3,6 +3,11 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+import os
 
 
 class TS601(TSBase):
@@ -27,12 +32,27 @@ class TS601(TSBase):
         self.build_model()
 
     def build_model(self):
+
         # Get off-line data
+        self.testscenario_new()
+        for project_name in self.projects:
+            for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
+                self._get_data_offline(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
+
 
         # Feature selection
+        feature_cols = ['pregnant', 'insulin', 'bmi', 'age', 'glucose', 'bp', 'pedigree']
+        X = pima[feature_cols]  # Features
+        y = pima.label  # Target variable
 
         # Split data
 
         # Building Decision Tree Model
         pass
 
+    def _get_data_offline(self, testcase_name, project_name, featurevector_name):
+        self.project_switch(project_name)
+        vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
+
+        resp = fstore.get_offline_features(vector)
+        return resp.to_dataframe()
