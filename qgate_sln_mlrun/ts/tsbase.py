@@ -61,21 +61,15 @@ class TSBase:
     # region INTERNAL
 
     def get_featuresets(self, project_spec):
-        if project_spec:
-            # Support two different collections
-            if isinstance(project_spec, dict):
-                return project_spec["feature-sets"]
-            elif isinstance(project_spec, list):
-                return project_spec
-            else:
-                raise Exception("Unsupported type")
+        if isinstance(project_spec, dict):
+            return project_spec["feature-sets"]
         return []
 
     def get_featurevectors(self, project_spec):
-        # Support two different collections
         if isinstance(project_spec, dict):
             return project_spec["feature-vectors"]
         return []
+
 
     @staticmethod
     def get_json_header(json_content):
