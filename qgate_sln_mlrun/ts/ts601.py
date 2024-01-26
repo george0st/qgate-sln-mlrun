@@ -48,7 +48,7 @@ class TS601(TSBase):
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    # iterate cross all featureset definitions
+                    # iterate cross all ml models definitions
                     with open(file, "r") as json_file:
                         self._create_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
 
