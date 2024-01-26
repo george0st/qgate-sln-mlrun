@@ -58,13 +58,22 @@ class TS601(TSBase):
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "ml-model":
-            # create ml model
-            # Feature selection
-            # feature_cols = ['pregnant', 'insulin', 'bmi', 'age', 'glucose', 'bp', 'pedigree']
-            # X = pima[feature_cols]  # Features
-            # y = pima.label  # Target variable
 
-            # Split data
+            # load data
+            vector = fstore.get_feature_vector(f"{project_name}/{json_content['spec']['vector']}")
+            resp = fstore.get_offline_features(vector)
+            frm = resp.to_dataframe()
 
-            # Building Decision Tree Model
+            # feature selection
+            X=frm[json_content["spec"]["source"]]
+            y=frm[json_content["spec"]["target"]]
+
+            # split data
+            X_train, X_test, y_train, y_test = train_test_split(X,
+                                                                y,
+                                                                test_size=json_content["spec"]["test-size"],
+                                                                random_state=1)
+
+            # build data
+
             pass
