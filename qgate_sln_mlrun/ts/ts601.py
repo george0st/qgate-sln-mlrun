@@ -1,6 +1,7 @@
 """
   TS601: Build CART model
 """
+from sklearn.preprocessing import LabelEncoder
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
@@ -74,6 +75,16 @@ class TS601(TSBase):
                                                                 test_size=json_content["spec"]["test-size"],
                                                                 random_state=1)
 
+            # convert categorical data to numerical
+            # bridge_types = ('Arch', 'Beam', 'Truss', 'Cantilever', 'Tied Arch', 'Suspension', 'Cable')
+            # bridge_df = pd.DataFrame(bridge_types, columns=['Bridge_Types'])
+            # # creating instance of labelencoder
+            # labelencoder = LabelEncoder()
+            # # Assigning numerical values and storing in another column
+            # bridge_df['Bridge_Types_Cat'] = labelencoder.fit_transform(bridge_df['Bridge_Types'])
+            # labelencoder.transform(["Arch"])
+            # bridge_df
+
             # build data
             clf = DecisionTreeClassifier()
             # train
@@ -81,4 +92,6 @@ class TS601(TSBase):
             # predict
             y_pred = clf.predict(X_test)
 
-            pass
+            # from pickle import dumps
+            # model_data = dumps(model)
+            # context.log_model(key='my_model', body=model_data, model_file='my_model.pkl')
