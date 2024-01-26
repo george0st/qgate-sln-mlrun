@@ -70,6 +70,10 @@ class TSBase:
             return project_spec["feature-vectors"]
         return []
 
+    def get_mlmodel(self, project_spec):
+        if isinstance(project_spec, dict):
+            return project_spec["ml-models"]
+        return []
 
     @staticmethod
     def get_json_header(json_content):

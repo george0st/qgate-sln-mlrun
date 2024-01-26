@@ -37,8 +37,8 @@ class TS601(TSBase):
         # Get list of models
         self.testscenario_new()
         for project_name in self.projects:
-            for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
-                self._get_data_offline(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
+            for mlmodel_name in self.get_mlmodel(self.project_specs.get(project_name)):
+                self._get_mlmodel(f"{project_name}/{mlmodel_name}", project_name, mlmodel_name)
 
 
         # Feature selection
@@ -52,9 +52,5 @@ class TS601(TSBase):
         pass
 
     @TSBase.handler_testcase
-    def _get_data_offline(self, testcase_name, project_name, featurevector_name):
-        self.project_switch(project_name)
-        vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
-
-        resp = fstore.get_offline_features(vector)
-        return resp.to_dataframe()
+    def _get_mlmodel(self, testcase_name, project_name, featurevector_name):
+        pass
