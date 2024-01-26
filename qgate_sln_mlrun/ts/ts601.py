@@ -9,6 +9,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 import os
+import glob
+import json
 
 
 class TS601(TSBase):
@@ -34,27 +36,35 @@ class TS601(TSBase):
 
     def build_model(self):
 
-        # Get list of models
+        # Get list of ml models
         self.testscenario_new()
         for project_name in self.projects:
-            for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
-                self._get_data_offline(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
+            for mlmodel_name in self.get_mlmodel(self.project_specs.get(project_name)):
+                source_file = os.path.join(os.getcwd(),
+                                           self.setup.model_definition,
+                                           "01-model",
+                                           "04-ml-model",
+                                           f"*-{mlmodel_name}.json")
 
-
-        # Feature selection
-        # feature_cols = ['pregnant', 'insulin', 'bmi', 'age', 'glucose', 'bp', 'pedigree']
-        # X = pima[feature_cols]  # Features
-        # y = pima.label  # Target variable
-
-        # Split data
-
-        # Building Decision Tree Model
-        pass
+                # check existing data set
+                for file in glob.glob(source_file):
+                    # iterate cross all ml models definitions
+                    with open(file, "r") as json_file:
+                        self._create_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
 
     @TSBase.handler_testcase
-    def _get_data_offline(self, testcase_name, project_name, featurevector_name):
-        self.project_switch(project_name)
-        vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
+    def _create_mlmodel(self, testcase_name, project_name, json_file):
+        json_content = json.load(json_file)
+        name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
-        resp = fstore.get_offline_features(vector)
-        return resp.to_dataframe()
+        if kind == "ml-model":
+            # create ml model
+            # Feature selection
+            # feature_cols = ['pregnant', 'insulin', 'bmi', 'age', 'glucose', 'bp', 'pedigree']
+            # X = pima[feature_cols]  # Features
+            # y = pima.label  # Target variable
+
+            # Split data
+
+            # Building Decision Tree Model
+            pass
