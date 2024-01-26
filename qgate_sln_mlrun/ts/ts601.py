@@ -75,5 +75,10 @@ class TS601(TSBase):
                                                                 random_state=1)
 
             # build data
+            clf = DecisionTreeClassifier()
+            # train
+            clf = clf.fit(X_train, y_train)
+            # predict
+            y_pred = clf.predict(X_test)
 
             pass
