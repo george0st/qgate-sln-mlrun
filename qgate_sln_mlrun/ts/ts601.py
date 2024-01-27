@@ -65,9 +65,20 @@ class TS601(TSBase):
             resp = fstore.get_offline_features(vector)
             frm = resp.to_dataframe()
 
+            # encoder
+            labelencoder = LabelEncoder()
+            frm["transaction-direction-enc"]=labelencoder.fit_transform(frm["transaction-direction"])
+            frm["transaction-type-enc"]=labelencoder.fit_transform(frm["transaction-type"])
+            frm["transaction-currency-enc"]=labelencoder.fit_transform(frm["transaction-currency"])
+            print(frm)
+
+            source=json_content["spec"]["source"]
+            source=["transaction-direction-enc","transaction-type-enc","transaction-value","transaction-currency-enc"]
+            target=json_content["spec"]["target"]
+
             # feature selection
-            X=frm[json_content["spec"]["source"]]
-            y=frm[json_content["spec"]["target"]]
+            X=frm[source]
+            y=frm[target]
 
             # split data
             X_train, X_test, y_train, y_test = train_test_split(X,
@@ -85,12 +96,15 @@ class TS601(TSBase):
             # labelencoder.transform(["Arch"])
             # bridge_df
 
+
             # build data
             clf = DecisionTreeClassifier()
             # train
             clf = clf.fit(X_train, y_train)
             # predict
             y_pred = clf.predict(X_test)
+
+            # store the model
 
             # from pickle import dumps
             # model_data = dumps(model)
