@@ -61,19 +61,13 @@ class TSBase:
     # region INTERNAL
 
     def get_featuresets(self, project_spec):
-        if isinstance(project_spec, dict):
-            return project_spec["feature-sets"]
-        return []
+        return project_spec.get("feature-sets",[])
 
     def get_featurevectors(self, project_spec):
-        if isinstance(project_spec, dict):
-            return project_spec["feature-vectors"]
-        return []
+        return project_spec.get("feature-vectors",[])
 
     def get_mlmodel(self, project_spec):
-        if isinstance(project_spec, dict):
-            return project_spec.get("ml-models", [])
-        return []
+        return project_spec.get("ml-models", [])
 
     @staticmethod
     def get_json_header(json_content):
