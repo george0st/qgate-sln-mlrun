@@ -67,7 +67,7 @@ class TS601(TSBase):
 
             # encode data
             labelencoder = LabelEncoder()
-            for column in json_content["spec"]["encode"]:
+            for column in json_content["spec"]["encode-columns"]:
                 frm[column]=labelencoder.fit_transform(frm[column])
 
             # select data for training
