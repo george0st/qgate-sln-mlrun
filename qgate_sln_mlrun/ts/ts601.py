@@ -67,9 +67,10 @@ class TS601(TSBase):
 
             # encoding
             labelencoder = LabelEncoder()
-            frm["transaction-direction"]=labelencoder.fit_transform(frm["transaction-direction"])
-            frm["transaction-type"]=labelencoder.fit_transform(frm["transaction-type"])
-            frm["transaction-currency"]=labelencoder.fit_transform(frm["transaction-currency"])
+            for column in json_content["spec"]["encode"]:
+                frm[column]=labelencoder.fit_transform(frm[column])
+                # frm["transaction-type"]=labelencoder.fit_transform(frm["transaction-type"])
+                # frm["transaction-currency"]=labelencoder.fit_transform(frm["transaction-currency"])
 
             # feature selection
             source=json_content["spec"]["source"]
