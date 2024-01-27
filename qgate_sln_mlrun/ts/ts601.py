@@ -1,6 +1,7 @@
 """
   TS601: Build CART model
 """
+from sklearn.preprocessing import LabelEncoder
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
@@ -64,15 +65,37 @@ class TS601(TSBase):
             resp = fstore.get_offline_features(vector)
             frm = resp.to_dataframe()
 
+            # encoder
+            labelencoder = LabelEncoder()
+            frm["transaction-direction-enc"]=labelencoder.fit_transform(frm["transaction-direction"])
+            frm["transaction-type-enc"]=labelencoder.fit_transform(frm["transaction-type"])
+            frm["transaction-currency-enc"]=labelencoder.fit_transform(frm["transaction-currency"])
+            print(frm)
+
+            source=json_content["spec"]["source"]
+            source=["transaction-direction-enc","transaction-type-enc","transaction-value","transaction-currency-enc"]
+            target=json_content["spec"]["target"]
+
             # feature selection
-            X=frm[json_content["spec"]["source"]]
-            y=frm[json_content["spec"]["target"]]
+            X=frm[source]
+            y=frm[target]
 
             # split data
             X_train, X_test, y_train, y_test = train_test_split(X,
                                                                 y,
                                                                 test_size=json_content["spec"]["test-size"],
                                                                 random_state=1)
+
+            # convert categorical data to numerical
+            # bridge_types = ('Arch', 'Beam', 'Truss', 'Cantilever', 'Tied Arch', 'Suspension', 'Cable')
+            # bridge_df = pd.DataFrame(bridge_types, columns=['Bridge_Types'])
+            # # creating instance of labelencoder
+            # labelencoder = LabelEncoder()
+            # # Assigning numerical values and storing in another column
+            # bridge_df['Bridge_Types_Cat'] = labelencoder.fit_transform(bridge_df['Bridge_Types'])
+            # labelencoder.transform(["Arch"])
+            # bridge_df
+
 
             # build data
             clf = DecisionTreeClassifier()
@@ -81,4 +104,8 @@ class TS601(TSBase):
             # predict
             y_pred = clf.predict(X_test)
 
-            pass
+            # store the model
+
+            # from pickle import dumps
+            # model_data = dumps(model)
+            # context.log_model(key='my_model', body=model_data, model_file='my_model.pkl')
