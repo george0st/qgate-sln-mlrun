@@ -61,18 +61,18 @@ class TS601(TSBase):
         if kind == "ml-model":
 
             # load data
-            vector = fstore.get_feature_vector(f"{project_name}/{json_content['spec']['vector']}")
+            vector = fstore.get_feature_vector(f"{project_name}/{json_content['spec']['source']}")
             resp = fstore.get_offline_features(vector)
             frm = resp.to_dataframe()
 
-            # encoding
+            # encode data
             labelencoder = LabelEncoder()
-            for column in json_content["spec"]["encode"]:
+            for column in json_content["spec"]["encode-columns"]:
                 frm[column]=labelencoder.fit_transform(frm[column])
 
-            # feature selection
-            source=json_content["spec"]["source"]
-            target=json_content["spec"]["target"]
+            # select data for training
+            source=json_content["spec"]["source-columns"]
+            target=json_content["spec"]["target-columns"]
             X=frm[source]
             y=frm[target]
 
@@ -93,4 +93,5 @@ class TS601(TSBase):
 
             # from pickle import dumps
             # model_data = dumps(clf)
+            # context = mlrun.get_or_create_ctx("apply-mlrun-tutorial")
             # context.log_model(key='my_model', body=model_data, model_file='my_model.pkl')
