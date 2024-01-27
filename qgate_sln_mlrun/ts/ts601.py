@@ -65,18 +65,15 @@ class TS601(TSBase):
             resp = fstore.get_offline_features(vector)
             frm = resp.to_dataframe()
 
-            # encoder
+            # encoding
             labelencoder = LabelEncoder()
-            frm["transaction-direction-enc"]=labelencoder.fit_transform(frm["transaction-direction"])
-            frm["transaction-type-enc"]=labelencoder.fit_transform(frm["transaction-type"])
-            frm["transaction-currency-enc"]=labelencoder.fit_transform(frm["transaction-currency"])
-            print(frm)
-
-            source=json_content["spec"]["source"]
-            source=["transaction-direction-enc","transaction-type-enc","transaction-value","transaction-currency-enc"]
-            target=json_content["spec"]["target"]
+            frm["transaction-direction"]=labelencoder.fit_transform(frm["transaction-direction"])
+            frm["transaction-type"]=labelencoder.fit_transform(frm["transaction-type"])
+            frm["transaction-currency"]=labelencoder.fit_transform(frm["transaction-currency"])
 
             # feature selection
+            source=json_content["spec"]["source"]
+            target=json_content["spec"]["target"]
             X=frm[source]
             y=frm[target]
 
@@ -86,26 +83,15 @@ class TS601(TSBase):
                                                                 test_size=json_content["spec"]["test-size"],
                                                                 random_state=1)
 
-            # convert categorical data to numerical
-            # bridge_types = ('Arch', 'Beam', 'Truss', 'Cantilever', 'Tied Arch', 'Suspension', 'Cable')
-            # bridge_df = pd.DataFrame(bridge_types, columns=['Bridge_Types'])
-            # # creating instance of labelencoder
-            # labelencoder = LabelEncoder()
-            # # Assigning numerical values and storing in another column
-            # bridge_df['Bridge_Types_Cat'] = labelencoder.fit_transform(bridge_df['Bridge_Types'])
-            # labelencoder.transform(["Arch"])
-            # bridge_df
-
-
-            # build data
-            clf = DecisionTreeClassifier()
             # train
+            clf = DecisionTreeClassifier()
             clf = clf.fit(X_train, y_train)
+
             # predict
             y_pred = clf.predict(X_test)
 
             # store the model
 
             # from pickle import dumps
-            # model_data = dumps(model)
+            # model_data = dumps(clf)
             # context.log_model(key='my_model', body=model_data, model_file='my_model.pkl')
