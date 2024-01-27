@@ -65,12 +65,12 @@ class TS601(TSBase):
             resp = fstore.get_offline_features(vector)
             frm = resp.to_dataframe()
 
-            # encoding
+            # encode data
             labelencoder = LabelEncoder()
             for column in json_content["spec"]["encode"]:
                 frm[column]=labelencoder.fit_transform(frm[column])
 
-            # feature selection
+            # select data for training
             source=json_content["spec"]["source"]
             target=json_content["spec"]["target"]
             X=frm[source]
