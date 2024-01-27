@@ -72,7 +72,7 @@ class TSBase:
 
     def get_mlmodel(self, project_spec):
         if isinstance(project_spec, dict):
-            return project_spec["ml-models"]
+            return project_spec.get("ml-models", [])
         return []
 
     @staticmethod
