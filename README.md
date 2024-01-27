@@ -30,9 +30,9 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
    - ✅ TS501: Get data from off-line feature vector(s)
    - ✅ TS502: Get data from on-line feature vector(s)
  - **Build model**
-   - ❌ TS601: Build model for CART
-   - ❌ TS602: Build model for XGBoost
-   - ❌ TS603: Build model for DNN
+   - ✅ TS601: Build CART model
+   - ❌ TS602: Build XGBoost model
+   - ❌ TS603: Build DNN model
  - **Serve score**
    - ❌ TS701: Serving score from CART
    - ❌ TS702: Serving score from XGBoost
