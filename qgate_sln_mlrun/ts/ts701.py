@@ -10,6 +10,8 @@ import mlrun
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
+import mlrun.feature_store as fstore
+from sklearn.preprocessing import LabelEncoder
 import os
 import glob
 import json
@@ -61,19 +63,27 @@ class TS701(TSBase):
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "ml-model":
-        #     if models_path is None:
-        #         models_path = context.artifact_subpath("models")
-        #     xtest = test_set.as_df()
-        #     ytest = xtest.pop(label_column)
+
+            # get data
+            vector = fstore.get_feature_vector(f"{project_name}/{json_content['spec']['source']}")
+            resp = fstore.get_offline_features(vector)
+            frm = resp.to_dataframe()
+
+            # encode data
+            labelencoder = LabelEncoder()
+            for column in json_content["spec"]["encode-columns"]:
+                frm[column] = labelencoder.fit_transform(frm[column])
+
+            # select data for prediction
+            X = frm[json_content["spec"]["source-columns"]]
+
+            # get model
             #context = mlrun.get_or_create_ctx("output", project=project_name)
             #models_path = context.artifact_subpath("models")
             models_path=f"C:/Python/qgate-sln-mlrun/output/0/model-transaction/model-transaction.pkl"
             #store://models/gate-alfa/output_model-transaction#0:latest
             model_file, model_artifact, extra_data = get_model(models_path, suffix='.pkl')
             model = load(open(model_file, "rb"))
-            print(model)
-            #model.predict(X_test)
 
             # predict
-            #y_pred = model.predict(X_test)
-
+            model.predict(X)

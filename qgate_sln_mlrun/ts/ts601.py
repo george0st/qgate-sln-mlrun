@@ -2,7 +2,6 @@
   TS601: Build CART model
 """
 from sklearn.preprocessing import LabelEncoder
-
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
 import mlrun
@@ -85,7 +84,7 @@ class TS601(TSBase):
             clf = DecisionTreeClassifier()
             clf = clf.fit(X_train, y_train)
 
-            # # predict
+            # predict
             # y_pred = clf.predict(X_test)
 
             # store the model
