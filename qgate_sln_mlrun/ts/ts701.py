@@ -50,22 +50,23 @@ class TS701(TSBase):
                 for file in glob.glob(source_file):
                     # iterate cross all ml models definitions
                     with open(file, "r") as json_file:
-                        self._create_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
+                        self._use_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
 
     @TSBase.handler_testcase
-    def _create_mlmodel(self, testcase_name, project_name, json_file):
+    def _use_mlmodel(self, testcase_name, project_name, json_file):
         json_content = json.load(json_file)
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "ml-model":
-            pass
         #     if models_path is None:
         #         models_path = context.artifact_subpath("models")
         #     xtest = test_set.as_df()
         #     ytest = xtest.pop(label_column)
-        #
-        #     model_file, model_obj, _ = get_model(models_path)
-        #     model = load(open(model_file, 'rb'))
+            models_path=""
+            model_file, model_artifact, extra_data = get_model(models_path, suffix='.pkl')
+            model = load(open(model_file, "rb"))
+            categories = extra_data['categories'].as_df()
+            
         #
         #     extra_data = eval_model_v2(context, xtest, ytest.values, model)
         #     update_model(model_artifact=model_obj, extra_data=extra_data,
