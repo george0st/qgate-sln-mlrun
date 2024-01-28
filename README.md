@@ -34,7 +34,7 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
    - ❌ TS602: Build XGBoost model
    - ❌ TS603: Build DNN model
  - **Serve score**
-   - ❌ TS701: Serving score from CART
+   - ✅ TS701: Serving score from CART
    - ❌ TS702: Serving score from XGBoost
    - ❌ TS703: Serving score from DNN
    
