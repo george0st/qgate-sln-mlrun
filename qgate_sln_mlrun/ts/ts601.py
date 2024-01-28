@@ -5,6 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
+import mlrun
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
@@ -12,6 +13,7 @@ from sklearn import metrics
 import os
 import glob
 import json
+from pickle import dumps
 
 
 class TS601(TSBase):
@@ -71,14 +73,11 @@ class TS601(TSBase):
                 frm[column]=labelencoder.fit_transform(frm[column])
 
             # select data for training
-            source=json_content["spec"]["source-columns"]
-            target=json_content["spec"]["target-columns"]
-            X=frm[source]
-            y=frm[target]
+            X=frm[json_content["spec"]["source-columns"]]
+            y=frm[json_content["spec"]["target-columns"]]
 
             # split data
-            X_train, X_test, y_train, y_test = train_test_split(X,
-                                                                y,
+            X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                                 test_size=json_content["spec"]["test-size"],
                                                                 random_state=1)
 
@@ -86,12 +85,10 @@ class TS601(TSBase):
             clf = DecisionTreeClassifier()
             clf = clf.fit(X_train, y_train)
 
-            # predict
-            y_pred = clf.predict(X_test)
+            # # predict
+            # y_pred = clf.predict(X_test)
 
             # store the model
-
-            # from pickle import dumps
-            # model_data = dumps(clf)
-            # context = mlrun.get_or_create_ctx("apply-mlrun-tutorial")
-            # context.log_model(key='my_model', body=model_data, model_file='my_model.pkl')
+            model_data = dumps(clf)
+            context = mlrun.get_or_create_ctx("output", project=project_name)
+            context.log_model(key=name, body=model_data, model_file=f'{name}.pkl')

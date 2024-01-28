@@ -31,7 +31,25 @@ class TS701(TSBase):
         Serve score
         """
 
-        # Evaluating the Model
-        pass
-
+        # from pickle import load
+        # from mlrun.execution import MLClientCtx
+        # from mlrun.datastore import DataItem
+        # from mlrun.artifacts import get_model, update_model
+        # from mlrun.mlutils import eval_model_v2
+        #
+        # def test_model(context: MLClientCtx,
+        #                models_path: DataItem,
+        #                test_set: DataItem,
+        #                label_column: str):
+        #     if models_path is None:
+        #         models_path = context.artifact_subpath("models")
+        #     xtest = test_set.as_df()
+        #     ytest = xtest.pop(label_column)
+        #
+        #     model_file, model_obj, _ = get_model(models_path)
+        #     model = load(open(model_file, 'rb'))
+        #
+        #     extra_data = eval_model_v2(context, xtest, ytest.values, model)
+        #     update_model(model_artifact=model_obj, extra_data=extra_data,
+        #                  metrics=context.results, key_prefix='validation-')
 
