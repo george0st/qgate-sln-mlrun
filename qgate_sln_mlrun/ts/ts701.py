@@ -6,6 +6,9 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 from pickle import load
 from mlrun.datastore import DataItem
 from mlrun.artifacts import get_model, update_model
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 import os
 import glob
 import json
@@ -61,11 +64,11 @@ class TS701(TSBase):
         #         models_path = context.artifact_subpath("models")
         #     xtest = test_set.as_df()
         #     ytest = xtest.pop(label_column)
-            models_path="C:\Python\qgate-sln-mlrun\output\0\model-transaction\model-transaction.pkl"
+            models_path=f"C:/Python/qgate-sln-mlrun/output/0/model-transaction/model-transaction.pkl"
             #store://models/gate-alfa/output_model-transaction#0:latest
             model_file, model_artifact, extra_data = get_model(models_path, suffix='.pkl')
             model = load(open(model_file, "rb"))
-            categories = extra_data['categories'].as_df()
+            #categories = extra_data['categories'].as_df()
 
         #
         #     extra_data = eval_model_v2(context, xtest, ytest.values, model)
