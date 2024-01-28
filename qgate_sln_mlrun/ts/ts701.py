@@ -3,7 +3,12 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-
+from pickle import load
+from mlrun.datastore import DataItem
+from mlrun.artifacts import get_model, update_model
+from mlrun.mlutils import eval_model_v2
+import os
+import glob
 
 class TS701(TSBase):
 
@@ -30,17 +35,23 @@ class TS701(TSBase):
         """
         Serve score
         """
+        # Get list of ml models
+        self.testscenario_new()
+        for project_name in self.projects:
+            for mlmodel_name in self.get_mlmodel(self.project_specs.get(project_name)):
+                source_file = os.path.join(os.getcwd(),
+                                           self.setup.model_definition,
+                                           "01-model",
+                                           "04-ml-model",
+                                           f"*-{mlmodel_name}.json")
 
-        # from pickle import load
-        # from mlrun.execution import MLClientCtx
-        # from mlrun.datastore import DataItem
-        # from mlrun.artifacts import get_model, update_model
-        # from mlrun.mlutils import eval_model_v2
-        #
-        # def test_model(context: MLClientCtx,
-        #                models_path: DataItem,
-        #                test_set: DataItem,
-        #                label_column: str):
+                # check existing data set
+                for file in glob.glob(source_file):
+                    # iterate cross all ml models definitions
+                    with open(file, "r") as json_file:
+                        self._create_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
+
+
         #     if models_path is None:
         #         models_path = context.artifact_subpath("models")
         #     xtest = test_set.as_df()
