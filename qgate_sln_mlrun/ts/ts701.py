@@ -9,6 +9,7 @@ from mlrun.artifacts import get_model, update_model
 from mlrun.mlutils import eval_model_v2
 import os
 import glob
+import json
 
 class TS701(TSBase):
 
@@ -51,7 +52,13 @@ class TS701(TSBase):
                     with open(file, "r") as json_file:
                         self._create_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
 
+    @TSBase.handler_testcase
+    def _create_mlmodel(self, testcase_name, project_name, json_file):
+        json_content = json.load(json_file)
+        name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
+        if kind == "ml-model":
+            pass
         #     if models_path is None:
         #         models_path = context.artifact_subpath("models")
         #     xtest = test_set.as_df()
