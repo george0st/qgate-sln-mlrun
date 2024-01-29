@@ -9,7 +9,6 @@ The Path to the QGate model definition (the path can be relative or full) e.g. .
 The name of data set for testing e.g. "01-size-100", "02-size-1K", etc.
   - `QGATE_DATASET = 01-size-100`
 
-
 ## Output
 The path to the output directory for **off-line storage** (valid for target 'parquet', 'csv', etc.)
   - local file system `QGATE_OUTPUT = ./output/`
