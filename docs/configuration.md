@@ -1,12 +1,16 @@
 # Configuration
 
 
+## Model definition
+The Path to the QGate model definition (the path can be relative or full) e.g. ../qgate-fs-model/
+  - `QGATE_DEFINITION = ../qgate-model/`
+
 ## Data set
 The name of data set for testing e.g. "01-size-100", "02-size-1K", etc.
   - `QGATE_DATASET = 01-size-100`
 
 
-## Path to data storage
+## Output
 The path to the output directory for **off-line storage** (valid for target 'parquet', 'csv', etc.)
   - local file system `QGATE_OUTPUT = ./output/`
   - object storage `QGATE_OUTPUT = TBD`
