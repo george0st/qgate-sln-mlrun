@@ -32,10 +32,6 @@ class Setup:
 
         self._variables["DIR"]=os.getcwd()
 
-        # set model dirs
-        #self._model_definition=self._variables['QGATE_DEFINITION']
-        #self._model_output=self._variables['QGATE_OUTPUT']
-
     def __str__(self):
         ret=""
         for key in self._variables.keys():
