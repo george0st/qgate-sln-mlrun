@@ -2,7 +2,7 @@
 
 
 ## Model definition
-The Path to the QGate model definition (the path can be relative or full) e.g. ../qgate-fs-model/
+The Path to the QGate model definition (the path can be relative or full) e.g. ../qgate-model/
   - `QGATE_DEFINITION = ../qgate-model/`
 
 ## Data set
