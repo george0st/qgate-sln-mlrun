@@ -18,3 +18,8 @@ The path to the output directory for **off-line storage** (valid for target 'par
 The setup of Redis for **on-line FeatureStore** (valid fot target 'redis')
   - `QGATE_REDIS = redis://localhost:6379`
   - detail description, see [Redis](./redis.md)
+
+## 5. MySQL
+The setup of MySQL for **on-line FeatureStore** (valid fot target 'mysql')
+  - `QGATE_MYSQL = http://localhost:8081`
+  - detail description, see [MySQL](./mysql.md)
