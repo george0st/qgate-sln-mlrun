@@ -12,4 +12,7 @@ The list of expected/future improvements:
     - Why?
       - Check maturity of this solution
       - Tests from on/off-line view
- 3. Etc.
+ 3. **Add tests without Redis/MySQL/...
+    - Why?
+      - Add bigger variability for usage
+ 4. Etc.
