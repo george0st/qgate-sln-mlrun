@@ -6,7 +6,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget
+from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, SQLTarget
 import os
 import json
 import glob
@@ -98,14 +98,23 @@ class TS201(TSBase):
         target_providers=[]
         for target in json_spec['targets']:
             target_name = f"target_{count}"
-            if target.lower().strip()=="parquet":
+            target=target.lower().strip()
+            if target == "parquet":
                 # support more parquet targets (each target has different path)
                 target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name)))
-            elif target.lower().strip()=="csv":
+            elif target == "csv":
                 target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
-            elif target.lower().strip()=="redis":
+            elif target == "redis":
                 if self.setup.redis:
                     target_providers.append(RedisNoSqlTarget(name=target_name, path=self.setup.redis))
+                else:
+                    raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
+            elif target == "mysql":
+                if self.setup.mysql:
+                    # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
+                    # mysql+pymysql://jist:jist@localhost:3306/test
+                    #target_providers.append(SQLTarget(name=target_name, db_url=self.setup.mysql))
+                    pass
                 else:
                     raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
             else:

@@ -19,9 +19,21 @@
 
 2. Run new container
    - create container with name 'mlrun-mysql', use image 'mysql:8.3' and open ports 8081:8080
-     - `docker run --name mlrun-mysql -p 8081:8080 -d mysql:8.3`
+     - `docker run --name mlrun-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=jist -e MYSQL_DATABASE=test -e MYSQL_USER=jist -e MYSQL_PASSWORD=jist -d mysql:8.3 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
    - or create container with name 'mlrun-mysql', use image 'mysql:latest' and open ports 8081:8080
-     - `docker run --name mlrun-mysql -p 8081:8080 -d mysql:latest`
+     - `docker run --name mlrun-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=jist -e MYSQL_DATABASE=test -e MYSQL_USER=jist -e MYSQL_PASSWORD=jist -d mysql:last --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
+   - NOTE:
+     - user `jist`, password `jist`
+
+<!--
+default port 3306
+
+docker run -d -p 3306:3306 --name mysql-docker-container -e MYSQL_ROOT_PASSWORD=sergey -e MYSQL_DATABASE=photo_app -e MYSQL_USER=sergey -e MYSQL_PASSWORD=sergey mysql/mysql-server:latest
+docker exec -it mysql-docker-container bash
+mysql -u root -p
+SELECT user FROM mysql.user;
+show databases;
+-->
 
 ## 3. Use MySQL for tests
 
