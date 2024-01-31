@@ -24,6 +24,7 @@
    - NOTE:
      - user `jist`, password `jist`
 
+
 3. Test MySQL in container
    - interactive access to the container
      - `docker exec -it mlrun-mysql bash`
@@ -37,5 +38,5 @@
 ## 3. Use MySQL for tests
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_MYSQL`
-   - see `QGATE_MYSQL = http://localhost:8081`
+   - see `QGATE_MYSQL = mysql+pymysql://jist:jist@localhost:3306/test`
 
