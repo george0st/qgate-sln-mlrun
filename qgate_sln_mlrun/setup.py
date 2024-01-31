@@ -63,3 +63,7 @@ class Setup:
     @property
     def redis(self):
         return self._variables.get('QGATE_REDIS', None)
+
+    @property
+    def mysql(self):
+        return self._variables.get('QGATE_MYSQL', None)
