@@ -11,4 +11,5 @@ The list of expected/future improvements:
     - Focus on MySQL and PostgreSQL in DockerImage
     - Why?
       - Check maturity of this solution
-      - Tests from on/off-line view 
+      - Tests from on/off-line view
+ 3. Etc.
