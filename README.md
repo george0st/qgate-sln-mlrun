@@ -39,7 +39,17 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
    - ❌ TS703: Serving score from DNN
    
 NOTE: Each test scenario contains addition specific test cases.
-    
+
+## Test sources
+The quality gate tests these sources (✅ done, ❌ in-progress/planned):
+ - Off-line
+   - ✅ ParquetTarget, ✅ CSVTarget, ❌ SQLTarget
+ - On-line
+   - ✅ RedisTarget, ❌ SQLTarget, ❌ KafkaTarget
+   - ❌ SQLSource
+ - Other
+   - ✅ Pandas DataFrame (as Source)
+
 ## Sample of outputs
 
 ![Sample of outputs](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-samples.png?raw=true)
