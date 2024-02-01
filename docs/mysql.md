@@ -53,5 +53,5 @@
  - Dialect pymysql
    - it required `pymysql ~= 1.1`
  - NOTE
-   - these are version valid for MLRun 1.5.2
+   - these are versions valid for MLRun 1.5.2
 

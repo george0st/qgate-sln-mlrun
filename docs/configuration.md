@@ -21,5 +21,5 @@ The setup of Redis for **on-line FeatureStore** (valid fot target 'redis')
 
 ## 5. MySQL
 The setup of MySQL for **on-line FeatureStore** (valid fot target 'mysql')
-  - `QGATE_MYSQL = http://localhost:8081`
+  - `QGATE_MYSQL = mysql+pymysql://jist:jist@localhost:3306/test`
   - detail description, see [MySQL](./mysql.md)
