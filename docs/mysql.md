@@ -43,4 +43,15 @@
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_MYSQL`
    - see `QGATE_MYSQL = mysql+pymysql://jist:jist@localhost:3306/test`
+ - Note
+   - List of [Dialects](https://docs.sqlalchemy.org/en/20/dialects/index.html)
+
+## 4. Install these python packages
+
+ - SQLAlchemy based on MLRun extas see `pip install mlrun[sqlalchemy]`
+   - it required `sqlalchemy ~= 1.4`
+ - Dialect pymysql
+   - it required `pymysql ~= 1.1`
+ - NOTE
+   - these are version valid for MLRun 1.5.2
 
