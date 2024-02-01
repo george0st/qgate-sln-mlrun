@@ -34,6 +34,10 @@
      - `SELECT user FROM mysql.user;`
    - show list of databases
      - `show databases;`
+   - switch to use database `test`
+     - `use test;`
+   - show list of tables
+     - `show tables;`
 
 ## 3. Use MySQL for tests
 
