@@ -43,7 +43,7 @@ NOTE: Each test scenario contains addition specific test cases.
 ## Test sources
 The quality gate tests these sources (✅ done, ❌ in-progress/planned):
  - Off-line
-   - ✅ ParquetTarget, ✅ CSVTarget, ❌ SQLTarget
+   - ✅ ParquetTarget, ✅ CSVTarget
  - On-line
    - ✅ RedisTarget, ❌ SQLTarget, ❌ KafkaTarget
    - ❌ SQLSource
