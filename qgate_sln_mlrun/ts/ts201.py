@@ -112,7 +112,8 @@ class TS201(TSBase):
         target_provider=None
         if target == "parquet":
             # support more parquet targets (each target has different path)
-            target_provider=ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name))
+            target_provider=ParquetTarget(name=target_name,
+                                          path=os.path.join(self.setup.model_output, project_name, target_name))
         elif target == "csv":
             target_provider=CSVTarget(name=target_name,
                                               path=os.path.join(self.setup.model_output, project_name, target_name,
@@ -121,7 +122,7 @@ class TS201(TSBase):
             if self.setup.redis:
                 target_provider=RedisNoSqlTarget(name=target_name, path=self.setup.redis)
             else:
-                raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
+                raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
         elif target == "mysql":
             if self.setup.mysql:
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
@@ -129,7 +130,7 @@ class TS201(TSBase):
                 # target_providers.append(SQLTarget(name=target_name, db_url=self.setup.mysql))
                 pass
             else:
-                raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
+                raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
         else:
             # TODO: Add support other targets for MLRun CE
             raise NotImplementedError()
