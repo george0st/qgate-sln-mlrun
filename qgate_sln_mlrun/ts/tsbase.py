@@ -74,7 +74,7 @@ class TSBase:
         """ Get common header
 
         :param json_content:    json content
-        :return:                name, description, labeles and kind from header
+        :return:                name, description, labeled, kind, parent from header
         """
         name = json_content['name']
         desc = json_content['description']
@@ -83,6 +83,21 @@ class TSBase:
         # optional labels
         lbls = None if json_content.get('labels') is None else json_content.get('labels')
         return name, desc, lbls, kind
+
+    def get_json_header_full(json_content):
+        """ Get common header
+
+        :param json_content:    json content
+        :return:                name, description, labels, kind and parent from header
+        """
+        name = json_content['name']
+        desc = json_content['description']
+        kind = json_content['kind']
+        parent = json_content.get('parent', None)
+
+        # optional labels
+        lbls = None if json_content.get('labels') is None else json_content.get('labels')
+        return name, desc, lbls, kind, parent
 
     @staticmethod
     def get_model_info(model_definition):
