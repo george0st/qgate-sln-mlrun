@@ -28,15 +28,28 @@ class TS101(TSBase):
         """ Create projects based on json definition
         """
         self.testscenario_new()
-        dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "*.json")
-        for file in glob.glob(dir):
+        dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "**", "*.json")
+        for file in glob.glob(dir, recursive=True):
             with (open(file, "r") as json_file):
                 json_content = json.load(json_file)
-                name, desc, lbls, kind = TSBase.get_json_header(json_content)
+                name, desc, lbls, kind, parent = TSBase.get_json_header_full(json_content)
 
                 self.projects.append(name)
-                if self._create_project(name, desc, lbls, kind):
-                    self.project_specs[name] = json_content['spec']
+                self.project_specs[name] = json_content['spec']
+                # add project inheritance
+                self._add_inheritance(name, parent)
+
+                self._create_project(name, desc, lbls, kind)
+
+    def _add_inheritance(self, project_name, parent):
+
+        if parent:
+            for spec_item in self.project_specs[parent]:
+                itm=self.project_specs[project_name].get(spec_item, None)
+                if itm is None:
+                    self.project_specs[project_name][spec_item]=self.project_specs[parent][spec_item]
+
+
 
     @TSBase.handler_testcase
     def _create_project(self, name, desc, lbls, kind):
