@@ -34,15 +34,15 @@ class TS101(TSBase):
                 json_content = json.load(json_file)
                 name, desc, lbls, kind, parent = TSBase.get_json_header_full(json_content)
 
+                # add project include project inheritance
                 self.projects.append(name)
                 self.project_specs[name] = json_content['spec']
-                # add project inheritance
                 self._add_inheritance(name, parent)
 
                 self._create_project(name, desc, lbls, kind)
 
     def _add_inheritance(self, project_name, parent):
-
+        """Copy 'spec' content from parent project, but only for missing items"""
         if parent:
             for spec_item in self.project_specs[parent]:
                 itm=self.project_specs[project_name].get(spec_item, None)
