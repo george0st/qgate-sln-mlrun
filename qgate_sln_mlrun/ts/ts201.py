@@ -97,10 +97,8 @@ class TS201(TSBase):
         count=0
         target_providers=[]
         for target in json_spec['targets']:
-            target_name = f"target_{count}"
-            target=target.lower().strip()
 
-            target_provider=self._create_target(target,target_name,project_name)
+            target_provider=self._create_target(target.lower().strip(),f"target_{count}",project_name)
             if target_provider:
                 target_providers.append(target_provider)
 
