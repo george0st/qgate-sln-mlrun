@@ -97,6 +97,7 @@ class TS201(TSBase):
         count=0
         target_providers=[]
         for target in json_spec['targets']:
+            # TODO: check if current target == project targets, if yes than secondary cycle
             target_provider=self._create_target(target.lower().strip(), f"target_{count}", project_name)
             if target_provider:
                 target_providers.append(target_provider)
