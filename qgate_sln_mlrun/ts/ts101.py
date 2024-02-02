@@ -49,8 +49,6 @@ class TS101(TSBase):
                 if itm is None:
                     self.project_specs[project_name][spec_item]=self.project_specs[parent][spec_item]
 
-
-
     @TSBase.handler_testcase
     def _create_project(self, name, desc, lbls, kind):
         """Create project"""
