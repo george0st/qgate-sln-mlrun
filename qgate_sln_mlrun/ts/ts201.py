@@ -97,32 +97,9 @@ class TS201(TSBase):
         count=0
         target_providers=[]
         for target in json_spec['targets']:
-
-            target_provider=self._create_target(target.lower().strip(),f"target_{count}",project_name)
+            target_provider=self._create_target(target.lower().strip(), f"target_{count}", project_name)
             if target_provider:
                 target_providers.append(target_provider)
-
-            # if target == "parquet":
-            #     # support more parquet targets (each target has different path)
-            #     target_providers.append(ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name)))
-            # elif target == "csv":
-            #     target_providers.append(CSVTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name,target_name+".csv")))
-            # elif target == "redis":
-            #     if self.setup.redis:
-            #         target_providers.append(RedisNoSqlTarget(name=target_name, path=self.setup.redis))
-            #     else:
-            #         raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
-            # elif target == "mysql":
-            #     if self.setup.mysql:
-            #         # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
-            #         # mysql+pymysql://jist:jist@localhost:3306/test
-            #         #target_providers.append(SQLTarget(name=target_name, db_url=self.setup.mysql))
-            #         pass
-            #     else:
-            #         raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
-            # else:
-            #     # TODO: Add support other targets for MLRun CE
-            #     raise NotImplementedError()
             count+=1
         fs.set_targets(target_providers, with_defaults=False)
 
