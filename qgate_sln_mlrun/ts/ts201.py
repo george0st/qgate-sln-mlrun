@@ -69,6 +69,7 @@ class TS201(TSBase):
         :param json_spec:  Json specification for this featureset
         """
 
+        project_spec = self.project_specs.get(project_name, None)
         self.project_switch(project_name)
         fs = fstore.FeatureSet(
             name=featureset_name,
@@ -98,10 +99,24 @@ class TS201(TSBase):
         target_providers=[]
         for target in json_spec['targets']:
             # TODO: check if current target == project targets, if yes than secondary cycle
-            target_provider=self._create_target(target.lower().strip(), f"target_{count}", project_name)
-            if target_provider:
-                target_providers.append(target_provider)
-            count+=1
+            target=target.lower().strip()
+
+            # check, if target is not project target
+            project_target = self.get_project_target(project_spec, target)
+            if project_target:
+                # add project targets
+                for sub_target in project_target:
+                    sub_target = sub_target.lower().strip()
+                    target_provider=self._create_target(sub_target, f"target_{count}", project_name)
+                    if target_provider:
+                        target_providers.append(target_provider)
+                    count+=1
+            else:
+                # add target
+                target_provider = self._create_target(target, f"target_{count}", project_name)
+                if target_provider:
+                    target_providers.append(target_provider)
+                count += 1
         fs.set_targets(target_providers, with_defaults=False)
 
         fs.save()
@@ -112,24 +127,25 @@ class TS201(TSBase):
         target_provider=None
         if target == "parquet":
             # support more parquet targets (each target has different path)
-            target_provider=ParquetTarget(name=target_name, path=os.path.join(self.setup.model_output, project_name, target_name))
+            target_provider = ParquetTarget(name=target_name,
+                                          path=os.path.join(self.setup.model_output, project_name, target_name))
         elif target == "csv":
-            target_provider=CSVTarget(name=target_name,
+            target_provider = CSVTarget(name=target_name,
                                               path=os.path.join(self.setup.model_output, project_name, target_name,
                                                                 target_name + ".csv"))
         elif target == "redis":
             if self.setup.redis:
-                target_provider=RedisNoSqlTarget(name=target_name, path=self.setup.redis)
+                target_provider = RedisNoSqlTarget(name=target_name, path=self.setup.redis)
             else:
-                raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
+                raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
         elif target == "mysql":
             if self.setup.mysql:
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://jist:jist@localhost:3306/test
-                # target_providers.append(SQLTarget(name=target_name, db_url=self.setup.mysql))
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql)
                 pass
             else:
-                raise ValueError("Invalid value for redis connection, see 'QGATE_REDIS'.")
+                raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
         else:
             # TODO: Add support other targets for MLRun CE
             raise NotImplementedError()
