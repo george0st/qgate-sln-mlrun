@@ -112,22 +112,22 @@ class TS201(TSBase):
         target_provider=None
         if target == "parquet":
             # support more parquet targets (each target has different path)
-            target_provider=ParquetTarget(name=target_name,
+            target_provider = ParquetTarget(name=target_name,
                                           path=os.path.join(self.setup.model_output, project_name, target_name))
         elif target == "csv":
-            target_provider=CSVTarget(name=target_name,
+            target_provider = CSVTarget(name=target_name,
                                               path=os.path.join(self.setup.model_output, project_name, target_name,
                                                                 target_name + ".csv"))
         elif target == "redis":
             if self.setup.redis:
-                target_provider=RedisNoSqlTarget(name=target_name, path=self.setup.redis)
+                target_provider = RedisNoSqlTarget(name=target_name, path=self.setup.redis)
             else:
                 raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
         elif target == "mysql":
             if self.setup.mysql:
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://jist:jist@localhost:3306/test
-                # target_providers.append(SQLTarget(name=target_name, db_url=self.setup.mysql))
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql)
                 pass
             else:
                 raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
