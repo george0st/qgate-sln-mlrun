@@ -53,7 +53,7 @@ class TS101(TSBase):
     def _create_project(self, name, desc, lbls, kind):
         """Create project"""
 
-        prj = mlrun.get_or_create_project(name, context=self.setup.model_output, user_project=False, save=False)
+        prj = mlrun.get_or_create_project(name, context=os.path.join(self.setup.model_output, name), user_project=False, save=False)
         prj.description = desc
         for lbl in lbls:
             prj.metadata.labels[lbl] = lbls[lbl]
