@@ -69,6 +69,7 @@ class TS201(TSBase):
         :param json_spec:  Json specification for this featureset
         """
 
+        project_spec = self.project_specs.get(project_name, None)
         self.project_switch(project_name)
         fs = fstore.FeatureSet(
             name=featureset_name,
@@ -101,7 +102,7 @@ class TS201(TSBase):
             target=target.lower().strip()
 
             # check, if target is not project target
-            project_target = self.get_project_target(target)
+            project_target = self.get_project_target(project_spec, target)
             if project_target:
                 # add project targets
                 for sub_target in project_target:
