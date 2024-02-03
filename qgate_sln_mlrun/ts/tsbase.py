@@ -60,6 +60,18 @@ class TSBase:
 
     # region INTERNAL
 
+    def get_project_target(self, target):
+        targets=self.project_spec.get("targets", None)
+        if targets:
+            return targets.get(target, None)
+        return None
+
+    def get_targets(self):
+        return self.project_spec.get("targets", {})
+
+    def get_targets(self, project_spec):
+        return project_spec.get("targets", {})
+
     def get_featuresets(self, project_spec):
         return project_spec.get("feature-sets",[])
 

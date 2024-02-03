@@ -98,10 +98,24 @@ class TS201(TSBase):
         target_providers=[]
         for target in json_spec['targets']:
             # TODO: check if current target == project targets, if yes than secondary cycle
-            target_provider=self._create_target(target.lower().strip(), f"target_{count}", project_name)
-            if target_provider:
-                target_providers.append(target_provider)
-            count+=1
+            target=target.lower().strip()
+
+            # check, if target is not project target
+            project_target = self.get_project_target(target)
+            if project_target:
+                # add project targets
+                for sub_target in project_target:
+                    sub_target = sub_target.lower().strip()
+                    target_provider=self._create_target(sub_target, f"target_{count}", project_name)
+                    if target_provider:
+                        target_providers.append(target_provider)
+                    count+=1
+            else:
+                # add target
+                target_provider = self._create_target(target, f"target_{count}", project_name)
+                if target_provider:
+                    target_providers.append(target_provider)
+                count += 1
         fs.set_targets(target_providers, with_defaults=False)
 
         fs.save()
