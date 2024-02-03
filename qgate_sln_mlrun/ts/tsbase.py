@@ -124,7 +124,7 @@ class TSBase:
     def project_switch(self, project_name):
         # switch to proper project if the current project is different
         if mlrun.get_current_project().name != project_name:
-            mlrun.load_project(name=project_name, context="./", user_project=False)
+            mlrun.load_project(name=project_name, context=os.path.join(self.setup.model_output,project_name), user_project=False)
 
     # endregion
 
