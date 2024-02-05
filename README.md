@@ -86,9 +86,9 @@ The project was tested with these MLRun versions (see [change log](https://docs.
    - MLRun 1.5.2, 1.5.1, 1.5.0
    - MLRun 1.4.1
    - MLRun 1.3.0
- - **Iguazio** (k8s, on-prem, VM on VMware)
-   - Iguazio 3.5.3 (with MLRun 1.4.1)
-   - Iguazio 3.5.1 (with MLRun 1.3.0)
+   - **Iguazio** (k8s, on-prem, VM on VMware)
+     - Iguazio 3.5.3 (with MLRun 1.4.1)
+     - Iguazio 3.5.1 (with MLRun 1.3.0)
 
 NOTE: Current state, only the last MLRun/Iguazio versions are valid for testing.
 
