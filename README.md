@@ -92,5 +92,6 @@ The project was tested with these MLRun versions (see [change log](https://docs.
 
 NOTE: Current state, only the last MLRun/Iguazio versions are valid for testing.
 
-## TODO list
-The list of expected/future improvements [see](./docs/todo_list.md) 
+## Others
+ - **To-Do**, the list of expected/future improvements [see](./docs/todo_list.md)
+ - **Applied limits**, the list of applied limits [see](./docs/applied-limits.md) 
