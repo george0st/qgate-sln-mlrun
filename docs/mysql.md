@@ -1,4 +1,4 @@
-# MySQL as on-line feature store
+# MySQL as on-line source/target
 
 ## 1. Preconditions for OS Windows
 
