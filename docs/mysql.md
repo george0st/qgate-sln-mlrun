@@ -7,15 +7,15 @@
 ## 2. Run MySQL (in container)
 
 1. Get image from official source
-   - get specific redis image version 7.2 `docker pull mysql:8.3`
+   - get specific redis image version 8.3 `docker pull mysql:8.3`
    - or get last redis image `docker pull mysql:latest`
    - Note
      - available [versions](https://hub.docker.com/_/mysql)/[tags](https://hub.docker.com/_/mysql/tags)
 
 2. Run new container
-   - create container with name 'mlrun-mysql', use image 'mysql:8.3' and open ports 8081:8080
+   - create container with name 'mlrun-mysql', use image 'mysql:8.3' and open ports 3306:3306
      - `docker run --name mlrun-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=jist -e MYSQL_DATABASE=test -e MYSQL_USER=jist -e MYSQL_PASSWORD=jist -d mysql:8.3 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
-   - or create container with name 'mlrun-mysql', use image 'mysql:latest' and open ports 8081:8080
+   - or create container with name 'mlrun-mysql', use image 'mysql:latest' and open ports 3306:3306
      - `docker run --name mlrun-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=jist -e MYSQL_DATABASE=test -e MYSQL_USER=jist -e MYSQL_PASSWORD=jist -d mysql:last --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
    - NOTE:
      - user `jist`, password `jist`
