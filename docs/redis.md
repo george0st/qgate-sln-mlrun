@@ -12,7 +12,6 @@
    - Note
      - available [versions](https://hub.docker.com/_/redis)/[tags](https://hub.docker.com/_/redis/tags)
 
-
 2. Run new container
    - create container with name 'mlrun-redis', use image 'redis:7.2' and open ports 6379:6379
      - `docker run --name mlrun-redis -p 6379:6379 -d redis:7.2`
