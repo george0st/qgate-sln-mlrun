@@ -25,4 +25,5 @@ The setup of MySQL for **on-line FeatureStore** (valid fot target 'mysql')
   - detail description, see [MySQL](./mysql.md)
 
 ## 6. Kafka
-TBD. see https://hub.docker.com/r/confluentinc/cp-kafka
+TBD. see helper https://hackernoon.com/setting-up-kafka-on-docker-for-local-development
+https://hub.docker.com/r/confluentinc/cp-kafka
