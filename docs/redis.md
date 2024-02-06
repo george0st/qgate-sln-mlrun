@@ -1,4 +1,4 @@
-# Redis as on-line feature store
+# Redis as on-line source/target
 
 ## 1. Preconditions for OS Windows
 
