@@ -2,7 +2,8 @@
 
 The list of expected/future improvements:
  0. **Repair path in CSVTarget**
-
+    - repair path to Unix format
+    - repair path in *.env file (see QGATE_OUTPUT = ./output/)
  1. **Test mlrun client under Python 3.10 with OS Windows**
     - Why?
       - Remove issue with datetime under Python 3.9 in OS Windows
