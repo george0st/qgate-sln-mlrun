@@ -30,11 +30,6 @@ class Setup:
             for key in hard_variables.keys():
                 self._variables[key]=hard_variables[key]
 
-        #
-
-        ./ output /
-        self._variables['QGATE_OUTPUT'].split('/')
-
         self._variables["DIR"]=os.getcwd()
 
     def __str__(self):
