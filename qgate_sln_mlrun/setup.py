@@ -29,6 +29,7 @@ class Setup:
         if hard_variables:
             for key in hard_variables.keys():
                 self._variables[key]=hard_variables[key]
+                
 
         self._variables["DIR"]=os.getcwd()
 

@@ -130,9 +130,10 @@ class TS201(TSBase):
             target_provider = ParquetTarget(name=target_name,
                                           path=os.path.join(self.setup.model_output, project_name, target_name))
         elif target == "csv":
+            # ERR: it is not possible to use os.path.join in CSVTarget because issue in MLRun
             target_provider = CSVTarget(name=target_name,
-                                              path=os.path.join(self.setup.model_output, project_name, target_name,
-                                                                target_name + ".csv"))
+                                        path="/".join(self.setup.model_output, project_name, target_name,
+                                                      target_name + ".csv"))
         elif target == "redis":
             if self.setup.redis:
                 target_provider = RedisNoSqlTarget(name=target_name, path=self.setup.redis)
