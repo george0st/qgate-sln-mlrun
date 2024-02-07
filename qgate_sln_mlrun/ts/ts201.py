@@ -131,9 +131,10 @@ class TS201(TSBase):
                                           path=os.path.join(self.setup.model_output, project_name, target_name))
         elif target == "csv":
             # ERR: it is not possible to use os.path.join in CSVTarget because issue in MLRun
+#            pth="/".join(self.setup.model_output, project_name, target_name, target_name + ".csv")
             target_provider = CSVTarget(name=target_name,
-                                        path="/".join(self.setup.model_output, project_name, target_name,
-                                                      target_name + ".csv"))
+                                        path="/".join([self.setup.model_output, project_name, target_name,
+                                                      target_name + ".csv"]))
         elif target == "redis":
             if self.setup.redis:
                 target_provider = RedisNoSqlTarget(name=target_name, path=self.setup.redis)
