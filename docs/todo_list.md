@@ -14,7 +14,7 @@ The list of expected/future improvements:
  2. **Test SQLSource and SQLTarget**
     - Focus on MySQL and PostgreSQL in DockerImage
     - Why?
-      - Check maturity of this solution
+      - Quality gate extension
       - Tests from on/off-line view
 
  3. **Add tests with Redis/MySQL/...**
