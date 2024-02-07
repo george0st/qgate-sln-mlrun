@@ -1,6 +1,8 @@
 # TODO list
 
 The list of expected/future improvements:
+ 0. **Repair path in CSVTarget**
+
  1. **Test mlrun client under Python 3.10 with OS Windows**
     - Why?
       - Remove issue with datetime under Python 3.9 in OS Windows
