@@ -2,7 +2,8 @@
 
 1. The MLRun Client (in version 1.5.2) **does not support OS Windows**, 
 see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations)
-   - know issues with datatime conversion in python 3.9 (under OS Windows)
+   - know issues with datatime conversion in python 3.9 (under OS Windows), see issue
+   - it is neccessity to use Linux path (not Windows path) for some cases e.g. for [CSVTarget](https://github.com/mlrun/mlrun/issues/5056)
    - missing MLRun tests under OS Windows
    - others (without addition details)
    
