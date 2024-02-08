@@ -118,12 +118,14 @@ td {
 </style>
 <script>
 
-function myFunction(element) {
-  var x = document.getElementById(element);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+function myFunction(...elements) {
+  for (let element of elements) {
+	var x = document.getElementById(element);
+	if (x.style.display === "none") {
+	  x.style.display = "block";
+	} else {
+	  x.style.display = "none";
+	}
   }
 }
 
