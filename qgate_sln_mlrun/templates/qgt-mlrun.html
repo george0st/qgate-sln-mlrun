@@ -129,6 +129,29 @@ function myFunction(...elements) {
   }
 }
 
+function filterState(comboBox, filtrTable) {
+  let dropdown, table, rows, cells, country, filter;
+  dropdown = document.getElementById(comboBox);
+  table = document.getElementById(filtrTable);
+  rows = table.getElementsByTagName("tr");
+  filter = dropdown.value;
+
+  for (let row of rows) {
+    cells = row.getElementsByTagName("td");
+    item = cells[0] || null;
+    item = item.innerHTML
+    if (item.startsWith("<b>TS")){
+    	item = null
+    }
+    if (filter === "All" || !item || (item.endsWith(filter))) {
+      row.style.display = ""; // shows
+    }
+    else {
+      row.style.display = "none"; // hides
+    }
+  }
+}
+
 </script>
 <body>
 	<h2>Quality report for MLRun</h2>
