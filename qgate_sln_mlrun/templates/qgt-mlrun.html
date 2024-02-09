@@ -168,7 +168,7 @@ function filterState(comboBox, filtrTable) {
 	<div id="myDIV3" style="display: none;" class="content">
 		<table>{% for testscenario in data.testscenarios %}
 			<tr><td colspan="2"><b>{{ testscenario.name }}: {{ testscenario.desc }}</b></td></tr>{% for testcase in testscenario.testcases %}
-				<tr><td>&nbsp;{% if testcase.state == 'DONE' %}<img class="img-check" src="">{% else %}<img class="img-error" src="">{% endif %}{{ testcase.state }}</td><td>'{{ testcase.name }}'{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}</td></tr>{% endfor %}{% endfor %}
+				<tr><td>&nbsp;{% if testcase.state == 'DONE' %}<img class="img-check" src="">{% else %}<img class="img-error" src="">{% endif %}{{ testcase.state }}</td><td>{{ testcase.name }} {% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}</td></tr>{% endfor %}{% endfor %}
 		</table>
 	</div>
 
