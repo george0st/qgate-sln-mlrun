@@ -118,12 +118,37 @@ td {
 </style>
 <script>
 
-function myFunction(element) {
-  var x = document.getElementById(element);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+function myFunction(...elements) {
+  for (let element of elements) {
+	var x = document.getElementById(element);
+	if (x.style.display === "none") {
+	  x.style.display = "block";
+	} else {
+	  x.style.display = "none";
+	}
+  }
+}
+
+function filterState(comboBox, filtrTable) {
+  let dropdown, table, rows, cells, country, filter;
+  dropdown = document.getElementById(comboBox);
+  table = document.getElementById(filtrTable);
+  rows = table.getElementsByTagName("tr");
+  filter = dropdown.value;
+
+  for (let row of rows) {
+    cells = row.getElementsByTagName("td");
+    item = cells[0] || null;
+    item = item.innerHTML
+    if (item.startsWith("<b>TS")){
+    	item = null
+    }
+    if (filter === "All" || !item || (item.endsWith(filter))) {
+      row.style.display = ""; // shows
+    }
+    else {
+      row.style.display = "none"; // hides
+    }
   }
 }
 
