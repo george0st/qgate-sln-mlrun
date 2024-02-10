@@ -157,7 +157,7 @@ function filterState(comboBox, filtrTable) {
 	<h2>Quality report for MLRun</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version/model: v{{ data.version }}/v{{ data.model_version }}</p>
 
-	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr','myProject')">
+	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;">{% if data.summary.state == 'DONE' %}<img class="img-check" src="">{% else %}<img class="img-error" src="">{% endif %}Report outputs ...</td>
@@ -169,8 +169,8 @@ function filterState(comboBox, filtrTable) {
 		<select id="myState" oninput="filterState('myState','keyOutputs')">
 			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
-		<select id="myProject" style="display: none;">
-			{% for prj in data.projects %}<option>{{ prj.name }}: {{ prj.desc }}</option>{% endfor %}
+		<select id="myProject">
+			{% for prj in data.projects %}<option title='{{ prj.desc }}'>{{ prj.name }}</option>{% endfor %}
 		</select>
 	</div>
 	<div id="myDIV3" style="display: none;" class="content">
