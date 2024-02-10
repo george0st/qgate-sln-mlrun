@@ -137,11 +137,7 @@ class Output():
     def _projects(self, projects: list):
         self._data["projects"]=[]
         for project in projects:
-            new_project = {}
-            new_project['name'] = project
-            self._data["projects"].append(new_project)
-
-
+            self._data["projects"].append(project)
 
     def _summary(self):
         self._data["summary"]={}
