@@ -87,12 +87,7 @@ class Output():
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
 
         self._summary()
-
-        self._data["projects"]=[]
-        for project in projects:
-            new_project = {}
-            new_project['name'] = project
-            self._data["projects"].append(new_project)
+        self._projects(projects)
 
         for template in self._templates:
 
@@ -139,6 +134,12 @@ class Output():
             del self._data
             self._data = None
 
+    def _projects(self, projects: list):
+        self._data["projects"]=[]
+        for project in projects:
+            new_project = {}
+            new_project['name'] = project
+            self._data["projects"].append(new_project)
     def _summary(self):
         self._data["summary"]={}
         count_testcases=0
