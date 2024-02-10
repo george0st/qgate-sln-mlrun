@@ -57,7 +57,7 @@ td {
   font-family: courier new, courier, serif;
   font-size: 12px;
   font-weight: normal;
-  width:inherit;
+  width: inherit;
   height: 120px;
   overflow: auto;
 }
@@ -70,8 +70,8 @@ td {
   font-family: courier new, courier, serif;
   font-size: 14px;
   font-weight: normal;
-  width:inherit;
-  height: 400px;
+  width: inherit;
+  height: 380px;
   overflow: auto;
 }
 
@@ -152,6 +152,29 @@ function filterState(comboBox, filtrTable) {
   }
 }
 
+function filterProject(comboBox, filtrTable) {
+  let dropdown, table, rows, cells, country, filter;
+  dropdown = document.getElementById(comboBox);
+  table = document.getElementById(filtrTable);
+  rows = table.getElementsByTagName("tr");
+  filter = dropdown.value;
+  filter = filter.concat("/")
+
+  for (let row of rows) {
+    cells = row.getElementsByTagName("td");
+    item = cells[1] || null;
+    if (item !== null) {
+    	item = item.innerHTML.concat("/")
+    }
+    if (filter === "All/" || !item || (item.startsWith(filter))) {
+      row.style.display = ""; // shows
+    }
+    else {
+      row.style.display = "none"; // hides
+    }
+  }
+}
+
 </script>
 <body>
 	<h2>Quality report for MLRun</h2>
@@ -169,8 +192,8 @@ function filterState(comboBox, filtrTable) {
 		<select id="myState" oninput="filterState('myState','keyOutputs')">
 			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
-		<select id="myProject">
-			{% for prj in data.projects %}<option title='{{ prj.desc }}'>{{ prj.name }}</option>{% endfor %}
+		<select id="myProject" oninput="filterProject('myProject','keyOutputs')">
+			<option>All</option>{% for prj in data.projects %}<option title='{{ prj.desc }}'>{{ prj.name }}</option>{% endfor %}
 		</select>
 	</div>
 	<div id="myDIV3" style="display: none;" class="content">
