@@ -80,13 +80,15 @@ class Output():
 
 # endregion
 
-    def render(self):
+    def render(self, projects: list):
         """Generate/Render final outputs basen on templates"""
         # https://zetcode.com/python/jinja/
         # https://ultraconfig.com.au/blog/jinja2-a-crash-course-for-beginners/
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
 
         self._summary()
+        self._projects(projects)
+
         for template in self._templates:
 
             # get template
@@ -131,6 +133,11 @@ class Output():
         if self._data:
             del self._data
             self._data = None
+
+    def _projects(self, projects: list):
+        self._data["projects"]=[]
+        for project in projects:
+            self._data["projects"].append(project)
 
     def _summary(self):
         self._data["summary"]={}
