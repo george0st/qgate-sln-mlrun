@@ -170,7 +170,7 @@ function filterState(comboBox, filtrTable) {
 			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
 		<select id="myProject" style="display: none;">
-			{% for prj in data.projects %}<option>{{ prj }}</option>{% endfor %}
+			{% for prj in data.projects %}<option>{{ prj.name }}: {{ prj.desc }}</option>{% endfor %}
 		</select>
 	</div>
 	<div id="myDIV3" style="display: none;" class="content">
