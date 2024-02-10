@@ -167,14 +167,11 @@ function filterState(comboBox, filtrTable) {
 	</button>
 	<div id="myFiltr" style="display: none;">
 		<select id="myState" oninput="filterState('myState','keyOutputs')">
-			<option>All</option>
-			<option>DONE</option>
-			<option>ERR</option>
+			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
 		<select id="myProject" style="display: none;">
 			{% for prj in data.projects %}<option>{{ prj.name }}</option>{% endfor %}
 		</select>
-
 	</div>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table id="keyOutputs">{% for testscenario in data.testscenarios %}
