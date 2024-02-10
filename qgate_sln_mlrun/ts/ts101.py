@@ -36,6 +36,7 @@ class TS101(TSBase):
 
                 # add project include project inheritance
                 self.projects.append(name)
+                self.project_descs[name] = desc
                 self.project_specs[name] = json_content['spec']
                 self._add_inheritance(name, parent)
 

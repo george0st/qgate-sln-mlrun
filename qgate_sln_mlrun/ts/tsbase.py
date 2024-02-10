@@ -27,6 +27,10 @@ class TSBase:
         return self._solution.projects
 
     @property
+    def project_descs(self) -> dict:
+        return self._solution._project_descs
+
+    @property
     def project_specs(self) -> dict:
         return self._solution.project_specs
 

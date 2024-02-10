@@ -22,6 +22,7 @@ class QualityReport:
         self._output = output
 
         self._projects = []
+        self._project_descs = {}
         self._project_specs = {}
         self._test_setting = {}
 
@@ -57,7 +58,7 @@ class QualityReport:
                     ts.state = tsbase.TSState.ERR
                     ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
                     ts.testcase_state("ERR")
-        self._output.render(self.projects)
+        self._output.render(self.projects, self.project_descs)
         self._output.close()
 
     def load_test_setting(self):
@@ -86,6 +87,10 @@ class QualityReport:
     @property
     def projects(self) -> list:
         return self._projects
+
+    @property
+    def project_descs(self) -> dict:
+        return self._project_descs
 
     @property
     def project_specs(self) -> dict:
