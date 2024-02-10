@@ -157,7 +157,7 @@ function filterState(comboBox, filtrTable) {
 	<h2>Quality report for MLRun</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version/model: v{{ data.version }}/v{{ data.model_version }}</p>
 
-	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr')">
+	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr','myProject')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;">{% if data.summary.state == 'DONE' %}<img class="img-check" src="">{% else %}<img class="img-error" src="">{% endif %}Report outputs ...</td>
