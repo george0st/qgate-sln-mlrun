@@ -87,7 +87,12 @@ class Output():
         # https://www.analyticsvidhya.com/blog/2022/04/the-ultimate-guide-to-master-jinja-template/
 
         self._summary()
-        self._data["summary"]["projets"]=projects
+
+        self._data["projets"]=[]
+        for project in projects:
+            new_project = {}
+            new_project['name'] = project
+            self._data["projets"].append(new_project)
 
         for template in self._templates:
 
