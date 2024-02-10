@@ -57,7 +57,7 @@ class QualityReport:
                     ts.state = tsbase.TSState.ERR
                     ts.testcase_detail(f"{type(ex).__name__}: {str(ex)}")
                     ts.testcase_state("ERR")
-        self._output.render()
+        self._output.render(self.projects)
         self._output.close()
 
     def load_test_setting(self):
