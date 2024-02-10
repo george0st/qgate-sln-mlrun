@@ -192,7 +192,7 @@ function filterProject(comboBox, filtrTable) {
 		<select id="myState" oninput="filterState('myState','keyOutputs')">
 			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
-		<select id="myProject" oninput="filterProject('myProject','keyOutputs')>
+		<select id="myProject" oninput="filterProject('myProject','keyOutputs')">
 			<option>All</option>{% for prj in data.projects %}<option title='{{ prj.desc }}'>{{ prj.name }}</option>{% endfor %}
 		</select>
 	</div>
