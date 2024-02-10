@@ -88,11 +88,11 @@ class Output():
 
         self._summary()
 
-        self._data["projets"]=[]
+        self._data["projects"]=[]
         for project in projects:
             new_project = {}
             new_project['name'] = project
-            self._data["projets"].append(new_project)
+            self._data["projects"].append(new_project)
 
         for template in self._templates:
 

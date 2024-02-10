@@ -172,14 +172,7 @@ function filterState(comboBox, filtrTable) {
 			<option>ERR</option>
 		</select>
 		<select id="myProject" style="display: none;">
-			{% for testscenario in data.testscenarios %}
-			<option>{{ testscenario.name }}</option>
-			{% endfor %}
-		</select>
-		<select id="myProject2" style="display: none;">
-			{% for prj in data.projets %}
-			<option>{{ prj.name }}</option>
-			{% endfor %}
+			{% for prj in data.projects %}<option>{{ prj.name }}</option>{% endfor %}
 		</select>
 
 	</div>
