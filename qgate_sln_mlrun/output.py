@@ -140,6 +140,9 @@ class Output():
             new_project = {}
             new_project['name'] = project
             self._data["projects"].append(new_project)
+
+
+
     def _summary(self):
         self._data["summary"]={}
         count_testcases=0
