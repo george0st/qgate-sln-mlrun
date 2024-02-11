@@ -21,7 +21,7 @@ The setup of Redis for **on-line source/target** (valid fot target 'redis')
 
 ## 5. MySQL
 The setup of MySQL for **on-line source/target** (valid fot target 'mysql')
-  - `QGATE_MYSQL = mysql+pymysql://test:test@localhost:3306/test`
+  - `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@localhost:3306/test`
   - detail description, see [MySQL](./mysql.md)
 
 ## 6. Kafka
