@@ -30,6 +30,7 @@ class TS502(TSBase):
         """
         self.testscenario_new()
 
+        # get information, about list of on-line vectors
         vectors = None
         if self.test_setting.get('vector'):
             if self.test_setting['vector'].get('online'):

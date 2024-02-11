@@ -17,10 +17,9 @@ class QualityReport:
     TEST_EXPERIMENTS = [ts601.TS601, ts701.TS701]
     TEST_SCENARIO_DELETE = ts102.TS102
 
-    def __init__(self, setup: Setup, output: Output, only_projects: list=None):
+    def __init__(self, setup: Setup, output: Output):
         self._setup = setup
         self._output = output
-        self._only_projects = only_projects
 
         self._projects = []
         self._project_descs = {}
@@ -43,9 +42,10 @@ class QualityReport:
 
         return test_scenario_functions
 
-    def execute(self, delete_scenario=True, experiment_scenario=False):
+    def execute(self, delete_scenario=True, experiment_scenario=False, only_projects: list=None):
 
-        # TODO: create list of projects and apply self._only_projects, update TS101
+        # define valid projects
+        self._define_projects(only_projects)
 
         test_scenario_functions = self.build_scenarios_functions(delete_scenario, experiment_scenario)
 
@@ -63,6 +63,32 @@ class QualityReport:
                     ts.testcase_state("ERR")
         self._output.render(self.projects, self.project_descs)
         self._output.close()
+
+    def _define_projects(self, only_projects: list=None):
+
+        dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "**", "*.json")
+        for file in glob.glob(dir, recursive=True):
+            with (open(file, "r") as json_file):
+                json_content = json.load(json_file)
+                name, desc, lbls, kind, parent = tsbase.TSBase.get_json_header_full(json_content)
+
+                # add project include project inheritance
+                self._projects.append(name)
+                self._project_descs[name] = [desc, lbls, kind, parent]
+                self._project_specs[name] = json_content['spec']
+                self._add_inheritance(name, parent)
+
+        # focus on
+        if only_projects:
+            self._projects = [prj for prj in self._projects if prj in only_projects]
+
+    def _add_inheritance(self, project_name, parent):
+        """Copy 'spec' content from parent project, but only for missing items"""
+        if parent:
+            for spec_item in self.project_specs[parent]:
+                itm=self.project_specs[project_name].get(spec_item, None)
+                if itm is None:
+                    self.project_specs[project_name][spec_item]=self.project_specs[parent][spec_item]
 
     def load_test_setting(self):
         """Load setting for test execution from model\03-test\*-vector.json """
