@@ -139,7 +139,7 @@ class Output():
         for project in projects:
             new_prj={}
             new_prj['name'] = project
-            new_prj['desc'] = project_descs[project]
+            new_prj['desc'] = project_descs[project][0]
             self._data["projects"].append(new_prj)
 
     def _summary(self):
