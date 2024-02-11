@@ -17,9 +17,10 @@ class QualityReport:
     TEST_EXPERIMENTS = [ts601.TS601, ts701.TS701]
     TEST_SCENARIO_DELETE = ts102.TS102
 
-    def __init__(self, setup: Setup, output: Output):
+    def __init__(self, setup: Setup, output: Output, only_projects: list=None):
         self._setup = setup
         self._output = output
+        self._only_projects = only_projects
 
         self._projects = []
         self._project_descs = {}
@@ -43,6 +44,8 @@ class QualityReport:
         return test_scenario_functions
 
     def execute(self, delete_scenario=True, experiment_scenario=False):
+
+        # TODO: create list of projects and apply self._only_projects, update TS101
 
         test_scenario_functions = self.build_scenarios_functions(delete_scenario, experiment_scenario)
 
