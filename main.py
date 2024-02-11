@@ -7,7 +7,7 @@ if __name__ == '__main__':
     stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
     out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
                                    './qgate_sln_mlrun/templates/qgt-mlrun.html'])
-    report=QualityReport(stp,out, ['agate','agate-1','agate-2','vcf'])
+    report=QualityReport(stp,out)
 
     delete_scenario = True
     test_scenario = False
@@ -21,4 +21,4 @@ if __name__ == '__main__':
             elif arg == "test":
                 test_scenario=True
 
-    report.execute(delete_scenario, test_scenario)
+    report.execute(delete_scenario, test_scenario, ['agate-1','agate-2','vcf'])
