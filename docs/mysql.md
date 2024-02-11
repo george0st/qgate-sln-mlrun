@@ -14,9 +14,9 @@
 
 2. Run new container
    - create container with name 'mlrun-mysql', use image 'mysql:8.3' and open ports 3306:3306
-     - `docker run --name mlrun-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=jist -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -d mysql:8.3 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
+     - `docker run --name mlrun-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=jist -e MYSQL_DATABASE=test -e MYSQL_USER=testuser -e MYSQL_PASSWORD=testpwd -d mysql:8.3 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
    - or create container with name 'mlrun-mysql', use image 'mysql:latest' and open ports 3306:3306
-     - `docker run --name mlrun-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=jist -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -d mysql:last --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
+     - `docker run --name mlrun-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=jist -e MYSQL_DATABASE=test -e MYSQL_USER=testuser -e MYSQL_PASSWORD=testpwd -d mysql:last --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
    - NOTE:
      - user `test`, password `test`
 
@@ -39,7 +39,7 @@
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_MYSQL`
    - format `QGATE_MYSQL = mysql+pymysql://<username>:<password>@localhost:3306/<database>`
-   - see `QGATE_MYSQL = mysql+pymysql://test:test@localhost:3306/test`
+   - see `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@localhost:3306/test`
  - Note
    - List of [Dialects](https://docs.sqlalchemy.org/en/20/dialects/index.html)
 
