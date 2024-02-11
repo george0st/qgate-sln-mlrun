@@ -38,7 +38,7 @@
 ## 3. Use MySQL for tests
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_MYSQL`
-   - format `QGATE_MYSQL = mysql+pymysql://<username>:<password>@localhost:3306/<database>`
+   - format `QGATE_MYSQL = mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>`
    - see `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@localhost:3306/test`
  - Note
    - List of [Dialects](https://docs.sqlalchemy.org/en/20/dialects/index.html)

@@ -143,7 +143,7 @@ class TS201(TSBase):
         elif target == "mysql":
             if self.setup.mysql:
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
-                # mysql+pymysql://jist:jist@localhost:3306/test
+                # mysql+pymysql://testuser:testpwd@localhost:3306/test
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql)
                 pass
             else:
