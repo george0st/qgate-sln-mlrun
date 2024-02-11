@@ -44,9 +44,7 @@ class QualityReport:
 
     def execute(self, delete_scenario=True, experiment_scenario=False, only_projects: list=None):
 
-        # TODO: create list of projects and apply self._only_projects,
-        #  then update TS101
-        # define valida projects
+        # define valid projects
         self._define_projects(only_projects)
 
         test_scenario_functions = self.build_scenarios_functions(delete_scenario, experiment_scenario)
