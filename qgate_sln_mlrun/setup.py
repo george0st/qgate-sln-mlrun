@@ -58,7 +58,7 @@ class Setup:
 
     @property
     def dataset_name(self):
-        return self._variables["QGATE_DATASET"]
+        return self._variables.get("QGATE_DATASET", "01-size-100")
 
     @property
     def filter_projects(self):
