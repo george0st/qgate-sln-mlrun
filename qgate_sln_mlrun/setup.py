@@ -50,7 +50,7 @@ class Setup:
 
     @property
     def model_output(self):
-        return self._variables['QGATE_OUTPUT']
+        return self._variables.get('QGATE_OUTPUT', './output')
 
     @property
     def model_definition(self):
@@ -58,7 +58,7 @@ class Setup:
 
     @property
     def dataset_name(self):
-        return self._variables["QGATE_DATASET"]
+        return self._variables.get("QGATE_DATASET", "01-size-100")
 
     @property
     def filter_projects(self):
