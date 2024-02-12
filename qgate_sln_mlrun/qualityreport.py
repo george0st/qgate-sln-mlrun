@@ -79,6 +79,10 @@ class QualityReport:
                 self._project_specs[name] = json_content['spec']
                 self._add_inheritance(name, parent)
 
+        if filter_projects is None:
+            if self.setup.filter_projects:
+                filter_projects = [itm.strip() for itm in self.setup.filter_projects.split(',')]
+
         # focus on
         if filter_projects:
             self._projects = [prj for prj in self._projects if prj in filter_projects]
