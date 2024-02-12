@@ -21,4 +21,4 @@ if __name__ == '__main__':
             elif arg == "test":
                 test_scenario=True
 
-    report.execute(delete_scenario, test_scenario, ['agate-1','agate-2','vcf'])
+    report.execute(delete_scenario, test_scenario)
