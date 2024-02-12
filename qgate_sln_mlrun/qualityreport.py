@@ -42,10 +42,11 @@ class QualityReport:
 
         return test_scenario_functions
 
-    def execute(self, delete_scenario=True, experiment_scenario=False, only_projects: list=None):
+    def execute(self, delete_scenario=True, experiment_scenario=False, filter_projects: list=None):
 
         # define valid projects
-        self._define_projects(only_projects)
+
+        self._define_projects(filter_projects)
 
         test_scenario_functions = self.build_scenarios_functions(delete_scenario, experiment_scenario)
 
@@ -64,7 +65,7 @@ class QualityReport:
         self._output.render(self.projects, self.project_descs)
         self._output.close()
 
-    def _define_projects(self, only_projects: list=None):
+    def _define_projects(self, filter_projects: list=None):
 
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "**", "*.json")
         for file in glob.glob(dir, recursive=True):
@@ -79,8 +80,8 @@ class QualityReport:
                 self._add_inheritance(name, parent)
 
         # focus on
-        if only_projects:
-            self._projects = [prj for prj in self._projects if prj in only_projects]
+        if filter_projects:
+            self._projects = [prj for prj in self._projects if prj in filter_projects]
 
     def _add_inheritance(self, project_name, parent):
         """Copy 'spec' content from parent project, but only for missing items"""

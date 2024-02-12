@@ -61,6 +61,10 @@ class Setup:
         return self._variables["QGATE_DATASET"]
 
     @property
+    def filter_projects(self):
+        return self._variables.get("QGATE_FILTER_PROJECTS", None)
+
+    @property
     def redis(self):
         return self._variables.get('QGATE_REDIS', None)
 
