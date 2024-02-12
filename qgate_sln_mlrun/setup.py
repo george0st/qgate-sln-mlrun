@@ -50,7 +50,7 @@ class Setup:
 
     @property
     def model_output(self):
-        return self._variables['QGATE_OUTPUT']
+        return self._variables.get('QGATE_OUTPUT', './output')
 
     @property
     def model_definition(self):
