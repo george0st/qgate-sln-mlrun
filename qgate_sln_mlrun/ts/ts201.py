@@ -165,10 +165,8 @@ class TS201(TSBase):
                 #                                            create_table=True,
                 #                                            primary_key_column='party-id')],
                 #                         with_defaults=False)
-
-                pass
             else:
-                raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
+                raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
         else:
             # TODO: Add support other targets for MLRun CE
             raise NotImplementedError()
