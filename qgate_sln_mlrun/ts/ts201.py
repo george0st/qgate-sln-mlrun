@@ -144,7 +144,7 @@ class TS201(TSBase):
             if self.setup.mysql:
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
-                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name="",   # add value
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=f"{project_name}_{target_name}",
                                             schema=None,                    # add value
                                             create_table=True,
                                             primary_key_column=None)       # add value
