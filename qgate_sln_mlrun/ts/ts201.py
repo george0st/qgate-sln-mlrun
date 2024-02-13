@@ -144,7 +144,17 @@ class TS201(TSBase):
             if self.setup.mysql:
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
-                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql)
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name="",   # add value
+                                            schema=None,                    # add value
+                                            create_table=True,
+                                            primary_key_column=None)       # add value
+
+                # feature_set.set_targets(targets=[SQLTarget(name="we2", db_url=conn, table_name='my_table',
+                #                                            schema={'party-id': int, 'party-type': str},
+                #                                            create_table=True,
+                #                                            primary_key_column='party-id')],
+                #                         with_defaults=False)
+
                 pass
             else:
                 raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
