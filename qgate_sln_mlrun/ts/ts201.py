@@ -1,6 +1,7 @@
 """
   TS201: Create feature set(s)
 """
+import datetime
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
@@ -144,6 +145,7 @@ class TS201(TSBase):
             if self.setup.mysql:
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
+
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=f"{project_name}_{target_name}",
                                             schema=None,                    # add value
                                             create_table=True,
@@ -179,6 +181,27 @@ class TS201(TSBase):
             "datetime": ValueType.DATETIME,
             "string": ValueType.STRING,
             "list": ValueType.STRING_LIST,
+        }
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
+
+    @staticmethod
+    def type_to_type(data_type) -> ValueType:
+        type_map = {
+            "int": int,
+            "int64": int,
+            "uint64": int,
+            "int128": int,
+            "uint128": int,
+            "float": float,
+            "double": float,
+            "boolean": bool,
+            "bool": bool,
+            "timestamp": datetime.datetime.timestamp,
+            "datetime": datetime.datetime,
+            "string": str,
+            "list": list,
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
