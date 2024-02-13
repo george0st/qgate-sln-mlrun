@@ -154,21 +154,19 @@ class TS201(TSBase):
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
 
-                sql_schem, prim_key=self._get_sqlschema(json_spec)
+                sql_schema, primary_key=self._get_sqlschema(json_spec)
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=f"{project_name}_{target_name}",
-                                            schema=sql_schem,
+                                            schema=sql_schema,
                                             create_table=True,
-                                            primary_key_column=prim_key)
+                                            primary_key_column=primary_key)
 
                 # feature_set.set_targets(targets=[SQLTarget(name="we2", db_url=conn, table_name='my_table',
                 #                                            schema={'party-id': int, 'party-type': str},
                 #                                            create_table=True,
                 #                                            primary_key_column='party-id')],
                 #                         with_defaults=False)
-
-                pass
             else:
-                raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
+                raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
         else:
             # TODO: Add support other targets for MLRun CE
             raise NotImplementedError()
@@ -189,7 +187,7 @@ class TS201(TSBase):
             "timestamp": ValueType.DATETIME,
             "datetime": ValueType.DATETIME,
             "string": ValueType.STRING,
-            "list": ValueType.STRING_LIST,
+            "list": ValueType.STRING_LIST
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
@@ -210,7 +208,7 @@ class TS201(TSBase):
             "timestamp": datetime.datetime.timestamp,
             "datetime": datetime.datetime,
             "string": str,
-            "list": list,
+            "list": list
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
