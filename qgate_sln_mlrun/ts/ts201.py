@@ -123,6 +123,14 @@ class TS201(TSBase):
         fs.save()
         return fs
 
+    def _get_sqlschema(json_spec):
+        schema = {}
+        for item in json_spec['entities']:
+            schema[item['name']] = TS201.type_to_type(item['type'])
+        for item in json_spec['features']:
+            schema[item['name']] = TS201.type_to_type(item['type'])
+        return schema
+
     def _create_target(self, target, target_name, project_name):
 
         target_provider=None
