@@ -159,12 +159,6 @@ class TS201(TSBase):
                                             schema=sql_schema,
                                             create_table=True,
                                             primary_key_column=primary_key)
-
-                # feature_set.set_targets(targets=[SQLTarget(name="we2", db_url=conn, table_name='my_table',
-                #                                            schema={'party-id': int, 'party-type': str},
-                #                                            create_table=True,
-                #                                            primary_key_column='party-id')],
-                #                         with_defaults=False)
             else:
                 raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
         else:
