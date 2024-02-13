@@ -40,15 +40,11 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
    
 NOTE: Each test scenario contains addition specific test cases.
 
-## Test sources
-The quality gate tests these sources (✅ done, ❌ in-progress/planned):
- - Off-line
+## Test inputs/outputs
+The quality gate tests these inputs/outputs (✅ done, ❌ in-progress/planned):
+ - ✅ RedisTarget, ❌ SQLTarget, ❌ KafkaTarget
+ - ✅ File system, ❌ S3 with
    - ✅ ParquetTarget, ✅ CSVTarget
- - On-line
-   - ✅ RedisTarget, ❌ SQLTarget, ❌ KafkaTarget
-   - ❌ SQLSource
- - Other
-   - ✅ Pandas DataFrame (as Source)
 
 ## Sample of outputs
 
