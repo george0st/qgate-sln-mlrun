@@ -154,11 +154,11 @@ class TS201(TSBase):
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
 
-                sql_schem, prim_key=self._get_sqlschema(json_spec)
+                sql_schema, primary_key=self._get_sqlschema(json_spec)
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=f"{project_name}_{target_name}",
-                                            schema=sql_schem,
+                                            schema=sql_schema,
                                             create_table=True,
-                                            primary_key_column=prim_key)
+                                            primary_key_column=primary_key)
 
                 # feature_set.set_targets(targets=[SQLTarget(name="we2", db_url=conn, table_name='my_table',
                 #                                            schema={'party-id': int, 'party-type': str},
