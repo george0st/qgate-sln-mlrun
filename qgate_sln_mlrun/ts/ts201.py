@@ -108,13 +108,13 @@ class TS201(TSBase):
                 # add project targets
                 for sub_target in project_target:
                     sub_target = sub_target.lower().strip()
-                    target_provider=self._create_target(sub_target, f"target_{count}", project_name)
+                    target_provider=self._create_target(sub_target, f"target_{count}", project_name, json_spec)
                     if target_provider:
                         target_providers.append(target_provider)
                     count+=1
             else:
                 # add target
-                target_provider = self._create_target(target, f"target_{count}", project_name)
+                target_provider = self._create_target(target, f"target_{count}", project_name, json_spec)
                 if target_provider:
                     target_providers.append(target_provider)
                 count += 1
@@ -129,9 +129,9 @@ class TS201(TSBase):
             schema[item['name']] = TS201.type_to_type(item['type'])
         for item in json_spec['features']:
             schema[item['name']] = TS201.type_to_type(item['type'])
-        return schema
+        return schema, json_spec['entities'][0]['name']
 
-    def _create_target(self, target, target_name, project_name):
+    def _create_target(self, target, target_name, project_name, json_spec):
 
         target_provider=None
         if target == "parquet":
@@ -154,10 +154,11 @@ class TS201(TSBase):
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
 
+                sql_schem, prim_key=self._get_sqlschema(json_spec)
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=f"{project_name}_{target_name}",
-                                            schema=None,                    # add value
+                                            schema=sql_schem,
                                             create_table=True,
-                                            primary_key_column=None)       # add value
+                                            primary_key_column=prim_key)
 
                 # feature_set.set_targets(targets=[SQLTarget(name="we2", db_url=conn, table_name='my_table',
                 #                                            schema={'party-id': int, 'party-type': str},
