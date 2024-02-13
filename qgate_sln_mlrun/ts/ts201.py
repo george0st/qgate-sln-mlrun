@@ -187,7 +187,7 @@ class TS201(TSBase):
             "timestamp": ValueType.DATETIME,
             "datetime": ValueType.DATETIME,
             "string": ValueType.STRING,
-            "list": ValueType.STRING_LIST,
+            "list": ValueType.STRING_LIST
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
@@ -208,7 +208,7 @@ class TS201(TSBase):
             "timestamp": datetime.datetime.timestamp,
             "datetime": datetime.datetime,
             "string": str,
-            "list": list,
+            "list": list
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
