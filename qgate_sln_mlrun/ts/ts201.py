@@ -1,6 +1,7 @@
 """
   TS201: Create feature set(s)
 """
+import datetime
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
@@ -107,13 +108,13 @@ class TS201(TSBase):
                 # add project targets
                 for sub_target in project_target:
                     sub_target = sub_target.lower().strip()
-                    target_provider=self._create_target(sub_target, f"target_{count}", project_name)
+                    target_provider=self._create_target(sub_target, f"target_{count}", project_name, json_spec)
                     if target_provider:
                         target_providers.append(target_provider)
                     count+=1
             else:
                 # add target
-                target_provider = self._create_target(target, f"target_{count}", project_name)
+                target_provider = self._create_target(target, f"target_{count}", project_name, json_spec)
                 if target_provider:
                     target_providers.append(target_provider)
                 count += 1
@@ -122,7 +123,15 @@ class TS201(TSBase):
         fs.save()
         return fs
 
-    def _create_target(self, target, target_name, project_name):
+    def _get_sqlschema(json_spec):
+        schema = {}
+        for item in json_spec['entities']:
+            schema[item['name']] = TS201.type_to_type(item['type'])
+        for item in json_spec['features']:
+            schema[item['name']] = TS201.type_to_type(item['type'])
+        return schema, json_spec['entities'][0]['name']
+
+    def _create_target(self, target, target_name, project_name, json_spec):
 
         target_provider=None
         if target == "parquet":
@@ -144,7 +153,19 @@ class TS201(TSBase):
             if self.setup.mysql:
                 # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
-                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql)
+
+                sql_schem, prim_key=self._get_sqlschema(json_spec)
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=f"{project_name}_{target_name}",
+                                            schema=sql_schem,
+                                            create_table=True,
+                                            primary_key_column=prim_key)
+
+                # feature_set.set_targets(targets=[SQLTarget(name="we2", db_url=conn, table_name='my_table',
+                #                                            schema={'party-id': int, 'party-type': str},
+                #                                            create_table=True,
+                #                                            primary_key_column='party-id')],
+                #                         with_defaults=False)
+
                 pass
             else:
                 raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
@@ -169,6 +190,27 @@ class TS201(TSBase):
             "datetime": ValueType.DATETIME,
             "string": ValueType.STRING,
             "list": ValueType.STRING_LIST,
+        }
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
+
+    @staticmethod
+    def type_to_type(data_type) -> ValueType:
+        type_map = {
+            "int": int,
+            "int64": int,
+            "uint64": int,
+            "int128": int,
+            "uint128": int,
+            "float": float,
+            "double": float,
+            "boolean": bool,
+            "bool": bool,
+            "timestamp": datetime.datetime.timestamp,
+            "datetime": datetime.datetime,
+            "string": str,
+            "list": list,
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
