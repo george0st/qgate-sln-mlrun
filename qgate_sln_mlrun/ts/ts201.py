@@ -123,7 +123,7 @@ class TS201(TSBase):
         fs.save()
         return fs
 
-    def _get_sqlschema(json_spec):
+    def _get_sqlschema(self, json_spec):
         schema = {}
         for item in json_spec['entities']:
             schema[item['name']] = TS201.type_to_type(item['type'])
