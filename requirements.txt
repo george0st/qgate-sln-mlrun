@@ -10,3 +10,4 @@ redis ~= 5.0
 # SQLSource/SQLTarget
 sqlalchemy ~= 1.4
 pymysql ~=1.1
+cryptography ~= 42.0
