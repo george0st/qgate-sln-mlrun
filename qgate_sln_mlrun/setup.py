@@ -58,6 +58,7 @@ class Setup:
 
     @property
     def dataset_name(self):
+        """Return dataset setting"""
         return self._variables.get("QGATE_DATASET", "01-size-100")
 
     @property
