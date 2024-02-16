@@ -19,6 +19,7 @@ class TestProjects(unittest.TestCase):
         pass
 
     def test_template_file(self):
+        # test based on external template files
         stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
                           None,
                           {"QGATE_OUTPUT": "./tests_output/"})
@@ -28,6 +29,7 @@ class TestProjects(unittest.TestCase):
         report.execute(True, True)
 
     def test_template_embeded(self):
+        # test based on embeddit templates
         stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
                           None,
                           {"QGATE_OUTPUT": "./tests_output/"})
