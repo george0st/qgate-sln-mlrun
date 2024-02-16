@@ -54,6 +54,7 @@ class Setup:
 
     @property
     def model_definition(self):
+        """Return path to model definition"""
         return self._variables['QGATE_DEFINITION']
 
     @property
