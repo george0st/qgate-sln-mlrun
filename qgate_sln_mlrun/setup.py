@@ -50,27 +50,30 @@ class Setup:
 
     @property
     def model_output(self):
+        """Return the model output path"""
         return self._variables.get('QGATE_OUTPUT', './output')
 
     @property
     def model_definition(self):
+        """Return the path to model definition"""
         return self._variables['QGATE_DEFINITION']
 
     @property
     def dataset_name(self):
+        """Return the dataset setting"""
         return self._variables.get("QGATE_DATASET", "01-size-100")
 
     @property
     def filter_projects(self):
-        """Return project filter setting"""
+        """Return the project filter setting"""
         return self._variables.get("QGATE_FILTER_PROJECTS", None)
 
     @property
     def redis(self):
-        """Return REDIS setting"""
+        """Return the connection to Redis"""
         return self._variables.get('QGATE_REDIS', None)
 
     @property
     def mysql(self):
-        """Return MYSQL setting"""
+        """Return the connection to MySql"""
         return self._variables.get('QGATE_MYSQL', None)
