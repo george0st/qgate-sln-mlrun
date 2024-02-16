@@ -62,6 +62,7 @@ class Setup:
 
     @property
     def filter_projects(self):
+        """Return project filter setting"""
         return self._variables.get("QGATE_FILTER_PROJECTS", None)
 
     @property
