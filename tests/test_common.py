@@ -18,6 +18,7 @@ class TestCommon(unittest.TestCase):
         pass
 
     def test_setup_str(self):
+        # Test only the setup
         stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
         print(str(stp))
 
