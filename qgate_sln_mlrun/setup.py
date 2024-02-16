@@ -66,6 +66,7 @@ class Setup:
 
     @property
     def redis(self):
+        """Return REDIS setting"""
         return self._variables.get('QGATE_REDIS', None)
 
     @property
