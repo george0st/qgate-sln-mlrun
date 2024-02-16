@@ -23,12 +23,14 @@ class TestCommon(unittest.TestCase):
         print(str(stp))
 
     def test_setup_str2(self):
+        # Test onlu the setup
         stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
                           None,
                           {"QGATE_OUTPUT": "./tests_output/"})
         print(str(stp))
 
     def test_scenarios_name_desc(self):
+        # Test only descriptions
         stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"])
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)

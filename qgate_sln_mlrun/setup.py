@@ -70,4 +70,5 @@ class Setup:
 
     @property
     def mysql(self):
+        """Return MYSQL setting"""
         return self._variables.get('QGATE_MYSQL', None)
