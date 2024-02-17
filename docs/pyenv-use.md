@@ -1,16 +1,16 @@
 # Pyenv usage
 
-1. Setting pyenv
+##1. Setting pyenv
 pyenv install 3.9
 pyenv global 3.9
 
-2. Clone GIT repo
+##2. Clone GIT repo
 git clone git@github.com:george0st/qgate-sln-mlrun.git
 cd qgate-sln-mlrun
 
-3. Build virtual environment
+##3. Create virtual environment
 python -m venv venv
 source venv/bin/activate
 
-4. Install requirements
+##4. Install requirements
 pip install requirements.txt
