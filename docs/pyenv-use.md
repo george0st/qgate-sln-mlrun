@@ -12,5 +12,8 @@ cd qgate-sln-mlrun
 python -m venv venv
 source venv/bin/activate
 
-##4. Install requirements
-pip install requirements.txt
+##4. Upgrade PIP
+pip install --upgrade pip
+
+##5. Install requirements
+pip install -r requirements.txt
