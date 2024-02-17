@@ -12,3 +12,4 @@ Note:
     - you can use this command for correct setup `wsl -s docker-desktop`
   - In case of isses, you can use different distribution e.g. 'ubuntu'
     - see command `wsl --install -d Ubuntu`
+    - or specific Ubuntu version e.g. `wsl --install -d Ubuntu-20.04`
