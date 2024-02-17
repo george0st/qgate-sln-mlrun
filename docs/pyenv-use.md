@@ -4,7 +4,7 @@
 pyenv install 3.9
 pyenv global 3.9
 
-##2. Clone GIT repo
+##2. Clone GIT repo `qgate-sln-mlrun`
 git clone git@github.com:george0st/qgate-sln-mlrun.git
 cd qgate-sln-mlrun
 
