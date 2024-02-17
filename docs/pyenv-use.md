@@ -16,4 +16,4 @@ source venv/bin/activate
 pip install --upgrade pip
 
 ##5. Install requirements
-pip install requirements.txt
+pip install -r requirements.txt
