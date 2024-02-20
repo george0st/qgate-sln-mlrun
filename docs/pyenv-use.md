@@ -1,4 +1,4 @@
-# Pyenv usage
+# Pyenv usage 
 
 ### 1. Setting pyenv
 pyenv install 3.9

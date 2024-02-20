@@ -1,4 +1,4 @@
-# Installation pyenv
+# Installation pyenv (for Ubuntu-20.04)
 
 ### 1. Update OS
 sudo apt update -y
@@ -17,5 +17,5 @@ echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
 ### 5. Restart shell
 exec "$SHELL"
 
-### 6. Check pyenv version
+### 6. Check pyenv version (validation step)
 pyenv --version
