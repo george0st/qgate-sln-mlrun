@@ -30,10 +30,10 @@ class TS101(TSBase):
         self.testscenario_new()
         for project_name in self.projects:
             desc = self.project_descs[project_name]
-            self._create_project(project_name, desc[0], desc[1], desc[2])
+            self._create_project(f"{project_name}: '{desc[0]}'", project_name, desc[0], desc[1], desc[2])
 
     @TSBase.handler_testcase
-    def _create_project(self, name, desc, lbls, kind):
+    def _create_project(self, testcase_name, name, desc, lbls, kind):
         """Create project"""
 
         prj = mlrun.get_or_create_project(name, context=os.path.join(self.setup.model_output, name), user_project=False, save=False)
