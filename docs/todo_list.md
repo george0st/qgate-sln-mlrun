@@ -4,9 +4,8 @@ The list of expected/future improvements:
 
  1. **Split output report based on Projects**
     - Group by Project
-    - Add project description also
     - Why?
-      - Increase readeability
+      - Increase readeability & Filtering
      
  2. **Test SQLSource and SQLTarget**
     - Focus on MySQL and PostgreSQL in DockerImage
