@@ -10,8 +10,9 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
 2. The data read (via feature vector) **accept only one on-line and
    one off-line target** in FeatureSet, see [Slack discussion](https://mlopslive.slack.com/archives/C014XCMNY4Q/p1701025414893399?thread_ts=1701021926.280329&cid=C014XCMNY4Q)
    - in case of e.g. more on-line targets, it is not possible to choose 
-   relevant for FeatureVector  
+   relevant target for FeatureVector  
 
 3. SQLTarget limits
    - missing support more primary keys
    - without check of table schema if table exist
+   - schema for mapping FeatureStore to Table is must

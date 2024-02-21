@@ -46,9 +46,11 @@
 ## 4. Install these python packages
 
  - SQLAlchemy based on MLRun extas see `pip install mlrun[sqlalchemy]`
-   - it required `sqlalchemy ~= 1.4`
+   - it required `sqlalchemy~=1.4`
  - Dialect pymysql
-   - it required `pymysql ~= 1.1`
+   - it required `pymysql~=1.1`
+ - Cryptography support
+   - it required `cryptography~=42.0`
  - NOTE
    - these are versions valid for MLRun 1.5.2
 
