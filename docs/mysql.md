@@ -45,7 +45,7 @@
 
 ## 4. Install these python packages
 
- - SQLAlchemy based on MLRun extas see `pip install mlrun[sqlalchemy]`
+ - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]`
    - it required `sqlalchemy~=1.4`
  - Dialect pymysql
    - it required `pymysql~=1.1`
