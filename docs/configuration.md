@@ -27,3 +27,6 @@ The setup of MySQL for **on-line source/target** (valid fot target 'mysql')
 ## 6. Kafka
 TBD. see helper https://hackernoon.com/setting-up-kafka-on-docker-for-local-development
 https://hub.docker.com/r/confluentinc/cp-kafka
+
+## 7. Postgres
+TBD. see https://hub.docker.com/_/postgres

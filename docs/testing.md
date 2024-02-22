@@ -1,4 +1,4 @@
-# How can you test
+# How can you do the testing
 
 ### 1. Desktop Docker Setting
  - [see](./desktopdocker.md)
