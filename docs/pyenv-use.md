@@ -1,6 +1,6 @@
 # Pyenv usage 
 
-### 1. Setting pyenv
+### 1. Install python 3.9 in pyenv 
 pyenv install 3.9
 pyenv global 3.9
 
