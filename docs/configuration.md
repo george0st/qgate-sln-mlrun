@@ -28,7 +28,3 @@ The setup of MySQL for **on-line source/target** (valid fot target 'mysql')
 TBD. see helper https://hackernoon.com/setting-up-kafka-on-docker-for-local-development
 https://hub.docker.com/r/confluentinc/cp-kafka
 
-## 7. Postgres
-The setup of Postgres for **on-line source/target** (valid fot target 'postgres')
-  - `QGATE_POSTGRES = postgresql+pyscopg2://testuser:testpwd@localhost:8810/test`
-  - detail description, see TBD.
