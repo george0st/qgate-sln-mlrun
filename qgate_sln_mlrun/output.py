@@ -24,7 +24,9 @@ class Output():
     Management reports/outputs based on templates.
     """
 
+    # HTML template, where template is located in python package
     DEFAULT_TEMPLATE_HTML = '#qgate_sln_mlrun.templates#qgt-mlrun.html'
+    # Test template, where template is located in python package
     DEFAULT_TEMPLATE_TXT = '#qgate_sln_mlrun.templates#qgt-mlrun.txt'
 
     def __init__(self, setup: Setup, templates: [str] = [DEFAULT_TEMPLATE_HTML,
