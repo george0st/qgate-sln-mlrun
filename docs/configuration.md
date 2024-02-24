@@ -24,7 +24,12 @@ The setup of MySQL for **on-line source/target** (valid fot target 'mysql')
   - `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@localhost:3306/test`
   - detail description, see [MySQL](./mysql.md)
 
-## 6. Kafka
+## 6. Postgres
+The setup of Postgres for **on-line source/target** (valid fot target 'postgres')
+  - `QGATE_POSTGRESL = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
+  - detail description, see TBD
+
+## 7. Kafka
 TBD. see helper https://hackernoon.com/setting-up-kafka-on-docker-for-local-development
 https://hub.docker.com/r/confluentinc/cp-kafka
 
