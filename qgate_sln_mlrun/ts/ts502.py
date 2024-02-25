@@ -53,7 +53,8 @@ class TS502(TSBase):
         # own testing
         test_sets = self._get_data_hint(featurevector_name, test_featureset)
         for test_data in test_sets:
-            with fstore.get_online_feature_service(vector) as svc:
+            with vector.fstore.get_online_feature_service() as svc:
+#            with fstore.get_online_feature_service(vector) as svc:
                 entities = []
                 itm = {}
 
