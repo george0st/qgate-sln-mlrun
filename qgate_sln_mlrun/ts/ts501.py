@@ -35,12 +35,10 @@ class TS501(TSBase):
     @TSBase.handler_testcase
     def _get_data_offline(self, testcase_name, project_name, featurevector_name):
 
-
         self.project_switch(project_name)
         vector = fstore.get_feature_vector(f"{project_name}/{featurevector_name}")
 
         resp = vector.get_offline_features()
-        #resp = fstore.get_offline_features(vector)
         frm = resp.to_dataframe()
         self.testcase_detail(f"... get {len(frm.index)} items")
 
