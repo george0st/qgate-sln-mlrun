@@ -63,7 +63,7 @@ class TS601(TSBase):
 
             # load data
             vector = fstore.get_feature_vector(f"{project_name}/{json_content['spec']['source']}")
-            resp = fstore.get_offline_features(vector)
+            resp = vector.get_offline_features()
             frm = resp.to_dataframe()
 
             # encode data
