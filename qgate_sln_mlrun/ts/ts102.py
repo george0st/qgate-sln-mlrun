@@ -42,7 +42,7 @@ class TS102(TSBase):
     @TSBase.handler_testcase
     def _delete_project(self, name):
         """Delete project"""
-        mlrun.get_run_db().delete_project(name, "cascade")
+        mlrun.get_run_db().delete_project(name, mlrun.common.schemas.DeletionStrategy.cascade)
 
         # delete project in FS
         project_dir = os.path.join(self.setup.model_output, name)
