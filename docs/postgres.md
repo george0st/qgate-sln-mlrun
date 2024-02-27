@@ -19,3 +19,12 @@
      - `docker run --name mlrun-postgres -p 5432:5432 -e POSTGRES_DB=test -e POSTGRES_USER=testuser -e POSTGRES_PASSWORD=testpwd -d postgres:last`
    - NOTE:
      - user `testuser`, password `testpwd`
+
+3. Test Postgres in container
+    TBD.
+
+## 3. Use Postgres for tests
+    TBD.
+
+## 4. Install these python packages
+    TBD.
