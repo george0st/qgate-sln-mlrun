@@ -42,4 +42,11 @@
    - [Pypi psycopg2](https://pypi.org/project/psycopg2/)
 
 ## 4. Install these python packages
-    TBD.
+ - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]`
+   - it required `pip install sqlalchemy~=1.4`
+ - Dialect psycopg2
+   - it required `pip install psycopg2~=2.9`
+ - Cryptography support
+   - it required `pip install cryptography~=42.0`
+ - NOTE
+   - these are versions valid for MLRun 1.6.0
