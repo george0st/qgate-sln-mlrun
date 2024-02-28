@@ -21,7 +21,11 @@
      - user `testuser`, password `testpwd`
 
 3. Test Postgres in container
-    TBD.
+   - interactive access to the container
+     - `docker exec -it mlrun-postgres psql -U testuser test`
+   - show list of databases
+     - `test=# \l`
+   - list of DB tables
 
 ## 3. Use Postgres for tests
     TBD.
