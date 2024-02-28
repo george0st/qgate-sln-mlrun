@@ -37,7 +37,12 @@
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_POSTGRES`
    - format `QGATE_POSTGRES = postgresql+pg8000://<username>:<password>@<host>:<port>/<db_name>`
    - see `QGATE_POSTGRES = postgresql+pg8000://testuser:testpwd@localhost:5432/test`
-
+postgresql+pyscopg2
+   - postgresql+psycopg2
+   - postgresql+psycopg
+ - NOTE:
+   - https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2
+   - https://pypi.org/project/psycopg2/
 
 ## 4. Install these python packages
     TBD.
