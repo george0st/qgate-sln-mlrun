@@ -21,10 +21,32 @@
      - user `testuser`, password `testpwd`
 
 3. Test Postgres in container
-    TBD.
-
+   - interactive access to the container
+     - `docker exec -it mlrun-postgres psql -U testuser test`
+   - list of users and their roles
+     - `test=# \du` 
+   - show list of databases
+     - `test=# \l`
+   - list of DB tables
+     - `test=# \dt`
+   - switch to database `postgres`
+     - `test=# \c postgres`
+   - more commands [see](https://hasura.io/blog/top-psql-commands-and-flags-you-need-to-know-postgresql/)
+     
 ## 3. Use Postgres for tests
-    TBD.
+ - Update `qgate-sln-mlrun.env`, change setting for `QGATE_POSTGRES`
+   - format `QGATE_POSTGRES = postgresql+psycopg2://<username>:<password>@<host>:<port>/<db_name>`
+   - see `QGATE_POSTGRES = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
+ - NOTE:
+   - [Dialect psycopg2](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2)
+   - [Pypi psycopg2](https://pypi.org/project/psycopg2/)
 
 ## 4. Install these python packages
-    TBD.
+ - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]`
+   - it required `pip install sqlalchemy~=1.4`
+ - Dialect psycopg2
+   - it required `pip install psycopg2~=2.9`
+ - Cryptography support
+   - it required `pip install cryptography~=42.0`
+ - NOTE
+   - these are versions valid for MLRun 1.5.2
