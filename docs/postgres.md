@@ -35,11 +35,11 @@
      
 ## 3. Use Postgres for tests
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_POSTGRES`
-   - format `QGATE_POSTGRES = postgresql+psycopg2://<username>:<password>@<host>:<port>/<db_name>`
-   - see `QGATE_POSTGRES = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
+   - format `QGATE_POSTGRES = postgresql+psycopg://<username>:<password>@<host>:<port>/<db_name>`
+   - see `QGATE_POSTGRES = postgresql+psycopg://testuser:testpwd@localhost:5432/test`
  - NOTE:
-   - [Dialect psycopg2](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2)
-   - [Pypi psycopg2](https://pypi.org/project/psycopg2/)
+   - [Dialect psycopg](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2)
+   - [Pypi psycopg](https://pypi.org/project/psycopg/)
 
 ## 4. Install these python packages
  - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]`
