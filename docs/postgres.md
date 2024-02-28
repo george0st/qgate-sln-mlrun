@@ -38,7 +38,7 @@
    - format `QGATE_POSTGRES = postgresql+psycopg://<username>:<password>@<host>:<port>/<db_name>`
    - see `QGATE_POSTGRES = postgresql+psycopg://testuser:testpwd@localhost:5432/test`
  - NOTE:
-   - [Dialect psycopg](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2)
+   - [Dialect psycopg](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg)
    - [Pypi psycopg](https://pypi.org/project/psycopg/)
 
 ## 4. Install these python packages
