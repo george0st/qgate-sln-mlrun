@@ -35,8 +35,9 @@
      
 ## 3. Use Postgres for tests
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_POSTGRES`
-   - format `QGATE_POSTGRES = mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>`
-   - see `QGATE_POSTGRES = mysql+pymysql://testuser:testpwd@localhost:5432/test`
+   - format `QGATE_POSTGRES = postgresql+pg8000://<username>:<password>@<host>:<port>/<db_name>`
+   - see `QGATE_POSTGRES = postgresql+pg8000://testuser:testpwd@localhost:5432/test`
+
 
 ## 4. Install these python packages
     TBD.
