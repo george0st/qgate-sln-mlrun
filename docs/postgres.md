@@ -31,9 +31,12 @@
      - `test=# \dt`
    - switch to database `postgres`
      - `test=# \c postgres`
+   - more commands [see](https://hasura.io/blog/top-psql-commands-and-flags-you-need-to-know-postgresql/)
      
 ## 3. Use Postgres for tests
-    TBD.
+ - Update `qgate-sln-mlrun.env`, change setting for `QGATE_POSTGRES`
+   - format `QGATE_POSTGRES = mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>`
+   - see `QGATE_POSTGRES = mysql+pymysql://testuser:testpwd@localhost:5432/test`
 
 ## 4. Install these python packages
     TBD.
