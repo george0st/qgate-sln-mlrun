@@ -20,7 +20,6 @@
    - NOTE:
      - user `testuser`, password `testpwd`
 
-
 3. Test MySQL in container
    - interactive access to the container
      - `docker exec -it mlrun-mysql bash`
