@@ -14,3 +14,5 @@ cryptography~=42.0
 
 # for MySQL
 pymysql~=1.1
+
+# for Postgres
