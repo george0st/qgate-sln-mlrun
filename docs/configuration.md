@@ -1,8 +1,9 @@
 # Configuration
 
+The view to setting of test configuration.
 
 ## 1. Model definition
-The Path to the QGate model definition (the path can be relative or full) e.g. ../qgate-model
+The path to the QGate model definition (the path can be relative or full) e.g. ../qgate-model
   - `QGATE_DEFINITION = ../qgate-model`
 
 ## 2. Data set
