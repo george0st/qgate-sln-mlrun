@@ -47,6 +47,8 @@
    - it required `pip install sqlalchemy~=1.4`
  - Dialect psycopg2
    - it required `pip install psycopg~=3.1`
+   or
+   - it required `pip install psycopg2~=3.1`
  - Cryptography support
    - it required `pip install cryptography~=42.0`
  - NOTE
