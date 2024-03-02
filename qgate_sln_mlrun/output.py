@@ -181,7 +181,7 @@ class Output():
         self._data["cpu"] = str(multiprocessing.cpu_count())
         self._data["mlrun"] = mlrun.get_version()
         self._data["mlrun_server"] = self._mlrun_server()
-        self._data["mlrun_support"] = [">=1.5.0", "<=1.6.0"]
+        self._data["mlrun_support"] = [">=1.5.0", "<=1.6.1"]
 
         self._data["python"] = sys.version
 
