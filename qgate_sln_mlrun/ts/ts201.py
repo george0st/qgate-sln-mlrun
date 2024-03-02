@@ -25,7 +25,7 @@ class TS201(TSBase):
     @property
     def long_desc(self):
         return ("Create feature set with name, description, entities, features and targets. "
-                "Supported targes are these off-line 'parquet', 'csv' and the on-line 'redis'.")
+                "Supported these targets off-line 'parquet', 'csv' and the on-line 'redis'.")
 
     def exec(self):
         self.create_featuresets()
