@@ -44,7 +44,7 @@
 
 ## 4. Install these python packages
 
- - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/dependencies.py)
+ - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/blob/development/dependencies.py)
    - it required `pip install sqlalchemy~=1.4`
  - Dialect pymysql
    - it required `pip install pymysql~=1.1`
