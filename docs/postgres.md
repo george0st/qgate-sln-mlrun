@@ -31,22 +31,25 @@
      - `test=# \dt`
    - switch to database `postgres`
      - `test=# \c postgres`
+   - create table `my_table`
+     - TBD.
    - more commands [see](https://hasura.io/blog/top-psql-commands-and-flags-you-need-to-know-postgresql/)
      
 ## 3. Use Postgres for tests
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_POSTGRES`
-   - format `QGATE_POSTGRES = postgresql+psycopg://<username>:<password>@<host>:<port>/<db_name>`
+   - format `QGATE_POSTGRES = postgresql+<dialect>://<username>:<password>@<host>:<port>/<db_name>`
    - see `QGATE_POSTGRES = postgresql+psycopg://testuser:testpwd@localhost:5432/test`
+   - or see `QGATE_POSTGRES = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
  - NOTE:
    - [SQLAlchemy postgres](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html)
    - [Dialect psycopg](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg)
    - [Pypi psycopg](https://pypi.org/project/psycopg/)
 
 ## 4. Install these python packages
- - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]`
+ - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/dependencies.py)
    - it required `pip install sqlalchemy~=1.4`
- - Dialect psycopg2
-   - it required `pip install psycopg~=3.1`
+ - Dialect psycopg or psycopg2 
+   - it required `pip install psycopg~=3.1` or `pip install psycopg2~=2.9`
  - Cryptography support
    - it required `pip install cryptography~=42.0`
  - NOTE
