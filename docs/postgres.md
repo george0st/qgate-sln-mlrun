@@ -32,7 +32,7 @@
    - switch to database `postgres`
      - `test=# \c postgres`
    - create table `my_table`
-     - TBD.
+     - `CREATE TABLE my_table(id int, description varchar(50));`
    - more commands [see](https://hasura.io/blog/top-psql-commands-and-flags-you-need-to-know-postgresql/)
      
 ## 3. Use Postgres for tests
