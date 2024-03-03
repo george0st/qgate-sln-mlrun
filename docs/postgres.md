@@ -32,7 +32,7 @@
    - switch to database `postgres`
      - `test=# \c postgres`
    - create table `my_table`
-     - TBD.
+     - `CREATE TABLE my_table(id int, description varchar(50));`
    - more commands [see](https://hasura.io/blog/top-psql-commands-and-flags-you-need-to-know-postgresql/)
      
 ## 3. Use Postgres for tests
@@ -46,7 +46,7 @@
    - [Pypi psycopg](https://pypi.org/project/psycopg/)
 
 ## 4. Install these python packages
- - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/dependencies.py)
+ - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/blob/development/dependencies.py)
    - it required `pip install sqlalchemy~=1.4`
  - Dialect psycopg or psycopg2 
    - it required `pip install psycopg~=3.1` or `pip install psycopg2~=2.9`

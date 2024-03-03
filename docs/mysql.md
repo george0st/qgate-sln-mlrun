@@ -37,14 +37,14 @@
 ## 3. Use MySQL for tests
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_MYSQL`
-   - format `QGATE_MYSQL = mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>`
+   - format `QGATE_MYSQL = mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>`
    - see `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@localhost:3306/test`
  - Note
    - List of [Dialects](https://docs.sqlalchemy.org/en/20/dialects/index.html)
 
 ## 4. Install these python packages
 
- - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/dependencies.py)
+ - SQLAlchemy based on MLRun extras see `pip install mlrun[sqlalchemy]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/blob/development/dependencies.py)
    - it required `pip install sqlalchemy~=1.4`
  - Dialect pymysql
    - it required `pip install pymysql~=1.1`
