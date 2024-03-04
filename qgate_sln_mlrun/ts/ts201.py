@@ -187,27 +187,6 @@ class TS201(TSBase):
             raise TypeError(f"Unsupported type '{data_type}'")
         return type_map[data_type]
 
-    # @staticmethod
-    # def type_to_type(data_type) -> ValueType:
-    #     type_map = {
-    #         "int": int,
-    #         "int64": int,
-    #         "uint64": int,
-    #         "int128": int,
-    #         "uint128": int,
-    #         "float": float,
-    #         "double": float,
-    #         "boolean": bool,
-    #         "bool": bool,
-    #         "timestamp": datetime.datetime.timestamp,
-    #         "datetime": datetime.datetime,
-    #         "string": str,
-    #         "list": list
-    #     }
-    #     if data_type not in type_map:
-    #         raise TypeError(f"Unsupported type '{data_type}'")
-    #     return type_map[data_type]
-
     @staticmethod
     def type_to_type(data_type):
         type_map = {
