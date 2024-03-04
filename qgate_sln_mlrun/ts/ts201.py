@@ -188,7 +188,7 @@ class TS201(TSBase):
         return type_map[data_type]
 
     @staticmethod
-    def type_to_type(data_type) -> ValueType:
+    def type_to_type(data_type):
         type_map = {
             "int": int,
             "int64": int,
