@@ -14,8 +14,7 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
 
 3. SQLTarget limits
    - missing support more primary keys
-   - without check of table schema if table exist
-   - schema for mapping FeatureStore to Table is must
+   - schema for mapping FeatureStore to Table must be defined
    
 4. Not to use the engine `pandas`
    - this `pandas` engine is useful only for test purpose (see the first 
