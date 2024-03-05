@@ -31,7 +31,8 @@
 ## 3. Use Redis for tests
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_REDIS`
-   - see `QGATE_REDIS = redis://localhost:6379`
+   - pattern see `<redis|rediss>://<host>[:port]`
+   - real usage, see `QGATE_REDIS = redis://localhost:6379`
  - Note
    - Port is based on container see **6379**, you can use also different 
    protocol see **rediss**, more information see [Redis targes store from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html#redis-target)
