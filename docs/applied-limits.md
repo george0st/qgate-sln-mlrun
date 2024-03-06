@@ -19,3 +19,8 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
 4. Not to use the engine `pandas`
    - this `pandas` engine is useful only for test purpose (see the first 
    info about that in change log for MLRun version 1.6.0)
+
+5. SqlTarget is limited to MySql in current SqlTarget Technical Preview
+    - in case of create table in SqlTarget (if the table will be created out
+   of SqlTarget, all is fine)
+    - see the detail https://github.com/mlrun/mlrun/issues/5231

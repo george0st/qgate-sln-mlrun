@@ -35,6 +35,9 @@ The setup of Postgres for **on-line source/target** (valid fot target 'postgres'
   - `QGATE_POSTGRESL = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
   - detail description, see [Postgres](./postgres.md)
 
+NOTE: limited usage based on SqlTarget technical preview state
+    (the main focus on MySQL)
+
 ## 8. Kafka
 TBD. see helper https://hackernoon.com/setting-up-kafka-on-docker-for-local-development
 https://hub.docker.com/r/confluentinc/cp-kafka

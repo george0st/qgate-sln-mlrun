@@ -18,8 +18,8 @@ The list of expected/future improvements:
     - Why?
       - Add bigger variability for usage
 
- 4. Etc.
-
+ 4. TBD.
+ 
 ## Freeze points
 
  1. **Test mlrun client under Python 3.10 with OS Windows**
