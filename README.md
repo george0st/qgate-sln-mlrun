@@ -41,9 +41,9 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
 NOTE: Each test scenario contains addition specific test cases.
 
 ## Test inputs/outputs
-The quality gate tests these inputs/outputs (✅ done, ❌ in-progress/planned):
- - ✅ RedisTarget, ❌ SQLTarget, ❌ KafkaTarget
- - ✅ File system, ❌ S3 with
+The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ planned):
+ - ✅ RedisTarget, ✔ SQLTarget/MySQL, ✔ SQLTarget/Postgres, ❌ KafkaTarget
+ - ✅ File system, ❌ S3, ❌ BlobStorage with
    - ✅ ParquetTarget, ✅ CSVTarget
 
 ## Sample of outputs
