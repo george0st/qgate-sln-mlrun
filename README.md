@@ -42,7 +42,7 @@ NOTE: Each test scenario contains addition specific test cases.
 
 ## Test inputs/outputs
 The quality gate tests these inputs/outputs (✅ done, ❌ in-progress/planned):
- - ✅ RedisTarget, ❌ SQLTarget, ❌ KafkaTarget
+ - ✅ RedisTarget, ❌ SQLTarget/MySQL, ❌ SQLTarget/Postgres, ❌ KafkaTarget
  - ✅ File system, ❌ S3 with
    - ✅ ParquetTarget, ✅ CSVTarget
 
