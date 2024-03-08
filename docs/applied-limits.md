@@ -13,14 +13,13 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
    relevant target for FeatureVector  
 
 3. SQLTarget limits
-   - missing support more primary keys
+   - missing support more primary keys (only one primary key is supported right now)
    - schema for mapping FeatureStore to Table must be defined
    
 4. Not to use the engine `pandas`
    - this `pandas` engine is useful only for test purpose (see the first 
    info about that in change log for MLRun version 1.6.0)
 
-5. SqlTarget is limited to MySql in current SqlTarget Technical Preview
-    - in case of create table in SqlTarget (if the table will be created out
-   of SqlTarget, all is fine)
+5. SqlTarget is limited to MySql, if you need to create table (SqlTarget is in Technical Preview)
     - see the detail https://github.com/mlrun/mlrun/issues/5231
+    - NOTE: I used work-arround, I created table before the ingest

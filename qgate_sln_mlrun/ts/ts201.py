@@ -149,9 +149,10 @@ class TS201(TSBase):
                 target_provider = RedisNoSqlTarget(name=target_name, path=self.setup.redis)
             else:
                 raise ValueError("Missing value for redis connection, see 'QGATE_REDIS'.")
+
         elif target == "mysql":
             if self.setup.mysql:
-                # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
+                # mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
 
                 sql_schema, primary_key=self._get_sqlschema(json_spec)
@@ -161,6 +162,18 @@ class TS201(TSBase):
                                             primary_key_column=primary_key)
             else:
                 raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
+        elif target == "postgres":
+            if self.setup.postgres:
+                # postgresql+<dialect>://<username>:<password>@<host>:<port>/<db_name>
+                # postgresql+psycopg2://testuser:testpwd@localhost:5432/test
+
+                sql_schema, primary_key=self._get_sqlschema(json_spec)
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.postgres, table_name=f"{project_name}_{target_name}",
+                                            schema=sql_schema,
+                                            create_table=True,
+                                            primary_key_column=primary_key)
+            else:
+                raise ValueError("Missing value for mysql connection, see 'QGATE_POSTGRES'.")
         else:
             # TODO: Add support other targets for MLRun CE
             raise NotImplementedError()
