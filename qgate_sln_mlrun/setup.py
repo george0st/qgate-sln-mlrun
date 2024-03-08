@@ -78,6 +78,7 @@ class Setup:
         """Return the connection to MySql"""
         return self._variables.get('QGATE_MYSQL', None)
 
+    @property
     def postgres(self):
         """Return the connection to Postgres"""
         return self._variables.get('QGATE_POSTGRES', None)

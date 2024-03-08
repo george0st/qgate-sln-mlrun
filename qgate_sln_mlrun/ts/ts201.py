@@ -163,17 +163,17 @@ class TS201(TSBase):
             else:
                 raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
         elif target == "postgres":
-            if self.setup.mysql:
-            #     # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
-            #     # mysql+pymysql://testuser:testpwd@localhost:3306/test
-            #
-            #     sql_schema, primary_key=self._get_sqlschema(json_spec)
-            #     target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=f"{project_name}_{target_name}",
-            #                                 schema=sql_schema,
-            #                                 create_table=True,
-            #                                 primary_key_column=primary_key)
-            # else:
-            #     raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
+            if self.setup.postgres:
+                # mysql+pymysql://<username>:<password>@<host>:<port>/<db_name>
+                # mysql+pymysql://testuser:testpwd@localhost:3306/test
+
+                sql_schema, primary_key=self._get_sqlschema(json_spec)
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.postgres, table_name=f"{project_name}_{target_name}",
+                                            schema=sql_schema,
+                                            create_table=True,
+                                            primary_key_column=primary_key)
+            else:
+                raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
         else:
             # TODO: Add support other targets for MLRun CE
             raise NotImplementedError()
