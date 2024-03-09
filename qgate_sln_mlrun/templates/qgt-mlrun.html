@@ -129,12 +129,12 @@ function myFunction(...elements) {
   }
 }
 
-function filterState(comboBox, filtrTable) {
-  let dropdown, table, rows, cells, country, filter;
-  dropdown = document.getElementById(comboBox);
+function filterState(comboBox1, filtrTable) {
+  let dropdown1, table, rows, cells, country, filter1;
+  dropdown1 = document.getElementById(comboBox1);
   table = document.getElementById(filtrTable);
   rows = table.getElementsByTagName("tr");
-  filter = dropdown.value;
+  filter1 = dropdown1.value;
 
   for (let row of rows) {
     cells = row.getElementsByTagName("td");
@@ -143,7 +143,7 @@ function filterState(comboBox, filtrTable) {
     if (item.startsWith("<b>TS")){
     	item = null
     }
-    if (filter === "All" || !item || (item.endsWith(filter))) {
+    if (filter1 === "All" || !item || (item.endsWith(filter1))) {
       row.style.display = ""; // shows
     }
     else {
@@ -152,13 +152,13 @@ function filterState(comboBox, filtrTable) {
   }
 }
 
-function filterProject(comboBox, filtrTable) {
-  let dropdown, table, rows, cells, country, filter;
-  dropdown = document.getElementById(comboBox);
+function filterProject(comboBox2, filtrTable) {
+  let dropdown2, table, rows, cells, country, filter2;
+  dropdown2 = document.getElementById(comboBox2);
   table = document.getElementById(filtrTable);
   rows = table.getElementsByTagName("tr");
-  filter = dropdown.value;
-  filter = filter.concat("/")
+  filter2 = dropdown2.value;
+  filter2 = filter2.concat("/")
 
   for (let row of rows) {
     cells = row.getElementsByTagName("td");
@@ -166,7 +166,7 @@ function filterProject(comboBox, filtrTable) {
     if (item !== null) {
     	item = item.innerHTML.concat("/")
     }
-    if (filter === "All/" || !item || (item.startsWith(filter))) {
+    if (filter2 === "All/" || !item || (item.startsWith(filter2))) {
       row.style.display = ""; // shows
     }
     else {
