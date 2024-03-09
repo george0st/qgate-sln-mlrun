@@ -7,19 +7,24 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
    - missing MLRun tests under OS Windows
    - probably others (without full tracking and addition details)
    
-2. The data read (via feature vector) **accept only one on-line and
+2. The data read (via feature vector) **accept only ONE on-line and
    one off-line target** in FeatureSet, see [Slack discussion](https://mlopslive.slack.com/archives/C014XCMNY4Q/p1701025414893399?thread_ts=1701021926.280329&cid=C014XCMNY4Q)
    - in case of e.g. more on-line targets, it is not possible to choose 
    relevant target for FeatureVector  
 
 3. SQLTarget limits
-   - missing support more primary keys (only one primary key is supported right now)
-   - schema for mapping FeatureStore to Table must be defined
+   - missing support more primary keys (only ONE primary key is supported right now)
+   - schema for mapping FeatureStore to Table must be defined manually (not automatically)
    
 4. Not to use the engine `pandas`
    - this `pandas` engine is useful only for test purpose (see the first 
    info about that in change log for MLRun version 1.6.0)
 
-5. SqlTarget is limited to MySql, if you need to create table (SqlTarget is in Technical Preview)
+5. SqlTarget is limited to MySql, if you need to create table (SqlTarget is in
+  Technical Preview)
     - see the detail https://github.com/mlrun/mlrun/issues/5231
-    - NOTE: I used work-arround, I created table before the ingest
+    - NOTE: It is possible to use work-arround, create table before the ingest
+
+6. SqlTarget issue with save/load content mapping for SqlTarget
+   - see the detail https://github.com/mlrun/mlrun/issues/5238
+   - NOTE: It is issue for all SqlTargets
