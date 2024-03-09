@@ -16,3 +16,4 @@ cryptography~=42.0
 pymysql~=1.1
 
 # for Postgres
+psycopg2~=2.9
