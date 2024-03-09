@@ -14,7 +14,7 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
    - in case of e.g. more on-line targets, it is not possible to choose 
    relevant target for FeatureVector  
 
-## SQLTarget (preview version with focus on MySQL only)
+## SQLTarget (preview version, very limited with focus on MySQL only)
 
 1. SQLTarget limits
    - missing support MORE primary keys (only ONE primary key is supported right now)

@@ -82,3 +82,10 @@ class Setup:
     def postgres(self):
         """Return the connection to Postgres"""
         return self._variables.get('QGATE_POSTGRES', None)
+
+    @property
+    def kafka(self):
+        """Return the connection to Kafka"""
+        return self._variables.get('QGATE_KAFKA', None)
+
+
