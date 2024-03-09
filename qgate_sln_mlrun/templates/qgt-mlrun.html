@@ -175,6 +175,44 @@ function filterProject(comboBox2, filtrTable) {
   }
 }
 
+function filterAll(comboBox1, comboBox2, filtrTable) {
+  let dropdown1, dropdown2, table, rows, cells, country, filter1, filter2;
+  dropdown1 = document.getElementById(comboBox1);
+  dropdown2 = document.getElementById(comboBox2);
+  table = document.getElementById(filtrTable);
+  rows = table.getElementsByTagName("tr");
+  filter1 = dropdown1.value;
+  filter2 = dropdown2.value;
+  filter2 = filter2.concat("/")
+
+  for (let row of rows) {
+    cells = row.getElementsByTagName("td");
+
+    item1 = cells[0] || null;
+    item1 = item1.innerHTML
+    if (item1.startsWith("<b>TS")){
+    	item1 = null
+    }
+    item2 = cells[1] || null;
+    if (item2 !== null) {
+    	item2 = item2.innerHTML.concat("/")
+    }
+
+    if (filter1 === "All" || !item1 || (item1.endsWith(filter1))) {
+      // row.style.display = ""; // shows
+ 	  if (filter2 === "All/" || !item2 || (item2.startsWith(filter2))) {
+	    row.style.display = ""; // shows
+	  }
+	  else {
+	    row.style.display = "none"; // hides
+	  }
+    }
+    else {
+      row.style.display = "none"; // hides
+    }
+  }
+}
+
 </script>
 <body>
 	<h2>Quality report for MLRun</h2>
