@@ -227,10 +227,10 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		</table>
 	</button>
 	<div id="myFiltr" style="display: none;">
-		<select id="myState" oninput="filterState('myState','keyOutputs')">
+		<select id="myState" oninput="filterAll('myState','myProject','keyOutputs')">
 			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
-		<select id="myProject" oninput="filterProject('myProject','keyOutputs')">
+		<select id="myProject" oninput="filterAll('myState','myProject','keyOutputs')">
 			<option>All</option>{% for prj in data.projects %}<option title='{{ prj.desc }}'>{{ prj.name }}</option>{% endfor %}
 		</select>
 	</div>
