@@ -13,7 +13,7 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
    relevant target for FeatureVector  
 
 3. SQLTarget limits
-   - missing support more primary keys (only one primary key is supported right now)
+   - missing support more primary keys (only ONE primary key is supported right now)
    - schema for mapping FeatureStore to Table must be defined manually (not automatically)
    
 4. Not to use the engine `pandas`
