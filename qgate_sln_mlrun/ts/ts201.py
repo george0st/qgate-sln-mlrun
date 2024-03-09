@@ -55,10 +55,12 @@ class TS201(TSBase):
 
         if kind == "feature-set":
             # create feature set only in case, if not exist
-            try:
-                fstore.get_feature_set(f"{project_name}/{name}")
-            except:
-                self._create_featureset_content(project_name, name, desc, json_content['spec'])
+            self._create_featureset_content(project_name, name, desc, json_content['spec'])
+
+            # try:
+            #     fstore.get_feature_set(f"{project_name}/{name}")
+            # except:
+            #     self._create_featureset_content(project_name, name, desc, json_content['spec'])
 
     def _create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
         """
@@ -155,8 +157,13 @@ class TS201(TSBase):
                 # mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
 
+                tbl_name = f"{project_name}_{target_name}r"
+
+                # TODO: create table as work-around, because create_table=True does not work for Postgres, only for MySQL
+                #self._createtable(self.setup.mysql, tbl_name, json_spec)
+
                 sql_schema, primary_key=self._get_sqlschema(json_spec)
-                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=f"{project_name}_{target_name}",
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=tbl_name,
                                             schema=sql_schema,
                                             create_table=True,
                                             primary_key_column=primary_key)
@@ -167,8 +174,13 @@ class TS201(TSBase):
                 # postgresql+<dialect>://<username>:<password>@<host>:<port>/<db_name>
                 # postgresql+psycopg2://testuser:testpwd@localhost:5432/test
 
+                tbl_name = f"{project_name}_{target_name}"
+
+                # TODO: create table as work-around, because create_table=True does not work for Postgres, only for MySQL
+                #self._createtable(self.setup.postgres, tbl_name, json_spec)
+
                 sql_schema, primary_key=self._get_sqlschema(json_spec)
-                target_provider = SQLTarget(name=target_name, db_url=self.setup.postgres, table_name=f"{project_name}_{target_name}",
+                target_provider = SQLTarget(name=target_name, db_url=self.setup.postgres, table_name=tbl_name,
                                             schema=sql_schema,
                                             create_table=True,
                                             primary_key_column=primary_key)
@@ -178,6 +190,26 @@ class TS201(TSBase):
             # TODO: Add support other targets for MLRun CE
             raise NotImplementedError()
         return target_provider
+
+    def _createtable(self, db_url, table_name, json_spec):
+        # https://medium.com/@sandyjtech/creating-a-database-using-python-and-sqlalchemy-422b7ba39d7e
+
+        engine = sqlalchemy.create_engine(db_url, echo=False)
+        meta = sqlalchemy.MetaData()
+
+        # create table definition
+        tbl=sqlalchemy.Table(table_name, meta)
+        # create primary keys
+        for item in json_spec['entities']:
+            tbl.append_column(
+                sqlalchemy.Column( item['name'],TS201.type_to_sqlalchemy(item['type']), primary_key=True))
+        # create columns
+        for item in json_spec['features']:
+            tbl.append_column(
+                sqlalchemy.Column(item['name'], TS201.type_to_sqlalchemy(item['type'])))
+
+        # create table
+        meta.create_all(engine)
 
     @staticmethod
     def type_to_mlrun_type(data_type) -> ValueType:
@@ -235,8 +267,9 @@ class TS201(TSBase):
             "bool": sqlalchemy.Boolean,
             "timestamp": sqlalchemy.TIMESTAMP,
             "datetime": sqlalchemy.DateTime,
-            "string": sqlalchemy.String
+            "string": sqlalchemy.String(50)
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
         return type_map[data_type]
+
