@@ -7,14 +7,14 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
    - missing MLRun tests under OS Windows
    - probably others (without full tracking and addition details)
    
-2. The data read (via feature vector) **accept only one on-line and
+2. The data read (via feature vector) **accept only ONE on-line and
    one off-line target** in FeatureSet, see [Slack discussion](https://mlopslive.slack.com/archives/C014XCMNY4Q/p1701025414893399?thread_ts=1701021926.280329&cid=C014XCMNY4Q)
    - in case of e.g. more on-line targets, it is not possible to choose 
    relevant target for FeatureVector  
 
 3. SQLTarget limits
    - missing support more primary keys (only one primary key is supported right now)
-   - schema for mapping FeatureStore to Table must be defined
+   - schema for mapping FeatureStore to Table must be defined manually (not automatically)
    
 4. Not to use the engine `pandas`
    - this `pandas` engine is useful only for test purpose (see the first 
