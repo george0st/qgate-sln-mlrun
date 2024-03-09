@@ -2,7 +2,7 @@
   TS201: Create feature set(s)
 """
 import datetime
-
+import sqlalchemy
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
@@ -216,6 +216,26 @@ class TS201(TSBase):
             "datetime": datetime.datetime,
             "string": str,
             "list": list
+        }
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
+
+    @staticmethod
+    def type_to_sqlalchemy(data_type):
+        type_map = {
+            "int": sqlalchemy.Integer,
+            "int64": sqlalchemy.Integer,
+            "uint64": sqlalchemy.Integer,
+            "int128": sqlalchemy.BigInteger,
+            "uint128": sqlalchemy.BigInteger,
+            "float": sqlalchemy.Float,
+            "double": sqlalchemy.Float,
+            "boolean": sqlalchemy.Boolean,
+            "bool": sqlalchemy.Boolean,
+            "timestamp": sqlalchemy.TIMESTAMP,
+            "datetime": sqlalchemy.DateTime,
+            "string": sqlalchemy.String
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
