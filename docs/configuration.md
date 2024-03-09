@@ -39,6 +39,8 @@ NOTE: limited usage based on SqlTarget technical preview state
     (the main focus on MySQL)
 
 ## 8. Kafka
-TBD. see helper https://hackernoon.com/setting-up-kafka-on-docker-for-local-development
-https://hub.docker.com/r/confluentinc/cp-kafka
+TBD. 
+ - see helper https://hackernoon.com/setting-up-kafka-on-docker-for-local-development
+ - https://hub.docker.com/r/confluentinc/cp-kafka
+ - https://docs.confluent.io/platform/current/platform-quickstart.html#ce-docker-quickstart
 
