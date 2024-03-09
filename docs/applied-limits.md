@@ -20,6 +20,11 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
    - this `pandas` engine is useful only for test purpose (see the first 
    info about that in change log for MLRun version 1.6.0)
 
-5. SqlTarget is limited to MySql, if you need to create table (SqlTarget is in Technical Preview)
+5. SqlTarget is limited to MySql, if you need to create table (SqlTarget is in
+  Technical Preview)
     - see the detail https://github.com/mlrun/mlrun/issues/5231
-    - NOTE: I used work-arround, I created table before the ingest
+    - NOTE: It is possible to use work-arround, create table before the ingest
+
+6. SqlTarget issue with save/load content mapping for SqlTarget
+   - see the detail https://github.com/mlrun/mlrun/issues/5238
+   - NOTE: It is issue for all SqlTargets
