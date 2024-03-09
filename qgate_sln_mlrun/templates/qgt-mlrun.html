@@ -138,12 +138,12 @@ function filterState(comboBox1, filtrTable) {
 
   for (let row of rows) {
     cells = row.getElementsByTagName("td");
-    item = cells[0] || null;
-    item = item.innerHTML
-    if (item.startsWith("<b>TS")){
-    	item = null
+    item1 = cells[0] || null;
+    item1 = item1.innerHTML
+    if (item1.startsWith("<b>TS")){
+    	item1 = null
     }
-    if (filter1 === "All" || !item || (item.endsWith(filter1))) {
+    if (filter1 === "All" || !item1 || (item1.endsWith(filter1))) {
       row.style.display = ""; // shows
     }
     else {
@@ -162,11 +162,11 @@ function filterProject(comboBox2, filtrTable) {
 
   for (let row of rows) {
     cells = row.getElementsByTagName("td");
-    item = cells[1] || null;
-    if (item !== null) {
-    	item = item.innerHTML.concat("/")
+    item2 = cells[1] || null;
+    if (item2 !== null) {
+    	item2 = item2.innerHTML.concat("/")
     }
-    if (filter2 === "All/" || !item || (item.startsWith(filter2))) {
+    if (filter2 === "All/" || !item2 || (item2.startsWith(filter2))) {
       row.style.display = ""; // shows
     }
     else {
