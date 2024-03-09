@@ -44,3 +44,5 @@ TBD.
  - https://hub.docker.com/r/confluentinc/cp-kafka
  - https://docs.confluent.io/platform/current/platform-quickstart.html#ce-docker-quickstart
 
+## Useful sources
+ - [Sources-Targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html)
