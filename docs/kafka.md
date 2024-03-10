@@ -4,12 +4,12 @@
 
  - Install Desktop Docker, [see](./desktopdocker.md)
 
-## 2. Run Kafka (in container)
+## 2. Run Kafka (in container, focus on conduktor solution)
 
 
 ## Useful sources
 
-1. Conductor & Kafka
+1. Conduktor & Kafka
  - see https://www.conduktor.io/kafka/how-to-start-kafka-using-docker/
 
 2. Installation steps
