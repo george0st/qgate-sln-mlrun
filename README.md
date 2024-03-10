@@ -77,8 +77,8 @@ You can easy use this solution in four steps:
 3. Run from `qgate-sln-mlrun`
    - **python main.py**
 4. See outputs
-   - './output/qgt-mlrun-*.html'
-   - './output/qgt-mlrun-*.txt'
+   - './output/qgt-mlrun-<date_time>.html'
+   - './output/qgt-mlrun-<date_time>.txt'
 
 Precondition: You have available MLRun or Iguazio solution (MLRun is part of that),
 see official [installation steps](https://docs.mlrun.org/en/latest/install.html), or directly installation for [Desktop Docker](https://docs.mlrun.org/en/latest/install/local-docker.html). 
