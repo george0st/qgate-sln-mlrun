@@ -10,3 +10,5 @@ docker run --name mlrun-postgres -p 5432:5432 -e POSTGRES_DB=test -e POSTGRES_US
 
 # redis
 docker run --name mlrun-redis -p 6379:6379 -m 512m -d redis:7.2
+
+# kafka
