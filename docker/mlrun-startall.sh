@@ -10,3 +10,5 @@ docker start mlrun-postgres
 
 # redis
 docker start mlrun-redis
+
+# kafka
