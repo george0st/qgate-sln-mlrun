@@ -5,7 +5,8 @@
  - Install Desktop Docker, [see](./desktopdocker.md)
 
 ## 2. Run Kafka (in container, focus on conduktor solution)
-
+ - https://github.com/conduktor/kafka-stack-docker-compose/blob/master/zk-single-kafka-single.yml
+ - `docker-compose -f zk-single-kafka-single.yml up -d`
 
 ## Useful sources
 
