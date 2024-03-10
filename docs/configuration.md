@@ -42,5 +42,5 @@ The setup of Kafka for **on-line source** (valid for target 'kafka')
   - `QGATE_KAFKA = TBD.`
   - detail description, see [Kafka](./kafka.md)
 
-## Useful sources/targers in MLRun
+## Supported sources and targers in MLRun
  - [Sources-Targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html)
