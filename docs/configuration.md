@@ -21,26 +21,26 @@ The path to the output directory for **off-line storage** (valid for target 'par
   - object storage `QGATE_OUTPUT = TBD`
 
 ## 5. Redis
-The setup of Redis for **on-line source/target** (valid fot target 'redis')
+The setup of Redis for **on-line source/target** (valid for target 'redis')
   - `QGATE_REDIS = redis://localhost:6379`
   - detail description, see [Redis](./redis.md)
 
 ## 6. MySQL
-The setup of MySQL for **on-line source/target** (valid fot target 'mysql')
+The setup of MySQL for **on-line source/target** (valid for target 'mysql')
   - `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@localhost:3306/test`
   - detail description, see [MySQL](./mysql.md)
 
 ## 7. Postgres
-The setup of Postgres for **on-line source/target** (valid fot target 'postgres')
+The setup of Postgres for **on-line source/target** (valid for target 'postgres')
   - `QGATE_POSTGRES = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
   - detail description, see [Postgres](./postgres.md)
   - NOTE: limited usage based on SqlTarget technical preview state
     (the main focus on MySQL)
 
 ## 8. Kafka
-The setup of Kafka for **on-line source** (valid fot target 'kafka')
+The setup of Kafka for **on-line source** (valid for target 'kafka')
   - `QGATE_KAFKA = TBD.`
   - detail description, see [Kafka](./kafka.md)
 
-## Useful sources/targers in MLRun
+## Supported sources and targers in MLRun
  - [Sources-Targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html)
