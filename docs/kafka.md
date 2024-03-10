@@ -8,6 +8,10 @@
  - https://github.com/conduktor/kafka-stack-docker-compose/blob/master/zk-single-kafka-single.yml
  - `docker-compose -f zk-single-kafka-single.yml up -d`
 
+
+docker exec -it kafka1 /bin/bash
+kafka-topics --version
+
 ## Useful sources
 
 1. Conduktor & Kafka
