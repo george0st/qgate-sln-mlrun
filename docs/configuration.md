@@ -32,17 +32,15 @@ The setup of MySQL for **on-line source/target** (valid fot target 'mysql')
 
 ## 7. Postgres
 The setup of Postgres for **on-line source/target** (valid fot target 'postgres')
-  - `QGATE_POSTGRESL = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
+  - `QGATE_POSTGRES = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
   - detail description, see [Postgres](./postgres.md)
-
-NOTE: limited usage based on SqlTarget technical preview state
+  - NOTE: limited usage based on SqlTarget technical preview state
     (the main focus on MySQL)
 
 ## 8. Kafka
-TBD. 
- - see helper https://hackernoon.com/setting-up-kafka-on-docker-for-local-development
- - https://hub.docker.com/r/confluentinc/cp-kafka
- - https://docs.confluent.io/platform/current/platform-quickstart.html#ce-docker-quickstart
+The setup of Kafka for **on-line source** (valid fot target 'kafka')
+  - `QGATE_KAFKA = TBD.`
+  - detail description, see [Kafka](./kafka.md)
 
-## Useful sources
+## Useful sources/targers in MLRun
  - [Sources-Targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html)
