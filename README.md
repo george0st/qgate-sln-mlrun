@@ -42,9 +42,16 @@ NOTE: Each test scenario contains addition specific test cases.
 
 ## Test inputs/outputs
 The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ planned):
- - ✅ RedisTarget, ✔ SQLTarget/MySQL, ✔ SQLTarget/Postgres, ❌ KafkaTarget
- - ✅ File system, ❌ S3, ❌ BlobStorage with
-   - ✅ ParquetTarget, ✅ CSVTarget
+ - Outputs (targets)
+   - ✅ RedisTarget, ✔ SQLTarget/MySQL, ✔ SQLTarget/Postgres, ❌ KafkaTarget
+   - ✅ File system, ❌ S3, ❌ BlobStorage with
+     - ✅ ParquetTarget, ✅ CSVTarget
+ - Inputs (sources)
+   - ✅ Pandas/DataFrame, ❌ KafkaSource
+   - ❌ File system, ❌ S3, ❌ BlobStorage with
+     - ❌ ParquetSource, ❌ CSVSource
+
+The supported [sources/targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html).
 
 ## Sample of outputs
 
@@ -69,9 +76,9 @@ You can easy use this solution in four steps:
      - detail setup [configuration](./docs/configuration.md)
 3. Run from `qgate-sln-mlrun`
    - **python main.py**
-4. See outputs
-   - './output/qgt-mlrun-*.html'
-   - './output/qgt-mlrun-*.txt'
+4. See outputs (location is based on `QGATE_OUTPUT` in configuration)
+   - './output/qgt-mlrun-<date_time>.html'
+   - './output/qgt-mlrun-<date_time>.txt'
 
 Precondition: You have available MLRun or Iguazio solution (MLRun is part of that),
 see official [installation steps](https://docs.mlrun.org/en/latest/install.html), or directly installation for [Desktop Docker](https://docs.mlrun.org/en/latest/install/local-docker.html). 
@@ -85,7 +92,8 @@ The project was tested with these MLRun versions (see [change log](https://docs.
    - Iguazio 3.5.3 (with MLRun 1.4.1)
    - Iguazio 3.5.1 (with MLRun 1.3.0)
 
-NOTE: Current state, only the last MLRun/Iguazio versions are valid for testing.
+NOTE: Current state, only the last MLRun/Iguazio versions are valid for testing 
+(these tests are without back-compatibilities).
 
 ## Others
  - **To-Do**, the list of expected/future improvements, [see](./docs/todo_list.md)
