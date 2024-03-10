@@ -42,9 +42,16 @@ NOTE: Each test scenario contains addition specific test cases.
 
 ## Test inputs/outputs
 The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ planned):
- - ✅ RedisTarget, ✔ SQLTarget/MySQL, ✔ SQLTarget/Postgres, ❌ KafkaTarget
- - ✅ File system, ❌ S3, ❌ BlobStorage with
-   - ✅ ParquetTarget, ✅ CSVTarget
+ - Outputs (targets)
+   - ✅ RedisTarget, ✔ SQLTarget/MySQL, ✔ SQLTarget/Postgres, ❌ KafkaTarget
+   - ✅ File system, ❌ S3, ❌ BlobStorage with
+     - ✅ ParquetTarget, ✅ CSVTarget
+ - Inputs (sources)
+   - ✅ Pandas/DataFrame, ❌ KafkaSource
+   - ❌ File system, ❌ S3, ❌ BlobStorage with
+     - ❌ ParquetSource, ❌ CSVSource
+
+The supported [sources/targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html).
 
 ## Sample of outputs
 
