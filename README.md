@@ -76,7 +76,7 @@ You can easy use this solution in four steps:
      - detail setup [configuration](./docs/configuration.md)
 3. Run from `qgate-sln-mlrun`
    - **python main.py**
-4. See outputs
+4. See outputs (location is based on `QGATE_OUTPUT` in configuration)
    - './output/qgt-mlrun-<date_time>.html'
    - './output/qgt-mlrun-<date_time>.txt'
 
