@@ -1,5 +1,11 @@
 # Kafka as on-line source
 
+## 1. Preconditions for OS Windows
+
+ - Install Desktop Docker, [see](./desktopdocker.md)
+
+## 2. Run Kafka (in container)
+
 
 ## Useful sources
 
