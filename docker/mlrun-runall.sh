@@ -9,6 +9,8 @@
 ./mlrun-postgres.sh
 
 # redis
-./mrlun-redis.sh
+./mlrun-redis.sh
 
 # kafka
+./mlrun-kafka.sh
+
