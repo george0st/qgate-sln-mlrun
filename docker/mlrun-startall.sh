@@ -12,3 +12,5 @@ docker start mlrun-postgres
 docker start mlrun-redis
 
 # kafka
+docker start zoo1
+docker start kafka1
