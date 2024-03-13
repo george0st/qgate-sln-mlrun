@@ -92,5 +92,5 @@ class TS601(TSBase):
             context = mlrun.get_or_create_ctx(name="output", with_env=False, project=project_name)
             context.log_model(key=name,
                               body=model_data,
-                              model_dir="/".join([self.setup.model_output, project_name]),
+                              model_dir="/".join([self.setup.model_output, project_name,'aa']),
                               model_file=f'{name}.pkl')
