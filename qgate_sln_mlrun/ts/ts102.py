@@ -31,7 +31,7 @@ class TS102(TSBase):
         """
         self.testscenario_new()
         for project_name in self.projects:
-            self._delete_project(project_name)
+            self._delete_project(f"{project_name}/*:")
 
         # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
