@@ -89,5 +89,8 @@ class TS601(TSBase):
 
             # store the model
             model_data = dumps(clf)
-            context = mlrun.get_or_create_ctx(name="output", project=project_name)
-            context.log_model(key=name, body=model_data, model_file=f'{name}.pkl')
+            context = mlrun.get_or_create_ctx(name="output", with_env=False, project=project_name)
+            context.log_model(key=name,
+                              body=model_data,
+                              model_dir="/".join([self.setup.model_output, project_name]),
+                              model_file=f'{name}.pkl')
