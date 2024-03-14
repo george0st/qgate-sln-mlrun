@@ -8,6 +8,8 @@ see [ML-4907](https://docs.mlrun.org/en/latest/change-log/index.html#limitations
    - missing MLRun tests under OS Windows
    - probably others (without full tracking and addition details)
 
+NOTE: Solution, it is necessity to use WSL under OS Windows
+
 ## Feature Vector
 1. The data read (via feature vector) **accept only ONE on-line and
    one off-line target** in FeatureSet, see [Slack discussion](https://mlopslive.slack.com/archives/C014XCMNY4Q/p1701025414893399?thread_ts=1701021926.280329&cid=C014XCMNY4Q)
