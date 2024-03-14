@@ -1,19 +1,14 @@
 # TODO list
 
 The list of expected/future improvements:
-
- 1. **Split output report based on Projects**
-    - Group by Project (JavaScript in UI)
-    - Why?
-      - Increase readeability & Filtering
-     
- 2. **Test SQLSource and SQLTarget**
+ 
+ 1. **Test SQLSource and SQLTarget**
     - Focus on MySQL or/and PostgreSQL in DockerImage
     - Why?
       - Quality gate extension
       - Tests from on/off-line view
 
- 3. **Add tests with MySQL...**
+ 2. **Add tests with MySQL...**
     - It is important to solve schema mapping issue
     - Why?
       - Add bigger variability for usage
