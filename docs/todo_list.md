@@ -9,8 +9,12 @@ The list of expected/future improvements:
 
  2. **Solve issue with project delete**
     - see mistake in MLRun 1.6.1
+    
+ 3. **Test target in S3**
 
- 3. TBD.
+ 4. **Test target in BlobStorage**
+
+ 5. TBD.
  
 ## Freeze points
 
