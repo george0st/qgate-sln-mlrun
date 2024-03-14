@@ -14,7 +14,7 @@ The list of expected/future improvements:
     - support more storages S3, BlobStorage
     
  3. **Test target in S3**
-    - extend
+    - add secrets for S3 login
 
  4. **Test target in BlobStorage**
 
