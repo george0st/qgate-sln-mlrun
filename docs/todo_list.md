@@ -2,18 +2,15 @@
 
 The list of expected/future improvements:
  
- 1. **Test SQLSource and SQLTarget**
-    - Focus on MySQL or/and PostgreSQL in DockerImage
-    - Why?
-      - Quality gate extension
-      - Tests from on/off-line view
-
- 2. **Add tests with MySQL...**
+ 1. **Add tests with MySQL...**
     - It is important to solve schema mapping issue in MySQL source
     - Why?
       - Add bigger variability for usage
 
- 4. TBD.
+ 2. **Solve issue with project delete**
+    - see mistake in MLRun 1.6.1
+
+ 3. TBD.
  
 ## Freeze points
 
