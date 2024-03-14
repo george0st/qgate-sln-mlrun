@@ -93,4 +93,5 @@ class TS601(TSBase):
             context.log_model(key=name,
                               body=model_data,
                               model_dir="/".join([self.setup.model_output, project_name,'aa']),
+                              #model_dir="/".join(['C:/Python/qgate-sln-mlrun/output', project_name, 'aa']),
                               model_file=f'{name}.pkl')
