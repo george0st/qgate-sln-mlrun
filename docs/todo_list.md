@@ -9,7 +9,7 @@ The list of expected/future improvements:
       - Tests from on/off-line view
 
  2. **Add tests with MySQL...**
-    - It is important to solve schema mapping issue
+    - It is important to solve schema mapping issue in MySQL source
     - Why?
       - Add bigger variability for usage
 
