@@ -9,8 +9,17 @@ The list of expected/future improvements:
 
  2. **Solve issue with project delete**
     - see mistake in MLRun 1.6.1
+    
+ 3. **Extend QGATE_OUTPUT as arraylist**
+    - support more storages S3, BlobStorage
+    
+ 3. **Test target in S3**
+    - add secrets for S3 login
 
- 3. TBD.
+ 4. **Test target in BlobStorage**
+    - add secrets for BlobStorage
+
+ 5. TBD.
  
 ## Freeze points
 
