@@ -1,24 +1,16 @@
 # TODO list
 
 The list of expected/future improvements:
-
- 1. **Split output report based on Projects**
-    - Group by Project (JavaScript in UI)
-    - Why?
-      - Increase readeability & Filtering
-     
- 2. **Test SQLSource and SQLTarget**
-    - Focus on MySQL or/and PostgreSQL in DockerImage
-    - Why?
-      - Quality gate extension
-      - Tests from on/off-line view
-
- 3. **Add tests with MySQL...**
-    - It is important to solve schema mapping issue
+ 
+ 1. **Add tests with MySQL...**
+    - It is important to solve schema mapping issue in MySQL source
     - Why?
       - Add bigger variability for usage
 
- 4. TBD.
+ 2. **Solve issue with project delete**
+    - see mistake in MLRun 1.6.1
+
+ 3. TBD.
  
 ## Freeze points
 
