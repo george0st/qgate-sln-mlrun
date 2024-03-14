@@ -1,81 +1,81 @@
-# QGate version/model: v0.1.5/v0.1.5
-# 2024-01-23 18:12:30
+# QGate version/model: v0.1.7/v0.1.7
+# 2024-03-14 20:21:14
 # -----------------------
-Summary, test scenarios: 52 [TOTAL] (1/51 [ERR/DONE])
+Summary, test scenarios: 48 [TOTAL] (1/47 [ERR/DONE])
 # -----------------------
 TS101: Create project(s)
-  DONE ... 'gate-alfa'
-  DONE ... 'gate-bravo'
+  DONE ... agate-1/*: 'The A-GATE-1, focus on Redis, CSV'
 TS201: Create feature set(s)
-  DONE ... 'gate-alfa/basic-party'
-  DONE ... 'gate-alfa/basic-contact'
-  DONE ... 'gate-alfa/basic-relation'
-  DONE ... 'gate-alfa/basic-account'
-  DONE ... 'gate-alfa/basic-transaction'
-  DONE ... 'gate-alfa/basic-event'
-  DONE ... 'gate-alfa/basic-communication'
-  DONE ... 'gate-alfa/aggregate-party'
-  DONE ... 'gate-alfa/aggregate-account'
-  DONE ... 'gate-alfa/aggregate-transaction'
-  DONE ... 'gate-alfa/aggregate-circle'
-  DONE ... 'gate-bravo/basic-account'
-  DONE ... 'gate-bravo/basic-contact'
-  DONE ... 'gate-bravo/aggregate-account'
+  DONE ... agate-1/basic-party
+  DONE ... agate-1/basic-contact
+  DONE ... agate-1/basic-relation
+  DONE ... agate-1/basic-account
+  DONE ... agate-1/basic-transaction
+  DONE ... agate-1/basic-event
+  DONE ... agate-1/basic-communication
+  DONE ... agate-1/aggregate-party
+  DONE ... agate-1/aggregate-account
+  DONE ... agate-1/aggregate-transaction
+  DONE ... agate-1/aggregate-circle
 TS301: Ingest data to feature set(s)
-  DONE ... 'gate-alfa/basic-party'
-  DONE ... 'gate-alfa/basic-contact'
-  DONE ... 'gate-alfa/basic-relation'
-  DONE ... 'gate-alfa/basic-account'
-  DONE ... 'gate-alfa/basic-transaction'
-  DONE ... 'gate-alfa/basic-event'
-  DONE ... 'gate-alfa/basic-communication'
-  DONE ... 'gate-bravo/basic-account'
-  DONE ... 'gate-bravo/basic-contact'
+  DONE ... agate-1/basic-party
+  DONE ... agate-1/basic-contact
+  DONE ... agate-1/basic-relation
+  DONE ... agate-1/basic-account
+  DONE ... agate-1/basic-transaction
+  DONE ... agate-1/basic-event
+  DONE ... agate-1/basic-communication
 TS401: Create feature vector(s)
-  DONE ... 'gate-alfa/vector-party'
-  DONE ... 'gate-alfa/vector-contact'
-  DONE ... 'gate-alfa/vector-partycontact'
-  DONE ... 'gate-alfa/vector-partycontact-02'
-  DONE ... 'gate-alfa/vector-account'
-  DONE ... 'gate-alfa/vector-partyaccount'
-  DONE ... 'gate-alfa/vector-partyaccount-02'
-  DONE ... 'gate-alfa/vector-partycontactaccount'
-  DONE ... 'gate-alfa/vector-accounttransaction'
+  DONE ... agate-1/vector-party
+  DONE ... agate-1/vector-contact
+  DONE ... agate-1/vector-partycontact
+  DONE ... agate-1/vector-partycontact-02
+  DONE ... agate-1/vector-account
+  DONE ... agate-1/vector-partyaccount
+  DONE ... agate-1/vector-partyaccount-02
+  DONE ... agate-1/vector-transaction
+  DONE ... agate-1/vector-partycontactaccount
+  DONE ... agate-1/vector-accounttransaction
 TS501: Get data from off-line feature vector(s)
-  DONE ... 'gate-alfa/vector-party': ... get 100 items
-  DONE ... 'gate-alfa/vector-contact': ... get 103 items
-  DONE ... 'gate-alfa/vector-partycontact': ... get 103 items
-  DONE ... 'gate-alfa/vector-partycontact-02': ... get 103 items
-  DONE ... 'gate-alfa/vector-account': ... get 13 items
-  DONE ... 'gate-alfa/vector-partyaccount': ... get 13 items
-  DONE ... 'gate-alfa/vector-partyaccount-02': ... get 13 items
-  DONE ... 'gate-alfa/vector-partycontactaccount': ... get 16 items
-  ERR  ... 'gate-alfa/vector-accounttransaction': MLRunRuntimeError: Failed to merge
+  DONE ... agate-1/vector-party: ... get 100 items
+  DONE ... agate-1/vector-contact: ... get 103 items
+  DONE ... agate-1/vector-partycontact: ... get 103 items
+  DONE ... agate-1/vector-partycontact-02: ... get 103 items
+  DONE ... agate-1/vector-account: ... get 13 items
+  DONE ... agate-1/vector-partyaccount: ... get 13 items
+  DONE ... agate-1/vector-partyaccount-02: ... get 13 items
+  DONE ... agate-1/vector-transaction: ... get 2805 items
+  DONE ... agate-1/vector-partycontactaccount: ... get 16 items
+  ERR  ... agate-1/vector-accounttransaction: MLRunRuntimeError: Failed to merge
 TS502: Get data from on-line feature vector(s)
-  DONE ... 'gate-alfa/vector-party'
-  DONE ... 'gate-alfa/vector-contact'
-  DONE ... 'gate-alfa/vector-partycontact'
-  DONE ... 'gate-alfa/vector-partycontact-02'
-  DONE ... 'gate-alfa/vector-account'
-  DONE ... 'gate-alfa/vector-partyaccount'
-  DONE ... 'gate-alfa/vector-partyaccount-02'
-TS102: Delete project(s)
-  DONE ... 'gate-alfa'
-  DONE ... 'gate-bravo'
+  DONE ... agate-1/vector-party
+  DONE ... agate-1/vector-contact
+  DONE ... agate-1/vector-partycontact
+  DONE ... agate-1/vector-partycontact-02
+  DONE ... agate-1/vector-account
+  DONE ... agate-1/vector-partyaccount
+  DONE ... agate-1/vector-partyaccount-02
+TS601: Build CART model
+  DONE ... agate-1/model-transaction
+TS701: Serving score from CART
+  DONE ... agate-1/model-transaction
 # -----------------------
-# MLRun (client/server): 1.5.2/1.5.2 (https://docs.mlrun.org/en/latest/change-log/index.html)
-# MLRun support: ['>=1.5.0', '<=1.5.2']
+# MLRun (client/server): 1.6.1/1.6.1 (https://docs.mlrun.org/en/latest/change-log/index.html)
+# MLRun support: ['>=1.5.0', '<=1.6.1']
 # Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]
 # System: Windows 10.0.22621 (Windows-10-10.0.22621-SP0)
 # Platform: AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)
 # ----------------------- 
 # MLRUN_DBPATH: 'http://localhost:8080' 
-# QGATE_DEFINITION: '../qgate-model/' 
+# QGATE_DEFINITION: '../qgate-model' 
 # QGATE_DATASET: '01-size-100' 
-# QGATE_OUTPUT: './output/' 
+# QGATE_FILTER_PROJECTS: 'agate-1' 
+# QGATE_OUTPUT: './output' 
 # QGATE_REDIS: 'redis://localhost:6379' 
+# QGATE_MYSQL: 'mysql+pymysql://testuser:testpwd@localhost:3306/test' 
+# QGATE_POSTGRES: 'postgresql+psycopg2://testuser:testpwd@localhost:5432/test' 
 # DIR: 'C:\Python\qgate-sln-mlrun' 
 # -----------------------
 # CPU: 12
-# RAM total/free: 15.2 GB/2.1 GB
-# Host: HCI-L3204/172.18.224.1
+# RAM total/free: 15.2 GB/1.0 GB
+# Host: HCI-L3204/172.20.48.1
