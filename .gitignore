@@ -14,10 +14,10 @@
 *venv*
 /qgate_sln_mlrun/__pycache__/*.pyc
 /output/
+/secrets/
 /.coverage
 /tests/__pycache__/*.pyc
 /tests_output/
 /tests_output/*
 project.yaml
 To-Do internal.txt
-qgate-sln-mlrun-private.env
