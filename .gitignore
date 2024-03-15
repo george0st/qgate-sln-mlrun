@@ -14,6 +14,7 @@
 *venv*
 /qgate_sln_mlrun/__pycache__/*.pyc
 /output/
+/secrets/
 /.coverage
 /tests/__pycache__/*.pyc
 /tests_output/
