@@ -20,3 +20,4 @@
 /tests_output/*
 project.yaml
 To-Do internal.txt
+qgate-sln-mlrun-private.env
