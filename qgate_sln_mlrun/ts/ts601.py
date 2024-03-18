@@ -90,7 +90,7 @@ class TS601(TSBase):
             # store the model
             model_data = dumps(clf)
             context = mlrun.get_or_create_ctx(name="output", with_env=False, project=project_name)
-            context.log_artifact()
+            #context.log_artifact(f"aa-{name}",body=model_data,local_path=f'aa-{name}.pkl')
             context.log_model(key=name,
                               body=model_data,
                               model_dir="/".join([self.setup.model_output, project_name]),
