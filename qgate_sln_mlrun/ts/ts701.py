@@ -78,10 +78,14 @@ class TS701(TSBase):
             X = frm[json_content["spec"]["source-columns"]]
 
             # get model
-            #context = mlrun.get_or_create_ctx("output", project=project_name)
+            context = mlrun.get_or_create_ctx("output", project=project_name)
             #models_path = context.artifact_subpath("models")
-            models_path=f"C:/Python/qgate-sln-mlrun/output/0/model-transaction/model-transaction.pkl"
-            #store://models/gate-alfa/output_model-transaction#0:latest
+#            models_path = context.artifact_subpath("model-transaction")
+            #models_path=f"C:/Python/qgate-sln-mlrun/output/0/model-transaction/model-transaction.pkl"
+#            models_path=f'store://{models_path}/{project_name}/model-transaction:latest'
+            for artifact in context.artifacts:
+                if artifact['kind']=='model' and artifact['metadata']['key']=='model-transaction':
+                    models_path=artifact['spec']['target_path']
             model_file, model_artifact, extra_data = get_model(models_path, suffix='.pkl')
             model = load(open(model_file, "rb"))
 
