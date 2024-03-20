@@ -7,7 +7,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, SQLTarget
+from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, SQLTarget, KafkaTarget
 import os
 import json
 import glob
@@ -188,7 +188,7 @@ class TS201(TSBase):
                 raise ValueError("Missing value for mysql connection, see 'QGATE_POSTGRES'.")
         elif target == "kafka":
             if self.setup.kafka:
-                pass
+                target_provider = KafkaTarget(name=target_name, bootstrap_servers="localhost", topic="topic_name")
             else:
                 raise ValueError("Missing value for kafka connection, see 'QGATE_KAFKA'.")
         else:
