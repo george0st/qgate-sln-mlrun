@@ -39,7 +39,7 @@ The setup of Postgres for **on-line source/target** (valid for target 'postgres'
 
 ## 8. Kafka
 The setup of Kafka for **on-line source** (valid for target 'kafka')
-  - `QGATE_KAFKA = TBD.`
+  - `QGATE_KAFKA = localhost:9092, testtopic`
   - detail description, see [Kafka](./kafka.md)
 
 ## Supported sources and targers in MLRun
