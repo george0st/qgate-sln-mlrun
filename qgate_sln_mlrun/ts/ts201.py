@@ -186,6 +186,11 @@ class TS201(TSBase):
                                             primary_key_column=primary_key)
             else:
                 raise ValueError("Missing value for mysql connection, see 'QGATE_POSTGRES'.")
+        elif target == "kafka":
+            if self.setup.kafka:
+                pass
+            else:
+                raise ValueError("Missing value for kafka connection, see 'QGATE_KAFKA'.")
         else:
             # TODO: Add support other targets for MLRun CE
             raise NotImplementedError()
