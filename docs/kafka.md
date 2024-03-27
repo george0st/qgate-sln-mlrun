@@ -18,6 +18,12 @@
    - `docker exec -it kafka1 /bin/bash`
    - get kafka version `kafka-topics --version`
 
+## 3. Use Kafka for tests
+
+ - Update `qgate-sln-mlrun.env`, change setting for `QGATE_KAFKA`
+   - format `QGATE_KAFKA = <url>, <topic name>`
+   - see `QGATE_KAFKA = localhost:9092, testtopic`
+
 
 ## Useful sources for kafka
 

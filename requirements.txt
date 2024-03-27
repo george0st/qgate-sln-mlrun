@@ -17,3 +17,7 @@ pymysql~=1.1
 
 # for Postgres
 psycopg2~=2.9
+
+# for kafka
+kafka-python~=2.0
+avro~=1.11
