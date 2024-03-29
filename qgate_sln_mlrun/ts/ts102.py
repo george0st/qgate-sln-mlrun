@@ -31,7 +31,7 @@ class TS102(TSBase):
         """
         self.testscenario_new()
         for project_name in self.projects:
-            self._delete_project(f"{project_name}/*:")
+            self._delete_project(f"{project_name}/*:", project_name)
 
         # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
@@ -40,7 +40,7 @@ class TS102(TSBase):
                 shutil.rmtree(file, True)
 
     @TSBase.handler_testcase
-    def _delete_project(self, name):
+    def _delete_project(self, label, name):
         """Delete project"""
         mlrun.get_run_db().delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
 
