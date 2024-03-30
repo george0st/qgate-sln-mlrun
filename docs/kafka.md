@@ -19,9 +19,18 @@
    - get kafka version `kafka-topics --version`
  - list kafka topics
    - `docker exec -t kafka1 /usr/bin/kafka-topics --bootstrap-server localhost:9092 --list`
- - get kafka content of topic 'aa'
+
+ - create (define) new kafka topic 'aa'
+   - `kafka-topics --bootstrap-server localhost:9092 --topic aa --create --partitions 3 --replication-factor 1`
+   - or `docker exec -t kafka1 /usr/bin/kafka-topics --bootstrap-server localhost:9092 --topic aa --create --partitions 3 --replication-factor 1`
+ - fire (produce) new kafka topic 'aa'
+   - `kafka-console-producer --bootstrap-server localhost:9092 --topic aa`
+   - or `docker exec -t kafka1 /usr/bin/kafka-console-producer --bootstrap-server localhost:9092 --topic aa`
+ - get kafka topics 'aa'
    - `kafka-console-consumer --bootstrap-server localhost:9092 --topic aa --from-beginning`
    - or `docker exec -t kafka1 /usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic aa --from-beginning`
+
+
 ## 3. Use Kafka for tests
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_KAFKA`
