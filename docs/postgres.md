@@ -53,4 +53,4 @@
  - Cryptography support
    - it required `pip install cryptography~=42.0`
  - NOTE
-   - these are versions valid for MLRun 1.6.1
+   - these are versions valid for MLRun 1.6.2
