@@ -88,7 +88,8 @@ see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - **MLRun** (in Desktop Docker)
    - MLRun 1.6.2, 1.6.1, 1.6.0
-   - MLRun 1.5.2, 1.5.1, 1.5.0, 1.4.1, 1.3.0
+   - MLRun 1.5.2, 1.5.1, 1.5.0
+   - MLRun 1.4.1, 1.3.0
  - **Iguazio** (k8s, on-prem, VM on VMware)
    - Iguazio 3.5.3 (with MLRun 1.4.1)
    - Iguazio 3.5.1 (with MLRun 1.3.0)
