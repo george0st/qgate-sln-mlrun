@@ -17,6 +17,19 @@
  - interactive access to the container
    - `docker exec -it kafka1 /bin/bash`
    - get kafka version `kafka-topics --version`
+ - list kafka topics
+   - `kafka-topics --bootstrap-server localhost:9092 --list`
+   - or `docker exec -t kafka1 /usr/bin/kafka-topics --bootstrap-server localhost:9092 --list`
+ - create (define) new kafka topic 'aa'
+   - `kafka-topics --bootstrap-server localhost:9092 --topic aa --create --partitions 3 --replication-factor 1`
+   - or `docker exec -t kafka1 /usr/bin/kafka-topics --bootstrap-server localhost:9092 --topic aa --create --partitions 3 --replication-factor 1`
+ - fire (produce) new kafka topic 'aa' (CTRL+C for finish new topic)
+   - `kafka-console-producer --bootstrap-server localhost:9092 --topic aa`
+   - or `docker exec -t kafka1 /usr/bin/kafka-console-producer --bootstrap-server localhost:9092 --topic aa`
+ - get (consume) kafka topics 'aa'
+   - `kafka-console-consumer --bootstrap-server localhost:9092 --topic aa --from-beginning`
+   - or `docker exec -t kafka1 /usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic aa --from-beginning`
+
 
 ## 3. Use Kafka for tests
 
@@ -24,6 +37,13 @@
    - format `QGATE_KAFKA = <url>, <topic name>`
    - see `QGATE_KAFKA = localhost:9092, testtopic`
 
+## 4. Install these python packages
+
+ - SQLAlchemy based on MLRun extras see `pip install mlrun[kafka]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/blob/development/dependencies.py)
+   - it required `pip install kafka-python~=2.0`
+   - it required `pip install avro~=1.11`
+ - NOTE
+   - these are versions valid for MLRun 1.6.2
 
 ## Useful sources for kafka
 
