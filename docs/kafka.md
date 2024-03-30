@@ -43,7 +43,7 @@
    - it required `pip install kafka-python~=2.0`
    - it required `pip install avro~=1.11`
  - NOTE
-   - it is valid for MLRun 1.6.2
+   - these are versions valid for MLRun 1.6.2
 
 ## Useful sources for kafka
 
