@@ -17,7 +17,11 @@
  - interactive access to the container
    - `docker exec -it kafka1 /bin/bash`
    - get kafka version `kafka-topics --version`
-
+ - list kafka topics
+   - `docker exec -t kafka1 /usr/bin/kafka-topics --bootstrap-server localhost:9092 --list`
+ - get kafka content of topic 'aa'
+   - `kafka-console-consumer --bootstrap-server localhost:9092 --topic aa --from-beginning`
+   - or `docker exec -t kafka1 /usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic aa --from-beginning`
 ## 3. Use Kafka for tests
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_KAFKA`
