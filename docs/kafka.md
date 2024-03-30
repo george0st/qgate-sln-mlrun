@@ -18,15 +18,15 @@
    - `docker exec -it kafka1 /bin/bash`
    - get kafka version `kafka-topics --version`
  - list kafka topics
-   - `docker exec -t kafka1 /usr/bin/kafka-topics --bootstrap-server localhost:9092 --list`
-
+   - `kafka-topics --bootstrap-server localhost:9092 --list`
+   - or `docker exec -t kafka1 /usr/bin/kafka-topics --bootstrap-server localhost:9092 --list`
  - create (define) new kafka topic 'aa'
    - `kafka-topics --bootstrap-server localhost:9092 --topic aa --create --partitions 3 --replication-factor 1`
    - or `docker exec -t kafka1 /usr/bin/kafka-topics --bootstrap-server localhost:9092 --topic aa --create --partitions 3 --replication-factor 1`
- - fire (produce) new kafka topic 'aa'
+ - fire (produce) new kafka topic 'aa' (CTRL+C for finish new topic)
    - `kafka-console-producer --bootstrap-server localhost:9092 --topic aa`
    - or `docker exec -t kafka1 /usr/bin/kafka-console-producer --bootstrap-server localhost:9092 --topic aa`
- - get kafka topics 'aa'
+ - get (consume) kafka topics 'aa'
    - `kafka-console-consumer --bootstrap-server localhost:9092 --topic aa --from-beginning`
    - or `docker exec -t kafka1 /usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic aa --from-beginning`
 
