@@ -31,6 +31,12 @@ NOTE: Solution, it is necessity to use WSL under OS Windows
    - see the detail https://github.com/mlrun/mlrun/issues/5238
    - NOTE: It is issue for all SqlTargets
 
+## Kafka
+
+1. KafkaTarget
+   - TBD.
+
+
 ## Others
 1. Not to use the engine `pandas`
    - this `pandas` engine is useful only for test purpose (see the first 
