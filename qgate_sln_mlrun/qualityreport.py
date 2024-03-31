@@ -56,6 +56,9 @@ class QualityReport:
                 ts = test_scenario_fn(self)
                 try:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
+                    # prepare before execution of test case
+                    ts.prepare()
+                    # execution of test case
                     ts.exec()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:
