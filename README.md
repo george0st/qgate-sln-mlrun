@@ -16,7 +16,7 @@ The tests use these key components, MLRun solution see **[GIT mlrun](https://git
 sample meta-data model see **[GIT qgate-model](https://github.com/george0st/qgate-model)** and this project.
 
 ## Test scenarios
-The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned):
+The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ planned):
  - **Project**
    - ✅ TS101: Create project(s)
    - ✅ TS102: Delete project(s)
@@ -26,7 +26,7 @@ The quality gate covers these test scenarios (✅ done, ❌ in-progress/planned)
    - ✅ TS301: Ingest data to feature set(s)
  - **Feature vector**
    - ✅ TS401: Create feature vector(s)
- - **Get data**
+ - **Get data from vector**
    - ✅ TS501: Get data from off-line feature vector(s)
    - ✅ TS502: Get data from on-line feature vector(s)
  - **Build model**
