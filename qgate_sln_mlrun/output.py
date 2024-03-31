@@ -218,10 +218,13 @@ class Output():
         """ Return information about the host in format (host_name/ip addr)"""
 
         host = ""
-        with suppress(Exception):
-            import socket
+        if self._setup.anonym_mode:
+            host = "Anonym/192.168.0.1"
+        else:
+            with suppress(Exception):
+                import socket
 
-            host_name = socket.gethostname()
-            ip = socket.gethostbyname(host_name)
-            host = f"{host_name}/{ip}"
+                host_name = socket.gethostname()
+                ip = socket.gethostbyname(host_name)
+                host = f"{host_name}/{ip}"
         return host
