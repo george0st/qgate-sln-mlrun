@@ -24,6 +24,10 @@ class TS301(TSBase):
     def long_desc(self):
         return "Ingest data to feature set(s) from data source"
 
+    def prepare(self):
+        """Prepare data for ingestion"""
+        pass
+
     def exec(self):
         self.ingest_data()
 

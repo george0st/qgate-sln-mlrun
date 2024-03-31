@@ -154,7 +154,12 @@ class TSBase:
         return self._name
 
     def exec(self):
+        """Execution of test case"""
         raise NotImplemented()
+
+    def prepare(self):
+        """Prepare test case before test case execution e.g. ingest data to the kafka, database, etc."""
+        pass
 
     # region TEST_SCENARIOS
     def testscenario_new(self):
