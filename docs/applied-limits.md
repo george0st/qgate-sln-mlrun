@@ -33,8 +33,9 @@ NOTE: Solution, it is necessity to use WSL under OS Windows
 
 ## Kafka
 
-1. KafkaTarget
-   - TBD.
+1. Issue with usage KafkaTarget
+   - see the detail https://github.com/mlrun/mlrun/issues/5347
+
 
 
 ## Others

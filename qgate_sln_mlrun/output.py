@@ -174,7 +174,9 @@ class Output():
         self._data["version"] = __version__
         self._data["model_version"] = self._get_model_version()
 
-        self._data["datetime"] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        # application anonymous mode setting
+        time_format='%Y-%m-%d %H%M%S%f' if self._setup.anonym_mode else '%Y-%m-%d %H:%M:%S'
+        self._data["datetime"] = datetime.datetime.now().strftime(time_format)
 
         self._data["memory_total"], self._data["memory_free"] = self._memory()
         self._data["host"] = self._host()
@@ -216,10 +218,13 @@ class Output():
         """ Return information about the host in format (host_name/ip addr)"""
 
         host = ""
-        with suppress(Exception):
-            import socket
+        if self._setup.anonym_mode:
+            host = "Anonym/192.168.0.1"
+        else:
+            with suppress(Exception):
+                import socket
 
-            host_name = socket.gethostname()
-            ip = socket.gethostbyname(host_name)
-            host = f"{host_name}/{ip}"
+                host_name = socket.gethostname()
+                ip = socket.gethostbyname(host_name)
+                host = f"{host_name}/{ip}"
         return host

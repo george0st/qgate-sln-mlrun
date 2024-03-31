@@ -88,4 +88,10 @@ class Setup:
         """Return the connection to Kafka"""
         return self._variables.get('QGATE_KAFKA', None)
 
+    @property
+    def anonym_mode(self) -> bool:
+        """Return the anonymous mode"""
+        return True if self._variables.get('QGATE_ANONYM_MODE', "Off").lower() == "on" else False
+
+
 
