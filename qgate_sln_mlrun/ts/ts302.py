@@ -1,5 +1,5 @@
 """
-  TS301: Ingest data to feature set(s) from DataFrame Source
+  TS302: Ingest data to feature set(s) from CSV Source
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -11,21 +11,22 @@ import glob
 import os
 
 
-class TS301(TSBase):
+class TS302(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
-        return "Ingest data to feature set(s) from DataFrame"
+        return "Ingest data to feature set(s) from CSV Source "
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set(s) from data source DataFrame"
+        return "Ingest data to feature set(s) from data source CSV Source"
 
     def prepare(self):
         """Prepare data for ingestion"""
+        # TODO: switch files to CSV
         pass
 
     def exec(self):
