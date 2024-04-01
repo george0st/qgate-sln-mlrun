@@ -61,8 +61,7 @@ class TS301(TSBase):
                                     compression="gzip",
                                     encoding="utf-8",
                                     chunksize=10000):
-            fstore.ingest(featureset,
-                          data_frm,
+            featureset.ingest(data_frm,
                           # overwrite=False,
                           return_df=False,
                           #infer_options=mlrun.data_types.data_types.InferOptions.Null)

@@ -31,7 +31,8 @@ class TS302(TSBase):
         pass
 
     def exec(self):
-        self.ingest_data()
+        #self.ingest_data()
+        pass
 
     def ingest_data(self):
         """Data ingest
