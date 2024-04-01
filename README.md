@@ -23,7 +23,9 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **Feature set**
    - ✅ TS201: Create feature set(s)
  - **Ingest data**
-   - ✅ TS301: Ingest data to feature set(s)
+   - ✅ TS301: Ingest data to feature set(s) from DataFrame Source
+   - ✔ TS302: Ingest data to feature set(s) from CSV Source 
+   - ❌ TS303: Ingest data to feature set(s) from Parquet Source
  - **Feature vector**
    - ✅ TS401: Create feature vector(s)
  - **Get data from vector**
@@ -87,7 +89,8 @@ see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 ## Tested with
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - **MLRun** (in Desktop Docker)
-   - MLRun 1.6.2, 1.6.1, 1.6.0
+   - MLRun 1.7.0 (plan 05/2024)
+   - MLRun 1.6.3 (plan 04/2024), 1.6.2, 1.6.1, 1.6.0
    - MLRun 1.5.2, 1.5.1, 1.5.0
    - MLRun 1.4.1, 1.3.0
  - **Iguazio** (k8s, on-prem, VM on VMware)

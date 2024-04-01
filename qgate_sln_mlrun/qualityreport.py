@@ -3,7 +3,7 @@ import json
 import os
 from qgate_sln_mlrun.setup import Setup
 from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts401, ts501, ts502, ts601, ts701
+from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts302, ts401, ts501, ts502, ts601, ts701
 from qgate_sln_mlrun.ts import tsbase
 import logging
 
@@ -13,7 +13,7 @@ class QualityReport:
     Quality report
     """
 
-    TEST_SCENARIOS = [ts101.TS101, ts201.TS201, ts301.TS301, ts401.TS401, ts501.TS501, ts502.TS502]
+    TEST_SCENARIOS = [ts101.TS101, ts201.TS201, ts301.TS301, ts302.TS302, ts401.TS401, ts501.TS501, ts502.TS502]
     TEST_EXPERIMENTS = [ts601.TS601, ts701.TS701]
     TEST_SCENARIO_DELETE = ts102.TS102
 
