@@ -1,8 +1,16 @@
 
 import mlrun
 import os
+import json
 
-class Setup:
+class Singleton (type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class Setup(metaclass=Singleton):
     """
     Setup for solution
     """
@@ -31,6 +39,12 @@ class Setup:
                 self._variables[key]=hard_variables[key]
 
         self._variables["DIR"]=os.getcwd()
+
+        # model definition setting
+        self._model_definition_setting={}
+        with open(os.path.join(self.model_definition, "01-model", "model.json"), "r") as json_file:
+            setting = json.load(json_file)
+        self._model_definition_setting=setting["spec"]
 
     def __str__(self):
         ret=""
@@ -92,6 +106,14 @@ class Setup:
     def anonym_mode(self) -> bool:
         """Return the anonymous mode"""
         return True if self._variables.get('QGATE_ANONYM_MODE', "Off").lower() == "on" else False
+
+    @property
+    def csv_separator(self):
+        return self._model_definition_setting["CSV_SEPARATOR"]
+
+    @property
+    def csv_decimal(self):
+        return self._model_definition_setting["CSV_DECIMAL"]
 
 
 
