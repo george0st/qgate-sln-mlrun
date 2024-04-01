@@ -6,6 +6,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import spark_to_value_type
+from mlrun.datastore.sources import CSVSource
 import pandas as pd
 import glob
 import os
@@ -53,6 +54,11 @@ class TS302(TSBase):
     def _ingest_data(self, testcase_name, project_name, featureset_name, file):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+
+
+        # TODO:
+        # HINT: in attribute 'chunksize'
+        #source = CSVSource()
 
         # ingest data with bundl/chunk
         for data_frm in pd.read_csv(file,
