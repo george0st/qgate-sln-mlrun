@@ -55,28 +55,31 @@ class TS302(TSBase):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
+        # TODO: test pure *.csv and *.csv.gz
+        # HINT: in attribute 'chunksize' in CSVSource
 
-        # TODO:
-        # HINT: in attribute 'chunksize'
-        #source = CSVSource()
-
-        # ingest data with bundl/chunk
-        for data_frm in pd.read_csv(file,
-                                    sep=";",
-                                    header="infer",
-                                    decimal=",",
-                                    compression="gzip",
-                                    encoding="utf-8",
-                                    chunksize=10000):
-            fstore.ingest(featureset,
-                          data_frm,
-                          # overwrite=False,
-                          return_df=False,
-                          #infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                          infer_options=mlrun.data_types.data_types.InferOptions.default())
-            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-            # NOTE: option default, change types
-            # NOTE: option Null, generate error with datetime in python 3.9
+        # for data_frm in pd.read_csv(file,
+        #                             sep=";",
+        #                             header="infer",
+        #                             decimal=",",
+        #                             compression="gzip",
+        #                             encoding="utf-8",
+        #                             chunksize=10000):
+        fstore.ingest(featureset,
+                      CSVSource(name="tst", path=file, attributes={
+                          "sep": ";",
+                          "header": "infer",
+                          "decimal": ",",
+                          "compression": "gzip",
+                          "encoding": "utf-8",
+                          "chunksize": "10000"}),
+                      # overwrite=False,
+                      return_df=False,
+                      #infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                      infer_options=mlrun.data_types.data_types.InferOptions.default())
+        # TODO: use InferOptions.Null with python 3.10 or focus on WSL
+        # NOTE: option default, change types
+        # NOTE: option Null, generate error with datetime in python 3.9
 
 
 
