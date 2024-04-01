@@ -18,11 +18,11 @@ class TS301(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Ingest data to feature set(s)"
+        return "Ingest data to feature set(s) from DataFrame"
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set(s) from data source"
+        return "Ingest data to feature set(s) from data source DataFrame"
 
     def prepare(self):
         """Prepare data for ingestion"""

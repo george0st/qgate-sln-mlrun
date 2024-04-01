@@ -23,7 +23,9 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **Feature set**
    - ✅ TS201: Create feature set(s)
  - **Ingest data**
-   - ✅ TS301: Ingest data to feature set(s)
+   - ✅ TS301: Ingest data to feature set(s) from DataFrame Source
+   - ✔ TS302: Ingest data to feature set(s) from CSV Source 
+   - ❌ TS303: Ingest data to feature set(s) from Parquet Source
  - **Feature vector**
    - ✅ TS401: Create feature vector(s)
  - **Get data from vector**
