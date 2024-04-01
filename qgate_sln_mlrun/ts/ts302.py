@@ -44,7 +44,8 @@ class TS302(TSBase):
                                          self.setup.model_definition,
                                          "02-data",
                                          self.setup.dataset_name,
-                                         f"*-{featureset_name}.csv.gz")
+#                                         f"*-{featureset_name}.csv.gz")
+                                         f"*-{featureset_name}.csv")
 
                 # check existing data set
                 for file in glob.glob(source_file):
@@ -70,9 +71,9 @@ class TS302(TSBase):
                           "sep": ";",
                           "header": "infer",
                           "decimal": ",",
-                          "compression": "gzip",
+#                          "compression": "gzip",
                           "encoding": "utf-8",
-                          "chunksize": "10000"}),
+                          "chunksize": 10000}),
                       # overwrite=False,
                       return_df=False,
                       #infer_options=mlrun.data_types.data_types.InferOptions.Null)
