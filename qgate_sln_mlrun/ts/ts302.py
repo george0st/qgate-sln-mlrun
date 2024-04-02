@@ -25,11 +25,6 @@ class TS302(TSBase):
     def long_desc(self):
         return "Ingest data to feature set(s) from CSV source"
 
-    def prepare(self):
-        """Prepare data for ingestion"""
-        # TODO: switch files to CSV
-        pass
-
     def exec(self):
         self.ingest_data()
 
