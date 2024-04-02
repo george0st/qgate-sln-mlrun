@@ -27,6 +27,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS302: Ingest data to feature set(s) from CSV source 
    - ✔  TS303: Ingest data to feature set(s) from Parquet source
    - ❌ TS304: Ingest data to feature set(s) from Kafka source
+   - ❌ TS305: Ingest data to feature set(s) from HTTP source
  - **Feature vector**
    - ✅ TS401: Create feature vector(s)
  - **Get data from vector**
@@ -41,7 +42,8 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ❌ TS702: Serving score from XGBoost
    - ❌ TS703: Serving score from DNN
    
-NOTE: Each test scenario contains addition specific test cases.
+NOTE: Each test scenario contains addition specific test cases (e.g. with different
+targets for feature sets, etc.).
 
 ## Test inputs/outputs
 The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ planned):
