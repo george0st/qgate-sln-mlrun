@@ -33,7 +33,7 @@ NOTE: Solution, it is necessity to use WSL2 under OS Windows
 
 ## KafkaTarget
 
-1. Issue with usage KafkaTarget
+1. Issue with usage KafkaTarget (__init__)
    - see the detail https://github.com/mlrun/mlrun/issues/5347
 
 ### CSVSource
