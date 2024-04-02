@@ -6,7 +6,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import spark_to_value_type
-from mlrun.datastore.sources import CSVSource
+from mlrun.datastore.sources import ParquetSource
 import pandas as pd
 import glob
 import os
@@ -52,7 +52,7 @@ class TS303(TSBase):
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         fstore.ingest(featureset,
-                      CSVSource(name="tst", path=file),
+                      ParquetSource(name="tst", path=file),
                       # overwrite=False,
                       return_df=False,
                       #infer_options=mlrun.data_types.data_types.InferOptions.Null)
