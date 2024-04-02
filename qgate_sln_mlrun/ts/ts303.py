@@ -1,5 +1,5 @@
 """
-  TS302: Ingest data to feature set(s) from CSV Source
+  TS303: Ingest data to feature set(s) from Parquet Source
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -12,21 +12,22 @@ import glob
 import os
 
 
-class TS302(TSBase):
+class TS303(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
-        return "Ingest data to feature set(s) from CSV source "
+        return "Ingest data to feature set(s) from Parquet source "
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set(s) from CSV source"
+        return "Ingest data to feature set(s) from Parquet source"
 
     def exec(self):
-        self.ingest_data()
+        #self.ingest_data()
+        pass
 
     def ingest_data(self):
         """Data ingest
