@@ -19,11 +19,11 @@ class TS302(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Ingest data to feature set(s) from CSV Source "
+        return "Ingest data to feature set(s) from CSV source "
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set(s) from data source CSV Source"
+        return "Ingest data to feature set(s) from CSV source"
 
     def prepare(self):
         """Prepare data for ingestion"""
@@ -31,8 +31,7 @@ class TS302(TSBase):
         pass
 
     def exec(self):
-        #self.ingest_data()
-        pass
+        self.ingest_data()
 
     def ingest_data(self):
         """Data ingest
@@ -45,8 +44,7 @@ class TS302(TSBase):
                                          self.setup.model_definition,
                                          "02-data",
                                          self.setup.dataset_name,
-#                                         f"*-{featureset_name}.csv.gz")
-                                         f"*-{featureset_name}.csv")
+                                         f"*-{featureset_name}.csv.gz")
 
                 # check existing data set
                 for file in glob.glob(source_file):
@@ -57,24 +55,8 @@ class TS302(TSBase):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
-        # TODO: test pure *.csv and *.csv.gz
-        # HINT: in attribute 'chunksize' in CSVSource
-
-        # for data_frm in pd.read_csv(file,
-        #                             sep=";",
-        #                             header="infer",
-        #                             decimal=",",
-        #                             compression="gzip",
-        #                             encoding="utf-8",
-        #                             chunksize=10000):
         fstore.ingest(featureset,
-                      CSVSource(name="tst", path=file, attributes={
-                          "sep": ";",
-                          "header": "infer",
-                          "decimal": ",",
-#                          "compression": "gzip",
-                          "encoding": "utf-8",
-                          "chunksize": 10000}),
+                      CSVSource(name="tst", path=file),
                       # overwrite=False,
                       return_df=False,
                       #infer_options=mlrun.data_types.data_types.InferOptions.Null)
