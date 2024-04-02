@@ -25,7 +25,8 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **Ingest data**
    - ✅ TS301: Ingest data to feature set(s) from DataFrame source
    - ✅ TS302: Ingest data to feature set(s) from CSV source 
-   - ❌ TS303: Ingest data to feature set(s) from Parquet source
+   - ✔  TS303: Ingest data to feature set(s) from Parquet source
+   - ❌ TS304: Ingest data to feature set(s) from Kafka source
  - **Feature vector**
    - ✅ TS401: Create feature vector(s)
  - **Get data from vector**
@@ -50,7 +51,7 @@ The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ plan
    - ✅ File system, ❌ S3, ❌ BlobStorage
  - Inputs (sources)
    - ✅ Pandas/DataFrame, ✅ CSVSource
-   - ❌ ParquetSource, ❌ KafkaSource
+   - ✔ ParquetSource, ❌ KafkaSource
    - ❌ File system, ❌ S3, ❌ BlobStorage with
 
 
