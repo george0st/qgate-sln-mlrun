@@ -189,7 +189,7 @@ class TS201(TSBase):
         elif target == "kafka":
             if self.setup.kafka:
                 params=self.setup.kafka.split(',')
-                target_provider = KafkaTarget(name=target_name, bootstrap_servers=params[0].strip(), topic=params[1].strip())
+                target_provider = KafkaTarget(name=target_name, bootstrap_servers=params[0].strip(), path=params[1].strip())
             else:
                 raise ValueError("Missing value for kafka connection, see 'QGATE_KAFKA'.")
         else:
