@@ -31,11 +31,6 @@ NOTE: Solution, it is necessity to use WSL2 under OS Windows
    - see the detail https://github.com/mlrun/mlrun/issues/5238
    - NOTE: It is issue for all SqlTargets
 
-## KafkaTarget
-
-1. Issue with usage KafkaTarget (__init__)
-   - see the detail https://github.com/mlrun/mlrun/issues/5347
-
 ### CSVSource
 
 1. CSVSource supports only default CSV setting, it means sep=',' and decimal='.'
