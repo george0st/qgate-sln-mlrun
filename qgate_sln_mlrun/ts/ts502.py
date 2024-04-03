@@ -36,6 +36,8 @@ class TS502(TSBase):
             if self.test_setting['vector'].get('online'):
                 vectors = self.test_setting['vector']['online']
 
+
+        # TODO: add bypas for kafka source
         if vectors:
             for project_name in self.projects:
                 for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
