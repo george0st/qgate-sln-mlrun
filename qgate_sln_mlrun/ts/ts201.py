@@ -110,6 +110,8 @@ class TS201(TSBase):
                 # add project targets
                 for sub_target in project_target:
                     sub_target = sub_target.lower().strip()
+                    if len(sub_target)==0:  # support bypass: switch empty targets
+                        continue
                     target_provider=self._create_target(sub_target, f"target_{count}", project_name, json_spec)
                     if target_provider:
                         target_providers.append(target_provider)
