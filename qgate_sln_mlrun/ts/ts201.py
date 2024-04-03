@@ -118,6 +118,8 @@ class TS201(TSBase):
                     count+=1
             else:
                 # add target
+                if len(target) == 0:  # support bypass: switch empty targets
+                    continue
                 target_provider = self._create_target(target, f"target_{count}", project_name, json_spec)
                 if target_provider:
                     target_providers.append(target_provider)
