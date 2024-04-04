@@ -1,0 +1,17 @@
+{
+  "name": "agate-kafka",
+  "description": "The A-GATE with kafka",
+  "labels": {
+    "temp": "True"
+  },
+  "kind": "project",
+  "parent": "agate",
+  "spec": {
+    "targets": {
+      "prj-offline": [""],
+      "prj-online": ["kafka"]
+    },
+    "feature-vectors": [],
+    "ml-models": []
+  }
+}
