@@ -16,11 +16,15 @@ NOTE: Solution, it is necessity to use WSL2 under OS Windows
    - in case of e.g. more on-line targets, it is not possible to choose 
    relevant target for FeatureVector  
 
-## SQLTarget (preview version, very limited with focus on MySQL only)
+## SQLTarget
+
+NOTE: It is in preview version, very limited with focus on MySQL only, 
+see detail below
 
 1. SQLTarget limits
    - missing support MORE primary keys (only ONE primary key is supported right now)
    - schema for mapping FeatureStore to Table must be defined manually (not automatically)
+   - see detail https://github.com/mlrun/mlrun/issues/5051
 
 2. SqlTarget is limited to MySql, if you need to create table (SqlTarget is in
   Technical Preview)
@@ -31,10 +35,20 @@ NOTE: Solution, it is necessity to use WSL2 under OS Windows
    - see the detail https://github.com/mlrun/mlrun/issues/5238
    - NOTE: It is issue for all SqlTargets
 
-### CSVSource
+## KafkaTarget
+
+1. It is impossible to use feature vector operations
+   - but it is possible to do ingest to the KafkaTarget or consume data via 
+   KafkaSource (with triggers)
+   - it means, test scenarios TS401, 501, 502, 601 and 701 for KafkaTarget
+   was skipped (see setting in  qgate-model/01-project/*)
+   
+
+## CSVSource
 
 1. CSVSource supports only default CSV setting, it means sep=',' and decimal='.'
-   - in case of different setting, it is better to use Pandas/DataFrame
+   - in case of different setting, it is better to use Pandas/DataFrame source
+     (it has bigger variability)
 
 ## Others
 1. Not to use the engine `pandas`
