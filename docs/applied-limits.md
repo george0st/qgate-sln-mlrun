@@ -37,11 +37,11 @@ see detail below
 
 ## KafkaTarget
 
-1. It is impossible to use feature vector operations
-   - but it is possible to do ingest to the KafkaTarget or consume data via 
+1. It is not possible to use feature vector operations in KafkaTarget
+   - but it is possible to do ingest to the KafkaTarget or consume data from 
    KafkaSource (with triggers)
-   - it means, test scenarios TS401, 501, 502, 601 and 701 for KafkaTarget
-   was skipped (see setting in  qgate-model/01-project/*)
+   - it means, test scenarios TS401, TS501, TS502, TS601 and TS701 for
+   KafkaTarget was skipped (see setting in ./qgate-model/01-project/*)
    
 
 ## CSVSource
