@@ -45,7 +45,8 @@ see detail below
 ## CSVSource
 
 1. CSVSource supports only default CSV setting, it means sep=',' and decimal='.'
-   - in case of different setting, it is better to use Pandas/DataFrame
+   - in case of different setting, it is better to use Pandas/DataFrame source
+     (it has bigger variability)
 
 ## Others
 1. Not to use the engine `pandas`
