@@ -49,11 +49,11 @@ repository='https://pypi.org/project/qgate-sln-mlrun/'
 #"Source" = "https://github.com/pypa/sampleproject/"
 
 [tool.setuptools]
-packages = ["qgate_sln_mlrun", "qgate_sln_mlrun.ts", "qgate_sln_mlrun.templates"]
+packages = ["qgate_sln_mlrun", "qgate_sln_mlrun.ts", "qgate_sln_mlrun.templates", "qgate_sln_mlrun.model_changes"]
 include-package-data = true     # true - add other data such as *.txt, *.html, etc. under all packages
 
 [tool.setuptools.package-data]
-"*" = ["*.txt", "*.html"]
+"*" = ["*.txt", "*.html", "*.json"]
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
