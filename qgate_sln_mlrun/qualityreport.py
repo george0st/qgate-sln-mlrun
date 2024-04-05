@@ -6,6 +6,7 @@ from qgate_sln_mlrun.output import Output
 from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts302, ts303, ts401, ts501, ts502, ts601, ts701
 from qgate_sln_mlrun.ts import tsbase
 import logging
+import importlib.resources
 
 
 class QualityReport:
@@ -72,13 +73,13 @@ class QualityReport:
         self._output.close()
 
     def _get_model_changes(self, resource):
-        import importlib.resources
-
-        #DEFAULT_TEMPLATE_HTML = '#qgate_sln_mlrun.model_changes#qgt-mlrun.html'
         package = "qgate_sln_mlrun.model_changes"
 
-        with importlib.resources.open_text(package, resource) as input_file:
-            return json.load(input_file.read())
+        try:
+            with importlib.resources.open_text(package, resource) as input_file:
+                return json.loads(input_file.read())
+        except Exception as ex:
+            pass
         return None
 
     def _define_projects(self, filter_projects: list=None):
