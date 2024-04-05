@@ -71,16 +71,15 @@ class QualityReport:
         self._output.render(self.projects, self.project_descs)
         self._output.close()
 
-    def _get_model_changes(self, file_name):
+    def _get_model_changes(self, resource):
         import importlib.resources
 
         #DEFAULT_TEMPLATE_HTML = '#qgate_sln_mlrun.model_changes#qgt-mlrun.html'
-        package = qgate_sln_mlrun.model_changes
-        resource = file_name
+        package = "qgate_sln_mlrun.model_changes"
 
         with importlib.resources.open_text(package, resource) as input_file:
-            template_content = input_file.read()
-        template = resource
+            return input_file.read()
+        return None
 
     def _define_projects(self, filter_projects: list=None):
 
