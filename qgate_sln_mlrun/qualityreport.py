@@ -73,6 +73,10 @@ class QualityReport:
         self._output.close()
 
     def _get_model_changes(self, resource):
+        """
+        Replacement of qgate_model content. It is useful for changes of default fehavioral
+        (e.g. for different KafkaTarget handling, because KafkaTarget cannot work with FeatureVector, etc.).
+        """
         package = "qgate_sln_mlrun.model_changes"
 
         try:
