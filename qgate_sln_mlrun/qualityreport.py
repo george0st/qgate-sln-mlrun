@@ -78,23 +78,24 @@ class QualityReport:
         package = "qgate_sln_mlrun.model_changes"
 
         with importlib.resources.open_text(package, resource) as input_file:
-            return input_file.read()
+            return json.load(input_file.read())
         return None
 
     def _define_projects(self, filter_projects: list=None):
 
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "**", "*.json")
         for file in glob.glob(dir, recursive=True):
-            with (open(file, "r") as json_file):
-                json_content = json.load(json_file)
-                name, desc, lbls, kind, parent = tsbase.TSBase.get_json_header_full(json_content)
+            json_content=self._get_model_changes(os.path.basename(file))
+            if json_content is None:
+                with (open(file, "r") as json_file):
+                    json_content = json.load(json_file)
 
-                # add project include project inheritance
-                self._projects.append(name)
-                self._project_descs[name] = [desc, lbls, kind, parent]
-                self._project_specs[name] = json_content['spec']
-                name=os.path.basename()
-                self._add_inheritance(name, parent)
+            name, desc, lbls, kind, parent = tsbase.TSBase.get_json_header_full(json_content)
+            # add project include project inheritance
+            self._projects.append(name)
+            self._project_descs[name] = [desc, lbls, kind, parent]
+            self._project_specs[name] = json_content['spec']
+            self._add_inheritance(name, parent)
 
         if filter_projects is None:
             if self.setup.filter_projects:
