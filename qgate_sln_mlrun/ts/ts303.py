@@ -25,6 +25,11 @@ class TS303(TSBase):
     def long_desc(self):
         return "Ingest data to feature set(s) from Parquet source"
 
+    def prepare(self):
+        # convert CSV to parquet
+        # TODO: Add conversion
+        pass
+
     def exec(self):
         #self.ingest_data()
         pass

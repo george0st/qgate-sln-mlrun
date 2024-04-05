@@ -53,9 +53,9 @@ The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ plan
    - ✅ ParquetTarget, ✅ CSVTarget
    - ✅ File system, ❌ S3, ❌ BlobStorage
  - Inputs (sources)
-   - ✅ Pandas/DataFrame, ✅ CSVSource
-   - ✔ ParquetSource, ❌ KafkaSource
-   - ✅ File system, ❌ S3, ❌ BlobStorage with
+   - ✅ Pandas/DataFrame, ❌ SQLSource/MySQL, ❌ SQLSource/Postgres, ❌ KafkaSource
+   - ✔ ParquetSource, ✅ CSVSource
+   - ✅ File system, ❌ S3, ❌ BlobStorage
 
 
 The supported [sources/targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html).
