@@ -19,5 +19,5 @@ In case of load file from '../qgate_model':
 
 It covers content replacement for these paths:
   - **'./qgate-model/01-model/01-project/*'**
-  - other paths, can be later added
+  - other paths, can be added later (based on request)
 
