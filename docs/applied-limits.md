@@ -41,7 +41,9 @@ see detail below
    - but it is possible to do ingest to the KafkaTarget or consume data from 
    KafkaSource (with triggers)
    - it means, test scenarios TS401, TS501, TS502, TS601 and TS701 for
-   KafkaTarget was skipped (see setting in ./qgate-model/01-project/*)
+   KafkaTarget was switch-off
+   - the scenario switch-off was realised based on change of in '*-agate-kafka.json', 
+   see the path './qgate-sln-mlrun/model_changes/*'
    
 
 ## CSVSource
