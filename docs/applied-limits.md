@@ -33,7 +33,6 @@ see detail below
 
 3. SqlTarget issue with save/load content mapping for SqlTarget
    - see the detail https://github.com/mlrun/mlrun/issues/5238
-   - NOTE: It is issue for all SqlTargets
 
 ## KafkaTarget
 
