@@ -20,8 +20,11 @@
 
 3. Test Redis in container
    - interactive access to the container
-   - login to mysql under the user 'root'
-   - show list of users
+     - `docker exec -it mlrun-redis redis-cli`
+   - set key 'aa' to the value '100'
+     - `set aa 100`
+   - get key 'aa'
+     - `get aa`
    - show list of databases
    - switch to use database `test`
    - show list of tables
