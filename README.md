@@ -53,7 +53,7 @@ The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ plan
    - ✅ ParquetTarget, ✅ CSVTarget
    - ✅ File system, ❌ S3, ❌ BlobStorage
  - Inputs (sources)
-   - ✅ Pandas/DataFrame, ❌ KafkaSource
+   - ✅ Pandas/DataFrame, ❌ SQLSource/MySQL, ❌ SQLSource/Postgres, ❌ KafkaSource
    - ✔ ParquetSource, ✅ CSVSource
    - ✅ File system, ❌ S3, ❌ BlobStorage
 

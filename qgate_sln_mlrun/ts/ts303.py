@@ -27,6 +27,7 @@ class TS303(TSBase):
 
     def prepare(self):
         # convert CSV to parquet
+        # TODO: Add conversion
         pass
 
     def exec(self):
