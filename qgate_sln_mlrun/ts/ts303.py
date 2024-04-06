@@ -41,7 +41,7 @@ class TS303(TSBase):
 
         # write parquet
         file_name = os.path.basename(os.path.basename(csv_file))
-        parquet_file=os.path.join(self._temp, os.path.splitext(file_name)[0])
+        parquet_file=os.path.join(self._temp, f"{file_name.split('.')[0]}.parquet")
         pq.write_table(arrow_table, parquet_file)
         return parquet_file
 
