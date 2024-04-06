@@ -16,6 +16,7 @@ class TS303(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
+        self._temp=os.path.join(self.setup.model_output,"temp")
 
     @property
     def desc(self) -> str:
@@ -25,32 +26,13 @@ class TS303(TSBase):
     def long_desc(self):
         return "Ingest data to feature set(s) from Parquet source"
 
-    def prepare(self):
-        # convert CSV to parquet
-        # TODO: Add conversion
-        self._temp=os.path.join(self.setup.model_output,"temp")
-        pass
-
-        # import pandas as pd
-        # import pyarrow as pa
-        # import pyarrow.parquet as pq
-        #
-        # csv_file_path = "./path/to/your/data.csv"
-        # df = pd.read_csv(csv_file_path)
-        #
-        # table = pa.Table.from_pandas(df)
-        #
-        # parquet_file_path = "./path/to/your/data.parquet"
-        # pq.write_table(table, parquet_file_path)
-
     def _cvs_to_parquest(self, csv_file) -> str:
         import pyarrow.parquet as pq
         import pyarrow.csv as pacsv
 
         # csv setting
-        # TODO: CSV setting based on model ...
-        parse_options = pacsv.ParseOptions(delimiter="\t", quote_char="^")
-        pacsv.ConvertOptions(decimal_point='.')
+        parse_options = pacsv.ParseOptions(delimiter=self.setup.csv_separator)
+        pacsv.ConvertOptions(decimal_point=self.setup.csv_decimal)
 
         # read csv
         arrow_table = pacsv.read_csv(csv_file, parse_options=parse_options)
@@ -58,7 +40,6 @@ class TS303(TSBase):
         # write parquet
         parquet_file=os.path.join(self._temp, os.path.basename(csv_file))
         pq.write_table(arrow_table, parquet_file)
-
         return parquet_file
 
     def exec(self):
@@ -88,10 +69,11 @@ class TS303(TSBase):
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # create parquest file from csv
+        parquet_file=self._cvs_to_parquest(file)
 
 
         fstore.ingest(featureset,
-                      ParquetSource(name="tst", path=file),
+                      ParquetSource(name="tst", path=parquet_file),
                       # overwrite=False,
                       return_df=False,
                       #infer_options=mlrun.data_types.data_types.InferOptions.Null)
