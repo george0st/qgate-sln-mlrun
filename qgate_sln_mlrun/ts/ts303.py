@@ -30,6 +30,28 @@ class TS303(TSBase):
         # TODO: Add conversion
         pass
 
+        # import pandas as pd
+        # import pyarrow as pa
+        # import pyarrow.parquet as pq
+        #
+        # csv_file_path = "./path/to/your/data.csv"
+        # df = pd.read_csv(csv_file_path)
+        #
+        # table = pa.Table.from_pandas(df)
+        #
+        # parquet_file_path = "./path/to/your/data.parquet"
+        # pq.write_table(table, parquet_file_path)
+
+        # Pyarrow
+        import pyarrow.parquet as pq
+        import pyarrow.csv as pacsv
+
+        # read
+        parse_options = pacsv.ParseOptions(delimiter="\t", quote_char="^")
+        arrow_table = pacsv.read_csv("csv_file", parse_options=parse_options)
+        # Convert to Parquet
+        pq.write_table(arrow_table, "parquet_file")
+
     def exec(self):
         #self.ingest_data()
         pass
