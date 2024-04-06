@@ -28,6 +28,7 @@ class TS303(TSBase):
     def prepare(self):
         # convert CSV to parquet
         # TODO: Add conversion
+        self._temp=os.path.join(self.setup.model_output,"temp")
         pass
 
         # import pandas as pd
@@ -42,15 +43,23 @@ class TS303(TSBase):
         # parquet_file_path = "./path/to/your/data.parquet"
         # pq.write_table(table, parquet_file_path)
 
-        # Pyarrow
+    def _cvs_to_parquest(self, csv_file) -> str:
         import pyarrow.parquet as pq
         import pyarrow.csv as pacsv
 
-        # read
+        # csv setting
+        # TODO: CSV setting based on model ...
         parse_options = pacsv.ParseOptions(delimiter="\t", quote_char="^")
-        arrow_table = pacsv.read_csv("csv_file", parse_options=parse_options)
-        # Convert to Parquet
-        pq.write_table(arrow_table, "parquet_file")
+        pacsv.ConvertOptions(decimal_point='.')
+
+        # read csv
+        arrow_table = pacsv.read_csv(csv_file, parse_options=parse_options)
+
+        # write parquet
+        parquet_file=os.path.join(self._temp, os.path.basename(csv_file))
+        pq.write_table(arrow_table, parquet_file)
+
+        return parquet_file
 
     def exec(self):
         #self.ingest_data()
@@ -77,6 +86,9 @@ class TS303(TSBase):
     def _ingest_data(self, testcase_name, project_name, featureset_name, file):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+
+        # create parquest file from csv
+
 
         fstore.ingest(featureset,
                       ParquetSource(name="tst", path=file),
