@@ -17,6 +17,8 @@ class TS303(TSBase):
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
         self._temp=os.path.join(self.setup.model_output,"temp")
+        if not os.path.exists(self._temp):
+            os.makedirs(self._temp)
 
     @property
     def desc(self) -> str:
@@ -32,19 +34,19 @@ class TS303(TSBase):
 
         # csv setting
         parse_options = pacsv.ParseOptions(delimiter=self.setup.csv_separator)
-        pacsv.ConvertOptions(decimal_point=self.setup.csv_decimal)
+        convert_options = pacsv.ConvertOptions(decimal_point=self.setup.csv_decimal)
 
         # read csv
-        arrow_table = pacsv.read_csv(csv_file, parse_options=parse_options)
+        arrow_table = pacsv.read_csv(csv_file, parse_options=parse_options, convert_options=convert_options)
 
         # write parquet
-        parquet_file=os.path.join(self._temp, os.path.basename(csv_file))
+        file_name = os.path.basename(os.path.basename(csv_file))
+        parquet_file=os.path.join(self._temp, os.path.splitext(file_name)[0])
         pq.write_table(arrow_table, parquet_file)
         return parquet_file
 
     def exec(self):
-        #self.ingest_data()
-        pass
+        self.ingest_data()
 
     def ingest_data(self):
         """Data ingest
@@ -70,7 +72,6 @@ class TS303(TSBase):
 
         # create parquest file from csv
         parquet_file=self._cvs_to_parquest(file)
-
 
         fstore.ingest(featureset,
                       ParquetSource(name="tst", path=parquet_file),
