@@ -41,6 +41,7 @@ class TS102(TSBase):
         for file in glob.glob(dir):
             if os.path.isdir(file):
                 shutil.rmtree(file, True)
+            # remove old files (d-1 or olders) from templates "qgt-mlrun-*"
             elif not os.path.basename(file).startswith(not_remove):
                 os.remove(file)
 
@@ -49,11 +50,11 @@ class TS102(TSBase):
     def _delete_project(self, label, name):
         """Delete project (in MLRun and in file system)"""
 
-        # if full delete
+        # if full delete, delete project in MLRun also
         if self.setup.get_scenario_setting("TS102_DELETE") == ProjectDelete.FULL_DELETE:
             mlrun.get_run_db().delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
 
-        # delete project in FS (valid for partly delete)
+        # delete directory with the same name as project in FS (valid for partly delete)
         project_dir = os.path.join(self.setup.model_output, name)
         if os.path.exists(project_dir):
             shutil.rmtree(project_dir, True)
