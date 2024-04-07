@@ -3,7 +3,7 @@ import json
 import os
 from qgate_sln_mlrun.setup import Setup, ProjectDelete
 from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts302, ts303, ts401, ts501, ts502, ts601, ts701
+from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts302, ts303, ts401, ts501, ts502, ts701, ts801
 from qgate_sln_mlrun.ts import tsbase
 import logging
 import importlib.resources
@@ -19,7 +19,7 @@ class QualityReport:
                       ts301.TS301, ts302.TS302, ts303.TS303,
                       ts401.TS401,
                       ts501.TS501, ts502.TS502]
-    TEST_EXPERIMENTS = [ts601.TS601, ts701.TS701]
+    TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
     TEST_SCENARIO_DELETE = ts102.TS102
 
     def __init__(self, setup: Setup, output: Output):
