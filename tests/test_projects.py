@@ -1,4 +1,4 @@
-from qgate_sln_mlrun.qualityreport import QualityReport
+from qgate_sln_mlrun.qualityreport import QualityReport, ProjectDelete
 from qgate_sln_mlrun import output, setup
 import unittest
 import os
@@ -26,7 +26,7 @@ class TestProjects(unittest.TestCase):
         out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
                                   './qgate_sln_mlrun/templates/qgt-mlrun.html'])
         report = QualityReport(stp, out)
-        report.execute(True, True)
+        report.execute(ProjectDelete.FULL_DELETE, True)
 
     def test_template_embeded(self):
         # test based on embeddit templates
@@ -35,4 +35,4 @@ class TestProjects(unittest.TestCase):
                           {"QGATE_OUTPUT": "./tests_output/"})
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
-        report.execute(True, True)
+        report.execute(ProjectDelete.FULL_DELETE, True)
