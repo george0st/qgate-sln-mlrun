@@ -14,7 +14,7 @@ class ProjectDelete(Enum):
     NO_DELETE = 0
     FULL_DELETE = 1
     PART_DELETE = 2
-    
+
 class QualityReport:
     """
     Quality report
