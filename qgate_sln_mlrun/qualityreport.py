@@ -1,19 +1,13 @@
 import glob
 import json
 import os
-from qgate_sln_mlrun.setup import Setup
+from qgate_sln_mlrun.setup import Setup, ProjectDelete
 from qgate_sln_mlrun.output import Output
 from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts302, ts303, ts401, ts501, ts502, ts601, ts701
 from qgate_sln_mlrun.ts import tsbase
 import logging
 import importlib.resources
-from enum import Enum
 
-
-class ProjectDelete(Enum):
-    NO_DELETE = 0
-    FULL_DELETE = 1
-    PART_DELETE = 2
 
 class QualityReport:
     """

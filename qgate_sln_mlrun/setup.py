@@ -2,6 +2,13 @@
 import mlrun
 import os
 import json
+from enum import Enum
+
+
+class ProjectDelete(Enum):
+    NO_DELETE = 0
+    FULL_DELETE = 1
+    PART_DELETE = 2
 
 class Singleton (type):
     _instances = {}
