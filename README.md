@@ -34,14 +34,17 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **Get data from vector**
    - ✅ TS501: Get data from off-line feature vector(s)
    - ✅ TS502: Get data from on-line feature vector(s)
+ - **Pipelines**
+   - ❌ TS601: Simple cleanup pipeline for DataFrame source
+   - ❌ TS602: Complex cleanup pipeline for DataFrame source
  - **Build model**
-   - ✅ TS601: Build CART model
-   - ❌ TS602: Build XGBoost model
-   - ❌ TS603: Build DNN model
+   - ✅ TS701: Build CART model
+   - ❌ TS702: Build XGBoost model
+   - ❌ TS703: Build DNN model
  - **Serve model**
-   - ✅ TS701: Serving score from CART
-   - ❌ TS702: Serving score from XGBoost
-   - ❌ TS703: Serving score from DNN
+   - ✅ TS801: Serving score from CART
+   - ❌ TS802: Serving score from XGBoost
+   - ❌ TS803: Serving score from DNN
    
 NOTE: Each test scenario contains addition specific test cases (e.g. with different
 targets for feature sets, etc.).
