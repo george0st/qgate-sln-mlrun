@@ -1,5 +1,6 @@
-from qgate_sln_mlrun.qualityreport import QualityReport, ProjectDelete
+from qgate_sln_mlrun.qualityreport import QualityReport
 from qgate_sln_mlrun import output, setup
+from qgate_sln_mlrun.setup import ProjectDelete
 import unittest
 import os
 
