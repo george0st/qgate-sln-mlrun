@@ -65,8 +65,10 @@ class QualityReport:
         logger = logging.getLogger("mlrun")
         for test_scenario_fn in test_scenario_functions:
             if test_scenario_fn:
+
+                # create instance
                 if test_scenario_fn is type(ts102.TS102):
-                    ts = test_scenario_fn(self,"dd")
+                    ts = test_scenario_fn(self, {"delete_partly": delete_scenario==delete_scenario.PART_DELETE})
                 else:
                     ts = test_scenario_fn(self)
                 try:

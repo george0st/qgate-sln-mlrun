@@ -13,7 +13,7 @@ import os
 
 class TS301(TSBase):
 
-    def __init__(self, solution, setting: dict[str,str]=None):
+    def __init__(self, solution, setting: dict[str, object]=None):
         super().__init__(solution, self.__class__.__name__)
 
     @property
