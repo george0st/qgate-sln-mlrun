@@ -56,7 +56,7 @@ class Setup(metaclass=Singleton):
     def __str__(self):
         ret=""
         for key in self._variables.keys():
-            ret+=key+ ": "+ "'" + self._variables[key] + "'\n"
+            ret+=key+ ": "+ "'" + str(self._variables[key]) + "'\n"
         return ret[:-1]
 
     @property

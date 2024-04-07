@@ -16,9 +16,7 @@ class TS303(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
-        self._temp=os.path.join(self.setup.model_output,"temp")
-        if not os.path.exists(self._temp):
-            os.makedirs(self._temp)
+
 
     @property
     def desc(self) -> str:
@@ -44,6 +42,11 @@ class TS303(TSBase):
         parquet_file=os.path.join(self._temp, f"{file_name.split('.')[0]}.parquet")
         pq.write_table(arrow_table, parquet_file)
         return parquet_file
+
+    def prepare(self):
+        self._temp=os.path.join(self.setup.model_output,"temp")
+        if not os.path.exists(self._temp):
+            os.makedirs(self._temp)
 
     def exec(self):
         self.ingest_data()
