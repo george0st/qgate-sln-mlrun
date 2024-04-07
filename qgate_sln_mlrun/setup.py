@@ -115,5 +115,15 @@ class Setup(metaclass=Singleton):
     def csv_decimal(self):
         return self._model_definition_setting["CSV_DECIMAL"]
 
+    def get_scenario_setting(self, name):
+        return self._variables.get(name, None)
+
+    def set_scenario_setting(self, name, val):
+        self._variables[name] = val
+
+    @property
+    def scenario(self):
+        """Return the connection to Kafka"""
+        return self._variables.get('QGATE_KAFKA', None)
 
 

@@ -53,6 +53,7 @@ class QualityReport:
         # add delete
         if delete_scenario != ProjectDelete.NO_DELETE:
             test_scenario_functions.append(QualityReport.TEST_SCENARIO_DELETE)
+            self.setup.set_scenario_setting("TS102_DELETE_FULL", "1" if delete_scenario == ProjectDelete.DELETE else "0")
 
         return test_scenario_functions
 
@@ -66,12 +67,8 @@ class QualityReport:
         logger = logging.getLogger("mlrun")
         for test_scenario_fn in test_scenario_functions:
             if test_scenario_fn:
-
                 # create instance
-                if test_scenario_fn is type(qgate_sln_mlrun.ts.ts102.TS102):
-                    ts = test_scenario_fn(self, {"delete_partly": delete_scenario==delete_scenario.PART_DELETE})
-                else:
-                    ts = test_scenario_fn(self)
+                ts = test_scenario_fn(self)
                 try:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
                     # prepare before execution of test case
