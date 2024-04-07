@@ -30,7 +30,7 @@ class TestProjects(unittest.TestCase):
         report.execute(ProjectDelete.PART_DELETE, True)
 
     def test_template_embeded(self):
-        # test based on embeddit templates
+        # test based on embed templates
         stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
                           None,
                           {"QGATE_OUTPUT": "./tests_output/"})
