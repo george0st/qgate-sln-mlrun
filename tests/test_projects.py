@@ -27,7 +27,7 @@ class TestProjects(unittest.TestCase):
         out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
                                   './qgate_sln_mlrun/templates/qgt-mlrun.html'])
         report = QualityReport(stp, out)
-        report.execute(ProjectDelete.FULL_DELETE, True)
+        report.execute(ProjectDelete.PART_DELETE, True)
 
     def test_template_embeded(self):
         # test based on embeddit templates
@@ -36,4 +36,4 @@ class TestProjects(unittest.TestCase):
                           {"QGATE_OUTPUT": "./tests_output/"})
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
-        report.execute(ProjectDelete.FULL_DELETE, True)
+        report.execute(ProjectDelete.PART_DELETE, True)
