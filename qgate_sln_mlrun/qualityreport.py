@@ -7,13 +7,7 @@ from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts302, ts303, ts401, 
 from qgate_sln_mlrun.ts import tsbase
 import logging
 import importlib.resources
-#from enum import Enum
 
-
-# class ProjectDelete(Enum):
-#     NO_DELETE = 0
-#     FULL_DELETE = 1
-#     PART_DELETE = 2
 
 class QualityReport:
     """
