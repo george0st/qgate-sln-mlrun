@@ -26,7 +26,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS301: Ingest data to feature set(s) from DataFrame source
    - ✅ TS302: Ingest data to feature set(s) from CSV source 
    - ✅ TS303: Ingest data to feature set(s) from Parquet source
-   - ❌ TS304: Ingest data to feature set(s) from SQL source
+   - ✔  TS304: Ingest data to feature set(s) from SQL source
    - ❌ TS305: Ingest data to feature set(s) from Kafka source
    - ❌ TS306: Ingest data to feature set(s) from HTTP source
  - **Feature vector**
@@ -34,14 +34,21 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **Get data from vector**
    - ✅ TS501: Get data from off-line feature vector(s)
    - ✅ TS502: Get data from on-line feature vector(s)
+ - **Pipelines**
+   - ❌ TS601: Simple cleanup pipeline for DataFrame source
+   - ❌ TS602: Simple cleanup pipeline for CSV source
+   - ❌ TS603: Simple cleanup pipeline for Parquet source
+   - ❌ TS604: Complex cleanup pipeline for DataFrame source
+   - ❌ TS605: Complex cleanup pipeline for CSV source
+   - ❌ TS606: Complex cleanup pipeline for Parquet source
  - **Build model**
-   - ✅ TS601: Build CART model
-   - ❌ TS602: Build XGBoost model
-   - ❌ TS603: Build DNN model
+   - ✅ TS701: Build CART model
+   - ❌ TS702: Build XGBoost model
+   - ❌ TS703: Build DNN model
  - **Serve model**
-   - ✅ TS701: Serving score from CART
-   - ❌ TS702: Serving score from XGBoost
-   - ❌ TS703: Serving score from DNN
+   - ✅ TS801: Serving score from CART
+   - ❌ TS802: Serving score from XGBoost
+   - ❌ TS803: Serving score from DNN
    
 NOTE: Each test scenario contains addition specific test cases (e.g. with different
 targets for feature sets, etc.).

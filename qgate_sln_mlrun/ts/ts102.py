@@ -41,7 +41,7 @@ class TS102(TSBase):
         for file in glob.glob(dir):
             if os.path.isdir(file):
                 shutil.rmtree(file, True)
-            # remove old files (d-1 or olders) from templates "qgt-mlrun-*"
+            # remove old files (d-1 and olders) from templates "qgt-mlrun-*"
             elif not os.path.basename(file).startswith(not_remove):
                 os.remove(file)
 
