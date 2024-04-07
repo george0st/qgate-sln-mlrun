@@ -27,13 +27,13 @@ class TS102(TSBase):
         self.delete_projects()
 
     def delete_projects(self):
-        """Delete projects
-        """
+        """Delete projects and addition content of output directory"""
         self.testscenario_new()
         for project_name in self.projects:
             self._delete_project(f"{project_name}/*:", project_name)
 
         # not remove files from today
+        # (this line generate file profix for today)
         not_remove = f"qgt-mlrun-{str.replace(self.output.datetime, ':', '-')}".split(" ")[0]
 
         # cleaning/delete other directories in output directory (generated from e.g. CSVTargets)
