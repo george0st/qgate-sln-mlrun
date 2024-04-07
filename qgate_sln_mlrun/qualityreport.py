@@ -7,7 +7,13 @@ from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts301, ts302, ts303, ts401, 
 from qgate_sln_mlrun.ts import tsbase
 import logging
 import importlib.resources
+from enum import Enum
 
+
+class ProjectDelete(Enum):
+    NO_DELETE = 0
+    FULL_DELETE = 1
+    PART_DELETE = 2
 
 class QualityReport:
     """
@@ -33,7 +39,9 @@ class QualityReport:
 
         self.load_test_setting()
 
-    def build_scenarios_functions(self, delete_scenario=True, experiment_scenario=False) -> list[tsbase.TSBase]:
+    def build_scenarios_functions(self,
+                                  delete_scenario: ProjectDelete = ProjectDelete.FULL_DELETE,
+                                  experiment_scenario=False) -> list[tsbase.TSBase]:
         test_scenario_functions = list(QualityReport.TEST_SCENARIOS)
 
         # add experiments
@@ -42,12 +50,13 @@ class QualityReport:
                 test_scenario_functions.append(experiment)
 
         # add delete
-        if delete_scenario:
+        if delete_scenario != ProjectDelete.NO_DELETE:
             test_scenario_functions.append(QualityReport.TEST_SCENARIO_DELETE)
+            self.setup.set_scenario_setting("TS102_DELETE", delete_scenario)
 
         return test_scenario_functions
 
-    def execute(self, delete_scenario=True, experiment_scenario=False, filter_projects: list=None):
+    def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):
 
         # define valid projects
         self._define_projects(filter_projects)
@@ -57,6 +66,7 @@ class QualityReport:
         logger = logging.getLogger("mlrun")
         for test_scenario_fn in test_scenario_functions:
             if test_scenario_fn:
+                # create instance
                 ts = test_scenario_fn(self)
                 try:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")

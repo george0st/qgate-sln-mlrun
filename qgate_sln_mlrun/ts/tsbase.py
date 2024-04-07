@@ -17,7 +17,7 @@ class TSBase:
     Base class for all test scenarios
     """
 
-    def __init__(self, solution, name: str):
+    def __init__(self, solution, name: str, setting: dict[str, object]=None):
         self._solution=solution
         self._name=name
         self._state = TSState.NoExecution

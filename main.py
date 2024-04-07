@@ -1,4 +1,4 @@
-from qgate_sln_mlrun.qualityreport import QualityReport
+from qgate_sln_mlrun.qualityreport import QualityReport, ProjectDelete
 from qgate_sln_mlrun import output, setup
 import sys
 
@@ -9,7 +9,7 @@ if __name__ == '__main__':
                                    './qgate_sln_mlrun/templates/qgt-mlrun.html'])
     report=QualityReport(stp,out)
 
-    delete_scenario = True
+    delete_scenario = ProjectDelete.FULL_DELETE
     test_scenario = False
 
     # support parameters 'NoDelete' and 'Test' for switch-off the UC102: Delete project(s), ...
@@ -17,7 +17,9 @@ if __name__ == '__main__':
         for arg in sys.argv[1:]:
             arg = arg.lower()
             if arg == "nodelete":
-                delete_scenario = False
+                delete_scenario = ProjectDelete.NO_DELETE
+            if arg == "partdelete":
+                delete_scenario = ProjectDelete.PART_DELETE
             elif arg == "test":
                 test_scenario=True
 
