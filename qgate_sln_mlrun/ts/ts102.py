@@ -33,22 +33,27 @@ class TS102(TSBase):
         for project_name in self.projects:
             self._delete_project(f"{project_name}/*:", project_name)
 
-        # cleaning/delete other things in output directory (generated from e.g. CSVTargets)
+        # not remove files from today
+        not_remove = f"qgt-mlrun-{str.replace(self.output.datetime, ':', '-')}".split(" ")[0]
+
+        # cleaning/delete other directories in output directory (generated from e.g. CSVTargets)
         dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
         for file in glob.glob(dir):
             if os.path.isdir(file):
                 shutil.rmtree(file, True)
+            elif not os.path.basename(file).startswith(not_remove):
+                os.remove(file)
+
 
     @TSBase.handler_testcase
     def _delete_project(self, label, name):
-        """Delete project (include MLRun, file system, etc.)"""
+        """Delete project (in MLRun and in file system)"""
 
         # if full delete
         if self.setup.get_scenario_setting("TS102_DELETE") == ProjectDelete.FULL_DELETE:
             mlrun.get_run_db().delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
 
-        # if partly delete
-        # delete project in FS
+        # delete project in FS (valid for partly delete)
         project_dir = os.path.join(self.setup.model_output, name)
         if os.path.exists(project_dir):
             shutil.rmtree(project_dir, True)
