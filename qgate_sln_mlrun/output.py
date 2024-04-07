@@ -227,3 +227,7 @@ class Output():
                 ip = socket.gethostbyname(host_name)
                 host = f"{host_name}/{ip}"
         return host
+
+    @property
+    def datetime(self):
+        return self._data["datetime"]
