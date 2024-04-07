@@ -16,7 +16,7 @@ import os
 import glob
 import json
 
-class TS701(TSBase):
+class TS801(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
