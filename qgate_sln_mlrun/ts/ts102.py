@@ -44,7 +44,7 @@ class TS102(TSBase):
         """Delete project (include MLRun, file system, etc.)"""
 
         # if full delete
-        if self.setup.get_scenario_setting("TS102_DELETE_FULL")==qgate.ProjectDelete.DELETE:
+        if self.setup.get_scenario_setting("TS102_DELETE") == qgate.ProjectDelete.FULL_DELETE:
             mlrun.get_run_db().delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
 
         # if partly delete
