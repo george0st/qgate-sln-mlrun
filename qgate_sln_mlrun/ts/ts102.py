@@ -3,11 +3,11 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
+from qgate_sln_mlrun import qgate
 import mlrun
 import os
 import glob
 import shutil
-
 
 
 class TS102(TSBase):
@@ -41,9 +41,13 @@ class TS102(TSBase):
 
     @TSBase.handler_testcase
     def _delete_project(self, label, name):
-        """Delete project"""
-        mlrun.get_run_db().delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
+        """Delete project (include MLRun, file system, etc.)"""
 
+        # if full delete
+        if self.setup.get_scenario_setting("TS102_DELETE_FULL")==qgate.ProjectDelete.DELETE:
+            mlrun.get_run_db().delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
+
+        # if partly delete
         # delete project in FS
         project_dir = os.path.join(self.setup.model_output, name)
         if os.path.exists(project_dir):

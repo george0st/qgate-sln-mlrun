@@ -8,14 +8,12 @@ from qgate_sln_mlrun.ts import tsbase
 import logging
 import importlib.resources
 from enum import Enum
-import qgate_sln_mlrun
 
 
 class ProjectDelete(Enum):
     DELETE = 2
     NO_DELETE = 1
     PART_DELETE = 2
-
 class QualityReport:
     """
     Quality report
@@ -41,7 +39,7 @@ class QualityReport:
         self.load_test_setting()
 
     def build_scenarios_functions(self,
-                                  delete_scenario: ProjectDelete=ProjectDelete.DELETE,
+                                  delete_scenario: ProjectDelete = ProjectDelete.DELETE,
                                   experiment_scenario=False) -> list[tsbase.TSBase]:
         test_scenario_functions = list(QualityReport.TEST_SCENARIOS)
 
@@ -53,7 +51,7 @@ class QualityReport:
         # add delete
         if delete_scenario != ProjectDelete.NO_DELETE:
             test_scenario_functions.append(QualityReport.TEST_SCENARIO_DELETE)
-            self.setup.set_scenario_setting("TS102_DELETE_FULL", "1" if delete_scenario == ProjectDelete.DELETE else "0")
+            self.setup.set_scenario_setting("TS102_DELETE_FULL", delete_scenario)
 
         return test_scenario_functions
 
