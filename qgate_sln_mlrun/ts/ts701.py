@@ -15,7 +15,7 @@ import json
 from pickle import dumps
 
 
-class TS601(TSBase):
+class TS701(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
