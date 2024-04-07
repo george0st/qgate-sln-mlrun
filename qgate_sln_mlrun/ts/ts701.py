@@ -18,7 +18,7 @@ import json
 
 class TS701(TSBase):
 
-    def __init__(self, solution, setting: dict[str, object]=None):
+    def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
     @property

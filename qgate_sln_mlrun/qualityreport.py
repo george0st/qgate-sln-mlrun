@@ -8,6 +8,7 @@ from qgate_sln_mlrun.ts import tsbase
 import logging
 import importlib.resources
 from enum import Enum
+import qgate_sln_mlrun
 
 
 class ProjectDelete(Enum):
@@ -67,7 +68,7 @@ class QualityReport:
             if test_scenario_fn:
 
                 # create instance
-                if test_scenario_fn is type(ts102.TS102):
+                if test_scenario_fn is type(qgate_sln_mlrun.ts.ts102.TS102):
                     ts = test_scenario_fn(self, {"delete_partly": delete_scenario==delete_scenario.PART_DELETE})
                 else:
                     ts = test_scenario_fn(self)
