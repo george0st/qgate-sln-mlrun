@@ -65,7 +65,10 @@ class QualityReport:
         logger = logging.getLogger("mlrun")
         for test_scenario_fn in test_scenario_functions:
             if test_scenario_fn:
-                ts = test_scenario_fn(self)
+                if test_scenario_fn is type(ts102.TS102):
+                    ts = test_scenario_fn(self,"dd")
+                else:
+                    ts = test_scenario_fn(self)
                 try:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
                     # prepare before execution of test case

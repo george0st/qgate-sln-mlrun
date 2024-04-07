@@ -10,7 +10,7 @@ import glob
 
 class TS101(TSBase):
 
-    def __init__(self, solution):
+    def __init__(self, solution, setting: dict[str,str]=None):
         super().__init__(solution, self.__class__.__name__)
 
     @property

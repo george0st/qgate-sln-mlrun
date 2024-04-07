@@ -8,7 +8,7 @@ import mlrun.feature_store as fstore
 
 class TS501(TSBase):
 
-    def __init__(self, solution):
+    def __init__(self, solution, setting: dict[str,str]=None):
         super().__init__(solution, self.__class__.__name__)
 
     @property

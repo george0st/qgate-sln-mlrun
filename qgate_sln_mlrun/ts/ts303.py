@@ -14,7 +14,7 @@ import os
 
 class TS303(TSBase):
 
-    def __init__(self, solution):
+    def __init__(self, solution, setting: dict[str,str]=None):
         super().__init__(solution, self.__class__.__name__)
         self._temp=os.path.join(self.setup.model_output,"temp")
         if not os.path.exists(self._temp):
