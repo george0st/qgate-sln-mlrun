@@ -4,8 +4,9 @@
 pyenv install 3.9
 pyenv global 3.9
 
-### 2. Clone GIT repo `qgate-sln-mlrun`
+### 2. Clone GIT repo `qgate-sln-mlrun` & `qgate-model`
 git clone https://github.com/george0st/qgate-sln-mlrun.git
+git clone https://github.com/george0st/qgate-model.git
 cd qgate-sln-mlrun
 
 ### 3. Create virtual environment

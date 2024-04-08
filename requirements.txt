@@ -16,6 +16,7 @@ cryptography~=42.0
 pymysql~=1.1
 
 # for Postgres
+# NOTE: version conflict in Linux
 psycopg2~=2.9
 
 # for kafka
