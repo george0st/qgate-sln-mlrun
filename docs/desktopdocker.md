@@ -13,3 +13,8 @@
   - In case of issues, you can use different distribution e.g. 'ubuntu'
     - see command `wsl --install -d Ubuntu`
     - or specific Ubuntu version e.g. `wsl --install -d Ubuntu-20.04`
+
+**Helper:**
+  - Remove distribution
+    - see command `wsl -t Ubuntu`
+    - or specific Ubuntu version e.g. `wsl -t Ubuntu-20.04`
