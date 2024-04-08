@@ -1,4 +1,6 @@
-# Installation pyenv (for Ubuntu-20.04)
+# Installation pyenv (for Linux-Ubuntu)
+
+Note: I tested these steps with Ubuntu-20.04 and Ubuntu distribution under WSL
 
 ### 1. Update OS
 sudo apt update -y
