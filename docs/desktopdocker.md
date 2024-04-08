@@ -15,6 +15,6 @@
     - or specific Ubuntu version e.g. `wsl --install -d Ubuntu-20.04`
 
 **Helper:**
-  - Remove distribution
+  - Remove/Terminate distribution
     - see command `wsl -t Ubuntu`
     - or specific Ubuntu version e.g. `wsl -t Ubuntu-20.04`
