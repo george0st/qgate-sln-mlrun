@@ -114,4 +114,5 @@ NOTE: Current state, only the last MLRun/Iguazio versions are valid for testing
 ## Others
  - **To-Do**, the list of expected/future improvements, [see](./docs/todo_list.md)
  - **Applied limits**, the list of applied limits, [see](./docs/applied-limits.md) 
- - **Define test environment**, you have to focus on Linux env. or Windows with WSL2, [see](./docs/testing.md)
+ - **How can you test the solution?**, you have to focus on Linux env. or 
+ Windows with WSL2 ([see](./docs/testing.md) step by step tutorial)
