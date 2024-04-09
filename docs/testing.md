@@ -8,3 +8,9 @@ You have to install Pyenv, [see](./pyenv-install.md)
 
 ### 3. Pyenv usage
 You have to use Pyenv, [see](./pyenv-use.md)
+
+### 4. Use IDE e.g. VSCode
+ - run IDE VSCode
+ - choose WSL and relevant distribution `WSL: Ubuntu` or `WSL: Ubuntu-20.04` 
+ - choose interpreter `python 3.9.x ('venv': venv)'`
+ - it is possible to Run/Debug your code
