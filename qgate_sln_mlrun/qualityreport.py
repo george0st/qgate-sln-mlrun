@@ -22,6 +22,20 @@ class QualityReport:
     TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
     TEST_SCENARIO_DELETE = ts102.TS102
 
+
+    # Target vs On/Off-line
+    TARGET_ONLINE = ["kafka", "redis", "mysql", "postgres"]
+    TARGET_OFFLINE = ["parquet", "csv"]
+
+    # Target vs invalid tests
+    TARGET_NOT_VALID_TEST = {"kafka": ["TS501", "TS502"], }
+
+    # Test vs Only On/Off-line
+    TEST_BOTH = ["TS101","TS102","TS201","TS301", "TS302", "TS303", "TS401"]
+    TEST_ONLY_OFFLINE = ["TS501","TS701","TS801"]
+    TEST_ONLY_ONLINE = ["TS502"]
+
+
     def __init__(self, setup: Setup, output: Output):
         self._setup = setup
         self._output = output
@@ -64,6 +78,10 @@ class QualityReport:
                     online=True
                 if spec["targets"][target] in offline_target:
                     offline=True
+
+            # TEST_SCENARIOS
+            # TEST_EXPERIMENTS
+            # TEST_SCENARIO_DELETE
 
             # if not online:
             #     self._project_scenarios[prj]=

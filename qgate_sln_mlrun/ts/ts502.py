@@ -1,5 +1,5 @@
 """
-  TS501: Get data from on-line feature vector(s)
+  TS502: Get data from on-line feature vector(s)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
