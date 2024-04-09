@@ -43,7 +43,7 @@ class TS303(TSBase):
         pq.write_table(arrow_table, parquet_file)
         return parquet_file
 
-    def prepare(self):
+    def before(self):
         self._temp=os.path.join(self.setup.model_output,"temp")
         if not os.path.exists(self._temp):
             os.makedirs(self._temp)
