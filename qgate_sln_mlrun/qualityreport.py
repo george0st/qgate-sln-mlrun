@@ -65,13 +65,13 @@ class QualityReport:
 
         return test_scenarios
 
-    def _define_testscenarios_based_projects(self):
-
+    def _define_avoid_testscenarios(self, project):
+        # Define test scenarios, which will be jumped (without execution)
         online_target=["kafka", "redis", "mysql", "postgres"]
         offline_target=["parquet", "csv"]
 
         for prj in self._projects:
-            spec=self.project_specs[prj]
+            spec=self.project_specs[project]
             online = offline = False
             for target in spec["targets"]:
                 if spec["targets"][target] in online_target:

@@ -22,12 +22,10 @@ class TSBase:
     Base class for all test scenarios
     """
 
-    def __init__(self, solution, name: str, scenario_type: TSType = TSType.Both):
+    def __init__(self, solution, name: str):
         self._solution=solution
         self._name=name
-        self._scenario_type=scenario_type
         self._state = TSState.NoExecution
-
 
     @property
     def projects(self) -> list:
