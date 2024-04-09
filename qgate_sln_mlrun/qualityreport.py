@@ -50,10 +50,17 @@ class QualityReport:
 
         return test_scenarios
 
+    def _define_testscenarios_based_projects(self):
+        
+        pass
+
     def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):
 
         # define valid projects
         self._define_projects(filter_projects)
+
+        # TODO: Define, which test scenarios will be valid for specific project
+        self._define_testscenarios_based_projects()
 
         test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
 
