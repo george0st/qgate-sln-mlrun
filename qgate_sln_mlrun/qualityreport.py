@@ -29,6 +29,7 @@ class QualityReport:
         self._projects = []
         self._project_descs = {}
         self._project_specs = {}
+        self._project_scenarios = {}
         self._test_setting = {}
 
         self.load_test_setting()
@@ -51,8 +52,25 @@ class QualityReport:
         return test_scenarios
 
     def _define_testscenarios_based_projects(self):
-        
-        pass
+
+        online_target=["kafka", "redis", "mysql", "postgres"]
+        offline_target=["parquet", "csv"]
+
+        for prj in self._projects:
+            spec=self.project_specs[prj]
+            online = offline = False
+            for target in spec["targets"]:
+                if spec["targets"][target] in online_target:
+                    online=True
+                if spec["targets"][target] in offline_target:
+                    offline=True
+
+            # if not online:
+            #     self._project_scenarios[prj]=
+            # if not offline:
+
+
+
 
     def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):
 
