@@ -35,12 +35,12 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS501: Get data from off-line feature vector(s)
    - ✅ TS502: Get data from on-line feature vector(s)
  - **Pipelines**
-   - ❌ TS601: Simple cleanup pipeline for DataFrame source
-   - ❌ TS602: Simple cleanup pipeline for CSV source
-   - ❌ TS603: Simple cleanup pipeline for Parquet source
-   - ❌ TS604: Complex cleanup pipeline for DataFrame source
-   - ❌ TS605: Complex cleanup pipeline for CSV source
-   - ❌ TS606: Complex cleanup pipeline for Parquet source
+   - ❌ TS601: Simple pipeline for DataFrame source
+   - ❌ TS602: Simple pipeline for CSV source
+   - ❌ TS603: Simple pipeline for Parquet source
+   - ❌ TS604: Complex pipeline for DataFrame source
+   - ❌ TS605: Complex pipeline for CSV source
+   - ❌ TS606: Complex pipeline for Parquet source
  - **Build model**
    - ✅ TS701: Build CART model
    - ❌ TS702: Build XGBoost model
