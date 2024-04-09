@@ -33,35 +33,35 @@ class QualityReport:
 
         self.load_test_setting()
 
-    def build_scenarios_functions(self,
-                                  delete_scenario: ProjectDelete = ProjectDelete.FULL_DELETE,
-                                  experiment_scenario=False) -> list[tsbase.TSBase]:
-        test_scenario_functions = list(QualityReport.TEST_SCENARIOS)
+    def build_scenarios(self,
+                        delete_scenario: ProjectDelete = ProjectDelete.FULL_DELETE,
+                        experiment_scenario=False) -> list[tsbase.TSBase]:
+        test_scenarios = list(QualityReport.TEST_SCENARIOS)
 
         # add experiments
         if experiment_scenario:
             for experiment in QualityReport.TEST_EXPERIMENTS:
-                test_scenario_functions.append(experiment)
+                test_scenarios.append(experiment)
 
         # add delete
         if delete_scenario != ProjectDelete.NO_DELETE:
-            test_scenario_functions.append(QualityReport.TEST_SCENARIO_DELETE)
+            test_scenarios.append(QualityReport.TEST_SCENARIO_DELETE)
             self.setup.set_scenario_setting("TS102_DELETE", delete_scenario)
 
-        return test_scenario_functions
+        return test_scenarios
 
     def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):
 
         # define valid projects
         self._define_projects(filter_projects)
 
-        test_scenario_functions = self.build_scenarios_functions(delete_scenario, experiment_scenario)
+        test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
 
         logger = logging.getLogger("mlrun")
-        for test_scenario_fn in test_scenario_functions:
-            if test_scenario_fn:
+        for test_scenario in test_scenarios:
+            if test_scenario:
                 # create instance
-                ts = test_scenario_fn(self)
+                ts = test_scenario(self)
                 try:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
                     # prepare before execution of test case
