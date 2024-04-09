@@ -8,7 +8,7 @@ The list of expected/future improvements:
       - Add bigger variability for usage
 
  2. **Solve issue with project delete**
-    - see mistake in MLRun 1.6.1
+    - see mistake in MLRun versions 1.6.0, 1.6.1, 1.6.2
     
  3. **Extend QGATE_OUTPUT as arraylist**
     - support more storages S3, BlobStorage
