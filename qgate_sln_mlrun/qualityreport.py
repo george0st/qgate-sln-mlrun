@@ -91,7 +91,9 @@ class QualityReport:
         return None
 
     def _define_projects(self, filter_projects: list=None):
-
+        """
+        Define valid projects based on QGATE_FILTER_PROJECTS, support project inheritance for 'spec'
+        """
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "**", "*.json")
         for file in glob.glob(dir, recursive=True):
             json_content=self._get_model_changes(os.path.basename(file))
@@ -100,17 +102,19 @@ class QualityReport:
                     json_content = json.load(json_file)
 
             name, desc, lbls, kind, parent = tsbase.TSBase.get_json_header_full(json_content)
+
             # add project include project inheritance
             self._projects.append(name)
             self._project_descs[name] = [desc, lbls, kind, parent]
             self._project_specs[name] = json_content['spec']
             self._add_inheritance(name, parent)
 
+        # cleanup filter_projects
         if filter_projects is None:
             if self.setup.filter_projects:
                 filter_projects = [itm.strip() for itm in self.setup.filter_projects.split(',')]
 
-        # focus on
+        # apply filter, after inheritance
         if filter_projects:
             self._projects = [prj for prj in self._projects if prj in filter_projects]
 
