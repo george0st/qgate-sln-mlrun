@@ -16,11 +16,25 @@ class QualityReport:
 
     TEST_SCENARIOS = [ts101.TS101,
                       ts201.TS201,
-                      ts301.TS301, ts302.TS302, ts303.TS303,
+                      ts301.TS301, ts302.TS302, #ts303.TS303,
                       ts401.TS401,
                       ts501.TS501, ts502.TS502]
     TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
     TEST_SCENARIO_DELETE = ts102.TS102
+
+
+    # Target vs On/Off-line
+    TARGET_ONLINE = ["kafka", "redis", "mysql", "postgres"]
+    TARGET_OFFLINE = ["parquet", "csv"]
+
+    # Target vs invalid tests
+    TARGET_NOT_VALID_TEST = {"kafka": ["TS501", "TS502"], }
+
+    # Test vs Only On/Off-line
+    TEST_BOTH = ["TS101","TS102","TS201","TS301", "TS302", "TS303", "TS401"]
+    TEST_ONLY_OFFLINE = ["TS501","TS701","TS801"]
+    TEST_ONLY_ONLINE = ["TS502"]
+
 
     def __init__(self, setup: Setup, output: Output):
         self._setup = setup
@@ -29,6 +43,7 @@ class QualityReport:
         self._projects = []
         self._project_descs = {}
         self._project_specs = {}
+        self._project_scenarios = {}
         self._test_setting = {}
 
         self.load_test_setting()
@@ -50,10 +65,38 @@ class QualityReport:
 
         return test_scenarios
 
+    def _define_avoid_testscenarios(self, project):
+        # Define test scenarios, which will be jumped (without execution)
+        online_target=["kafka", "redis", "mysql", "postgres"]
+        offline_target=["parquet", "csv"]
+
+        for prj in self._projects:
+            spec=self.project_specs[project]
+            online = offline = False
+            for target in spec["targets"]:
+                if spec["targets"][target] in online_target:
+                    online=True
+                if spec["targets"][target] in offline_target:
+                    offline=True
+
+            # TEST_SCENARIOS
+            # TEST_EXPERIMENTS
+            # TEST_SCENARIO_DELETE
+
+            # if not online:
+            #     self._project_scenarios[prj]=
+            # if not offline:
+
+
+
+
     def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):
 
         # define valid projects
         self._define_projects(filter_projects)
+
+        # TODO: Define, which test scenarios will be valid for specific project
+        #self._define_testscenarios_based_projects()
 
         test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
 
@@ -91,7 +134,9 @@ class QualityReport:
         return None
 
     def _define_projects(self, filter_projects: list=None):
-
+        """
+        Define valid projects based on QGATE_FILTER_PROJECTS, support project inheritance for 'spec'
+        """
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "**", "*.json")
         for file in glob.glob(dir, recursive=True):
             json_content=self._get_model_changes(os.path.basename(file))
@@ -100,17 +145,19 @@ class QualityReport:
                     json_content = json.load(json_file)
 
             name, desc, lbls, kind, parent = tsbase.TSBase.get_json_header_full(json_content)
+
             # add project include project inheritance
             self._projects.append(name)
             self._project_descs[name] = [desc, lbls, kind, parent]
             self._project_specs[name] = json_content['spec']
             self._add_inheritance(name, parent)
 
+        # cleanup filter_projects
         if filter_projects is None:
             if self.setup.filter_projects:
                 filter_projects = [itm.strip() for itm in self.setup.filter_projects.split(',')]
 
-        # focus on
+        # apply filter, after inheritance
         if filter_projects:
             self._projects = [prj for prj in self._projects if prj in filter_projects]
 

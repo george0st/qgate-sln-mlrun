@@ -12,12 +12,17 @@ class TSState(Enum):
     DONE = 2
     ERR = 3
 
+class TSType(Enum):
+    OnLine = 1
+    OffLine = 2
+    Both = OnLine + OffLine
+
 class TSBase:
     """
     Base class for all test scenarios
     """
 
-    def __init__(self, solution, name: str, setting: dict[str, object]=None):
+    def __init__(self, solution, name: str):
         self._solution=solution
         self._name=name
         self._state = TSState.NoExecution
