@@ -28,7 +28,7 @@ class QualityReport:
     TARGET_OFFLINE = ["parquet", "csv"]
 
     # Target vs invalid tests
-    TARGET_NOT_VALID_TEST = {"kafka": ["TS501", "TS502"], }
+    TARGET_NOT_VALID_TEST = {"kafka": ["TS501", "TS502"]}
 
     # Test vs Only On/Off-line
     TEST_BOTH = ["TS101","TS102","TS201","TS301", "TS302", "TS303", "TS401"]
@@ -65,30 +65,43 @@ class QualityReport:
 
         return test_scenarios
 
-    def _define_avoid_testscenarios(self, project):
+    def _project_avoid_testscenarios(self, project):
         # Define test scenarios, which will be jumped (without execution)
 
-        all_avoid=[]
+        all_avoid=set()
         online = offline = False
 
+        # identification of targets (I am focusing on project level)
+        # TODO: focus on featureset level also
         spec=self.project_specs[project]
-        for target in spec["targets"]:
-            if spec["targets"][target] in self.TARGET_ONLINE:
-                online=True
-            if spec["targets"][target] in self.TARGET_OFFLINE:
-                offline=True
+        for prj_targets in spec["targets"]:
+            targets=spec["targets"][prj_targets]
+            for target in targets:
+                if target in self.TARGET_ONLINE:
+                    online=True
+                if target in self.TARGET_OFFLINE:
+                    offline=True
 
-            # add avoid based on target
-            avoid=self.TARGET_NOT_VALID_TEST.get(spec["targets"][target], None)
-            if avoid:
-                all_avoid.append(avoid)
+                # add avoid based on target
+                avoid=self.TARGET_NOT_VALID_TEST.get(target, None)
+                if avoid:
+                    for name in avoid:
+                        all_avoid.add(name)
 
-        # add avoid TS for missing On/Off-line
+        # add avoid TS based on missing On/Off-line targets
         if not offline:
-            all_avoid.append(self.TEST_ONLY_OFFLINE)
+            for name in self.TEST_ONLY_OFFLINE:
+                all_avoid.add(name)
         if not online:
-            all_avoid.append(self.TEST_ONLY_ONLINE)
+            for name in self.TEST_ONLY_ONLINE:
+                all_avoid.add(name)
         return all_avoid
+
+    def _projects_avoid_testscenarios(self):
+        projects_avoid_ts={}
+        for project_name in self.projects:
+            projects_avoid_ts[project_name] = self._project_avoid_testscenarios(project_name)
+        return projects_avoid_ts
 
     def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):
 
@@ -96,9 +109,12 @@ class QualityReport:
         self._define_projects(filter_projects)
 
         # TODO: Define, which test scenarios will be valid for specific project
-        #self._define_testscenarios_based_projects()
 
+
+        # Define, which test scenarios will be executed
         test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
+        # Define, which test scenarios will be valid for specific project
+        projects_avoid_ts = self._projects_avoid_testscenarios()
 
         logger = logging.getLogger("mlrun")
         for test_scenario in test_scenarios:
@@ -107,14 +123,18 @@ class QualityReport:
                 ts = test_scenario(self)
                 try:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
+
                     # execution of test case
+                    ts.testscenario_new()
                     ts.before()
 
-                    # TODO: add cycle cross projects
-                    # filter, if this TS is relevant for this project
-                    ts.testscenario_new()
                     for project_name in self.projects:
+                        # avoid irrelevant scenarios for this project
+                        if ts.name in projects_avoid_ts[project_name]:
+                            continue
+                        # execute TS for this project
                         ts.exec(project_name)
+
                     ts.after()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:
