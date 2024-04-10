@@ -74,19 +74,17 @@ class QualityReport:
         # identification of targets (I am focusing on project level)
         # TODO: focus on featureset level also
         spec=self.project_specs[project]
-        for prj_targets in spec["targets"]:
-            targets=spec["targets"][prj_targets]
-            for target in targets:
-                if target in self.TARGET_ONLINE:
-                    online=True
-                if target in self.TARGET_OFFLINE:
-                    offline=True
+        for target in spec["targets"]:
+            if target in self.TARGET_ONLINE:
+                online=True
+            if target in self.TARGET_OFFLINE:
+                offline=True
 
-                # add avoid based on target
-                avoid=self.TARGET_NOT_VALID_TEST.get(target, None)
-                if avoid:
-                    for name in avoid:
-                        all_avoid.add(name)
+            # add avoid based on target
+            avoid=self.TARGET_NOT_VALID_TEST.get(target, None)
+            if avoid:
+                for name in avoid:
+                    all_avoid.add(name)
 
         # add avoid TS based on missing On/Off-line targets
         if not offline:

@@ -10,9 +10,9 @@ NOTE: You can see detail changes in [MLRun change log](https://docs.mlrun.org/en
 
 ### 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
- - MLFlow integration
- - Pandas 2.0 support
- - Extend datastore profiles
+ - MLFlow integration (store artifact to MLRun)
+ - Support Pandas 2.0
+ - Extend datastore profiles (add providers)
 
 ### 1.5 MLRun
  - Datastore profiles
