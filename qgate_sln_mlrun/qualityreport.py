@@ -125,14 +125,13 @@ class QualityReport:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
 
                     # execution of test case
+                    ts.testscenario_new()
                     ts.before()
 
-                    ts.testscenario_new()
                     for project_name in self.projects:
                         # avoid irrelevant scenarios for this project
                         if ts.name in projects_avoid_ts[project_name]:
                             continue
-
                         # execute TS for this project
                         ts.exec(project_name)
 
