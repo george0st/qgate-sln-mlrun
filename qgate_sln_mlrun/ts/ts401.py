@@ -22,27 +22,42 @@ class TS401(TSBase):
     def long_desc(self):
         return "Create feature vectors as join of relevant feature sets"
 
-    def exec(self):
-        self.create_featurevector()
-
-    def create_featurevector(self):
+    def exec(self, project_name):
+        """Create feature vectors"""
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
 
-        self.testscenario_new()
-        for project_name in self.projects:
-            for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
-                # create file with definition of vector
-                source_file = os.path.join(os.getcwd(),
-                                           self.setup.model_definition,
-                                           "01-model",
-                                           "03-feature-vector",
-                                           f"*-{featurevector_name}.json")
+        for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
+            # create file with definition of vector
+            source_file = os.path.join(os.getcwd(),
+                                       self.setup.model_definition,
+                                       "01-model",
+                                       "03-feature-vector",
+                                       f"*-{featurevector_name}.json")
 
-                # check existing data set
-                for file in glob.glob(source_file):
-                    # iterate cross all featureset definitions
-                    with open(file, "r") as json_file:
-                        self._create_featurevector(f"{project_name}/{featurevector_name}", project_name, json_file)
+            # check existing data set
+            for file in glob.glob(source_file):
+                # iterate cross all featureset definitions
+                with open(file, "r") as json_file:
+                    self._create_featurevector(f"{project_name}/{featurevector_name}", project_name, json_file)
+
+    # def create_featurevector(self):
+    #     # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
+    #
+    #     self.testscenario_new()
+    #     for project_name in self.projects:
+    #         for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
+    #             # create file with definition of vector
+    #             source_file = os.path.join(os.getcwd(),
+    #                                        self.setup.model_definition,
+    #                                        "01-model",
+    #                                        "03-feature-vector",
+    #                                        f"*-{featurevector_name}.json")
+    #
+    #             # check existing data set
+    #             for file in glob.glob(source_file):
+    #                 # iterate cross all featureset definitions
+    #                 with open(file, "r") as json_file:
+    #                     self._create_featurevector(f"{project_name}/{featurevector_name}", project_name, json_file)
 
     @TSBase.handler_testcase
     def _create_featurevector(self, testcase_name, project_name, json_file):
