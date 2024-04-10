@@ -68,7 +68,7 @@ class QualityReport:
     def _define_avoid_testscenarios(self, project):
         # Define test scenarios, which will be jumped (without execution)
 
-        all_avoid=[]
+        all_avoid={''}
         online = offline = False
 
         # identification of targets (I am focusing on project level)
@@ -85,13 +85,16 @@ class QualityReport:
                 # add avoid based on target
                 avoid=self.TARGET_NOT_VALID_TEST.get(target, None)
                 if avoid:
-                    all_avoid.append(avoid)
+                    for name in avoid:
+                        all_avoid.add(name)
 
         # add avoid TS based on missing On/Off-line targets
         if not offline:
-            all_avoid.append(self.TEST_ONLY_OFFLINE)
+            for name in self.TEST_ONLY_OFFLINE:
+                all_avoid.add(name)
         if not online:
-            all_avoid.append(self.TEST_ONLY_ONLINE)
+            for name in self.TEST_ONLY_ONLINE:
+                all_avoid.add(name)
         return all_avoid
 
     def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):

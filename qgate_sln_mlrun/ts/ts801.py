@@ -1,5 +1,5 @@
 """
-  TS801: Serving score from CART
+  TS801: Serving score from CART (with usage of off-line feature vector)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase

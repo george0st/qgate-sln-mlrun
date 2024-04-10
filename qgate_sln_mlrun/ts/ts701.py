@@ -1,5 +1,5 @@
 """
-  TS701: Build CART model
+  TS701: Build CART model (based on off-line feature vector)
 """
 from sklearn.preprocessing import LabelEncoder
 from qgate_sln_mlrun.ts.tsbase import TSBase
