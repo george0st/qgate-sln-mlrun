@@ -71,6 +71,8 @@ class QualityReport:
         all_avoid=[]
         online = offline = False
 
+        # identification of targets (I am focusing on project level)
+        # TODO: focus on featureset level also
         spec=self.project_specs[project]
         for target in spec["targets"]:
             if spec["targets"][target] in self.TARGET_ONLINE:
@@ -83,7 +85,7 @@ class QualityReport:
             if avoid:
                 all_avoid.append(avoid)
 
-        # add avoid TS for missing On/Off-line
+        # add avoid TS based on missing On/Off-line targets
         if not offline:
             all_avoid.append(self.TEST_ONLY_OFFLINE)
         if not online:
@@ -107,6 +109,7 @@ class QualityReport:
                 ts = test_scenario(self)
                 try:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
+
                     # execution of test case
                     ts.before()
 
@@ -114,7 +117,11 @@ class QualityReport:
                     # filter, if this TS is relevant for this project
                     ts.testscenario_new()
                     for project_name in self.projects:
-                        ts.exec(project_name)
+                        if ts.name in self._define_avoid_testscenarios(project_name):
+                            print("AVOID")
+                        else:
+                            ts.exec(project_name)
+
                     ts.after()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:
