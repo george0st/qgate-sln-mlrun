@@ -28,7 +28,7 @@ class QualityReport:
     TARGET_OFFLINE = ["parquet", "csv"]
 
     # Target vs invalid tests
-    TARGET_NOT_VALID_TEST = {"kafka": ["TS501", "TS502"], }
+    TARGET_NOT_VALID_TEST = {"kafka": ["TS501", "TS502"]}
 
     # Test vs Only On/Off-line
     TEST_BOTH = ["TS101","TS102","TS201","TS301", "TS302", "TS303", "TS401"]
@@ -74,16 +74,18 @@ class QualityReport:
         # identification of targets (I am focusing on project level)
         # TODO: focus on featureset level also
         spec=self.project_specs[project]
-        for target in spec["targets"]:
-            if spec["targets"][target] in self.TARGET_ONLINE:
-                online=True
-            if spec["targets"][target] in self.TARGET_OFFLINE:
-                offline=True
+        for prj_targets in spec["targets"]:
+            targets=spec["targets"][prj_targets]
+            for target in targets:
+                if target in self.TARGET_ONLINE:
+                    online=True
+                if target in self.TARGET_OFFLINE:
+                    offline=True
 
-            # add avoid based on target
-            avoid=self.TARGET_NOT_VALID_TEST.get(spec["targets"][target], None)
-            if avoid:
-                all_avoid.append(avoid)
+                # add avoid based on target
+                avoid=self.TARGET_NOT_VALID_TEST.get(target, None)
+                if avoid:
+                    all_avoid.append(avoid)
 
         # add avoid TS based on missing On/Off-line targets
         if not offline:
