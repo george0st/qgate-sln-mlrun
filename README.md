@@ -116,4 +116,4 @@ NOTE: Current state, only the last MLRun/Iguazio versions are valid for testing
  - **Applied limits**, the list of applied limits, [see](./docs/applied-limits.md) 
  - **How can you test the solution?**, you have to focus on Linux env. or 
  Windows with WSL2 ([see](./docs/testing.md) step by step tutorial)
- - **MLRun/Iguazio, the key changes in a nutshell**, [see](./docs/mlrun-history.md)
+ - **MLRun/Iguazio, the key changes in a nutshell**, [see](./docs/mlrun-iguazio-release-notes.md)
