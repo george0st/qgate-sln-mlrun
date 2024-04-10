@@ -19,17 +19,21 @@ class TS501(TSBase):
     def long_desc(self):
         return "Get data from off-line feature vector"
 
-    def exec(self):
-        self.get_data_offline()
-
-    def get_data_offline(self):
+    def exec(self, project_name):
         """
         Get data from off-line feature vector
         """
-        self.testscenario_new()
-        for project_name in self.projects:
-            for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
-                self._get_data_offline(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
+        for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
+            self._get_data_offline(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
+
+    # def get_data_offline(self):
+    #     """
+    #     Get data from off-line feature vector
+    #     """
+    #     self.testscenario_new()
+    #     for project_name in self.projects:
+    #         for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
+    #             self._get_data_offline(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
 
 
     @TSBase.handler_testcase

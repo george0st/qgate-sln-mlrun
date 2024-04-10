@@ -109,7 +109,12 @@ class QualityReport:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
                     # execution of test case
                     ts.before()
-                    ts.exec()
+
+                    # TODO: add cycle cross projects
+                    # filter, if this TS is relevant for this project
+                    ts.testscenario_new()
+                    for project_name in self.projects:
+                        ts.exec(project_name)
                     ts.after()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:

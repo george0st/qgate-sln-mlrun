@@ -33,26 +33,39 @@ class TS701(TSBase):
         """
         return "Build CART model (Classification and Regression Tree) from Scikit-Learn"
 
-    def exec(self):
-        self.build_model()
-
-    def build_model(self):
+    def exec(self, project_name):
 
         # Get list of ml models
-        self.testscenario_new()
-        for project_name in self.projects:
-            for mlmodel_name in self.get_mlmodel(self.project_specs.get(project_name)):
-                source_file = os.path.join(os.getcwd(),
-                                           self.setup.model_definition,
-                                           "01-model",
-                                           "04-ml-model",
-                                           f"*-{mlmodel_name}.json")
+        for mlmodel_name in self.get_mlmodel(self.project_specs.get(project_name)):
+            source_file = os.path.join(os.getcwd(),
+                                       self.setup.model_definition,
+                                       "01-model",
+                                       "04-ml-model",
+                                       f"*-{mlmodel_name}.json")
 
-                # check existing data set
-                for file in glob.glob(source_file):
-                    # iterate cross all ml models definitions
-                    with open(file, "r") as json_file:
-                        self._create_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
+            # check existing data set
+            for file in glob.glob(source_file):
+                # iterate cross all ml models definitions
+                with open(file, "r") as json_file:
+                    self._create_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
+
+    # def build_model(self):
+    #
+    #     # Get list of ml models
+    #     self.testscenario_new()
+    #     for project_name in self.projects:
+    #         for mlmodel_name in self.get_mlmodel(self.project_specs.get(project_name)):
+    #             source_file = os.path.join(os.getcwd(),
+    #                                        self.setup.model_definition,
+    #                                        "01-model",
+    #                                        "04-ml-model",
+    #                                        f"*-{mlmodel_name}.json")
+    #
+    #             # check existing data set
+    #             for file in glob.glob(source_file):
+    #                 # iterate cross all ml models definitions
+    #                 with open(file, "r") as json_file:
+    #                     self._create_mlmodel(f"{project_name}/{mlmodel_name}", project_name, json_file)
 
     @TSBase.handler_testcase
     def _create_mlmodel(self, testcase_name, project_name, json_file):

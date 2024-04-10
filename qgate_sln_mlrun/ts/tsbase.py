@@ -162,7 +162,7 @@ class TSBase:
         """Call before exec, relevant for data preparation, etc."""
         pass
 
-    def exec(self):
+    def exec(self, project_name):
         """Execution of test case"""
         raise NotImplemented()
 
