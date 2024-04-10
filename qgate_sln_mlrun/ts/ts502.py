@@ -36,24 +36,6 @@ class TS502(TSBase):
                 if featurevector_name in vectors:
                     self._get_data_online(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
 
-    # def get_data_online(self):
-    #     """
-    #     Get data from on-line feature vector
-    #     """
-    #     self.testscenario_new()
-    #
-    #     # get information, about list of on-line vectors
-    #     vectors = None
-    #     if self.test_setting.get('vector'):
-    #         if self.test_setting['vector'].get('online'):
-    #             vectors = self.test_setting['vector']['online']
-    #
-    #     if vectors:
-    #         for project_name in self.projects:
-    #             for featurevector_name in self.get_featurevectors(self.project_specs.get(project_name)):
-    #                 if featurevector_name in vectors:
-    #                     self._get_data_online(f"{project_name}/{featurevector_name}", project_name, featurevector_name)
-
     @TSBase.handler_testcase
     def _get_data_online(self, testcase_name, project_name, featurevector_name):
         self.project_switch(project_name)
