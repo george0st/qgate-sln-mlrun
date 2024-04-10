@@ -43,26 +43,6 @@ class TS102(TSBase):
             elif not os.path.basename(file).startswith(not_remove):
                 os.remove(file)
 
-    # def delete_projects(self):
-    #     """Delete projects and addition content of output directory"""
-    #     self.testscenario_new()
-    #     for project_name in self.projects:
-    #         self._delete_project(f"{project_name}/*:", project_name)
-    #
-    #     # not remove files from today
-    #     # (this line generate file prefix for today)
-    #     not_remove = f"qgt-mlrun-{str.replace(self.output.datetime, ':', '-')}".split(" ")[0]
-    #
-    #     # cleaning/delete other directories in output directory (generated from e.g. CSVTargets)
-    #     dir = os.path.join(os.getcwd(), self.setup.model_output, "*")
-    #     for file in glob.glob(dir):
-    #         if os.path.isdir(file):
-    #             shutil.rmtree(file, True)
-    #         # remove old files (d-1 and olders) from templates "qgt-mlrun-*"
-    #         elif not os.path.basename(file).startswith(not_remove):
-    #             os.remove(file)
-
-
     @TSBase.handler_testcase
     def _delete_project(self, label, name):
         """Delete project (in MLRun and in file system)"""
