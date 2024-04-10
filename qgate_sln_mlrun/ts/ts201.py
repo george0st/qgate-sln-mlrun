@@ -43,24 +43,6 @@ class TS201(TSBase):
                 with open(file, "r") as json_file:
                     self._create_featureset(f'{project_name}/{featureset_name}', project_name, json_file)
 
-    # def create_featuresets(self):
-    #     """ Get or create featuresets
-    #     """
-    #     self.testscenario_new()
-    #     for project_name in self.projects:
-    #         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-    #             # create file with definition of vector
-    #             source_file = os.path.join(os.getcwd(),
-    #                                        self.setup.model_definition,
-    #                                        "01-model",
-    #                                        "02-feature-set",
-    #                                        f"*-{featureset_name}.json")
-    #
-    #             for file in glob.glob(source_file):
-    #                 # iterate cross all featureset definitions
-    #                 with open(file, "r") as json_file:
-    #                     self._create_featureset(f'{project_name}/{featureset_name}', project_name, json_file)
-
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, json_file):
         json_content = json.load(json_file)

@@ -160,10 +160,13 @@ class QualityReport:
 
     def _define_projects(self, filter_projects: list=None):
         """
-        Define valid projects based on QGATE_FILTER_PROJECTS, support project inheritance for 'spec'
+        Define valid projects based on QGATE_FILTER_PROJECTS, support project inheritance for 'spec'.
+
+        Support project replacement based on local specification of projects in the folder './qgate_sln_mlrun/model_changes'
         """
         dir=os.path.join(os.getcwd(), self.setup.model_definition, "01-model", "01-project", "**", "*.json")
         for file in glob.glob(dir, recursive=True):
+            # check, if it is possible to replace project based on project in './qgate_sln_mlrun/model_changes'
             json_content=self._get_model_changes(os.path.basename(file))
             if json_content is None:
                 with (open(file, "r") as json_file):
