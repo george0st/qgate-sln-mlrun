@@ -21,16 +21,18 @@ class TS101(TSBase):
     def long_desc(self):
         return "Create project with setting name, description and tags"
 
-    def exec(self):
-        self.create_projects()
+    def exec(self, project_name):
+        """ Create projects based on json definition"""
+        desc = self.project_descs[project_name]
+        self._create_project(f"{project_name}/*: '{desc[0]}'", project_name, desc[0], desc[1], desc[2])
 
-    def create_projects(self):
-        """ Create projects based on json definition
-        """
-        self.testscenario_new()
-        for project_name in self.projects:
-            desc = self.project_descs[project_name]
-            self._create_project(f"{project_name}/*: '{desc[0]}'", project_name, desc[0], desc[1], desc[2])
+    # def create_projects(self):
+    #     """ Create projects based on json definition
+    #     """
+    #     self.testscenario_new()
+    #     for project_name in self.projects:
+    #         desc = self.project_descs[project_name]
+    #         self._create_project(f"{project_name}/*: '{desc[0]}'", project_name, desc[0], desc[1], desc[2])
 
     @TSBase.handler_testcase
     def _create_project(self, testcase_name, name, desc, lbls, kind):
