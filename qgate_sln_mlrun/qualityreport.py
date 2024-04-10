@@ -65,10 +65,10 @@ class QualityReport:
 
         return test_scenarios
 
-    def _define_avoid_testscenarios(self, project):
+    def _project_avoid_testscenarios(self, project):
         # Define test scenarios, which will be jumped (without execution)
 
-        all_avoid={''}
+        all_avoid=set()
         online = offline = False
 
         # identification of targets (I am focusing on project level)
@@ -97,15 +97,24 @@ class QualityReport:
                 all_avoid.add(name)
         return all_avoid
 
+    def _projects_avoid_testscenarios(self):
+        projects_avoid_ts={}
+        for project_name in self.projects:
+            projects_avoid_ts[project_name] = self._project_avoid_testscenarios(project_name)
+        return projects_avoid_ts
+
     def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):
 
         # define valid projects
         self._define_projects(filter_projects)
 
         # TODO: Define, which test scenarios will be valid for specific project
-        #self._define_testscenarios_based_projects()
 
+
+        # Define, which test scenarios will be executed
         test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
+        # Define, which test scenarios will be valid for specific project
+        projects_avoid_ts = self._projects_avoid_testscenarios()
 
         logger = logging.getLogger("mlrun")
         for test_scenario in test_scenarios:
@@ -118,14 +127,14 @@ class QualityReport:
                     # execution of test case
                     ts.before()
 
-                    # TODO: add cycle cross projects
-                    # filter, if this TS is relevant for this project
                     ts.testscenario_new()
                     for project_name in self.projects:
-                        if ts.name in self._define_avoid_testscenarios(project_name):
-                            print("AVOID")
-                        else:
-                            ts.exec(project_name)
+                        # avoid irrelevant scenarios for this project
+                        if ts.name in projects_avoid_ts[project_name]:
+                            continue
+
+                        # execute TS for this project
+                        ts.exec(project_name)
 
                     ts.after()
                     ts.state = tsbase.TSState.DONE
