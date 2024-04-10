@@ -52,11 +52,6 @@ class TS201(TSBase):
             # create feature set only in case, if not exist
             self._create_featureset_content(project_name, name, desc, json_content['spec'])
 
-            # try:
-            #     fstore.get_feature_set(f"{project_name}/{name}")
-            # except:
-            #     self._create_featureset_content(project_name, name, desc, json_content['spec'])
-
     def _create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
         """
         Create featureset based on json spec
