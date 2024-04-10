@@ -67,28 +67,28 @@ class QualityReport:
 
     def _define_avoid_testscenarios(self, project):
         # Define test scenarios, which will be jumped (without execution)
-        online_target=["kafka", "redis", "mysql", "postgres"]
-        offline_target=["parquet", "csv"]
 
-        for prj in self._projects:
-            spec=self.project_specs[project]
-            online = offline = False
-            for target in spec["targets"]:
-                if spec["targets"][target] in online_target:
-                    online=True
-                if spec["targets"][target] in offline_target:
-                    offline=True
+        all_avoid=[]
+        online = offline = False
 
-            # TEST_SCENARIOS
-            # TEST_EXPERIMENTS
-            # TEST_SCENARIO_DELETE
+        spec=self.project_specs[project]
+        for target in spec["targets"]:
+            if spec["targets"][target] in self.TARGET_ONLINE:
+                online=True
+            if spec["targets"][target] in self.TARGET_OFFLINE:
+                offline=True
 
-            # if not online:
-            #     self._project_scenarios[prj]=
-            # if not offline:
+            # add avoid based on target
+            avoid=self.TARGET_NOT_VALID_TEST.get(spec["targets"][target], None)
+            if avoid:
+                all_avoid.append(avoid)
 
-
-
+        # add avoid TS for missing On/Off-line
+        if not offline:
+            all_avoid.append(self.TEST_ONLY_OFFLINE)
+        if not online:
+            all_avoid.append(self.TEST_ONLY_ONLINE)
+        return all_avoid
 
     def execute(self, delete_scenario: ProjectDelete=ProjectDelete.FULL_DELETE, experiment_scenario=False, filter_projects: list=None):
 
@@ -107,10 +107,10 @@ class QualityReport:
                 ts = test_scenario(self)
                 try:
                     logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
-                    # prepare before execution of test case
-                    ts.prepare()
                     # execution of test case
+                    ts.before()
                     ts.exec()
+                    ts.after()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:
                     ts.state = tsbase.TSState.ERR
