@@ -130,7 +130,9 @@ class QualityReport:
                         # avoid irrelevant scenarios for this project
                         if ts.name in projects_avoid_ts[project_name]:
                             continue
+
                         # execute TS for this project
+                        logger.info(f"    {project_name} ...")
                         ts.exec(project_name)
 
                     ts.after()
