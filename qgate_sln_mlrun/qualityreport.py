@@ -132,7 +132,7 @@ class QualityReport:
                             continue
 
                         # execute TS for this project
-                        logger.info(f"    {project_name} ...")
+                        logger.info(f"    Project: '{project_name}' ...")
                         ts.exec(project_name)
 
                     ts.after()
