@@ -63,7 +63,3 @@ class TS301(TSBase):
             # TODO: use InferOptions.Null with python 3.10 or focus on WSL
             # NOTE: option default, change types
             # NOTE: option Null, generate error with datetime in python 3.9
-
-
-
-
