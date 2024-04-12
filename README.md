@@ -22,6 +22,12 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS102: Delete project(s)
  - **Feature set**
    - ✅ TS201: Create feature set(s)
+   - ❌ TS202: Create feature set(s) & Ingest from DataFrame source (in one step)
+   - ❌ TS203: Create feature set(s) & Ingest from from CSV source (in one step) 
+   - ❌ TS204: Create feature set(s) & Ingest from Parquet source (in one step)
+   - ❌ TS205: Create feature set(s) & Ingest from SQL source (in one step)
+   - ❌ TS206: Create feature set(s) & Ingest from Kafka source (in one step)
+   - ❌ TS207: Create feature set(s) & Ingest from HTTP source (in one step)
  - **Ingest data**
    - ✅ TS301: Ingest data to feature set(s) from DataFrame source
    - ✅ TS302: Ingest data to feature set(s) from CSV source 

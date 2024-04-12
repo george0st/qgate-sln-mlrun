@@ -1,81 +1,301 @@
-# QGate version/model: v0.1.7/v0.1.7
-# 2024-03-14 20:21:14
+# QGate version/model: v0.2.0/v0.2.2
+# 2024-04-12 9213432128372
 # -----------------------
-Summary, test scenarios: 48 [TOTAL] (1/47 [ERR/DONE])
+Summary, test scenarios: 261 [TOTAL] (68/193 [ERR/DONE])
 # -----------------------
 TS101: Create project(s)
-  DONE ... agate-1/*: 'The A-GATE-1, focus on Redis, CSV'
+  DONE ... agate-redis-csv/*: 'The A-GATE with redis and csv'
+  DONE ... agate-redis-parquet/*: 'The A-GATE with redis and parquet'
+  DONE ... agate-mysql-csv/*: 'The A-GATE with mysql and csv'
+  DONE ... agate-mysql-parquet/*: 'The A-GATE with mysql and parquet'
+  DONE ... agate-kafka/*: 'The A-GATE with kafka'
 TS201: Create feature set(s)
-  DONE ... agate-1/basic-party
-  DONE ... agate-1/basic-contact
-  DONE ... agate-1/basic-relation
-  DONE ... agate-1/basic-account
-  DONE ... agate-1/basic-transaction
-  DONE ... agate-1/basic-event
-  DONE ... agate-1/basic-communication
-  DONE ... agate-1/aggregate-party
-  DONE ... agate-1/aggregate-account
-  DONE ... agate-1/aggregate-transaction
-  DONE ... agate-1/aggregate-circle
-TS301: Ingest data to feature set(s)
-  DONE ... agate-1/basic-party
-  DONE ... agate-1/basic-contact
-  DONE ... agate-1/basic-relation
-  DONE ... agate-1/basic-account
-  DONE ... agate-1/basic-transaction
-  DONE ... agate-1/basic-event
-  DONE ... agate-1/basic-communication
+  DONE ... agate-redis-csv/basic-party
+  DONE ... agate-redis-csv/basic-contact
+  DONE ... agate-redis-csv/basic-relation
+  DONE ... agate-redis-csv/basic-account
+  DONE ... agate-redis-csv/basic-transaction
+  DONE ... agate-redis-csv/basic-event
+  DONE ... agate-redis-csv/basic-communication
+  DONE ... agate-redis-csv/aggregate-party
+  DONE ... agate-redis-csv/aggregate-account
+  DONE ... agate-redis-csv/aggregate-transaction
+  DONE ... agate-redis-csv/aggregate-circle
+  DONE ... agate-redis-parquet/basic-party
+  DONE ... agate-redis-parquet/basic-contact
+  DONE ... agate-redis-parquet/basic-relation
+  DONE ... agate-redis-parquet/basic-account
+  DONE ... agate-redis-parquet/basic-transaction
+  DONE ... agate-redis-parquet/basic-event
+  DONE ... agate-redis-parquet/basic-communication
+  DONE ... agate-redis-parquet/aggregate-party
+  DONE ... agate-redis-parquet/aggregate-account
+  DONE ... agate-redis-parquet/aggregate-transaction
+  DONE ... agate-redis-parquet/aggregate-circle
+  DONE ... agate-mysql-csv/basic-party
+  DONE ... agate-mysql-csv/basic-contact
+  DONE ... agate-mysql-csv/basic-relation
+  DONE ... agate-mysql-csv/basic-account
+  DONE ... agate-mysql-csv/basic-transaction
+  DONE ... agate-mysql-csv/basic-event
+  DONE ... agate-mysql-csv/basic-communication
+  DONE ... agate-mysql-csv/aggregate-party
+  DONE ... agate-mysql-csv/aggregate-account
+  DONE ... agate-mysql-csv/aggregate-transaction
+  DONE ... agate-mysql-csv/aggregate-circle
+  DONE ... agate-mysql-parquet/basic-party
+  DONE ... agate-mysql-parquet/basic-contact
+  DONE ... agate-mysql-parquet/basic-relation
+  DONE ... agate-mysql-parquet/basic-account
+  DONE ... agate-mysql-parquet/basic-transaction
+  DONE ... agate-mysql-parquet/basic-event
+  DONE ... agate-mysql-parquet/basic-communication
+  DONE ... agate-mysql-parquet/aggregate-party
+  DONE ... agate-mysql-parquet/aggregate-account
+  DONE ... agate-mysql-parquet/aggregate-transaction
+  DONE ... agate-mysql-parquet/aggregate-circle
+  DONE ... agate-kafka/basic-party
+  DONE ... agate-kafka/basic-contact
+  DONE ... agate-kafka/basic-relation
+  DONE ... agate-kafka/basic-account
+  DONE ... agate-kafka/basic-transaction
+  DONE ... agate-kafka/basic-event
+  DONE ... agate-kafka/basic-communication
+  DONE ... agate-kafka/aggregate-party
+  DONE ... agate-kafka/aggregate-account
+  DONE ... agate-kafka/aggregate-transaction
+  DONE ... agate-kafka/aggregate-circle
+TS301: Ingest data to feature set(s) from DataFrame source
+  DONE ... agate-redis-csv/basic-party
+  DONE ... agate-redis-csv/basic-contact
+  DONE ... agate-redis-csv/basic-relation
+  DONE ... agate-redis-csv/basic-account
+  DONE ... agate-redis-csv/basic-transaction
+  DONE ... agate-redis-csv/basic-event
+  DONE ... agate-redis-csv/basic-communication
+  DONE ... agate-redis-parquet/basic-party
+  DONE ... agate-redis-parquet/basic-contact
+  DONE ... agate-redis-parquet/basic-relation
+  DONE ... agate-redis-parquet/basic-account
+  DONE ... agate-redis-parquet/basic-transaction
+  DONE ... agate-redis-parquet/basic-event
+  DONE ... agate-redis-parquet/basic-communication
+  ERR  ... agate-mysql-csv/basic-party: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-contact: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-relation: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-account: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-transaction: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-event: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-communication: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-party: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-contact: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-relation: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-account: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-transaction: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-event: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-communication: TypeError: None unsupported type
+  DONE ... agate-kafka/basic-party
+  DONE ... agate-kafka/basic-contact
+  DONE ... agate-kafka/basic-relation
+  DONE ... agate-kafka/basic-account
+  DONE ... agate-kafka/basic-transaction
+  DONE ... agate-kafka/basic-event
+  DONE ... agate-kafka/basic-communication
+TS302: Ingest data to feature set(s) from CSV source 
+  DONE ... agate-redis-csv/basic-party
+  DONE ... agate-redis-csv/basic-contact
+  DONE ... agate-redis-csv/basic-relation
+  DONE ... agate-redis-csv/basic-account
+  DONE ... agate-redis-csv/basic-transaction
+  DONE ... agate-redis-csv/basic-event
+  DONE ... agate-redis-csv/basic-communication
+  DONE ... agate-redis-parquet/basic-party
+  DONE ... agate-redis-parquet/basic-contact
+  DONE ... agate-redis-parquet/basic-relation
+  DONE ... agate-redis-parquet/basic-account
+  DONE ... agate-redis-parquet/basic-transaction
+  DONE ... agate-redis-parquet/basic-event
+  DONE ... agate-redis-parquet/basic-communication
+  ERR  ... agate-mysql-csv/basic-party: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-contact: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-relation: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-account: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-transaction: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-event: TypeError: None unsupported type
+  ERR  ... agate-mysql-csv/basic-communication: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-party: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-contact: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-relation: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-account: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-transaction: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-event: TypeError: None unsupported type
+  ERR  ... agate-mysql-parquet/basic-communication: TypeError: None unsupported type
+  DONE ... agate-kafka/basic-party
+  DONE ... agate-kafka/basic-contact
+  DONE ... agate-kafka/basic-relation
+  DONE ... agate-kafka/basic-account
+  DONE ... agate-kafka/basic-transaction
+  DONE ... agate-kafka/basic-event
+  DONE ... agate-kafka/basic-communication
 TS401: Create feature vector(s)
-  DONE ... agate-1/vector-party
-  DONE ... agate-1/vector-contact
-  DONE ... agate-1/vector-partycontact
-  DONE ... agate-1/vector-partycontact-02
-  DONE ... agate-1/vector-account
-  DONE ... agate-1/vector-partyaccount
-  DONE ... agate-1/vector-partyaccount-02
-  DONE ... agate-1/vector-transaction
-  DONE ... agate-1/vector-partycontactaccount
-  DONE ... agate-1/vector-accounttransaction
+  DONE ... agate-redis-csv/vector-party
+  DONE ... agate-redis-csv/vector-contact
+  DONE ... agate-redis-csv/vector-partycontact
+  DONE ... agate-redis-csv/vector-partycontact-02
+  DONE ... agate-redis-csv/vector-account
+  DONE ... agate-redis-csv/vector-partyaccount
+  DONE ... agate-redis-csv/vector-partyaccount-02
+  DONE ... agate-redis-csv/vector-transaction
+  DONE ... agate-redis-csv/vector-partycontactaccount
+  DONE ... agate-redis-csv/vector-accounttransaction
+  DONE ... agate-redis-parquet/vector-party
+  DONE ... agate-redis-parquet/vector-contact
+  DONE ... agate-redis-parquet/vector-partycontact
+  DONE ... agate-redis-parquet/vector-partycontact-02
+  DONE ... agate-redis-parquet/vector-account
+  DONE ... agate-redis-parquet/vector-partyaccount
+  DONE ... agate-redis-parquet/vector-partyaccount-02
+  DONE ... agate-redis-parquet/vector-transaction
+  DONE ... agate-redis-parquet/vector-partycontactaccount
+  DONE ... agate-redis-parquet/vector-accounttransaction
+  DONE ... agate-mysql-csv/vector-party
+  DONE ... agate-mysql-csv/vector-contact
+  DONE ... agate-mysql-csv/vector-partycontact
+  DONE ... agate-mysql-csv/vector-partycontact-02
+  DONE ... agate-mysql-csv/vector-account
+  DONE ... agate-mysql-csv/vector-partyaccount
+  DONE ... agate-mysql-csv/vector-partyaccount-02
+  DONE ... agate-mysql-csv/vector-transaction
+  DONE ... agate-mysql-csv/vector-partycontactaccount
+  DONE ... agate-mysql-csv/vector-accounttransaction
+  DONE ... agate-mysql-parquet/vector-party
+  DONE ... agate-mysql-parquet/vector-contact
+  DONE ... agate-mysql-parquet/vector-partycontact
+  DONE ... agate-mysql-parquet/vector-partycontact-02
+  DONE ... agate-mysql-parquet/vector-account
+  DONE ... agate-mysql-parquet/vector-partyaccount
+  DONE ... agate-mysql-parquet/vector-partyaccount-02
+  DONE ... agate-mysql-parquet/vector-transaction
+  DONE ... agate-mysql-parquet/vector-partycontactaccount
+  DONE ... agate-mysql-parquet/vector-accounttransaction
+  DONE ... agate-kafka/vector-party
+  DONE ... agate-kafka/vector-contact
+  DONE ... agate-kafka/vector-partycontact
+  DONE ... agate-kafka/vector-partycontact-02
+  DONE ... agate-kafka/vector-account
+  DONE ... agate-kafka/vector-partyaccount
+  DONE ... agate-kafka/vector-partyaccount-02
+  DONE ... agate-kafka/vector-transaction
+  DONE ... agate-kafka/vector-partycontactaccount
+  DONE ... agate-kafka/vector-accounttransaction
 TS501: Get data from off-line feature vector(s)
-  DONE ... agate-1/vector-party: ... get 100 items
-  DONE ... agate-1/vector-contact: ... get 103 items
-  DONE ... agate-1/vector-partycontact: ... get 103 items
-  DONE ... agate-1/vector-partycontact-02: ... get 103 items
-  DONE ... agate-1/vector-account: ... get 13 items
-  DONE ... agate-1/vector-partyaccount: ... get 13 items
-  DONE ... agate-1/vector-partyaccount-02: ... get 13 items
-  DONE ... agate-1/vector-transaction: ... get 2805 items
-  DONE ... agate-1/vector-partycontactaccount: ... get 16 items
-  ERR  ... agate-1/vector-accounttransaction: MLRunRuntimeError: Failed to merge
+  DONE ... agate-redis-csv/vector-party: ... get 100 items
+  DONE ... agate-redis-csv/vector-contact: ... get 106 items
+  DONE ... agate-redis-csv/vector-partycontact: ... get 106 items
+  DONE ... agate-redis-csv/vector-partycontact-02: ... get 106 items
+  DONE ... agate-redis-csv/vector-account: ... get 22 items
+  DONE ... agate-redis-csv/vector-partyaccount: ... get 22 items
+  DONE ... agate-redis-csv/vector-partyaccount-02: ... get 22 items
+  DONE ... agate-redis-csv/vector-transaction: ... get 4460 items
+  DONE ... agate-redis-csv/vector-partycontactaccount: ... get 28 items
+  ERR  ... agate-redis-csv/vector-accounttransaction: MLRunRuntimeError: Failed to merge
+  DONE ... agate-redis-parquet/vector-party: ... get 100 items
+  DONE ... agate-redis-parquet/vector-contact: ... get 106 items
+  DONE ... agate-redis-parquet/vector-partycontact: ... get 106 items
+  DONE ... agate-redis-parquet/vector-partycontact-02: ... get 106 items
+  DONE ... agate-redis-parquet/vector-account: ... get 22 items
+  DONE ... agate-redis-parquet/vector-partyaccount: ... get 22 items
+  DONE ... agate-redis-parquet/vector-partyaccount-02: ... get 22 items
+  DONE ... agate-redis-parquet/vector-transaction: ... get 4460 items
+  DONE ... agate-redis-parquet/vector-partycontactaccount: ... get 28 items
+  ERR  ... agate-redis-parquet/vector-accounttransaction: MLRunRuntimeError: Failed to merge
+  ERR  ... agate-mysql-csv/vector-party: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-contact: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-partycontact: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-partycontact-02: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-account: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-partyaccount: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-partyaccount-02: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-transaction: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-partycontactaccount: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-csv/vector-accounttransaction: MLRunRuntimeError: Failed to merge
+  ERR  ... agate-mysql-parquet/vector-party: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-contact: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-partycontact: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-partycontact-02: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-account: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-partyaccount: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-partyaccount-02: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-transaction: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-partycontactaccount: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/vector-accounttransaction: MLRunRuntimeError: Failed to merge
 TS502: Get data from on-line feature vector(s)
-  DONE ... agate-1/vector-party
-  DONE ... agate-1/vector-contact
-  DONE ... agate-1/vector-partycontact
-  DONE ... agate-1/vector-partycontact-02
-  DONE ... agate-1/vector-account
-  DONE ... agate-1/vector-partyaccount
-  DONE ... agate-1/vector-partyaccount-02
-TS601: Build CART model
-  DONE ... agate-1/model-transaction
-TS701: Serving score from CART
-  DONE ... agate-1/model-transaction
+  DONE ... agate-redis-csv/vector-party
+  DONE ... agate-redis-csv/vector-contact
+  DONE ... agate-redis-csv/vector-partycontact
+  DONE ... agate-redis-csv/vector-partycontact-02
+  DONE ... agate-redis-csv/vector-account
+  DONE ... agate-redis-csv/vector-partyaccount
+  DONE ... agate-redis-csv/vector-partyaccount-02
+  DONE ... agate-redis-parquet/vector-party
+  DONE ... agate-redis-parquet/vector-contact
+  DONE ... agate-redis-parquet/vector-partycontact
+  DONE ... agate-redis-parquet/vector-partycontact-02
+  DONE ... agate-redis-parquet/vector-account
+  DONE ... agate-redis-parquet/vector-partyaccount
+  DONE ... agate-redis-parquet/vector-partyaccount-02
+  ERR  ... agate-mysql-csv/vector-party: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-csv/vector-contact: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-contact:latest does not have an online data target
+  ERR  ... agate-mysql-csv/vector-partycontact: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-csv/vector-partycontact-02: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-csv/vector-account: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-account:latest does not have an online data target
+  ERR  ... agate-mysql-csv/vector-partyaccount: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-csv/vector-partyaccount-02: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-parquet/vector-party: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-parquet/vector-contact: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-contact:latest does not have an online data target
+  ERR  ... agate-mysql-parquet/vector-partycontact: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-parquet/vector-partycontact-02: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-parquet/vector-account: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-account:latest does not have an online data target
+  ERR  ... agate-mysql-parquet/vector-partyaccount: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target
+  ERR  ... agate-mysql-parquet/vector-partyaccount-02: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target
+TS701: Build CART model
+  DONE ... agate-redis-csv/model-transaction
+  DONE ... agate-redis-parquet/model-transaction
+  ERR  ... agate-mysql-csv/model-transaction: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/model-transaction: MLRunNotFoundError: there are no offline targets for this feature set
+TS801: Serving score from CART
+  DONE ... agate-redis-csv/model-transaction
+  DONE ... agate-redis-parquet/model-transaction
+  ERR  ... agate-mysql-csv/model-transaction: MLRunNotFoundError: there are no offline targets for this feature set
+  ERR  ... agate-mysql-parquet/model-transaction: MLRunNotFoundError: there are no offline targets for this feature set
+TS102: Delete project(s)
+  DONE ... agate-redis-csv/*:
+  DONE ... agate-redis-parquet/*:
+  DONE ... agate-mysql-csv/*:
+  DONE ... agate-mysql-parquet/*:
+  DONE ... agate-kafka/*:
 # -----------------------
-# MLRun (client/server): 1.6.1/1.6.1 (https://docs.mlrun.org/en/latest/change-log/index.html)
-# MLRun support: ['>=1.5.0', '<=1.6.1']
+# MLRun (client/server): 1.6.2/1.6.2 (https://docs.mlrun.org/en/latest/change-log/index.html)
 # Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]
 # System: Windows 10.0.22621 (Windows-10-10.0.22621-SP0)
 # Platform: AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)
 # ----------------------- 
 # MLRUN_DBPATH: 'http://localhost:8080' 
+# QGATE_ANONYM_MODE: 'On' 
 # QGATE_DEFINITION: '../qgate-model' 
 # QGATE_DATASET: '01-size-100' 
-# QGATE_FILTER_PROJECTS: 'agate-1' 
+# QGATE_FILTER_PROJECTS: 'agate-redis-csv,agate-redis-parquet,agate-mysql-csv,agate-mysql-parquet,agate-kafka' 
 # QGATE_OUTPUT: './output' 
+# QGATE_OUTPUT_EXP: './output, ds://az-blob/jistcontainer01/test/' 
+# QGATE_DATA_STORE: 'az-blob, AzureBlobStorage, ./secrets/az_connection.env' 
 # QGATE_REDIS: 'redis://localhost:6379' 
 # QGATE_MYSQL: 'mysql+pymysql://testuser:testpwd@localhost:3306/test' 
 # QGATE_POSTGRES: 'postgresql+psycopg2://testuser:testpwd@localhost:5432/test' 
+# QGATE_KAFKA: 'localhost:9092, testtopic' 
 # DIR: 'C:\Python\qgate-sln-mlrun' 
 # -----------------------
 # CPU: 12
-# RAM total/free: 15.2 GB/1.0 GB
-# Host: HCI-L3204/172.20.48.1
+# RAM total/free: 15.2 GB/1.9 GB
+# Host: Anonym/192.168.0.1
+# -----------------------
+# Source see the https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
