@@ -167,6 +167,7 @@ class TS201(TSBase):
                 # mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
 
+                # TODO: add featureset name
                 tbl_name = f"{project_name}_{target_name}r"
 
                 # TODO: create table as work-around, because create_table=True does not work for Postgres, only for MySQL
@@ -192,6 +193,7 @@ class TS201(TSBase):
                 sql_schema, primary_key=self._get_sqlschema(json_spec)
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.postgres, table_name=tbl_name,
                                             schema=sql_schema,
+                                            if_exists="replace",
                                             create_table=True,
                                             primary_key_column=primary_key)
             else:
