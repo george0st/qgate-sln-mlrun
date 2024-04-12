@@ -15,7 +15,7 @@ import glob
 import pandas as pd
 
 
-class TS201(TSBase):
+class TS202(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
