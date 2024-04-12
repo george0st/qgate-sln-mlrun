@@ -53,7 +53,7 @@ class TS202(TSBase):
         if kind == "feature-set":
             # create feature set only in case, if not exist
             ts=ts201.TS201(self._solution)
-            featureset=ts.create_featureset_content(project_name, name, desc, json_content['spec'])
+            featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
 
             # TODO: get the relevant data file
 
