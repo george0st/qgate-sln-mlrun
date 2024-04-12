@@ -49,7 +49,7 @@ class TS201(TSBase):
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "feature-set":
-            # create feature set only in case, if not exist
+            # create feature set
             self.create_featureset_content(project_name, name, desc, json_content['spec'])
 
     def create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
