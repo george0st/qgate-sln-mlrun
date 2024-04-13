@@ -59,7 +59,8 @@ class TS201(TSBase):
         :param project_name:        project name
         :param featureset_name:     feature name
         :param featureset_desc:     feature description
-        :param json_spec:  Json specification for this featureset
+        :param json_spec:   Json specification for this featureset
+        :return:            New (created) feature set
         """
 
         project_spec = self.project_specs.get(project_name, None)
