@@ -7,7 +7,6 @@ import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import spark_to_value_type
 from mlrun.datastore.sources import CSVSource
-import pandas as pd
 import glob
 import os
 
