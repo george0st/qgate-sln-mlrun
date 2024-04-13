@@ -176,8 +176,10 @@ class TS201(TSBase):
                 sql_schema, primary_key=self._get_sqlschema(json_spec)
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=tbl_name,
                                             schema=sql_schema,
+                                            if_exists="replace",
                                             create_table=True,
-                                            primary_key_column=primary_key)
+                                            primary_key_column=primary_key,
+                                            varchar_len=512)
             else:
                 raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
         elif target == "postgres":
