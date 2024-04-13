@@ -5,6 +5,7 @@ from enum import Enum
 import mlrun
 import os
 import json
+import logging
 
 
 class TSState(Enum):
@@ -26,6 +27,8 @@ class TSBase:
         self._solution=solution
         self._name=name
         self._state = TSState.NoExecution
+        self._logger = logging.getLogger("mlrun")
+
 
     @property
     def projects(self) -> list:
