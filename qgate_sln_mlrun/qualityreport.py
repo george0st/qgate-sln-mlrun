@@ -3,7 +3,7 @@ import json
 import os
 from qgate_sln_mlrun.setup import Setup, ProjectDelete
 from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts202, ts301, ts302, ts303, ts401, ts501, ts502, ts701, ts801
+from qgate_sln_mlrun.ts import ts101, ts102, ts201, ts202, ts203, ts301, ts302, ts303, ts401, ts501, ts502, ts701, ts801
 from qgate_sln_mlrun.ts import tsbase
 import logging
 import importlib.resources
@@ -15,7 +15,7 @@ class QualityReport:
     """
 
     TEST_SCENARIOS = [ts101.TS101,
-                      ts201.TS201, ts202.TS202,
+                      ts201.TS201, ts202.TS202, ts203.TS203,
                       ts301.TS301, ts302.TS302, #ts303.TS303,
                       ts401.TS401,
                       ts501.TS501, ts502.TS502]
@@ -114,13 +114,11 @@ class QualityReport:
         # Define, which test scenarios will be valid for specific project
         projects_avoid_ts = self._projects_avoid_testscenarios()
 
-        logger = logging.getLogger("mlrun")
         for test_scenario in test_scenarios:
             if test_scenario:
                 # create instance
                 ts = test_scenario(self)
                 try:
-                    logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
 
                     # execution of test case
                     ts.testscenario_new()
@@ -132,7 +130,6 @@ class QualityReport:
                             continue
 
                         # execute TS for this project
-                        logger.info(f"    Project: '{project_name}' ...")
                         ts.exec(project_name)
 
                     ts.after()

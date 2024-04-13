@@ -29,7 +29,6 @@ class TSBase:
         self._state = TSState.NoExecution
         self._logger = logging.getLogger("mlrun")
 
-
     @property
     def projects(self) -> list:
         return self._solution.projects
@@ -175,9 +174,11 @@ class TSBase:
 
     # region TEST_SCENARIOS
     def testscenario_new(self):
+        self._logger.info(f"!! {self.name}: {self.desc} ...")
         self.output.testscenario_new(self.name, self.desc)
 
     def testcase_new(self, name):
+        self._logger.info(f"  '{name}' ...")
         self.output.testcase_new(name)
 
     def testcase_detail(self, detail):
