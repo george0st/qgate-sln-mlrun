@@ -68,6 +68,7 @@ class TS202(TSBase):
                                             sep=self.setup.csv_separator,
                                             header="infer",
                                             decimal=self.setup.csv_decimal,
+                                            na_filter=False,
                                             compression="gzip",
                                             encoding="utf-8",
                                             chunksize=10000):
