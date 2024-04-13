@@ -14,14 +14,12 @@ import os
 import json
 import glob
 import pandas as pd
-import logging
 
 
 class TS202(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
-        self._logger = logging.getLogger("mlrun")
 
     @property
     def desc(self) -> str:
