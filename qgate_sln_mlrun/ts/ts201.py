@@ -97,7 +97,7 @@ class TS201(TSBase):
             # add target
             if len(target) == 0:  # support bypass: switch empty targets
                 continue
-            target_provider = self._create_target(target, f"target_{count}", project_name, json_spec)
+            target_provider = self._create_target(target, f"trg_{count}", featureset_name, project_name, json_spec)
             if target_provider:
                 target_providers.append(target_provider)
             count += 1
@@ -143,7 +143,7 @@ class TS201(TSBase):
             schema[item['name']] = TS201.type_to_type(item['type'])
         return schema, json_spec['entities'][0]['name']
 
-    def _create_target(self, target, target_name, project_name, json_spec):
+    def _create_target(self, target, target_name, featureset_name, project_name, json_spec):
 
         target_provider=None
         if target == "parquet":
@@ -168,7 +168,7 @@ class TS201(TSBase):
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
 
                 # TODO: add featureset name
-                tbl_name = f"{project_name}_{target_name}r"
+                tbl_name = f"{project_name}_{featureset_name}_{target_name}"
 
                 # TODO: create table as work-around, because create_table=True does not work for Postgres, only for MySQL
                 #self._createtable(self.setup.mysql, tbl_name, json_spec)
