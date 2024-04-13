@@ -64,7 +64,6 @@ class TS202(TSBase):
                                        f"*-{name}.csv.gz")
             for file in glob.glob(source_file):
                 # ingest data with bundl/chunk
-                self._logger.info(f"       FeatureSet: '{name}' ...")
                 for data_frm in pd.read_csv(file,
                                             sep=self.setup.csv_separator,
                                             header="infer",

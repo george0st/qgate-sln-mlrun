@@ -114,13 +114,11 @@ class QualityReport:
         # Define, which test scenarios will be valid for specific project
         projects_avoid_ts = self._projects_avoid_testscenarios()
 
-        logger = logging.getLogger("mlrun")
         for test_scenario in test_scenarios:
             if test_scenario:
                 # create instance
                 ts = test_scenario(self)
                 try:
-                    logger.info(f"!! Testing {ts.name}: {ts.desc} ...")
 
                     # execution of test case
                     ts.testscenario_new()
@@ -132,7 +130,6 @@ class QualityReport:
                             continue
 
                         # execute TS for this project
-                        logger.info(f"    Project: '{project_name}' ...")
                         ts.exec(project_name)
 
                     ts.after()
