@@ -51,28 +51,34 @@ class TS202(TSBase):
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "feature-set":
-            # create feature set only in case, if not exist
+
+            # create feature set based on the logic in TS201
             ts=ts201.TS201(self._solution)
             featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
 
             # TODO: get the relevant data file
-
-            # ingest data with bundl/chunk
-            for data_frm in pd.read_csv(file,
-                                        sep=self.setup.csv_separator,
-                                        header="infer",
-                                        decimal=self.setup.csv_decimal,
-                                        compression="gzip",
-                                        encoding="utf-8",
-                                        chunksize=10000):
-                featureset.ingest(data_frm,
-                              # overwrite=False,
-                              return_df=False,
-                              #infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                              infer_options=mlrun.data_types.data_types.InferOptions.default())
-                # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-                # NOTE: option default, change types
-                # NOTE: option Null, generate error with datetime in python 3.9
+            source_file = os.path.join(os.getcwd(),
+                                       self.setup.model_definition,
+                                       "02-data",
+                                       self.setup.dataset_name,
+                                       f"*-{name}.csv.gz")
+            for file in glob.glob(source_file):
+                # ingest data with bundl/chunk
+                for data_frm in pd.read_csv(file,
+                                            sep=self.setup.csv_separator,
+                                            header="infer",
+                                            decimal=self.setup.csv_decimal,
+                                            compression="gzip",
+                                            encoding="utf-8",
+                                            chunksize=10000):
+                    featureset.ingest(data_frm,
+                                  # overwrite=False,
+                                  return_df=False,
+                                  #infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                                  infer_options=mlrun.data_types.data_types.InferOptions.default())
+                    # TODO: use InferOptions.Null with python 3.10 or focus on WSL
+                    # NOTE: option default, change types
+                    # NOTE: option Null, generate error with datetime in python 3.9
 
 
 
