@@ -168,7 +168,7 @@ class TS201(TSBase):
                 # mysql+pymysql://testuser:testpwd@localhost:3306/test
 
                 # TODO: add featureset name
-                tbl_name = f"{project_name}_{featureset_name}_{target_name}"
+                tbl_name = f"{project_name}_{featureset_name}_{target_name}r"
 
                 # TODO: create table as work-around, because create_table=True does not work for Postgres, only for MySQL
                 #self._createtable(self.setup.mysql, tbl_name, json_spec)

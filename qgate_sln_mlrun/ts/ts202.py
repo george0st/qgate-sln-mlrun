@@ -14,12 +14,14 @@ import os
 import json
 import glob
 import pandas as pd
+import logging
 
 
 class TS202(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
+        self._logger = logging.getLogger("mlrun")
 
     @property
     def desc(self) -> str:
@@ -64,6 +66,7 @@ class TS202(TSBase):
                                        f"*-{name}.csv.gz")
             for file in glob.glob(source_file):
                 # ingest data with bundl/chunk
+                self._logger.info(f"       FeatureSet: '{name}' ...")
                 for data_frm in pd.read_csv(file,
                                             sep=self.setup.csv_separator,
                                             header="infer",
