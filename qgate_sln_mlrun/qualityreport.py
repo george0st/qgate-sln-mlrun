@@ -109,10 +109,13 @@ class QualityReport:
         # TODO: Define, which test scenarios will be valid for specific project
 
 
-        # Define, which test scenarios will be executed
+        # define, which test scenarios will be executed
         test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
-        # Define, which test scenarios will be valid for specific project
+
+        # define, which test scenarios will be valid for specific project based on target type, etc.
         projects_avoid_ts = self._projects_avoid_testscenarios()
+
+        # TODO: apply FILTER for scenarios
 
         for test_scenario in test_scenarios:
             if test_scenario:
