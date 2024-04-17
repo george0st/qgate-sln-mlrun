@@ -115,7 +115,8 @@ class QualityReport:
         # define, which test scenarios will be valid for specific project based on target type, etc.
         projects_avoid_ts = self._projects_avoid_testscenarios()
 
-        # TODO: apply FILTER for scenarios
+        # setup filter test scenarios
+        filter_scenarios = [itm.strip() for itm in self.setup.filter_scenarios.split(',')] if self.setup.filter_scenarios else None
 
         for test_scenario in test_scenarios:
             if test_scenario:
@@ -131,6 +132,10 @@ class QualityReport:
                         # avoid irrelevant scenarios for this project
                         if ts.name in projects_avoid_ts[project_name]:
                             continue
+
+                        if filter_scenarios:
+                            if not ts.name in filter_scenarios:
+                                continue
 
                         # execute TS for this project
                         ts.exec(project_name)
