@@ -133,6 +133,7 @@ class QualityReport:
                         if ts.name in projects_avoid_ts[project_name]:
                             continue
 
+                        # apply QGATE_FILTER_SCENARIOS, focus on only the specific test scenarios
                         if filter_scenarios:
                             if not ts.name in filter_scenarios:
                                 continue
