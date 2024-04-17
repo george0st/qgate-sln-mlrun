@@ -56,7 +56,8 @@ class TS303(TSBase):
                                        self.setup.model_definition,
                                        "02-data",
                                        self.setup.dataset_name,
-                                       f"*-{featureset_name}.csv.gz")
+#                                       f"*-{featureset_name}.csv.gz")
+                                       f"*-{featureset_name}.parquet")
 
             # check existing data set
             for file in glob.glob(source_file):
@@ -68,10 +69,11 @@ class TS303(TSBase):
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # create parquest file from csv
-        parquet_file=self._cvs_to_parquest(file)
+#        parquet_file=self._cvs_to_parquest(file)
 
         fstore.ingest(featureset,
-                      ParquetSource(name="tst", path=parquet_file),
+#                      ParquetSource(name="tst", path=parquet_file),
+                      ParquetSource(name="tst", path=file),
                       # overwrite=False,
                       return_df=False,
                       #infer_options=mlrun.data_types.data_types.InferOptions.Null)

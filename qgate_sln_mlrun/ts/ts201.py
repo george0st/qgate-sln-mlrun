@@ -103,7 +103,7 @@ class TS201(TSBase):
                 target_providers.append(target_provider)
             count += 1
         fs.set_targets(target_providers, with_defaults=False)
-        
+
         fs.save()
         return fs
 

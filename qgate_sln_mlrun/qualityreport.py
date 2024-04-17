@@ -16,7 +16,7 @@ class QualityReport:
 
     TEST_SCENARIOS = [ts101.TS101,
                       ts201.TS201, ts202.TS202, ts203.TS203,
-                      ts301.TS301, ts302.TS302, #ts303.TS303,
+                      ts301.TS301, ts302.TS302, ts303.TS303,
                       ts401.TS401,
                       ts501.TS501, ts502.TS502]
     TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
@@ -109,10 +109,13 @@ class QualityReport:
         # TODO: Define, which test scenarios will be valid for specific project
 
 
-        # Define, which test scenarios will be executed
+        # define, which test scenarios will be executed
         test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
-        # Define, which test scenarios will be valid for specific project
+
+        # define, which test scenarios will be valid for specific project based on target type, etc.
         projects_avoid_ts = self._projects_avoid_testscenarios()
+
+        # TODO: apply FILTER for scenarios
 
         for test_scenario in test_scenarios:
             if test_scenario:

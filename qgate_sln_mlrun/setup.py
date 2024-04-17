@@ -90,6 +90,11 @@ class Setup(metaclass=Singleton):
         return self._variables.get("QGATE_FILTER_PROJECTS", None)
 
     @property
+    def filter_scenarios(self):
+        """Return the test scenario filter setting"""
+        return self._variables.get("QGATE_FILTER_SCENARIOS", None)
+
+    @property
     def redis(self):
         """Return the connection to Redis"""
         return self._variables.get('QGATE_REDIS', None)
