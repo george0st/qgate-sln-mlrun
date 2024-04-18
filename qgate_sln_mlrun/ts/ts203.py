@@ -1,5 +1,5 @@
 """
-  TS203: Create feature set(s) & Ingest from from CSV source (one step)
+  TS203: Create feature set(s) & Ingest from CSV source (one step)
 """
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
