@@ -151,7 +151,7 @@ class TS201(TSBase):
                                             if_exists="replace",
                                             create_table=True,
                                             primary_key_column=primary_key,
-                                            varchar_len=512)
+                                            varchar_len=250)
             else:
                 raise ValueError("Missing value for mysql connection, see 'QGATE_MYSQL'.")
         elif target == "postgres":
