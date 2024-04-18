@@ -61,7 +61,7 @@ class TS203(TSBase):
             for file in glob.glob(source_file):
 
                 fstore.ingest(featureset,
-                              CSVSource(name="tst", path=file),
+                              CSVSource(name="tst", path=file, attributes={"na_filter": "False"}),
                               # overwrite=False,
                               return_df=False,
                               # infer_options=mlrun.data_types.data_types.InferOptions.Null)
