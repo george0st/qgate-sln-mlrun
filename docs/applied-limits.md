@@ -50,7 +50,8 @@ see detail below
 
 ## CSVSource
 
-1. CSVSource supports only default CSV setting, it means sep=',' and decimal='.'
+1. CSVSource supports only default CSV setting, it means sep=',', decimal='.' and 
+   with na_filter=True (it is the issue for nan value or empty strings) 
    - in case of different setting, it is better to use Pandas/DataFrame source
      (it has bigger variability)
 
