@@ -169,7 +169,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 
 </script>
 <body>
-	<h2>Quality report for MLRun</h2>
+	<h2>Quality report for MLRun {{ data.mlrun_server }} (<b>{{ data.datetime }}</b>)</h2>
 	<p><b>{{ data.datetime }}</b>, QGate version/model: v{{ data.version }}/v{{ data.model_version }}</p>
 
 	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr')">
