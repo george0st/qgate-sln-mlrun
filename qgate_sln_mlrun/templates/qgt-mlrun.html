@@ -201,9 +201,9 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 			<b>System information:</b><br>
 			&nbsp;&nbsp;<b style="color:blue;">MLRun: {{ data.mlrun }} (client)/{{ data.mlrun_server }} (server)</b>,  <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a><br>
 			&nbsp;&nbsp;<b style="color:blue;">Python: {{ data.python }}</b><br>
+			&nbsp;&nbsp;<b style="color:blue;">QGate:</b> {{ data.version }} (version)/{{ data.model_version }} (model)<br>
 			&nbsp;&nbsp;<b>System:</b> {{ data.system }}<br>
 			&nbsp;&nbsp;<b>Platform:</b> {{ data.platform }}<br>
-			&nbsp;&nbsp;<b>QGate:</b> {{ data.version }} (version)/{{ data.model_version }} (model)<br>
 		</p>
 		<p>
 			<b>Variables:</b><br>{% for variable in data.variables %}

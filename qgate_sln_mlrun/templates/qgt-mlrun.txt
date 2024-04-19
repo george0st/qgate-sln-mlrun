@@ -8,9 +8,9 @@ Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.sum
 # -----------------------
 # MLRun: {{ data.mlrun }} (client)/{{ data.mlrun_server }} (server), see https://docs.mlrun.org/en/latest/change-log/index.html
 # Python: {{ data.python }}
+# QGate: {{ data.version }} (version)/{{ data.model_version }} (model)
 # System: {{ data.system }}
 # Platform: {{ data.platform }}
-# QGate: {{ data.version }} (version)/{{ data.model_version }} (model)
 # ----------------------- {% for variable in data.variables %}
 # {{ variable.key }}: '{{ variable.value }}' {% endfor %}
 # -----------------------
