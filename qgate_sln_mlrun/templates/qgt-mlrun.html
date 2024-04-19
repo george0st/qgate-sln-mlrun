@@ -170,7 +170,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 </script>
 <body>
 	<h2>Quality report for <u>MLRun {{ data.mlrun_server }}</u></h2>
-	<p>Report ID: <b>{{ data.datetime }}</b></p>
+	<p>Report ID: <b>{{ data.datetime }}</b> ({{ data.used_filters }})</p>
 
 	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
