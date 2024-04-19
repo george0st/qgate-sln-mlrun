@@ -36,7 +36,6 @@ class Setup(metaclass=Singleton):
                 self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
                 break
 
-        # QGate version/model: v{{ data.version }}/v{{ data.model_version }}
         # push dataset name
         if dataset_name:
             self._variables["QGATE_DATASET"] = dataset_name
@@ -69,6 +68,17 @@ class Setup(metaclass=Singleton):
             itm['value']=self._variables[key]
             variable_list.append(itm)
         return variable_list
+
+    @property
+    def used_filters(self):
+        """Check, if some filter is used"""
+        if self.filter_scenarios:
+            if len(self.filter_scenarios)>0:
+                return True
+        if self.filter_projects:
+            if len(self.filter_projects)>0:
+                return True
+        return False
 
     @property
     def model_output(self):
