@@ -19,6 +19,12 @@ NOTE: Solution, it is necessity to use WSL2 under OS Windows
    - in case of e.g. more on-line targets, it is not possible to choose 
    relevant target for FeatureVector  
 
+## RedisNoSqlTarget
+
+1. Issue with support **date** type
+   - see [combination of RedisNoSqlTarget and ParquetSource](https://github.com/mlrun/mlrun/issues/5447)
+
+
 ## SQLTarget
 
 NOTE: It is in preview version, very limited with focus on MySQL only, 
