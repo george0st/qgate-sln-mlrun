@@ -31,7 +31,7 @@ class QualityReport:
     TARGET_NOT_VALID_TEST = {"kafka": ["TS501", "TS502"]}
 
     # Test vs Only On/Off-line
-    TEST_BOTH = ["TS101","TS102","TS201","TS301", "TS302", "TS303", "TS401"]
+    TEST_BOTH = ["TS101","TS102","TS201", "TS202", "TS203", "TS204", "TS301", "TS302", "TS303", "TS401"]
     TEST_ONLY_OFFLINE = ["TS501","TS701","TS801"]
     TEST_ONLY_ONLINE = ["TS502"]
 
