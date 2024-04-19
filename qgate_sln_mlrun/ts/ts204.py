@@ -5,7 +5,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.sources import CSVSource
+from mlrun.datastore.sources import ParquetSource
 from qgate_sln_mlrun.ts import ts201
 import os
 import json
@@ -28,19 +28,18 @@ class TS204(TSBase):
     def exec(self, project_name):
         """ Get or create featuresets"""
 
-        pass
-        # for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-        #     # create file with definition of vector
-        #     source_file = os.path.join(os.getcwd(),
-        #                                self.setup.model_definition,
-        #                                "01-model",
-        #                                "02-feature-set",
-        #                                f"*-{featureset_name}.json")
-        #
-        #     for file in glob.glob(source_file):
-        #         # iterate cross all featureset definitions
-        #         with open(file, "r") as json_file:
-        #             self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, json_file)
+        for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
+            # create file with definition of vector
+            source_file = os.path.join(os.getcwd(),
+                                       self.setup.model_definition,
+                                       "01-model",
+                                       "02-feature-set",
+                                       f"*-{featureset_name}.json")
+
+            for file in glob.glob(source_file):
+                # iterate cross all featureset definitions
+                with open(file, "r") as json_file:
+                    self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, json_file)
 
     @TSBase.handler_testcase
     def _create_featureset_ingest(self, testcase_name, project_name, json_file):
@@ -58,11 +57,11 @@ class TS204(TSBase):
                                        self.setup.model_definition,
                                        "02-data",
                                        self.setup.dataset_name,
-                                       f"*-{name}.csv.gz")
+                                       f"*-{name}.parquet")
             for file in glob.glob(source_file):
 
                 fstore.ingest(featureset,
-                              CSVSource(name="tst", path=file),
+                              ParquetSource(name="tst", path=file),
                               # overwrite=False,
                               return_df=False,
                               # infer_options=mlrun.data_types.data_types.InferOptions.Null)
