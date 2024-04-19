@@ -1,5 +1,5 @@
 # Quality report for MLRun {{ data.mlrun_server }} ({{ data.datetime }})
-# QGate version/model: v{{ data.version }}/v{{ data.model_version }}
+# Iteration: QGate version/model: v{{ data.version }}/v{{ data.model_version }}
 # -----------------------
 Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.summary.count_testcases_err }}/{{ data.summary.count_testcases_done }} [ERR/DONE])
 # -----------------------{% for testscenario in data.testscenarios %}
@@ -8,6 +8,7 @@ Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.sum
 # -----------------------
 # MLRun (client/server): {{ data.mlrun }}/{{ data.mlrun_server }} (https://docs.mlrun.org/en/latest/change-log/index.html)
 # Python: {{ data.python }}
+# QGate version/model: v{{ data.version }}/v{{ data.model_version }}
 # System: {{ data.system }}
 # Platform: {{ data.platform }}
 # ----------------------- {% for variable in data.variables %}

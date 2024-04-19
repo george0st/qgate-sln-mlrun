@@ -36,6 +36,7 @@ class Setup(metaclass=Singleton):
                 self._variables=mlrun.set_env_from_file(env_file, return_dict=True)
                 break
 
+        # QGate version/model: v{{ data.version }}/v{{ data.model_version }}
         # push dataset name
         if dataset_name:
             self._variables["QGATE_DATASET"] = dataset_name
