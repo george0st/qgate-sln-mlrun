@@ -170,7 +170,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 </script>
 <body>
 	<h2>Quality report for <u>MLRun {{ data.mlrun_server }}</u></h2>
-	<p>Report ID: {{ data.datetime }}</p>
+	<p>Report ID: <b>{{ data.datetime }}</b></p>
 
 	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
@@ -203,7 +203,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 			&nbsp;&nbsp;<b style="color:blue;">Python: {{ data.python }}</b><br>
 			&nbsp;&nbsp;<b>System:</b> {{ data.system }}<br>
 			&nbsp;&nbsp;<b>Platform:</b> {{ data.platform }}<br>
-			  <b>QGate version/model:</b> v{{ data.version }}/v{{ data.model_version }}<br>
+			  <b>QGate:</b> version {{ data.version }}/model{{ data.model_version }}<br>
 		</p>
 		<p>
 			<b>Variables:</b><br>{% for variable in data.variables %}
