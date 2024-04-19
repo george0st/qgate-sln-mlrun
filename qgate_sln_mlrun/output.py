@@ -173,7 +173,7 @@ class Output():
     def _system_info(self):
         self._data["version"] = __version__
         self._data["model_version"] = self._get_model_version()
-        self._data["used_filters"] = "Limited, see 'Execution details ...'" if self._setup.used_filters else "Full"
+        self._data["used_filters"] = "LIMITED" if self._setup.used_filters else "FULL"
 
         # application anonymous mode setting
         time_format='%Y-%m-%d x9%H%M%S%f' if self._setup.anonym_mode else '%Y-%m-%d %H:%M:%S'
