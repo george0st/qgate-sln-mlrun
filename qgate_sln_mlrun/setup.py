@@ -70,6 +70,17 @@ class Setup(metaclass=Singleton):
         return variable_list
 
     @property
+    def used_filters(self):
+        """Check, if some filter is used"""
+        if self.filter_scenarios:
+            if len(self.filter_scenarios)>0:
+                return True
+        if self.filter_projects:
+            if len(self.filter_projects)>0:
+                return True
+        return False
+
+    @property
     def model_output(self):
         """Return the model output path"""
         return self._variables.get('QGATE_OUTPUT', './output')

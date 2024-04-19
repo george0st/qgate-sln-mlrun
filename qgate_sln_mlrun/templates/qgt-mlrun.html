@@ -169,8 +169,8 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 
 </script>
 <body>
-	<h2>Quality report for MLRun</h2>
-	<p><b>{{ data.datetime }}</b>, QGate version/model: v{{ data.version }}/v{{ data.model_version }}</p>
+	<h2>Quality report for <u>MLRun {{ data.mlrun_server }}</u></h2>
+	<p>Report ID: <b>{{ data.datetime }}</b> ({{ data.used_filters }})</p>
 
 	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
@@ -199,8 +199,9 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b><br>
-			&nbsp;&nbsp;<b style="color:blue;">MLRun (client/server): {{ data.mlrun }}/{{ data.mlrun_server }}</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)<br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun: {{ data.mlrun }} (client)/{{ data.mlrun_server }} (server)</b>,  <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a><br>
 			&nbsp;&nbsp;<b style="color:blue;">Python: {{ data.python }}</b><br>
+			&nbsp;&nbsp;<b style="color:blue;">QGate: {{ data.version }} (version)/{{ data.model_version }} (model)</b><br>
 			&nbsp;&nbsp;<b>System:</b> {{ data.system }}<br>
 			&nbsp;&nbsp;<b>Platform:</b> {{ data.platform }}<br>
 		</p>
