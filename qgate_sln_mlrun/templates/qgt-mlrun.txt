@@ -10,7 +10,7 @@ Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.sum
 # Python: {{ data.python }}
 # System: {{ data.system }}
 # Platform: {{ data.platform }}
-# QGate:</b> version {{ data.version }}/model{{ data.model_version }}
+# QGate: {{ data.version }} (version)/{{ data.model_version }} (model)
 # ----------------------- {% for variable in data.variables %}
 # {{ variable.key }}: '{{ variable.value }}' {% endfor %}
 # -----------------------

@@ -203,7 +203,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 			&nbsp;&nbsp;<b style="color:blue;">Python: {{ data.python }}</b><br>
 			&nbsp;&nbsp;<b>System:</b> {{ data.system }}<br>
 			&nbsp;&nbsp;<b>Platform:</b> {{ data.platform }}<br>
-			  <b>QGate:</b> version {{ data.version }}/model{{ data.model_version }}<br>
+			  <b>QGate:</b> {{ data.version }} (version)/{{ data.model_version }} (model)<br>
 		</p>
 		<p>
 			<b>Variables:</b><br>{% for variable in data.variables %}
