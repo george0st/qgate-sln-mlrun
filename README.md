@@ -62,12 +62,12 @@ targets for feature sets, etc.).
 ## Test inputs/outputs
 The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ planned):
  - Outputs (targets)
-   - ✅ RedisTarget, ✔ SQLTarget/MySQL, ✔ SQLTarget/Postgres, ✅ KafkaTarget
+   - ✅ RedisTarget, ✅ SQLTarget/MySQL, ✔ SQLTarget/Postgres, ✅ KafkaTarget
    - ✅ ParquetTarget, ✅ CSVTarget
    - ✅ File system, ❌ S3, ❌ BlobStorage
  - Inputs (sources)
    - ✅ Pandas/DataFrame, ❌ SQLSource/MySQL, ❌ SQLSource/Postgres, ❌ KafkaSource
-   - ✔ ParquetSource, ✅ CSVSource
+   - ✅ ParquetSource, ✅ CSVSource
    - ✅ File system, ❌ S3, ❌ BlobStorage
 
 
