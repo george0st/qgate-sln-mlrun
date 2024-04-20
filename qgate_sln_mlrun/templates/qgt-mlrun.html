@@ -115,6 +115,22 @@ td {
   visibility: visible;
 }
 
+.btn-percentage {
+  background: #97c83e;
+  text-align: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none
+}
+
 </style>
 <script>
 
@@ -169,8 +185,20 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 
 </script>
 <body>
-	<h2>Quality report for <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank"><u>MLRun {{ data.mlrun_server }}</u></a></h2>
-	<p>Report ID: <b>{{ data.datetime }}</b> ({{ data.used_filters }})</p>
+	<table style="border: 1px; font-family: Helvetica, Arial, sans-serif; font-size: 16px; width: 100%">
+		<tr style="border: 0px;">
+			<td style="border: 0px; width: 100px;">
+				<a class="btn-percentage" {% if data.used_filters == 'FULL' %}style="background: green;"{% else %}style="background: #E20074;"{% endif %}>{{ data.used_filters }}</a>
+			</td>
+			<td style="border: 0px;" align="center">
+				<h2 style="margin: 0;">Quality report for <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank"><u>MLRun {{ data.mlrun_server }}</u></a></h2>
+				<p style="margin: 0; padding: 6px 3px;">Report ID: <b>{{ data.datetime }}</b></p>
+			</td>
+			<td style="border: 0px; width: 100px;">
+				<a class="btn-percentage" style="{{ data.summary.score_style }}">{{ data.summary.score }}%</a>
+			</td>
+		</tr>
+	</table>
 
 	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">

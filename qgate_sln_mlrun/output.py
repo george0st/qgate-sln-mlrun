@@ -163,17 +163,26 @@ class Output():
                             first_errors= first_errors + "<br><br>"
                         first_errors= first_errors + f"#{error_count} ERR<br>{testscenario['name']}: {testscenario['desc']}<br>{testcase['name']}<br>{testcase['detail']}"
             count_testcases+=len(testscenario["testcases"])
+        score=count_testcases_done*100.0/count_testcases
+        if score>0 and score<85:
+            score_style = "background: #E20074; color: white;"
+        elif score>=85 and score<95:
+            score_style = "background: yellow; color: black;"
+        elif score>=95:
+            score_style = "background: green; color: white;"
 
         self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "ERR"
-        self._data["summary"]["count_testcases"]=count_testcases
-        self._data["summary"]["count_testcases_done"]=count_testcases_done
-        self._data["summary"]["count_testcases_err"]=count_testcases-count_testcases_done
-        self._data["summary"]["first_errors"]=first_errors
+        self._data["summary"]["count_testcases"] = count_testcases
+        self._data["summary"]["count_testcases_done"] = count_testcases_done
+        self._data["summary"]["count_testcases_err"] = count_testcases-count_testcases_done
+        self._data["summary"]["first_errors"] = first_errors
+        self._data["summary"]["score"] = int(score)
+        self._data["summary"]["score_style"] = score_style
 
     def _system_info(self):
         self._data["version"] = __version__
         self._data["model_version"] = self._get_model_version()
-        self._data["used_filters"] = "limited" if self._setup.used_filters else "full"
+        self._data["used_filters"] = "PART" if self._setup.used_filters else "FULL"
 
         # application anonymous mode setting
         time_format='%Y-%m-%d x9%H%M%S%f' if self._setup.anonym_mode else '%Y-%m-%d %H:%M:%S'
