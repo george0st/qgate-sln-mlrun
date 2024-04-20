@@ -164,9 +164,9 @@ class Output():
                         first_errors= first_errors + f"#{error_count} ERR<br>{testscenario['name']}: {testscenario['desc']}<br>{testcase['name']}<br>{testcase['detail']}"
             count_testcases+=len(testscenario["testcases"])
         score=count_testcases_done*100.0/count_testcases
-        if score>0 and score<75:
+        if score>0 and score<85:
             score_style = "background: #E20074; color: white;"
-        elif score>=75 and score<95:
+        elif score>=85 and score<95:
             score_style = "background: yellow; color: black;"
         elif score>=95:
             score_style = "background: green; color: white;"
