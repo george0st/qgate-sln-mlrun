@@ -13,13 +13,16 @@ The list of expected/future improvements:
  3. **Extend QGATE_OUTPUT as arraylist**
     - support more storages S3, BlobStorage
     
- 3. **Test target in S3**
+ 4. **Test target in S3**
     - add secrets for S3 login
 
- 4. **Test target in BlobStorage**
+ 5. **Test target in BlobStorage**
     - add secrets for BlobStorage
 
- 5. TBD.
+ 6. **Test engine Spark**
+    - separate installation in docker image
+    
+ 7. etc.
  
 ## Freeze points
 
