@@ -195,7 +195,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 				<p style="margin: 0; padding: 6px 3px;">Report ID: <b>{{ data.datetime }}</b></p>
 			</td>
 			<td style="border: 0px; width: 100px;">
-				<a class="btn-percentage" style="background: #ff0000;">100%</a>
+				<a class="btn-percentage" style="background: {{ data.summary.score_color }};">{{ data.summary.score }}%</a>
 			</td>
 		</tr>
 	</table>
