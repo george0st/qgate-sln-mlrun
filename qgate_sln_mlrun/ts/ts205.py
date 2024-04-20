@@ -5,7 +5,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.sources import ParquetSource
+from mlrun.datastore.sources import SQLSource
 from qgate_sln_mlrun.ts import ts201
 import os
 import json
@@ -23,10 +23,12 @@ class TS205(TSBase):
 
     @property
     def long_desc(self):
-        return ("Create feature set(s) & Ingest from SQL source (one step)")
+        return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step)")
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
+
+        # TODO: test, if mySQL is available
         pass
         # for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
         #     # create file with definition of vector
@@ -61,7 +63,7 @@ class TS205(TSBase):
             for file in glob.glob(source_file):
 
                 fstore.ingest(featureset,
-                              ParquetSource(name="tst", path=file),
+                              SQLSource(name="tst", path=file),
                               # overwrite=False,
                               return_df=False,
                               # infer_options=mlrun.data_types.data_types.InferOptions.Null)
