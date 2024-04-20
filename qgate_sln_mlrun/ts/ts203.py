@@ -26,7 +26,7 @@ class TS203(TSBase):
         return ("Create feature set(s) & Ingest from from CSV source (one step)")
 
     def exec(self, project_name):
-        """ Get or create featuresets"""
+        """ Create featuresets and ingest"""
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # create file with definition of vector

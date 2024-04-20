@@ -1,5 +1,5 @@
 """
-  TS202: Create feature set(s) & Ingest from DataFrame source (in one step)
+  TS202: Create feature set(s) & Ingest from DataFrame source (one step)
 """
 import datetime
 import sqlalchemy
@@ -30,7 +30,7 @@ class TS202(TSBase):
         return ("Create feature set(s) & Ingest from DataFrame source (in one step)")
 
     def exec(self, project_name):
-        """ Get or create featuresets"""
+        """ Create featuresets and ingest"""
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # create file with definition of vector
