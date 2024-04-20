@@ -1,5 +1,6 @@
 # Quality report for MLRun {{ data.mlrun_server }}
 # Report ID: {{ data.datetime }} ({{ data.used_filters }})
+# Score: {{ data.summary.score }}% ({{ data.used_filters }})
 # -----------------------
 Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.summary.count_testcases_err }}/{{ data.summary.count_testcases_done }} [ERR/DONE])
 # -----------------------{% for testscenario in data.testscenarios %}
@@ -18,4 +19,4 @@ Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.sum
 # RAM total/free: {{ data.memory_total }}/{{ data.memory_free }}
 # Host: {{ data.host }}
 # -----------------------
-# Source see the Github https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
+# Source, see the Github https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
