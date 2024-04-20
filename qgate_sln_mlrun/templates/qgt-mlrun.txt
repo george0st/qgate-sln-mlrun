@@ -7,8 +7,8 @@ Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.sum
   {% if testcase.state == 'DONE' %}{{ testcase.state }} {% else %}{{ testcase.state }}  {% endif %}... {{ testcase.name }}{% if testcase.detail is not none %}: {{ testcase.detail }}{% endif %}{% endfor %}{% endfor %}
 # -----------------------
 # MLRun: {{ data.mlrun }} (client)/{{ data.mlrun_server }} (server), see https://docs.mlrun.org/en/latest/change-log/index.html
-# Python: {{ data.python }}
 # QGate: {{ data.version }} (version)/{{ data.model_version }} (model)
+# Python: {{ data.python }}
 # System: {{ data.system }}
 # Platform: {{ data.platform }}
 # ----------------------- {% for variable in data.variables %}
