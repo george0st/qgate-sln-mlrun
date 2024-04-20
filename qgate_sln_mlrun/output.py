@@ -165,11 +165,11 @@ class Output():
             count_testcases+=len(testscenario["testcases"])
         score=count_testcases_done*100.0/count_testcases
         if score>0 and score<75:
-            score_color="#E20074"
+            score_style = "background: #E20074; color: white;"
         elif score>=75 and score<95:
-            score_color = "yellow"
+            score_style = "background: yellow; color: black;"
         elif score>=95:
-            score_color = "green"
+            score_style = "background: green; color: white;"
 
         self._data["summary"]["state"]="DONE" if count_testcases==count_testcases_done else "ERR"
         self._data["summary"]["count_testcases"] = count_testcases
@@ -177,7 +177,7 @@ class Output():
         self._data["summary"]["count_testcases_err"] = count_testcases-count_testcases_done
         self._data["summary"]["first_errors"] = first_errors
         self._data["summary"]["score"] = int(score)
-        self._data["summary"]["score_color"] = score_color
+        self._data["summary"]["score_style"] = score_style
 
     def _system_info(self):
         self._data["version"] = __version__
