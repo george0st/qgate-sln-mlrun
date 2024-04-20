@@ -1,5 +1,7 @@
 # Quality report for MLRun {{ data.mlrun_server }}
 # Report ID: {{ data.datetime }} ({{ data.used_filters }})
+# Scope: {{ data.used_filters }}
+# Score: {{ data.summary.score }}%
 # -----------------------
 Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.summary.count_testcases_err }}/{{ data.summary.count_testcases_done }} [ERR/DONE])
 # -----------------------{% for testscenario in data.testscenarios %}
