@@ -1,17 +1,24 @@
-# MLRun/Iguazio, the key BUSINESS changes in a nutshell
+# MLRun/Iguazio, the KEY changes in a nutshell
 
+NOTE: 
+ - You can see detail changes in
+   - [MLRun change log](https://docs.mlrun.org/en/latest/change-log/index.html)
+   - [Iguazio change log](https://www.iguazio.com/docs/latest-release/release-notes/)
+ - Legend
+   - 🚩 future version, ✅ current version 
 
 ## MLRun
-NOTE: You can see detail changes in [MLRun change log](https://docs.mlrun.org/en/latest/change-log/index.html)
 
-### 1.7 MLRun
- - Model monitoring/drifting for MLRun (in free version)
- - Available API Gateway 
+### 🚩1.7 MLRun
+ - Model monitoring/drifting for MLRun (available in free version also)
+ - Available API Gateway
+ - NOTE:
+   - Expected release date 05/2024 (based on 3 months release cycle)
 
-### 1.6 MLRun
+### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
  - MLFlow integration (store artifact to MLRun)
- - Support Pandas 2.0
+ - Support Pandas 2.0 (improve performace)
  - Extend datastore profiles (add providers)
 
 ### 1.5 MLRun
@@ -20,11 +27,9 @@ NOTE: You can see detail changes in [MLRun change log](https://docs.mlrun.org/en
 
 ## Iguazio
 
-NOTE: You can see detail changes in [Iguazio change log](https://www.iguazio.com/docs/latest-release/release-notes/)
-
-### 3.5.5 Iguazio
+### ✅ 3.5.5 Iguazio
  - Supports self-signed docker-registries
- - SSO with Keycloak
+ - support full SSO with Keycloak (useful for end users)
  - K8s 1.28
 
 ### 3.5.4 Iguazio

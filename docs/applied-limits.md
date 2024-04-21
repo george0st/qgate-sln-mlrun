@@ -49,8 +49,6 @@ see detail below
    KafkaSource (with triggers)
    - it means, test scenarios TS401, TS501, TS502, TS601 and TS701 for
    KafkaTarget was switch-off
-   - the scenario switch-off was realised based on change of in '*-agate-kafka.json', 
-   see the path './qgate-sln-mlrun/model_changes/*'
 
 ## CSVSource
 
@@ -60,6 +58,13 @@ see detail below
      (it has bigger variability)
 
 ## Others
+
 1. Not to use the engine `pandas`
    - this `pandas` engine is useful only for test purpose (see the first 
    info about that in change log for MLRun version 1.6.0)
+
+## Recommendation
+
+1. It is really tricky to use a function in **Preview** state
+   - it makes sense to wait for delivery full version or contribute changes in
+   Github
