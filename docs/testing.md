@@ -17,6 +17,8 @@ You have to use Pyenv, [see](./pyenv-use.md)
 
 ### 5. Tune Docker Desktop
  - Define limit for WSL2
-   - define `c:\Users\<user>\.wslconfig`
-   - use relevant memory limit for you `[wsl2] memory=8GB`
+   - define the file `c:\Users\<user>\.wslconfig`
+   - define your memory limit (8GB is minimum) for testing 
+     - see `[wsl2] memory=8GB`
+   - restart WSL2 
  - NOTE: [Full description](https://www.aleksandrhovhannisyan.com/blog/limiting-memory-usage-in-wsl-2/)
