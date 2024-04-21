@@ -4,7 +4,6 @@
 You can disable the service **docker scout**, it is primary
 for vulnerability scanning and reporting and you not need that for testing:
  - see `docker scout repo disable --all`
- - 
 
 NOTE: 
  - In case of MLRun function, ... deployment (and create new docker image),
