@@ -57,7 +57,7 @@ td {
   font-family: courier new, courier, serif;
   font-size: 12px;
   font-weight: normal;
-  width:inherit;
+  width: inherit;
   height: 120px;
   overflow: auto;
 }
@@ -70,8 +70,8 @@ td {
   font-family: courier new, courier, serif;
   font-size: 14px;
   font-weight: normal;
-  width:inherit;
-  height: 400px;
+  width: inherit;
+  height: 380px;
   overflow: auto;
 }
 
@@ -115,90 +115,149 @@ td {
   visibility: visible;
 }
 
+.btn-percentage {
+  background: #97c83e;
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none
+}
+
 </style>
 <script>
 
-function myFunction(element) {
-  var x = document.getElementById(element);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+function myFunction(...elements) {
+  for (let element of elements) {
+	var x = document.getElementById(element);
+	if (x.style.display === "none") {
+	  x.style.display = "block";
+	} else {
+	  x.style.display = "none";
+	}
+  }
+}
+
+function filterAll(comboBox1, comboBox2, filtrTable) {
+  let dropdown1, dropdown2, table, rows, cells, country, filter1, filter2;
+  dropdown1 = document.getElementById(comboBox1);
+  dropdown2 = document.getElementById(comboBox2);
+  table = document.getElementById(filtrTable);
+  rows = table.getElementsByTagName("tr");
+  filter1 = dropdown1.value;
+  filter2 = dropdown2.value;
+  filter2 = filter2.concat("/")
+
+  for (let row of rows) {
+    cells = row.getElementsByTagName("td");
+
+    item1 = cells[0] || null;
+    item1 = item1.innerHTML
+    if (item1.startsWith("<b>TS")){
+    	item1 = null
+    }
+    item2 = cells[1] || null;
+    if (item2 !== null) {
+    	item2 = item2.innerHTML.concat("/")
+    }
+
+    if (filter1 === "All" || !item1 || (item1.endsWith(filter1))) {
+      // row.style.display = ""; // shows
+ 	  if (filter2 === "All/" || !item2 || (item2.startsWith(filter2))) {
+	    row.style.display = ""; // shows
+	  }
+	  else {
+	    row.style.display = "none"; // hides
+	  }
+    }
+    else {
+      row.style.display = "none"; // hides
+    }
   }
 }
 
 </script>
 <body>
-	<h2>Quality report for MLRun</h2>
-	<p><b>2024-01-23 18:24:31</b>, QGate version/model: v0.1.5/v0.1.5</p>
+	<table style="border: 1px; font-family: Helvetica, Arial, sans-serif; font-size: 16px; width: 100%">
+		<tr style="border: 0px;">
+			<td style="border: 0px; width: 90px;">
+				<a class="btn-percentage" style="background: grey;">PART</a>
+			</td>
+			<td style="border: 0px;" align="center">
+				<h2 style="margin: 0;">Quality report for <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank"><u>MLRun 1.6.2</u></a></h2>
+				<p style="margin: 0; padding: 6px 3px;">Report ID: <b>2024-04-21 x9103548355161</b></p>
+			</td>
+			<td style="border: 0px; width: 90px;">
+				<a class="btn-percentage" style="background: green; color: white;">100%</a>
+			</td>
+		</tr>
+	</table>
 
-	<button type="button" class="collapsible" style="background-color: green;" onclick="myFunction('myDIV3')">
+	<button type="button" class="collapsible" style="background-color: green;" onclick="myFunction('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;"><img class="img-check" src="">Report outputs ...</td>
-				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">50x TOTAL (50x DONE)</td>
+				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">24x TOTAL (24x DONE)</td>
 			</tr>
 		</table>
 	</button>
+	<div id="myFiltr" style="display: none;">
+		<select id="myState" oninput="filterAll('myState','myProject','keyOutputs')">
+			<option>All</option><option>DONE</option><option>ERR</option>
+		</select>
+		<select id="myProject" oninput="filterAll('myState','myProject','keyOutputs')">
+			<option>All</option><option title='The A-GATE with redis and csv targets'>agate-redis-csv</option>
+		</select>
+	</div>
 	<div id="myDIV3" style="display: none;" class="content">
-		<table>
+		<table id="keyOutputs">
 			<tr><td colspan="2"><b>TS101: Create project(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/*: 'The A-GATE with redis and csv targets'</td></tr>
 			<tr><td colspan="2"><b>TS201: Create feature set(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-party'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-contact'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-relation'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-account'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-transaction'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-event'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-communication'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/aggregate-party'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/aggregate-account'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/aggregate-transaction'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/aggregate-circle'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/basic-account'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/basic-contact'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/aggregate-account'</td></tr>
-			<tr><td colspan="2"><b>TS301: Ingest data to feature set(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-party'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-contact'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-relation'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-account'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-transaction'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-event'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/basic-communication'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/basic-account'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo/basic-contact'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-contact</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-relation</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-event</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-communication</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-circle</td></tr>
+			<tr><td colspan="2"><b>TS202: Create feature set(s) & Ingest from DataFrame source (in one step)</b></td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-contact</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-relation</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-event</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-communication</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-circle</td></tr>
+			<tr><td colspan="2"><b>TS203: Create feature set(s) & Ingest from from CSV source (one step)</b></td></tr>
+			<tr><td colspan="2"><b>TS204: Create feature set(s) & Ingest from Parquet source (one step)</b></td></tr>
+			<tr><td colspan="2"><b>TS205: Create feature set(s) & Ingest from SQL source (one step)</b></td></tr>
+			<tr><td colspan="2"><b>TS301: Ingest data to feature set(s) from DataFrame source</b></td></tr>
+			<tr><td colspan="2"><b>TS302: Ingest data to feature set(s) from CSV source </b></td></tr>
+			<tr><td colspan="2"><b>TS303: Ingest data to feature set(s) from Parquet source </b></td></tr>
+			<tr><td colspan="2"><b>TS304: Ingest data to feature set(s) from SQL source</b></td></tr>
 			<tr><td colspan="2"><b>TS401: Create feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-party'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-contact'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact-02'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-account'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount-02'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontactaccount'</td></tr>
 			<tr><td colspan="2"><b>TS501: Get data from off-line feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-party': ... get 100 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-contact': ... get 103 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact': ... get 103 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact-02': ... get 103 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-account': ... get 13 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount': ... get 13 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount-02': ... get 13 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontactaccount': ... get 16 items</td></tr>
 			<tr><td colspan="2"><b>TS502: Get data from on-line feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-party'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-contact'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partycontact-02'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-account'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa/vector-partyaccount-02'</td></tr>
+			<tr><td colspan="2"><b>TS701: Build CART model</b></td></tr>
+			<tr><td colspan="2"><b>TS801: Serving score from CART</b></td></tr>
 			<tr><td colspan="2"><b>TS102: Delete project(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-alfa'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>'gate-bravo'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/*:</td></tr>
 		</table>
 	</div>
 
@@ -206,8 +265,8 @@ function myFunction(element) {
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b><br>
-			&nbsp;&nbsp;<b style="color:blue;">MLRun (client/server): 1.5.2/1.5.2</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)<br>
-			&nbsp;&nbsp;<b style="color:blue;">MLRun support:</b> ['>=1.5.0', '<=1.5.2']<br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun: 1.6.2 (client)/1.6.2 (server)</b>,  <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">Change log</a>, <a href="https://docs.mlrun.org/en/latest/change-log/index.html#open-issues" target="_blank">Issues</a>, <a href="https://docs.mlrun.org/en/latest/change-log/index.html#limitations" target="_blank">Limitations</a><br>
+			&nbsp;&nbsp;<b style="color:blue;">QGate: 0.2.1 (version)/0.2.3 (model)</b><br>
 			&nbsp;&nbsp;<b style="color:blue;">Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]</b><br>
 			&nbsp;&nbsp;<b>System:</b> Windows 10.0.22621 (Windows-10-10.0.22621-SP0)<br>
 			&nbsp;&nbsp;<b>Platform:</b> AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)<br>
@@ -215,21 +274,29 @@ function myFunction(element) {
 		<p>
 			<b>Variables:</b><br>
 		 	&nbsp;&nbsp;<b>MLRUN_DBPATH:</b> 'http://localhost:8080'<br> 
-		 	&nbsp;&nbsp;<b>QGATE_DEFINITION:</b> '../qgate-model/'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_ANONYM_MODE:</b> 'On'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_DEFINITION:</b> '../qgate-model'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_DATASET:</b> '01-size-100'<br> 
-		 	&nbsp;&nbsp;<b>QGATE_OUTPUT:</b> './output/'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_FILTER_PROJECTS:</b> 'agate-redis-csv'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_FILTER_SCENARIOS:</b> 'TS101, TS102, TS201, TS202'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_OUTPUT:</b> './output'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_OUTPUT_EXP:</b> './output, ds://az-blob/jistcontainer01/test/'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_DATA_STORE:</b> 'az-blob, AzureBlobStorage, ./secrets/az_connection.env'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_REDIS:</b> 'redis://localhost:6379'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_MYSQL:</b> 'mysql+pymysql://testuser:testpwd@localhost:3306/test'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_POSTGRES:</b> 'postgresql+psycopg2://testuser:testpwd@localhost:5432/test'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_KAFKA:</b> 'localhost:9092, testtopic'<br> 
 		 	&nbsp;&nbsp;<b>DIR:</b> 'C:\Python\qgate-sln-mlrun'<br> 
 		</p>
 		<p>
 			<b>Hardware information:</b><br>
 			&nbsp;&nbsp;<b>CPU:</b> 12 cores<br>
-			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/2.4 GB<br>
-			&nbsp;&nbsp;<b>Host:</b> HCI-L3204/172.18.224.1<br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/0.8 GB<br>
+			&nbsp;&nbsp;<b>Host:</b> Anonym/192.168.0.1<br>
 		</p>
 	</div>
 
 	<hr>
-	<p class="footer">Source see the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
+	<p class="footer">Source, see the Github <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
 </body>
 </html>

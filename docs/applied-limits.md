@@ -24,7 +24,6 @@ NOTE: Solution, it is necessity to use WSL2 under OS Windows
 1. Issue with support **date** type
    - see [combination of RedisNoSqlTarget and ParquetSource](https://github.com/mlrun/mlrun/issues/5447)
 
-
 ## SQLTarget
 
 NOTE: It is in preview version, very limited with focus on MySQL only, 
@@ -52,12 +51,11 @@ see detail below
    KafkaTarget was switch-off
    - the scenario switch-off was realised based on change of in '*-agate-kafka.json', 
    see the path './qgate-sln-mlrun/model_changes/*'
-   
 
 ## CSVSource
 
-1. CSVSource supports only default CSV setting, it means sep=',', decimal='.' and 
-   with na_filter=True (it is the issue for nan value or empty strings) 
+1. CSVSource supports only default CSV setting, it means sep=',', decimal='.'. It is not
+   possible to use e.g. na_filter=True (it is the issue for nan value or empty strings). 
    - in case of different setting, it is better to use Pandas/DataFrame source
      (it has bigger variability)
 

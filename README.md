@@ -25,7 +25,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS202: Create feature set(s) & Ingest from DataFrame source (one step)
    - ✅ TS203: Create feature set(s) & Ingest from CSV source (one step) 
    - ✅ TS204: Create feature set(s) & Ingest from Parquet source (one step)
-   - ❌ TS205: Create feature set(s) & Ingest from SQL source (one step)
+   - ✔  TS205: Create feature set(s) & Ingest from SQL source (one step)
    - ❌ TS206: Create feature set(s) & Ingest from Kafka source (one step)
    - ❌ TS207: Create feature set(s) & Ingest from HTTP source (one step)
  - **Ingest data**
@@ -66,7 +66,7 @@ The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ plan
    - ✅ ParquetTarget, ✅ CSVTarget
    - ✅ File system, ❌ S3, ❌ BlobStorage
  - Inputs (sources)
-   - ✅ Pandas/DataFrame, ❌ SQLSource/MySQL, ❌ SQLSource/Postgres, ❌ KafkaSource
+   - ✅ Pandas/DataFrame, ✔ SQLSource/MySQL, ❌ SQLSource/Postgres, ❌ KafkaSource
    - ✅ ParquetSource, ✅ CSVSource
    - ✅ File system, ❌ S3, ❌ BlobStorage
 
