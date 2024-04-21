@@ -115,6 +115,22 @@ td {
   visibility: visible;
 }
 
+.btn-percentage {
+  background: #97c83e;
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none
+}
+
 </style>
 <script>
 
@@ -169,14 +185,26 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 
 </script>
 <body>
-	<h2>Quality report for MLRun</h2>
-	<p><b>2024-04-12 9213432128372</b>, QGate version/model: v0.2.0/v0.2.2</p>
+	<table style="border: 1px; font-family: Helvetica, Arial, sans-serif; font-size: 16px; width: 100%">
+		<tr style="border: 0px;">
+			<td style="border: 0px; width: 90px;">
+				<a class="btn-percentage" style="background: grey;">PART</a>
+			</td>
+			<td style="border: 0px;" align="center">
+				<h2 style="margin: 0;">Quality report for <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank"><u>MLRun 1.6.2</u></a></h2>
+				<p style="margin: 0; padding: 6px 3px;">Report ID: <b>2024-04-20 x9205001510782</b></p>
+			</td>
+			<td style="border: 0px; width: 90px;">
+				<a class="btn-percentage" style="background: #E20074; color: white;">76%</a>
+			</td>
+		</tr>
+	</table>
 
 	<button type="button" class="collapsible" style="background-color: #E20074;" onclick="myFunction('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;"><img class="img-error" src="">Report outputs ...</td>
-				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">261x TOTAL (<div class="tooltip">68x ERR<span class="tooltiptext">#1 ERR<br>TS301: Ingest data to feature set(s) from DataFrame source<br>agate-mysql-csv/basic-party<br>TypeError: None unsupported type<br><br>#2 ERR<br>TS301: Ingest data to feature set(s) from DataFrame source<br>agate-mysql-csv/basic-contact<br>TypeError: None unsupported type<br><br>#3 ERR<br>TS301: Ingest data to feature set(s) from DataFrame source<br>agate-mysql-csv/basic-relation<br>TypeError: None unsupported type</span></div> & 193x DONE)</td>
+				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">13x TOTAL (<div class="tooltip">3x ERR<span class="tooltiptext">#1 ERR<br>TS204: Create feature set(s) & Ingest from Parquet source (one step)<br>agate-redis-csv/basic-party<br>TypeError: Object of type date is not JSON serializable<br><br>#2 ERR<br>TS204: Create feature set(s) & Ingest from Parquet source (one step)<br>agate-redis-csv/basic-account<br>TypeError: Object of type date is not JSON serializable<br><br>#3 ERR<br>TS204: Create feature set(s) & Ingest from Parquet source (one step)<br>agate-redis-csv/basic-transaction<br>TypeError: Object of type date is not JSON serializable</span></div> & 10x DONE)</td>
 			</tr>
 		</table>
 	</button>
@@ -185,282 +213,39 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
 		<select id="myProject" oninput="filterAll('myState','myProject','keyOutputs')">
-			<option>All</option><option title='The A-GATE with redis and csv'>agate-redis-csv</option><option title='The A-GATE with redis and parquet'>agate-redis-parquet</option><option title='The A-GATE with mysql and csv'>agate-mysql-csv</option><option title='The A-GATE with mysql and parquet'>agate-mysql-parquet</option><option title='The A-GATE with kafka'>agate-kafka</option>
+			<option>All</option><option title='The A-GATE with redis and csv'>agate-redis-csv</option>
 		</select>
 	</div>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table id="keyOutputs">
 			<tr><td colspan="2"><b>TS101: Create project(s)</b></td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/*: 'The A-GATE with redis and csv'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/*: 'The A-GATE with redis and parquet'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/*: 'The A-GATE with mysql and csv'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/*: 'The A-GATE with mysql and parquet'</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/*: 'The A-GATE with kafka'</td></tr>
 			<tr><td colspan="2"><b>TS201: Create feature set(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-party</td></tr>
+			<tr><td colspan="2"><b>TS202: Create feature set(s) & Ingest from DataFrame source (in one step)</b></td></tr>
+			<tr><td colspan="2"><b>TS203: Create feature set(s) & Ingest from from CSV source (one step)</b></td></tr>
+			<tr><td colspan="2"><b>TS204: Create feature set(s) & Ingest from Parquet source (one step)</b></td></tr>
+				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-redis-csv/basic-party: TypeError: Object of type date is not JSON serializable</td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-contact</td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-redis-csv/basic-account: TypeError: Object of type date is not JSON serializable</td></tr>
+				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-redis-csv/basic-transaction: TypeError: Object of type date is not JSON serializable</td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-event</td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-communication</td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-party</td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-account</td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-transaction</td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-circle</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/aggregate-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/aggregate-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/aggregate-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/aggregate-circle</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/aggregate-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/aggregate-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/aggregate-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/aggregate-circle</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/aggregate-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/aggregate-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/aggregate-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/aggregate-circle</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/aggregate-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/aggregate-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/aggregate-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/aggregate-circle</td></tr>
+			<tr><td colspan="2"><b>TS205: Create feature set(s) & Ingest from SQL source (one step)</b></td></tr>
 			<tr><td colspan="2"><b>TS301: Ingest data to feature set(s) from DataFrame source</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-party: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-contact: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-relation: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-account: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-transaction: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-event: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-communication: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-party: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-contact: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-relation: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-account: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-transaction: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-event: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-communication: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-communication</td></tr>
 			<tr><td colspan="2"><b>TS302: Ingest data to feature set(s) from CSV source </b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-party: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-contact: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-relation: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-account: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-transaction: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-event: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/basic-communication: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-party: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-contact: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-relation: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-account: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-transaction: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-event: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/basic-communication: TypeError: None unsupported type</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/basic-communication</td></tr>
+			<tr><td colspan="2"><b>TS303: Ingest data to feature set(s) from Parquet source </b></td></tr>
 			<tr><td colspan="2"><b>TS401: Create feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partycontact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partycontact-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partyaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partyaccount-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partycontactaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-accounttransaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partycontact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partycontact-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partyaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partyaccount-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partycontactaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-accounttransaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-partycontact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-partycontact-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-partyaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-partyaccount-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-partycontactaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/vector-accounttransaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-partycontact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-partycontact-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-partyaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-partyaccount-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-partycontactaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/vector-accounttransaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-partycontact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-partycontact-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-partyaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-partyaccount-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-partycontactaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/vector-accounttransaction</td></tr>
 			<tr><td colspan="2"><b>TS501: Get data from off-line feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-party: ... get 100 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-contact: ... get 106 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partycontact: ... get 106 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partycontact-02: ... get 106 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-account: ... get 22 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partyaccount: ... get 22 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partyaccount-02: ... get 22 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-transaction: ... get 4460 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partycontactaccount: ... get 28 items</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-redis-csv/vector-accounttransaction: MLRunRuntimeError: Failed to merge</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-party: ... get 100 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-contact: ... get 106 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partycontact: ... get 106 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partycontact-02: ... get 106 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-account: ... get 22 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partyaccount: ... get 22 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partyaccount-02: ... get 22 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-transaction: ... get 4460 items</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partycontactaccount: ... get 28 items</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-redis-parquet/vector-accounttransaction: MLRunRuntimeError: Failed to merge</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-party: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-contact: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partycontact: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partycontact-02: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-account: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partyaccount: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partyaccount-02: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-transaction: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partycontactaccount: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-accounttransaction: MLRunRuntimeError: Failed to merge</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-party: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-contact: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partycontact: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partycontact-02: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-account: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partyaccount: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partyaccount-02: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-transaction: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partycontactaccount: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-accounttransaction: MLRunRuntimeError: Failed to merge</td></tr>
 			<tr><td colspan="2"><b>TS502: Get data from on-line feature vector(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partycontact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partycontact-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partyaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/vector-partyaccount-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partycontact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partycontact-02</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partyaccount</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/vector-partyaccount-02</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-party: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-contact: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-contact:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partycontact: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partycontact-02: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-account: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-account:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partyaccount: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/vector-partyaccount-02: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-csv/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-party: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-contact: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-contact:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partycontact: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partycontact-02: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-account: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-account:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partyaccount: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/vector-partyaccount-02: MLRunInvalidArgumentError: resource store://feature-sets/agate-mysql-parquet/basic-party:latest does not have an online data target</td></tr>
 			<tr><td colspan="2"><b>TS701: Build CART model</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/model-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/model-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/model-transaction: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/model-transaction: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
 			<tr><td colspan="2"><b>TS801: Serving score from CART</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/model-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/model-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-csv/model-transaction: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
-				<tr><td>&nbsp;<img class="img-error" src="">ERR</td><td>agate-mysql-parquet/model-transaction: MLRunNotFoundError: there are no offline targets for this feature set</td></tr>
 			<tr><td colspan="2"><b>TS102: Delete project(s)</b></td></tr>
 				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/*:</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-parquet/*:</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-csv/*:</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-mysql-parquet/*:</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-kafka/*:</td></tr>
 		</table>
 	</div>
 
@@ -468,7 +253,8 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b><br>
-			&nbsp;&nbsp;<b style="color:blue;">MLRun (client/server): 1.6.2/1.6.2</b> (<a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">MLRun change log</a>)<br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun: 1.6.2 (client)/1.6.2 (server)</b>,  <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">Change log</a>, <a href="https://docs.mlrun.org/en/latest/change-log/index.html#open-issues" target="_blank">Issues</a>, <a href="https://docs.mlrun.org/en/latest/change-log/index.html#limitations" target="_blank">Limitations</a><br>
+			&nbsp;&nbsp;<b style="color:blue;">QGate: 0.2.1 (version)/0.2.3 (model)</b><br>
 			&nbsp;&nbsp;<b style="color:blue;">Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]</b><br>
 			&nbsp;&nbsp;<b>System:</b> Windows 10.0.22621 (Windows-10-10.0.22621-SP0)<br>
 			&nbsp;&nbsp;<b>Platform:</b> AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)<br>
@@ -479,7 +265,8 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		 	&nbsp;&nbsp;<b>QGATE_ANONYM_MODE:</b> 'On'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_DEFINITION:</b> '../qgate-model'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_DATASET:</b> '01-size-100'<br> 
-		 	&nbsp;&nbsp;<b>QGATE_FILTER_PROJECTS:</b> 'agate-redis-csv,agate-redis-parquet,agate-mysql-csv,agate-mysql-parquet,agate-kafka'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_FILTER_PROJECTS:</b> 'agate-redis-csv'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_FILTER_SCENARIOS:</b> 'TS101, TS102, TS204'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_OUTPUT:</b> './output'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_OUTPUT_EXP:</b> './output, ds://az-blob/jistcontainer01/test/'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_DATA_STORE:</b> 'az-blob, AzureBlobStorage, ./secrets/az_connection.env'<br> 
@@ -492,12 +279,12 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		<p>
 			<b>Hardware information:</b><br>
 			&nbsp;&nbsp;<b>CPU:</b> 12 cores<br>
-			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/1.9 GB<br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/0.7 GB<br>
 			&nbsp;&nbsp;<b>Host:</b> Anonym/192.168.0.1<br>
 		</p>
 	</div>
 
 	<hr>
-	<p class="footer">Source see the <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
+	<p class="footer">Source, see the Github <a href="https://github.com/george0st/qgate-sln-mlrun" target="_blank">qgate-sln-mlrun</a>, <a href="https://github.com/george0st/qgate-model" target="_blank">qgate-model</a></p>
 </body>
 </html>
