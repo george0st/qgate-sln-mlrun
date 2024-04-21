@@ -1,8 +1,13 @@
 # How can you do the testing
 
-### 1. Disable 'docker scout' (optinal)
-You can disable this service:
+### 1. Disable 'docker scout' (recommendation)
+You can disable the service **docker scout**, it is primary
+for vulnerability scanning and reporting and you not need that for testing:
  - see `docker scout repo disable --all`
+
+NOTE: In case of MLRun function, ... deployment (and create new docker image),
+this security scanner can significantly degrade performance based on scanning e.g.
+new docker image with size 2 GB.  
 
 ### 2. Tune Docker Desktop (recommendation)
 It is useful to define limit for WSL2:
