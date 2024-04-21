@@ -23,7 +23,7 @@ class TS203(TSBase):
 
     @property
     def long_desc(self):
-        return ("Create feature set(s) & Ingest from from CSV source (one step)")
+        return ("Create feature set(s) & Ingest from from CSV source (one step, without save and load featureset)")
 
     def exec(self, project_name):
         """ Create featuresets and ingest"""
@@ -52,7 +52,6 @@ class TS203(TSBase):
             ts=ts201.TS201(self._solution)
             featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
 
-            # TODO: get the relevant data file
             source_file = os.path.join(os.getcwd(),
                                        self.setup.model_definition,
                                        "02-data",
