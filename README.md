@@ -43,10 +43,8 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **Pipelines**
    - ❌ TS601: Simple pipeline for DataFrame source
    - ❌ TS602: Simple pipeline for CSV source
-   - ❌ TS603: Simple pipeline for Parquet source
-   - ❌ TS604: Complex pipeline for DataFrame source
-   - ❌ TS605: Complex pipeline for CSV source
-   - ❌ TS606: Complex pipeline for Parquet source
+   - ❌ TS603: Complex pipeline for DataFrame source
+   - ❌ TS604: Complex pipeline for CSV source
  - **Build model**
    - ✅ TS701: Build CART model
    - ❌ TS702: Build XGBoost model
