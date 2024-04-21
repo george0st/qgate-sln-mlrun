@@ -1,79 +1,73 @@
-# QGate version/model: v0.1.5/v0.1.5
-# 2024-01-23 18:24:31
+# Quality report for MLRun 1.6.2
+# Report ID: 2024-04-21 x9103548355161 (PART)
+# Score: 100% (PART)
 # -----------------------
-Summary, test scenarios: 50 [TOTAL] (0/50 [ERR/DONE])
+Summary, test scenarios: 24 [TOTAL] (0/24 [ERR/DONE])
 # -----------------------
 TS101: Create project(s)
-  DONE ... 'gate-alfa'
-  DONE ... 'gate-bravo'
+  DONE ... agate-redis-csv/*: 'The A-GATE with redis and csv targets'
 TS201: Create feature set(s)
-  DONE ... 'gate-alfa/basic-party'
-  DONE ... 'gate-alfa/basic-contact'
-  DONE ... 'gate-alfa/basic-relation'
-  DONE ... 'gate-alfa/basic-account'
-  DONE ... 'gate-alfa/basic-transaction'
-  DONE ... 'gate-alfa/basic-event'
-  DONE ... 'gate-alfa/basic-communication'
-  DONE ... 'gate-alfa/aggregate-party'
-  DONE ... 'gate-alfa/aggregate-account'
-  DONE ... 'gate-alfa/aggregate-transaction'
-  DONE ... 'gate-alfa/aggregate-circle'
-  DONE ... 'gate-bravo/basic-account'
-  DONE ... 'gate-bravo/basic-contact'
-  DONE ... 'gate-bravo/aggregate-account'
-TS301: Ingest data to feature set(s)
-  DONE ... 'gate-alfa/basic-party'
-  DONE ... 'gate-alfa/basic-contact'
-  DONE ... 'gate-alfa/basic-relation'
-  DONE ... 'gate-alfa/basic-account'
-  DONE ... 'gate-alfa/basic-transaction'
-  DONE ... 'gate-alfa/basic-event'
-  DONE ... 'gate-alfa/basic-communication'
-  DONE ... 'gate-bravo/basic-account'
-  DONE ... 'gate-bravo/basic-contact'
+  DONE ... agate-redis-csv/basic-party
+  DONE ... agate-redis-csv/basic-contact
+  DONE ... agate-redis-csv/basic-relation
+  DONE ... agate-redis-csv/basic-account
+  DONE ... agate-redis-csv/basic-transaction
+  DONE ... agate-redis-csv/basic-event
+  DONE ... agate-redis-csv/basic-communication
+  DONE ... agate-redis-csv/aggregate-party
+  DONE ... agate-redis-csv/aggregate-account
+  DONE ... agate-redis-csv/aggregate-transaction
+  DONE ... agate-redis-csv/aggregate-circle
+TS202: Create feature set(s) & Ingest from DataFrame source (in one step)
+  DONE ... agate-redis-csv/basic-party
+  DONE ... agate-redis-csv/basic-contact
+  DONE ... agate-redis-csv/basic-relation
+  DONE ... agate-redis-csv/basic-account
+  DONE ... agate-redis-csv/basic-transaction
+  DONE ... agate-redis-csv/basic-event
+  DONE ... agate-redis-csv/basic-communication
+  DONE ... agate-redis-csv/aggregate-party
+  DONE ... agate-redis-csv/aggregate-account
+  DONE ... agate-redis-csv/aggregate-transaction
+  DONE ... agate-redis-csv/aggregate-circle
+TS203: Create feature set(s) & Ingest from from CSV source (one step)
+TS204: Create feature set(s) & Ingest from Parquet source (one step)
+TS205: Create feature set(s) & Ingest from SQL source (one step)
+TS301: Ingest data to feature set(s) from DataFrame source
+TS302: Ingest data to feature set(s) from CSV source 
+TS303: Ingest data to feature set(s) from Parquet source 
+TS304: Ingest data to feature set(s) from SQL source
 TS401: Create feature vector(s)
-  DONE ... 'gate-alfa/vector-party'
-  DONE ... 'gate-alfa/vector-contact'
-  DONE ... 'gate-alfa/vector-partycontact'
-  DONE ... 'gate-alfa/vector-partycontact-02'
-  DONE ... 'gate-alfa/vector-account'
-  DONE ... 'gate-alfa/vector-partyaccount'
-  DONE ... 'gate-alfa/vector-partyaccount-02'
-  DONE ... 'gate-alfa/vector-partycontactaccount'
 TS501: Get data from off-line feature vector(s)
-  DONE ... 'gate-alfa/vector-party': ... get 100 items
-  DONE ... 'gate-alfa/vector-contact': ... get 103 items
-  DONE ... 'gate-alfa/vector-partycontact': ... get 103 items
-  DONE ... 'gate-alfa/vector-partycontact-02': ... get 103 items
-  DONE ... 'gate-alfa/vector-account': ... get 13 items
-  DONE ... 'gate-alfa/vector-partyaccount': ... get 13 items
-  DONE ... 'gate-alfa/vector-partyaccount-02': ... get 13 items
-  DONE ... 'gate-alfa/vector-partycontactaccount': ... get 16 items
 TS502: Get data from on-line feature vector(s)
-  DONE ... 'gate-alfa/vector-party'
-  DONE ... 'gate-alfa/vector-contact'
-  DONE ... 'gate-alfa/vector-partycontact'
-  DONE ... 'gate-alfa/vector-partycontact-02'
-  DONE ... 'gate-alfa/vector-account'
-  DONE ... 'gate-alfa/vector-partyaccount'
-  DONE ... 'gate-alfa/vector-partyaccount-02'
+TS701: Build CART model
+TS801: Serving score from CART
 TS102: Delete project(s)
-  DONE ... 'gate-alfa'
-  DONE ... 'gate-bravo'
+  DONE ... agate-redis-csv/*:
 # -----------------------
-# MLRun (client/server): 1.5.2/1.5.2 (https://docs.mlrun.org/en/latest/change-log/index.html)
-# MLRun support: ['>=1.5.0', '<=1.5.2']
+# MLRun: 1.6.2 (client)/1.6.2 (server), see https://docs.mlrun.org/en/latest/change-log/index.html
+# QGate: 0.2.1 (version)/0.2.3 (model)
 # Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]
 # System: Windows 10.0.22621 (Windows-10-10.0.22621-SP0)
 # Platform: AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)
 # ----------------------- 
 # MLRUN_DBPATH: 'http://localhost:8080' 
-# QGATE_DEFINITION: '../qgate-model/' 
+# QGATE_ANONYM_MODE: 'On' 
+# QGATE_DEFINITION: '../qgate-model' 
 # QGATE_DATASET: '01-size-100' 
-# QGATE_OUTPUT: './output/' 
+# QGATE_FILTER_PROJECTS: 'agate-redis-csv' 
+# QGATE_FILTER_SCENARIOS: 'TS101, TS102, TS201, TS202' 
+# QGATE_OUTPUT: './output' 
+# QGATE_OUTPUT_EXP: './output, ds://az-blob/jistcontainer01/test/' 
+# QGATE_DATA_STORE: 'az-blob, AzureBlobStorage, ./secrets/az_connection.env' 
 # QGATE_REDIS: 'redis://localhost:6379' 
+# QGATE_MYSQL: 'mysql+pymysql://testuser:testpwd@localhost:3306/test' 
+# QGATE_POSTGRES: 'postgresql+psycopg2://testuser:testpwd@localhost:5432/test' 
+# QGATE_KAFKA: 'localhost:9092, testtopic' 
 # DIR: 'C:\Python\qgate-sln-mlrun' 
 # -----------------------
 # CPU: 12
-# RAM total/free: 15.2 GB/2.4 GB
-# Host: HCI-L3204/172.18.224.1
+# RAM total/free: 15.2 GB/0.8 GB
+# Host: Anonym/192.168.0.1
+# -----------------------
+# Source, see the Github https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
