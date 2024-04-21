@@ -14,3 +14,9 @@ You have to use Pyenv, [see](./pyenv-use.md)
  - choose WSL and relevant distribution `WSL: Ubuntu` or `WSL: Ubuntu-20.04` 
  - choose interpreter `python 3.9.x ('venv': venv)'`
  - it is possible to Run/Debug your code
+
+### 5. Tune Docker Desktop
+ - Define limit for WSL2
+   - define `c:\Users\<user>\.wslconfig`
+   - use relevant memory limit for you `[wsl2] memory=8GB`
+ - NOTE: [Full description](https://www.aleksandrhovhannisyan.com/blog/limiting-memory-usage-in-wsl-2/)
