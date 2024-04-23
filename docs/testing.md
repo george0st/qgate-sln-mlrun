@@ -4,20 +4,19 @@
 You can disable the service **docker scout**, it is primary
 for vulnerability scanning and reporting and you not need that for testing:
  - see `docker scout repo disable --all`
- - 
 
 NOTE: 
  - In case of MLRun function, ... deployment (and create new docker image),
 this security scanner can significantly degrade performance based on scanning e.g.
 new docker image with size 2 GB.
- - full description, [see](https://docs.docker.com/reference/cli/docker/scout/repo/disable/)
+ - Full description, [see](https://docs.docker.com/reference/cli/docker/scout/repo/disable/)
 
 ### 2. Tune Docker Desktop (recommendation)
 It is useful to define limit for WSL2:
  - define the file `c:\Users\<user>\.wslconfig`
  - define in the file your memory limit (8 GB is minimum) for testing 
    - see `[wsl2] memory=8GB`
- - restart WSL2 
+ - restart WSL2 is needed 
 
 Full description [see](https://www.aleksandrhovhannisyan.com/blog/limiting-memory-usage-in-wsl-2/)
 
