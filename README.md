@@ -41,7 +41,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS501: Get data from off-line feature vector(s)
    - ✅ TS502: Get data from on-line feature vector(s)
  - **Pipelines**
-   - ❌ TS601: Simple pipeline for DataFrame source
+   - ✔ TS601: Simple pipeline(s) (HTTP call)
    - ❌ TS602: Simple pipeline for CSV source
    - ❌ TS603: Complex pipeline for DataFrame source
    - ❌ TS604: Complex pipeline for CSV source
