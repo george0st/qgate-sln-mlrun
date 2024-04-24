@@ -10,7 +10,8 @@ from qgate_sln_mlrun.ts import ts201
 import os
 import json
 import glob
-
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+import sqlalchemy
 
 class TS205(TSBase):
 
@@ -24,6 +25,77 @@ class TS205(TSBase):
     @property
     def long_desc(self):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
+
+    def create_table(self,featureset_name):
+        # Create source in MySQL for testing
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "01-model",
+                                   "02-feature-set",
+                                   f"*-{featureset_name}.json")
+
+        for file in glob.glob(source_file):
+            # iterate cross all featureset definitions
+            with open(file, "r") as json_file:
+                json_content = json.load(json_file)
+                name, desc, lbls, kind = TSBase.get_json_header(json_content)
+
+                # create SQL source based on the featureset
+                json_spec=json_content['spec']
+                meta = MetaData()
+                tbl=Table("aaa",meta)
+
+                # define entities
+                for item in json_spec['entities']:
+                    tbl.append_column()
+ #                   schema[item['name']] = TS205.type_to_alchemy_type(item['type'])
+                    pass
+
+                # define features
+                for item in json_spec['features']:
+                    pass
+
+        # Command via native MySQL connector
+        # pip install mysql-connector-python
+        # import mysql.connector
+        #
+        # mydb = mysql.connector.connect(
+        #     host="localhost",
+        #     user="yourusername",
+        #     password="yourpassword",
+        #     database="mydatabase"
+        # )
+        #
+        # mycursor = mydb.cursor()
+        #
+        # mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
+
+
+        # command via SQLAlchemy
+        # from sqlalchemy.sql import text
+        # with engine.connect() as con:
+        #
+        #     data = ({"id": 1, "title": "The Hobbit", "primary_author": "Tolkien"},
+        #             {"id": 2, "title": "The Silmarillion", "primary_author": "Tolkien"},
+        #             )
+        #
+        #     statement = text("""INSERT INTO book(id, title, primary_author) VALUES(:id, :title, :primary_author)""")
+        #
+        #     for line in data:
+        #         con.execute(statement, **line)
+
+        # from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+        # conn = "mysql+pymysql://testuser:testpwd@localhost:3306/test"
+        # engine = create_engine(conn, echo=True)
+        # meta = MetaData()
+        #
+        # students = Table(
+        #     'students', meta,
+        #     Column('id', Integer, primary_key=True),
+        #     Column('name', String),
+        #     Column('lastname', String),
+        # )
+        # meta.create_all(engine)
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
@@ -71,3 +143,40 @@ class TS205(TSBase):
                 # NOTE: option default, change types
                 # NOTE: option Null, generate error with datetime in python 3.9
 
+    def type_to_alchemy_type(data_type):
+        type_map = {
+            "int": sqlalchemy.Integer,
+            "int64": sqlalchemy.BigInteger,
+            "uint64": sqlalchemy.BigInteger,
+            "int128": sqlalchemy.BigInteger,
+            "uint128": sqlalchemy.BigInteger,
+            "float": sqlalchemy.Float,
+            "double": sqlalchemy.Float,
+            "boolean": sqlalchemy.Boolean,
+            "bool": sqlalchemy.Boolean,
+            "timestamp": sqlalchemy.TIMESTAMP,
+            "datetime": sqlalchemy.DateTime,
+            "string": sqlalchemy.String
+        }
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
+
+    def type_to_mysql_type(data_type):
+        type_map = {
+            "int": "INT",
+            "int64": "INT",
+            "uint64": "INT",
+            "int128": "INT",
+            "uint128": "INT",
+            "float": "float",
+            "double": "float",
+            "boolean": "bit",
+            "bool": "bit",
+            "timestamp": "timestamp",
+            "datetime": "datetime",
+            "string": "varchar{0}"
+        }
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
