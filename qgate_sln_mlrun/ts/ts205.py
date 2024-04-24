@@ -42,11 +42,12 @@ class TS205(TSBase):
 
                 # create SQL source based on the featureset
                 json_spec=json_content['spec']
-                tbl=Table()
+                meta = MetaData()
+                tbl=Table("aaa",meta)
 
                 # define entities
                 for item in json_spec['entities']:
-#                    tbl.append_column()
+                    tbl.append_column()
  #                   schema[item['name']] = TS205.type_to_alchemy_type(item['type'])
                     pass
 
@@ -54,6 +55,34 @@ class TS205(TSBase):
                 for item in json_spec['features']:
                     pass
 
+        # Command via native MySQL connector
+        # pip install mysql-connector-python
+        # import mysql.connector
+        #
+        # mydb = mysql.connector.connect(
+        #     host="localhost",
+        #     user="yourusername",
+        #     password="yourpassword",
+        #     database="mydatabase"
+        # )
+        #
+        # mycursor = mydb.cursor()
+        #
+        # mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
+
+
+        # command via SQLAlchemy
+        # from sqlalchemy.sql import text
+        # with engine.connect() as con:
+        #
+        #     data = ({"id": 1, "title": "The Hobbit", "primary_author": "Tolkien"},
+        #             {"id": 2, "title": "The Silmarillion", "primary_author": "Tolkien"},
+        #             )
+        #
+        #     statement = text("""INSERT INTO book(id, title, primary_author) VALUES(:id, :title, :primary_author)""")
+        #
+        #     for line in data:
+        #         con.execute(statement, **line)
 
         # from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
         # conn = "mysql+pymysql://testuser:testpwd@localhost:3306/test"
