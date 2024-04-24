@@ -42,8 +42,12 @@ class TS205(TSBase):
 
                 # create SQL source based on the featureset
                 json_spec=json_content['spec']
+                tbl=Table()
+
                 # define entities
                 for item in json_spec['entities']:
+#                    tbl.append_column()
+ #                   schema[item['name']] = TS205.type_to_alchemy_type(item['type'])
                     pass
 
                 # define features
@@ -110,7 +114,7 @@ class TS205(TSBase):
                 # NOTE: option default, change types
                 # NOTE: option Null, generate error with datetime in python 3.9
 
-    def type_to_alchimy_type(data_type):
+    def type_to_alchemy_type(data_type):
         type_map = {
             "int": sqlalchemy.Integer,
             "int64": sqlalchemy.BigInteger,
