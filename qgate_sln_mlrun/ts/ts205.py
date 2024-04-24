@@ -25,6 +25,44 @@ class TS205(TSBase):
     def long_desc(self):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
+    def create_table(self,featureset_name):
+        # Create source in MySQL for testing
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "01-model",
+                                   "02-feature-set",
+                                   f"*-{featureset_name}.json")
+
+        for file in glob.glob(source_file):
+            # iterate cross all featureset definitions
+            with open(file, "r") as json_file:
+                json_content = json.load(json_file)
+                name, desc, lbls, kind = TSBase.get_json_header(json_content)
+
+                # create SQL source based on the featureset
+                json_spec=json_content['spec']
+                # define entities
+                for item in json_spec['entities']:
+                    pass
+
+                # define features
+                for item in json_spec['features']:
+                    pass
+
+
+        # from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+        # conn = "mysql+pymysql://testuser:testpwd@localhost:3306/test"
+        # engine = create_engine(conn, echo=True)
+        # meta = MetaData()
+        #
+        # students = Table(
+        #     'students', meta,
+        #     Column('id', Integer, primary_key=True),
+        #     Column('name', String),
+        #     Column('lastname', String),
+        # )
+        # meta.create_all(engine)
+
     def exec(self, project_name):
         """ Create featuresets & ingest"""
 
