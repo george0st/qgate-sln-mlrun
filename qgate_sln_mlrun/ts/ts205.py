@@ -10,7 +10,8 @@ from qgate_sln_mlrun.ts import ts201
 import os
 import json
 import glob
-
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+import sqlalchemy
 
 class TS205(TSBase):
 
@@ -109,3 +110,21 @@ class TS205(TSBase):
                 # NOTE: option default, change types
                 # NOTE: option Null, generate error with datetime in python 3.9
 
+    def type_to_alchimy_type(data_type):
+        type_map = {
+            "int": sqlalchemy.Integer,
+            "int64": sqlalchemy.BigInteger,
+            "uint64": sqlalchemy.BigInteger,
+            "int128": sqlalchemy.BigInteger,
+            "uint128": sqlalchemy.BigInteger,
+            "float": sqlalchemy.Float,
+            "double": sqlalchemy.Float,
+            "boolean": sqlalchemy.Boolean,
+            "bool": sqlalchemy.Boolean,
+            "timestamp": sqlalchemy.TIMESTAMP,
+            "datetime": sqlalchemy.DateTime,
+            "string": sqlalchemy.String
+        }
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
