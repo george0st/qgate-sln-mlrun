@@ -57,8 +57,6 @@ class TS205(TSBase):
 
         create_cmd=f"CREATE TABLE src_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
 
-
-
         # Connect to the database
         connection = pymysql.connect(host='localhost',
                                      port=3306,
@@ -73,36 +71,8 @@ class TS205(TSBase):
                 cursor.execute(create_cmd)
                 connection.commit()
 
-                # insert data
-
-
-
-        # command via SQLAlchemy
-        # from sqlalchemy.sql import text
-        # with engine.connect() as con:
-        #
-        #     data = ({"id": 1, "title": "The Hobbit", "primary_author": "Tolkien"},
-        #             {"id": 2, "title": "The Silmarillion", "primary_author": "Tolkien"},
-        #             )
-        #
-        #     statement = text("""INSERT INTO book(id, title, primary_author) VALUES(:id, :title, :primary_author)""")
-        #
-        #     for line in data:
-        #         con.execute(statement, **line)
-
-        # from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
-        # conn = "mysql+pymysql://testuser:testpwd@localhost:3306/test"
-        # engine = create_engine(conn, echo=True)
-        # meta = MetaData()
-        #
-        # students = Table(
-        #     'students', meta,
-        #     Column('id', Integer, primary_key=True),
-        #     Column('name', String),
-        #     Column('lastname', String),
-        # )
-        # meta.create_all(engine)
-
+                # TODO: insert data
+                
     def exec(self, project_name):
         """ Create featuresets & ingest"""
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
