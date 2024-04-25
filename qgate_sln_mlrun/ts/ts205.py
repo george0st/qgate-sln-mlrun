@@ -12,6 +12,7 @@ import json
 import glob
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import sqlalchemy
+import pymysql.cursors
 
 class TS205(TSBase):
 
@@ -27,6 +28,8 @@ class TS205(TSBase):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
     def create_table(self,featureset_name):
+        primary_keys=""
+        columns=""
         # Create source in MySQL for testing
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
@@ -42,33 +45,33 @@ class TS205(TSBase):
 
                 # create SQL source based on the featureset
                 json_spec=json_content['spec']
-                meta = MetaData()
-                tbl=Table("aaa",meta)
 
                 # define entities
                 for item in json_spec['entities']:
-                    tbl.append_column()
- #                   schema[item['name']] = TS205.type_to_alchemy_type(item['type'])
-                    pass
+                    columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
+                    primary_keys+=f"{item['name']},"
 
                 # define features
                 for item in json_spec['features']:
-                    pass
+                    columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
 
-        # Command via native MySQL connector
-        # pip install mysql-connector-python
-        # import mysql.connector
-        #
-        # mydb = mysql.connector.connect(
-        #     host="localhost",
-        #     user="yourusername",
-        #     password="yourpassword",
-        #     database="mydatabase"
-        # )
-        #
-        # mycursor = mydb.cursor()
-        #
-        # mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
+        create_cmd=f"CREATE TABLE src_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));"
+
+        # Connect to the database
+        connection = pymysql.connect(host='localhost',
+                                     user='user',
+                                     password='passwd',
+                                     database='db',
+                                     cursorclass=pymysql.cursors.DictCursor)
+
+        with connection:
+            with connection.cursor() as cursor:
+                # create table
+                cursor.execute(create_cmd)
+                connection.commit()
+
+                # insert data
+
 
 
         # command via SQLAlchemy
