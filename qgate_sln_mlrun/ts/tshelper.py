@@ -68,4 +68,23 @@ class TSHelper:
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
         return type_map[data_type]
-
+    
+    @staticmethod
+    def type_to_mysql_type(data_type):
+        type_map = {
+            "int": "INT",
+            "int64": "INT",
+            "uint64": "INT",
+            "int128": "INT",
+            "uint128": "INT",
+            "float": "float",
+            "double": "float",
+            "boolean": "bit",
+            "bool": "bit",
+            "timestamp": "timestamp",
+            "datetime": "datetime",
+            "string": "nvarchar(512)"
+        }
+        if data_type not in type_map:
+            raise TypeError(f"Unsupported type '{data_type}'")
+        return type_map[data_type]
