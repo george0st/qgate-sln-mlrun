@@ -28,9 +28,10 @@ class TS205(TSBase):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
     def create_table(self,featureset_name):
+        """Create source in MySQL for testing"""
         primary_keys=""
         columns=""
-        # Create source in MySQL for testing
+
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
                                    "01-model",
@@ -38,6 +39,7 @@ class TS205(TSBase):
                                    f"*-{featureset_name}.json")
 
         for file in glob.glob(source_file):
+
             # iterate cross all featureset definitions
             with open(file, "r") as json_file:
                 json_content = json.load(json_file)
@@ -46,18 +48,19 @@ class TS205(TSBase):
                 # create SQL source based on the featureset
                 json_spec=json_content['spec']
 
-                # define entities
+                # primary keys
                 for item in json_spec['entities']:
                     columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
                     primary_keys+=f"{item['name']},"
 
-                # define features
+                # columns
                 for item in json_spec['features']:
                     columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
 
+        # create table
         create_cmd=f"CREATE TABLE src_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
 
-        # Connect to the database
+        # TODO: parse QGATE_MYSQL
         connection = pymysql.connect(host='localhost',
                                      port=3306,
                                      user='testuser',
@@ -72,7 +75,7 @@ class TS205(TSBase):
                 connection.commit()
 
                 # TODO: insert data
-                
+
     def exec(self, project_name):
         """ Create featuresets & ingest"""
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
