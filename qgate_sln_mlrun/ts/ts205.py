@@ -55,10 +55,13 @@ class TS205(TSBase):
                 for item in json_spec['features']:
                     columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
 
-        create_cmd=f"CREATE TABLE src_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));"
+        create_cmd=f"CREATE TABLE src_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
+
+
 
         # Connect to the database
-        connection = pymysql.connect(host='localhost:3306',
+        connection = pymysql.connect(host='localhost',
+                                     port=3306,
                                      user='testuser',
                                      password='testpwd',
                                      database='test',
