@@ -13,6 +13,7 @@ import glob
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import sqlalchemy
 import pymysql.cursors
+from tshelper import TSHelper
 
 class TS205(TSBase):
 
@@ -50,12 +51,12 @@ class TS205(TSBase):
 
                 # primary keys
                 for item in json_spec['entities']:
-                    columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
+                    columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
                     primary_keys+=f"{item['name']},"
 
                 # columns
                 for item in json_spec['features']:
-                    columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
+                    columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
         # create table
         create_cmd=f"CREATE TABLE src_{project_name}_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
@@ -129,40 +130,3 @@ class TS205(TSBase):
                 # NOTE: option default, change types
                 # NOTE: option Null, generate error with datetime in python 3.9
 
-    def type_to_alchemy_type(data_type):
-        type_map = {
-            "int": sqlalchemy.Integer,
-            "int64": sqlalchemy.BigInteger,
-            "uint64": sqlalchemy.BigInteger,
-            "int128": sqlalchemy.BigInteger,
-            "uint128": sqlalchemy.BigInteger,
-            "float": sqlalchemy.Float,
-            "double": sqlalchemy.Float,
-            "boolean": sqlalchemy.Boolean,
-            "bool": sqlalchemy.Boolean,
-            "timestamp": sqlalchemy.TIMESTAMP,
-            "datetime": sqlalchemy.DateTime,
-            "string": sqlalchemy.String
-        }
-        if data_type not in type_map:
-            raise TypeError(f"Unsupported type '{data_type}'")
-        return type_map[data_type]
-
-    def type_to_mysql_type(data_type):
-        type_map = {
-            "int": "INT",
-            "int64": "INT",
-            "uint64": "INT",
-            "int128": "INT",
-            "uint128": "INT",
-            "float": "float",
-            "double": "float",
-            "boolean": "bit",
-            "bool": "bit",
-            "timestamp": "timestamp",
-            "datetime": "datetime",
-            "string": "nvarchar(512)"
-        }
-        if data_type not in type_map:
-            raise TypeError(f"Unsupported type '{data_type}'")
-        return type_map[data_type]

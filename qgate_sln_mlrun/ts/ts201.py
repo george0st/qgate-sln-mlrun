@@ -11,6 +11,7 @@ from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, 
 import os
 import json
 import glob
+from tshelper import TSHelper
 
 
 class TS201(TSBase):
@@ -74,7 +75,7 @@ class TS201(TSBase):
         for item in json_spec['entities']:
             fs.add_entity(
                 name=item['name'],
-                value_type=TS201.type_to_mlrun_type(item['type']),
+                value_type=TSHelper.type_to_mlrun_type(item['type']),
                 description=item['description']
             )
 
@@ -83,7 +84,7 @@ class TS201(TSBase):
             fs.add_feature(
                 name=item['name'],
                 feature=Feature(
-                    value_type=TS201.type_to_mlrun_type(item['type']),
+                    value_type=TSHelper.type_to_mlrun_type(item['type']),
                     description=item['description']
                 )
             )
@@ -110,9 +111,9 @@ class TS201(TSBase):
     def _get_sqlschema(self, json_spec):
         schema = {}
         for item in json_spec['entities']:
-            schema[item['name']] = TS201.type_to_type(item['type'])
+            schema[item['name']] = TSHelper.type_to_type(item['type'])
         for item in json_spec['features']:
-            schema[item['name']] = TS201.type_to_type(item['type'])
+            schema[item['name']] = TSHelper.type_to_type(item['type'])
         return schema, json_spec['entities'][0]['name']
 
     def _create_target(self, target, target_name, featureset_name, project_name, json_spec):
@@ -196,74 +197,11 @@ class TS201(TSBase):
         # create primary keys
         for item in json_spec['entities']:
             tbl.append_column(
-                sqlalchemy.Column( item['name'],TS201.type_to_sqlalchemy(item['type']), primary_key=True))
+                sqlalchemy.Column( item['name'],TSHelper.type_to_sqlalchemy(item['type']), primary_key=True))
         # create columns
         for item in json_spec['features']:
             tbl.append_column(
-                sqlalchemy.Column(item['name'], TS201.type_to_sqlalchemy(item['type'])))
+                sqlalchemy.Column(item['name'], TSHelper.type_to_sqlalchemy(item['type'])))
 
         # create table
         meta.create_all(engine)
-
-    @staticmethod
-    def type_to_mlrun_type(data_type) -> ValueType:
-        type_map = {
-            "int": ValueType.INT64,
-            "int64": ValueType.INT64,
-            "uint64": ValueType.UINT64,
-            "int128": ValueType.INT128,
-            "uint128": ValueType.UINT128,
-            "float": ValueType.FLOAT,
-            "double": ValueType.DOUBLE,
-            "boolean": ValueType.BOOL,
-            "bool": ValueType.BOOL,
-            "timestamp": ValueType.DATETIME,
-            "datetime": ValueType.DATETIME,
-            "string": ValueType.STRING,
-            "list": ValueType.STRING_LIST
-        }
-        if data_type not in type_map:
-            raise TypeError(f"Unsupported type '{data_type}'")
-        return type_map[data_type]
-
-    @staticmethod
-    def type_to_type(data_type):
-        type_map = {
-            "int": int,
-            "int64": int,
-            "uint64": int,
-            "int128": int,
-            "uint128": int,
-            "float": float,
-            "double": float,
-            "boolean": bool,
-            "bool": bool,
-            "timestamp": datetime.datetime.timestamp,
-            "datetime": datetime.datetime,
-            "string": str,
-            "list": list
-        }
-        if data_type not in type_map:
-            raise TypeError(f"Unsupported type '{data_type}'")
-        return type_map[data_type]
-
-    @staticmethod
-    def type_to_sqlalchemy(data_type):
-        type_map = {
-            "int": sqlalchemy.Integer,
-            "int64": sqlalchemy.Integer,
-            "uint64": sqlalchemy.Integer,
-            "int128": sqlalchemy.BigInteger,
-            "uint128": sqlalchemy.BigInteger,
-            "float": sqlalchemy.Float,
-            "double": sqlalchemy.Float,
-            "boolean": sqlalchemy.Boolean,
-            "bool": sqlalchemy.Boolean,
-            "timestamp": sqlalchemy.TIMESTAMP,
-            "datetime": sqlalchemy.DateTime,
-            "string": sqlalchemy.String(50)
-        }
-        if data_type not in type_map:
-            raise TypeError(f"Unsupported type '{data_type}'")
-        return type_map[data_type]
-
