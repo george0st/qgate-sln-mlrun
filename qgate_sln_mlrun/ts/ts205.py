@@ -12,6 +12,7 @@ import json
 import glob
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import sqlalchemy
+import pymysql.cursors
 
 class TS205(TSBase):
 
@@ -27,6 +28,8 @@ class TS205(TSBase):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
     def create_table(self,featureset_name):
+        primary_keys=""
+        columns=""
         # Create source in MySQL for testing
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
@@ -42,63 +45,38 @@ class TS205(TSBase):
 
                 # create SQL source based on the featureset
                 json_spec=json_content['spec']
-                meta = MetaData()
-                tbl=Table("aaa",meta)
 
                 # define entities
                 for item in json_spec['entities']:
-                    tbl.append_column()
- #                   schema[item['name']] = TS205.type_to_alchemy_type(item['type'])
-                    pass
+                    columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
+                    primary_keys+=f"{item['name']},"
 
                 # define features
                 for item in json_spec['features']:
-                    pass
+                    columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
 
-        # Command via native MySQL connector
-        # pip install mysql-connector-python
-        # import mysql.connector
-        #
-        # mydb = mysql.connector.connect(
-        #     host="localhost",
-        #     user="yourusername",
-        #     password="yourpassword",
-        #     database="mydatabase"
-        # )
-        #
-        # mycursor = mydb.cursor()
-        #
-        # mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
+        create_cmd=f"CREATE TABLE src_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
 
+        # Connect to the database
+        connection = pymysql.connect(host='localhost',
+                                     port=3306,
+                                     user='testuser',
+                                     password='testpwd',
+                                     database='test',
+                                     cursorclass=pymysql.cursors.DictCursor)
 
-        # command via SQLAlchemy
-        # from sqlalchemy.sql import text
-        # with engine.connect() as con:
-        #
-        #     data = ({"id": 1, "title": "The Hobbit", "primary_author": "Tolkien"},
-        #             {"id": 2, "title": "The Silmarillion", "primary_author": "Tolkien"},
-        #             )
-        #
-        #     statement = text("""INSERT INTO book(id, title, primary_author) VALUES(:id, :title, :primary_author)""")
-        #
-        #     for line in data:
-        #         con.execute(statement, **line)
+        with connection:
+            with connection.cursor() as cursor:
+                # create table
+                cursor.execute(create_cmd)
+                connection.commit()
 
-        # from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
-        # conn = "mysql+pymysql://testuser:testpwd@localhost:3306/test"
-        # engine = create_engine(conn, echo=True)
-        # meta = MetaData()
-        #
-        # students = Table(
-        #     'students', meta,
-        #     Column('id', Integer, primary_key=True),
-        #     Column('name', String),
-        #     Column('lastname', String),
-        # )
-        # meta.create_all(engine)
-
+                # TODO: insert data
+                
     def exec(self, project_name):
         """ Create featuresets & ingest"""
+        for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
+            self.create_table(featureset_name)
 
         # TODO: test, if mySQL is available
         pass
@@ -175,7 +153,7 @@ class TS205(TSBase):
             "bool": "bit",
             "timestamp": "timestamp",
             "datetime": "datetime",
-            "string": "varchar{0}"
+            "string": "nvarchar(512)"
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
