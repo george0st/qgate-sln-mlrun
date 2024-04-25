@@ -57,12 +57,11 @@ class TS205(TSBase):
 
         create_cmd=f"CREATE TABLE src_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));"
 
-        mysql + pymysql: // testuser: testpwd @ localhost:3306 / test
         # Connect to the database
         connection = pymysql.connect(host='localhost:3306',
                                      user='testuser',
-                                     password='passwd',
-                                     database='db',
+                                     password='testpwd',
+                                     database='test',
                                      cursorclass=pymysql.cursors.DictCursor)
 
         with connection:
