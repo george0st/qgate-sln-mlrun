@@ -102,6 +102,8 @@ class TS205(TSBase):
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
+        for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
+            self.create_table(featureset_name)
 
         # TODO: test, if mySQL is available
         pass
@@ -178,7 +180,7 @@ class TS205(TSBase):
             "bool": "bit",
             "timestamp": "timestamp",
             "datetime": "datetime",
-            "string": "varchar{0}"
+            "string": "varchar(512)"
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
