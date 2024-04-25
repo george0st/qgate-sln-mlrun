@@ -180,7 +180,7 @@ class TS205(TSBase):
             "bool": "bit",
             "timestamp": "timestamp",
             "datetime": "datetime",
-            "string": "varchar(512)"
+            "string": "nvarchar(512)"
         }
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
