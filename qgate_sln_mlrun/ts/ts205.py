@@ -27,8 +27,8 @@ class TS205(TSBase):
     def long_desc(self):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
-    def create_table(self,featureset_name):
-        """Create source in MySQL for testing"""
+    def create_table(self,project_name, featureset_name):
+        """Create table in MySQL"""
         primary_keys=""
         columns=""
 
@@ -58,7 +58,7 @@ class TS205(TSBase):
                     columns+=f"{item['name']} {TS205.type_to_mysql_type(item['type'])},"
 
         # create table
-        create_cmd=f"CREATE TABLE src_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
+        create_cmd=f"CREATE TABLE src_{project_name}_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
 
         # TODO: parse QGATE_MYSQL
         connection = pymysql.connect(host='localhost',
@@ -76,10 +76,15 @@ class TS205(TSBase):
 
                 # TODO: insert data
 
+    def insert_into(self, project_name, featureset_name):
+        """Insert data into table in MySQL"""
+
+        pass
+
     def exec(self, project_name):
         """ Create featuresets & ingest"""
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            self.create_table(featureset_name)
+            self.create_table(project_name, featureset_name)
 
         # TODO: test, if mySQL is available
         pass
