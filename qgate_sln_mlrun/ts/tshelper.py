@@ -1,21 +1,18 @@
 import sqlalchemy
 from mlrun.data_types.data_types import ValueType
 import datetime
+import re
 
 
 class TSHelper:
 
 
     @staticmethod
-    def split_sqlalchemy_connection():
-        # mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>
-
-        # re.findall(r'//(.*):', text)
-        # re.findall(r':(.*)@', text)
-        # re.findall(r'@(.*):', text)
-        # re.findall(r':(.*)/', text)
-
-        pass
+    def split_sqlalchemy_connection(connection_string):
+        """Parsing pattern 'mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>'"""
+        if connection_string:
+            return re.findall(r'//(.*):(.*)@(.*):(.*)/(.*)', connection_string)
+        return None
 
     @staticmethod
     def type_to_mlrun_type(data_type) -> ValueType:
