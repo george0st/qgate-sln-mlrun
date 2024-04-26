@@ -9,10 +9,17 @@ class TSHelper:
 
     @staticmethod
     def split_sqlalchemy_connection(connection_string):
-        """Parsing pattern 'mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>'"""
+        """Parsing pattern 'mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>'
+
+        :param connection_string:   connection string for parsing
+        :return:                    None value or collection of items user name, password, host, port and db name
+        """
         if connection_string:
-            return re.findall(r'//(.*):(.*)@(.*):(.*)/(.*)', connection_string)
-        return None
+            items = re.findall(r'//(.*):(.*)@(.*):(.*)/(.*)', connection_string)
+            #items2 = re.findall(r'\/\/(.*):(.*)@(.*):(.*)/(.*)', connection_string)
+
+        return items
+
 
     @staticmethod
     def type_to_mlrun_type(data_type) -> ValueType:
