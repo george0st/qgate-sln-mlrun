@@ -60,16 +60,14 @@ class TS205(TSBase):
                     columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
         table_name=f"src_{project_name}_{featureset_name}".replace('-','_')
-        # create table
-        create_cmd=f"CREATE TABLE {table_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
 
-        # TODO: parse QGATE_MYSQL
+        # connect
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
-        connection = pymysql.connect(host=host, #'localhost',
-                                     port=port, #3306,
-                                     user=user_name, #'testuser',
-                                     password=password, #'testpwd',
-                                     database=db, #'test',
+        connection = pymysql.connect(host=host,
+                                     port=port,
+                                     user=user_name,
+                                     password=password,
+                                     database=db,
                                      cursorclass=pymysql.cursors.DictCursor)
 
         with connection:
@@ -80,7 +78,7 @@ class TS205(TSBase):
                 connection.commit()
 
                 # create table
-                cursor.execute(create_cmd)
+                cursor.execute(f"CREATE TABLE {table_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_'))
                 connection.commit()
 
                 # TODO: insert data
