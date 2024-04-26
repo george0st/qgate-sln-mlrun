@@ -182,7 +182,7 @@ class TS201(TSBase):
             else:
                 raise ValueError("Missing value for kafka connection, see 'QGATE_KAFKA'.")
         else:
-            # TODO: Add support other targets
+            # TODO: Add support for other targets
             raise NotImplementedError()
         return target_provider
 

@@ -6,6 +6,16 @@ import datetime
 class TSHelper:
 
 
+    @staticmethod
+    def split_sqlalchemy_connection():
+        # mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>
+
+        # re.findall(r'//(.*):', text)
+        # re.findall(r':(.*)@', text)
+        # re.findall(r'@(.*):', text)
+        # re.findall(r':(.*)/', text)
+
+        pass
 
     @staticmethod
     def type_to_mlrun_type(data_type) -> ValueType:
@@ -68,7 +78,7 @@ class TSHelper:
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
         return type_map[data_type]
-    
+
     @staticmethod
     def type_to_mysql_type(data_type):
         type_map = {
