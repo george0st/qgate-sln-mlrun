@@ -59,8 +59,9 @@ class TS205(TSBase):
                 for item in json_spec['features']:
                     columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
+        table_name=f"src_{project_name}_{featureset_name}".replace('-','_')
         # create table
-        create_cmd=f"CREATE TABLE src_{project_name}_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
+        create_cmd=f"CREATE TABLE {table_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
 
         # TODO: parse QGATE_MYSQL
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
@@ -73,6 +74,11 @@ class TS205(TSBase):
 
         with connection:
             with connection.cursor() as cursor:
+
+                # drop table
+                cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
+                connection.commit()
+
                 # create table
                 cursor.execute(create_cmd)
                 connection.commit()
@@ -81,7 +87,6 @@ class TS205(TSBase):
 
     def insert_into(self, project_name, featureset_name):
         """Insert data into table in MySQL"""
-
         pass
 
     def exec(self, project_name):
