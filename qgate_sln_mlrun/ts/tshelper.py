@@ -16,6 +16,7 @@ class TSHelper:
 
     @staticmethod
     def type_to_mlrun_type(data_type) -> ValueType:
+        """Mapping types from Quality Gate to MLRun types"""
         type_map = {
             "int": ValueType.INT64,
             "int64": ValueType.INT64,
@@ -37,6 +38,7 @@ class TSHelper:
 
     @staticmethod
     def type_to_type(data_type):
+        """Mapping types from Quality Gate to Python types"""
         type_map = {
             "int": int,
             "int64": int,
@@ -58,6 +60,7 @@ class TSHelper:
 
     @staticmethod
     def type_to_sqlalchemy(data_type):
+        """Mapping types from Quality Gate to SqlAlchemy types"""
         type_map = {
             "int": sqlalchemy.Integer,
             "int64": sqlalchemy.Integer,
@@ -78,6 +81,7 @@ class TSHelper:
 
     @staticmethod
     def type_to_mysql_type(data_type):
+        """Mapping types from Quality Gate to MySQL types"""
         type_map = {
             "int": "INT",
             "int64": "INT",
