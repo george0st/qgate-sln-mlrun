@@ -13,7 +13,8 @@ import glob
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import sqlalchemy
 import pymysql.cursors
-from tshelper import TSHelper
+from qgate_sln_mlrun.ts.tshelper import TSHelper
+
 
 class TS205(TSBase):
 
@@ -58,28 +59,34 @@ class TS205(TSBase):
                 for item in json_spec['features']:
                     columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        # create table
-        create_cmd=f"CREATE TABLE src_{project_name}_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
+        table_name=f"src_{project_name}_{featureset_name}".replace('-','_')
 
-        # TODO: parse QGATE_MYSQL
-        connection = pymysql.connect(host='localhost',
-                                     port=3306,
-                                     user='testuser',
-                                     password='testpwd',
-                                     database='test',
+        # connect
+        user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
+        connection = pymysql.connect(host=host,
+                                     port=port,
+                                     user=user_name,
+                                     password=password,
+                                     database=db,
                                      cursorclass=pymysql.cursors.DictCursor)
 
         with connection:
             with connection.cursor() as cursor:
-                # create table
-                cursor.execute(create_cmd)
+
+                # drop table
+                cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
                 connection.commit()
 
-                # TODO: insert data
+                # create table
+                cursor.execute(f"CREATE TABLE {table_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_'))
+                connection.commit()
+
+                # insert data
+                self.insert_into(project_name, featureset_name)
 
     def insert_into(self, project_name, featureset_name):
         """Insert data into table in MySQL"""
-
+        # TODO: add code
         pass
 
     def exec(self, project_name):

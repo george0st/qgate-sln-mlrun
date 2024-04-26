@@ -11,7 +11,7 @@ from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, 
 import os
 import json
 import glob
-from tshelper import TSHelper
+from qgate_sln_mlrun.ts.tshelper import TSHelper
 
 
 class TS201(TSBase):
