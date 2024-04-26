@@ -81,10 +81,12 @@ class TS205(TSBase):
                 cursor.execute(f"CREATE TABLE {table_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_'))
                 connection.commit()
 
-                # TODO: insert data
+                # insert data
+                self.insert_into(project_name, featureset_name)
 
     def insert_into(self, project_name, featureset_name):
         """Insert data into table in MySQL"""
+        # TODO: add code
         pass
 
     def exec(self, project_name):
