@@ -14,11 +14,22 @@ class TSHelper:
         :param connection_string:   connection string for parsing
         :return:                    None value or collection of items user name, password, host, port and db name
         """
-        if connection_string:
-            items = re.findall(r'//(.*):(.*)@(.*):(.*)/(.*)', connection_string)
-            #items2 = re.findall(r'\/\/(.*):(.*)@(.*):(.*)/(.*)', connection_string)
+        user_name = host = db = None
+        password=""
+        port=0
 
-        return items
+        if connection_string:
+            # re.findall(r'\/\/(.*):(.*)@(.*):(.*)/(.*)', connection_string)
+            configs = re.findall(r'//(.*):(.*)@(.*):(.*)/(.*)', connection_string)
+            if configs and len(configs)>0:
+                config=configs[0]
+                if len(config)>=5:
+                    user_name = config[0]
+                    password = config[1]
+                    host = config[2]
+                    port = int(config[3]) if config[3] else 0
+                    db = config[4]
+        return user_name, password, host, port, db
 
 
     @staticmethod

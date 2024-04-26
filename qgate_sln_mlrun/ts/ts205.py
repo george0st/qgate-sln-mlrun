@@ -13,7 +13,8 @@ import glob
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import sqlalchemy
 import pymysql.cursors
-from tshelper import TSHelper
+from qgate_sln_mlrun.ts.tshelper import TSHelper
+
 
 class TS205(TSBase):
 
@@ -62,11 +63,12 @@ class TS205(TSBase):
         create_cmd=f"CREATE TABLE src_{project_name}_{featureset_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_')
 
         # TODO: parse QGATE_MYSQL
-        connection = pymysql.connect(host='localhost',
-                                     port=3306,
-                                     user='testuser',
-                                     password='testpwd',
-                                     database='test',
+        user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
+        connection = pymysql.connect(host=host, #'localhost',
+                                     port=port, #3306,
+                                     user=user_name, #'testuser',
+                                     password=password, #'testpwd',
+                                     database=db, #'test',
                                      cursorclass=pymysql.cursors.DictCursor)
 
         with connection:
