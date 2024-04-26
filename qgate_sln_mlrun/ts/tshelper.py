@@ -1,14 +1,29 @@
 import sqlalchemy
 from mlrun.data_types.data_types import ValueType
 import datetime
+import re
 
 
 class TSHelper:
 
 
+    @staticmethod
+    def split_sqlalchemy_connection(connection_string):
+        """Parsing pattern 'mysql+<dialect>://<username>:<password>@<host>:<port>/<db_name>'
+
+        :param connection_string:   connection string for parsing
+        :return:                    None value or collection of items user name, password, host, port and db name
+        """
+        if connection_string:
+            items = re.findall(r'//(.*):(.*)@(.*):(.*)/(.*)', connection_string)
+            #items2 = re.findall(r'\/\/(.*):(.*)@(.*):(.*)/(.*)', connection_string)
+
+        return items
+
 
     @staticmethod
     def type_to_mlrun_type(data_type) -> ValueType:
+        """Mapping types from Quality Gate to MLRun types"""
         type_map = {
             "int": ValueType.INT64,
             "int64": ValueType.INT64,
@@ -30,6 +45,7 @@ class TSHelper:
 
     @staticmethod
     def type_to_type(data_type):
+        """Mapping types from Quality Gate to Python types"""
         type_map = {
             "int": int,
             "int64": int,
@@ -51,6 +67,7 @@ class TSHelper:
 
     @staticmethod
     def type_to_sqlalchemy(data_type):
+        """Mapping types from Quality Gate to SqlAlchemy types"""
         type_map = {
             "int": sqlalchemy.Integer,
             "int64": sqlalchemy.Integer,
@@ -68,9 +85,10 @@ class TSHelper:
         if data_type not in type_map:
             raise TypeError(f"Unsupported type '{data_type}'")
         return type_map[data_type]
-    
+
     @staticmethod
     def type_to_mysql_type(data_type):
+        """Mapping types from Quality Gate to MySQL types"""
         type_map = {
             "int": "INT",
             "int64": "INT",
