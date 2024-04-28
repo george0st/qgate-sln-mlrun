@@ -33,7 +33,7 @@ class TS205(TSBase):
     def long_desc(self):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
-    def create_table(self,project_name, featureset_name):
+    def create_table(self, featureset_name):
         """Create table in MySQL"""
         primary_keys=""
         column_types= ""
@@ -66,7 +66,7 @@ class TS205(TSBase):
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name = f"{TS205.TABLE_SOURCE_PREFIX}{project_name}_{featureset_name}".replace('-','_')
+        table_name = f"{TS205.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-','_')
         column_types = column_types[:-1].replace('-', '_')
         primary_keys = primary_keys[:-1].replace('-','_')
         columns = columns[:-1].replace('-', '_')
@@ -120,25 +120,30 @@ class TS205(TSBase):
                     cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
 
-    def before(self):
-        # TODO: create source table only with feature name, not with project
-        self._source_tables = {}
-        pass
-
     def after(self):
-        # delete all tables with prefix 'src_tmp'
+        # delete all tables with prefix TS205.TABLE_SOURCE_PREFIX
+        # delete in TS102, not here
         pass
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
 
+        # It can be executed only in case that QGATE_MYSQL exists
         if not self.setup.mysql:
             return
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            self.create_table(project_name, featureset_name)
 
-        # TODO: test, if mySQL is available
+            # TODO: check if table exist
+
+            #SELECT *
+            # FROM information_schema.tables
+            # WHERE table_schema = 'yourdb'
+            #     AND table_name = 'testtable'
+            # LIMIT 1;
+
+            self.create_table(featureset_name)
+
 
 
     @TSBase.handler_testcase
