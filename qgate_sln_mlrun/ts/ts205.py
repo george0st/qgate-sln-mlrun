@@ -33,7 +33,7 @@ class TS205(TSBase):
     def long_desc(self):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
-    def create_table(self, featureset_name):
+    def create_sqlsource(self, featureset_name):
         """Create table in MySQL"""
         primary_keys=""
         column_types= ""
@@ -93,9 +93,9 @@ class TS205(TSBase):
                 connection.commit()
 
                 # insert data
-                self.execute_insert_into(connection, cursor, table_name, featureset_name, columns)
+                self._insert_into(connection, cursor, table_name, featureset_name, columns)
 
-    def execute_insert_into(self, connection, cursor, table_name, featureset_name, columns):
+    def _insert_into(self, connection, cursor, table_name, featureset_name, columns):
         """Insert data into table in MySQL"""
 
         # create possible file for load
@@ -142,7 +142,7 @@ class TS205(TSBase):
             #     AND table_name = 'testtable'
             # LIMIT 1;
 
-            self.create_table(featureset_name)
+            self.create_sqlsource(featureset_name)
 
 
 
