@@ -81,13 +81,14 @@ class TS205(TSBase):
                 connection.commit()
 
                 # create table
-                cursor.execute(f"CREATE TABLE {table_name} ({columns}, PRIMARY KEY ({primary_keys}));")
+                #cursor.execute(f"CREATE TABLE {table_name} ({columns}, PRIMARY KEY ({primary_keys}));")
+                cursor.execute(f"CREATE TABLE {table_name} ({columns});")
                 connection.commit()
 
                 # insert data
-                self.execute_insert_into(cursor, table_name, columns)
+                self.execute_insert_into(connection, cursor, table_name, featureset_name, columns)
 
-    def execute_insert_into(self, cursor, table_name, columns, featureset_name):
+    def execute_insert_into(self, connection, cursor, table_name, featureset_name, columns):
         """Insert data into table in MySQL"""
 
         # create possible file for load
@@ -106,14 +107,18 @@ class TS205(TSBase):
                                         compression="gzip",
                                         encoding="utf-8",
                                         chunksize=10000):
-                for row in data_frm:
-                    values=""
+                # aa=pd.DataFrame()
+                # aa.iterrows()
+                # aa.to_numpy().tolist()
+
+                for row in data_frm.to_numpy().tolist():
+                    values=f"\",\"".join(str(e) for e in row)
+                    values=f"\"{values}\""
 
                     # INSERT INTO tbl_name (col1,col2) VALUES(15,col1*2);
-                    cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES({values})")
-
-                    # create CMD
-                    pass
+                    #cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES({values})")
+                    cursor.execute(f"INSERT INTO {table_name} VALUES({values});")
+                connection.commit()
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
