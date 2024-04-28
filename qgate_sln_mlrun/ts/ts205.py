@@ -113,30 +113,21 @@ class TS205(TSBase):
                                         chunksize=10000):
                 for row in data_frm.to_numpy().tolist():
                     values=f"\",\"".join(str(e) for e in row)
-                    values=f"\"{values}\""
 
-                    cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES({values});")
+                    cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
+
+        if not self.setup.mysql:
+            return
+
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             self.create_table(project_name, featureset_name)
 
         # TODO: test, if mySQL is available
-        pass
-        # for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-        #     # create file with definition of vector
-        #     source_file = os.path.join(os.getcwd(),
-        #                                self.setup.model_definition,
-        #                                "01-model",
-        #                                "02-feature-set",
-        #                                f"*-{featureset_name}.json")
-        #
-        #     for file in glob.glob(source_file):
-        #         # iterate cross all featureset definitions
-        #         with open(file, "r") as json_file:
-        #             self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, json_file)
+
 
     @TSBase.handler_testcase
     def _create_featureset_ingest(self, testcase_name, project_name, json_file):

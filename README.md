@@ -69,7 +69,7 @@ The quality gate tests these inputs/outputs (✅ done, ✔ in-progress, ❌ plan
    - ✅ File system, ❌ S3, ❌ BlobStorage
 
 
-The supported [sources/targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html).
+The current supported [sources/targets in MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html).
 
 ## Sample of outputs
 
