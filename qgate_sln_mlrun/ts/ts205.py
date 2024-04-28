@@ -119,7 +119,10 @@ class TS205(TSBase):
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
-        
+
+        if not self.setup.mysql:
+            return
+
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             self.create_table(project_name, featureset_name)
 
