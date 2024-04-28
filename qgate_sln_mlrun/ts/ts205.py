@@ -61,6 +61,8 @@ class TS205(TSBase):
                     columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
         table_name=f"src_{project_name}_{featureset_name}".replace('-','_')
+        columns=columns[:-1].replace('-','_')
+        primary_keys=primary_keys[:-1].replace('-','_')
 
         # connect
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
@@ -79,13 +81,13 @@ class TS205(TSBase):
                 connection.commit()
 
                 # create table
-                cursor.execute(f"CREATE TABLE {table_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_'))
+                cursor.execute(f"CREATE TABLE {table_name} ({columns}, PRIMARY KEY ({primary_keys}));")
                 connection.commit()
 
                 # insert data
-                self.execute_insert_into(project_name, featureset_name, cursor)
+                self.execute_insert_into(cursor, table_name, columns)
 
-    def execute_insert_into(self, project_name, featureset_name, cursor):
+    def execute_insert_into(self, cursor, table_name, columns, featureset_name):
         """Insert data into table in MySQL"""
 
         # create possible file for load
@@ -104,8 +106,14 @@ class TS205(TSBase):
                                         compression="gzip",
                                         encoding="utf-8",
                                         chunksize=10000):
-                # create CMD
-                pass
+                for row in data_frm:
+                    values=""
+
+                    # INSERT INTO tbl_name (col1,col2) VALUES(15,col1*2);
+                    cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES({values})")
+
+                    # create CMD
+                    pass
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
