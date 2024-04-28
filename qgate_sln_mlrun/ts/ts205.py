@@ -33,7 +33,8 @@ class TS205(TSBase):
     def create_table(self,project_name, featureset_name):
         """Create table in MySQL"""
         primary_keys=""
-        columns=""
+        column_types= ""
+        columns = ""
 
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
@@ -53,16 +54,19 @@ class TS205(TSBase):
 
                 # primary keys
                 for item in json_spec['entities']:
-                    columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
-                    primary_keys+=f"{item['name']},"
+                    columns += f"{item['name']},"
+                    column_types += f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
+                    primary_keys += f"{item['name']},"
 
                 # columns
                 for item in json_spec['features']:
-                    columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
+                    columns += f"{item['name']},"
+                    column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name=f"src_{project_name}_{featureset_name}".replace('-','_')
-        columns=columns[:-1].replace('-','_')
-        primary_keys=primary_keys[:-1].replace('-','_')
+        table_name = f"src_{project_name}_{featureset_name}".replace('-','_')
+        column_types = column_types[:-1].replace('-', '_')
+        primary_keys = primary_keys[:-1].replace('-','_')
+        columns = columns[:-1].replace('-', '_')
 
         # connect
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
@@ -82,7 +86,7 @@ class TS205(TSBase):
 
                 # create table
                 #cursor.execute(f"CREATE TABLE {table_name} ({columns}, PRIMARY KEY ({primary_keys}));")
-                cursor.execute(f"CREATE TABLE {table_name} ({columns});")
+                cursor.execute(f"CREATE TABLE {table_name} ({column_types});")
                 connection.commit()
 
                 # insert data
@@ -107,17 +111,11 @@ class TS205(TSBase):
                                         compression="gzip",
                                         encoding="utf-8",
                                         chunksize=10000):
-                # aa=pd.DataFrame()
-                # aa.iterrows()
-                # aa.to_numpy().tolist()
-
                 for row in data_frm.to_numpy().tolist():
                     values=f"\",\"".join(str(e) for e in row)
                     values=f"\"{values}\""
 
-                    # INSERT INTO tbl_name (col1,col2) VALUES(15,col1*2);
-                    #cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES({values})")
-                    cursor.execute(f"INSERT INTO {table_name} VALUES({values});")
+                    cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES({values});")
                 connection.commit()
 
     def exec(self, project_name):
