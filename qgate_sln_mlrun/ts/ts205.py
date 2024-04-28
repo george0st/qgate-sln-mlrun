@@ -10,6 +10,7 @@ from qgate_sln_mlrun.ts import ts201
 import os
 import json
 import glob
+import pandas as pd
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import sqlalchemy
 import pymysql.cursors
@@ -32,7 +33,8 @@ class TS205(TSBase):
     def create_table(self,project_name, featureset_name):
         """Create table in MySQL"""
         primary_keys=""
-        columns=""
+        column_types= ""
+        columns = ""
 
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
@@ -52,14 +54,19 @@ class TS205(TSBase):
 
                 # primary keys
                 for item in json_spec['entities']:
-                    columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
-                    primary_keys+=f"{item['name']},"
+                    columns += f"{item['name']},"
+                    column_types += f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
+                    primary_keys += f"{item['name']},"
 
                 # columns
                 for item in json_spec['features']:
-                    columns+=f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
+                    columns += f"{item['name']},"
+                    column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name=f"src_{project_name}_{featureset_name}".replace('-','_')
+        table_name = f"src_{project_name}_{featureset_name}".replace('-','_')
+        column_types = column_types[:-1].replace('-', '_')
+        primary_keys = primary_keys[:-1].replace('-','_')
+        columns = columns[:-1].replace('-', '_')
 
         # connect
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
@@ -78,16 +85,38 @@ class TS205(TSBase):
                 connection.commit()
 
                 # create table
-                cursor.execute(f"CREATE TABLE {table_name} ({columns[:-1]}, PRIMARY KEY ({primary_keys[:-1]}));".replace('-','_'))
+                #cursor.execute(f"CREATE TABLE {table_name} ({columns}, PRIMARY KEY ({primary_keys}));")
+                cursor.execute(f"CREATE TABLE {table_name} ({column_types});")
                 connection.commit()
 
                 # insert data
-                self.insert_into(project_name, featureset_name)
+                self.execute_insert_into(connection, cursor, table_name, featureset_name, columns)
 
-    def insert_into(self, project_name, featureset_name):
+    def execute_insert_into(self, connection, cursor, table_name, featureset_name, columns):
         """Insert data into table in MySQL"""
-        # TODO: add code
-        pass
+
+        # create possible file for load
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "02-data",
+                                   self.setup.dataset_name,
+                                   f"*-{featureset_name}.csv.gz")
+
+        for file in glob.glob(source_file):
+            # ingest data with bundl/chunk
+            for data_frm in pd.read_csv(file,
+                                        sep=self.setup.csv_separator,  # ";",
+                                        header="infer",
+                                        decimal=self.setup.csv_decimal,  # ",",
+                                        compression="gzip",
+                                        encoding="utf-8",
+                                        chunksize=10000):
+                for row in data_frm.to_numpy().tolist():
+                    values=f"\",\"".join(str(e) for e in row)
+                    values=f"\"{values}\""
+
+                    cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES({values});")
+                connection.commit()
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
