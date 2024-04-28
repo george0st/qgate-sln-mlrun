@@ -10,6 +10,7 @@ from qgate_sln_mlrun.ts import ts201
 import os
 import json
 import glob
+import pandas as pd
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import sqlalchemy
 import pymysql.cursors
@@ -82,12 +83,29 @@ class TS205(TSBase):
                 connection.commit()
 
                 # insert data
-                self.insert_into(project_name, featureset_name)
+                self.execute_insert_into(project_name, featureset_name, cursor)
 
-    def insert_into(self, project_name, featureset_name):
+    def execute_insert_into(self, project_name, featureset_name, cursor):
         """Insert data into table in MySQL"""
-        # TODO: add code
-        pass
+
+        # create possible file for load
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "02-data",
+                                   self.setup.dataset_name,
+                                   f"*-{featureset_name}.csv.gz")
+
+        for file in glob.glob(source_file):
+            # ingest data with bundl/chunk
+            for data_frm in pd.read_csv(file,
+                                        sep=self.setup.csv_separator,  # ";",
+                                        header="infer",
+                                        decimal=self.setup.csv_decimal,  # ",",
+                                        compression="gzip",
+                                        encoding="utf-8",
+                                        chunksize=10000):
+                # create CMD
+                pass
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
