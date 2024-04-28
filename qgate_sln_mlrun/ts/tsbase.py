@@ -161,7 +161,7 @@ class TSBase:
         return self._name
 
     def before(self):
-        """Call before exec, relevant for data preparation, etc."""
+        """One call BEFORE exec all projects for specific TS. It is relevant for data preparation, etc."""
         pass
 
     def exec(self, project_name):
@@ -169,7 +169,7 @@ class TSBase:
         raise NotImplemented()
 
     def after(self):
-        """Call after exec, relevant for data cleaning, etc."""
+        """One call AFTER execute all projects for specific TS. It is relevant for data cleaning, etc."""
         pass
 
     # region TEST_SCENARIOS

@@ -19,8 +19,11 @@ from qgate_sln_mlrun.ts.tshelper import TSHelper
 
 class TS205(TSBase):
 
+    TABLE_SOURCE_PREFIX = "tmp_"
+
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
+        self._source_tables = {}
 
     @property
     def desc(self) -> str:
@@ -63,7 +66,7 @@ class TS205(TSBase):
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name = f"src_{project_name}_{featureset_name}".replace('-','_')
+        table_name = f"{TS205.TABLE_SOURCE_PREFIX}{project_name}_{featureset_name}".replace('-','_')
         column_types = column_types[:-1].replace('-', '_')
         primary_keys = primary_keys[:-1].replace('-','_')
         columns = columns[:-1].replace('-', '_')
@@ -116,6 +119,15 @@ class TS205(TSBase):
 
                     cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
+
+    def before(self):
+        # TODO: create source table only with feature name, not with project
+        self._source_tables = {}
+        pass
+
+    def after(self):
+        # delete all tables with prefix 'src_tmp'
+        pass
 
     def exec(self, project_name):
         """ Create featuresets & ingest"""
