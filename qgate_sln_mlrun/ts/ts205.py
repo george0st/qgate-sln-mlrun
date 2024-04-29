@@ -31,11 +31,6 @@ class TS205(TSBase):
     def long_desc(self):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
-    def after(self):
-        # delete all tables with prefix TS205.TABLE_SOURCE_PREFIX
-        # delete in TS102, not here
-        pass
-
     def exec(self, project_name):
         """ Create featuresets & ingest"""
 
@@ -50,31 +45,44 @@ class TS205(TSBase):
             if not mysql.table_exist(featureset_name):
                 mysql.create_table(featureset_name)
 
-    @TSBase.handler_testcase
-    def _create_featureset_ingest(self, testcase_name, project_name, json_file):
-        json_content = json.load(json_file)
-        name, desc, lbls, kind = TSBase.get_json_header(json_content)
-
-        if kind == "feature-set":
-
-            # create feature set based on the logic in TS201
-            ts=ts201.TS201(self._solution)
-            featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
-
+            # create file with definition of vector
             source_file = os.path.join(os.getcwd(),
                                        self.setup.model_definition,
-                                       "02-data",
-                                       self.setup.dataset_name,
-                                       f"*-{name}.parquet")
-            for file in glob.glob(source_file):
+                                       "01-model",
+                                       "02-feature-set",
+                                       f"*-{featureset_name}.json")
 
-                fstore.ingest(featureset,
-                              SQLSource(name="tst", path=file),
-                              # overwrite=False,
-                              return_df=False,
-                              # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                              infer_options=mlrun.data_types.data_types.InferOptions.default())
-                # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-                # NOTE: option default, change types
-                # NOTE: option Null, generate error with datetime in python 3.9
+            for file in glob.glob(source_file):
+                # iterate cross all featureset definitions
+                with open(file, "r") as json_file:
+                    self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, json_file)
+
+    @TSBase.handler_testcase
+    def _create_featureset_ingest(self, testcase_name, project_name, json_file):
+        return
+        # json_content = json.load(json_file)
+        # name, desc, lbls, kind = TSBase.get_json_header(json_content)
+        #
+        # if kind == "feature-set":
+        #
+        #     # create feature set based on the logic in TS201
+        #     ts=ts201.TS201(self._solution)
+        #     featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
+        #
+        #     source_file = os.path.join(os.getcwd(),
+        #                                self.setup.model_definition,
+        #                                "02-data",
+        #                                self.setup.dataset_name,
+        #                                f"*-{name}.parquet")
+        #     for file in glob.glob(source_file):
+        #
+        #         fstore.ingest(featureset,
+        #                       SQLSource(name="tst", path=file),
+        #                       # overwrite=False,
+        #                       return_df=False,
+        #                       # infer_options=mlrun.data_types.data_types.InferOptions.Null)
+        #                       infer_options=mlrun.data_types.data_types.InferOptions.default())
+        #         # TODO: use InferOptions.Null with python 3.10 or focus on WSL
+        #         # NOTE: option default, change types
+        #         # NOTE: option Null, generate error with datetime in python 3.9
 
