@@ -10,6 +10,7 @@ from qgate_sln_mlrun.setup import Setup
 
 class MySQLHelper():
 
+    # Prefix of table with sources
     TABLE_SOURCE_PREFIX = "tmp_"
 
     def __init__(self,setup: Setup):
@@ -21,11 +22,11 @@ class MySQLHelper():
 
     @property
     def configured(self):
-        """Return None if not configured or connection string (based on setting QGATE_MYSQL in *.env file"""
+        """Return None if not configured or connection string (based on setting QGATE_MYSQL in *.env file)."""
         return self.setup.mysql
 
-    def create_table(self, featureset_name):
-        """Create table in MySQL"""
+    def create_table(self, featureset_name, drop_table_if_exist = False):
+        """Create table"""
         primary_keys=""
         column_types= ""
         columns = ""
@@ -74,12 +75,12 @@ class MySQLHelper():
         with connection:
             with connection.cursor() as cursor:
 
-                # drop table
-                cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
-                connection.commit()
+                if drop_table_if_exist:
+                    # drop table
+                    cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
+                    connection.commit()
 
                 # create table
-                #cursor.execute(f"CREATE TABLE {table_name} ({columns}, PRIMARY KEY ({primary_keys}));")
                 cursor.execute(f"CREATE TABLE {table_name} ({column_types});")
                 connection.commit()
 
@@ -87,7 +88,7 @@ class MySQLHelper():
                 self._insert_into(connection, cursor, table_name, featureset_name, columns)
 
     def _insert_into(self, connection, cursor, table_name, featureset_name, columns):
-        """Insert data into table in MySQL"""
+        """Insert data into the table"""
 
         # create possible file for load
         source_file = os.path.join(os.getcwd(),
@@ -114,13 +115,13 @@ class MySQLHelper():
     def _convert_feature_tablename(self, featureset_name):
         """Convert featureset name to the name of table.
 
-        :param featureset_name:     feature set name
-        :return:                    name of db table with relevant prefix
+        :param featureset_name:     Feature set name
+        :return:                    The name of db table with relevant prefix
         """
         return f"{MySQLHelper.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-', '_')
 
     def table_exist(self, featureset_name):
-        """Check, if table in MySQL exist
+        """Check, if table exists
 
         :param table_name:      name of the table for check
         :return:                True - table exist, False - table does not exist
@@ -135,8 +136,8 @@ class MySQLHelper():
 
         with connection:
             with connection.cursor() as cursor:
-                cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = {db}"
-                               f" AND table_name = {self._convert_feature_tablename(featureset_name)} LIMIT 1;")
+                cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
+                               f" AND table_name = '{self._convert_feature_tablename(featureset_name)}' LIMIT 1;")
                 myresult = cursor.fetchone()
                 if myresult:
                     if len(myresult)>0:

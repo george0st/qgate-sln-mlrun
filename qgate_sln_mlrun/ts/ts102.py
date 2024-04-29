@@ -28,7 +28,10 @@ class TS102(TSBase):
         self._delete_project(f"{project_name}/*:", project_name)
 
     def after(self):
-        """Delete addition content of project (include output directory, etc.)"""
+        """Delete addition content of project (include output directory, DB content etc.)"""
+
+        # TODO: remove data from MySQL & separate file, db, ... cleaning
+
 
         # not remove files from today
         # (this line generate file prefix for today)
