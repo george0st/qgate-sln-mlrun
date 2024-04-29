@@ -2,6 +2,7 @@ import pymysql.cursors
 import os
 import glob
 import json
+import pandas as pd
 from qgate_sln_mlrun.ts.tsbase import TSBase
 from qgate_sln_mlrun.ts.tshelper import TSHelper
 from qgate_sln_mlrun.setup import Setup
@@ -19,11 +20,11 @@ class MySQLHelper():
         return self._setup
 
     @property
-    def mysql_configured(self):
-        """Return None if not configured or connection string"""
+    def configured(self):
+        """Return None if not configured or connection string (based on setting QGATE_MYSQL in *.env file"""
         return self.setup.mysql
 
-    def create_sqlsource(self, featureset_name):
+    def create_table(self, featureset_name):
         """Create table in MySQL"""
         primary_keys=""
         column_types= ""
@@ -57,7 +58,6 @@ class MySQLHelper():
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
         table_name = self._convert_feature_tablename(featureset_name)
-        #f"{TS205.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-','_')
         column_types = column_types[:-1].replace('-', '_')
         primary_keys = primary_keys[:-1].replace('-','_')
         columns = columns[:-1].replace('-', '_')
@@ -119,7 +119,7 @@ class MySQLHelper():
         """
         return f"{MySQLHelper.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-', '_')
 
-    def _mysql_table_exist(self, table_name):
+    def table_exist(self, featureset_name):
         """Check, if table in MySQL exist
 
         :param table_name:      name of the table for check
@@ -135,7 +135,8 @@ class MySQLHelper():
 
         with connection:
             with connection.cursor() as cursor:
-                cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = {db} AND table_name = {table_name} LIMIT 1;")
+                cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = {db}"
+                               f" AND table_name = {self._convert_feature_tablename(featureset_name)} LIMIT 1;")
                 myresult = cursor.fetchone()
                 if myresult:
                     if len(myresult)>0:

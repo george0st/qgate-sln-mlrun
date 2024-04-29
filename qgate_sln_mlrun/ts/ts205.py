@@ -15,6 +15,7 @@ from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import sqlalchemy
 import pymysql.cursors
 from qgate_sln_mlrun.ts.tshelper import TSHelper
+from qgate_sln_mlrun.mysqlhelper import MySQLHelper
 
 
 class TS205(TSBase):
@@ -23,7 +24,6 @@ class TS205(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
-        self._source_tables = {}
 
     @property
     def desc(self) -> str:
@@ -156,15 +156,16 @@ class TS205(TSBase):
     def exec(self, project_name):
         """ Create featuresets & ingest"""
 
-        # It can be executed only in case that QGATE_MYSQL exists
-        if not self.setup.mysql:
+        mysql= MySQLHelper(self.setup)
+
+        # It can be executed only in case that configuration is fine
+        if not mysql.configured:
             return
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table only in case, that table does not exist
-            if not self._mysql_table_exist(self._convert_feature_tablename(featureset_name)):
-                self.create_sqlsource(featureset_name)
-
+            if not mysql.table_exist(featureset_name):
+                mysql.create_table(featureset_name)
 
     @TSBase.handler_testcase
     def _create_featureset_ingest(self, testcase_name, project_name, json_file):
