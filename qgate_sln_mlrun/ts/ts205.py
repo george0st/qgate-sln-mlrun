@@ -66,7 +66,8 @@ class TS205(TSBase):
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name = f"{TS205.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-','_')
+        table_name = self._convert_feature_tablename(featureset_name)
+        #f"{TS205.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-','_')
         column_types = column_types[:-1].replace('-', '_')
         primary_keys = primary_keys[:-1].replace('-','_')
         columns = columns[:-1].replace('-', '_')
@@ -125,6 +126,32 @@ class TS205(TSBase):
         # delete in TS102, not here
         pass
 
+    def _convert_feature_tablename(self, featureset_name):
+        return f"{TS205.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-', '_')
+
+    def _mysql_table_exist(self, table_name):
+        """Check, if table in MySQL exist
+
+        :param table_name:      name of the table for check
+        :return:                True - table exist, False - table does not exist
+        """
+        user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
+        connection = pymysql.connect(host=host,
+                                     port=port,
+                                     user=user_name,
+                                     password=password,
+                                     database=db,
+                                     cursorclass=pymysql.cursors.DictCursor)
+
+        with connection:
+            with connection.cursor() as cursor:
+                cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = {db} AND table_name = {table_name} LIMIT 1;")
+                myresult = cursor.fetchone()
+                if myresult:
+                    if len(myresult)>0:
+                        return True
+        return False
+
     def exec(self, project_name):
         """ Create featuresets & ingest"""
 
@@ -134,15 +161,9 @@ class TS205(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
 
-            # TODO: check if table exist
-
-            #SELECT *
-            # FROM information_schema.tables
-            # WHERE table_schema = 'yourdb'
-            #     AND table_name = 'testtable'
-            # LIMIT 1;
-
-            self.create_sqlsource(featureset_name)
+            # Create table only in case, that table does not exist
+            if not self._mysql_table_exist(featureset_name):
+                self.create_sqlsource(featureset_name)
 
 
 
