@@ -135,8 +135,8 @@ class MySQLHelper():
 
         with connection:
             with connection.cursor() as cursor:
-                cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = {db}"
-                               f" AND table_name = {self._convert_feature_tablename(featureset_name)} LIMIT 1;")
+                cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
+                               f" AND table_name = '{self._convert_feature_tablename(featureset_name)}' LIMIT 1;")
                 myresult = cursor.fetchone()
                 if myresult:
                     if len(myresult)>0:
