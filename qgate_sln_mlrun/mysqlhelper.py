@@ -24,7 +24,7 @@ class MySQLHelper():
         """Return None if not configured or connection string (based on setting QGATE_MYSQL in *.env file"""
         return self.setup.mysql
 
-    def create_table(self, featureset_name):
+    def create_table(self, featureset_name, drop_table_if_exist = False):
         """Create table in MySQL"""
         primary_keys=""
         column_types= ""
@@ -74,9 +74,10 @@ class MySQLHelper():
         with connection:
             with connection.cursor() as cursor:
 
-                # drop table
-                cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
-                connection.commit()
+                if drop_table_if_exist:
+                    # drop table
+                    cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
+                    connection.commit()
 
                 # create table
                 #cursor.execute(f"CREATE TABLE {table_name} ({columns}, PRIMARY KEY ({primary_keys}));")
