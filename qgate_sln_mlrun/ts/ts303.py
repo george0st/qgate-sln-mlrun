@@ -17,7 +17,6 @@ class TS303(TSBase):
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
-
     @property
     def desc(self) -> str:
         return "Ingest data to feature set(s) from Parquet source "
