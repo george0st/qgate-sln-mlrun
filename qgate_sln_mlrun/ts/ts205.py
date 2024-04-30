@@ -34,7 +34,7 @@ class TS205(TSBase):
     def exec(self, project_name):
         """ Create featuresets & ingest"""
 
-        mysql= MySQLHelper(self.setup)
+        mysql = MySQLHelper(self.setup)
 
         # It can be executed only in case that configuration is fine
         if not mysql.configured:

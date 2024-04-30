@@ -8,6 +8,7 @@ import os
 import glob
 import shutil
 from qgate_sln_mlrun.setup import ProjectDelete
+from qgate_sln_mlrun.mysqlhelper import MySQLHelper
 
 
 class TS102(TSBase):
@@ -30,9 +31,11 @@ class TS102(TSBase):
     def after(self):
         """Delete addition content of project (include output directory, DB content etc.)"""
 
-        # TODO: remove data from MySQL & separate file, db, ... cleaning
+        # remove data from MySQL
+        mysql= MySQLHelper(self.setup)
+        mysql.remove_table(MySQLHelper.TABLE_SOURCE_PREFIX)
 
-
+        # remove files
         # not remove files from today
         # (this line generate file prefix for today)
         not_remove = f"qgt-mlrun-{str.replace(self.output.datetime, ':', '-')}".split(" ")[0]
