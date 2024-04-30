@@ -67,11 +67,15 @@ class TS205(TSBase):
             ts=ts201.TS201(self._solution)
             featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
 
+            keys = ""
+            for entity in featureset.spec.entities:
+                keys+=f"{entity.name},"
+
             fstore.ingest(featureset,
                           SQLSource(name="tst",
                                     table_name=self._mysql.convert_feature_tablename(featureset_name),
                                     db_url=self.setup.mysql,
-                                    key_field="party_id"),
+                                    key_field=keys[:-1].replace('-','_')),
                           # overwrite=False,
                           return_df=False,
                           # infer_options=mlrun.data_types.data_types.InferOptions.Null)
