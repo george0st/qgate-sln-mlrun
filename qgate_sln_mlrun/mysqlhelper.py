@@ -58,7 +58,7 @@ class MySQLHelper():
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name = self._convert_feature_tablename(featureset_name)
+        table_name = self.convert_feature_tablename(featureset_name)
         column_types = column_types[:-1].replace('-', '_')
         primary_keys = primary_keys[:-1].replace('-','_')
         columns = columns[:-1].replace('-', '_')
@@ -112,7 +112,7 @@ class MySQLHelper():
                     cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
 
-    def _convert_feature_tablename(self, featureset_name):
+    def convert_feature_tablename(self, featureset_name):
         """Convert featureset name to the name of table.
 
         :param featureset_name:     Feature set name
@@ -137,7 +137,7 @@ class MySQLHelper():
         with connection:
             with connection.cursor() as cursor:
                 cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
-                               f" AND table_name = '{self._convert_feature_tablename(featureset_name)}' LIMIT 1;")
+                               f" AND table_name = '{self.convert_feature_tablename(featureset_name)}' LIMIT 1;")
                 myresult = cursor.fetchone()
                 if myresult:
                     if len(myresult)>0:
