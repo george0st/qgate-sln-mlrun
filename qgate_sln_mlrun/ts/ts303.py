@@ -34,7 +34,6 @@ class TS303(TSBase):
                                        self.setup.model_definition,
                                        "02-data",
                                        self.setup.dataset_name,
-#                                       f"*-{featureset_name}.csv.gz")
                                        f"*-{featureset_name}.parquet")
 
             # check existing data set
@@ -47,7 +46,6 @@ class TS303(TSBase):
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         fstore.ingest(featureset,
-#                      ParquetSource(name="tst", path=parquet_file),
                       ParquetSource(name="tst", path=file),
                       # overwrite=False,
                       return_df=False,
