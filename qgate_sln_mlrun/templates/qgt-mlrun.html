@@ -134,7 +134,7 @@ td {
 </style>
 <script>
 
-function myFunction(...elements) {
+function myOnOff(...elements) {
   for (let element of elements) {
 	var x = document.getElementById(element);
 	if (x.style.display === "none") {
@@ -184,7 +184,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 }
 
 </script>
-<body>
+<body onload="myOnOff('myDIV3','myFiltr')">
 	<table style="border: 1px; font-family: Helvetica, Arial, sans-serif; font-size: 16px; width: 100%">
 		<tr style="border: 0px;">
 			<td style="border: 0px; width: 90px;">
@@ -200,7 +200,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		</tr>
 	</table>
 
-	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myFunction('myDIV3','myFiltr')">
+	<button type="button" class="collapsible" {% if data.summary.state == 'DONE' %}style="background-color: green;"{% else %}style="background-color: #E20074;"{% endif %} onclick="myOnOff('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;">{% if data.summary.state == 'DONE' %}<img class="img-check" src="">{% else %}<img class="img-error" src="">{% endif %}Report outputs ...</td>
@@ -223,7 +223,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		</table>
 	</div>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img class="img-info" src="">&nbsp;Execution details ...</button>
+	<button type="button" class="collapsible" onclick="myOnOff('myDIV')"><img class="img-info" src="">&nbsp;Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b><br>
