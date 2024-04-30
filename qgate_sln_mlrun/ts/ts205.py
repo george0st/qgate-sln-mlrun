@@ -67,22 +67,15 @@ class TS205(TSBase):
             ts=ts201.TS201(self._solution)
             featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
 
-            source_file = os.path.join(os.getcwd(),
-                                       self.setup.model_definition,
-                                       "02-data",
-                                       self.setup.dataset_name,
-                                       f"*-{name}.parquet")
-            for file in glob.glob(source_file):
-
-                fstore.ingest(featureset,
-                              SQLSource(name="tst",
-                                        table_name=self._mysql.convert_feature_tablename(featureset_name),
-                                        db_url=self.setup.mysql),
-                              # overwrite=False,
-                              return_df=False,
-                              # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                              infer_options=mlrun.data_types.data_types.InferOptions.default())
-                # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-                # NOTE: option default, change types
-                # NOTE: option Null, generate error with datetime in python 3.9
+            fstore.ingest(featureset,
+                          SQLSource(name="tst",
+                                    table_name=self._mysql.convert_feature_tablename(featureset_name),
+                                    db_url=self.setup.mysql),
+                          # overwrite=False,
+                          return_df=False,
+                          # infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                          infer_options=mlrun.data_types.data_types.InferOptions.default())
+            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
+            # NOTE: option default, change types
+            # NOTE: option Null, generate error with datetime in python 3.9
 
