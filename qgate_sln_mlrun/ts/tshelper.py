@@ -2,10 +2,10 @@ import sqlalchemy
 from mlrun.data_types.data_types import ValueType
 import datetime
 import re
+import os
 
 
 class TSHelper:
-
 
     @staticmethod
     def split_sqlalchemy_connection(connection_string):
