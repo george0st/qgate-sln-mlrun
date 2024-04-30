@@ -143,3 +143,27 @@ class MySQLHelper():
                     if len(myresult)>0:
                         return True
         return False
+
+    def remove_table(self, start_with):
+        """Remove tables with specific prefix
+
+        :param start_with:      prefix of tables for remove
+        """
+        if start_with:
+            user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
+            connection = pymysql.connect(host=host,
+                                         port=port,
+                                         user=user_name,
+                                         password=password,
+                                         database=db,
+                                         cursorclass=pymysql.cursors.DictCursor)
+
+            with connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
+                                   f" AND table_name like '{start_with}%';")
+                    results = cursor.fetchall()
+                    if results:
+                        for result in results:
+                            cursor.execute(f"DROP TABLE IF EXISTS {result['TABLE_NAME']};")
+                            connection.commit()
