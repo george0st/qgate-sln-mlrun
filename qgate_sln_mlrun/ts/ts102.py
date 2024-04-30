@@ -32,11 +32,20 @@ class TS102(TSBase):
         """Delete addition content of project (include output directory, DB content etc.)"""
 
         # remove data from MySQL
+        self._clean_mysql()
+
+        # remove files
+        self._clean_file()
+
+    def _clean_mysql(self):
+        # remove contant of mysql
+
         mysql= MySQLHelper(self.setup)
         mysql.remove_table(MySQLHelper.TABLE_SOURCE_PREFIX)
 
-        # remove files
-        # not remove files from today
+    def _clean_file(self):
+        # remove files (not remove files from today)
+
         # (this line generate file prefix for today)
         not_remove = f"qgt-mlrun-{str.replace(self.output.datetime, ':', '-')}".split(" ")[0]
 
