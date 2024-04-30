@@ -161,8 +161,9 @@ class MySQLHelper():
             with connection:
                 with connection.cursor() as cursor:
                     cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
-                                   f" AND table_name = '{start_with}%';")
+                                   f" AND table_name like '{start_with}%';")
                     results = cursor.fetchall()
                     if results:
                         for result in results:
-                            print(result)
+                            cursor.execute(f"DROP TABLE IF EXISTS {result['TABLE_NAME']};")
+                            connection.commit()
