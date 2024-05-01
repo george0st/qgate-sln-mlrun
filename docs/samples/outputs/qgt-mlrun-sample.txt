@@ -1,5 +1,5 @@
 # Quality report for MLRun 1.6.2
-# Report ID: 2024-04-21 x9103548355161 (PART)
+# Report ID: 2024-04-30 x9220039600848 (PART)
 # Score: 100% (PART)
 # -----------------------
 Summary, test scenarios: 24 [TOTAL] (0/24 [ERR/DONE])
@@ -19,6 +19,13 @@ TS201: Create feature set(s)
   DONE ... agate-redis-csv/aggregate-transaction
   DONE ... agate-redis-csv/aggregate-circle
 TS202: Create feature set(s) & Ingest from DataFrame source (in one step)
+TS203: Create feature set(s) & Ingest from from CSV source (one step)
+TS204: Create feature set(s) & Ingest from Parquet source (one step)
+TS205: Create feature set(s) & Ingest from SQL source (one step)
+TS301: Ingest data to feature set(s) from DataFrame source
+TS302: Ingest data to feature set(s) from CSV source 
+TS303: Ingest data to feature set(s) from Parquet source 
+TS304: Ingest data to feature set(s) from SQL source
   DONE ... agate-redis-csv/basic-party
   DONE ... agate-redis-csv/basic-contact
   DONE ... agate-redis-csv/basic-relation
@@ -30,13 +37,6 @@ TS202: Create feature set(s) & Ingest from DataFrame source (in one step)
   DONE ... agate-redis-csv/aggregate-account
   DONE ... agate-redis-csv/aggregate-transaction
   DONE ... agate-redis-csv/aggregate-circle
-TS203: Create feature set(s) & Ingest from from CSV source (one step)
-TS204: Create feature set(s) & Ingest from Parquet source (one step)
-TS205: Create feature set(s) & Ingest from SQL source (one step)
-TS301: Ingest data to feature set(s) from DataFrame source
-TS302: Ingest data to feature set(s) from CSV source 
-TS303: Ingest data to feature set(s) from Parquet source 
-TS304: Ingest data to feature set(s) from SQL source
 TS401: Create feature vector(s)
 TS501: Get data from off-line feature vector(s)
 TS502: Get data from on-line feature vector(s)
@@ -56,7 +56,7 @@ TS102: Delete project(s)
 # QGATE_DEFINITION: '../qgate-model' 
 # QGATE_DATASET: '01-size-100' 
 # QGATE_FILTER_PROJECTS: 'agate-redis-csv' 
-# QGATE_FILTER_SCENARIOS: 'TS101, TS102, TS201, TS202' 
+# QGATE_FILTER_SCENARIOS: 'TS101, TS102, TS201, TS304' 
 # QGATE_OUTPUT: './output' 
 # QGATE_OUTPUT_EXP: './output, ds://az-blob/jistcontainer01/test/' 
 # QGATE_DATA_STORE: 'az-blob, AzureBlobStorage, ./secrets/az_connection.env' 
@@ -67,7 +67,7 @@ TS102: Delete project(s)
 # DIR: 'C:\Python\qgate-sln-mlrun' 
 # -----------------------
 # CPU: 12
-# RAM total/free: 15.2 GB/0.8 GB
+# RAM total/free: 15.2 GB/2.2 GB
 # Host: Anonym/192.168.0.1
 # -----------------------
 # Source, see the Github https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
