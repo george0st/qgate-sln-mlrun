@@ -18,7 +18,7 @@ from qgate_sln_mlrun.ts.tshelper import TSHelper
 from qgate_sln_mlrun.mysqlhelper import MySQLHelper
 
 
-class TS205(TSBase):
+class TS206(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
