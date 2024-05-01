@@ -134,7 +134,7 @@ td {
 </style>
 <script>
 
-function myFunction(...elements) {
+function myOnOff(...elements) {
   for (let element of elements) {
 	var x = document.getElementById(element);
 	if (x.style.display === "none") {
@@ -184,7 +184,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 }
 
 </script>
-<body>
+<body onload="myOnOff('myDIV3','myFiltr')">
 	<table style="border: 1px; font-family: Helvetica, Arial, sans-serif; font-size: 16px; width: 100%">
 		<tr style="border: 0px;">
 			<td style="border: 0px; width: 90px;">
@@ -192,7 +192,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 			</td>
 			<td style="border: 0px;" align="center">
 				<h2 style="margin: 0;">Quality report for <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank"><u>MLRun 1.6.2</u></a></h2>
-				<p style="margin: 0; padding: 6px 3px;">Report ID: <b>2024-04-20 x9205001510782</b></p>
+				<p style="margin: 0; padding: 6px 3px;">Report ID: <b>2024-05-01 x9124653875110</b></p>
 			</td>
 			<td style="border: 0px; width: 90px;">
 				<a class="btn-percentage" style="background: #E20074; color: white;">76%</a>
@@ -200,7 +200,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		</tr>
 	</table>
 
-	<button type="button" class="collapsible" style="background-color: #E20074;" onclick="myFunction('myDIV3','myFiltr')">
+	<button type="button" class="collapsible" style="background-color: #E20074;" onclick="myOnOff('myDIV3','myFiltr')">
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;"><img class="img-error" src="">Report outputs ...</td>
@@ -213,13 +213,13 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
 		<select id="myProject" oninput="filterAll('myState','myProject','keyOutputs')">
-			<option>All</option><option title='The A-GATE with redis and csv'>agate-redis-csv</option>
+			<option>All</option><option title='The A-GATE with redis and csv targets'>agate-redis-csv</option>
 		</select>
 	</div>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table id="keyOutputs">
 			<tr><td colspan="2"><b>TS101: Create project(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/*: 'The A-GATE with redis and csv'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/*: 'The A-GATE with redis and csv targets'</td></tr>
 			<tr><td colspan="2"><b>TS201: Create feature set(s)</b></td></tr>
 			<tr><td colspan="2"><b>TS202: Create feature set(s) & Ingest from DataFrame source (in one step)</b></td></tr>
 			<tr><td colspan="2"><b>TS203: Create feature set(s) & Ingest from from CSV source (one step)</b></td></tr>
@@ -239,6 +239,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 			<tr><td colspan="2"><b>TS301: Ingest data to feature set(s) from DataFrame source</b></td></tr>
 			<tr><td colspan="2"><b>TS302: Ingest data to feature set(s) from CSV source </b></td></tr>
 			<tr><td colspan="2"><b>TS303: Ingest data to feature set(s) from Parquet source </b></td></tr>
+			<tr><td colspan="2"><b>TS304: Ingest data to feature set(s) from SQL source</b></td></tr>
 			<tr><td colspan="2"><b>TS401: Create feature vector(s)</b></td></tr>
 			<tr><td colspan="2"><b>TS501: Get data from off-line feature vector(s)</b></td></tr>
 			<tr><td colspan="2"><b>TS502: Get data from on-line feature vector(s)</b></td></tr>
@@ -249,7 +250,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		</table>
 	</div>
 
-	<button type="button" class="collapsible" onclick="myFunction('myDIV')"><img class="img-info" src="">&nbsp;Execution details ...</button>
+	<button type="button" class="collapsible" onclick="myOnOff('myDIV')"><img class="img-info" src="">&nbsp;Execution details ...</button>
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b><br>
@@ -279,7 +280,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		<p>
 			<b>Hardware information:</b><br>
 			&nbsp;&nbsp;<b>CPU:</b> 12 cores<br>
-			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/0.7 GB<br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/1.2 GB<br>
 			&nbsp;&nbsp;<b>Host:</b> Anonym/192.168.0.1<br>
 		</p>
 	</div>

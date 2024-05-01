@@ -1,11 +1,11 @@
 # Quality report for MLRun 1.6.2
-# Report ID: 2024-04-20 x9205001510782 (PART)
+# Report ID: 2024-05-01 x9124653875110 (PART)
 # Score: 76% (PART)
 # -----------------------
 Summary, test scenarios: 13 [TOTAL] (3/10 [ERR/DONE])
 # -----------------------
 TS101: Create project(s)
-  DONE ... agate-redis-csv/*: 'The A-GATE with redis and csv'
+  DONE ... agate-redis-csv/*: 'The A-GATE with redis and csv targets'
 TS201: Create feature set(s)
 TS202: Create feature set(s) & Ingest from DataFrame source (in one step)
 TS203: Create feature set(s) & Ingest from from CSV source (one step)
@@ -25,6 +25,7 @@ TS205: Create feature set(s) & Ingest from SQL source (one step)
 TS301: Ingest data to feature set(s) from DataFrame source
 TS302: Ingest data to feature set(s) from CSV source 
 TS303: Ingest data to feature set(s) from Parquet source 
+TS304: Ingest data to feature set(s) from SQL source
 TS401: Create feature vector(s)
 TS501: Get data from off-line feature vector(s)
 TS502: Get data from on-line feature vector(s)
@@ -55,7 +56,7 @@ TS102: Delete project(s)
 # DIR: 'C:\Python\qgate-sln-mlrun' 
 # -----------------------
 # CPU: 12
-# RAM total/free: 15.2 GB/0.7 GB
+# RAM total/free: 15.2 GB/1.2 GB
 # Host: Anonym/192.168.0.1
 # -----------------------
 # Source, see the Github https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
