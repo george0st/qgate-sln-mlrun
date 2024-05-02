@@ -3,8 +3,10 @@ import json
 import os
 from qgate_sln_mlrun.setup import Setup, ProjectDelete
 from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.ts import (ts101, ts102, ts201, ts202, ts203, ts204, ts205, ts206,
-                                ts301, ts302, ts303, ts304, ts401, ts501, ts502, ts701, ts801)
+from qgate_sln_mlrun.ts import (ts101, ts102,
+                                ts201, ts202, ts203, ts204, ts205, ts206,
+                                ts302, ts303, ts304, ts305,
+                                ts401, ts501, ts502, ts701, ts801)
 from qgate_sln_mlrun.ts import tsbase
 import logging
 import importlib.resources
@@ -17,7 +19,7 @@ class QualityReport:
 
     TEST_SCENARIOS = [ts101.TS101,
                       ts201.TS201, ts202.TS202, ts203.TS203, ts204.TS204, ts205.TS205, ts206.TS206,
-                      ts301.TS301, ts302.TS302, ts303.TS303, ts304.TS304,
+                      ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305,
                       ts401.TS401,
                       ts501.TS501, ts502.TS502]
     TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
@@ -33,7 +35,7 @@ class QualityReport:
 
     # Test vs Only On/Off-line
     TEST_BOTH = ["TS101","TS102","TS201", "TS202", "TS203", "TS204", "TS205", "TS206",
-                 "TS301", "TS302", "TS303", "TS304", "TS401"]
+                 "TS301", "TS302", "TS303", "TS304", "TS305", "TS401"]
     TEST_ONLY_OFFLINE = ["TS501","TS701","TS801"]
     TEST_ONLY_ONLINE = ["TS502"]
 

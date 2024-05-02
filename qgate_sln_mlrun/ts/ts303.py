@@ -1,13 +1,12 @@
 """
-  TS303: Ingest data to feature set(s) from Parquet Source
+  TS303: Ingest data to feature set(s) from CSV Source
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import spark_to_value_type
-from mlrun.datastore.sources import ParquetSource
-import pandas as pd
+from mlrun.datastore.sources import CSVSource
 import glob
 import os
 
@@ -19,11 +18,11 @@ class TS303(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Ingest data to feature set(s) from Parquet source "
+        return "Ingest data to feature set(s) from CSV source "
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set(s) from Parquet source"
+        return "Ingest data to feature set(s) from CSV source"
 
     def exec(self, project_name):
         """Data ingest"""
@@ -33,7 +32,7 @@ class TS303(TSBase):
                                        self.setup.model_definition,
                                        "02-data",
                                        self.setup.dataset_name,
-                                       f"*-{featureset_name}.parquet")
+                                       f"*-{featureset_name}.csv.gz")
 
             # check existing data set
             for file in glob.glob(source_file):
@@ -45,7 +44,7 @@ class TS303(TSBase):
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         fstore.ingest(featureset,
-                      ParquetSource(name="tst", path=file),
+                      CSVSource(name="tst", path=file),
                       # overwrite=False,
                       return_df=False,
                       #infer_options=mlrun.data_types.data_types.InferOptions.Null)
