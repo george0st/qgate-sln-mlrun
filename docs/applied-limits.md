@@ -65,6 +65,6 @@ see detail below
 
 ## Recommendation
 
-1. It is really tricky to use a function in **Preview** state
+1. It is really tricky to use functions in **Preview** state
    - it makes sense to wait for delivery full version or contribute changes in
    Github
