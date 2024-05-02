@@ -1,2 +1,2 @@
 # info
-from ..version import __version__
+from qgate_sln_mlrun.version import __version__

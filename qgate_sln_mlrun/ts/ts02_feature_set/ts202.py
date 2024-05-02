@@ -1,29 +1,28 @@
 """
-  TS203: Create feature set(s) & Ingest from CSV source (one step)
+  TS202: Create feature set(s) & Ingest from DataFrame source (one step)
 """
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
-import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.sources import CSVSource
-from qgate_sln_mlrun.ts.feature_set import ts201
+from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import os
 import json
 import glob
+import pandas as pd
 
 
-class TS203(TSBase):
+class TS202(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
-        return "Create feature set(s) & Ingest from from CSV source (one step)"
+        return "Create feature set(s) & Ingest from DataFrame source (in one step)"
 
     @property
     def long_desc(self):
-        return ("Create feature set(s) & Ingest from from CSV source (one step, without save and load featureset)")
+        return ("Create feature set(s) & Ingest from DataFrame source (in one step, without save and load featureset)")
 
     def exec(self, project_name):
         """ Create featuresets and ingest"""
@@ -58,14 +57,24 @@ class TS203(TSBase):
                                        self.setup.dataset_name,
                                        f"*-{name}.csv.gz")
             for file in glob.glob(source_file):
+                # ingest data with bundl/chunk
+                for data_frm in pd.read_csv(file,
+                                            sep=self.setup.csv_separator,
+                                            header="infer",
+                                            decimal=self.setup.csv_decimal,
+                                            na_filter=False,
+                                            compression="gzip",
+                                            encoding="utf-8",
+                                            chunksize=10000):
+                    featureset.ingest(data_frm,
+                                  # overwrite=False,
+                                  return_df=False,
+                                  #infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                                  infer_options=mlrun.data_types.data_types.InferOptions.default())
+                    # TODO: use InferOptions.Null with python 3.10 or focus on WSL
+                    # NOTE: option default, change types
+                    # NOTE: option Null, generate error with datetime in python 3.9
 
-                fstore.ingest(featureset,
-                              CSVSource(name="tst", path=file),
-                              # overwrite=False,
-                              return_df=False,
-                              # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                              infer_options=mlrun.data_types.data_types.InferOptions.default())
-                # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-                # NOTE: option default, change types
-                # NOTE: option Null, generate error with datetime in python 3.9
+
+
 
