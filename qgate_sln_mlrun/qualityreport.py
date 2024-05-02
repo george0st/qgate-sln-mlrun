@@ -3,7 +3,7 @@ import json
 import os
 from qgate_sln_mlrun.setup import Setup, ProjectDelete
 from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.ts import (ts801)
+from qgate_sln_mlrun.ts.serve_model import ts801
 from qgate_sln_mlrun.ts.build_model import ts701
 from qgate_sln_mlrun.ts.get_data import ts501, ts502
 from qgate_sln_mlrun.ts.feature_vector import ts401
