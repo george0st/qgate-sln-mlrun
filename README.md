@@ -17,10 +17,10 @@ sample meta-data model see **[GIT qgate-model](https://github.com/george0st/qgat
 
 ## Test scenarios
 The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ planned):
- - **Project**
+ - **01 - Project**
    - ✅ TS101: Create project(s)
    - ✅ TS102: Delete project(s)
- - **Feature set**
+ - **02 - Feature set**
    - ✅ TS201: Create feature set(s)
    - ✅ TS202: Create feature set(s) & Ingest from DataFrame source (one step)
    - ✅ TS203: Create feature set(s) & Ingest from CSV source (one step) 
@@ -28,7 +28,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS205: Create feature set(s) & Ingest from SQL source (one step)
    - ✔  TS206: Create feature set(s) & Ingest from Kafka source (one step)
    - ❌ TS207: Create feature set(s) & Ingest from HTTP source (one step)
- - **Ingest data**
+ - **03 - Ingest data**
    - ✔  TS301: Ingest data (Preview)
    - ✅ TS302: Ingest data to feature set(s) from DataFrame source
    - ✅ TS303: Ingest data to feature set(s) from CSV source 
@@ -36,25 +36,25 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS305: Ingest data to feature set(s) from SQL source
    - ✔  TS306: Ingest data to feature set(s) from Kafka source
    - ❌ TS307: Ingest data to feature set(s) from HTTP source
- - **Feature vector**
+ - **04 - Feature vector**
    - ✅ TS401: Create feature vector(s)
- - **Get data from vector**
+ - **05 - Get data from vector**
    - ✅ TS501: Get data from off-line feature vector(s)
    - ✅ TS502: Get data from on-line feature vector(s)
- - **Pipeline**
+ - **06 - Pipeline**
    - ✔ TS601: Simple pipeline(s) (HTTP call)
    - ❌ TS602: Simple pipeline for CSV source
    - ❌ TS603: Complex pipeline for DataFrame source
    - ❌ TS604: Complex pipeline for CSV source
- - **Build model**
+ - **07 - Build model**
    - ✅ TS701: Build CART model
    - ❌ TS702: Build XGBoost model
    - ❌ TS703: Build DNN model
- - **Serve model**
+ - **08 - Serve model**
    - ✅ TS801: Serving score from CART
    - ❌ TS802: Serving score from XGBoost
    - ❌ TS803: Serving score from DNN
- - **Model monitoring/drifting**
+ - **09 - Model monitoring/drifting**
    - ❌ TS901: Real-time monitoring
    - ❌ TS902: Batch monitoring
    
