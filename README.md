@@ -54,6 +54,9 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS801: Serving score from CART
    - ❌ TS802: Serving score from XGBoost
    - ❌ TS803: Serving score from DNN
+ - **Model monitoring/drifting**
+   - ❌ TS901: Real-time monitoring
+   - ❌ TS902: Batch monitoring
    
 NOTE: Each test scenario contains addition specific test cases (e.g. with different
 targets for feature sets, etc.).
