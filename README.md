@@ -41,7 +41,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **Get data from vector**
    - ✅ TS501: Get data from off-line feature vector(s)
    - ✅ TS502: Get data from on-line feature vector(s)
- - **Pipelines**
+ - **Pipeline**
    - ✔ TS601: Simple pipeline(s) (HTTP call)
    - ❌ TS602: Simple pipeline for CSV source
    - ❌ TS603: Complex pipeline for DataFrame source
@@ -54,6 +54,9 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS801: Serving score from CART
    - ❌ TS802: Serving score from XGBoost
    - ❌ TS803: Serving score from DNN
+ - **Model monitoring/drifting**
+   - ❌ TS901: Real-time monitoring
+   - ❌ TS902: Batch monitoring
    
 NOTE: Each test scenario contains addition specific test cases (e.g. with different
 targets for feature sets, etc.).
