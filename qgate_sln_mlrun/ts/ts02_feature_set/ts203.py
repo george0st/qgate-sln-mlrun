@@ -1,29 +1,29 @@
 """
-  TS204: Create feature set(s) & Ingest from Parquet source (one step)
+  TS203: Create feature set(s) & Ingest from CSV source (one step)
 """
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.sources import ParquetSource
-from qgate_sln_mlrun.ts.feature_set import ts201
+from mlrun.datastore.sources import CSVSource
+from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import os
 import json
 import glob
 
 
-class TS204(TSBase):
+class TS203(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
-        return "Create feature set(s) & Ingest from Parquet source (one step)"
+        return "Create feature set(s) & Ingest from from CSV source (one step)"
 
     @property
     def long_desc(self):
-        return ("Create feature set(s) & Ingest from Parquet source (one step, without save and load featureset)")
+        return ("Create feature set(s) & Ingest from from CSV source (one step, without save and load featureset)")
 
     def exec(self, project_name):
         """ Create featuresets and ingest"""
@@ -56,11 +56,11 @@ class TS204(TSBase):
                                        self.setup.model_definition,
                                        "02-data",
                                        self.setup.dataset_name,
-                                       f"*-{name}.parquet")
+                                       f"*-{name}.csv.gz")
             for file in glob.glob(source_file):
 
                 fstore.ingest(featureset,
-                              ParquetSource(name="tst", path=file),
+                              CSVSource(name="tst", path=file),
                               # overwrite=False,
                               return_df=False,
                               # infer_options=mlrun.data_types.data_types.InferOptions.Null)
