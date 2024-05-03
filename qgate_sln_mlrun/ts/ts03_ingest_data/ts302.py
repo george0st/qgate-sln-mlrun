@@ -49,9 +49,9 @@ class TS302(TSBase):
 
         # ingest data with bundl/chunk
         for data_frm in pd.read_csv(file,
-                                    sep=self.setup.csv_separator,       #";",
+                                    sep=self.setup.csv_separator,
                                     header="infer",
-                                    decimal=self.setup.csv_decimal,     #",",
+                                    decimal=self.setup.csv_decimal,
                                     compression="gzip",
                                     encoding="utf-8",
                                     chunksize=10000):

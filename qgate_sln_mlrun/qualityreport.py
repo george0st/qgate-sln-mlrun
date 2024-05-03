@@ -114,9 +114,6 @@ class QualityReport:
         # define valid projects
         self._define_projects(filter_projects)
 
-        # TODO: Define, which test scenarios will be valid for specific project
-
-
         # define, which test scenarios will be executed
         test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
 
