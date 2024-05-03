@@ -1,5 +1,5 @@
 """
-  TS302: Ingest data to feature set(s) from DataFrame Source
+  TS301: Ingest data (Preview)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -11,22 +11,18 @@ import glob
 import os
 
 
-class TS302(TSBase):
+class TS301(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
-        return "Ingest data to feature set(s) from DataFrame source"
+        return "Ingest data (Preview)"
 
     @property
     def long_desc(self):
-        return "Ingest data to feature set(s) from Pandas DataFrame source"
-
-    def prepare(self):
-        """Prepare data for ingestion"""
-        pass
+        return "Ingest data (in Preview mode) from DataFrame Source"
 
     def exec(self, project_name):
         """Data ingest"""
@@ -54,12 +50,14 @@ class TS302(TSBase):
                                     decimal=self.setup.csv_decimal,
                                     compression="gzip",
                                     encoding="utf-8",
-                                    chunksize=self.setup.max_bundle):
-            featureset.ingest(data_frm,
-                          # overwrite=False,
-                          return_df=False,
-                          #infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                          infer_options=mlrun.data_types.data_types.InferOptions.default())
+                                    chunksize=100):
+
+            featureset.preview(data_frm)
+            # featureset.preview(data_frm,
+            #               # overwrite=False,
+            #               return_df=False,
+            #               #infer_options=mlrun.data_types.data_types.InferOptions.Null)
+            #               infer_options=mlrun.data_types.data_types.InferOptions.default())
             # TODO: use InferOptions.Null with python 3.10 or focus on WSL
             # NOTE: option default, change types
             # NOTE: option Null, generate error with datetime in python 3.9

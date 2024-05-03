@@ -17,7 +17,7 @@ Default is empty list (all projects will be tested)
 
 ## 4. Filet scenarios
 The list of test scenarios for testing e.g. TS201, etc. (it is 
-important to keep TS dependencies). Default is empty list (all test
+important to keep and know TS dependencies). Default is empty list (all test
 scenarios will be tested)
   - `QGATE_FILTER_SCENARIOS = TS101, TS102, TS205`
 

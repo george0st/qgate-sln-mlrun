@@ -7,9 +7,9 @@ from qgate_sln_mlrun.ts.ts08_serve_model import ts801
 from qgate_sln_mlrun.ts.ts07_build_model import ts701
 from qgate_sln_mlrun.ts.ts05_get_data import ts501, ts502
 from qgate_sln_mlrun.ts.ts04_feature_vector import ts401
-from qgate_sln_mlrun.ts.ts03_ingest_data import ts305, ts302, ts304, ts303
-from qgate_sln_mlrun.ts.ts02_feature_set import ts201, ts203, ts205, ts204, ts202, ts206
-from qgate_sln_mlrun.ts.ts01_project import ts102, ts101
+from qgate_sln_mlrun.ts.ts03_ingest_data import ts301, ts302, ts303, ts304, ts305
+from qgate_sln_mlrun.ts.ts02_feature_set import ts201, ts202, ts203, ts204, ts205, ts206
+from qgate_sln_mlrun.ts.ts01_project import ts101, ts102
 from qgate_sln_mlrun.ts import tsbase
 import importlib.resources
 
@@ -21,7 +21,7 @@ class QualityReport:
 
     TEST_SCENARIOS = [ts101.TS101,
                       ts201.TS201, ts202.TS202, ts203.TS203, ts204.TS204, ts205.TS205, ts206.TS206,
-                      ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305,
+                      ts301.TS301, ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305,
                       ts401.TS401,
                       ts501.TS501, ts502.TS502]
     TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
@@ -36,8 +36,10 @@ class QualityReport:
     TARGET_NOT_VALID_TEST = {"kafka": ["TS501", "TS502"]}
 
     # Test vs Only On/Off-line
-    TEST_BOTH = ["TS101","TS102","TS201", "TS202", "TS203", "TS204", "TS205", "TS206",
-                 "TS301", "TS302", "TS303", "TS304", "TS305", "TS401"]
+    TEST_BOTH = ["TS101","TS102",
+                 "TS201", "TS202", "TS203", "TS204", "TS205", "TS206",
+                 "TS301", "TS302", "TS303", "TS304", "TS305",
+                 "TS401"]
     TEST_ONLY_OFFLINE = ["TS501","TS701","TS801"]
     TEST_ONLY_ONLINE = ["TS502"]
 
@@ -111,9 +113,6 @@ class QualityReport:
 
         # define valid projects
         self._define_projects(filter_projects)
-
-        # TODO: Define, which test scenarios will be valid for specific project
-
 
         # define, which test scenarios will be executed
         test_scenarios = self.build_scenarios(delete_scenario, experiment_scenario)
