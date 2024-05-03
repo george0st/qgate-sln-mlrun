@@ -66,5 +66,5 @@ see detail below
 ## Recommendation
 
 1. It is really tricky to use functions in **Preview** state
-   - it makes sense to wait for delivery full version or contribute changes in
+   - it makes sense to wait for full version delivery or contribute changes in
    Github
