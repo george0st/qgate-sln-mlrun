@@ -22,7 +22,7 @@ class TS301(TSBase):
 
     @property
     def long_desc(self):
-        return "Ingest data (Preview)"
+        return "Ingest data (in Preview mode) from DataFrame Source"
 
     def exec(self, project_name):
         """Data ingest"""
