@@ -152,7 +152,4 @@ class Setup(metaclass=Singleton):
         """Return the connection to Kafka"""
         return self._variables.get('QGATE_KAFKA', None)
 
-    @property
-    def max_bundle(self):
-        return Setup.MAX_BUNDLE
 

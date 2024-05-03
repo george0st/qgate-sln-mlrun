@@ -2,6 +2,7 @@
   TS202: Create feature set(s) & Ingest from DataFrame source (one step)
 """
 from qgate_sln_mlrun.ts.tsbase import TSBase
+from qgate_sln_mlrun.setup import Setup
 import mlrun
 from mlrun.data_types.data_types import ValueType
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201
@@ -9,6 +10,7 @@ import os
 import json
 import glob
 import pandas as pd
+
 
 
 class TS202(TSBase):
@@ -65,7 +67,7 @@ class TS202(TSBase):
                                             na_filter=False,
                                             compression="gzip",
                                             encoding="utf-8",
-                                            chunksize=self.setup.max_bundle):
+                                            chunksize=Setup.MAX_BUNDLE):
                     featureset.ingest(data_frm,
                                   # overwrite=False,
                                   return_df=False,
