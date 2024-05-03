@@ -24,6 +24,7 @@ class Setup(metaclass=Singleton):
 
     # max bundle size for data ingestion
     MAX_BUNDLE = 10000
+    MIN_BUNDLE = 100
 
     def __init__(self, mlrun_env_file: list[str], dataset_name = None, hard_variables: dict=None):
         """Define setting for testing
