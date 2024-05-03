@@ -24,6 +24,7 @@ class Setup(metaclass=Singleton):
 
     # max bundle size for data ingestion
     MAX_BUNDLE = 10000
+    MIN_BUNDLE = 100
 
     def __init__(self, mlrun_env_file: list[str], dataset_name = None, hard_variables: dict=None):
         """Define setting for testing
@@ -152,7 +153,4 @@ class Setup(metaclass=Singleton):
         """Return the connection to Kafka"""
         return self._variables.get('QGATE_KAFKA', None)
 
-    @property
-    def max_bundle(self):
-        return Setup.MAX_BUNDLE
 

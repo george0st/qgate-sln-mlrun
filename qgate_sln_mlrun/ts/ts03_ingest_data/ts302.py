@@ -3,6 +3,7 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
+from qgate_sln_mlrun.setup import Setup
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import spark_to_value_type
@@ -54,7 +55,7 @@ class TS302(TSBase):
                                     decimal=self.setup.csv_decimal,
                                     compression="gzip",
                                     encoding="utf-8",
-                                    chunksize=self.setup.max_bundle):
+                                    chunksize=Setup.MAX_BUNDLE):
             featureset.ingest(data_frm,
                           # overwrite=False,
                           return_df=False,

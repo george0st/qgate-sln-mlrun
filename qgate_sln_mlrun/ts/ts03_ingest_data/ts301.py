@@ -3,9 +3,8 @@
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
-import mlrun
+from qgate_sln_mlrun.setup import Setup
 import mlrun.feature_store as fstore
-from mlrun.data_types.data_types import spark_to_value_type
 import pandas as pd
 import glob
 import os
@@ -50,14 +49,6 @@ class TS301(TSBase):
                                     decimal=self.setup.csv_decimal,
                                     compression="gzip",
                                     encoding="utf-8",
-                                    chunksize=100):
-
+                                    chunksize=Setup.MIN_BUNDLE):
             featureset.preview(data_frm)
-            # featureset.preview(data_frm,
-            #               # overwrite=False,
-            #               return_df=False,
-            #               #infer_options=mlrun.data_types.data_types.InferOptions.Null)
-            #               infer_options=mlrun.data_types.data_types.InferOptions.default())
-            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-            # NOTE: option default, change types
-            # NOTE: option Null, generate error with datetime in python 3.9
+

@@ -105,7 +105,7 @@ class MySQLHelper():
                                         decimal=self.setup.csv_decimal,  # ",",
                                         compression="gzip",
                                         encoding="utf-8",
-                                        chunksize=self.setup.max_bundle):
+                                        chunksize=Setup.MAX_BUNDLE):
                 for row in data_frm.to_numpy().tolist():
                     values=f"\",\"".join(str(e) for e in row)
 
