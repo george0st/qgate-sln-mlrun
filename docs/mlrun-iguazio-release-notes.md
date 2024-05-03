@@ -1,12 +1,11 @@
 # MLRun/Iguazio, the KEY changes in a nutshell
 
-NOTE: 
- - You can see detail changes in
+You can see detail changes in 
    - [MLRun change log](https://docs.mlrun.org/en/latest/change-log/index.html)
    - [Iguazio change log](https://www.iguazio.com/docs/latest-release/release-notes/)
    - [Iguazio mng. change log](https://iguazio.github.io/igz-mgmt-sdk/changelog.html)
- - Legend
-   - 🚩 future version, ✅ current version 
+   - Legend
+     - 🚩 future version, ✅ current version 
 
 ## MLRun
 
