@@ -12,6 +12,7 @@ NOTE:
 ### 🚩1.7 MLRun
  - Model monitoring/drifting for MLRun (available in free version also)
  - Available API Gateway
+ - Improve scaling for Nuclio (from version >= 1.13) 
  - NOTE:
    - Expected release date 05/2024 (based on 3 months release cycle)
 
