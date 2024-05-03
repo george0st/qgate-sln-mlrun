@@ -54,7 +54,7 @@ class TS302(TSBase):
                                     decimal=self.setup.csv_decimal,
                                     compression="gzip",
                                     encoding="utf-8",
-                                    chunksize=10000):
+                                    chunksize=self.setup.max_bundle):
             featureset.ingest(data_frm,
                           # overwrite=False,
                           return_df=False,
