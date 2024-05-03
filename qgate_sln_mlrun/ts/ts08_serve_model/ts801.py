@@ -4,12 +4,8 @@
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 from pickle import load
-from mlrun.datastore import DataItem
 from mlrun.artifacts import get_model, update_model
 import mlrun
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
 import mlrun.feature_store as fstore
 from sklearn.preprocessing import LabelEncoder
 import os

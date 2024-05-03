@@ -4,8 +4,6 @@
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import os
-import json
-import glob
 
 
 class TS101(TSBase):

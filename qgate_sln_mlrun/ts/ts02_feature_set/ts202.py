@@ -12,7 +12,6 @@ import glob
 import pandas as pd
 
 
-
 class TS202(TSBase):
 
     def __init__(self, solution):
