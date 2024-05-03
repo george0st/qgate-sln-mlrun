@@ -12,17 +12,17 @@ NOTE:
 
 ### 🚩1.7 MLRun
  - Model monitoring/drifting for MLRun (available in free version also)
- - Available API Gateway (better configuration)
+ - Available API Gateway (flexible configuration)
  - Improve scaling for Nuclio (from version >= 1.13)
- - Support paging (ability to return long data)
+ - Support paging (ability to return longer data)
  - NOTE:
    - Expected release date 05/2024 (based on 3 months release cycle)
 
 ### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
- - MLFlow integration (store artifact to MLRun)
+ - MLFlow integration (store artifact to MLRun, [see](https://docs.mlrun.org/en/latest/tutorials/mlflow.html))
  - Support Pandas 2.0 (improve performance)
- - Extend datastore profiles (add providers)
+ - Extend datastore profiles (addition providers)
 
 ### 1.5 MLRun
  - Datastore profiles
