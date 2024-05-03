@@ -1,5 +1,5 @@
 """
-  TS301: Ingest data (Preview)
+  TS301: Ingest data (Preview mode)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -17,7 +17,7 @@ class TS301(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Ingest data (Preview)"
+        return "Ingest data (Preview mode)"
 
     @property
     def long_desc(self):

@@ -29,7 +29,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✔  TS206: Create feature set(s) & Ingest from Kafka source (one step)
    - ❌ TS207: Create feature set(s) & Ingest from HTTP source (one step)
  - **03 - Ingest data**
-   - ✅ TS301: Ingest data (Preview)
+   - ✅ TS301: Ingest data (Preview mode)
    - ✅ TS302: Ingest data to feature set(s) from DataFrame source
    - ✅ TS303: Ingest data to feature set(s) from CSV source 
    - ✅ TS304: Ingest data to feature set(s) from Parquet source
