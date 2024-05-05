@@ -1,5 +1,5 @@
 """
-  TS601: Simple pipeline(s) (HTTP call)
+  TS601: Simple pipeline(s)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -18,11 +18,11 @@ class TS601(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Simple pipeline(s) (HTTP call)"
+        return "Simple pipeline(s)"
 
     @property
     def long_desc(self):
-        return "Simple pipeline(s) in project (access via HTTP call)"
+        return "Simple pipeline(s)"
 
     def exec(self, project_name):
         """Simple pipeline during ingest"""
