@@ -9,7 +9,6 @@ class TS601Pipeline:
         self.kw = kw
 
     def do(self, event):
-        print("Echo:", self.name, event)
         if self.name.lower()=="multipl":
             self._multipli(event)
         elif self.name.lower()=="plus":
