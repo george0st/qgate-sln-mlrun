@@ -22,3 +22,8 @@ class TS601Pipeline:
     def _plus(self, event):
         calc = event.body["a"] + event.body["b"]
         event.body = {"calc": calc}
+
+def minus(event):
+    calc = event.body["a"] + event.body["b"]
+    event.body = {"calc": calc}
+    return event
