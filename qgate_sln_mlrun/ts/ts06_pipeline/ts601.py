@@ -22,47 +22,24 @@ class TS601(TSBase):
 
     @property
     def long_desc(self):
-        return "Simple pipeline(s)"
+        return "Simple pipeline(s) and test with Mock"
 
     def exec(self, project_name):
         """Simple pipeline during ingest"""
-        return
 
-        for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # create possible file for load
-            source_file = os.path.join(os.getcwd(),
-                                       self.setup.model_definition,
-                                       "02-data",
-                                       self.setup.dataset_name,
-                                       f"*-{featureset_name}.csv.gz")
+        self.project_switch(project_name)
 
-            # check existing data set
-            for file in glob.glob(source_file):
-                self._ingest_data(f"{project_name}/{featureset_name}", project_name, featureset_name, file)
+        self._ingest_data(f"{project_name}/*", project_name)
 
     @TSBase.handler_testcase
-    def _ingest_data(self, testcase_name, project_name, featureset_name, file):
-        # get existing feature set (feature set have to be created in previous test scenario)
-        featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+    def _simple_pipeline(self, testcase_name, project_name, featureset_name, file):
 
-        #quotes_set.graph.to("storey.Filter", "filter", _fn="(event['bid'] > 50)")
-        #https://docs.mlrun.org/en/latest/serving/getting-started.html
+        func = mlrun.code_to_function("ts601_function", kind="serving", filename="./ts601_ext_code.py")
+        graph_echo = func.set_topology("flow")
+        graph_echo.to(class_name="TS601Pipeline", name="STEP1", default=True)
 
-
-
-        # ingest data with bundl/chunk
-        for data_frm in pd.read_csv(file,
-                                    sep=self.setup.csv_separator,
-                                    header="infer",
-                                    decimal=self.setup.csv_decimal,
-                                    compression="gzip",
-                                    encoding="utf-8",
-                                    chunksize=Setup.MAX_BUNDLE):
-            featureset.ingest(data_frm,
-                          # overwrite=False,
-                          return_df=False,
-                          #infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                          infer_options=mlrun.data_types.data_types.InferOptions.default())
-            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-            # NOTE: option default, change types
-            # NOTE: option Null, generate error with datetime in python 3.9
+        # tests
+        echo_server = func.to_mock_server(current_function="*")
+        result = echo_server.test("", {"a": 100, "b": 200})
+        echo_server.wait_for_completion()
+        print(result)
