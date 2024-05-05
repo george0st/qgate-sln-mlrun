@@ -32,7 +32,7 @@ class TS601(TSBase):
         self._simple_pipeline_multipl(f"{project_name}/simple_pipeline_multipl", project_name)
 
     @TSBase.handler_testcase
-    def _simple_pipeline_plus(self, testcase_name, project_name, featureset_name, file):
+    def _simple_pipeline_plus(self, testcase_name, project_name):
 
         func = mlrun.code_to_function(f"ts601_{project_name}_fn", kind="serving", filename="./ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
@@ -48,7 +48,7 @@ class TS601(TSBase):
             raise ValueError("Invalid calculation, expected value 12")
 
     @TSBase.handler_testcase
-    def _simple_pipeline_multipl(self, testcase_name, project_name, featureset_name, file):
+    def _simple_pipeline_multipl(self, testcase_name, project_name):
 
         func = mlrun.code_to_function(f"ts601_{project_name}_fn", kind="serving", filename="./ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
