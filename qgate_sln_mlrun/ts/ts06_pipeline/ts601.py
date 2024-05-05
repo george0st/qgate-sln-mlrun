@@ -28,13 +28,14 @@ class TS601(TSBase):
         """Simple pipeline during ingest"""
 
         self.project_switch(project_name)
-        self._simple_pipeline_plus(f"{project_name}/simple_pipeline_plus", project_name)
-        self._simple_pipeline_multipl(f"{project_name}/simple_pipeline_multipl", project_name)
+        self._pipeline_class_plus(f"{project_name}/pipeline_class_plus", project_name)
+        self._pipeline_class_multipl(f"{project_name}/pipeline_class_multipl", project_name)
+        self._pipeline_minus(f"{project_name}/pipeline_class_minus", project_name)
 
     @TSBase.handler_testcase
     def _simple_pipeline_plus(self, testcase_name, project_name):
 
-        func = mlrun.code_to_function(f"ts601_{project_name}_fn",
+        func = mlrun.code_to_function(f"ts601_{project_name}_plus",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
@@ -50,9 +51,9 @@ class TS601(TSBase):
             raise ValueError("Invalid calculation, expected value 12")
 
     @TSBase.handler_testcase
-    def _simple_pipeline_multipl(self, testcase_name, project_name):
+    def _pipeline_class_multipl(self, testcase_name, project_name):
 
-        func = mlrun.code_to_function(f"ts601_{project_name}_fn",
+        func = mlrun.code_to_function(f"ts601_{project_name}_multipl",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
@@ -66,3 +67,20 @@ class TS601(TSBase):
         # value check
         if result['calc']!=35:
             raise ValueError("Invalid calculation, expected value 35")
+
+    @TSBase.handler_testcase
+    def _pipeline_minus(self, testcase_name, project_name):
+        func = mlrun.code_to_function(f"ts601_{project_name}_minus",
+                                      kind="serving",
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
+        graph_echo = func.set_topology("flow")
+        graph_echo.to(handler="minus" , full_event=True, name="minus", default=True).respond()
+
+        # tests
+        echo_server = func.to_mock_server(current_function="*")
+        result = echo_server.test("", {"a": 10, "b": 7})
+        echo_server.wait_for_completion()
+
+        # value check
+        if result['calc']!=3:
+            raise ValueError("Invalid calculation, expected value 3")
