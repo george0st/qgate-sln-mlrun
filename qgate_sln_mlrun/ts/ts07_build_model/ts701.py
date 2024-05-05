@@ -5,10 +5,8 @@ from sklearn.preprocessing import LabelEncoder
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
 import mlrun
-import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
-from sklearn import metrics
 import os
 import glob
 import json

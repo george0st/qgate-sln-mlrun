@@ -8,7 +8,6 @@ import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import spark_to_value_type
 from mlrun.datastore.sources import SQLSource
-import pandas as pd
 import glob
 import os
 from qgate_sln_mlrun.mysqlhelper import MySQLHelper
