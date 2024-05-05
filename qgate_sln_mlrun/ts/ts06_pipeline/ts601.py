@@ -45,7 +45,7 @@ class TS601(TSBase):
 
         # value check
         if result['calc']!=12:
-            raise Exception("Invalid calculation, expected value 12")
+            raise ValueError("Invalid calculation, expected value 12")
 
     @TSBase.handler_testcase
     def _simple_pipeline_multipl(self, testcase_name, project_name, featureset_name, file):
@@ -61,4 +61,4 @@ class TS601(TSBase):
 
         # value check
         if result['calc']!=35:
-            raise Exception("Invalid calculation, expected value 35")
+            raise ValueError("Invalid calculation, expected value 35")
