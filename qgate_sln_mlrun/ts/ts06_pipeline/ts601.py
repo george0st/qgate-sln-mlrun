@@ -34,7 +34,11 @@ class TS601(TSBase):
     @TSBase.handler_testcase
     def _simple_pipeline_plus(self, testcase_name, project_name):
 
-        func = mlrun.code_to_function(f"ts601_{project_name}_fn", kind="serving", filename="./ts601_ext_code.py")
+#C:\Python\qgate-sln-mlrun\qgate_sln_mlrun\ts\ts06_pipeline\ts601_ext_code.py
+        func = mlrun.code_to_function(f"ts601_{project_name}_fn",
+                                      kind="serving",
+#                                      filename="./ts601_ext_code.py",
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(class_name="TS601Pipeline", full_event=True, name="plus", default=True).respond()
 
@@ -50,7 +54,9 @@ class TS601(TSBase):
     @TSBase.handler_testcase
     def _simple_pipeline_multipl(self, testcase_name, project_name):
 
-        func = mlrun.code_to_function(f"ts601_{project_name}_fn", kind="serving", filename="./ts601_ext_code.py")
+        func = mlrun.code_to_function(f"ts601_{project_name}_fn",
+                                      kind="serving",
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(class_name="TS601Pipeline", full_event=True, name="multipl", default=True).respond()
 
