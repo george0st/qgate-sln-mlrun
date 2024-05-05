@@ -28,12 +28,12 @@ class TS601(TSBase):
         """Simple pipeline during ingest"""
 
         self.project_switch(project_name)
-        self._pipeline_class_plus(f"{project_name}/pipeline_class_plus", project_name)
-        self._pipeline_class_multipl(f"{project_name}/pipeline_class_multipl", project_name)
-        self._pipeline_minus(f"{project_name}/pipeline_class_minus", project_name)
+        self._class_plus(f"{project_name}/pipeline_class_plus", project_name)
+        self._class_multipl(f"{project_name}/pipeline_class_multipl", project_name)
+        self._minus(f"{project_name}/pipeline_class_minus", project_name)
 
     @TSBase.handler_testcase
-    def _simple_pipeline_plus(self, testcase_name, project_name):
+    def _class_plus(self, testcase_name, project_name):
 
         func = mlrun.code_to_function(f"ts601_{project_name}_plus",
                                       kind="serving",
@@ -51,7 +51,7 @@ class TS601(TSBase):
             raise ValueError("Invalid calculation, expected value 12")
 
     @TSBase.handler_testcase
-    def _pipeline_class_multipl(self, testcase_name, project_name):
+    def _class_multipl(self, testcase_name, project_name):
 
         func = mlrun.code_to_function(f"ts601_{project_name}_multipl",
                                       kind="serving",
@@ -69,7 +69,7 @@ class TS601(TSBase):
             raise ValueError("Invalid calculation, expected value 35")
 
     @TSBase.handler_testcase
-    def _pipeline_minus(self, testcase_name, project_name):
+    def _minus(self, testcase_name, project_name):
         func = mlrun.code_to_function(f"ts601_{project_name}_minus",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
