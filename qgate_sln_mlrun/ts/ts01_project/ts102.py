@@ -41,7 +41,8 @@ class TS102(TSBase):
         # remove content of mysql
 
         mysql= MySQLHelper(self.setup)
-        mysql.remove_table(MySQLHelper.TABLE_SOURCE_PREFIX)
+        if mysql.configured:
+            mysql.remove_table(MySQLHelper.TABLE_SOURCE_PREFIX)
 
     def _clean_file(self):
         # remove files (not remove files from today)
