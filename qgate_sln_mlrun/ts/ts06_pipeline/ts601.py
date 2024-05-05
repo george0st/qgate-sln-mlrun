@@ -30,7 +30,7 @@ class TS601(TSBase):
         self.project_switch(project_name)
         self._class_plus(f"{project_name}/pipeline_class_plus", project_name)
         self._class_multipl(f"{project_name}/pipeline_class_multipl", project_name)
-        self._minus(f"{project_name}/pipeline_class_minus", project_name)
+        self._minus(f"{project_name}/pipeline_minus", project_name)
 
     @TSBase.handler_testcase
     def _class_plus(self, testcase_name, project_name):
