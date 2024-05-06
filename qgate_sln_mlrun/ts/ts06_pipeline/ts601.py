@@ -24,16 +24,23 @@ class TS601(TSBase):
     def long_desc(self):
         return "Simple pipeline(s), focus on full/partial event and tests under the Mock"
 
-    def exec(self, project_name):
+    def ts_exec(self):
         """Simple pipeline during ingest"""
 
-        self.project_switch(project_name)
-        self._class_plus(f"{project_name}/class_plus (event)", project_name, True)
-        self._class_plus(f"{project_name}/class_plus", project_name, False)
-        self._class_multipl(f"{project_name}/class_multipl (event)", project_name, True)
-        self._class_multipl(f"{project_name}/class_multipl", project_name, False)
-        self._minus(f"{project_name}/minus (event)", project_name, True)
-        self._minus(f"{project_name}/minus", project_name, False)
+        #self.project_switch(project_name)
+        # self._class_plus(f"{project_name}/class_plus (event)", project_name, True)
+        # self._class_plus(f"{project_name}/class_plus", project_name, False)
+        # self._class_multipl(f"{project_name}/class_multipl (event)", project_name, True)
+        # self._class_multipl(f"{project_name}/class_multipl", project_name, False)
+        # self._minus(f"{project_name}/minus (event)", project_name, True)
+        # self._minus(f"{project_name}/minus", project_name, False)
+        project_name="a"
+        self._class_plus(f"*/class_plus (event)", project_name, True)
+        self._class_plus(f"*/class_plus", project_name, False)
+        self._class_multipl(f"*/class_multipl (event)", project_name, True)
+        self._class_multipl(f"*/class_multipl", project_name, False)
+        self._minus(f"*/minus (event)", project_name, True)
+        self._minus(f"*/minus", project_name, False)
 
     @TSBase.handler_testcase
     def _class_plus(self, testcase_name, project_name, full_event):
