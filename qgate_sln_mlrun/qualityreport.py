@@ -5,7 +5,7 @@ from qgate_sln_mlrun.setup import Setup, ProjectDelete
 from qgate_sln_mlrun.output import Output
 from qgate_sln_mlrun.ts.ts08_serve_model import ts801
 from qgate_sln_mlrun.ts.ts07_build_model import ts701
-from qgate_sln_mlrun.ts.ts06_pipeline import ts601
+from qgate_sln_mlrun.ts.ts06_pipeline import ts601, ts602
 from qgate_sln_mlrun.ts.ts05_get_data import ts501, ts502
 from qgate_sln_mlrun.ts.ts04_feature_vector import ts401
 from qgate_sln_mlrun.ts.ts03_ingest_data import ts301, ts302, ts303, ts304, ts305
@@ -25,7 +25,7 @@ class QualityReport:
                       ts301.TS301, ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305,
                       ts401.TS401,
                       ts501.TS501, ts502.TS502,
-                      ts601.TS601]
+                      ts601.TS601, ts602.TS602]
     TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
     TEST_SCENARIO_DELETE = ts102.TS102
 
@@ -42,7 +42,7 @@ class QualityReport:
                  "TS201", "TS202", "TS203", "TS204", "TS205", "TS206",
                  "TS301", "TS302", "TS303", "TS304", "TS305",
                  "TS401",
-                 "TS601"]
+                 "TS601", "TS602"]
     TEST_ONLY_OFFLINE = ["TS501","TS701","TS801"]
     TEST_ONLY_ONLINE = ["TS502"]
 
