@@ -26,14 +26,6 @@ class TS601(TSBase):
 
     def top_exec(self):
         """Simple pipeline during ingest"""
-
-        #self.project_switch(project_name)
-        # self._class_plus(f"{project_name}/class_plus (event)", project_name, True)
-        # self._class_plus(f"{project_name}/class_plus", project_name, False)
-        # self._class_multipl(f"{project_name}/class_multipl (event)", project_name, True)
-        # self._class_multipl(f"{project_name}/class_multipl", project_name, False)
-        # self._minus(f"{project_name}/minus (event)", project_name, True)
-        # self._minus(f"{project_name}/minus", project_name, False)
         self._class_plus(f"*/class_plus (event)", True)
         self._class_plus(f"*/class_plus", False)
         self._class_multipl(f"*/class_multipl (event)", True)
