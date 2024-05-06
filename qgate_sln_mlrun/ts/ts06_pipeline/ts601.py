@@ -22,7 +22,7 @@ class TS601(TSBase):
 
     @property
     def long_desc(self):
-        return "Simple pipeline(s) and test with Mock"
+        return "Simple pipeline(s), focus on full/partial event and tests under the Mock"
 
     def exec(self, project_name):
         """Simple pipeline during ingest"""
