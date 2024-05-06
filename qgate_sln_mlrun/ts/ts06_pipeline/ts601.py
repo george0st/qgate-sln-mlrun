@@ -60,9 +60,9 @@ class TS601(TSBase):
             raise ValueError("Invalid calculation, expected value 12")
 
     @TSBase.handler_testcase
-    def _class_multipl(self, testcase_name, project_name, full_event):
+    def _class_multipl(self, testcase_name, full_event):
 
-        func = mlrun.code_to_function(f"ts601_{project_name}_multipl",
+        func = mlrun.code_to_function(f"ts601_fn",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
@@ -78,8 +78,8 @@ class TS601(TSBase):
             raise ValueError("Invalid calculation, expected value 35")
 
     @TSBase.handler_testcase
-    def _minus(self, testcase_name, project_name, full_event):
-        func = mlrun.code_to_function(f"ts601_{project_name}_minus",
+    def _minus(self, testcase_name, full_event):
+        func = mlrun.code_to_function(f"ts601_fn",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
