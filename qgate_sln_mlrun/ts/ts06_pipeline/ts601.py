@@ -34,18 +34,17 @@ class TS601(TSBase):
         # self._class_multipl(f"{project_name}/class_multipl", project_name, False)
         # self._minus(f"{project_name}/minus (event)", project_name, True)
         # self._minus(f"{project_name}/minus", project_name, False)
-        project_name="a"
-        self._class_plus(f"*/class_plus (event)", project_name, True)
-        self._class_plus(f"*/class_plus", project_name, False)
-        self._class_multipl(f"*/class_multipl (event)", project_name, True)
-        self._class_multipl(f"*/class_multipl", project_name, False)
-        self._minus(f"*/minus (event)", project_name, True)
-        self._minus(f"*/minus", project_name, False)
+        self._class_plus(f"*/class_plus (event)", True)
+        self._class_plus(f"*/class_plus", False)
+        self._class_multipl(f"*/class_multipl (event)", True)
+        self._class_multipl(f"*/class_multipl", False)
+        self._minus(f"*/minus (event)", True)
+        self._minus(f"*/minus", False)
 
     @TSBase.handler_testcase
-    def _class_plus(self, testcase_name, project_name, full_event):
+    def _class_plus(self, testcase_name, full_event):
 
-        func = mlrun.code_to_function(f"ts601_{project_name}_plus",
+        func = mlrun.code_to_function(f"ts601_fn",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
