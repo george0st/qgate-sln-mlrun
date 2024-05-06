@@ -28,18 +28,21 @@ class TS601(TSBase):
         """Simple pipeline during ingest"""
 
         self.project_switch(project_name)
-        self._class_plus(f"{project_name}/pipeline_class_plus", project_name)
-        self._class_multipl(f"{project_name}/pipeline_class_multipl", project_name)
-        self._minus(f"{project_name}/pipeline_class_minus", project_name)
+        self._class_plus(f"{project_name}/class_plus (event)", project_name, True)
+        self._class_plus(f"{project_name}/class_plus", project_name, False)
+        self._class_multipl(f"{project_name}/class_multipl (event)", project_name, True)
+        self._class_multipl(f"{project_name}/class_multipl", project_name, False)
+        self._minus(f"{project_name}/minus (event)", project_name, True)
+        self._minus(f"{project_name}/minus", project_name, False)
 
     @TSBase.handler_testcase
-    def _class_plus(self, testcase_name, project_name):
+    def _class_plus(self, testcase_name, project_name, full_event):
 
         func = mlrun.code_to_function(f"ts601_{project_name}_plus",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
-        graph_echo.to(class_name="TS601Pipeline", full_event=True, name="plus", default=True).respond()
+        graph_echo.to(class_name="TS601Pipeline", full_event=full_event, name="plus", default=True).respond()
 
         # tests
         echo_server = func.to_mock_server(current_function="*")
@@ -51,13 +54,13 @@ class TS601(TSBase):
             raise ValueError("Invalid calculation, expected value 12")
 
     @TSBase.handler_testcase
-    def _class_multipl(self, testcase_name, project_name):
+    def _class_multipl(self, testcase_name, project_name, full_event):
 
         func = mlrun.code_to_function(f"ts601_{project_name}_multipl",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
-        graph_echo.to(class_name="TS601Pipeline", full_event=True, name="multipl", default=True).respond()
+        graph_echo.to(class_name="TS601Pipeline", full_event=full_event, name="multipl", default=True).respond()
 
         # tests
         echo_server = func.to_mock_server(current_function="*")
@@ -69,12 +72,12 @@ class TS601(TSBase):
             raise ValueError("Invalid calculation, expected value 35")
 
     @TSBase.handler_testcase
-    def _minus(self, testcase_name, project_name):
+    def _minus(self, testcase_name, project_name, full_event):
         func = mlrun.code_to_function(f"ts601_{project_name}_minus",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
         graph_echo = func.set_topology("flow")
-        graph_echo.to(handler="minus" , full_event=True, name="minus", default=True).respond()
+        graph_echo.to(handler="minus" , full_event=full_event, name="minus", default=True).respond()
 
         # tests
         echo_server = func.to_mock_server(current_function="*")

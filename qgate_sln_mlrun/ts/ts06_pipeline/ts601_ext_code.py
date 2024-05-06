@@ -9,6 +9,7 @@ class TS601Pipeline:
         self.kw = kw
 
     def do(self, event):
+
         if self.name.lower()=="multipl":
             self._multipli(event)
         elif self.name.lower()=="plus":
@@ -16,14 +17,33 @@ class TS601Pipeline:
         return event
 
     def _multipli(self, event):
-        calc = event.body["a"] * event.body["b"]
-        event.body = {"calc": calc}
+
+        if isinstance(event, mlrun.serving.server.MockEvent):
+            data=event.body
+        else:
+            data=event
+        calc = data['a'] * data['b']
+
+#        data = {"calc": calc}
+        data.clear()
+        data['calc']=calc
 
     def _plus(self, event):
-        calc = event.body["a"] + event.body["b"]
-        event.body = {"calc": calc}
+        if isinstance(event, mlrun.serving.server.MockEvent):
+            data=event.body
+        else:
+            data=event
+        calc = data["a"] + data["b"]
+#        data = {"calc": calc}
+        data.clear()
+        data['calc']=calc
 
 def minus(event):
-    calc = event.body["a"] - event.body["b"]
-    event.body = {"calc": calc}
+    if isinstance(event, mlrun.serving.server.MockEvent):
+        data = event.body
+    else:
+        data = event
+    calc = data["a"] - data["b"]
+    data.clear()
+    data['calc'] = calc
     return event
