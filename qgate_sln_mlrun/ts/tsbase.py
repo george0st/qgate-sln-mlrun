@@ -165,8 +165,12 @@ class TSBase:
         pass
 
     def exec(self, project_name):
-        """Execution of test case"""
-        raise NotImplemented()
+        """Execution of TS for each project."""
+        pass
+
+    def exec(self):
+        """Execution of TS."""
+        pass
 
     def after(self):
         """One call AFTER execute all projects for specific TS. It is relevant for data cleaning, etc."""
