@@ -9,6 +9,8 @@ class TS601Pipeline:
         self.kw = kw
 
     def do(self, event):
+
+#        isinstance()
         if self.name.lower()=="multipl":
             self._multipli(event)
         elif self.name.lower()=="plus":
