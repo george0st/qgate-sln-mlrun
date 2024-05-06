@@ -160,7 +160,7 @@ class TSBase:
     def name(self):
         return self._name
 
-    def general_before(self):
+    def top_before(self):
         """One call BEFORE exec all projects for specific TS. It is relevant for data preparation, etc."""
         pass
 
@@ -168,11 +168,11 @@ class TSBase:
         """Execution of TS for each project."""
         pass
 
-    def general_exec(self):
+    def top_exec(self):
         """Execution of TS."""
         pass
 
-    def general_after(self):
+    def top_after(self):
         """One call AFTER execute all projects for specific TS. It is relevant for data cleaning, etc."""
         pass
 
