@@ -25,7 +25,7 @@ class TS204(TSBase):
     def long_desc(self):
         return ("Create feature set(s) & Ingest from Parquet source (one step, without save and load featureset)")
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """ Create featuresets and ingest"""
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):

@@ -27,7 +27,7 @@ class TS205(TSBase):
     def long_desc(self):
         return ("Create feature set(s) & Ingest from SQL (MySQL) source (one step, without save and load featureset)")
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """ Create featuresets & ingest"""
 
         # It can be executed only in case that configuration is fine

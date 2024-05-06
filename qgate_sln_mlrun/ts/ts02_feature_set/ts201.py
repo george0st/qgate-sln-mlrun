@@ -27,7 +27,7 @@ class TS201(TSBase):
         return ("Create feature set with name, description, entities, features and targets. "
                 "Supported these targets off-line 'parquet', 'csv' and the on-line 'redis'.")
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """ Get or create featuresets"""
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):

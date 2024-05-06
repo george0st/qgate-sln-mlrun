@@ -25,7 +25,7 @@ class TS206(TSBase):
     def long_desc(self):
         return ("Create feature set(s) & Ingest from Kafka source (one step, without save and load featureset)")
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """ Create featuresets & ingest"""
         return
 

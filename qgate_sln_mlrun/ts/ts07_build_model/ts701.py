@@ -31,7 +31,7 @@ class TS701(TSBase):
         """
         return "Build CART model (Classification and Regression Tree) from Scikit-Learn"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
 
         # Get list of ml models
         for mlmodel_name in self.get_mlmodel(self.project_specs.get(project_name)):

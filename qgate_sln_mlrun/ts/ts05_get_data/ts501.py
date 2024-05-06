@@ -19,7 +19,7 @@ class TS501(TSBase):
     def long_desc(self):
         return "Get data from off-line feature vector"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """
         Get data from off-line feature vector
         """

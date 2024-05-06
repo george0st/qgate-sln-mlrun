@@ -24,7 +24,7 @@ class TS602(TSBase):
     def long_desc(self):
         return "Complex pipeline(s)"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """Simple pipeline during ingest"""
         return
 
