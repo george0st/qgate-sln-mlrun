@@ -28,7 +28,7 @@ class TS102(TSBase):
         """Delete project"""
         self._delete_project(f"{project_name}/*:", project_name)
 
-    def ts_after(self):
+    def general_after(self):
         """Delete addition content of project (include output directory, DB content etc.)"""
 
         # remove data from MySQL

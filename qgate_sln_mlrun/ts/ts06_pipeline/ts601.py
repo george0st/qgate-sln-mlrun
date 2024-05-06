@@ -24,7 +24,7 @@ class TS601(TSBase):
     def long_desc(self):
         return "Simple pipeline(s), focus on full/partial event and tests under the Mock"
 
-    def ts_exec(self):
+    def general_exec(self):
         """Simple pipeline during ingest"""
 
         #self.project_switch(project_name)
