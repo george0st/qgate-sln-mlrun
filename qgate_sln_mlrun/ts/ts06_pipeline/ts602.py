@@ -27,29 +27,43 @@ class TS602(TSBase):
     def exec(self, project_name):
         """Simple pipeline during ingest"""
         return
-        # self.project_switch(project_name)
-        # self._class_plus(f"{project_name}/class_plus (event)", project_name, True)
-        # self._class_plus(f"{project_name}/class_plus", project_name, False)
-        # self._class_multipl(f"{project_name}/class_multipl (event)", project_name, True)
-        # self._class_multipl(f"{project_name}/class_multipl", project_name, False)
-        # self._minus(f"{project_name}/minus (event)", project_name, True)
-        # self._minus(f"{project_name}/minus", project_name, False)
+
 
     @TSBase.handler_testcase
-    def _class_plus(self, testcase_name, project_name, full_event):
+    def _complex_pipeline(self, testcase_name, project_name, full_event):
 
-        func = mlrun.code_to_function(f"ts601_{project_name}_plus",
-                                      kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
-        graph_echo = func.set_topology("flow")
-        graph_echo.to(class_name="TS601Pipeline", full_event=full_event, name="plus", default=True).respond()
+        # definition complex graph
+        #
 
-        # tests
-        echo_server = func.to_mock_server(current_function="*")
-        result = echo_server.test("", {"a": 5, "b": 7})
-        echo_server.wait_for_completion()
+        # transaction ingest from parquet to the featureset
 
-        # value check
-        if result['calc']!=12:
-            raise ValueError("Invalid calculation, expected value 12")
 
+        ## Define and add value mapping
+        # transaction_set = fs.FeatureSet("transactions",
+        #                                  entities=[fs.Entity("source")],
+        #                                  timestamp_key='timestamp',
+        #                                  description="transactions feature set")
+        # main_categories = ["es_transportation", "es_health", "es_otherservices",
+        #        "es_food", "es_hotelservices", "es_barsandrestaurants",
+        #        "es_tech", "es_sportsandtoys", "es_wellnessandbeauty",
+        #        "es_hyper", "es_fashion", "es_home", "es_contents",
+        #        "es_travel", "es_leisure"]
+        #
+        # # One Hot Encode the newly defined mappings
+        # one_hot_encoder_mapping = {'category': main_categories,
+        #                            'gender': list(transactions_data.gender.unique())}
+        #
+        # # Define the graph steps
+        # transaction_set.graph\
+        #     .to(DateExtractor(parts = ['hour', 'day_of_week'], timestamp_col = 'timestamp'))\
+        #     .to(MapValues(mapping={'age': {'U': '0'}}, with_original_features=True))\
+        #     .to(OneHotEncoder(mapping=one_hot_encoder_mapping)).respond()
+        #
+        #
+        # # Add aggregations for 2, 12, and 24 hour time windows
+        # transaction_set.add_aggregation(name='amount',
+        #                                 column='amount',
+        #                                 operations=['avg','sum', 'count','max'],
+        #                                 windows=['2h', '12h', '24h'],
+        #                                 period='1h')
+        pass
