@@ -20,6 +20,10 @@ class KafkaHelper():
         """Return None if not configured or connection string (based on setting QGATE_KAFKA in *.env file)."""
         return self.setup.kafka
 
+    @property
+    def prefix(self):
+        return KafkaHelper.TOPIC_SOURCE_PREFIX
+
     def create_insert_data(self, featureset_name, drop_if_exist = False):
         """Create topic and insert data"""
 
