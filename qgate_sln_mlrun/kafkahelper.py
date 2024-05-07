@@ -10,3 +10,17 @@ class KafkaHelper():
 
     def __init__(self,setup: Setup):
         self._setup = setup
+
+    @property
+    def setup(self) -> Setup:
+        return self._setup
+
+    @property
+    def configured(self):
+        """Return None if not configured or connection string (based on setting QGATE_MYSQL in *.env file)."""
+        return self.setup.kafka
+
+    def create_insert_data(self, featureset_name, drop_if_exist = False):
+        """Create table and insert data"""
+
+        return

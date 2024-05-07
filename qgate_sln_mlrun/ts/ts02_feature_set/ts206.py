@@ -8,14 +8,14 @@ from mlrun.data_types.data_types import ValueType
 from mlrun.datastore.sources import SQLSource
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import json
-from qgate_sln_mlrun.mysqlhelper import MySQLHelper
+from qgate_sln_mlrun.kafkahelper import KafkaHelper
 
 
 class TS206(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
-        self._mysql = MySQLHelper(self.setup)
+        self._kafka = KafkaHelper(self.setup)
 
     @property
     def desc(self) -> str:
@@ -29,10 +29,10 @@ class TS206(TSBase):
         """ Create featuresets & ingest"""
 
         # It can be executed only in case that configuration is fine
-        if not self.setup.kafka:
+        if not self._kafka:
             return
 
-
+        return 
 
         # for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
         #     # Create table only in case, that table does not exist
