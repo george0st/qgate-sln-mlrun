@@ -125,10 +125,11 @@ class MySQLHelper(BaseHelper):
     #     """
     #     return f"{MySQLHelper.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-', '_')
 
-    def table_exist(self, project_name, featureset_name):
-        """Check, if table exists
+    def helper_exist(self, project_name, featureset_name):
+        """Check, if helper exists
 
-        :param table_name:      name of the table for check
+        :param project_name:      name of the project
+        :param featureset_name:   name of the featureset
         :return:                True - table exist, False - table does not exist
         """
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
@@ -149,8 +150,8 @@ class MySQLHelper(BaseHelper):
                         return True
         return False
 
-    def remove_table(self, start_with):
-        """Remove tables with specific prefix
+    def remove_helper(self, start_with):
+        """Remove helper with specific prefix
 
         :param start_with:      prefix of tables for remove
         """

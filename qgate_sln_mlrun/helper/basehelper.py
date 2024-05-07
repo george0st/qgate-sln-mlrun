@@ -16,3 +16,9 @@ class BaseHelper:
 
     def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
         raise NotImplemented()
+
+    def helper_exist(self, project_name, featureset_name):
+        raise NotImplemented()
+
+    def remove_helper(self, start_with):
+        raise NotImplemented()
