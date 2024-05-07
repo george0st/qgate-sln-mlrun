@@ -132,6 +132,11 @@ class QualityReport:
                 ts = test_scenario(self)
                 try:
 
+                    # apply QGATE_FILTER_SCENARIOS, focus on only the specific test scenarios
+                    if filter_scenarios:
+                        if not ts.name in filter_scenarios:
+                            continue
+
                     # execution of test case
                     ts.testscenario_new()
                     ts.before()
@@ -144,10 +149,10 @@ class QualityReport:
                         if ts.name in projects_avoid_ts[project_name]:
                             continue
 
-                        # apply QGATE_FILTER_SCENARIOS, focus on only the specific test scenarios
-                        if filter_scenarios:
-                            if not ts.name in filter_scenarios:
-                                continue
+                        # # apply QGATE_FILTER_SCENARIOS, focus on only the specific test scenarios
+                        # if filter_scenarios:
+                        #     if not ts.name in filter_scenarios:
+                        #         continue
 
                         # execute of TS for this project
                         ts.prj_exec(project_name)

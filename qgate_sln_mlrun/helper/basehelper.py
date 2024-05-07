@@ -5,7 +5,7 @@ class BaseHelper:
     @property
     def prefix(self):
         raise NotImplemented()
-    
+
     def convert_featureset_name(self, featureset_name):
         """Convert featureset name to the name of helper (e.g. DB table name, kafka topic name, etc.).
 
