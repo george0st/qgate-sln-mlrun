@@ -9,6 +9,7 @@ class BaseHelper:
     def create_helper_name(self, project_name, featureset_name):
         """Convert project name and featureset name to the name of helper (e.g. DB table name, kafka topic name, etc.).
 
+        :param project_name:     project name
         :param featureset_name:     Feature set name
         :return:                    The name of helper (DB table name, kafka topic name, etc.) with relevant prefix
         """

@@ -117,14 +117,6 @@ class MySQLHelper(BaseHelper):
                     cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
 
-    # def convert_featureset_name(self, featureset_name):
-    #     """Convert featureset name to the name of table.
-    #
-    #     :param featureset_name:     Feature set name
-    #     :return:                    The name of db table with relevant prefix
-    #     """
-    #     return f"{MySQLHelper.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-', '_')
-
     def helper_exist(self, project_name, featureset_name):
         """Check, if helper exists
 
