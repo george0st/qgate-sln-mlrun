@@ -1,9 +1,9 @@
 from qgate_sln_mlrun.ts.tsbase import TSBase
 from qgate_sln_mlrun.ts.tshelper import TSHelper
 from qgate_sln_mlrun.setup import Setup
+from qgate_sln_mlrun.helper.basehelper import BaseHelper
 
-
-class KafkaHelper():
+class KafkaHelper(BaseHelper):
 
     # Prefix of TOPIC with sources
     TOPIC_SOURCE_PREFIX = "tmp_"
