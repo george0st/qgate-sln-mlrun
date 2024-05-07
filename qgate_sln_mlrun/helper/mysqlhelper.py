@@ -30,7 +30,7 @@ class MySQLHelper(BaseHelper):
     def prefix(self):
         return MySQLHelper.TABLE_SOURCE_PREFIX
 
-    def create_insert_data(self, featureset_name, drop_if_exist = False):
+    def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
         """Create table and insert data"""
         primary_keys=""
         column_types= ""
@@ -63,7 +63,7 @@ class MySQLHelper(BaseHelper):
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name = self.convert_featureset_name(featureset_name)
+        table_name = self.create_helper_name(project_name, featureset_name)
         column_types = column_types[:-1].replace('-', '_')
         primary_keys = primary_keys[:-1].replace('-','_')
         columns = columns[:-1].replace('-', '_')
@@ -125,7 +125,7 @@ class MySQLHelper(BaseHelper):
     #     """
     #     return f"{MySQLHelper.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-', '_')
 
-    def table_exist(self, featureset_name):
+    def table_exist(self, project_name, featureset_name):
         """Check, if table exists
 
         :param table_name:      name of the table for check
@@ -142,7 +142,7 @@ class MySQLHelper(BaseHelper):
         with connection:
             with connection.cursor() as cursor:
                 cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
-                               f" AND table_name = '{self.convert_featureset_name(featureset_name)}' LIMIT 1;")
+                               f" AND table_name = '{self.create_helper_name(project_name, featureset_name)}' LIMIT 1;")
                 myresult = cursor.fetchone()
                 if myresult:
                     if len(myresult)>0:
