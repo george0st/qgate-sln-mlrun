@@ -23,7 +23,7 @@ class TS301(TSBase):
     def long_desc(self):
         return "Ingest data (in Preview mode) from DataFrame Source"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """Data ingest"""
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # create possible file for load

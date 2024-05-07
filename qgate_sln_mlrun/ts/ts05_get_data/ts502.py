@@ -21,7 +21,7 @@ class TS502(TSBase):
     def long_desc(self):
         return "Get data from on-line feature vector(s), focus on target Redis"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """
         Get data from on-line feature vector
         """

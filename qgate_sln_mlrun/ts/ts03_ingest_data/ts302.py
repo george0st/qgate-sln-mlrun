@@ -29,7 +29,7 @@ class TS302(TSBase):
         """Prepare data for ingestion"""
         pass
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """Data ingest"""
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # create possible file for load

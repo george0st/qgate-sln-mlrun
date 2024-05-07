@@ -30,7 +30,7 @@ class TS801(TSBase):
         """
         return "Serving score from CART (Classification and Regression Tree) from Scikit-Learn"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """
         Serve score
         """

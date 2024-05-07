@@ -134,10 +134,10 @@ class QualityReport:
 
                     # execution of test case
                     ts.testscenario_new()
-                    ts.top_before()
+                    ts.before()
 
                     # execute of TS
-                    ts.top_exec()
+                    ts.exec()
 
                     for project_name in self.projects:
                         # avoid irrelevant scenarios for this project
@@ -150,9 +150,9 @@ class QualityReport:
                                 continue
 
                         # execute of TS for this project
-                        ts.exec(project_name)
+                        ts.prj_exec(project_name)
 
-                    ts.top_after()
+                    ts.after()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:
                     ts.state = tsbase.TSState.ERR

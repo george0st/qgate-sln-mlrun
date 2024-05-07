@@ -19,7 +19,7 @@ class TS101(TSBase):
     def long_desc(self):
         return "Create project with setting name, description and tags"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """ Create projects based on json definition"""
         desc = self.project_descs[project_name]
         self._create_project(f"{project_name}/*: '{desc[0]}'", project_name, desc[0], desc[1], desc[2])

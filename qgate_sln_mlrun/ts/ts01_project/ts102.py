@@ -24,11 +24,11 @@ class TS102(TSBase):
     def long_desc(self):
         return "Delete project include all contents and targets (such as Parquet/CSV files, etc.)"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """Delete project"""
         self._delete_project(f"{project_name}/*:", project_name)
 
-    def top_after(self):
+    def after(self):
         """Delete addition content of project (include output directory, DB content etc.)"""
 
         # remove data from MySQL

@@ -22,7 +22,7 @@ class TS401(TSBase):
     def long_desc(self):
         return "Create feature vectors as join of relevant feature sets"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """Create feature vectors"""
         # https://docs.mlrun.org/en/latest/api/mlrun.feature_store.html#mlrun.feature_store.FeatureVector
 

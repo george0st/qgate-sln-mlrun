@@ -24,7 +24,7 @@ class TS304(TSBase):
     def long_desc(self):
         return "Ingest data to feature set(s) from Parquet source"
 
-    def exec(self, project_name):
+    def prj_exec(self, project_name):
         """Data ingest"""
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # create possible file for load
