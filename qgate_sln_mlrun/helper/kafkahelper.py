@@ -26,5 +26,8 @@ class KafkaHelper(BaseHelper):
 
     def create_insert_data(self, featureset_name, drop_if_exist = False):
         """Create topic and insert data"""
+        from kafka import KafkaProducer
 
-        return
+        producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
+        for _ in range(5):
+            producer.send('ax', b'some_message_bytes')

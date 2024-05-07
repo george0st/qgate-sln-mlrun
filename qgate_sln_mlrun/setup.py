@@ -127,7 +127,11 @@ class Setup(metaclass=Singleton):
     @property
     def kafka(self):
         """Return the connection to Kafka"""
-        return self._variables.get('QGATE_KAFKA', None)
+        server=None
+        topic=
+        connection=self._variables.get('QGATE_KAFKA', None)
+        if connection:
+            params=connection.split(',')
 
     @property
     def anonym_mode(self) -> bool:
