@@ -27,12 +27,13 @@ class TS206(TSBase):
 
     def prj_exec(self, project_name):
         """ Create featuresets & ingest"""
-        return
 
-        # # It can be executed only in case that configuration is fine
-        # if not self._mysql.configured:
-        #     return
-        #
+        # It can be executed only in case that configuration is fine
+        if not self.setup.kafka:
+            return
+
+
+
         # for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
         #     # Create table only in case, that table does not exist
         #     if not self._mysql.table_exist(featureset_name):
