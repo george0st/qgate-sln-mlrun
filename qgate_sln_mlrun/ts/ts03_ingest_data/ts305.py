@@ -36,8 +36,8 @@ class TS305(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table only in case, that table does not exist
-            if not self._mysql.table_exist(featureset_name):
-                self._mysql.create_insert_data(featureset_name)
+            if not self._mysql.helper_exist(project_name, featureset_name):
+                self._mysql.create_insert_data(project_name, featureset_name)
 
             # create file with definition of vector
             source_file = os.path.join(os.getcwd(),
@@ -62,7 +62,7 @@ class TS305(TSBase):
 
         fstore.ingest(featureset,
                       SQLSource(name="tst",
-                                table_name=self._mysql.convert_featureset_name(featureset_name),
+                                table_name=self._mysql.create_helper_name(project_name, featureset_name),
                                 db_url=self.setup.mysql,
                                 key_field=keys[:-1].replace('-','_')),
                       # overwrite=False,

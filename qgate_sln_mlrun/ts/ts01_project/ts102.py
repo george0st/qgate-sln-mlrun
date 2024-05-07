@@ -42,7 +42,7 @@ class TS102(TSBase):
 
         mysql= MySQLHelper(self.setup)
         if mysql.configured:
-            mysql.remove_table(MySQLHelper.TABLE_SOURCE_PREFIX)
+            mysql.remove_helper(MySQLHelper.TABLE_SOURCE_PREFIX)
 
     def _clean_file(self):
         # remove files (not remove files from today)

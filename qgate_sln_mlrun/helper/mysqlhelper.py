@@ -30,7 +30,7 @@ class MySQLHelper(BaseHelper):
     def prefix(self):
         return MySQLHelper.TABLE_SOURCE_PREFIX
 
-    def create_insert_data(self, featureset_name, drop_if_exist = False):
+    def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
         """Create table and insert data"""
         primary_keys=""
         column_types= ""
@@ -63,7 +63,7 @@ class MySQLHelper(BaseHelper):
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name = self.convert_featureset_name(featureset_name)
+        table_name = self.create_helper_name(project_name, featureset_name)
         column_types = column_types[:-1].replace('-', '_')
         primary_keys = primary_keys[:-1].replace('-','_')
         columns = columns[:-1].replace('-', '_')
@@ -117,18 +117,11 @@ class MySQLHelper(BaseHelper):
                     cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
 
-    # def convert_featureset_name(self, featureset_name):
-    #     """Convert featureset name to the name of table.
-    #
-    #     :param featureset_name:     Feature set name
-    #     :return:                    The name of db table with relevant prefix
-    #     """
-    #     return f"{MySQLHelper.TABLE_SOURCE_PREFIX}{featureset_name}".replace('-', '_')
+    def helper_exist(self, project_name, featureset_name):
+        """Check, if helper exists
 
-    def table_exist(self, featureset_name):
-        """Check, if table exists
-
-        :param table_name:      name of the table for check
+        :param project_name:      name of the project
+        :param featureset_name:   name of the featureset
         :return:                True - table exist, False - table does not exist
         """
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
@@ -142,15 +135,15 @@ class MySQLHelper(BaseHelper):
         with connection:
             with connection.cursor() as cursor:
                 cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
-                               f" AND table_name = '{self.convert_featureset_name(featureset_name)}' LIMIT 1;")
+                               f" AND table_name = '{self.create_helper_name(project_name, featureset_name)}' LIMIT 1;")
                 myresult = cursor.fetchone()
                 if myresult:
                     if len(myresult)>0:
                         return True
         return False
 
-    def remove_table(self, start_with):
-        """Remove tables with specific prefix
+    def remove_helper(self, start_with):
+        """Remove helper with specific prefix
 
         :param start_with:      prefix of tables for remove
         """
