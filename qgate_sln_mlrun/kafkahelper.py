@@ -5,7 +5,7 @@ from qgate_sln_mlrun.setup import Setup
 
 class KafkaHelper():
 
-    # Prefix of table with sources
+    # Prefix of TOPIC with sources
     TOPIC_SOURCE_PREFIX = "tmp_"
 
     def __init__(self,setup: Setup):
@@ -17,10 +17,10 @@ class KafkaHelper():
 
     @property
     def configured(self):
-        """Return None if not configured or connection string (based on setting QGATE_MYSQL in *.env file)."""
+        """Return None if not configured or connection string (based on setting QGATE_KAFKA in *.env file)."""
         return self.setup.kafka
 
     def create_insert_data(self, featureset_name, drop_if_exist = False):
-        """Create table and insert data"""
+        """Create topic and insert data"""
 
         return

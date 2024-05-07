@@ -32,7 +32,7 @@ class TS206(TSBase):
         if not self._kafka:
             return
 
-        return 
+        return
 
         # for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
         #     # Create table only in case, that table does not exist
