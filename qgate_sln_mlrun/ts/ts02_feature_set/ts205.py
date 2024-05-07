@@ -10,7 +10,7 @@ from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import os
 import json
 import glob
-from qgate_sln_mlrun.mysqlhelper import MySQLHelper
+from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
 
 
 class TS205(TSBase):
@@ -68,7 +68,7 @@ class TS205(TSBase):
 
             fstore.ingest(featureset,
                           SQLSource(name="tst",
-                                    table_name=self._mysql.convert_feature_tablename(featureset_name),
+                                    table_name=self._mysql.convert_featureset_name(featureset_name),
                                     db_url=self.setup.mysql,
                                     key_field=keys[:-1].replace('-','_')),
                           # overwrite=False,

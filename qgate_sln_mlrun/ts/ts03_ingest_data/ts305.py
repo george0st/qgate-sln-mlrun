@@ -10,7 +10,7 @@ from mlrun.data_types.data_types import spark_to_value_type
 from mlrun.datastore.sources import SQLSource
 import glob
 import os
-from qgate_sln_mlrun.mysqlhelper import MySQLHelper
+from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
 
 
 class TS305(TSBase):
@@ -62,7 +62,7 @@ class TS305(TSBase):
 
         fstore.ingest(featureset,
                       SQLSource(name="tst",
-                                table_name=self._mysql.convert_feature_tablename(featureset_name),
+                                table_name=self._mysql.convert_featureset_name(featureset_name),
                                 db_url=self.setup.mysql,
                                 key_field=keys[:-1].replace('-','_')),
                       # overwrite=False,

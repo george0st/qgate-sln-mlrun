@@ -8,7 +8,7 @@ from mlrun.data_types.data_types import ValueType
 from mlrun.datastore.sources import SQLSource
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import json
-from qgate_sln_mlrun.kafkahelper import KafkaHelper
+from qgate_sln_mlrun.helper.kafkahelper import KafkaHelper
 
 
 class TS206(TSBase):
@@ -68,7 +68,7 @@ class TS206(TSBase):
 
             fstore.ingest(featureset,
                           SQLSource(name="tst",
-                                    table_name=self._mysql.convert_feature_tablename(featureset_name),
+                                    table_name=self._mysql.convert_featureset_name(featureset_name),
                                     db_url=self.setup.mysql,
                                     key_field=keys[:-1].replace('-','_')),
                           # overwrite=False,
