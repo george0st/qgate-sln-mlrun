@@ -137,26 +137,23 @@ class QualityReport:
                         if not ts.name in filter_scenarios:
                             continue
 
-                    # execution of test case
+                    # write info about TS to the output
                     ts.testscenario_new()
-                    ts.before()
 
-                    # execute of TS
+                    # BEFORE execution of TS
+                    ts.before()
+                    # EXEC execute of TS
                     ts.exec()
 
                     for project_name in self.projects:
-                        # avoid irrelevant scenarios for this project
                         if ts.name in projects_avoid_ts[project_name]:
+                            # avoid irrelevant scenarios for this project
                             continue
 
-                        # # apply QGATE_FILTER_SCENARIOS, focus on only the specific test scenarios
-                        # if filter_scenarios:
-                        #     if not ts.name in filter_scenarios:
-                        #         continue
-
-                        # execute of TS for this project
+                        # PRJ_EXEC execute of TS for project
                         ts.prj_exec(project_name)
 
+                    # AFTER execute of TS
                     ts.after()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:
