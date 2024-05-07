@@ -174,8 +174,10 @@ class TS201(TSBase):
                 raise ValueError("Missing value for mysql connection, see 'QGATE_POSTGRES'.")
         elif target == "kafka":
             if self.setup.kafka:
-                # NOTE: The topic name combina project, featurename and target
-                target_provider = KafkaTarget(name=target_name, bootstrap_servers=self.setup.kafka, path=f"{project_name}_{featureset_name}_{target_name}")
+                # NOTE: The topic name is combination of project name , feature name and target
+                target_provider = KafkaTarget(name=target_name,
+                                              bootstrap_servers=self.setup.kafka,
+                                              path=f"{project_name}_{featureset_name}_{target_name}")
             else:
                 raise ValueError("Missing value for kafka connection, see 'QGATE_KAFKA'.")
         else:
