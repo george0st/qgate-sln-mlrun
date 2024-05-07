@@ -25,8 +25,8 @@ class MySQLHelper():
         """Return None if not configured or connection string (based on setting QGATE_MYSQL in *.env file)."""
         return self.setup.mysql
 
-    def create_table(self, featureset_name, drop_table_if_exist = False):
-        """Create table"""
+    def create_insert_data(self, featureset_name, drop_table_if_exist = False):
+        """Create table and insert data"""
         primary_keys=""
         column_types= ""
         columns = ""

@@ -37,7 +37,7 @@ class TS205(TSBase):
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table only in case, that table does not exist
             if not self._mysql.table_exist(featureset_name):
-                self._mysql.create_table(featureset_name)
+                self._mysql.create_insert_data(featureset_name)
 
             # create file with definition of vector
             source_file = os.path.join(os.getcwd(),
