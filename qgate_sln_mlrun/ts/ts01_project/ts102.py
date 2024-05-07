@@ -8,7 +8,7 @@ import os
 import glob
 import shutil
 from qgate_sln_mlrun.setup import ProjectDelete
-from qgate_sln_mlrun.mysqlhelper import MySQLHelper
+from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
 
 
 class TS102(TSBase):

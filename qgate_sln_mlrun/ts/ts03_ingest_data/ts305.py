@@ -10,7 +10,7 @@ from mlrun.data_types.data_types import spark_to_value_type
 from mlrun.datastore.sources import SQLSource
 import glob
 import os
-from qgate_sln_mlrun.mysqlhelper import MySQLHelper
+from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
 
 
 class TS305(TSBase):

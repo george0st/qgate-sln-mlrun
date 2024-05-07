@@ -8,7 +8,7 @@ from mlrun.data_types.data_types import ValueType
 from mlrun.datastore.sources import SQLSource
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import json
-from qgate_sln_mlrun.kafkahelper import KafkaHelper
+from qgate_sln_mlrun.helper.kafkahelper import KafkaHelper
 
 
 class TS206(TSBase):

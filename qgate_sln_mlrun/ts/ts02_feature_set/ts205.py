@@ -10,7 +10,7 @@ from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import os
 import json
 import glob
-from qgate_sln_mlrun.mysqlhelper import MySQLHelper
+from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
 
 
 class TS205(TSBase):
