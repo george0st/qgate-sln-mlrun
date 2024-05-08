@@ -65,7 +65,24 @@ class KafkaHelper(BaseHelper):
         except  Exception as e:
             print(e)
 
+        # admin_client.create_topics(new_topics=topic_list, validate_only=False)
 
+        # if topic not in existing_topic_list:
+        #     print('Topic : {} added '.format(topic))
+        #     topic_list.append(NewTopic(name=topic, num_partitions=3, replication_factor=3))
+        # else:
+        #     print('Topic : {topic} already exist ')
+
+
+        # print("Topic Created Successfully")
+        # topic_list = [
+        #     NewTopic(
+        #         name=topic_name,
+        #         num_partitions=1,
+        #         replication_factor=1,
+        #         topic_configs={'retention.ms': '3600000'}
+        #     )
+    ]
 
     def helper_exist(self, project_name, featureset_name):
         from kafka import KafkaConsumer
