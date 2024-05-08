@@ -82,7 +82,7 @@ class KafkaHelper(BaseHelper):
         #         replication_factor=1,
         #         topic_configs={'retention.ms': '3600000'}
         #     )
-    ]
+        #    ]
 
     def helper_exist(self, project_name, featureset_name):
         from kafka import KafkaConsumer
