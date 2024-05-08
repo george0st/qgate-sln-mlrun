@@ -36,6 +36,9 @@ class KafkaHelper(BaseHelper):
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
         topic_name = self.create_helper_name(project_name, featureset_name)
 
+        if drop_if_exist:
+            self._delete_topics([topic_name])
+
         # create possible file for load
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
@@ -53,15 +56,22 @@ class KafkaHelper(BaseHelper):
                                         encoding="utf-8",
                                         chunksize=Setup.MAX_BUNDLE):
                 for row in data_frm.to_numpy().tolist():
-                    producer.send(topic_name, json.dumps(row))
+                    content=json.dumps(row)
+                    producer.send(topic_name, content)
             producer.flush()
 
     def _delete_topics(self, topic_names):
         from kafka.admin import KafkaAdminClient, NewTopic
+        from kafka.errors import (UnknownError, KafkaConnectionError, FailedPayloadsError,
+                                  KafkaTimeoutError, KafkaUnavailableError,
+                                  LeaderNotAvailableError, UnknownTopicOrPartitionError,
+                                  NotLeaderForPartitionError, ReplicaNotAvailableError)
 
         admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
         try:
-            admin_client.delete_topics(topics=topic_names)
+            admin_client.delete_topics(topics=topic_names, timeout_ms=2000)
+        except UnknownTopicOrPartitionError:
+            pass
         except  Exception as e:
             print(e)
 
