@@ -35,8 +35,8 @@ class TS206(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table only in case, that table does not exist
-            if not self._kafka.helper_exist(featureset_name):
-                self._kafka.create_insert_data(featureset_name)
+            if not self._kafka.helper_exist(project_name, featureset_name):
+                self._kafka.create_insert_data(project_name, featureset_name)
 
         return
 
