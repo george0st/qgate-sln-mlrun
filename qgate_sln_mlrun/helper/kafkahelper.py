@@ -56,10 +56,9 @@ class KafkaHelper(BaseHelper):
                                         encoding="utf-8",
                                         chunksize=Setup.MAX_BUNDLE):
                 for row in data_frm.to_numpy().tolist():
-                    content=json.dumps(row)
-                    producer.send(topic_name, content.encode("utf-8"))
-            producer.flush()
-            producer.close()
+                    producer.send(topic_name, json.dumps(row).encode("utf-8"))
+                producer.flush()
+        producer.close()
 
     def _delete_topics(self, topic_names):
         from kafka.admin import KafkaAdminClient, NewTopic
