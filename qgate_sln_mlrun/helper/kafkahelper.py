@@ -56,9 +56,9 @@ class KafkaHelper(BaseHelper):
                                         encoding="utf-8",
                                         chunksize=Setup.MAX_BUNDLE):
                 for row in data_frm.to_numpy().tolist():
-                    content=json.dumps(row)
-                    producer.send(topic_name, content)
-            producer.flush()
+                    producer.send(topic_name, json.dumps(row).encode("utf-8"))
+                producer.flush()
+        producer.close()
 
     def _delete_topics(self, topic_names):
         from kafka.admin import KafkaAdminClient, NewTopic
@@ -72,8 +72,9 @@ class KafkaHelper(BaseHelper):
             admin_client.delete_topics(topics=topic_names, timeout_ms=2000)
         except UnknownTopicOrPartitionError:
             pass
-        except  Exception as e:
-            print(e)
+        except Exception as e:
+            pass
+        admin_client.close()
 
         # admin_client.create_topics(new_topics=topic_list, validate_only=False)
 
@@ -97,9 +98,11 @@ class KafkaHelper(BaseHelper):
     def helper_exist(self, project_name, featureset_name):
         from kafka import KafkaConsumer
 
-        consumer = KafkaConsumer(bootstrap_servers=self.setup.kafka)
-        topic_name = self.create_helper_name(project_name, featureset_name)
+        consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
         existing_topic_list = consumer.topics()
+        consumer.close()
+
+        topic_name = self.create_helper_name(project_name, featureset_name)
         if topic_name in existing_topic_list:
             return True
         return False

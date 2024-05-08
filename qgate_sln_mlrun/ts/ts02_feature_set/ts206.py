@@ -32,11 +32,15 @@ class TS206(TSBase):
         if not self._kafka.configured:
             return
 
-
+        # from kafka import KafkaProducer
+        # producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
+        # strvalue="+ěščřžýáíé=ú)ů§"
+        # producer.send("ewrewr_erjewrkjweh_ekjrklwer_erwerwe", strvalue.encode('utf-8'))
+        # producer.close()
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table only in case, that table does not exist
-            if not self._kafka.helper_exist(project_name, featureset_name):
-                self._kafka.create_insert_data(project_name, featureset_name,True)
+            #if not self._kafka.helper_exist(project_name, featureset_name):
+            self._kafka.create_insert_data(project_name, featureset_name,True)
 
         return
 
