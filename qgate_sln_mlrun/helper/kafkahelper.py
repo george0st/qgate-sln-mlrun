@@ -59,3 +59,6 @@ class KafkaHelper(BaseHelper):
 
         # for _ in range(5):
         #     producer.send('ax', b'some_message_bytes')
+
+    def helper_exist(self, project_name, featureset_name):
+        return False
