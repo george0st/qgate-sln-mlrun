@@ -19,7 +19,6 @@ class TSHelper:
         port=0
 
         if connection_string:
-            # re.findall(r'\/\/(.*):(.*)@(.*):(.*)/(.*)', connection_string)
             configs = re.findall(r'//(.*):(.*)@(.*):(.*)/(.*)', connection_string)
             if configs and len(configs)>0:
                 config=configs[0]

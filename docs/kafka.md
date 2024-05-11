@@ -36,8 +36,8 @@
 ## 3. Use Kafka for tests
 
  - Update `qgate-sln-mlrun.env`, change setting for `QGATE_KAFKA`
-   - format `QGATE_KAFKA = <url>, <topic name>`
-   - see `QGATE_KAFKA = localhost:9092, testtopic`
+   - format `QGATE_KAFKA = <url>`
+   - see `QGATE_KAFKA = localhost:9092`
 
 ## 4. Install these python packages
 
