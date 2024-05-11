@@ -5,7 +5,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.sources import SQLSource
+from mlrun.datastore.sources import KafkaSource
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import json
 from qgate_sln_mlrun.helper.kafkahelper import KafkaHelper
@@ -56,6 +56,7 @@ class TS206(TSBase):
         json_content = json.load(json_file)
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
+        return
         if kind == "feature-set":
 
             # create feature set based on the logic in TS201
@@ -67,15 +68,11 @@ class TS206(TSBase):
                 keys+=f"{entity.name},"
 
             fstore.ingest(featureset,
-                          SQLSource(name="tst",
-                                    table_name=self._mysql.create_helper_name(project_name, featureset_name),
+                          KafkaSource(name="tst",
+                                    table_name=self._kafka.create_helper_name(project_name, featureset_name),
                                     db_url=self.setup.mysql,
                                     key_field=keys[:-1].replace('-','_')),
                           # overwrite=False,
                           return_df=False,
                           # infer_options=mlrun.data_types.data_types.InferOptions.Null)
                           infer_options=mlrun.data_types.data_types.InferOptions.default())
-            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-            # NOTE: option default, change types
-            # NOTE: option Null, generate error with datetime in python 3.9
-
