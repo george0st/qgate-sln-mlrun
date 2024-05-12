@@ -117,12 +117,13 @@ class MySQLHelper(BaseHelper):
                     cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
 
-    def helper_exist(self, project_name, featureset_name):
+    def helper_exist(self, helper, project_name = None, featureset_name = None):
         """Check, if helper exists
 
-        :param project_name:      name of the project
-        :param featureset_name:   name of the featureset
-        :return:                True - table exist, False - table does not exist
+        :param helper:              topic name
+        :param project_name:        project name (will be used in case of helper = None)
+        :param featureset_name:     feature set name (will be used in case of helper = None)
+        :return:                    True - table exist, False - table does not exist
         """
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
         connection = pymysql.connect(host=host,
@@ -132,10 +133,11 @@ class MySQLHelper(BaseHelper):
                                      database=db,
                                      cursorclass=pymysql.cursors.DictCursor)
 
+        table_name = helper if helper else self.create_helper_name(project_name, featureset_name)
         with connection:
             with connection.cursor() as cursor:
                 cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
-                               f" AND table_name = '{self.create_helper_name(project_name, featureset_name)}' LIMIT 1;")
+                               f" AND table_name = '{table_name}' LIMIT 1;")
                 myresult = cursor.fetchone()
                 if myresult:
                     if len(myresult)>0:

@@ -121,8 +121,8 @@ class KafkaHelper(BaseHelper):
         """Check, if topic (defined based on project name and feature name) exists
 
         :param helper:              topic name
-        :param project_name:        project name (will be used in case of topic name = None)
-        :param featureset_name:     feature set name (will be used in case of feature set name = None)
+        :param project_name:        project name (will be used in case of helper = None)
+        :param featureset_name:     feature set name (will be used in case of helper = None)
         :return:                    True - topic exist
         """
         consumer = existing_topic_list = None
