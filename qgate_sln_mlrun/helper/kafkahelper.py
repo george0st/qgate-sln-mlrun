@@ -47,9 +47,9 @@ class KafkaHelper(BaseHelper):
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
         topic_name = self.create_helper_name(project_name, featureset_name)
 
-        # TODO: tune delete
         if drop_if_exist:
-            self._delete_topics([topic_name])
+            if self.helper_exist(topic_name):
+                self._delete_topics([topic_name])
 
         # create possible file for load
         source_file = os.path.join(os.getcwd(),
@@ -117,10 +117,10 @@ class KafkaHelper(BaseHelper):
             if admin_client:
                 admin_client.close()
 
-    def helper_exist(self, topic_name, project_name, featureset_name) -> bool:
+    def helper_exist(self, helper, project_name = None, featureset_name = None) -> bool:
         """Check, if topic (defined based on project name and feature name) exists
 
-        :param topic_name:          topic name
+        :param helper:              topic name
         :param project_name:        project name (will be used in case of topic name = None)
         :param featureset_name:     feature set name (will be used in case of feature set name = None)
         :return:                    True - topic exist
@@ -136,8 +136,7 @@ class KafkaHelper(BaseHelper):
                 consumer.close()
 
         if existing_topic_list:
-            if not topic_name:
-                topic_name = self.create_helper_name(project_name, featureset_name)
+            topic_name = helper if helper else self.create_helper_name(project_name, featureset_name)
             if topic_name in existing_topic_list:
                 return True
         return False
