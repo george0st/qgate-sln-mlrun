@@ -45,11 +45,10 @@ class KafkaHelper(BaseHelper):
          """
 
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
-        topic_name = self.create_helper(project_name, featureset_name)
 
         if drop_if_exist:
-            if self.helper_exist(topic_name):
-                self._delete_topics([topic_name])
+            if self.helper_exist(helper):
+                self._delete_topics([helper])
 
         # create possible file for load
         source_file = os.path.join(os.getcwd(),
@@ -68,7 +67,7 @@ class KafkaHelper(BaseHelper):
                                         encoding="utf-8",
                                         chunksize=Setup.MAX_BUNDLE):
                 for row in data_frm.to_numpy().tolist():
-                    producer.send(topic_name, json.dumps(row).encode("utf-8"))
+                    producer.send(helper, json.dumps(row).encode("utf-8"))
                 producer.flush()
         producer.close()
 
