@@ -6,6 +6,12 @@ import glob
 import os
 import pandas as pd
 import json
+from kafka.admin import KafkaAdminClient, NewTopic
+from kafka import KafkaConsumer, KafkaProducer
+from kafka.errors import (UnknownError, KafkaConnectionError, FailedPayloadsError,
+                          KafkaTimeoutError, KafkaUnavailableError,
+                          LeaderNotAvailableError, UnknownTopicOrPartitionError,
+                          NotLeaderForPartitionError, ReplicaNotAvailableError)
 
 
 class KafkaHelper(BaseHelper):
@@ -31,7 +37,6 @@ class KafkaHelper(BaseHelper):
 
     def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
         """Create topic and insert data"""
-        from kafka import KafkaProducer
 
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
         topic_name = self.create_helper_name(project_name, featureset_name)
@@ -61,11 +66,6 @@ class KafkaHelper(BaseHelper):
         producer.close()
 
     def _delete_topics(self, topic_names):
-        from kafka.admin import KafkaAdminClient, NewTopic
-        from kafka.errors import (UnknownError, KafkaConnectionError, FailedPayloadsError,
-                                  KafkaTimeoutError, KafkaUnavailableError,
-                                  LeaderNotAvailableError, UnknownTopicOrPartitionError,
-                                  NotLeaderForPartitionError, ReplicaNotAvailableError)
 
         admin_client = None
         try:
@@ -79,8 +79,6 @@ class KafkaHelper(BaseHelper):
             if admin_client:
                 admin_client.close()
     def _create_topic(self, topic_name, num_partitions=1, replication_factor=1, retention_min=60):
-        from kafka.admin import KafkaAdminClient, NewTopic
-        from kafka.admin import KafkaAdminClient, NewTopic
 
         admin_client=None
         try:
@@ -96,32 +94,24 @@ class KafkaHelper(BaseHelper):
                 )
             ]
             admin_client.create_topics(new_topics=topic_list, validate_only=False)
-        except Exception as e:
-            pass
         finally:
             if admin_client:
                 admin_client.close()
 
+    def helper_exist(self, project_name, featureset_name) -> bool:
 
-
-        # print("Topic Created Successfully")
-        # topic_list = [
-        #     NewTopic(
-        #         name=topic_name,
-        #         num_partitions=1,
-        #         replication_factor=1,
-        #         topic_configs={'retention.ms': '3600000'}
-        #     )
-        #    ]
-
-    def helper_exist(self, project_name, featureset_name):
-        from kafka import KafkaConsumer
-
-        consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
-        existing_topic_list = consumer.topics()
-        consumer.close()
+        consumer = existing_topic_list = None
+        try:
+            consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
+            existing_topic_list = consumer.topics()
+        except:
+            pass
+        finally:
+            if consumer:
+                consumer.close()
 
         topic_name = self.create_helper_name(project_name, featureset_name)
-        if topic_name in existing_topic_list:
-            return True
+        if existing_topic_list:
+            if topic_name in existing_topic_list:
+                return True
         return False
