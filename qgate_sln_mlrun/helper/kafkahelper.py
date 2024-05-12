@@ -36,7 +36,11 @@ class KafkaHelper(BaseHelper):
         return KafkaHelper.TOPIC_SOURCE_PREFIX
 
     def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
-        """Create topic and insert data"""
+        """Create topic (composed of project name and feature name)
+         and insert data from model
+
+         
+         """
 
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
         topic_name = self.create_helper_name(project_name, featureset_name)
@@ -65,16 +69,21 @@ class KafkaHelper(BaseHelper):
                 producer.flush()
         producer.close()
 
-    def _delete_topics(self, topic_names):
+    def _delete_topics(self, topic_names, timeout_ms=2000):
+        """Delete requested topics
 
+        :param topic_names:     list of topic for delete
+        :param timeout_ms:      Milliseconds to wait for topics to be deleted before the broker returns,
+                                default is 2000 ms
+        """
         admin_client = None
         try:
             admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
-            admin_client.delete_topics(topics=topic_names, timeout_ms=2000)
+            admin_client.delete_topics(topics=topic_names, timeout_ms=timeout_ms)
         except UnknownTopicOrPartitionError:
             pass
         except Exception as e:
-            pass
+            raise
         finally:
             if admin_client:
                 admin_client.close()
