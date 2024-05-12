@@ -117,11 +117,12 @@ class KafkaHelper(BaseHelper):
             if admin_client:
                 admin_client.close()
 
-    def helper_exist(self, project_name, featureset_name) -> bool:
+    def helper_exist(self, topic_name, project_name, featureset_name) -> bool:
         """Check, if topic (defined based on project name and feature name) exists
 
-        :param project_name:        project name
-        :param featureset_name:     feature set name
+        :param topic_name:          topic name
+        :param project_name:        project name (will be used in case of topic name = None)
+        :param featureset_name:     feature set name (will be used in case of feature set name = None)
         :return:                    True - topic exist
         """
         consumer = existing_topic_list = None
@@ -134,8 +135,10 @@ class KafkaHelper(BaseHelper):
             if consumer:
                 consumer.close()
 
-        topic_name = self.create_helper_name(project_name, featureset_name)
         if existing_topic_list:
+            if not topic_name:
+                topic_name = self.create_helper_name(project_name, featureset_name)
             if topic_name in existing_topic_list:
                 return True
         return False
+
