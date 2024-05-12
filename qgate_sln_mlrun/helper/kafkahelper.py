@@ -35,21 +35,20 @@ class KafkaHelper(BaseHelper):
     def prefix(self):
         return KafkaHelper.TOPIC_SOURCE_PREFIX
 
-    def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
+    def create_insert_data(self, helper, featureset_name, drop_if_exist = False):
         """Create topic (composed of project name and feature name)
          and insert data from model
 
-         :param project_name:       project name
+         :param helper:       project name
          :param featureset_name:    featureset name
          :param drop_if_exist:      delete topic if exists
          """
 
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
-        topic_name = self.create_helper_name(project_name, featureset_name)
 
-        # TODO: tune delete
         if drop_if_exist:
-            self._delete_topics([topic_name])
+            if self.helper_exist(helper):
+                self._delete_topics([helper])
 
         # create possible file for load
         source_file = os.path.join(os.getcwd(),
@@ -68,7 +67,7 @@ class KafkaHelper(BaseHelper):
                                         encoding="utf-8",
                                         chunksize=Setup.MAX_BUNDLE):
                 for row in data_frm.to_numpy().tolist():
-                    producer.send(topic_name, json.dumps(row).encode("utf-8"))
+                    producer.send(helper, json.dumps(row).encode("utf-8"))
                 producer.flush()
         producer.close()
 
@@ -117,11 +116,39 @@ class KafkaHelper(BaseHelper):
             if admin_client:
                 admin_client.close()
 
-    def helper_exist(self, project_name, featureset_name) -> bool:
+    # def helper_exist(self, helper, project_name = None, featureset_name = None) -> bool:
+    #     """Check, if topic (defined based on project name and feature name) exists
+    #
+    #     :param helper:              topic name
+    #     :param project_name:        project name (will be used in case of helper = None)
+    #     :param featureset_name:     feature set name (will be used in case of helper = None)
+    #     :return:                    True - topic exist
+    #     """
+    #     consumer = existing_topic_list = None
+    #     try:
+    #         consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
+    #         existing_topic_list = consumer.topics()
+    #     except:
+    #         pass
+    #     finally:
+    #         if consumer:
+    #             consumer.close()
+    #
+    #     if existing_topic_list:
+    #         topic_name = helper if helper else self.create_helper_name(project_name, featureset_name)
+    #         if topic_name in existing_topic_list:
+    #             return True
+    #     return False
+
+    # def helper_exist(self, project_name, featureset_name) -> bool:
+    #     return self.helper_exist(self.create_helper_name(project_name, featureset_name))
+
+    def helper_exist(self, helper) -> bool:
         """Check, if topic (defined based on project name and feature name) exists
 
-        :param project_name:        project name
-        :param featureset_name:     feature set name
+        :param helper:              topic name
+        :param project_name:        project name (will be used in case of helper = None)
+        :param featureset_name:     feature set name (will be used in case of helper = None)
         :return:                    True - topic exist
         """
         consumer = existing_topic_list = None
@@ -134,8 +161,8 @@ class KafkaHelper(BaseHelper):
             if consumer:
                 consumer.close()
 
-        topic_name = self.create_helper_name(project_name, featureset_name)
         if existing_topic_list:
-            if topic_name in existing_topic_list:
+            if helper in existing_topic_list:
                 return True
         return False
+

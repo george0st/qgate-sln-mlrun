@@ -30,7 +30,7 @@ class MySQLHelper(BaseHelper):
     def prefix(self):
         return MySQLHelper.TABLE_SOURCE_PREFIX
 
-    def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
+    def create_insert_data(self, helper, featureset_name, drop_if_exist = False):
         """Create table and insert data"""
         primary_keys=""
         column_types= ""
@@ -63,7 +63,6 @@ class MySQLHelper(BaseHelper):
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        table_name = self.create_helper_name(project_name, featureset_name)
         column_types = column_types[:-1].replace('-', '_')
         primary_keys = primary_keys[:-1].replace('-','_')
         columns = columns[:-1].replace('-', '_')
@@ -82,17 +81,17 @@ class MySQLHelper(BaseHelper):
 
                 if drop_if_exist:
                     # drop table
-                    cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
+                    cursor.execute(f"DROP TABLE IF EXISTS {helper};")
                     connection.commit()
 
                 # create table
-                cursor.execute(f"CREATE TABLE {table_name} ({column_types});")
+                cursor.execute(f"CREATE TABLE {helper} ({column_types});")
                 connection.commit()
 
                 # insert data
-                self._insert_into(connection, cursor, table_name, featureset_name, columns)
+                self._insert_into(connection, cursor, helper, featureset_name, columns)
 
-    def _insert_into(self, connection, cursor, table_name, featureset_name, columns):
+    def _insert_into(self, connection, cursor, helper, featureset_name, columns):
         """Insert data into the table"""
 
         # create possible file for load
@@ -114,15 +113,16 @@ class MySQLHelper(BaseHelper):
                 for row in data_frm.to_numpy().tolist():
                     values=f"\",\"".join(str(e) for e in row)
 
-                    cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES(\"{values}\");")
+                    cursor.execute(f"INSERT INTO {helper} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
 
-    def helper_exist(self, project_name, featureset_name):
+    def helper_exist(self, helper): #, project_name = None, featureset_name = None):
         """Check, if helper exists
 
-        :param project_name:      name of the project
-        :param featureset_name:   name of the featureset
-        :return:                True - table exist, False - table does not exist
+        :param helper:              topic name
+        :param project_name:        project name (will be used in case of helper = None)
+        :param featureset_name:     feature set name (will be used in case of helper = None)
+        :return:                    True - table exist, False - table does not exist
         """
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
         connection = pymysql.connect(host=host,
@@ -135,7 +135,7 @@ class MySQLHelper(BaseHelper):
         with connection:
             with connection.cursor() as cursor:
                 cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{db}'"
-                               f" AND table_name = '{self.create_helper_name(project_name, featureset_name)}' LIMIT 1;")
+                               f" AND table_name = '{helper}' LIMIT 1;")
                 myresult = cursor.fetchone()
                 if myresult:
                     if len(myresult)>0:
