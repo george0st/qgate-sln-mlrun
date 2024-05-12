@@ -35,9 +35,9 @@ class TS206(TSBase):
             return
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # Create table only in case, that table does not exist
-            #if not self._kafka.helper_exist(project_name, featureset_name):
-            self._kafka.create_insert_data(project_name, featureset_name,True)
+            # Create topic only in case, that topic does not exist
+            if not self._kafka.helper_exist(None, project_name, featureset_name):
+                self._kafka.create_insert_data(project_name, featureset_name,True)
 
             # create file with definition of vector
             source_file = os.path.join(os.getcwd(),
