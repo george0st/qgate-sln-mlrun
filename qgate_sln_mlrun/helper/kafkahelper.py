@@ -79,27 +79,39 @@ class KafkaHelper(BaseHelper):
             if admin_client:
                 admin_client.close()
     def _create_topic(self, topic_name, num_partitions=1, replication_factor=1, retention_min=60):
+        """Create topic with detail setting
 
+        :param topic_name:          topic name
+        :param num_partitions:      amount of partitions, default is 1
+        :param replication_factor:  size of replication factor, default is 1
+        :param retention_min:       duration in minutes, how long the topics will be keeping, default is one hour
+        """
         admin_client=None
         try:
             admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
 
-            # https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#retention-ms
+            # Detail about retention.ms
+            #   https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#retention-ms
             topic_list = [
                 NewTopic(
-                    name=topic_name,
-                    num_partitions=num_partitions,
-                    replication_factor=replication_factor,
-                    topic_configs={'retention.ms': str(retention_min*60*1000)}
+                    name = topic_name,
+                    num_partitions = num_partitions,
+                    replication_factor = replication_factor,
+                    topic_configs = {'retention.ms': str(retention_min*60*1000)}
                 )
             ]
-            admin_client.create_topics(new_topics=topic_list, validate_only=False)
+            admin_client.create_topics(new_topics=topic_list)   # validate_only=False
         finally:
             if admin_client:
                 admin_client.close()
 
     def helper_exist(self, project_name, featureset_name) -> bool:
+        """Check, if topic (defined based on project name and feature name) exists
 
+        :param project_name:        project name
+        :param featureset_name:     feature set name
+        :return:                    True - topic exist
+        """
         consumer = existing_topic_list = None
         try:
             consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
