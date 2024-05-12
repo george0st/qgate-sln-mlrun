@@ -29,7 +29,7 @@ class TS102(TSBase):
         self._delete_project(f"{project_name}/*:", project_name)
 
     def after(self):
-        """Delete addition content of project (include output directory, DB content etc.)"""
+        """Delete addition content without relation to one project (include output directory, DB content etc.)"""
 
         # remove data from MySQL
         self._clean_mysql()
@@ -48,7 +48,7 @@ class TS102(TSBase):
             pass
 
     def _clean_file(self):
-        # remove files (not remove files from today)
+        # remove files from output dir (but not from today)
 
         # (this line generate file prefix for today)
         not_remove = f"qgt-mlrun-{str.replace(self.output.datetime, ':', '-')}".split(" ")[0]

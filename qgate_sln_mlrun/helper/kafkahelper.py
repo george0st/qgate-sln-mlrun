@@ -67,14 +67,17 @@ class KafkaHelper(BaseHelper):
                                   LeaderNotAvailableError, UnknownTopicOrPartitionError,
                                   NotLeaderForPartitionError, ReplicaNotAvailableError)
 
-        admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
+        admin_client = None
         try:
+            admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
             admin_client.delete_topics(topics=topic_names, timeout_ms=2000)
         except UnknownTopicOrPartitionError:
             pass
         except Exception as e:
             pass
-        admin_client.close()
+        finally:
+            if admin_client:
+                admin_client.close()
 
         # admin_client.create_topics(new_topics=topic_list, validate_only=False)
 
