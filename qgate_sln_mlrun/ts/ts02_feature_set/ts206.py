@@ -5,10 +5,12 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.sources import SQLSource
+from mlrun.datastore.sources import KafkaSource
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import json
 from qgate_sln_mlrun.helper.kafkahelper import KafkaHelper
+import os
+import glob
 
 
 class TS206(TSBase):
@@ -32,56 +34,45 @@ class TS206(TSBase):
         if not self._kafka.configured:
             return
 
-        # from kafka import KafkaProducer
-        # producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
-        # strvalue="+ěščřžýáíé=ú)ů§"
-        # producer.send("ewrewr_erjewrkjweh_ekjrklwer_erwerwe", strvalue.encode('utf-8'))
-        # producer.close()
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table only in case, that table does not exist
             #if not self._kafka.helper_exist(project_name, featureset_name):
             self._kafka.create_insert_data(project_name, featureset_name,True)
 
-        return
+            # create file with definition of vector
+            source_file = os.path.join(os.getcwd(),
+                                       self.setup.model_definition,
+                                       "01-model",
+                                       "02-feature-set",
+                                       f"*-{featureset_name}.json")
 
-        #
-        #     # create file with definition of vector
-        #     source_file = os.path.join(os.getcwd(),
-        #                                self.setup.model_definition,
-        #                                "01-model",
-        #                                "02-feature-set",
-        #                                f"*-{featureset_name}.json")
-        #
-        #     for file in glob.glob(source_file):
-        #         # iterate cross all featureset definitions
-        #         with open(file, "r") as json_file:
-        #             self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file)
+            for file in glob.glob(source_file):
+                # iterate cross all featureset definitions
+                with open(file, "r") as json_file:
+                    self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file)
 
     @TSBase.handler_testcase
     def _create_featureset_ingest(self, testcase_name, project_name, featureset_name, json_file):
         json_content = json.load(json_file)
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
-        if kind == "feature-set":
-
-            # create feature set based on the logic in TS201
-            ts= ts201.TS201(self._solution)
-            featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
-
-            keys = ""
-            for entity in featureset.spec.entities:
-                keys+=f"{entity.name},"
-
-            fstore.ingest(featureset,
-                          SQLSource(name="tst",
-                                    table_name=self._mysql.create_helper_name(project_name, featureset_name),
-                                    db_url=self.setup.mysql,
-                                    key_field=keys[:-1].replace('-','_')),
-                          # overwrite=False,
-                          return_df=False,
-                          # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                          infer_options=mlrun.data_types.data_types.InferOptions.default())
-            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-            # NOTE: option default, change types
-            # NOTE: option Null, generate error with datetime in python 3.9
-
+        return
+        # if kind == "feature-set":
+        #
+        #     # create feature set based on the logic in TS201
+        #     ts= ts201.TS201(self._solution)
+        #     featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
+        #
+        #     keys = ""
+        #     for entity in featureset.spec.entities:
+        #         keys+=f"{entity.name},"
+        #
+        #     fstore.ingest(featureset,
+        #                   KafkaSource(name="tst",
+        #                             table_name=self._kafka.create_helper_name(project_name, featureset_name),
+        #                             db_url=self.setup.mysql,
+        #                             key_field=keys[:-1].replace('-','_')),
+        #                   # overwrite=False,
+        #                   return_df=False,
+        #                   # infer_options=mlrun.data_types.data_types.InferOptions.Null)
+        #                   infer_options=mlrun.data_types.data_types.InferOptions.default())

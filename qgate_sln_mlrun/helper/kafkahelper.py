@@ -6,6 +6,12 @@ import glob
 import os
 import pandas as pd
 import json
+from kafka.admin import KafkaAdminClient, NewTopic
+from kafka import KafkaConsumer, KafkaProducer
+from kafka.errors import (UnknownError, KafkaConnectionError, FailedPayloadsError,
+                          KafkaTimeoutError, KafkaUnavailableError,
+                          LeaderNotAvailableError, UnknownTopicOrPartitionError,
+                          NotLeaderForPartitionError, ReplicaNotAvailableError)
 
 
 class KafkaHelper(BaseHelper):
@@ -30,12 +36,18 @@ class KafkaHelper(BaseHelper):
         return KafkaHelper.TOPIC_SOURCE_PREFIX
 
     def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
-        """Create topic and insert data"""
-        from kafka import KafkaProducer
+        """Create topic (composed of project name and feature name)
+         and insert data from model
+
+         :param project_name:       project name
+         :param featureset_name:    featureset name
+         :param drop_if_exist:      delete topic if exists
+         """
 
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
         topic_name = self.create_helper_name(project_name, featureset_name)
 
+        # TODO: tune delete
         if drop_if_exist:
             self._delete_topics([topic_name])
 
@@ -49,9 +61,9 @@ class KafkaHelper(BaseHelper):
         for file in glob.glob(source_file):
             # ingest data with bundl/chunk
             for data_frm in pd.read_csv(file,
-                                        sep=self.setup.csv_separator,  # ";",
+                                        sep=self.setup.csv_separator,
                                         header="infer",
-                                        decimal=self.setup.csv_decimal,  # ",",
+                                        decimal=self.setup.csv_decimal,
                                         compression="gzip",
                                         encoding="utf-8",
                                         chunksize=Setup.MAX_BUNDLE):
@@ -60,49 +72,70 @@ class KafkaHelper(BaseHelper):
                 producer.flush()
         producer.close()
 
-    def _delete_topics(self, topic_names):
-        from kafka.admin import KafkaAdminClient, NewTopic
-        from kafka.errors import (UnknownError, KafkaConnectionError, FailedPayloadsError,
-                                  KafkaTimeoutError, KafkaUnavailableError,
-                                  LeaderNotAvailableError, UnknownTopicOrPartitionError,
-                                  NotLeaderForPartitionError, ReplicaNotAvailableError)
+    def _delete_topics(self, topic_names, timeout_ms=2000):
+        """Delete requested topics
 
-        admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
+        :param topic_names:     list of topic for delete
+        :param timeout_ms:      Milliseconds to wait for topics to be deleted before the broker returns,
+                                default is 2000 ms
+        """
+        admin_client = None
         try:
-            admin_client.delete_topics(topics=topic_names, timeout_ms=2000)
+            admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
+            admin_client.delete_topics(topics=topic_names, timeout_ms=timeout_ms)
         except UnknownTopicOrPartitionError:
             pass
         except Exception as e:
+            raise
+        finally:
+            if admin_client:
+                admin_client.close()
+    def _create_topic(self, topic_name, num_partitions=1, replication_factor=1, retention_min=60):
+        """Create topic with detail setting
+
+        :param topic_name:          topic name
+        :param num_partitions:      amount of partitions, default is 1
+        :param replication_factor:  size of replication factor, default is 1
+        :param retention_min:       duration in minutes, how long the topics will be keeping, default is one hour
+        """
+        admin_client=None
+        try:
+            admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
+
+            # Detail about retention.ms
+            #   https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#retention-ms
+            topic_list = [
+                NewTopic(
+                    name = topic_name,
+                    num_partitions = num_partitions,
+                    replication_factor = replication_factor,
+                    topic_configs = {'retention.ms': str(retention_min*60*1000)}
+                )
+            ]
+            admin_client.create_topics(new_topics=topic_list)   # validate_only=False
+        finally:
+            if admin_client:
+                admin_client.close()
+
+    def helper_exist(self, project_name, featureset_name) -> bool:
+        """Check, if topic (defined based on project name and feature name) exists
+
+        :param project_name:        project name
+        :param featureset_name:     feature set name
+        :return:                    True - topic exist
+        """
+        consumer = existing_topic_list = None
+        try:
+            consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
+            existing_topic_list = consumer.topics()
+        except:
             pass
-        admin_client.close()
-
-        # admin_client.create_topics(new_topics=topic_list, validate_only=False)
-
-        # if topic not in existing_topic_list:
-        #     print('Topic : {} added '.format(topic))
-        #     topic_list.append(NewTopic(name=topic, num_partitions=3, replication_factor=3))
-        # else:
-        #     print('Topic : {topic} already exist ')
-
-
-        # print("Topic Created Successfully")
-        # topic_list = [
-        #     NewTopic(
-        #         name=topic_name,
-        #         num_partitions=1,
-        #         replication_factor=1,
-        #         topic_configs={'retention.ms': '3600000'}
-        #     )
-        #    ]
-
-    def helper_exist(self, project_name, featureset_name):
-        from kafka import KafkaConsumer
-
-        consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
-        existing_topic_list = consumer.topics()
-        consumer.close()
+        finally:
+            if consumer:
+                consumer.close()
 
         topic_name = self.create_helper_name(project_name, featureset_name)
-        if topic_name in existing_topic_list:
-            return True
+        if existing_topic_list:
+            if topic_name in existing_topic_list:
+                return True
         return False
