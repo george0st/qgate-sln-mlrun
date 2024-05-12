@@ -47,6 +47,7 @@ class KafkaHelper(BaseHelper):
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
         topic_name = self.create_helper_name(project_name, featureset_name)
 
+        # TODO: tune delete
         if drop_if_exist:
             self._delete_topics([topic_name])
 
