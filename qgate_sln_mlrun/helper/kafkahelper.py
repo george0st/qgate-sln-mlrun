@@ -39,7 +39,9 @@ class KafkaHelper(BaseHelper):
         """Create topic (composed of project name and feature name)
          and insert data from model
 
-         
+         :param project_name:       project name
+         :param featureset_name:    featureset name
+         :param drop_if_exist:      delete topic if exists
          """
 
         producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
