@@ -78,14 +78,30 @@ class KafkaHelper(BaseHelper):
         finally:
             if admin_client:
                 admin_client.close()
+    def _create_topic(self, topic_name, num_partitions=1, replication_factor=1, retention_min=60):
+        from kafka.admin import KafkaAdminClient, NewTopic
+        from kafka.admin import KafkaAdminClient, NewTopic
 
-        # admin_client.create_topics(new_topics=topic_list, validate_only=False)
+        admin_client=None
+        try:
+            admin_client = KafkaAdminClient(bootstrap_servers=self.setup.kafka)
 
-        # if topic not in existing_topic_list:
-        #     print('Topic : {} added '.format(topic))
-        #     topic_list.append(NewTopic(name=topic, num_partitions=3, replication_factor=3))
-        # else:
-        #     print('Topic : {topic} already exist ')
+            # https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#retention-ms
+            topic_list = [
+                NewTopic(
+                    name=topic_name,
+                    num_partitions=num_partitions,
+                    replication_factor=replication_factor,
+                    topic_configs={'retention.ms': str(retention_min*60*1000)}
+                )
+            ]
+            admin_client.create_topics(new_topics=topic_list, validate_only=False)
+        except Exception as e:
+            pass
+        finally:
+            if admin_client:
+                admin_client.close()
+
 
 
         # print("Topic Created Successfully")
