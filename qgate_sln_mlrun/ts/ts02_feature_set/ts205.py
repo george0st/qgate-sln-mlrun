@@ -68,7 +68,7 @@ class TS205(TSBase):
 
             fstore.ingest(featureset,
                           SQLSource(name="tst",
-                                    table_name=self._mysql.create_helper_name(project_name, featureset_name),
+                                    table_name=self._mysql.create_helper(project_name, featureset_name),
                                     db_url=self.setup.mysql,
                                     key_field=keys[:-1].replace('-','_')),
                           # overwrite=False,

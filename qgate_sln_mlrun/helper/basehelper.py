@@ -6,7 +6,7 @@ class BaseHelper:
     def prefix(self):
         raise NotImplemented()
 
-    def create_helper_name(self, project_name, featureset_name):
+    def create_helper(self, project_name, featureset_name) -> str:
         """Convert project name and featureset name to the name of helper (e.g. DB table name, kafka topic name, etc.).
 
         :param project_name:     project name
@@ -15,10 +15,13 @@ class BaseHelper:
         """
         return f"{self.prefix}{project_name}_{featureset_name}".replace('-', '_')
 
-    def create_insert_data(self, project_name, featureset_name, drop_if_exist = False):
+    def create_insert_data(self, helper, featureset_name, drop_if_exist = False):
         raise NotImplemented()
 
-    def helper_exist(self, helper, project_name = None, featureset_name = None) -> bool:
+    # def helper_exist(self, helper, project_name = None, featureset_name = None) -> bool:
+    #     raise NotImplemented()
+
+    def helper_exist(self, helper) -> bool:
         raise NotImplemented()
 
     def remove_helper(self, start_with):
