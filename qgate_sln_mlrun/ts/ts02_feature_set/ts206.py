@@ -57,23 +57,17 @@ class TS206(TSBase):
         json_content = json.load(json_file)
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
-        return
-        # if kind == "feature-set":
-        #
-        #     # create feature set based on the logic in TS201
-        #     ts= ts201.TS201(self._solution)
-        #     featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
-        #
-        #     keys = ""
-        #     for entity in featureset.spec.entities:
-        #         keys+=f"{entity.name},"
-        #
-        #     fstore.ingest(featureset,
-        #                   KafkaSource(name="tst",
-        #                             table_name=self._kafka.create_helper_name(project_name, featureset_name),
-        #                             db_url=self.setup.mysql,
-        #                             key_field=keys[:-1].replace('-','_')),
-        #                   # overwrite=False,
-        #                   return_df=False,
-        #                   # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-        #                   infer_options=mlrun.data_types.data_types.InferOptions.default())
+        if kind == "feature-set":
+
+            # create feature set based on the logic in TS201
+            ts= ts201.TS201(self._solution)
+            featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
+
+
+            # fstore.ingest(featureset,
+            #               KafkaSource(brokers=self.setup.kafka,
+            #                         topics=[self._kafka.create_helper(project_name, featureset_name)]),
+            #               # overwrite=False,
+            #               return_df=False,
+            #               # infer_options=mlrun.data_types.data_types.InferOptions.Null)
+            #               infer_options=mlrun.data_types.data_types.InferOptions.default())
