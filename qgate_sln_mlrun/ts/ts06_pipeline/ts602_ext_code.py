@@ -25,12 +25,13 @@ class TS602Pipeline:
         data['calc']=calc
         return event
 
-    def second(self, event):
-        if isinstance(event, mlrun.serving.server.MockEvent):
-            data=event.body
-        else:
-            data=event
-        calc = data["a"] + data["b"]
+def second(event):
+    if isinstance(event, mlrun.serving.server.MockEvent):
+        data=event.body
+    else:
+        data=event
+    calc = data["a"] + data["b"]
 #        data = {"calc": calc}
-        data.clear()
-        data['calc']=calc
+    data.clear()
+    data['calc']=calc
+    return event
