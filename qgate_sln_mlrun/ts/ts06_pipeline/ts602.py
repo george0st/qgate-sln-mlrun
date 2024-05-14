@@ -24,13 +24,13 @@ class TS602(TSBase):
     def long_desc(self):
         return "Complex pipeline(s)"
 
-    def prj_exec(self, project_name):
+    def exec(self):
         """Simple pipeline during ingest"""
-        return
+        self._complex_pipeline(f"*/complex (event)")
 
 
     @TSBase.handler_testcase
-    def _complex_pipeline(self, testcase_name, project_name, full_event):
+    def _complex_pipeline(self, testcase_name):
 
         # definition complex graph
         #
