@@ -10,10 +10,6 @@ class TS602Pipeline:
 
     def do(self, event):
 
-        if self.name.lower()=="multipl":
-            self._multipli(event)
-        elif self.name.lower()=="plus":
-            self._plus(event)
         return event
 
     def first(self, event):
@@ -27,6 +23,7 @@ class TS602Pipeline:
 #        data = {"calc": calc}
         data.clear()
         data['calc']=calc
+        return event
 
     def second(self, event):
         if isinstance(event, mlrun.serving.server.MockEvent):
