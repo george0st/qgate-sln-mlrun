@@ -16,7 +16,7 @@ class TS602Pipeline:
             self._plus(event)
         return event
 
-    def _multipli(self, event):
+    def first(self, event):
 
         if isinstance(event, mlrun.serving.server.MockEvent):
             data=event.body
@@ -28,7 +28,7 @@ class TS602Pipeline:
         data.clear()
         data['calc']=calc
 
-    def _plus(self, event):
+    def second(self, event):
         if isinstance(event, mlrun.serving.server.MockEvent):
             data=event.body
         else:
