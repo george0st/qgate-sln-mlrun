@@ -116,12 +116,10 @@ class MySQLHelper(BaseHelper):
                     cursor.execute(f"INSERT INTO {helper} ({columns}) VALUES(\"{values}\");")
                 connection.commit()
 
-    def helper_exist(self, helper): #, project_name = None, featureset_name = None):
+    def helper_exist(self, helper):
         """Check, if helper exists
 
         :param helper:              topic name
-        :param project_name:        project name (will be used in case of helper = None)
-        :param featureset_name:     feature set name (will be used in case of helper = None)
         :return:                    True - table exist, False - table does not exist
         """
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)

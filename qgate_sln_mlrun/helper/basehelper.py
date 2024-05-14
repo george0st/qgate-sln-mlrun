@@ -18,9 +18,6 @@ class BaseHelper:
     def create_insert_data(self, helper, featureset_name, drop_if_exist = False):
         raise NotImplemented()
 
-    # def helper_exist(self, helper, project_name = None, featureset_name = None) -> bool:
-    #     raise NotImplemented()
-
     def helper_exist(self, helper) -> bool:
         raise NotImplemented()
 
