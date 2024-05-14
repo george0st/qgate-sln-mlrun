@@ -35,6 +35,21 @@ class TS602(TSBase):
         # definition complex graph
         #
 
+        func = mlrun.code_to_function(f"ts602_fn",
+                                      kind="serving",
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
+        graph_echo = func.set_topology("flow")
+        graph_echo.to(class_name="TS602Pipeline", full_event=True, name="plus", default=True).respond()
+
+        # tests
+        echo_server = func.to_mock_server(current_function="*")
+        result = echo_server.test("", {"a": 5, "b": 7})
+        echo_server.wait_for_completion()
+
+        # value check
+        if result['calc']!=12:
+            raise ValueError("Invalid calculation, expected value 12")
+
         # transaction ingest from parquet to the featureset
 
 
