@@ -9,7 +9,8 @@ class TS602Pipeline:
         self.kw = kw
 
     def do(self, event):
-
+        if self.name=="first":
+            self.first(event)
         return event
 
     def first(self, event):
@@ -21,7 +22,6 @@ class TS602Pipeline:
         calc = data['a'] * data['b']
 
 #        data = {"calc": calc}
-        data.clear()
         data['calc']=calc
         return event
 
@@ -34,4 +34,8 @@ def second(event):
 #        data = {"calc": calc}
     data.clear()
     data['calc']=calc
+    return event
+
+def third(event):
+
     return event
