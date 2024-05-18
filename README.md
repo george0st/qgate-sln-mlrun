@@ -43,7 +43,8 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS502: Get data from on-line feature vector(s)
  - **06 - Pipeline**
    - ✅ TS601: Simple pipeline(s)
-   - ✔  TS602: Complex pipeline(s)
+   - ✅ TS602: Complex pipeline(s)
+   - ✔ TS602: Complex mass pipeline(s)
  - **07 - Build model**
    - ✅ TS701: Build CART model
    - ❌ TS702: Build XGBoost model
