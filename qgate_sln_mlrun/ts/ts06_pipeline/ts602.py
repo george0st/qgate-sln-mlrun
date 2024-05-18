@@ -47,6 +47,10 @@ class TS602(TSBase):
         result = echo_server.test("", {"a": 5, "b": 7})
         echo_server.wait_for_completion()
 
+        # value check
+        if result['calc']!=78177:
+            raise ValueError("Invalid calculation, expected value 78177")
+
     @TSBase.handler_testcase
     def _complex(self, testcase_name):
 
@@ -63,5 +67,9 @@ class TS602(TSBase):
         echo_server = func.to_mock_server(current_function="*")
         result = echo_server.test("", {"a": 5, "b": 7})
         echo_server.wait_for_completion()
+
+        # value check
+        if result['calc']!=78177:
+            raise ValueError("Invalid calculation, expected value 78177")
 
 

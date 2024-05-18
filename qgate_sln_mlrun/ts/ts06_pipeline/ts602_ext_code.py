@@ -51,12 +51,12 @@ class TS602Pipeline:
             data=event.body
         else:
             data=event
-        calc = data['calc'] + (data['a'] ^ data['b'])
+        calc = data['calc'] + pow(data['a'], data['b'])
         data['calc']=calc
         return event
 
 
-def step1(self, event):
+def step1(event):
     if isinstance(event, mlrun.serving.server.MockEvent):
         data = event.body
     else:
@@ -65,7 +65,7 @@ def step1(self, event):
     data['calc'] = calc
     return event
 
-def step2(self, event):
+def step2(event):
     if isinstance(event, mlrun.serving.server.MockEvent):
         data = event.body
     else:
@@ -74,7 +74,7 @@ def step2(self, event):
     data['calc'] = calc
     return event
 
-def step3(self, event):
+def step3(event):
     if isinstance(event, mlrun.serving.server.MockEvent):
         data = event.body
     else:
@@ -83,11 +83,11 @@ def step3(self, event):
     data['calc'] = calc
     return event
 
-def step4(self, event):
+def step4(event):
     if isinstance(event, mlrun.serving.server.MockEvent):
         data = event.body
     else:
         data = event
-    calc = data['calc'] + (data['a'] ^ data['b'])
+    calc = data['calc'] + pow(data['a'], data['b'])
     data['calc'] = calc
     return event
