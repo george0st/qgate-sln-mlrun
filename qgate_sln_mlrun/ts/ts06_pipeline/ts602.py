@@ -26,68 +26,50 @@ class TS602(TSBase):
 
     def exec(self):
         """Simple pipeline during ingest"""
-        self._complex_pipeline(f"*/complex (event)")
+        self._class_complex(f"*/class_complex (event)")
+        self._complex(f"*/complex (event)")
 
 
     @TSBase.handler_testcase
-    def _complex_pipeline(self, testcase_name):
-
-        # definition complex graph
-        #
-        # fn = mlrun.new_function("serving", kind="serving", image="mlrun/mlrun")
-        # graph = serving.set_topology("flow")
-        # graph.to(name="double", handler="mylib.double") \
-        #     .to(name="add3", handler="mylib.add3") \
-        #     .to(name="echo", handler="mylib.echo").respond()
-        #
-        # project.set_function(name="serving", func=fn, with_repo=True)
+    def _class_complex(self, testcase_name):
 
         func = mlrun.code_to_function(f"ts602_fn",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
         graph_echo = func.set_topology("flow")
-        graph_echo.to(class_name="TS602Pipeline", full_event=True, name="first") \
-                .to(handler="second", full_event=True, name="second") \
-                .to(handler="third", full_event=True, name="third").respond()
+        (graph_echo.to(class_name="TS602Pipeline", full_event=True, name="step1") \
+                .to(class_name="TS602Pipeline", full_event=True, name="step2") \
+                .to(class_name="TS602Pipeline", full_event=True, name="step3")
+                .to(class_name="TS602Pipeline", full_event=True, name="step4").respond())
 
         # tests
         echo_server = func.to_mock_server(current_function="*")
         result = echo_server.test("", {"a": 5, "b": 7})
         echo_server.wait_for_completion()
 
-        # # value check
-        # if result['calc']!=12:
-        #     raise ValueError("Invalid calculation, expected value 12")
+        # value check
+        if result['calc']!=78177:
+            raise ValueError("Invalid calculation, expected value 78177")
 
-        # transaction ingest from parquet to the featureset
+    @TSBase.handler_testcase
+    def _complex(self, testcase_name):
 
+        func = mlrun.code_to_function(f"ts602_fn",
+                                      kind="serving",
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
+        graph_echo = func.set_topology("flow")
+        graph_echo.to(handler="step1", full_event=True, name="step1") \
+                .to(handler="step2", full_event=True, name="step2") \
+                .to(handler="step3", full_event=True, name="step3") \
+                .to(handler="step4", full_event=True, name="step4").respond()
 
-        ## Define and add value mapping
-        # transaction_set = fs.FeatureSet("transactions",
-        #                                  entities=[fs.Entity("source")],
-        #                                  timestamp_key='timestamp',
-        #                                  description="transactions feature set")
-        # main_categories = ["es_transportation", "es_health", "es_otherservices",
-        #        "es_food", "es_hotelservices", "es_barsandrestaurants",
-        #        "es_tech", "es_sportsandtoys", "es_wellnessandbeauty",
-        #        "es_hyper", "es_fashion", "es_home", "es_contents",
-        #        "es_travel", "es_leisure"]
-        #
-        # # One Hot Encode the newly defined mappings
-        # one_hot_encoder_mapping = {'category': main_categories,
-        #                            'gender': list(transactions_data.gender.unique())}
-        #
-        # # Define the graph steps
-        # transaction_set.graph\
-        #     .to(DateExtractor(parts = ['hour', 'day_of_week'], timestamp_col = 'timestamp'))\
-        #     .to(MapValues(mapping={'age': {'U': '0'}}, with_original_features=True))\
-        #     .to(OneHotEncoder(mapping=one_hot_encoder_mapping)).respond()
-        #
-        #
-        # # Add aggregations for 2, 12, and 24 hour time windows
-        # transaction_set.add_aggregation(name='amount',
-        #                                 column='amount',
-        #                                 operations=['avg','sum', 'count','max'],
-        #                                 windows=['2h', '12h', '24h'],
-        #                                 period='1h')
+        # tests
+        echo_server = func.to_mock_server(current_function="*")
+        result = echo_server.test("", {"a": 5, "b": 7})
+        echo_server.wait_for_completion()
+
+        # value check
+        if result['calc']!=78177:
+            raise ValueError("Invalid calculation, expected value 78177")
+
 
