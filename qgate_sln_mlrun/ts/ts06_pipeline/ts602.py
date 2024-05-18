@@ -26,7 +26,8 @@ class TS602(TSBase):
 
     def exec(self):
         """Simple pipeline during ingest"""
-        self._complex_pipeline(f"*/complex (event)")
+        self._class_complex(f"*/class_complex (event)")
+        self._complex(f"*/complex (event)")
 
 
     @TSBase.handler_testcase
@@ -53,10 +54,10 @@ class TS602(TSBase):
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
         graph_echo = func.set_topology("flow")
-        graph_echo.to(handler="second", full_event=True, name="step1") \
-                .to(handler="second", full_event=True, name="step2") \
-                .to(handler="third", full_event=True, name="step3") \
-                .to(handler="third", full_event=True, name="step4").respond()
+        graph_echo.to(handler="step1", full_event=True, name="step1") \
+                .to(handler="step2", full_event=True, name="step2") \
+                .to(handler="step3", full_event=True, name="step3") \
+                .to(handler="step4", full_event=True, name="step4").respond()
 
         # tests
         echo_server = func.to_mock_server(current_function="*")
