@@ -5,7 +5,7 @@
 ![GitHub release](https://img.shields.io/github/v/release/george0st/qgate-sln-mlrun)
 
 # QGate-Sln-MLRun
-The Quality Gate for solution MLRun (and Iguazio). The main aims of the project are:
+The Quality Gate for solution [MLRun](https://github.com/mlrun/mlrun) (and [Iguazio](https://www.iguazio.com/)). The main aims of the project are:
 - independent quality test (function, integration, acceptance, ... tests)
 - deeper quality checks before full rollout/use in company environments
 - identification of possible compatibility issues (if any)
@@ -44,7 +44,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **06 - Pipeline**
    - ✅ TS601: Simple pipeline(s)
    - ✅ TS602: Complex pipeline(s)
-   - ✔  TS603: Complex pipeline(s), mass operation
+   - ✅ TS603: Complex pipeline(s), mass operation
    - ❌ TS604: Complex pipeline(s) for ingest
  - **07 - Build model**
    - ✅ TS701: Build CART model

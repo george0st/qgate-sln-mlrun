@@ -37,10 +37,10 @@ class TS602(TSBase):
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
         graph_echo = func.set_topology("flow")
-        (graph_echo.to(class_name="TS602Pipeline", full_event=True, name="step1") \
+        graph_echo.to(class_name="TS602Pipeline", full_event=True, name="step1") \
                 .to(class_name="TS602Pipeline", full_event=True, name="step2") \
-                .to(class_name="TS602Pipeline", full_event=True, name="step3")
-                .to(class_name="TS602Pipeline", full_event=True, name="step4").respond())
+                .to(class_name="TS602Pipeline", full_event=True, name="step3") \
+                .to(class_name="TS602Pipeline", full_event=True, name="step4").respond()
 
         # tests
         echo_server = func.to_mock_server(current_function="*")
