@@ -38,6 +38,8 @@ class TS603(TSBase):
                 b=b/10
                 self._one_call(a,b,echo_server)
 
+        echo_server.wait_for_completion()
+
     @TSBase.handler_testcase
     def _complex(self, testcase_name):
 
@@ -47,6 +49,9 @@ class TS603(TSBase):
             for b in range(-5,-1):
                 b=b/10
                 self._one_call(a,b,echo_server)
+
+        echo_server.wait_for_completion()
+
 
     def _one_call_init(self, call_class):
         func = mlrun.code_to_function(f"ts603_fn",
@@ -70,9 +75,9 @@ class TS603(TSBase):
 
         # tests
         result = echo_server.test("", {"a": a, "b": b})
-        echo_server.wait_for_completion()
 
         expected_value= (((a * b) + a + b) + min(a, b)) + pow(a, b)
+
         # value check
         if result['calc']!=expected_value:
             raise ValueError(f"Invalid calculation, expected value {expected_value}")
