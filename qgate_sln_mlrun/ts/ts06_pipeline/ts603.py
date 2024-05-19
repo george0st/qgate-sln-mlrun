@@ -53,7 +53,8 @@ class TS603(TSBase):
             graph_echo.to(class_name="TS603Pipeline", full_event=True, name="step1") \
                     .to(class_name="TS603Pipeline", full_event=True, name="step2") \
                     .to(class_name="TS603Pipeline", full_event=True, name="step3") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step4").respond()
+                    .to(class_name="TS603Pipeline", full_event=True, name="step4") \
+                    .to(class_name="TS603Pipeline", full_event=True, name="step5").respond()
         else:
             graph_echo.to(handler="step1", full_event=True, name="step1") \
                 .to(handler="step2", full_event=True, name="step2") \
