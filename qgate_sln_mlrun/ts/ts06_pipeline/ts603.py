@@ -31,23 +31,24 @@ class TS603(TSBase):
     @TSBase.handler_testcase
     def _class_complex(self, testcase_name):
 
+        func=self._one_call_init(True)
         for a in range(1,20):
             a=a/10
             for b in range(1,5):
                 b=b/10
-                self._one_call(a,b,True)
+                self._one_call(a,b,func)
 
     @TSBase.handler_testcase
     def _complex(self, testcase_name):
 
+        func=self._one_call_init(False)
         for a in range(-10,10):
             a=a/10
             for b in range(-5,-1):
                 b=b/10
-                self._one_call(a,b,False)
+                self._one_call(a,b,func)
 
-
-    def _one_call(self, a, b, call_class):
+    def _one_call_init(self, call_class):
         func = mlrun.code_to_function(f"ts603_fn",
                                       kind="serving",
                                       filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts603_ext_code.py")
@@ -62,6 +63,10 @@ class TS603(TSBase):
                 .to(handler="step2", full_event=True, name="step2") \
                 .to(handler="step3", full_event=True, name="step3") \
                 .to(handler="step4", full_event=True, name="step4").respond()
+        return func
+
+    def _one_call(self, a, b, func):
+
         # tests
         echo_server = func.to_mock_server(current_function="*")
         result = echo_server.test("", {"a": a, "b": b})
