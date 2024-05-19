@@ -1,5 +1,5 @@
 """
-  TS603: Complex pipeline(s)
+  TS603: Complex pipeline(s), mass operation
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -18,11 +18,11 @@ class TS603(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Complex pipeline(s)"
+        return "Complex pipeline(s), mass operation"
 
     @property
     def long_desc(self):
-        return "Complex pipeline(s)"
+        return "Complex pipeline(s), mass operation"
 
     def exec(self):
         """Simple pipeline during ingest"""
