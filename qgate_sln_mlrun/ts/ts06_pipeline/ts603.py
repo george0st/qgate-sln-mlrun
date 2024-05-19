@@ -48,15 +48,15 @@ class TS603(TSBase):
 
 
     def _one_call(self, a, b, call_class):
-        func = mlrun.code_to_function(f"ts602_fn",
+        func = mlrun.code_to_function(f"ts603_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts603_ext_code.py")
         graph_echo = func.set_topology("flow")
         if call_class:
-            graph_echo.to(class_name="TS602Pipeline", full_event=True, name="step1") \
-                    .to(class_name="TS602Pipeline", full_event=True, name="step2") \
-                    .to(class_name="TS602Pipeline", full_event=True, name="step3") \
-                    .to(class_name="TS602Pipeline", full_event=True, name="step4").respond()
+            graph_echo.to(class_name="TS603Pipeline", full_event=True, name="step1") \
+                    .to(class_name="TS603Pipeline", full_event=True, name="step2") \
+                    .to(class_name="TS603Pipeline", full_event=True, name="step3") \
+                    .to(class_name="TS603Pipeline", full_event=True, name="step4").respond()
         else:
             graph_echo.to(handler="step1", full_event=True, name="step1") \
                 .to(handler="step2", full_event=True, name="step2") \
