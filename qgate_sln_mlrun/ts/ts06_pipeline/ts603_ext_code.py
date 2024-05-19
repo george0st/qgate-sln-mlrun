@@ -17,6 +17,8 @@ class TS603Pipeline:
             self.step3(event)
         elif self.name=="step4":
             self.step4(event)
+        elif self.name=="step5":
+            self.step5(event)
         return event
 
     def step1(self, event):
@@ -55,6 +57,14 @@ class TS603Pipeline:
         data['calc']=calc
         return event
 
+    def step5(self, event):
+        if isinstance(event, mlrun.serving.server.MockEvent):
+            data=event.body
+        else:
+            data=event
+        calc = data['calc'] - (data['b'] * data['b'])
+        data['calc']=calc
+        return event
 
 def step1(event):
     if isinstance(event, mlrun.serving.server.MockEvent):
@@ -91,3 +101,14 @@ def step4(event):
     calc = data['calc'] + pow(data['a'], data['b'])
     data['calc'] = calc
     return event
+
+def step5(event):
+    if isinstance(event, mlrun.serving.server.MockEvent):
+        data=event.body
+    else:
+        data=event
+    calc = data['calc'] - (data['b'] * data['b'])
+    data['calc']=calc
+    return event
+
+
