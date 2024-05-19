@@ -44,21 +44,6 @@ class TS603(TSBase):
             echo_server.wait_for_completion()
         self.testcase_detail(f"{count} calls")
 
-    # @TSBase.handler_testcase
-    # def _complex(self, testcase_name):
-    #
-    #     echo_server=self._one_call_init(False)
-    #     try:
-    #         for a in range(-200, -1):
-    #             a=a/100
-    #             for b in range(-50, -1):
-    #                 b=b/10
-    #                 self._one_call(a,b,echo_server)
-    #     finally:
-    #         echo_server.wait_for_completion()
-    #     self.testcase_detail(f"{count} calls")
-
-
     def _one_call_init(self, call_class):
         func = mlrun.code_to_function(f"ts603_fn",
                                       kind="serving",
