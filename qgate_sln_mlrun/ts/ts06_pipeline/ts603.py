@@ -25,34 +25,38 @@ class TS603(TSBase):
         return "Complex pipeline(s), mass operation"
 
     def exec(self):
-        self._class_complex(f"*/class_complex (event)")
-        self._complex(f"*/complex (event)")
+        self._complex(f"*/class_complex_mass (event)", True)
+        self._complex(f"*/complex_mass (event)", False)
 
     @TSBase.handler_testcase
-    def _class_complex(self, testcase_name):
+    def _complex(self, testcase_name, class_call):
 
-        echo_server=self._one_call_init(True)
+        echo_server=self._one_call_init(class_call)
+        count=0
         try:
             for a in range(1, 200):
-                a=a/100
+                a=a/100 if class_call else a/-100
                 for b in range(1, 50):
-                    b=b/10
-                    self._one_call(a,b,echo_server)
+                    b=b/10 if class_call else b/-10
+                    count+=1
+                    self._one_call(a, b, echo_server)
         finally:
             echo_server.wait_for_completion()
+        self.testcase_detail(f"{count} calls")
 
-    @TSBase.handler_testcase
-    def _complex(self, testcase_name):
-
-        echo_server=self._one_call_init(False)
-        try:
-            for a in range(-200, -1):
-                a=a/100
-                for b in range(-50, -1):
-                    b=b/10
-                    self._one_call(a,b,echo_server)
-        finally:
-            echo_server.wait_for_completion()
+    # @TSBase.handler_testcase
+    # def _complex(self, testcase_name):
+    #
+    #     echo_server=self._one_call_init(False)
+    #     try:
+    #         for a in range(-200, -1):
+    #             a=a/100
+    #             for b in range(-50, -1):
+    #                 b=b/10
+    #                 self._one_call(a,b,echo_server)
+    #     finally:
+    #         echo_server.wait_for_completion()
+    #     self.testcase_detail(f"{count} calls")
 
 
     def _one_call_init(self, call_class):
