@@ -31,22 +31,22 @@ class TS603(TSBase):
     @TSBase.handler_testcase
     def _class_complex(self, testcase_name):
 
-        func=self._one_call_init(True)
+        echo_server=self._one_call_init(True)
         for a in range(1,20):
             a=a/10
             for b in range(1,5):
                 b=b/10
-                self._one_call(a,b,func)
+                self._one_call(a,b,echo_server)
 
     @TSBase.handler_testcase
     def _complex(self, testcase_name):
 
-        func=self._one_call_init(False)
+        echo_server=self._one_call_init(False)
         for a in range(-10,10):
             a=a/10
             for b in range(-5,-1):
                 b=b/10
-                self._one_call(a,b,func)
+                self._one_call(a,b,echo_server)
 
     def _one_call_init(self, call_class):
         func = mlrun.code_to_function(f"ts603_fn",
@@ -63,12 +63,12 @@ class TS603(TSBase):
                 .to(handler="step2", full_event=True, name="step2") \
                 .to(handler="step3", full_event=True, name="step3") \
                 .to(handler="step4", full_event=True, name="step4").respond()
-        return func
+        echo_server = func.to_mock_server(current_function="*")
+        return echo_server
 
-    def _one_call(self, a, b, func):
+    def _one_call(self, a, b, echo_server):
 
         # tests
-        echo_server = func.to_mock_server(current_function="*")
         result = echo_server.test("", {"a": a, "b": b})
         echo_server.wait_for_completion()
 
