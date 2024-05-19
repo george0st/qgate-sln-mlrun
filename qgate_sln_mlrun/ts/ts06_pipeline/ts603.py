@@ -35,9 +35,11 @@ class TS603(TSBase):
         count=0
         try:
             for a in range(1, 201):
+                #a=a/100
                 a=a/100 if class_call else a/-100
                 for b in range(1, 51):
                     b=b/10 if class_call else b/-10
+                    #b=b/10
                     count+=1
                     self._one_call(a, b, echo_server)
         finally:
@@ -60,7 +62,7 @@ class TS603(TSBase):
                 .to(handler="step2", full_event=True, name="step2") \
                 .to(handler="step3", full_event=True, name="step3") \
                 .to(handler="step4", full_event=True, name="step4") \
-                .to(handler="step4", full_event=True, name="step5").respond()
+                .to(handler="step5", full_event=True, name="step5").respond()
         echo_server = func.to_mock_server(current_function="*")
         return echo_server
 
