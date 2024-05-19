@@ -51,6 +51,31 @@ class TS603(TSBase):
         if result['calc']!=78177:
             raise ValueError("Invalid calculation, expected value 78177")
 
+    def _one_call(self, a, b, call_class):
+        func = mlrun.code_to_function(f"ts602_fn",
+                                      kind="serving",
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
+        graph_echo = func.set_topology("flow")
+        if call_class:
+            graph_echo.to(class_name="TS602Pipeline", full_event=True, name="step1") \
+                    .to(class_name="TS602Pipeline", full_event=True, name="step2") \
+                    .to(class_name="TS602Pipeline", full_event=True, name="step3") \
+                    .to(class_name="TS602Pipeline", full_event=True, name="step4").respond()
+        else:
+            graph_echo.to(handler="step1", full_event=True, name="step1") \
+                .to(handler="step2", full_event=True, name="step2") \
+                .to(handler="step3", full_event=True, name="step3") \
+                .to(handler="step4", full_event=True, name="step4").respond()
+        # tests
+        echo_server = func.to_mock_server(current_function="*")
+        result = echo_server.test("", {"a": 5, "b": 7})
+        echo_server.wait_for_completion()
+
+        # value check
+        if result['calc']!=78177:
+            raise ValueError("Invalid calculation, expected value 78177")
+
+
     @TSBase.handler_testcase
     def _complex(self, testcase_name):
 
