@@ -33,8 +33,10 @@ class TS603(TSBase):
 
         echo_server=self._one_call_init(True)
         try:
-            for a in range(1, 20, 0.1):
-                for b in range(1, 5, 0.1):
+            for a in range(1, 200):
+                a=a/100
+                for b in range(1, 50):
+                    b=b/10
                     self._one_call(a,b,echo_server)
         finally:
             echo_server.wait_for_completion()
@@ -44,9 +46,9 @@ class TS603(TSBase):
 
         echo_server=self._one_call_init(False)
         try:
-            for a in range(-20, -1, 0.1):
-                a=a/10
-                for b in range(-5, -1, 0.1):
+            for a in range(-200, -1):
+                a=a/100
+                for b in range(-50, -1):
                     b=b/10
                     self._one_call(a,b,echo_server)
         finally:
