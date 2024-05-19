@@ -32,25 +32,27 @@ class TS603(TSBase):
     def _class_complex(self, testcase_name):
 
         echo_server=self._one_call_init(True)
-        for a in range(1,20):
-            a=a/10
-            for b in range(1,5):
-                b=b/10
-                self._one_call(a,b,echo_server)
-
-        echo_server.wait_for_completion()
+        try:
+            for a in range(1,20):
+                a=a/10
+                for b in range(1,5):
+                    b=b/10
+                    self._one_call(a,b,echo_server)
+        finally:
+            echo_server.wait_for_completion()
 
     @TSBase.handler_testcase
     def _complex(self, testcase_name):
 
         echo_server=self._one_call_init(False)
-        for a in range(-10,10):
-            a=a/10
-            for b in range(-5,-1):
-                b=b/10
-                self._one_call(a,b,echo_server)
-
-        echo_server.wait_for_completion()
+        try:
+            for a in range(-20,-1):
+                a=a/10
+                for b in range(-5,-1):
+                    b=b/10
+                    self._one_call(a,b,echo_server)
+        finally:
+            echo_server.wait_for_completion()
 
 
     def _one_call_init(self, call_class):
