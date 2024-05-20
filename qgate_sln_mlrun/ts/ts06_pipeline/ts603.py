@@ -55,14 +55,16 @@ class TS603(TSBase):
                     .to(class_name="TS603Pipeline", full_event=True, name="step3") \
                     .to(class_name="TS603Pipeline", full_event=True, name="step4") \
                     .to(class_name="TS603Pipeline", full_event=True, name="step5") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step6").respond()
+                    .to(class_name="TS603Pipeline", full_event=True, name="step6") \
+                    .to(class_name="TS603Pipeline", full_event=True, name="step7").respond()
         else:
             graph_echo.to(handler="step1", full_event=True, name="step1") \
                 .to(handler="step2", full_event=True, name="step2") \
                 .to(handler="step3", full_event=True, name="step3") \
                 .to(handler="step4", full_event=True, name="step4") \
                 .to(handler="step5", full_event=True, name="step5") \
-                .to(handler="step6", full_event=True, name="step6").respond()
+                .to(handler="step6", full_event=True, name="step6") \
+                .to(handler="step7", full_event=True, name="step7").respond()
         echo_server = func.to_mock_server(current_function="*")
         return echo_server
 
@@ -71,7 +73,7 @@ class TS603(TSBase):
         # tests
         result = echo_server.test("", {"a": a, "b": b})
 
-        expected_value = (((((a * b) + a + b) + min(a, b)) + pow(a, b)) - (b * b)) * 0.95
+        expected_value = ((((((a * b) + a + b) + min(a, b)) + pow(a, b)) - (b * b)) * 0.95) * 2
 
         # value check
         if result['calc']!=expected_value:
