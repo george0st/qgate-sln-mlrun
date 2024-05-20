@@ -21,6 +21,8 @@ class TS603Pipeline:
             self.step5(event)
         elif self.name=="step6":
             self.step6(event)
+        elif self.name=="step7":
+            self.step7(event)
         return event
 
     def step1(self, event):
@@ -76,7 +78,7 @@ class TS603Pipeline:
             data=event.body
         else:
             data=event
-        data['calc'] = data['calc'] * data['calc']
+        data['calc'] = data['calc'] * 2
         return event
 
 def step1(event):
@@ -132,5 +134,5 @@ def step7(event):
         data=event.body
     else:
         data=event
-    data['calc'] = data['calc'] * data['calc']
+    data['calc'] = data['calc'] * 2
     return event

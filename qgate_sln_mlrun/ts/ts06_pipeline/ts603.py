@@ -73,8 +73,7 @@ class TS603(TSBase):
         # tests
         result = echo_server.test("", {"a": a, "b": b})
 
-        expected_value = (((((a * b) + a + b) + min(a, b)) + pow(a, b)) - (b * b)) * 0.95
-        expected_value = expected_value * expected_value
+        expected_value = ((((((a * b) + a + b) + min(a, b)) + pow(a, b)) - (b * b)) * 0.95) * 2
 
         # value check
         if result['calc']!=expected_value:
