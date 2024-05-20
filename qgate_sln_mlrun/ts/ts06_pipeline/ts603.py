@@ -54,13 +54,15 @@ class TS603(TSBase):
                     .to(class_name="TS603Pipeline", full_event=True, name="step2") \
                     .to(class_name="TS603Pipeline", full_event=True, name="step3") \
                     .to(class_name="TS603Pipeline", full_event=True, name="step4") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step5").respond()
+                    .to(class_name="TS603Pipeline", full_event=True, name="step5") \
+                    .to(class_name="TS603Pipeline", full_event=True, name="step6").respond()
         else:
             graph_echo.to(handler="step1", full_event=True, name="step1") \
                 .to(handler="step2", full_event=True, name="step2") \
                 .to(handler="step3", full_event=True, name="step3") \
                 .to(handler="step4", full_event=True, name="step4") \
-                .to(handler="step5", full_event=True, name="step5").respond()
+                .to(handler="step5", full_event=True, name="step5") \
+                .to(handler="step6", full_event=True, name="step6").respond()
         echo_server = func.to_mock_server(current_function="*")
         return echo_server
 
