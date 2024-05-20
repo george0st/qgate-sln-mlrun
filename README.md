@@ -45,7 +45,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS601: Simple pipeline(s)
    - ✅ TS602: Complex pipeline(s)
    - ✅ TS603: Complex pipeline(s), mass operation
-   - ❌ TS604: Complex pipeline(s) for ingest
+   - ✔  TS604: Complex pipeline(s) for ingest
  - **07 - Build model**
    - ✅ TS701: Build CART model
    - ❌ TS702: Build XGBoost model
