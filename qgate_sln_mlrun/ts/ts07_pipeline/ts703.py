@@ -47,7 +47,7 @@ class TS703(TSBase):
     def _one_call_init(self, call_class):
         func = mlrun.code_to_function(f"ts703_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts703_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts07_pipeline/ts703_ext_code.py")
         graph_echo = func.set_topology("flow")
         if call_class:
             graph_echo.to(class_name="TS703Pipeline", full_event=True, name="step1") \
