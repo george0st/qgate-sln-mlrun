@@ -1,5 +1,5 @@
 """
-  TS401: Create feature vector(s)
+  TS501: Create feature vector(s)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -9,7 +9,7 @@ import glob
 import os
 
 
-class TS401(TSBase):
+class TS501(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
