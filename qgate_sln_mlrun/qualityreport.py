@@ -25,7 +25,7 @@ class QualityReport:
                       ts301.TS301, ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305,
                       ts401.TS701,
                       ts501.TS701, ts502.TS702,
-                      ts601.TS701, ts602.TS702, ts603.TS703, ts604.TS604]
+                      ts601.TS701, ts602.TS702, ts603.TS703, ts604.TS704]
     TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
     TEST_SCENARIO_DELETE = ts102.TS102
 
