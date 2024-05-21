@@ -35,7 +35,7 @@ class TS702(TSBase):
 
         func = mlrun.code_to_function(f"ts702_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts702_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts07_pipeline/ts702_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(class_name="TS702Pipeline", full_event=True, name="step1") \
                 .to(class_name="TS702Pipeline", full_event=True, name="step2") \
@@ -56,7 +56,7 @@ class TS702(TSBase):
 
         func = mlrun.code_to_function(f"ts702_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts702_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts07_pipeline/ts702_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(handler="step1", full_event=True, name="step1") \
                 .to(handler="step2", full_event=True, name="step2") \
