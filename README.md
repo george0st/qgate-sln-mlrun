@@ -36,15 +36,14 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS305: Ingest data to feature set(s) from SQL source
    - ✔  TS306: Ingest data to feature set(s) from Kafka source
    - ❌ TS307: Ingest data to feature set(s) from HTTP source
- - **03 - Ingest data**
-   - ❌ TS311: Ingest data & pipeline (Preview mode)
-   - ❌ TS312: Ingest data & pipeline to feature set(s) from DataFrame source
-   - ❌ TS313: Ingest data & pipeline to feature set(s) from CSV source 
-   - ❌ TS314: Ingest data & pipeline to feature set(s) from Parquet source
-   - ❌ TS315: Ingest data to feature set(s) from SQL source
-   - ✔  TS316: Ingest data to feature set(s) from Kafka source
-   - ❌ TS317: Ingest data to feature set(s) from HTTP source
-
+ - **04 - Ingest data & pipeline**
+   - ❌ TS401: Ingest data & pipeline (Preview mode)
+   - ❌ TS402: Ingest data & pipeline to feature set(s) from DataFrame source
+   - ❌ TS403: Ingest data & pipeline to feature set(s) from CSV source 
+   - ❌ TS404: Ingest data & pipeline to feature set(s) from Parquet source
+   - ❌ TS405: Ingest data & pipeline to feature set(s) from SQL source
+   - ❌ TS406: Ingest data & pipeline to feature set(s) from Kafka source
+   - ❌ TS407: Ingest data & pipeline to feature set(s) from HTTP source
  - **04 - Feature vector**
    - ✅ TS401: Create feature vector(s)
  - **05 - Get data from vector**
