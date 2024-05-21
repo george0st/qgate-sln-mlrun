@@ -1,5 +1,5 @@
 """
-  TS601: Simple pipeline(s)
+  TS701: Simple pipeline(s)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -11,7 +11,7 @@ import glob
 import os
 
 
-class TS601(TSBase):
+class TS701(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
@@ -36,11 +36,11 @@ class TS601(TSBase):
     @TSBase.handler_testcase
     def _class_plus(self, testcase_name, full_event):
 
-        func = mlrun.code_to_function(f"ts601_fn",
+        func = mlrun.code_to_function(f"ts701_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts701_ext_code.py")
         graph_echo = func.set_topology("flow")
-        graph_echo.to(class_name="TS601Pipeline", full_event=full_event, name="plus", default=True).respond()
+        graph_echo.to(class_name="TS701Pipeline", full_event=full_event, name="plus", default=True).respond()
 
         # tests
         echo_server = func.to_mock_server(current_function="*")
@@ -54,11 +54,11 @@ class TS601(TSBase):
     @TSBase.handler_testcase
     def _class_multipl(self, testcase_name, full_event):
 
-        func = mlrun.code_to_function(f"ts601_fn",
+        func = mlrun.code_to_function(f"ts701_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts701_ext_code.py")
         graph_echo = func.set_topology("flow")
-        graph_echo.to(class_name="TS601Pipeline", full_event=full_event, name="multipl", default=True).respond()
+        graph_echo.to(class_name="TS701Pipeline", full_event=full_event, name="multipl", default=True).respond()
 
         # tests
         echo_server = func.to_mock_server(current_function="*")
@@ -71,9 +71,9 @@ class TS601(TSBase):
 
     @TSBase.handler_testcase
     def _minus(self, testcase_name, full_event):
-        func = mlrun.code_to_function(f"ts601_fn",
+        func = mlrun.code_to_function(f"ts701_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts601_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts701_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(handler="minus" , full_event=full_event, name="minus", default=True).respond()
 

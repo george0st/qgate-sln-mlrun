@@ -1,5 +1,5 @@
 """
-  TS801: Serving score from CART (with usage of off-line feature vector)
+  TS901: Serving score from CART (with usage of off-line feature vector)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -12,7 +12,7 @@ import os
 import glob
 import json
 
-class TS801(TSBase):
+class TS901(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)

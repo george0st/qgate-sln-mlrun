@@ -36,27 +36,35 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS305: Ingest data to feature set(s) from SQL source
    - ✔  TS306: Ingest data to feature set(s) from Kafka source
    - ❌ TS307: Ingest data to feature set(s) from HTTP source
- - **04 - Feature vector**
-   - ✅ TS401: Create feature vector(s)
- - **05 - Get data from vector**
-   - ✅ TS501: Get data from off-line feature vector(s)
-   - ✅ TS502: Get data from on-line feature vector(s)
- - **06 - Pipeline**
-   - ✅ TS601: Simple pipeline(s)
-   - ✅ TS602: Complex pipeline(s)
-   - ✅ TS603: Complex pipeline(s), mass operation
-   - ✔  TS604: Complex pipeline(s) for ingest
- - **07 - Build model**
-   - ✅ TS701: Build CART model
-   - ❌ TS702: Build XGBoost model
-   - ❌ TS703: Build DNN model
- - **08 - Serve model**
-   - ✅ TS801: Serving score from CART
-   - ❌ TS802: Serving score from XGBoost
-   - ❌ TS803: Serving score from DNN
- - **09 - Model monitoring/drifting**
-   - ❌ TS901: Real-time monitoring
-   - ❌ TS902: Batch monitoring
+ - **04 - Ingest data & pipeline**
+   - ❌ TS401: Ingest data & pipeline (Preview mode)
+   - ❌ TS402: Ingest data & pipeline to feature set(s) from DataFrame source
+   - ❌ TS403: Ingest data & pipeline to feature set(s) from CSV source 
+   - ❌ TS404: Ingest data & pipeline to feature set(s) from Parquet source
+   - ❌ TS405: Ingest data & pipeline to feature set(s) from SQL source
+   - ❌ TS406: Ingest data & pipeline to feature set(s) from Kafka source
+   - ❌ TS407: Ingest data & pipeline to feature set(s) from HTTP source
+ - **05 - Feature vector**
+   - ✅ TS501: Create feature vector(s)
+ - **06 - Get data from vector**
+   - ✅ TS601: Get data from off-line feature vector(s)
+   - ✅ TS602: Get data from on-line feature vector(s)
+ - **07 - Pipeline**
+   - ✅ TS701: Simple pipeline(s)
+   - ✅ TS702: Complex pipeline(s)
+   - ✅ TS703: Complex pipeline(s), mass operation
+   - ✔  TS704: Complex pipeline(s) for ingest
+ - **08 - Build model**
+   - ✅ TS801: Build CART model
+   - ❌ TS802: Build XGBoost model
+   - ❌ TS803: Build DNN model
+ - **09 - Serve model**
+   - ✅ TS901: Serving score from CART
+   - ❌ TS902: Serving score from XGBoost
+   - ❌ TS903: Serving score from DNN
+ - **10 - Model monitoring/drifting**
+   - ❌ TS1001: Real-time monitoring
+   - ❌ TS1002: Batch monitoring
    
 NOTE: Each test scenario contains addition specific test cases (e.g. with different
 targets for feature sets, etc.).

@@ -1,7 +1,7 @@
 import mlrun
 
 
-class TS603Pipeline:
+class TS703Pipeline:
 
     def __init__(self, context, name=None, **kw):
         self.context = context

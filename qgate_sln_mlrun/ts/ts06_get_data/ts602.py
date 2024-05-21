@@ -1,5 +1,5 @@
 """
-  TS502: Get data from on-line feature vector(s)
+  TS602: Get data from on-line feature vector(s)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -8,7 +8,7 @@ import os
 import json
 
 
-class TS502(TSBase):
+class TS602(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)

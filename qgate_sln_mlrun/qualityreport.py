@@ -3,11 +3,11 @@ import json
 import os
 from qgate_sln_mlrun.setup import Setup, ProjectDelete
 from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.ts.ts08_serve_model import ts801
-from qgate_sln_mlrun.ts.ts07_build_model import ts701
-from qgate_sln_mlrun.ts.ts06_pipeline import ts601, ts602, ts603, ts604
-from qgate_sln_mlrun.ts.ts05_get_data import ts501, ts502
-from qgate_sln_mlrun.ts.ts04_feature_vector import ts401
+from qgate_sln_mlrun.ts.ts09_serve_model import ts901
+from qgate_sln_mlrun.ts.ts08_build_model import ts801
+from qgate_sln_mlrun.ts.ts07_pipeline import ts701, ts702, ts703, ts704
+from qgate_sln_mlrun.ts.ts06_get_data import ts601, ts602
+from qgate_sln_mlrun.ts.ts05_feature_vector import ts501
 from qgate_sln_mlrun.ts.ts03_ingest_data import ts301, ts302, ts303, ts304, ts305
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201, ts202, ts203, ts204, ts205, ts206
 from qgate_sln_mlrun.ts.ts01_project import ts101, ts102
@@ -23,10 +23,10 @@ class QualityReport:
     TEST_SCENARIOS = [ts101.TS101,
                       ts201.TS201, ts202.TS202, ts203.TS203, ts204.TS204, ts205.TS205, ts206.TS206,
                       ts301.TS301, ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305,
-                      ts401.TS401,
-                      ts501.TS501, ts502.TS502,
-                      ts601.TS601, ts602.TS602, ts603.TS603, ts604.TS604]
-    TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
+                      ts501.TS501,
+                      ts601.TS601, ts602.TS602,
+                      ts701.TS701, ts702.TS702, ts703.TS703, ts704.TS704]
+    TEST_EXPERIMENTS = [ts801.TS801, ts901.TS901]
     TEST_SCENARIO_DELETE = ts102.TS102
 
 
@@ -41,10 +41,10 @@ class QualityReport:
     TEST_BOTH = ["TS101","TS102",
                  "TS201", "TS202", "TS203", "TS204", "TS205", "TS206",
                  "TS301", "TS302", "TS303", "TS304", "TS305",
-                 "TS401",
-                 "TS601", "TS602", "TS603", "TS604"]
-    TEST_ONLY_OFFLINE = ["TS501","TS701","TS801"]
-    TEST_ONLY_ONLINE = ["TS502"]
+                 "TS501",
+                 "TS701", "TS702", "TS703", "TS704"]
+    TEST_ONLY_OFFLINE = ["TS601","TS801","TS901"]
+    TEST_ONLY_ONLINE = ["TS602"]
 
 
     def __init__(self, setup: Setup, output: Output):

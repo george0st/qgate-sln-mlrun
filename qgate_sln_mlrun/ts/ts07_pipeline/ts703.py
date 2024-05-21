@@ -1,5 +1,5 @@
 """
-  TS603: Complex pipeline(s), mass operation
+  TS703: Complex pipeline(s), mass operation
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -11,7 +11,7 @@ import glob
 import os
 
 
-class TS603(TSBase):
+class TS703(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
@@ -45,18 +45,18 @@ class TS603(TSBase):
         self.testcase_detail(f"{count} calls")
 
     def _one_call_init(self, call_class):
-        func = mlrun.code_to_function(f"ts603_fn",
+        func = mlrun.code_to_function(f"ts703_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts603_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts703_ext_code.py")
         graph_echo = func.set_topology("flow")
         if call_class:
-            graph_echo.to(class_name="TS603Pipeline", full_event=True, name="step1") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step2") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step3") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step4") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step5") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step6") \
-                    .to(class_name="TS603Pipeline", full_event=True, name="step7").respond()
+            graph_echo.to(class_name="TS703Pipeline", full_event=True, name="step1") \
+                    .to(class_name="TS703Pipeline", full_event=True, name="step2") \
+                    .to(class_name="TS703Pipeline", full_event=True, name="step3") \
+                    .to(class_name="TS703Pipeline", full_event=True, name="step4") \
+                    .to(class_name="TS703Pipeline", full_event=True, name="step5") \
+                    .to(class_name="TS703Pipeline", full_event=True, name="step6") \
+                    .to(class_name="TS703Pipeline", full_event=True, name="step7").respond()
         else:
             graph_echo.to(handler="step1", full_event=True, name="step1") \
                 .to(handler="step2", full_event=True, name="step2") \

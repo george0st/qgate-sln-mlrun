@@ -1,5 +1,5 @@
 """
-  TS604: Complex pipeline(s) for ingest
+  TS704: Complex pipeline(s) for ingest
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -11,7 +11,7 @@ import glob
 import os
 
 
-class TS604(TSBase):
+class TS704(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)

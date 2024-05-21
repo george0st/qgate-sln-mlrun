@@ -1,5 +1,5 @@
 """
-  TS701: Build CART model (based on off-line feature vector)
+  TS801: Build CART model (based on off-line feature vector)
 """
 from sklearn.preprocessing import LabelEncoder
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -13,7 +13,7 @@ import json
 from pickle import dumps
 
 
-class TS701(TSBase):
+class TS801(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
