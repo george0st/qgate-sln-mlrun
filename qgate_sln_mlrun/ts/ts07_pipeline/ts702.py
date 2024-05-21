@@ -1,5 +1,5 @@
 """
-  TS602: Complex pipeline(s)
+  TS702: Complex pipeline(s)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -11,7 +11,7 @@ import glob
 import os
 
 
-class TS602(TSBase):
+class TS702(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
@@ -33,14 +33,14 @@ class TS602(TSBase):
     @TSBase.handler_testcase
     def _class_complex(self, testcase_name):
 
-        func = mlrun.code_to_function(f"ts602_fn",
+        func = mlrun.code_to_function(f"ts702_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts702_ext_code.py")
         graph_echo = func.set_topology("flow")
-        graph_echo.to(class_name="TS602Pipeline", full_event=True, name="step1") \
-                .to(class_name="TS602Pipeline", full_event=True, name="step2") \
-                .to(class_name="TS602Pipeline", full_event=True, name="step3") \
-                .to(class_name="TS602Pipeline", full_event=True, name="step4").respond()
+        graph_echo.to(class_name="TS702Pipeline", full_event=True, name="step1") \
+                .to(class_name="TS702Pipeline", full_event=True, name="step2") \
+                .to(class_name="TS702Pipeline", full_event=True, name="step3") \
+                .to(class_name="TS702Pipeline", full_event=True, name="step4").respond()
 
         # tests
         echo_server = func.to_mock_server(current_function="*")
@@ -54,9 +54,9 @@ class TS602(TSBase):
     @TSBase.handler_testcase
     def _complex(self, testcase_name):
 
-        func = mlrun.code_to_function(f"ts602_fn",
+        func = mlrun.code_to_function(f"ts702_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts602_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts702_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(handler="step1", full_event=True, name="step1") \
                 .to(handler="step2", full_event=True, name="step2") \
