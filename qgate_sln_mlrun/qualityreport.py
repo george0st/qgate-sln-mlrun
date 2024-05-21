@@ -23,10 +23,10 @@ class QualityReport:
     TEST_SCENARIOS = [ts101.TS101,
                       ts201.TS201, ts202.TS202, ts203.TS203, ts204.TS204, ts205.TS205, ts206.TS206,
                       ts301.TS301, ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305,
-                      ts401.TS701,
-                      ts501.TS701, ts502.TS702,
-                      ts601.TS701, ts602.TS702, ts603.TS703, ts604.TS704]
-    TEST_EXPERIMENTS = [ts701.TS701, ts801.TS801]
+                      ts401.TS801,
+                      ts501.TS801, ts502.TS702,
+                      ts601.TS801, ts602.TS702, ts603.TS703, ts604.TS704]
+    TEST_EXPERIMENTS = [ts701.TS801, ts801.TS801]
     TEST_SCENARIO_DELETE = ts102.TS102
 
 
