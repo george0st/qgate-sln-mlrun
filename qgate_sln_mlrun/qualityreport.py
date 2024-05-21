@@ -3,11 +3,11 @@ import json
 import os
 from qgate_sln_mlrun.setup import Setup, ProjectDelete
 from qgate_sln_mlrun.output import Output
-from qgate_sln_mlrun.ts.ts08_serve_model import ts801
-from qgate_sln_mlrun.ts.ts07_build_model import ts701
-from qgate_sln_mlrun.ts.ts06_pipeline import ts601, ts602, ts603, ts604
-from qgate_sln_mlrun.ts.ts05_get_data import ts501, ts502
-from qgate_sln_mlrun.ts.ts04_feature_vector import ts401
+from qgate_sln_mlrun.ts.ts09_serve_model import ts801
+from qgate_sln_mlrun.ts.ts08_build_model import ts701
+from qgate_sln_mlrun.ts.ts07_pipeline import ts601, ts602, ts603, ts604
+from qgate_sln_mlrun.ts.ts06_get_data import ts501, ts502
+from qgate_sln_mlrun.ts.ts05_feature_vector import ts401
 from qgate_sln_mlrun.ts.ts03_ingest_data import ts301, ts302, ts303, ts304, ts305
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201, ts202, ts203, ts204, ts205, ts206
 from qgate_sln_mlrun.ts.ts01_project import ts101, ts102
