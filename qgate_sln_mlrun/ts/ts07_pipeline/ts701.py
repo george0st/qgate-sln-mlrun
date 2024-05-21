@@ -38,7 +38,7 @@ class TS701(TSBase):
 
         func = mlrun.code_to_function(f"ts701_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts701_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts07_pipeline/ts701_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(class_name="TS701Pipeline", full_event=full_event, name="plus", default=True).respond()
 
@@ -56,7 +56,7 @@ class TS701(TSBase):
 
         func = mlrun.code_to_function(f"ts701_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts701_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts07_pipeline/ts701_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(class_name="TS701Pipeline", full_event=full_event, name="multipl", default=True).respond()
 
@@ -73,7 +73,7 @@ class TS701(TSBase):
     def _minus(self, testcase_name, full_event):
         func = mlrun.code_to_function(f"ts701_fn",
                                       kind="serving",
-                                      filename="./qgate_sln_mlrun/ts/ts06_pipeline/ts701_ext_code.py")
+                                      filename="./qgate_sln_mlrun/ts/ts07_pipeline/ts701_ext_code.py")
         graph_echo = func.set_topology("flow")
         graph_echo.to(handler="minus" , full_event=full_event, name="minus", default=True).respond()
 
