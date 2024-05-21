@@ -1,12 +1,12 @@
 """
-  TS501: Get data from off-line feature vector(s)
+  TS601: Get data from off-line feature vector(s)
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
 
 
-class TS501(TSBase):
+class TS601(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
