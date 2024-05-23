@@ -107,8 +107,8 @@ You can easy use this solution in four steps:
 3. Run from `qgate-sln-mlrun`
    - **python main.py**
 4. See outputs (location is based on `QGATE_OUTPUT` in configuration)
-   - './output/qgt-mlrun-<date> <timestamp>.html'
-   - './output/qgt-mlrun-<date> <timestamp>.txt'
+   - './output/qgt-mlrun-<date> <sequence>.html'
+   - './output/qgt-mlrun-<date> <sequence>.txt'
 
 Precondition: You have available MLRun or Iguazio solution (MLRun is part of that),
 see official [installation steps](https://docs.mlrun.org/en/latest/install.html), or directly installation for [Desktop Docker](https://docs.mlrun.org/en/latest/install/local-docker.html). 
@@ -116,8 +116,8 @@ see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 ## Tested with
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - **MLRun** (in Desktop Docker)
-   - MLRun 1.7.0 (plan 05-06/2024)
-   - MLRun 1.6.3 (plan 05/2024), 1.6.2, 1.6.1, 1.6.0
+   - MLRun 1.7.0 (plan 06/2024)
+   - MLRun 1.6.3 (plan 05-06/2024), 1.6.2, 1.6.1, 1.6.0
    - MLRun 1.5.2, 1.5.1, 1.5.0
    - MLRun 1.4.1, 1.3.0
  - **Iguazio** (k8s, on-prem, VM on VMware)
@@ -132,4 +132,4 @@ NOTE: Current state, only the last MLRun/Iguazio versions are valid for testing
  - **Applied limits**, the list of applied limits, [see](./docs/applied-limits.md) 
  - **How can you test the solution?**, you have to focus on Linux env. or 
  Windows with WSL2 ([see](./docs/testing.md) step by step tutorial)
- - **MLRun/Iguazio, the key changes in a nutshell**, [see](./docs/mlrun-iguazio-release-notes.md)
+ - **MLRun/Iguazio**, the key changes in a nutshell, [see](./docs/mlrun-iguazio-release-notes.md)

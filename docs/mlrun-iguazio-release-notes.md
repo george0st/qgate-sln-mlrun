@@ -15,8 +15,9 @@ You can see detail changes in
  - Improve scaling for Nuclio (from version >= 1.13)
  - Support paging (ability to return longer data)
  - Support HDFS as data store (via WebHDFS)
+ - Support Spark Streaming
  - NOTE:
-   - Expected release date 05-06/2024 (based on ~3 months release cycle)
+   - Expected release date 06/2024 (based on ~3 months release cycle)
 
 ### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
