@@ -1,27 +1,33 @@
 """
-  TS401: Ingest data & pipeline (Preview mode)
+  TS402: Ingest data & pipeline to feature set(s) from DataFrame source
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 from qgate_sln_mlrun.setup import Setup
+import mlrun
 import mlrun.feature_store as fstore
+from mlrun.data_types.data_types import spark_to_value_type
 import pandas as pd
 import glob
 import os
 
 
-class TS401(TSBase):
+class TS402(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
     @property
     def desc(self) -> str:
-        return "Ingest data & pipeline (Preview mode)"
+        return "Ingest data & pipeline to feature set(s) from DataFrame source"
 
     @property
     def long_desc(self):
-        return "Ingest data & pipeline (Preview mode) from DataFrame Source"
+        return "Ingest data & pipeline to feature set(s) from Pandas DataFrame source"
+
+    def prepare(self):
+        """Prepare data for ingestion"""
+        pass
 
     def prj_exec(self, project_name):
         """Data ingest"""
@@ -53,6 +59,12 @@ class TS401(TSBase):
                                     decimal=self.setup.csv_decimal,
                                     compression="gzip",
                                     encoding="utf-8",
-                                    chunksize=Setup.MIN_BUNDLE):
-            featureset.preview(data_frm)
-
+                                    chunksize=Setup.MAX_BUNDLE):
+            featureset.ingest(data_frm,
+                          # overwrite=False,
+                          return_df=False,
+                          #infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                          infer_options=mlrun.data_types.data_types.InferOptions.default())
+            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
+            # NOTE: option default, change types
+            # NOTE: option Null, generate error with datetime in python 3.9
