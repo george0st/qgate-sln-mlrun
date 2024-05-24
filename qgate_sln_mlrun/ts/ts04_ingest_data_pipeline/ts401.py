@@ -42,6 +42,10 @@ class TS401(TSBase):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
+        # add pipeline
+        featureset.graph.to("storey.Extend", _fn="({'extra': event['x3']+'jstrrrr'})")
+        featureset.save()
+
         # ingest data with bundl/chunk
         for data_frm in pd.read_csv(file,
                                     sep=self.setup.csv_separator,
