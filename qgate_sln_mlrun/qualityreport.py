@@ -220,19 +220,31 @@ class QualityReport:
                     self.project_specs[project_name][spec_item]=self.project_specs[parent][spec_item]
 
     def load_test_setting(self):
-        """Load setting for test execution from model\03-test\*-vector.json """
+        """Load setting for test execution from model\03-test\ such as vector.json, pipeline.json, etc. """
 
+        # vector
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
                                    "03-test",
                                    f"*-vector.json")
 
-        # check existing data set
+        # check existing data
         for file in glob.glob(source_file):
-            # iterate cross all featureset definitions
             with open(file, "r") as json_file:
                 json_content = json.load(json_file)
                 self._test_setting['vector'] = json_content["spec"]
+
+        # pipeline
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "03-test",
+                                   f"*-pipeline.json")
+
+        # check existing data
+        for file in glob.glob(source_file):
+            with open(file, "r") as json_file:
+                json_content = json.load(json_file)
+                self._test_setting['pipeline'] = json_content["spec"]
 
     @property
     def setup(self) -> Setup:
