@@ -33,6 +33,7 @@ class TS401(TSBase):
 
         if pipelines:
             for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
+                # processing only feature sets with pipelines
                 if featureset_name in pipelines:
                     # create possible file for load
                     source_file = os.path.join(os.getcwd(),
