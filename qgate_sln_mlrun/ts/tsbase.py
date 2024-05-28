@@ -41,9 +41,21 @@ class TSBase:
     def project_specs(self) -> dict:
         return self._solution.project_specs
 
+#region TEST_SETTING
+
     @property
     def test_setting(self) -> dict:
         return self._solution.test_setting
+
+    @property
+    def test_setting_vector(self) -> dict:
+        return self._solution.test_setting["vector"]
+
+    @property
+    def test_setting_pipeline(self) -> dict:
+        return self._solution.test_setting["pipeline"]
+
+#endregion
 
     @property
     def setup(self) -> Setup:
