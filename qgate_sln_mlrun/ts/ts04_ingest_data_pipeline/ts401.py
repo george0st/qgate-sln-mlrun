@@ -51,6 +51,10 @@ class TS401(TSBase):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
+        # TODO: define pipelines based on setting
+
+
+        
         # add pipeline for ingest
         featureset.graph.to("storey.Extend", _fn="({'newextra': 'mlrun'})")
         featureset.save()
