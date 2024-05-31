@@ -50,20 +50,19 @@ class TS401(TSBase):
     def _ingest_data(self, testcase_name, project_name, featureset_name, file):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
-
-        # TODO: define pipelines based on setting
-
         graph = featureset.graph
+
+        # add pipelines
         setting=self.test_setting_pipeline['tests'][featureset_name]
         if setting:
+            # add steps
             if setting["filter"]:
-                graph.add_step("storey.Filter",
-                               name="filter",
-                               _fn=f"setting['filter']")
-                print("filter")
+                graph.add_step("storey.Filter", name="filter", _fn=f"{setting['filter']}")
+            if setting["extend"]:
+                graph.add_step("storey.Extend",
+                              name="extend",
+                              _fn=f"{setting['filter']}")
 
-        # add pipeline for ingest
-        #featureset.graph.to("storey.Extend", _fn="({'newextra': 'mlrun'})")
         featureset.save()
 
         # ingest data with bundl/chunk
