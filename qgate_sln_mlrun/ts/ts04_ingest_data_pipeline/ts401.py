@@ -60,13 +60,13 @@ class TS401(TSBase):
             if setting["filter"]:
                 last_step=graph.add_step("storey.Filter",
                                          name="filter",
-                                         after=None if last_step else last_step.name,
+                                         after=None if not last_step else last_step.name,
                                          _fn=f"{setting['filter']}")
             if setting["extend"]:
                 last_step=graph.add_step("storey.Extend",
-                              name="extend",
-                               after=None if last_step else last_step.name,
-                               _fn=f"{setting['filter']}")
+                                         name="extend",
+                                         after=None if not last_step else last_step.name,
+                                         _fn=f"{setting['extend']}")
 
         featureset.save()
 
