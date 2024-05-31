@@ -55,13 +55,18 @@ class TS401(TSBase):
         # add pipelines
         setting=self.test_setting_pipeline['tests'][featureset_name]
         if setting:
+            last_step=None
             # add steps
             if setting["filter"]:
-                graph.add_step("storey.Filter", name="filter", _fn=f"{setting['filter']}")
+                last_step=graph.add_step("storey.Filter",
+                                         name="filter",
+                                         after=None if last_step else last_step.name,
+                                         _fn=f"{setting['filter']}")
             if setting["extend"]:
-                graph.add_step("storey.Extend",
+                last_step=graph.add_step("storey.Extend",
                               name="extend",
-                              _fn=f"{setting['filter']}")
+                               after=None if last_step else last_step.name,
+                               _fn=f"{setting['filter']}")
 
         featureset.save()
 
