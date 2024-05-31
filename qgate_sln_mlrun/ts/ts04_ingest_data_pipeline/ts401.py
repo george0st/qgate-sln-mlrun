@@ -53,7 +53,10 @@ class TS401(TSBase):
 
         # TODO: define pipelines based on setting
 
-
+        setting=self.test_setting_pipeline['tests'][featureset_name]
+        if setting:
+            if setting["filter"]:
+                print("filter")
 
         # add pipeline for ingest
         featureset.graph.to("storey.Extend", _fn="({'newextra': 'mlrun'})")
