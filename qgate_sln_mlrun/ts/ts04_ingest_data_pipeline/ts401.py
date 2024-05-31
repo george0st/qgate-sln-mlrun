@@ -53,13 +53,17 @@ class TS401(TSBase):
 
         # TODO: define pipelines based on setting
 
+        graph = featureset.graph
         setting=self.test_setting_pipeline['tests'][featureset_name]
         if setting:
             if setting["filter"]:
+                graph.add_step("storey.Filter",
+                               name="filter",
+                               _fn=f"setting['filter']")
                 print("filter")
 
         # add pipeline for ingest
-        featureset.graph.to("storey.Extend", _fn="({'newextra': 'mlrun'})")
+        #featureset.graph.to("storey.Extend", _fn="({'newextra': 'mlrun'})")
         featureset.save()
 
         # ingest data with bundl/chunk
