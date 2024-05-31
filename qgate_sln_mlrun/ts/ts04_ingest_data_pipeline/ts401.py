@@ -29,7 +29,7 @@ class TS401(TSBase):
         pipelines = None
         if self.test_setting.get('pipeline'):
             if self.test_setting_pipeline.get('featuresets'):
-                pipelines = self.test_setting.pipeline['featuresets']
+                pipelines = self.test_setting_pipeline['featuresets']
 
         if pipelines:
             for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
