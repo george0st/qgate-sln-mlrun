@@ -61,11 +61,18 @@ class TS401(TSBase):
                 last_step=featureset.graph.add_step(fsteps.Imputer(mapping=setting['imputer']),
                                          name="imputer",
                                          after=None if not last_step else last_step.name)
+
+            if setting["onehotencoder"]:
+                last_step = featureset.graph.add_step(fsteps.OneHotEncoder(mapping=setting['onehotencoder']),
+                                                      name="onehotencoder",
+                                                      after=None if not last_step else last_step.name)
+
             if setting["storey.filter"]:
                 last_step=featureset.graph.add_step("storey.Filter",
-                                         name="filter",
-                                         after=None if not last_step else last_step.name,
-                                         _fn=f"{setting['storey.filter']}")
+                                     name="filter",
+                                     after=None if not last_step else last_step.name,
+                                     _fn=f"{setting['storey.filter']}")
+
             if setting["storey.extend"]:
                 last_step=featureset.graph.add_step("storey.Extend",
                                          name="extend",
@@ -73,10 +80,10 @@ class TS401(TSBase):
                                          _fn=f"{setting['storey.extend']}")
 
         # https://docs.mlrun.org/en/latest/feature-store/transformations.html
-        #Imputer
+        #ok - Imputer
         #DateExtractor
         #MapValues
-        #OneHotEncoder
+        #ok - OneHotEncoder
         #DropFeatures
         #MLRunStep
 
