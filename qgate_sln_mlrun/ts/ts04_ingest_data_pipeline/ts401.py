@@ -5,6 +5,7 @@
 from qgate_sln_mlrun.ts.tsbase import TSBase
 from qgate_sln_mlrun.setup import Setup
 import mlrun.feature_store as fstore
+import mlrun.feature_store.steps as fsteps
 import pandas as pd
 import glob
 import os
@@ -50,23 +51,43 @@ class TS401(TSBase):
     def _ingest_data(self, testcase_name, project_name, featureset_name, file):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
-        graph = featureset.graph
 
         # add pipelines
         setting=self.test_setting_pipeline['tests'][featureset_name]
         if setting:
             last_step=None
             # add steps
-            if setting["filter"]:
-                last_step=graph.add_step("storey.Filter",
+            if setting["imputer"]:
+                last_step=featureset.graph.add_step(fsteps.Imputer(mapping=setting['imputer']),
+                                         name="imputer",
+                                         after=None if not last_step else last_step.name)
+            if setting["storey.filter"]:
+                last_step=featureset.graph.add_step("storey.Filter",
                                          name="filter",
                                          after=None if not last_step else last_step.name,
                                          _fn=f"{setting['filter']}")
-            if setting["extend"]:
-                last_step=graph.add_step("storey.Extend",
+            if setting["storey.extend"]:
+                last_step=featureset.graph.add_step("storey.Extend",
                                          name="extend",
                                          after=None if not last_step else last_step.name,
                                          _fn=f"{setting['extend']}")
+
+        # https://docs.mlrun.org/en/latest/feature-store/transformations.html
+        #Imputer
+        #DateExtractor
+        #MapValues
+        #OneHotEncoder
+        #DropFeatures
+        #MLRunStep
+
+        # https://docs.mlrun.org/en/latest/feature-store/transformations.html#supporting-multiple-engines
+
+        #     if setting["extend"]:
+        #         last_step=graph.add_step("storey.Extend",
+        #                                  name="extend",
+        #                                  after=None if not last_step else last_step.name,
+        #                                  _fn=f"{setting['extend']}")
+
 
         featureset.save()
 
