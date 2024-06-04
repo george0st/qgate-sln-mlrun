@@ -68,7 +68,8 @@ class TS401(TSBase):
                                                       after=None if not last_step else last_step.name)
 
             if setting["dateextractor"]:
-                last_step = featureset.graph.add_step(fsteps.OneHotEncoder(mapping=setting['dateextractor']),
+                last_step = featureset.graph.add_step(fsteps.DateExtractor(parts=setting['dateextractor']['parts'],
+                                                                           timestamp_col=setting['dateextractor']['timestamp_col']),
                                                       name="dateextractor",
                                                       after=None if not last_step else last_step.name)
 
