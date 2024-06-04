@@ -90,19 +90,10 @@ class TS401(TSBase):
         #ok - Imputer
         #ok - OneHotEncoder
         #ok - DateExtractor
-        
+
         #MapValues
         #DropFeatures
         #MLRunStep
-
-        # https://docs.mlrun.org/en/latest/feature-store/transformations.html#supporting-multiple-engines
-
-        #     if setting["extend"]:
-        #         last_step=graph.add_step("storey.Extend",
-        #                                  name="extend",
-        #                                  after=None if not last_step else last_step.name,
-        #                                  _fn=f"{setting['extend']}")
-
 
         featureset.save()
 
