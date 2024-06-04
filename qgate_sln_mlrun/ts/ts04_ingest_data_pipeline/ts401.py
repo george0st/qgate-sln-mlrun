@@ -89,8 +89,8 @@ class TS401(TSBase):
         # https://docs.mlrun.org/en/latest/feature-store/transformations.html
         #ok - Imputer
         #ok - OneHotEncoder
-
-        #DateExtractor
+        #ok - DateExtractor
+        
         #MapValues
         #DropFeatures
         #MLRunStep
