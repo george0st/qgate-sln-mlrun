@@ -57,21 +57,27 @@ class TS401(TSBase):
         if setting:
             last_step=None
             # add steps
-            if setting["imputer"]:
-                last_step=featureset.graph.add_step(fsteps.Imputer(mapping=setting['imputer']),
-                                         name="imputer",
+            if setting["Imputer"]:
+                last_step=featureset.graph.add_step(fsteps.Imputer(mapping=setting['Imputer']),
+                                         name="Imputer",
                                          after=None if not last_step else last_step.name)
 
-            if setting["onehotencoder"]:
-                last_step = featureset.graph.add_step(fsteps.OneHotEncoder(mapping=setting['onehotencoder']),
-                                                      name="onehotencoder",
+            if setting["OneHotEncoder"]:
+                last_step = featureset.graph.add_step(fsteps.OneHotEncoder(mapping=setting['OneHotEncoder']),
+                                                      name="OneHotEncoder",
                                                       after=None if not last_step else last_step.name)
 
-            if setting["dateextractor"]:
-                last_step = featureset.graph.add_step(fsteps.DateExtractor(parts=setting['dateextractor']['parts'],
-                                                                           timestamp_col=setting['dateextractor']['timestamp_col']),
-                                                      name="dateextractor",
+            if setting["DateExtractor"]:
+                last_step = featureset.graph.add_step(fsteps.DateExtractor(parts=setting['DateExtractor']['parts'],
+                                                                           timestamp_col=setting['DateExtractor']['timestamp_col']),
+                                                      name="DateExtractor",
                                                       after=None if not last_step else last_step.name)
+
+            if setting["MapValues"]:
+                last_step = featureset.graph.add_step(fsteps.MapValues(mapping=setting['MapValues']),
+                                                      name="MapValues",
+                                                      after=None if not last_step else last_step.name)
+
 
             # storey steps (works only in engine 'storey')
             if setting["storey.filter"]:
@@ -90,19 +96,10 @@ class TS401(TSBase):
         #ok - Imputer
         #ok - OneHotEncoder
         #ok - DateExtractor
-        
+
         #MapValues
         #DropFeatures
         #MLRunStep
-
-        # https://docs.mlrun.org/en/latest/feature-store/transformations.html#supporting-multiple-engines
-
-        #     if setting["extend"]:
-        #         last_step=graph.add_step("storey.Extend",
-        #                                  name="extend",
-        #                                  after=None if not last_step else last_step.name,
-        #                                  _fn=f"{setting['extend']}")
-
 
         featureset.save()
 
