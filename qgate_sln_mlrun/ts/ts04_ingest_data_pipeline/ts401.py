@@ -73,6 +73,12 @@ class TS401(TSBase):
                                                       name="dateextractor",
                                                       after=None if not last_step else last_step.name)
 
+            if setting["MapValues"]:
+                last_step = featureset.graph.add_step(fsteps.MapValues(mapping=setting['MapValues']),
+                                                      name="MapValues",
+                                                      after=None if not last_step else last_step.name)
+
+
             # storey steps (works only in engine 'storey')
             if setting["storey.filter"]:
                 last_step=featureset.graph.add_step("storey.Filter",
