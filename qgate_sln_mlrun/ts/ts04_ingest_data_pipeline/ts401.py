@@ -62,15 +62,15 @@ class TS401(TSBase):
                                          name="Imputer",
                                          after=None if not last_step else last_step.name)
 
-            if setting["onehotencoder"]:
-                last_step = featureset.graph.add_step(fsteps.OneHotEncoder(mapping=setting['onehotencoder']),
-                                                      name="onehotencoder",
+            if setting["OneHotEncoder"]:
+                last_step = featureset.graph.add_step(fsteps.OneHotEncoder(mapping=setting['OneHotEncoder']),
+                                                      name="OneHotEncoder",
                                                       after=None if not last_step else last_step.name)
 
-            if setting["dateextractor"]:
-                last_step = featureset.graph.add_step(fsteps.DateExtractor(parts=setting['dateextractor']['parts'],
-                                                                           timestamp_col=setting['dateextractor']['timestamp_col']),
-                                                      name="dateextractor",
+            if setting["DateExtractor"]:
+                last_step = featureset.graph.add_step(fsteps.DateExtractor(parts=setting['DateExtractor']['parts'],
+                                                                           timestamp_col=setting['DateExtractor']['timestamp_col']),
+                                                      name="DateExtractor",
                                                       after=None if not last_step else last_step.name)
 
             if setting["MapValues"]:
