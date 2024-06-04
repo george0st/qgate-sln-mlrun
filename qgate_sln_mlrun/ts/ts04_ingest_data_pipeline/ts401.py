@@ -57,9 +57,9 @@ class TS401(TSBase):
         if setting:
             last_step=None
             # add steps
-            if setting["imputer"]:
-                last_step=featureset.graph.add_step(fsteps.Imputer(mapping=setting['imputer']),
-                                         name="imputer",
+            if setting["Imputer"]:
+                last_step=featureset.graph.add_step(fsteps.Imputer(mapping=setting['Imputer']),
+                                         name="Imputer",
                                          after=None if not last_step else last_step.name)
 
             if setting["onehotencoder"]:
