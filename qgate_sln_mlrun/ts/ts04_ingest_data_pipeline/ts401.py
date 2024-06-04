@@ -67,6 +67,13 @@ class TS401(TSBase):
                                                       name="onehotencoder",
                                                       after=None if not last_step else last_step.name)
 
+            if setting["dateextractor"]:
+                last_step = featureset.graph.add_step(fsteps.DateExtractor(parts=setting['dateextractor']['parts'],
+                                                                           timestamp_col=setting['dateextractor']['timestamp_col']),
+                                                      name="dateextractor",
+                                                      after=None if not last_step else last_step.name)
+
+            # storey steps (works only in engine 'storey')
             if setting["storey.filter"]:
                 last_step=featureset.graph.add_step("storey.Filter",
                                      name="filter",
@@ -81,9 +88,10 @@ class TS401(TSBase):
 
         # https://docs.mlrun.org/en/latest/feature-store/transformations.html
         #ok - Imputer
-        #DateExtractor
-        #MapValues
         #ok - OneHotEncoder
+        #ok - DateExtractor
+        
+        #MapValues
         #DropFeatures
         #MLRunStep
 
