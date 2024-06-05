@@ -80,17 +80,17 @@ class TS401(TSBase):
 
 
             # storey steps (works only in engine 'storey')
-            if setting["storey.filter"]:
+            if setting["storey.Filter"]:
                 last_step=featureset.graph.add_step("storey.Filter",
-                                     name="filter",
+                                     name="storey.Filter",
                                      after=None if not last_step else last_step.name,
-                                     _fn=f"{setting['storey.filter']}")
+                                     _fn=f"{setting['storey.Filter']}")
 
-            if setting["storey.extend"]:
+            if setting["storey.Extend"]:
                 last_step=featureset.graph.add_step("storey.Extend",
-                                         name="extend",
+                                         name="storey.Extend",
                                          after=None if not last_step else last_step.name,
-                                         _fn=f"{setting['storey.extend']}")
+                                         _fn=f"{setting['storey.Extend']}")
 
         # https://docs.mlrun.org/en/latest/feature-store/transformations.html
         #ok - Imputer
