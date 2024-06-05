@@ -80,11 +80,11 @@ class TS401(TSBase):
 
 
             # storey steps (works only in engine 'storey')
-            if setting["storey.filter"]:
+            if setting["storey.Filter"]:
                 last_step=featureset.graph.add_step("storey.Filter",
-                                     name="filter",
+                                     name="storey.Filter",
                                      after=None if not last_step else last_step.name,
-                                     _fn=f"{setting['storey.filter']}")
+                                     _fn=f"{setting['storey.Filter']}")
 
             if setting["storey.extend"]:
                 last_step=featureset.graph.add_step("storey.Extend",
