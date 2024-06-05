@@ -86,11 +86,11 @@ class TS401(TSBase):
                                      after=None if not last_step else last_step.name,
                                      _fn=f"{setting['storey.Filter']}")
 
-            if setting["storey.extend"]:
+            if setting["storey.Extend"]:
                 last_step=featureset.graph.add_step("storey.Extend",
-                                         name="extend",
+                                         name="storey.Extend",
                                          after=None if not last_step else last_step.name,
-                                         _fn=f"{setting['storey.extend']}")
+                                         _fn=f"{setting['storey.Extend']}")
 
         # https://docs.mlrun.org/en/latest/feature-store/transformations.html
         #ok - Imputer
