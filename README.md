@@ -88,10 +88,8 @@ The current supported [sources/targets in MLRun](https://docs.mlrun.org/en/lates
 ![Sample of outputs](https://github.com/george0st/qgate-sln-mlrun/blob/master/assets/imgs/qgt-mlrun-samples.png?raw=true)
 
 The reports in original form, see:
- - all DONE - [HTML](https://htmlpreview.github.io/?https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.html), 
-   [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.txt?raw=true)
- - with ERR - [HTML](https://htmlpreview.github.io/?https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.html),
-   [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.txt?raw=true)
+ - all DONE - [HTML](https://htmlpreview.github.io/?https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.html), [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample.txt?raw=true)
+ - with ERR - [HTML](https://htmlpreview.github.io/?https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.html), [TXT](https://github.com/george0st/qgate-sln-mlrun/blob/master/docs/samples/outputs/qgt-mlrun-sample-err.txt?raw=true)
 
 ## Usage
 
@@ -117,7 +115,7 @@ see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - **MLRun** (in Desktop Docker)
    - MLRun 1.7.0 (plan 06-07/2024)
-   - MLRun 1.6.4 (plan 06-07/2024), 1.6.3 (plan),  1.6.2, 1.6.1, 1.6.0
+   - MLRun 1.6.4 (plan 06-07/2024), 1.6.3 (plan), 1.6.2, 1.6.1, 1.6.0
    - MLRun 1.5.2, 1.5.1, 1.5.0
    - MLRun 1.4.1, 1.3.0
  - **Iguazio** (k8s, on-prem, VM on VMware)
