@@ -1,4 +1,4 @@
-# Quality report for MLRun {{ data.mlrun_server }}
+# Quality report MLRun {{ data.mlrun_server }}
 # ID: {{ data.datetime }} ({{ data.used_filters }})
 # Score: {{ data.summary.score }}% ({{ data.used_filters }})
 # -----------------------
