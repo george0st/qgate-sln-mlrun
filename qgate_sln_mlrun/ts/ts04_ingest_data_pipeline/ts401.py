@@ -57,23 +57,23 @@ class TS401(TSBase):
         if setting:
             last_step=None
             # add steps
-            if setting["Imputer"]:
+            if setting.get("Imputer"):
                 last_step=featureset.graph.add_step(fsteps.Imputer(mapping=setting['Imputer']),
                                          name="Imputer",
                                          after=None if not last_step else last_step.name)
 
-            if setting["OneHotEncoder"]:
+            if setting.get("OneHotEncoder"):
                 last_step = featureset.graph.add_step(fsteps.OneHotEncoder(mapping=setting['OneHotEncoder']),
                                                       name="OneHotEncoder",
                                                       after=None if not last_step else last_step.name)
 
-            if setting["DateExtractor"]:
+            if setting.get("DateExtractor"):
                 last_step = featureset.graph.add_step(fsteps.DateExtractor(parts=setting['DateExtractor']['parts'],
                                                                            timestamp_col=setting['DateExtractor']['timestamp_col']),
                                                       name="DateExtractor",
                                                       after=None if not last_step else last_step.name)
 
-            if setting["MapValues"]:
+            if setting.get("MapValues"):
                 last_step = featureset.graph.add_step(fsteps.MapValues(mapping=setting['MapValues']),
                                                       name="MapValues",
                                                       after=None if not last_step else last_step.name)
@@ -87,7 +87,7 @@ class TS401(TSBase):
                                      _fn=f"{setting['storey.Filter']}")
             #             "storey.Filter": "(event['party-gender'] == 'F')",
 
-            if setting["storey.Extend"]:
+            if setting.get("storey.Extend"):
                 last_step=featureset.graph.add_step("storey.Extend",
                                          name="storey.Extend",
                                          after=None if not last_step else last_step.name,
