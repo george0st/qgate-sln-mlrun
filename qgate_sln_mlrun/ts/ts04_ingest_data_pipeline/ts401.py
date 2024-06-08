@@ -78,14 +78,12 @@ class TS401(TSBase):
                                                       name="MapValues",
                                                       after=None if not last_step else last_step.name)
 
-
             # storey steps (works only in engine 'storey')
             if setting.get("storey.Filter"):
                 last_step=featureset.graph.add_step("storey.Filter",
                                      name="storey.Filter",
                                      after=None if not last_step else last_step.name,
                                      _fn=f"{setting['storey.Filter']}")
-            #             "storey.Filter": "(event['party-gender'] == 'F')",
 
             if setting.get("storey.Extend"):
                 last_step=featureset.graph.add_step("storey.Extend",
@@ -97,8 +95,8 @@ class TS401(TSBase):
         #ok - Imputer
         #ok - OneHotEncoder
         #ok - DateExtractor
-
-        #MapValues
+        #ok - MapValues
+        
         #DropFeatures
         #MLRunStep
 
