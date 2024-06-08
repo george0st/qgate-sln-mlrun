@@ -57,6 +57,12 @@ see detail below
    - in case of different setting, it is better to use Pandas/DataFrame source
      (it has bigger variability)
 
+## Pipelines
+
+1. The step DateExtractor, in case of part e.g. 'is_month_end', it generated the warning 
+[Converting input from bool to <class 'numpy.uint8'> for compatibility.](https://github.com/mlrun/mlrun/issues/5741)
+
+
 ## Others
 
 1. Not to use the engine `pandas`
