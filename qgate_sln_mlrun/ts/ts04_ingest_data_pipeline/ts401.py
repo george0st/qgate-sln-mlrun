@@ -77,6 +77,11 @@ class TS401(TSBase):
                 last_step = featureset.graph.add_step(fsteps.MapValues(mapping=setting['MapValues']),
                                                       name="MapValues",
                                                       after=None if not last_step else last_step.name)
+                
+            if setting.get("DropFeatures"):
+                last_step = featureset.graph.add_step(fsteps.DropFeatures(features=setting['DropFeatures']),
+                                                      name="DropFeatures",
+                                                      after=None if not last_step else last_step.name)
 
             # storey steps (works only in engine 'storey')
             if setting.get("storey.Filter"):
@@ -96,7 +101,7 @@ class TS401(TSBase):
         #ok - OneHotEncoder
         #ok - DateExtractor
         #ok - MapValues
-        
+
         #DropFeatures
         #MLRunStep
 
