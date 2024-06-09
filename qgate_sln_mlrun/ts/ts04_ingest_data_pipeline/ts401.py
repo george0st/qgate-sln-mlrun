@@ -78,8 +78,6 @@ class TS401(TSBase):
                                                                        with_original_features=True),
                                                       name="MapValues",
                                                       after=None if not last_step else last_step.name)
-                #            "MapValues": {"party-familystatus": {"Married": "M", "Single": "S", "Divorced": "D"}},
-
 
             if setting.get("DropFeatures"):
                 last_step = featureset.graph.add_step(fsteps.DropFeatures(features=setting['DropFeatures']),
