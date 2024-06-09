@@ -74,7 +74,8 @@ class TS401(TSBase):
                                                       after=None if not last_step else last_step.name)
 
             if setting.get("MapValues"):
-                last_step = featureset.graph.add_step(fsteps.MapValues(mapping=setting['MapValues']),
+                last_step = featureset.graph.add_step(fsteps.MapValues(mapping=setting['MapValues'],
+                                                                       with_original_features=True),
                                                       name="MapValues",
                                                       after=None if not last_step else last_step.name)
 
@@ -102,7 +103,7 @@ class TS401(TSBase):
         #ok - DateExtractor
         #ok - MapValues
         #ok - DropFeatures
-        
+
         #MLRunStep
 
         featureset.save()
