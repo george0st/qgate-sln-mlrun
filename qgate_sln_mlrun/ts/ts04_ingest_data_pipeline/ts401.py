@@ -85,7 +85,7 @@ class TS401(TSBase):
                                                       name="DropFeatures",
                                                       after=None if not last_step else last_step.name)
 
-            # storey steps (works only in engine 'storey')
+            # storey steps (works only in engine 'storey', it is valid for engine 'spark' or 'pandas')
             if setting.get("storey.Filter"):
                 last_step=featureset.graph.add_step("storey.Filter",
                                      name="storey.Filter",
