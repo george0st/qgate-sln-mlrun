@@ -74,6 +74,7 @@ class TS401(TSBase):
                                                       after=None if not last_step else last_step.name)
 
             if setting.get("MapValues"):
+                # TODO: remove workaround see https://github.com/mlrun/mlrun/issues/5743 (after repair, issue in MLRun 1.6.3)
                 last_step = featureset.graph.add_step(fsteps.MapValues(mapping=setting['MapValues'],
                                                                        with_original_features=True),
                                                       name="MapValues",
@@ -84,7 +85,7 @@ class TS401(TSBase):
                                                       name="DropFeatures",
                                                       after=None if not last_step else last_step.name)
 
-            # storey steps (works only in engine 'storey')
+            # storey steps (works only in engine 'storey', it is valid for engine 'spark' or 'pandas')
             if setting.get("storey.Filter"):
                 last_step=featureset.graph.add_step("storey.Filter",
                                      name="storey.Filter",

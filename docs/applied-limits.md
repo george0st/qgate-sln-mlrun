@@ -62,6 +62,8 @@ see detail below
 1. The step DateExtractor, in case of part e.g. 'is_month_end', it generated the warning 
 [Converting input from bool to <class 'numpy.uint8'> for compatibility.](https://github.com/mlrun/mlrun/issues/5741)
 
+2. Relation MapValues and storey.Filter [see](https://github.com/mlrun/mlrun/issues/5743)
+  - Workarround: Use MapValues with parameter **with_original_features=True**
 
 ## Others
 
