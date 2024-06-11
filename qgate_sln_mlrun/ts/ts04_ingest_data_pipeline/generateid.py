@@ -60,7 +60,5 @@ class GenerateID(StepToDict, MLRunStep):
             )
 
         if not namespace:
-            raise mlrun.errors.MLRunInvalidArgumentError(
-                f"GenerateID can not applu to these entities: {dropped_entities}"
-            )
+            raise mlrun.errors.MLRunInvalidArgumentError("GenerateID can use not None value for namespace")
 
