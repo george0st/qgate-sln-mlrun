@@ -16,9 +16,11 @@ class GenerateId(StepToDict, MLRunStep):
         super().__init__(**kwargs)
         self.namespace = namespace
         self.features = features
+        self.iterator = 0
 
     def _get_id(self):
-        return uuid.uuid5(self.namespace, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
+        self.iterator+=1
+        return uuid.uuid5(self.namespace, f"{self.iterator} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')}")
 
     def _do_storey(self, event):
         for feature in self.features:
@@ -26,7 +28,7 @@ class GenerateId(StepToDict, MLRunStep):
                 event[feature]=self._get_id()
             except KeyError:
                 raise mlrun.errors.MLRunInvalidArgumentError(
-                    f"The error in '{feature}'"
+                    f"The error for GeneraId for the feature '{feature}'"
                 )
         return event
 
@@ -36,7 +38,7 @@ class GenerateId(StepToDict, MLRunStep):
                 event[feature]=self._get_id()
             except KeyError:
                 raise mlrun.errors.MLRunInvalidArgumentError(
-                    f"The error in '{feature}'"
+                    f"The error for GeneraId for the feature '{feature}'"
                 )
         return event
 
@@ -46,7 +48,7 @@ class GenerateId(StepToDict, MLRunStep):
                 event[feature]=self._get_id()
             except KeyError:
                 raise mlrun.errors.MLRunInvalidArgumentError(
-                    f"The error in '{feature}'"
+                    f"The error for GeneraId for the feature '{feature}'"
                 )
         return event
 

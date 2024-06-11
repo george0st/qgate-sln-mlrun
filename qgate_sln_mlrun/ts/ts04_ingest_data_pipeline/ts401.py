@@ -88,7 +88,8 @@ class TS401(TSBase):
 
             # own step
             if setting.get("GenerateId"):
-                last_step = featureset.graph.add_step(generateid.GenerateId(features=setting['GenerateId']),
+                last_step = featureset.graph.add_step(generateid.GenerateId(namespace=setting['GenerateId']["namespace"],
+                                                                            features=setting['GenerateId']["features"]),
                                                       name="GenerateId",
                                                       after=None if not last_step else last_step.name)
 
