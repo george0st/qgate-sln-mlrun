@@ -28,7 +28,7 @@ class GenerateId(StepToDict, MLRunStep):
                 event[feature]=self._get_id()
             except KeyError:
                 raise mlrun.errors.MLRunInvalidArgumentError(
-                    f"The error in '{feature}'"
+                    f"The error for GeneraId for the feature '{feature}'"
                 )
         return event
 
@@ -38,7 +38,7 @@ class GenerateId(StepToDict, MLRunStep):
                 event[feature]=self._get_id()
             except KeyError:
                 raise mlrun.errors.MLRunInvalidArgumentError(
-                    f"The error in '{feature}'"
+                    f"The error for GeneraId for the feature '{feature}'"
                 )
         return event
 
@@ -48,7 +48,7 @@ class GenerateId(StepToDict, MLRunStep):
                 event[feature]=self._get_id()
             except KeyError:
                 raise mlrun.errors.MLRunInvalidArgumentError(
-                    f"The error in '{feature}'"
+                    f"The error for GeneraId for the feature '{feature}'"
                 )
         return event
 
