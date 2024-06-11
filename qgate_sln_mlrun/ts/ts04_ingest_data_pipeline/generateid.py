@@ -1,9 +1,5 @@
 import datetime
-
-from storey import MapClass
-
 from typing import Any, Dict, List, Optional, Union
-
 import mlrun.errors
 from mlrun.serving.utils import StepToDict
 from mlrun.feature_store.steps import MLRunStep
@@ -11,6 +7,12 @@ import uuid
 
 class GenerateId(StepToDict, MLRunStep):
     def __init__(self, namespace: str, features: List[str], **kwargs):
+        """
+        Generate unique ID for specific features
+
+        :param namespace:   namespace for unique ID
+        :param features:    string list of the features names to drop
+        """
         super().__init__(**kwargs)
         self.namespace = namespace
         self.features = features
