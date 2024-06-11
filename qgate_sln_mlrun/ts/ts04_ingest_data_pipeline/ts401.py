@@ -9,6 +9,7 @@ import mlrun.feature_store.steps as fsteps
 import pandas as pd
 import glob
 import os
+import generateid
 
 
 class TS401(TSBase):
@@ -83,6 +84,12 @@ class TS401(TSBase):
             if setting.get("DropFeatures"):
                 last_step = featureset.graph.add_step(fsteps.DropFeatures(features=setting['DropFeatures']),
                                                       name="DropFeatures",
+                                                      after=None if not last_step else last_step.name)
+
+            # own step
+            if setting.get("GenerateId"):
+                last_step = featureset.graph.add_step(generateid.GenerateId(features=setting['GenerateId']),
+                                                      name="GenerateId",
                                                       after=None if not last_step else last_step.name)
 
             # storey steps (works only in engine 'storey', it is valid for engine 'spark' or 'pandas')
