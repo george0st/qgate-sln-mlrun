@@ -9,7 +9,7 @@ from mlrun.serving.utils import StepToDict
 from mlrun.feature_store.steps import MLRunStep
 import uuid
 
-class GenerateID(StepToDict, MLRunStep):
+class GenerateId(StepToDict, MLRunStep):
     def __init__(self, namespace: str, features: List[str], **kwargs):
         super().__init__(**kwargs)
         self.namespace = namespace
@@ -47,6 +47,7 @@ class GenerateID(StepToDict, MLRunStep):
                     f"The error in '{feature}'"
                 )
         return event
+
     @classmethod
     def validate_args(cls, feature_set, **kwargs):
         features = kwargs.get("features", [])
