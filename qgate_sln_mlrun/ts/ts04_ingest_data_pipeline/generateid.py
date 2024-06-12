@@ -42,15 +42,15 @@ class GenerateId(StepToDict, MLRunStep):
                 )
         return event
 
-    def _do_spark(self, event):
-        for feature in self.features:
-            try:
-                event[feature]=self._get_id()
-            except KeyError:
-                raise mlrun.errors.MLRunInvalidArgumentError(
-                    f"The error for GeneraId for the feature '{feature}'"
-                )
-        return event
+    # def _do_spark(self, event):
+    #     for feature in self.features:
+    #         try:
+    #             event[feature]=self._get_id()
+    #         except KeyError:
+    #             raise mlrun.errors.MLRunInvalidArgumentError(
+    #                 f"The error for GeneraId for the feature '{feature}'"
+    #             )
+    #     return event
 
     @classmethod
     def validate_args(cls, feature_set, **kwargs):
@@ -61,9 +61,9 @@ class GenerateId(StepToDict, MLRunStep):
         dropped_entities = set(features).intersection(entity_names)
         if dropped_entities:
             raise mlrun.errors.MLRunInvalidArgumentError(
-                f"GenerateID can not apply to these entities: {dropped_entities}"
+                f"GenerateId can not apply to these entities: {dropped_entities}"
             )
 
         if not namespace:
-            raise mlrun.errors.MLRunInvalidArgumentError("GenerateID can use not None value for namespace")
+            raise mlrun.errors.MLRunInvalidArgumentError("GenerateId can use not None value for namespace")
 
