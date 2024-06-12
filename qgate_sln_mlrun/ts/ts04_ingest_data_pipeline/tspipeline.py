@@ -70,5 +70,4 @@ class TSPipeline():
 
         #MLRunStep
 
-        self._featureset.save()
 
