@@ -1,3 +1,5 @@
+import mlrun.feature_store.steps as fsteps
+import generateid
 
 
 class TSPipeline():
@@ -6,10 +8,8 @@ class TSPipeline():
         self.featureset = featureset
         self.setting = setting
 
-    def add_pipeline(self):
-        # get existing feature set (feature set have to be created in previous test scenario)
+    def add(self):
         # add pipelines
-
         if self.setting:
             last_step=None
             # add steps
