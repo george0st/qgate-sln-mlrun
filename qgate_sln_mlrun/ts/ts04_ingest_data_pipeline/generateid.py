@@ -42,15 +42,15 @@ class GenerateId(StepToDict, MLRunStep):
                 )
         return event
 
-    def _do_spark(self, event):
-        for feature in self.features:
-            try:
-                event[feature]=self._get_id()
-            except KeyError:
-                raise mlrun.errors.MLRunInvalidArgumentError(
-                    f"The error for GeneraId for the feature '{feature}'"
-                )
-        return event
+    # def _do_spark(self, event):
+    #     for feature in self.features:
+    #         try:
+    #             event[feature]=self._get_id()
+    #         except KeyError:
+    #             raise mlrun.errors.MLRunInvalidArgumentError(
+    #                 f"The error for GeneraId for the feature '{feature}'"
+    #             )
+    #     return event
 
     @classmethod
     def validate_args(cls, feature_set, **kwargs):
