@@ -54,7 +54,9 @@ class TS401(TSBase):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
-
+        pipeline=TSPipeline(featureset,self.test_setting_pipeline['tests'][featureset_name])
+        pipeline.add()
+        
         # add pipelines
         setting=self.test_setting_pipeline['tests'][featureset_name]
         if setting:
