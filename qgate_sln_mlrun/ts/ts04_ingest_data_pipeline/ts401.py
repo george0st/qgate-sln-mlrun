@@ -9,6 +9,7 @@ import mlrun.feature_store.steps as fsteps
 import pandas as pd
 import glob
 import os
+from tspipelinebase import TSPipeline
 import generateid
 
 
@@ -52,6 +53,7 @@ class TS401(TSBase):
     def _ingest_data(self, testcase_name, project_name, featureset_name, file):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
+
 
         # add pipelines
         setting=self.test_setting_pipeline['tests'][featureset_name]
