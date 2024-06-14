@@ -5,12 +5,10 @@
 from qgate_sln_mlrun.ts.tsbase import TSBase
 from qgate_sln_mlrun.setup import Setup
 import mlrun.feature_store as fstore
-import mlrun.feature_store.steps as fsteps
 import pandas as pd
 import glob
 import os
-from tspipelinebase import TSPipeline
-import generateid
+from tspipeline import TSPipeline
 
 
 class TS401(TSBase):

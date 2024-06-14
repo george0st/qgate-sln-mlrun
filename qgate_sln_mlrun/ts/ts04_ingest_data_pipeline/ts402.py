@@ -10,6 +10,7 @@ from mlrun.data_types.data_types import spark_to_value_type
 import pandas as pd
 import glob
 import os
+from tspipeline import TSPipeline
 
 
 class TS402(TSBase):
@@ -48,8 +49,11 @@ class TS402(TSBase):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
-        # add pipeline for ingest
-        featureset.graph.to("storey.Extend", _fn="({'newextra': 'mlrun'})")
+        # add pipelines
+        pipeline = TSPipeline(featureset,self.test_setting_pipeline['tests'][featureset_name])
+        pipeline.add()
+
+        # save featureset
         featureset.save()
 
         # ingest data with bundl/chunk
