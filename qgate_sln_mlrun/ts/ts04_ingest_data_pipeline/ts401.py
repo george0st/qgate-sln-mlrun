@@ -9,7 +9,7 @@ import mlrun.feature_store.steps as fsteps
 import pandas as pd
 import glob
 import os
-from tspipelinebase import TSPipeline
+from tspipeline import TSPipeline
 import generateid
 
 

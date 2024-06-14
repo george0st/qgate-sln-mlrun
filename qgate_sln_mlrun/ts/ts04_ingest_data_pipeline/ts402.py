@@ -10,6 +10,7 @@ from mlrun.data_types.data_types import spark_to_value_type
 import pandas as pd
 import glob
 import os
+from tspipeline import TSPipeline
 
 
 class TS402(TSBase):
