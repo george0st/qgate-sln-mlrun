@@ -6,10 +6,11 @@
 
 # QGate-Sln-MLRun
 The Quality Gate for solution [MLRun](https://www.mlrun.org/) (and [Iguazio](https://www.iguazio.com/)). The main aims of the project are:
-- independent quality test (function, integration, acceptance, ... tests)
+- independent quality test (function, integration, performance, vulnerability, acceptance, ... tests)
 - deeper quality checks before full rollout/use in company environments
 - identification of possible compatibility issues (if any)
 - external and independent test coverage
+- community support
 - etc.
 
 The tests use these key components, MLRun solution see **[GIT mlrun](https://github.com/mlrun/mlrun)**, 
