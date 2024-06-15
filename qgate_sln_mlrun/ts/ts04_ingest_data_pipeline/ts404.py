@@ -11,7 +11,7 @@ import pandas as pd
 import glob
 import os
 from tspipeline import TSPipeline
-from mlrun.datastore.sources import CSVSource
+from mlrun.datastore.sources import ParquetSource
 
 
 class TS404(TSBase):
