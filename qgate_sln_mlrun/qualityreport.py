@@ -43,7 +43,7 @@ class QualityReport:
     TEST_BOTH = ["TS101","TS102",
                  "TS201", "TS202", "TS203", "TS204", "TS205", "TS206",
                  "TS301", "TS302", "TS303", "TS304", "TS305",
-                 "TS401", "TS402", "TS403", "TS404",
+                 "TS401", "TS402", "TS403", "TS404", "TS405",
                  "TS501",
                  "TS701", "TS702", "TS703", "TS704"]
     TEST_ONLY_OFFLINE = ["TS601","TS801","TS901"]
