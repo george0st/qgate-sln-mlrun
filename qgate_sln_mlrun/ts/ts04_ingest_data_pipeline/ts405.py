@@ -56,20 +56,6 @@ class TS405(TSBase):
                 with open(file, "r") as json_file:
                     self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file)
 
-        # """Data ingest"""
-        # for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-        #     # create possible file for load
-        #     source_file = os.path.join(os.getcwd(),
-        #                                self.setup.model_definition,
-        #                                "02-data",
-        #                                self.setup.dataset_name,
-        #                                f"*-{featureset_name}.csv.gz")
-        #
-        #     # check existing data set
-        #     for file in glob.glob(source_file):
-        #         self._ingest_data(f"{project_name}/{featureset_name}", project_name, featureset_name, file)
-
-
     @TSBase.handler_testcase
     def _create_featureset_ingest(self, testcase_name, project_name, featureset_name, json_file):
 
