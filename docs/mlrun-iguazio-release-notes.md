@@ -9,7 +9,7 @@ You can see detail changes in
 
 ## MLRun
 
-### 🚩1.7 MLRun (06-07/2024)
+### 🚩1.7 MLRun (07/2024)
  - Model monitoring/drifting for MLRun (available in free version also)
  - Available API Gateway (flexible configuration)
  - Improve scaling for Nuclio (from version >= 1.13)
