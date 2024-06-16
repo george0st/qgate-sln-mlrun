@@ -57,11 +57,18 @@ class TS405(TSBase):
         # save featureset
         featureset.save()
 
+        keys = ""
+        for entity in featureset.spec.entities:
+            keys+=f"{entity.name},"
+
         fstore.ingest(featureset,
-                      ParquetSource(name="tst", path=file),
+                      SQLSource(name="tst",
+                                table_name=self._mysql.create_helper(project_name, featureset_name),
+                                db_url=self.setup.mysql,
+                                key_field=keys[:-1].replace('-','_')),
                       # overwrite=False,
                       return_df=False,
-                      #infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                      # infer_options=mlrun.data_types.data_types.InferOptions.Null)
                       infer_options=mlrun.data_types.data_types.InferOptions.default())
         # TODO: use InferOptions.Null with python 3.10 or focus on WSL
         # NOTE: option default, change types
