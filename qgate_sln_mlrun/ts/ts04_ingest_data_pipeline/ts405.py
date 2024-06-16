@@ -34,22 +34,45 @@ class TS405(TSBase):
         pass
 
     def prj_exec(self, project_name):
-        """Data ingest"""
+
+        # It can be executed only in case that configuration is fine
+        if not self._mysql.configured:
+            return
+
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # create possible file for load
+            # Create table only in case, that table does not exist
+            #if not self._mysql.helper_exist(None, project_name, featureset_name):
+            self._mysql.create_insert_data(project_name, featureset_name, True)
+
+            # create file with definition of vector
             source_file = os.path.join(os.getcwd(),
                                        self.setup.model_definition,
-                                       "02-data",
-                                       self.setup.dataset_name,
-                                       f"*-{featureset_name}.csv.gz")
+                                       "01-model",
+                                       "02-feature-set",
+                                       f"*-{featureset_name}.json")
 
-            # check existing data set
             for file in glob.glob(source_file):
-                self._ingest_data(f"{project_name}/{featureset_name}", project_name, featureset_name, file)
+                # iterate cross all featureset definitions
+                with open(file, "r") as json_file:
+                    self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file)
+
+        # """Data ingest"""
+        # for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
+        #     # create possible file for load
+        #     source_file = os.path.join(os.getcwd(),
+        #                                self.setup.model_definition,
+        #                                "02-data",
+        #                                self.setup.dataset_name,
+        #                                f"*-{featureset_name}.csv.gz")
+        #
+        #     # check existing data set
+        #     for file in glob.glob(source_file):
+        #         self._ingest_data(f"{project_name}/{featureset_name}", project_name, featureset_name, file)
+
 
     @TSBase.handler_testcase
-    def _ingest_data(self, testcase_name, project_name, featureset_name, file):
-        # get existing feature set (feature set have to be created in previous test scenario)
+    def _create_featureset_ingest(self, testcase_name, project_name, featureset_name, json_file):
+
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # add pipelines
@@ -75,3 +98,4 @@ class TS405(TSBase):
         # TODO: use InferOptions.Null with python 3.10 or focus on WSL
         # NOTE: option default, change types
         # NOTE: option Null, generate error with datetime in python 3.9
+
