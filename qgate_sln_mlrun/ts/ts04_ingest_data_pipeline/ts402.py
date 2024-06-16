@@ -10,7 +10,7 @@ from mlrun.data_types.data_types import spark_to_value_type
 import pandas as pd
 import glob
 import os
-from tspipeline import TSPipeline
+from qgate_sln_mlrun.helper.pipelinehelper import PipelineHelper
 
 
 class TS402(TSBase):
@@ -50,7 +50,7 @@ class TS402(TSBase):
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # add pipelines
-        pipeline = TSPipeline(featureset,self.test_setting_pipeline['tests'][featureset_name])
+        pipeline = PipelineHelper(featureset,self.test_setting_pipeline['tests'][featureset_name])
         pipeline.add()
 
         # save featureset
