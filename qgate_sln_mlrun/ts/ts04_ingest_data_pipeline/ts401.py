@@ -8,7 +8,7 @@ import mlrun.feature_store as fstore
 import pandas as pd
 import glob
 import os
-from tspipeline import TSPipeline
+from qgate_sln_mlrun.helper.pipelinehelper import PipelineHelper
 
 
 class TS401(TSBase):
@@ -53,7 +53,7 @@ class TS401(TSBase):
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # add pipelines
-        pipeline = TSPipeline(featureset,self.test_setting_pipeline['tests'][featureset_name])
+        pipeline = PipelineHelper(featureset,self.test_setting_pipeline['tests'][featureset_name])
         pipeline.add()
 
         # save featureset
