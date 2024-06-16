@@ -11,13 +11,15 @@ import pandas as pd
 import glob
 import os
 from tspipeline import TSPipeline
-from mlrun.datastore.sources import ParquetSource
+from mlrun.datastore.sources import SQLSource
+from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
 
 
 class TS405(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
+        self._mysql = MySQLHelper(self.setup)
 
     @property
     def desc(self) -> str:
