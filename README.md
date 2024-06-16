@@ -42,7 +42,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS402: Ingest data & pipeline to feature set(s) from DataFrame source
    - ✔  TS403: Ingest data & pipeline to feature set(s) from CSV source 
    - ✔  TS404: Ingest data & pipeline to feature set(s) from Parquet source
-   - ❌ TS405: Ingest data & pipeline to feature set(s) from SQL source
+   - ✔  TS405: Ingest data & pipeline to feature set(s) from SQL source
    - ❌ TS406: Ingest data & pipeline to feature set(s) from Kafka source
    - ❌ TS407: Ingest data & pipeline to feature set(s) from HTTP source
  - **05 - Feature vector**
@@ -115,7 +115,7 @@ see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 ## Tested with
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - **MLRun** (in Desktop Docker)
-   - MLRun 1.7.0 (plan 06-07/2024)
+   - MLRun 1.7.0 (plan 07/2024)
    - MLRun 1.6.4 (plan 06-07/2024), 1.6.3, 1.6.2, 1.6.1, 1.6.0
    - MLRun 1.5.2, 1.5.1, 1.5.0
    - MLRun 1.4.1, 1.3.0
