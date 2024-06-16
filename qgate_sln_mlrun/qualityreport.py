@@ -8,7 +8,7 @@ from qgate_sln_mlrun.ts.ts08_build_model import ts801
 from qgate_sln_mlrun.ts.ts07_pipeline import ts701, ts702, ts703, ts704
 from qgate_sln_mlrun.ts.ts06_get_data import ts601, ts602
 from qgate_sln_mlrun.ts.ts05_feature_vector import ts501
-from qgate_sln_mlrun.ts.ts04_ingest_data_pipeline import ts401, ts402, ts403, ts404
+from qgate_sln_mlrun.ts.ts04_ingest_data_pipeline import ts401, ts402, ts403, ts404, ts405
 from qgate_sln_mlrun.ts.ts03_ingest_data import ts301, ts302, ts303, ts304, ts305
 from qgate_sln_mlrun.ts.ts02_feature_set import ts201, ts202, ts203, ts204, ts205, ts206
 from qgate_sln_mlrun.ts.ts01_project import ts101, ts102
@@ -24,7 +24,7 @@ class QualityReport:
     TEST_SCENARIOS = [ts101.TS101,
                       ts201.TS201, ts202.TS202, ts203.TS203, ts204.TS204, ts205.TS205, ts206.TS206,
                       ts301.TS301, ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305,
-                      ts401.TS401, ts402.TS402, ts403.TS403, ts404.TS404,
+                      ts401.TS401, ts402.TS402, ts403.TS403, ts404.TS404, ts405.TS405,
                       ts501.TS501,
                       ts601.TS601, ts602.TS602,
                       ts701.TS701, ts702.TS702, ts703.TS703, ts704.TS704]
