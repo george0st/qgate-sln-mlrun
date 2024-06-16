@@ -2,7 +2,7 @@ import mlrun.feature_store.steps as fsteps
 import generateid
 
 
-class TSPipeline():
+class PipelineHelper():
 
     def __init__(self, featureset, setting):
         self._featureset = featureset
