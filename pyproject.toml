@@ -53,7 +53,7 @@ packages = ["qgate_sln_mlrun", "qgate_sln_mlrun.helper", "qgate_sln_mlrun.templa
   "qgate_sln_mlrun.ts", "qgate_sln_mlrun.ts.ts01_project", "qgate_sln_mlrun.ts.ts02_feature_set",
   "qgate_sln_mlrun.ts.ts03_ingest_data", "qgate_sln_mlrun.ts.ts04_ingest_data_pipeline", "qgate_sln_mlrun.ts.ts05_feature_vector",
   "qgate_sln_mlrun.ts.ts06_get_data", "qgate_sln_mlrun.ts.ts07_pipeline", "qgate_sln_mlrun.ts.ts08_build_model",
-  "qgate_sln_mlrun.ts.ts09_serve_model"]
+  "qgate_sln_mlrun.ts.ts09_serve_model", "qgate_sln_mlrun.ts.ts10_model_monitoring"]
 include-package-data = true     # true - add other data such as *.txt, *.html, etc. under all packages
 
 [tool.setuptools.package-data]
