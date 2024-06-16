@@ -1,5 +1,5 @@
 """
-  TS405: Ingest data & pipeline to feature set(s) from Parquet source
+  TS405: Ingest data & pipeline to feature set(s) from SQL source
 """
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
@@ -21,11 +21,11 @@ class TS405(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Ingest data & pipeline to feature set(s) from Parquet source"
+        return "Ingest data & pipeline to feature set(s) from SQL source"
 
     @property
     def long_desc(self):
-        return "Ingest data & pipeline to feature set(s) from Parquet source"
+        return "Ingest data & pipeline to feature set(s) from SQL source"
 
     def prepare(self):
         """Prepare data for ingestion"""
