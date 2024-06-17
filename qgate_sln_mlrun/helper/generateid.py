@@ -20,7 +20,7 @@ class GenerateId(StepToDict, MLRunStep):
 
     def _get_id(self):
         self.iterator+=1
-        return uuid.uuid5(bytes(self.namespace,"utf-8"), f"{self.iterator} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')}")
+        return uuid.uuid5(uuid.NAMESPACE_URL, f"{self.namespace} {self.iterator} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')}")
 
     def _do_storey(self, event):
         for feature in self.features:
