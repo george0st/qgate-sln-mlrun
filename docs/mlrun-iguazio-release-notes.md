@@ -33,7 +33,7 @@ You can see detail changes in
 
 ## Iguazio
 
-### ✅ 3.6 Iguazio
+### ✅ 3.6.0 Iguazio
  - Supports Rocky Linux 8.x OS & Kubernetes 1.28 for on-prem vanilla 
  - Focused on fixes
    - All ingresses using secured traffic (SSL), periodic deletion of files on var/crash on app nodes, etc.
