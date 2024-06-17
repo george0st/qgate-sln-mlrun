@@ -33,9 +33,15 @@ You can see detail changes in
 
 ## Iguazio
 
-### ✅ 3.5.5 Iguazio
+### ✅ 3.6.0 Iguazio
+ - Supports Rocky Linux 8.x OS & Kubernetes 1.28 for on-prem vanilla 
+ - Focused on fixes
+   - All ingresses using secured traffic (SSL), periodic deletion of files on var/crash on app nodes, etc.
+ - Announcement future deprecation, 'V3IO NoSQL (key-value) and streams functionality will be deprecated in the next major release.' 
+
+### 3.5.5 Iguazio
  - Supports self-signed docker-registries
- - support full SSO with Keycloak (useful for end users)
+ - Support full SSO with Keycloak (useful for end users)
  - K8s 1.28
 
 ### 3.5.4 Iguazio
