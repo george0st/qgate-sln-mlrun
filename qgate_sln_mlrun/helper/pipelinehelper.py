@@ -1,5 +1,5 @@
 import mlrun.feature_store.steps as fsteps
-import generateid
+from qgate_sln_mlrun.helper.generateid import GenerateId
 
 
 class PipelineHelper():
@@ -43,7 +43,7 @@ class PipelineHelper():
 
             # own step
             if self._setting.get("GenerateId"):
-                last_step = self._featureset.graph.add_step(generateid.GenerateId(namespace=self._setting['GenerateId']["namespace"],
+                last_step = self._featureset.graph.add_step(GenerateId(namespace=self._setting['GenerateId']["namespace"],
                                                                                   features=self._setting['GenerateId']["features"]),
                                                             name="GenerateId",
                                                             after=None if not last_step else last_step.name)
