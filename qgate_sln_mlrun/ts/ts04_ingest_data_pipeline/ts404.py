@@ -39,7 +39,7 @@ class TS404(TSBase):
                                        self.setup.model_definition,
                                        "02-data",
                                        self.setup.dataset_name,
-                                       f"*-{featureset_name}.csv.gz")
+                                       f"*-{featureset_name}.parquet")
 
             # check existing data set
             for file in glob.glob(source_file):
