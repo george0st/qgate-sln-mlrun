@@ -65,6 +65,11 @@ see detail below
 2. Relation MapValues and storey.Filter [see](https://github.com/mlrun/mlrun/issues/5743)
   - Workarround: Use MapValues with parameter **with_original_features=True**
 
+## Ingest issues
+
+1. Clarification of issues with relation to the source/target and
+ setting of InferOptions. See, [full detail](ingest_issues.md) 
+
 ## Others
 
 1. Not to use the engine `pandas`
