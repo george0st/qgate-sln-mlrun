@@ -4,10 +4,11 @@ List of extra situations/exceptions during feature set ingest with relation to t
 source, target and other ingest conditions.
 
 
- Target | Source   | Ingest   | State |
---------|----------|----------|-------|
-Parquet | Parquet  |
-Redis   | Parquet  |
+ Target | Source  | InferOptions.default()                                                                                                                | InferOptions.Null | 
+--------|---------|---------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+Parquet | Parquet | ArrowTypeError: ("Expected bytes, got a 'datetime.date' object", 'Conversion failed for column party-establishment with type object') | Ok 
+Parquet | CSV     | Ok                                                                                                                                    | ??                                                                                                                                    
+Redis   | Parquet | ??                                                                                                                                    | ??
 
 
 TBD.
