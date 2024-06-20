@@ -41,7 +41,7 @@
 
 ## 4. Install these python packages
 
- - SQLAlchemy based on MLRun extras see `pip install mlrun[kafka]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/blob/development/dependencies.py)
+ - Kafka based on MLRun extras see `pip install mlrun[kafka]` or [dependencies.py in MLRun](https://github.com/mlrun/mlrun/blob/development/dependencies.py)
    - it required `pip install kafka-python~=2.0`
    - it required `pip install avro~=1.11`
  - NOTE
