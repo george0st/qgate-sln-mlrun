@@ -68,8 +68,8 @@ class TS305(TSBase):
                                 key_field=keys[:-1].replace('-','_')),
                       # overwrite=False,
                       return_df=False,
-                      # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                      infer_options=mlrun.data_types.data_types.InferOptions.default())
+                      infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                      #infer_options=mlrun.data_types.data_types.InferOptions.default())
         # TODO: use InferOptions.Null with python 3.10 or focus on WSL
         # NOTE: option default, change types
         # NOTE: option Null, generate error with datetime in python 3.9

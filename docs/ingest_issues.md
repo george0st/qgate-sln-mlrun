@@ -8,11 +8,11 @@ the preview (it is operation before the own ingest).
 
  Target | Source     | InferOptions.default()                                                                                                                | InferOptions.Null | 
 --------|------------|---------------------------------------------------------------------------------------------------------------------------------------|--------|
-Parquet | DataFrame  | OK                                                                                                                                    | OK
+Parquet | DataFrame  | Ok                                                                                                                                    | Ok
 Parquet | CSV        | Ok                                                                                                                                    | Ok
 Parquet | Parquet    | ArrowTypeError: ("Expected bytes, got a 'datetime.date' object", 'Conversion failed for column party-establishment with type object') | Ok 
-Parquet | SQL(MySQL) |                                                                                                                                     
-Redis   | Parquet | Ok                                                                                                                                    | ??
+Parquet | SQL(MySQL) | Ok                                                                                                                                    | Ok
+Redis   | Parquet    | Ok                                                                                                                                    | ??
 
 
 TBD.
