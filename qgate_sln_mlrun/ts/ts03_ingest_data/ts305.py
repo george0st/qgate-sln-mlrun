@@ -35,9 +35,8 @@ class TS305(TSBase):
             return
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # Create table only in case, that table does not exist
-            #if not self._mysql.helper_exist(None, project_name, featureset_name):
-            self._mysql.create_insert_data(project_name, featureset_name, True)
+            # Create table as data source
+            self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
 
             # create file with definition of vector
             source_file = os.path.join(os.getcwd(),
@@ -67,7 +66,7 @@ class TS305(TSBase):
                                 key_field=keys[:-1].replace('-','_')),
                       # overwrite=False,
                       return_df=False,
-                      # infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                      #infer_options=mlrun.data_types.data_types.InferOptions.Null)
                       infer_options=mlrun.data_types.data_types.InferOptions.default())
         # TODO: use InferOptions.Null with python 3.10 or focus on WSL
         # NOTE: option default, change types
