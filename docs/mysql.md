@@ -7,8 +7,8 @@
 ## 2. Run MySQL (in container)
 
 1. Get image from official source
-   - get specific redis image version 8.3 `docker pull mysql:8.3`
-   - or get last redis image `docker pull mysql:latest`
+   - get specific mysql image version 8.3 `docker pull mysql:8.3`
+   - or get last mysql image `docker pull mysql:latest`
    - Note
      - available [versions](https://hub.docker.com/_/mysql)/[tags](https://hub.docker.com/_/mysql/tags)
 
