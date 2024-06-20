@@ -4,18 +4,18 @@
 
  - Install Desktop Docker, [see](./desktopdocker.md)
 
-## 2. Run MySQL (in container)
+## 2. Run Spark (in container)
 
 1. Get image from official source
-   - get specific redis image version 8.3 `docker pull spark:3.5.1-python3`
-   - or get last redis image `docker pull spark:latest`
+   - get specific Spark image version 8.3 `docker pull spark:3.5.1-python3`
+   - or get last Spark image `docker pull spark:latest`
    - Note
      - available [versions](https://hub.docker.com/_/spark)/[tags](https://hub.docker.com/_/spark/tags)
 
 2. Run new container
    - create container with name 'mlrun-spark', use image 'spark:3.5.1-python3' and open ports ???:???
      - `docker run --name mlrun-spark -d spark:3.5.1-python3`
-   - or create container with name 'mlrun-mysql', use image 'spark:latest' and open ports ???:???
+   - or create container with name 'mlrun-spark', use image 'spark:latest' and open ports ???:???
      - `docker run --name mlrun-spark -d spark:latest`
    - NOTE:
      - user `??`, password `??`
