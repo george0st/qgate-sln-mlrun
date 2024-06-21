@@ -8,6 +8,8 @@ the preview (it is operation before the own ingest).
 
 ## ParquetTarget
 
+Experinece from TS301-305, TS401-405
+
  Target | Source     | InferOptions.default()                                                                                                                | InferOptions.Null | 
 --------|------------|---------------------------------------------------------------------------------------------------------------------------------------|--------|
 Parquet | DataFrame  | Ok                                                                                                                                    | Ok
@@ -15,7 +17,9 @@ Parquet | CSV        | Ok                                                       
 Parquet | Parquet    | ArrowTypeError: ("Expected bytes, got a 'datetime.date' object", 'Conversion failed for column party-establishment with type object') | Ok 
 Parquet | SQL(MySQL) | Ok                                                                                                                                    | Ok
 
+
 ## RedisTarget
+
  Target | Source     | InferOptions.default()                                                                                                                | InferOptions.Null | 
 --------|------------|---------------------------------------------------------------------------------------------------------------------------------------|--------|
 Redis   | Parquet    | Ok                                                                                                                                    | ??
