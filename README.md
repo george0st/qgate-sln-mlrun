@@ -41,7 +41,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS401: Ingest data & pipeline (Preview mode)
    - ✅ TS402: Ingest data & pipeline to feature set(s) from DataFrame source
    - ✅ TS403: Ingest data & pipeline to feature set(s) from CSV source 
-   - ✔  TS404: Ingest data & pipeline to feature set(s) from Parquet source
+   - ✅ TS404: Ingest data & pipeline to feature set(s) from Parquet source
    - ✔  TS405: Ingest data & pipeline to feature set(s) from SQL source
    - ❌ TS406: Ingest data & pipeline to feature set(s) from Kafka source
    - ❌ TS407: Ingest data & pipeline to feature set(s) from HTTP source
