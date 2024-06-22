@@ -63,9 +63,9 @@ class MySQLHelper(BaseHelper):
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        column_types = column_types[:-1].replace('-', '_')
-        primary_keys = primary_keys[:-1].replace('-','_')
-        columns = columns[:-1].replace('-', '_')
+        column_types = column_types[:-1]
+        primary_keys = primary_keys[:-1]
+        columns = columns[:-1]
 
         # connect
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
@@ -111,9 +111,8 @@ class MySQLHelper(BaseHelper):
                                         encoding="utf-8",
                                         chunksize=Setup.MAX_BUNDLE):
                 for row in data_frm.to_numpy().tolist():
-                    values=f"\",\"".join(str(e) for e in row)
-
-                    cursor.execute(f"INSERT INTO {helper} ({columns}) VALUES(\"{values}\");")
+                    values=f",".join(f"\"{str(e)}\"" if pd.notna(e) else "NULL" for e in row)
+                    cursor.execute(f"INSERT INTO {helper} ({columns}) VALUES({values});")
                 connection.commit()
 
     def helper_exist(self, helper):

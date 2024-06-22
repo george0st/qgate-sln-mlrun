@@ -12,6 +12,7 @@ class PipelineHelper():
         # add pipelines
         if self._setting:
             last_step=None
+
             # add steps
             if self._setting.get("Imputer"):
                 last_step=self._featureset.graph.add_step(fsteps.Imputer(mapping=self._setting['Imputer']),
