@@ -63,9 +63,9 @@ class MySQLHelper(BaseHelper):
                     columns += f"{item['name']},"
                     column_types+= f"{item['name']} {TSHelper.type_to_mysql_type(item['type'])},"
 
-        column_types = column_types[:-1].replace('-', '_')
-        primary_keys = primary_keys[:-1].replace('-','_')
-        columns = columns[:-1].replace('-', '_')
+        column_types = column_types[:-1] #.replace('-', '_')
+        primary_keys = primary_keys[:-1] #.replace('-','_')
+        columns = columns[:-1] #.replace('-', '_')
 
         # connect
         user_name, password, host, port, db = TSHelper.split_sqlalchemy_connection(self.setup.mysql)
