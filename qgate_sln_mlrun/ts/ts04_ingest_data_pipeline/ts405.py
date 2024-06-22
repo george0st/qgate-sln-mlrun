@@ -75,11 +75,11 @@ class TS405(TSBase):
                       SQLSource(name="tst",
                                 table_name=self._mysql.create_helper(project_name, featureset_name),
                                 db_url=self.setup.mysql,
-                                key_field=keys[:-1].replace('-','_')),
+                                key_field=keys[:-1]),
                       # overwrite=False,
                       return_df=False,
-                      # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                      infer_options=mlrun.data_types.data_types.InferOptions.default())
+                      infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                      #infer_options=mlrun.data_types.data_types.InferOptions.default())
         # TODO: use InferOptions.Null with python 3.10 or focus on WSL
         # NOTE: option default, change types
         # NOTE: option Null, generate error with datetime in python 3.9
