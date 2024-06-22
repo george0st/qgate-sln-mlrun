@@ -111,9 +111,9 @@ class MySQLHelper(BaseHelper):
                                         encoding="utf-8",
                                         chunksize=Setup.MAX_BUNDLE):
                 for row in data_frm.to_numpy().tolist():
-                    values=f"\",\"".join(str(e) for e in row)
+                    values=f",".join(f"\"{str(e)}\"" if pd.notna(e) else "NULL" for e in row)
 
-                    cursor.execute(f"INSERT INTO {helper} ({columns}) VALUES(\"{values}\");")
+                    cursor.execute(f"INSERT INTO {helper} ({columns}) VALUES({values});")
                 connection.commit()
 
     def helper_exist(self, helper):
