@@ -19,7 +19,6 @@ You can see detail changes in
  - Improve scaling for Nuclio (from version >= 1.13)
  - Support paging (ability to return longer data)
  - Support HDFS as data store (via WebHDFS)
- - Support Spark Streaming
 
 ### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
@@ -37,7 +36,8 @@ You can see detail changes in
  - Supports Rocky Linux 8.x OS & Kubernetes 1.28 for on-prem vanilla 
  - Focused on fixes
    - All ingresses using secured traffic (SSL), periodic deletion of files on var/crash on app nodes, etc.
- - Announcement future deprecation, 'V3IO NoSQL (key-value) and streams functionality will be deprecated in the next major release.' 
+ - Important note:
+   - Announcement future deprecation, 'V3IO NoSQL (key-value) and streams functionality will be deprecated in the next major release.' 
 
 ### 3.5.5 Iguazio
  - Supports self-signed docker-registries
