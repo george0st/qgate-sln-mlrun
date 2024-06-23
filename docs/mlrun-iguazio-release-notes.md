@@ -19,7 +19,6 @@ You can see detail changes in
  - Improve scaling for Nuclio (from version >= 1.13)
  - Support paging (ability to return longer data)
  - Support HDFS as data store (via WebHDFS)
- - Support Spark Streaming
 
 ### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
