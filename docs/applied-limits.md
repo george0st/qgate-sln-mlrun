@@ -76,6 +76,10 @@ see detail below
    - this `pandas` engine is useful only for test purpose (see the first 
    info about that in change log for MLRun version 1.6.0)
 
+2. Issue with project delete
+   - see [mistake](https://github.com/mlrun/mlrun/issues/5202) in MLRun versions 1.6.0, 1.6.1, 1.6.2, 1.6.3
+   - expected solution in MLRun 1.7.0
+
 ## Recommendation
 
 1. It is really tricky to use functions in **Preview** state
