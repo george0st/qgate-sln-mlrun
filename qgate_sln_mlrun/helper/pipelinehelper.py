@@ -13,7 +13,7 @@ class PipelineHelper():
         if self._setting:
             last_step=None
 
-            # add steps
+            # add steps, see https://docs.mlrun.org/en/latest/feature-store/transformations.html
 
             # remove None, Nan, ... values
             if self._setting.get("Imputer"):
@@ -66,14 +66,3 @@ class PipelineHelper():
                                                           name="storey.Extend",
                                                           after=None if not last_step else last_step.name,
                                                           _fn=f"{self._setting['storey.Extend']}")
-
-        # https://docs.mlrun.org/en/latest/feature-store/transformations.html
-        #ok - Imputer
-        #ok - OneHotEncoder
-        #ok - DateExtractor
-        #ok - MapValues
-        #ok - DropFeatures
-
-        #MLRunStep
-
-
