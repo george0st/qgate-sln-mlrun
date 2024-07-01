@@ -13,36 +13,41 @@ class PipelineHelper():
         if self._setting:
             last_step=None
 
-            # add steps
+            # add steps, see https://docs.mlrun.org/en/latest/feature-store/transformations.html
+
+            # remove None, Nan, ... values
             if self._setting.get("Imputer"):
                 last_step=self._featureset.graph.add_step(fsteps.Imputer(mapping=self._setting['Imputer']),
                                                           name="Imputer",
                                                           after=None if not last_step else last_step.name)
 
+            # decode to numeric value
             if self._setting.get("OneHotEncoder"):
                 last_step = self._featureset.graph.add_step(fsteps.OneHotEncoder(mapping=self._setting['OneHotEncoder']),
                                                             name="OneHotEncoder",
                                                             after=None if not last_step else last_step.name)
 
+            # extract date value from datetime
             if self._setting.get("DateExtractor"):
                 last_step = self._featureset.graph.add_step(fsteps.DateExtractor(parts=self._setting['DateExtractor']['parts'],
                                                                                  timestamp_col=self._setting['DateExtractor']['timestamp_col']),
                                                             name="DateExtractor",
                                                             after=None if not last_step else last_step.name)
-
+            # transform values
             if self._setting.get("MapValues"):
-                # TODO: remove workaround see https://github.com/mlrun/mlrun/issues/5743 (after repair, issue in MLRun 1.6.3)
+                # TODO: must keep 'with_original_features=True', remove workaround see https://github.com/mlrun/mlrun/issues/5743 (after repair, issue in MLRun 1.6.3)
                 last_step = self._featureset.graph.add_step(fsteps.MapValues(mapping=self._setting['MapValues'],
                                                                              with_original_features=True),
                                                             name="MapValues",
                                                             after=None if not last_step else last_step.name)
 
+            # remove feature
             if self._setting.get("DropFeatures"):
                 last_step = self._featureset.graph.add_step(fsteps.DropFeatures(features=self._setting['DropFeatures']),
                                                             name="DropFeatures",
                                                             after=None if not last_step else last_step.name)
 
-            # own step
+            # own step, generate unique Id
             if self._setting.get("GenerateId"):
                 last_step = self._featureset.graph.add_step(GenerateId(namespace=self._setting['GenerateId']["namespace"],
                                                                                   features=self._setting['GenerateId']["features"]),
@@ -61,14 +66,3 @@ class PipelineHelper():
                                                           name="storey.Extend",
                                                           after=None if not last_step else last_step.name,
                                                           _fn=f"{self._setting['storey.Extend']}")
-
-        # https://docs.mlrun.org/en/latest/feature-store/transformations.html
-        #ok - Imputer
-        #ok - OneHotEncoder
-        #ok - DateExtractor
-        #ok - MapValues
-        #ok - DropFeatures
-
-        #MLRunStep
-
-
