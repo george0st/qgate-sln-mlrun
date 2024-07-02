@@ -60,8 +60,13 @@ class TS405(TSBase):
 
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
+        # test if pipelines setting exist
+        setting_pipeline=self.test_setting_pipeline['tests'].get(featureset_name)
+        if not setting_pipeline:
+            return
+
         # add pipelines
-        pipeline = PipelineHelper(featureset,self.test_setting_pipeline['tests'][featureset_name])
+        pipeline = PipelineHelper(featureset,setting_pipeline)
         pipeline.add()
 
         # save featureset
