@@ -36,7 +36,6 @@ class TS404(TSBase):
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # only for featuresets with defined pipeline setting
             if self.test_setting_pipeline['tests'].get(featureset_name):
-
                 # create possible file for load
                 source_file = os.path.join(os.getcwd(),
                                            self.setup.model_definition,
