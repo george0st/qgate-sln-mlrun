@@ -27,18 +27,10 @@ class TS401(TSBase):
     def prj_exec(self, project_name):
         """Data ingest"""
 
-        # pipelines = None
-        # if self.test_setting.get('pipeline'):
-        #     if self.test_setting_pipeline.get('featuresets'):
-        #         pipelines = self.test_setting_pipeline['featuresets']
-        #
-        # if pipelines:
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # only for featuresets with defined pipeline setting
             if self.test_setting_pipeline['tests'].get(featureset_name):
-                # processing only feature sets with pipelines
-#                if featureset_name in pipelines:
-                    # create possible file for load
+                # create possible file for load
                 source_file = os.path.join(os.getcwd(),
                                            self.setup.model_definition,
                                            "02-data",
