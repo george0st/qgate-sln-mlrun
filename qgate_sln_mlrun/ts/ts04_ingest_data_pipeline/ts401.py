@@ -27,25 +27,27 @@ class TS401(TSBase):
     def prj_exec(self, project_name):
         """Data ingest"""
 
-        pipelines = None
-        if self.test_setting.get('pipeline'):
-            if self.test_setting_pipeline.get('featuresets'):
-                pipelines = self.test_setting_pipeline['featuresets']
-
-        if pipelines:
-            for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
+        # pipelines = None
+        # if self.test_setting.get('pipeline'):
+        #     if self.test_setting_pipeline.get('featuresets'):
+        #         pipelines = self.test_setting_pipeline['featuresets']
+        #
+        # if pipelines:
+        for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
+            # only for featuresets with defined pipeline setting
+            if self.test_setting_pipeline['tests'].get(featureset_name):
                 # processing only feature sets with pipelines
-                if featureset_name in pipelines:
+#                if featureset_name in pipelines:
                     # create possible file for load
-                    source_file = os.path.join(os.getcwd(),
-                                               self.setup.model_definition,
-                                               "02-data",
-                                               self.setup.dataset_name,
-                                               f"*-{featureset_name}.csv.gz")
+                source_file = os.path.join(os.getcwd(),
+                                           self.setup.model_definition,
+                                           "02-data",
+                                           self.setup.dataset_name,
+                                           f"*-{featureset_name}.csv.gz")
 
-                    # check existing data set
-                    for file in glob.glob(source_file):
-                        self._ingest_data(f"{project_name}/{featureset_name}", project_name, featureset_name, file)
+                # check existing data set
+                for file in glob.glob(source_file):
+                    self._ingest_data(f"{project_name}/{featureset_name}", project_name, featureset_name, file)
 
     @TSBase.handler_testcase
     def _ingest_data(self, testcase_name, project_name, featureset_name, file):
