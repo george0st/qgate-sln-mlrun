@@ -40,33 +40,31 @@ class TS405(TSBase):
             return
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # Create table as data source
-            self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
+            # only for featuresets with defined pipeline setting
+            if self.test_setting_pipeline['tests'].get(featureset_name):
 
-            # create file with definition of vector
-            source_file = os.path.join(os.getcwd(),
-                                       self.setup.model_definition,
-                                       "01-model",
-                                       "02-feature-set",
-                                       f"*-{featureset_name}.json")
+                # Create table as data source
+                self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
 
-            for file in glob.glob(source_file):
-                # iterate cross all featureset definitions
-                with open(file, "r") as json_file:
-                    self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file)
+                # create file with definition of vector
+                source_file = os.path.join(os.getcwd(),
+                                           self.setup.model_definition,
+                                           "01-model",
+                                           "02-feature-set",
+                                           f"*-{featureset_name}.json")
+
+                for file in glob.glob(source_file):
+                    # iterate cross all featureset definitions
+                    with open(file, "r") as json_file:
+                        self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file)
 
     @TSBase.handler_testcase
     def _create_featureset_ingest(self, testcase_name, project_name, featureset_name, json_file):
 
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
-        # test if pipelines setting exist
-        setting_pipeline=self.test_setting_pipeline['tests'].get(featureset_name)
-        if not setting_pipeline:
-            return
-
         # add pipelines
-        pipeline = PipelineHelper(featureset,setting_pipeline)
+        pipeline = PipelineHelper(featureset,self.test_setting_pipeline['tests'][featureset_name])
         pipeline.add()
 
         # save featureset
