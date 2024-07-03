@@ -11,6 +11,7 @@ You can see detail changes in
 
 ### 🚩1.8 MLRun (exp. 11/2024)
  - Focus on SourceSQL, TargetSQL
+ - Python 3.12
  - TBD.
 
 ### 🚩1.7 MLRun (exp. 07/2024)
