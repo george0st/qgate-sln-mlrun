@@ -9,12 +9,12 @@ You can see detail changes in
 
 ## MLRun
 
-### 🚩1.8 MLRun (exp. 11/2024)
+### 🚩1.8 MLRun (exp. 11-12/2024)
  - Focus on SourceSQL/TargetSQL improvements 
  - Python 3.12 (till end of 2024)
  - TBD.
 
-### 🚩1.7 MLRun (exp. 07/2024)
+### 🚩1.7 MLRun (exp. 07-08/2024)
  - Model monitoring/drifting for MLRun (available in free version also)
  - Available API Gateway (flexible configuration & Nuclio tuning)
  - Improve scaling for Nuclio (from version >= 1.13)
