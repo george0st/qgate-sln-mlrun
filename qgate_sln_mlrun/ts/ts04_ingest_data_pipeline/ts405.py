@@ -41,7 +41,8 @@ class TS405(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # only for featuresets with defined pipeline setting
-            if self.test_setting_pipeline['tests'].get(featureset_name):
+            pipeline = PipelineHelper(featureset_name)
+            if pipeline.exist:
 
                 # Create table as data source
                 self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
@@ -56,16 +57,15 @@ class TS405(TSBase):
                 for file in glob.glob(source_file):
                     # iterate cross all featureset definitions
                     with open(file, "r") as json_file:
-                        self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file)
+                        self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file, pipeline)
 
     @TSBase.handler_testcase
-    def _create_featureset_ingest(self, testcase_name, project_name, featureset_name, json_file):
+    def _create_featureset_ingest(self, testcase_name, project_name, featureset_name, json_file, pipeline):
 
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # add pipelines
-        pipeline = PipelineHelper(featureset,self.test_setting_pipeline['tests'][featureset_name])
-        pipeline.add()
+        pipeline.add(featureset)
 
         # save featureset
         featureset.save()
