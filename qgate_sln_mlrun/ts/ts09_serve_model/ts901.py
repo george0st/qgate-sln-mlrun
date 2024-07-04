@@ -38,7 +38,7 @@ class TS901(TSBase):
             source_file = os.path.join(os.getcwd(),
                                        self.setup.model_definition,
                                        "01-model",
-                                       "04-ml-model",
+                                       "05-ml-model",
                                        f"*-{mlmodel_name}.json")
 
             # check existing data set

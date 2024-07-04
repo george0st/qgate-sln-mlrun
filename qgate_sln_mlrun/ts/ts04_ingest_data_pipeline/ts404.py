@@ -35,7 +35,8 @@ class TS404(TSBase):
         """Data ingest"""
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # only for featuresets with defined pipeline setting
-            if self.test_setting_pipeline['tests'].get(featureset_name):
+            pipeline = PipelineHelper(featureset_name)
+            if pipeline.exist:
                 # create possible file for load
                 source_file = os.path.join(os.getcwd(),
                                            self.setup.model_definition,
@@ -45,16 +46,15 @@ class TS404(TSBase):
 
                 # check existing data set
                 for file in glob.glob(source_file):
-                    self._ingest_data(f"{project_name}/{featureset_name}", project_name, featureset_name, file)
+                    self._ingest_data(f"{project_name}/{featureset_name}", project_name, featureset_name, file, pipeline)
 
     @TSBase.handler_testcase
-    def _ingest_data(self, testcase_name, project_name, featureset_name, file):
+    def _ingest_data(self, testcase_name, project_name, featureset_name, file, pipeline):
         # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # add pipelines
-        pipeline = PipelineHelper(featureset,self.test_setting_pipeline['tests'][featureset_name])
-        pipeline.add()
+        pipeline.add(featureset)
 
         # save featureset
         featureset.save()
