@@ -38,20 +38,10 @@ class TS305(TSBase):
             # Create table as data source
             self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
 
-            # create file with definition of vector
-            source_file = os.path.join(os.getcwd(),
-                                       self.setup.model_definition,
-                                       "01-model",
-                                       "02-feature-set",
-                                       f"*-{featureset_name}.json")
-
-            for file in glob.glob(source_file):
-                # iterate cross all featureset definitions
-                with open(file, "r") as json_file:
-                    self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name, json_file)
+            self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name)
 
     @TSBase.handler_testcase
-    def _create_featureset_ingest(self, testcase_name, project_name, featureset_name, json_file):
+    def _create_featureset_ingest(self, testcase_name, project_name, featureset_name):
 
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
