@@ -3,6 +3,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, SQLTarget, KafkaTarget
+import sqlalchemy
 import os
 
 
@@ -143,3 +144,23 @@ class FeatureSetHelper(TSBase):
         for item in json_spec['features']:
             schema[item['name']] = TSHelper.type_to_type(item['type'])
         return schema, json_spec['entities'][0]['name']
+
+    def _createtable(self, db_url, table_name, json_spec):
+        # https://medium.com/@sandyjtech/creating-a-database-using-python-and-sqlalchemy-422b7ba39d7e
+
+        engine = sqlalchemy.create_engine(db_url, echo=False)
+        meta = sqlalchemy.MetaData()
+
+        # create table definition
+        tbl=sqlalchemy.Table(table_name, meta)
+        # create primary keys
+        for item in json_spec['entities']:
+            tbl.append_column(
+                sqlalchemy.Column( item['name'],TSHelper.type_to_sqlalchemy(item['type']), primary_key=True))
+        # create columns
+        for item in json_spec['features']:
+            tbl.append_column(
+                sqlalchemy.Column(item['name'], TSHelper.type_to_sqlalchemy(item['type'])))
+
+        # create table
+        meta.create_all(engine)
