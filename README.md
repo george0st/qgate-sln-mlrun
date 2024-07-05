@@ -125,7 +125,7 @@ The project was tested with these MLRun versions (see [change log](https://docs.
    - Iguazio 3.5.1 (with MLRun 1.3.0)
 
 NOTE: Current state, only the last MLRun/Iguazio versions are tested 
-(the backward compatibility is based in MLRun/Iguazio, [see](https://docs.mlrun.org/en/latest/install.html#mlrun-client-backward-compatibility)).
+(the backward compatibility is based on MLRun/Iguazio, [see](https://docs.mlrun.org/en/latest/install.html#mlrun-client-backward-compatibility)).
 
 ## Others
  - **To-Do**, the list of expected/future improvements, [see](./docs/todo_list.md)
