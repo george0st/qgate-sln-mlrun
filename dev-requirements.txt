@@ -2,7 +2,6 @@ mlrun==1.6.4
 python-dotenv~=0.17.0
 jinja2~=3.1
 
-# ML model, update from 1.4.0
 scikit-learn==1.5.0
 
 # RedisNoSqlTarget
