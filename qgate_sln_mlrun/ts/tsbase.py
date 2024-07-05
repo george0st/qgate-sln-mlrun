@@ -51,10 +51,6 @@ class TSBase:
     def test_setting_vector(self) -> dict:
         return self._solution.test_setting["vector"]
 
-    @property
-    def test_setting_pipeline(self) -> dict:
-        return self._solution.test_setting["pipeline"]
-
 #endregion
 
     @property
