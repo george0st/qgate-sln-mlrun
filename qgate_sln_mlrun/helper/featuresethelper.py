@@ -4,8 +4,6 @@ import mlrun.feature_store as fstore
 from mlrun.features import Feature
 from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, SQLTarget, KafkaTarget
 import os
-import json
-import glob
 
 
 class FeatureSetHelper(TSBase):
@@ -137,3 +135,11 @@ class FeatureSetHelper(TSBase):
             # TODO: Add support for other targets
             raise NotImplementedError()
         return target_provider
+
+    def _get_sqlschema(self, json_spec):
+        schema = {}
+        for item in json_spec['entities']:
+            schema[item['name']] = TSHelper.type_to_type(item['type'])
+        for item in json_spec['features']:
+            schema[item['name']] = TSHelper.type_to_type(item['type'])
+        return schema, json_spec['entities'][0]['name']
