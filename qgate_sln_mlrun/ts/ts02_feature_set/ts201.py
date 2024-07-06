@@ -54,8 +54,6 @@ class TS201(TSBase):
             fs_helper=FeatureSetHelper(self._solution)
             featureset=fs_helper.create_featureset_content(project_name, name, desc, json_content['spec'])
 
-            #self.create_featureset_content(project_name, name, desc, json_content['spec'])
-
     def create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
         """
         Create featureset based on json spec
