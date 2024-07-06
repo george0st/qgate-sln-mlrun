@@ -11,6 +11,7 @@ import os
 import json
 import glob
 from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
+from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
 
 
 class TS205(TSBase):
@@ -57,9 +58,9 @@ class TS205(TSBase):
 
         if kind == "feature-set":
 
-            # create feature set based on the logic in TS201
-            ts= ts201.TS201(self._solution)
-            featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
+            # create feature
+            fs_helper=FeatureSetHelper(self._solution)
+            featureset=fs_helper.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
 
             keys = ""
             for entity in featureset.spec.entities:

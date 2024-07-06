@@ -70,6 +70,13 @@ class TS102(TSBase):
         if self.setup.get_scenario_setting("TS102_DELETE") == ProjectDelete.FULL_DELETE:
             mlrun.get_run_db().delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
 
+        # if part delete, delete only a few project parts
+        if self.setup.get_scenario_setting("TS102_DELETE") == ProjectDelete.PART_DELETE:
+            # mlrun.feature_store.delete_feature_set
+            # mlrun.feature_store.delete_feature_vector
+            # ...
+            pass
+
         # delete directory with the same name as project in FS (valid for partly delete)
         project_dir = os.path.join(self.setup.model_output, name)
         if os.path.exists(project_dir):

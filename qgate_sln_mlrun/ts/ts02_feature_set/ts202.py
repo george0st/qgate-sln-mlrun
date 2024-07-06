@@ -10,6 +10,7 @@ import os
 import json
 import glob
 import pandas as pd
+from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
 
 
 class TS202(TSBase):
@@ -48,9 +49,9 @@ class TS202(TSBase):
 
         if kind == "feature-set":
 
-            # create feature set based on the logic in TS201
-            ts= ts201.TS201(self._solution)
-            featureset=ts.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
+            # create feature
+            fs_helper=FeatureSetHelper(self._solution)
+            featureset=fs_helper.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
 
             source_file = os.path.join(os.getcwd(),
                                        self.setup.model_definition,
