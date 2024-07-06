@@ -11,6 +11,7 @@ import os
 import json
 import glob
 from qgate_sln_mlrun.ts.tshelper import TSHelper
+from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
 
 
 class TS201(TSBase):
@@ -50,7 +51,10 @@ class TS201(TSBase):
 
         if kind == "feature-set":
             # create feature set
-            self.create_featureset_content(project_name, name, desc, json_content['spec'])
+            fs_helper=FeatureSetHelper(self._solution)
+            featureset=fs_helper.create_featureset_content(project_name, name, desc, json_content['spec'])
+
+            #self.create_featureset_content(project_name, name, desc, json_content['spec'])
 
     def create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
         """
