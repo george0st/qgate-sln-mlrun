@@ -5,14 +5,43 @@ from mlrun.features import Feature
 from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, SQLTarget, KafkaTarget
 import sqlalchemy
 import os
+import glob
+import json
 
 
 class FeatureSetHelper(TSBase):
+    """Create featureset based on json definition"""
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
-    def create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
+    def get_definition(self, project_name, featureset_name):
+        # create full path for featureset definition
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "01-model",
+                                   "02-feature-set",
+                                   f"*-{featureset_name}.json")
+
+        for file in glob.glob(source_file):
+            # find relevant featureset file
+            if os.path.isfile(file):
+                return file
+        return None
+
+    def create_featureset(self, project_name, definition, featureset_prefix=None):
+        with open(definition, "r") as json_file:
+            json_content = json.load(json_file)
+        name, desc, lbls, kind = TSBase.get_json_header(json_content)
+
+        if kind == "feature-set":
+            return self._create_featureset_content(project_name,
+                                           f"{featureset_prefix}_{name}" if featureset_prefix else name,
+                                           desc,
+                                           json_content['spec'])
+        return None
+
+    def _create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
         """
         Create featureset based on json spec
 
@@ -76,7 +105,7 @@ class FeatureSetHelper(TSBase):
                                           path=os.path.join(self.setup.model_output, project_name, target_name))
         elif target == "csv":
             # ERR: it is not possible to use os.path.join in CSVTarget because issue in MLRun
-#            pth="/".join(self.setup.model_output, project_name, target_name, target_name + ".csv")
+            # pth="/".join(self.setup.model_output, project_name, target_name, target_name + ".csv")
             target_provider = CSVTarget(name=target_name,
                                         path="/".join([self.setup.model_output, project_name, target_name,
                                                       target_name + ".csv"]))
@@ -95,7 +124,7 @@ class FeatureSetHelper(TSBase):
                 tbl_name = f"{project_name}_{featureset_name}_{target_name}r"
 
                 # TODO: create table as work-around, because create_table=True does not work for Postgres, only for MySQL
-                #self._createtable(self.setup.mysql, tbl_name, json_spec)
+                # self._createtable(self.setup.mysql, tbl_name, json_spec)
 
                 sql_schema, primary_key=self._get_sqlschema(json_spec)
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=tbl_name,
