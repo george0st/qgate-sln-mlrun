@@ -27,8 +27,6 @@ class FeatureSetHelper(TSBase):
             # find relevant featureset file
             if os.path.isfile(file):
                 return file
-            # with open(file, "r") as json_file:
-            #     return json_file.read()
         return None
 
     def create_featureset(self, project_name, definition, featureset_prefix=None):
@@ -37,12 +35,12 @@ class FeatureSetHelper(TSBase):
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "feature-set":
-            self.create_featureset_content(project_name,
+            self._create_featureset_content(project_name,
                                            f"{featureset_prefix}-{name}" if featureset_prefix else name,
                                            desc,
                                            json_content['spec'])
 
-    def create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
+    def _create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
         """
         Create featureset based on json spec
 
