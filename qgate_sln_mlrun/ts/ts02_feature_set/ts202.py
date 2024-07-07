@@ -5,7 +5,6 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 from qgate_sln_mlrun.setup import Setup
 import mlrun
 from mlrun.data_types.data_types import ValueType
-from qgate_sln_mlrun.ts.ts02_feature_set import ts201
 import os
 import json
 import glob
