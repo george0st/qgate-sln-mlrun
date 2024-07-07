@@ -36,7 +36,7 @@ class FeatureSetHelper(TSBase):
 
         if kind == "feature-set":
             return self._create_featureset_content(project_name,
-                                           f"{featureset_prefix}-{name}" if featureset_prefix else name,
+                                           f"{featureset_prefix}_{name}" if featureset_prefix else name,
                                            desc,
                                            json_content['spec'])
         return None
