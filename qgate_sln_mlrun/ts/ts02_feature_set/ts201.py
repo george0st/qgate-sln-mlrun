@@ -1,11 +1,7 @@
 """
   TS201: Create feature set(s)
 """
-import datetime
 from qgate_sln_mlrun.ts.tsbase import TSBase
-import os
-import json
-import glob
 from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
 
 

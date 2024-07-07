@@ -6,7 +6,6 @@ from qgate_sln_mlrun.setup import Setup
 import mlrun
 from mlrun.data_types.data_types import ValueType
 import os
-import json
 import glob
 import pandas as pd
 from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
