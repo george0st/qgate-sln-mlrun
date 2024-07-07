@@ -10,17 +10,18 @@ import json
 
 
 class FeatureSetHelper(TSBase):
-    """Create featureset based"""
+    """Create featureset based on json definition"""
+
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
 
-    def featureset_exist(self, project_name, featureset_definition_name):
+    def get_definition(self, project_name, featureset_name):
         # create full path for featureset definition
         source_file = os.path.join(os.getcwd(),
                                    self.setup.model_definition,
                                    "01-model",
                                    "02-feature-set",
-                                   f"*-{featureset_definition_name}.json")
+                                   f"*-{featureset_name}.json")
 
         for file in glob.glob(source_file):
             # find relevant featureset file
@@ -28,8 +29,8 @@ class FeatureSetHelper(TSBase):
                 return json_file
         return None
 
-    def create_featureset(self, project_name, json_file, featureset_prefix=None):
-        json_content = json.load(json_file)
+    def create_featureset(self, project_name, definition, featureset_prefix=None):
+        json_content = json.load(definition)
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "feature-set":
