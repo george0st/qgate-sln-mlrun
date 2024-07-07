@@ -33,23 +33,23 @@ class TS203(TSBase):
             if definition:
                 self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition, self.name)
 
-        @TSBase.handler_testcase
-        def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
-            featureset = self._fshelper.create_featureset(project_name, definition, featureset_prefix)
+    @TSBase.handler_testcase
+    def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
+        featureset = self._fshelper.create_featureset(project_name, definition, featureset_prefix)
 
-            source_file = os.path.join(os.getcwd(),
-                                       self.setup.model_definition,
-                                       "02-data",
-                                       self.setup.dataset_name,
-                                       f"*-{featureset_name}.csv.gz")
-            for file in glob.glob(source_file):
-                fstore.ingest(featureset,
-                              CSVSource(name="tst", path=file),
-                              # overwrite=False,
-                              return_df=False,
-                              # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                              infer_options=mlrun.data_types.data_types.InferOptions.default())
-                # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-                # NOTE: option default, change types
-                # NOTE: option Null, generate error with datetime in python 3.9
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "02-data",
+                                   self.setup.dataset_name,
+                                   f"*-{featureset_name}.csv.gz")
+        for file in glob.glob(source_file):
+            fstore.ingest(featureset,
+                          CSVSource(name="tst", path=file),
+                          # overwrite=False,
+                          return_df=False,
+                          # infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                          infer_options=mlrun.data_types.data_types.InferOptions.default())
+            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
+            # NOTE: option default, change types
+            # NOTE: option Null, generate error with datetime in python 3.9
 
