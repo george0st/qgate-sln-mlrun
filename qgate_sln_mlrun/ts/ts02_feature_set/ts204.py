@@ -17,7 +17,7 @@ class TS204(TSBase):
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
         self._fshelper = FeatureSetHelper(self._solution)
-        
+
     @property
     def desc(self) -> str:
         return "Create feature set(s) & Ingest from Parquet source (one step)"
