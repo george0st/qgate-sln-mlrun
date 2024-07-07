@@ -25,12 +25,15 @@ class FeatureSetHelper(TSBase):
 
         for file in glob.glob(source_file):
             # find relevant featureset file
-            with open(file, "r") as json_file:
-                return json_file
+            if os.path.isfile(file):
+                return file
+            # with open(file, "r") as json_file:
+            #     return json_file.read()
         return None
 
     def create_featureset(self, project_name, definition, featureset_prefix=None):
-        json_content = json.load(definition)
+        with open(definition, "r") as json_file:
+            json_content = json.load(json_file)
         name, desc, lbls, kind = TSBase.get_json_header(json_content)
 
         if kind == "feature-set":

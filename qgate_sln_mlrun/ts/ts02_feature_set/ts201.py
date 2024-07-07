@@ -13,7 +13,7 @@ class TS201(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
-        self._fs_helper = FeatureSetHelper(self._solution)
+        self._fshelper = FeatureSetHelper(self._solution)
 
     @property
     def desc(self) -> str:
@@ -29,9 +29,9 @@ class TS201(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
 
-            definition=self._fs_helper.get_definition(project_name, featureset_name)
+            definition=self._fshelper.get_definition(project_name, featureset_name)
             if definition:
-                self._create_featureset(f'{project_name}/{featureset_name}', project_name, definition)
+                self._create_featureset2(f'{project_name}/{featureset_name}', project_name, definition)
 
 
             # # create file with definition of vector
@@ -48,7 +48,7 @@ class TS201(TSBase):
 
     @TSBase.handler_testcase
     def _create_featureset2(self, testcase_name, project_name, json_file, featureset_prefix=None):
-        self._fs_helper.create_featureset(project_name, json_file, featureset_prefix)
+        self._fshelper.create_featureset(project_name, json_file, featureset_prefix)
 
     # @TSBase.handler_testcase
     # def _create_featureset(self, testcase_name, project_name, json_file):
