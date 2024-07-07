@@ -47,7 +47,7 @@ class TS201(TSBase):
             #         self._create_featureset(f'{project_name}/{featureset_name}', project_name, json_file)
 
     @TSBase.handler_testcase
-    def _create_featureset2(self, testcase_name, project_name, json_file, featureset_prefix):
+    def _create_featureset2(self, testcase_name, project_name, json_file, featureset_prefix=None):
         self._fs_helper.create_featureset(project_name, json_file, featureset_prefix)
 
     # @TSBase.handler_testcase
