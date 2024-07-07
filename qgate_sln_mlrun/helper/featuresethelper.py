@@ -5,12 +5,38 @@ from mlrun.features import Feature
 from mlrun.datastore.targets import RedisNoSqlTarget, ParquetTarget, CSVTarget, SQLTarget, KafkaTarget
 import sqlalchemy
 import os
+import glob
+import json
 
 
 class FeatureSetHelper(TSBase):
-
+    """Create featureset based"""
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
+
+    def featureset_exist(self, project_name, featureset_definition_name):
+        # create full path for featureset definition
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "01-model",
+                                   "02-feature-set",
+                                   f"*-{featureset_definition_name}.json")
+
+        for file in glob.glob(source_file):
+            # find relevant featureset file
+            with open(file, "r") as json_file:
+                return json_file
+        return None
+
+    def create_featureset(self, project_name, json_file, featureset_prefix=None):
+        json_content = json.load(json_file)
+        name, desc, lbls, kind = TSBase.get_json_header(json_content)
+
+        if kind == "feature-set":
+            self.create_featureset_content(project_name,
+                                           f"{featureset_prefix}-{name}" if featureset_prefix else name,
+                                           desc,
+                                           json_content['spec'])
 
     def create_featureset_content(self, project_name, featureset_name, featureset_desc, json_spec):
         """
