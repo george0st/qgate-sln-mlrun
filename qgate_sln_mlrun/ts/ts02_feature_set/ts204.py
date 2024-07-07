@@ -16,6 +16,7 @@ class TS204(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
+        self._fshelper = FeatureSetHelper(self._solution)
 
     @property
     def desc(self) -> str:
@@ -29,43 +30,29 @@ class TS204(TSBase):
         """ Create featuresets and ingest"""
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # create file with definition of vector
-            source_file = os.path.join(os.getcwd(),
-                                       self.setup.model_definition,
-                                       "01-model",
-                                       "02-feature-set",
-                                       f"*-{featureset_name}.json")
-
-            for file in glob.glob(source_file):
-                # iterate cross all featureset definitions
-                with open(file, "r") as json_file:
-                    self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, json_file)
+            definition = self._fshelper.get_definition(project_name, featureset_name)
+            if definition:
+                self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition,
+                                        self.name)
 
     @TSBase.handler_testcase
-    def _create_featureset_ingest(self, testcase_name, project_name, json_file):
-        json_content = json.load(json_file)
-        name, desc, lbls, kind = TSBase.get_json_header(json_content)
+    def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
+        featureset = self._fshelper.create_featureset(project_name, definition, featureset_prefix)
 
-        if kind == "feature-set":
+        source_file = os.path.join(os.getcwd(),
+                                   self.setup.model_definition,
+                                   "02-data",
+                                   self.setup.dataset_name,
+                                   f"*-{featureset_name}.parquet")
+        for file in glob.glob(source_file):
 
-            # create feature
-            fs_helper=FeatureSetHelper(self._solution)
-            featureset=fs_helper.create_featureset_content(project_name, f"{self.name}-{name}", desc, json_content['spec'])
-
-            source_file = os.path.join(os.getcwd(),
-                                       self.setup.model_definition,
-                                       "02-data",
-                                       self.setup.dataset_name,
-                                       f"*-{name}.parquet")
-            for file in glob.glob(source_file):
-
-                fstore.ingest(featureset,
-                              ParquetSource(name="tst", path=file),
-                              # overwrite=False,
-                              return_df=False,
-                              # infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                              infer_options=mlrun.data_types.data_types.InferOptions.default())
-                # TODO: use InferOptions.Null with python 3.10 or focus on WSL
-                # NOTE: option default, change types
-                # NOTE: option Null, generate error with datetime in python 3.9
+            fstore.ingest(featureset,
+                          ParquetSource(name="tst", path=file),
+                          # overwrite=False,
+                          return_df=False,
+                          # infer_options=mlrun.data_types.data_types.InferOptions.Null)
+                          infer_options=mlrun.data_types.data_types.InferOptions.default())
+            # TODO: use InferOptions.Null with python 3.10 or focus on WSL
+            # NOTE: option default, change types
+            # NOTE: option Null, generate error with datetime in python 3.9
 

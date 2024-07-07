@@ -1,11 +1,7 @@
 """
   TS201: Create feature set(s)
 """
-import datetime
 from qgate_sln_mlrun.ts.tsbase import TSBase
-import os
-import json
-import glob
 from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
 
 
@@ -30,7 +26,7 @@ class TS201(TSBase):
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             definition=self._fshelper.get_definition(project_name, featureset_name)
             if definition:
-                self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition, self.name)
+                self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition)
 
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
