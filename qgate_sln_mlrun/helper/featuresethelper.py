@@ -76,7 +76,7 @@ class FeatureSetHelper(TSBase):
                                           path=os.path.join(self.setup.model_output, project_name, target_name))
         elif target == "csv":
             # ERR: it is not possible to use os.path.join in CSVTarget because issue in MLRun
-#            pth="/".join(self.setup.model_output, project_name, target_name, target_name + ".csv")
+            # pth="/".join(self.setup.model_output, project_name, target_name, target_name + ".csv")
             target_provider = CSVTarget(name=target_name,
                                         path="/".join([self.setup.model_output, project_name, target_name,
                                                       target_name + ".csv"]))
@@ -95,7 +95,7 @@ class FeatureSetHelper(TSBase):
                 tbl_name = f"{project_name}_{featureset_name}_{target_name}r"
 
                 # TODO: create table as work-around, because create_table=True does not work for Postgres, only for MySQL
-                #self._createtable(self.setup.mysql, tbl_name, json_spec)
+                # self._createtable(self.setup.mysql, tbl_name, json_spec)
 
                 sql_schema, primary_key=self._get_sqlschema(json_spec)
                 target_provider = SQLTarget(name=target_name, db_url=self.setup.mysql, table_name=tbl_name,
