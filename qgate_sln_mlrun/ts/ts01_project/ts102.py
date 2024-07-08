@@ -75,7 +75,13 @@ class TS102(TSBase):
 
         # if part delete, delete only a few project parts
         if self.setup.get_scenario_setting("TS102_DELETE") == ProjectDelete.PART_DELETE:
-            for feature_set in db.list_feature_sets(project=name):
+
+            feature_vectors=db.list_feature_vectors(project=name)
+            for feature_vector in feature_vectors if feature_vectors else []:
+                db.delete_feature_vector(feature_vector.metadata.name, project=name)
+
+            feature_sets=db.list_feature_sets(project=name)
+            for feature_set in feature_sets if feature_sets else []:
                 db.delete_feature_set(feature_set.metadata.name, project=name)
             # mlrun.feature_store.delete_feature_set
             # mlrun.feature_store.delete_feature_vector
