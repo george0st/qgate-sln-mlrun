@@ -90,6 +90,11 @@ class TS102(TSBase):
             for feature_set in feature_sets if feature_sets else []:
                 db.delete_feature_set(feature_set.metadata.name, project=name)
 
+            # delete functions
+            functions=db.list_functions(project=name)
+            for function in functions if functions else []:
+                db.delete_function(function.metadata.name, project=name)
+
         # delete directory with the same name as project in FS (valid for partly delete)
         project_dir = os.path.join(self.setup.model_output, name)
         if os.path.exists(project_dir):
