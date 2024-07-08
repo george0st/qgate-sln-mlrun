@@ -1,6 +1,7 @@
 """
   TS102: Delete project(s)
 """
+from mlrun.db import RunDBInterface
 
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
@@ -66,16 +67,28 @@ class TS102(TSBase):
     def _delete_project(self, label, name):
         """Delete project (in MLRun and in file system)"""
 
+        db=mlrun.get_run_db()
+
         # if full delete, delete project in MLRun also
         if self.setup.get_scenario_setting("TS102_DELETE") == ProjectDelete.FULL_DELETE:
-            mlrun.get_run_db().delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
+            db.delete_project(name, "cascade") #mlrun.common.schemas.DeletionStrategy.cascade)
 
         # if part delete, delete only a few project parts
         if self.setup.get_scenario_setting("TS102_DELETE") == ProjectDelete.PART_DELETE:
-            # mlrun.feature_store.delete_feature_set
-            # mlrun.feature_store.delete_feature_vector
-            # ...
-            pass
+            # delete artifacts
+            # artifacts=db.list_artifacts(project=name)
+            # for artefact in artifacts if artifacts else []:
+            #     db.delete_artifacts_tags(artefact.metadata.name, project=name)
+
+            # delete feature vectors
+            feature_vectors=db.list_feature_vectors(project=name)
+            for feature_vector in feature_vectors if feature_vectors else []:
+                db.delete_feature_vector(feature_vector.metadata.name, project=name)
+
+            # delete feature sets
+            feature_sets=db.list_feature_sets(project=name)
+            for feature_set in feature_sets if feature_sets else []:
+                db.delete_feature_set(feature_set.metadata.name, project=name)
 
         # delete directory with the same name as project in FS (valid for partly delete)
         project_dir = os.path.join(self.setup.model_output, name)
