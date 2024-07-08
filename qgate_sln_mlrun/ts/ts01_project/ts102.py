@@ -76,9 +76,9 @@ class TS102(TSBase):
         # if part delete, delete only a few project parts
         if self.setup.get_scenario_setting("TS102_DELETE") == ProjectDelete.PART_DELETE:
             # delete artifacts
-            # artifacts=db.list_artifacts(project=name)
-            # for artefact in artifacts if artifacts else []:
-            #     db.delete_artifacts_tags(artefact.metadata.name, project=name)
+            artifacts=db.list_artifacts(project=name)
+            for artefact in artifacts if artifacts else []:
+                db.delete_artifacts_tags(artefact.metadata.name, project=name)
 
             # delete feature vectors
             feature_vectors=db.list_feature_vectors(project=name)
