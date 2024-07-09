@@ -36,6 +36,9 @@ class TS305(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table as data source
+            # TODO: use global source, based on
+            #       create_helper("global", featureset_name)
+            #       create_helper(project_name, featureset_name), featureset_name, True)
             self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
 
             self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name)
