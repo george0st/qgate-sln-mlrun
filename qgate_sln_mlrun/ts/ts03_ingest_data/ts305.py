@@ -36,8 +36,10 @@ class TS305(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table as data source
-            self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
-
+            # TODO: use shared source for all projects (TS102, will clear content)
+            #       create_helper(featureset_name), featureset_name, False)
+            #self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
+            self._mysql.create_insert_data(self._mysql.create_helper(featureset_name), featureset_name, False)
             self._create_featureset_ingest(f'{project_name}/{featureset_name}', project_name, featureset_name)
 
     @TSBase.handler_testcase
@@ -49,9 +51,11 @@ class TS305(TSBase):
         for entity in featureset.spec.entities:
             keys+=f"{entity.name},"
 
+        # TODO: use global source, based on
+        #       table_name=self._mysql.create_helper(featureset_name),
         fstore.ingest(featureset,
                       SQLSource(name="tst",
-                                table_name=self._mysql.create_helper(project_name, featureset_name),
+                                table_name=self._mysql.create_helper(featureset_name),
                                 db_url=self.setup.mysql,
                                 key_field=keys[:-1].replace('-','_')),
                       # overwrite=False,
