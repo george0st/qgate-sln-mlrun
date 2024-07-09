@@ -143,9 +143,9 @@ class QualityReport:
                     # write info about TS to the output
                     ts.testscenario_new()
 
-                    # BEFORE execution of TS
+                    # BEFORE execution of TS (one time)
                     ts.before()
-                    # EXEC execute of TS
+                    # EXEC execute of TS (one time)
                     ts.exec()
 
                     for project_name in self.projects:
@@ -153,10 +153,10 @@ class QualityReport:
                             # avoid irrelevant scenarios for this project
                             continue
 
-                        # PRJ_EXEC execute of TS for project
+                        # PRJ_EXEC execute of TS for each project
                         ts.prj_exec(project_name)
 
-                    # AFTER execute of TS
+                    # AFTER execute of TS (one time0
                     ts.after()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:
