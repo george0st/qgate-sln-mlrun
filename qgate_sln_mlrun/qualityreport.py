@@ -156,7 +156,7 @@ class QualityReport:
                         # PRJ_EXEC execute of TS for each project
                         ts.prj_exec(project_name)
 
-                    # AFTER execute of TS (one time0
+                    # AFTER execute of TS (one time)
                     ts.after()
                     ts.state = tsbase.TSState.DONE
                 except Exception as ex:

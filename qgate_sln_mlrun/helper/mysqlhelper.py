@@ -85,17 +85,24 @@ class MySQLHelper(BaseHelper):
         with connection:
             with connection.cursor() as cursor:
 
-                if drop_if_exist:
-                    # drop table
-                    cursor.execute(f"DROP TABLE IF EXISTS {helper};")
-                    connection.commit()
+                create_table = True
+                # table exist?
+                if self.helper_exist(helper):
+                    create_table=False
+                    if drop_if_exist:
+                        # drop table
+                        cursor.execute(f"DROP TABLE IF EXISTS {helper};")
+                        connection.commit()
+                        create_table=True
 
                 # create table
-                cursor.execute(f"CREATE TABLE {helper} ({column_types});")
-                connection.commit()
+                if create_table:
+                    # create table
+                    cursor.execute(f"CREATE TABLE {helper} ({column_types});")
+                    connection.commit()
 
-                # insert data
-                self._insert_into(connection, cursor, helper, featureset_name, columns)
+                    # insert data
+                    self._insert_into(connection, cursor, helper, featureset_name, columns)
 
     def _insert_into(self, connection, cursor, helper, featureset_name, columns):
         """Insert data into the table"""
