@@ -18,6 +18,8 @@ class KafkaHelper(BaseHelper):
 
     # Prefix of TOPIC with sources
     TOPIC_SOURCE_PREFIX = "tmp_"
+    # Shared table source
+    PROJECT_SHARED = "shr"
 
     def __init__(self,setup: Setup):
         self._setup = setup
@@ -34,6 +36,10 @@ class KafkaHelper(BaseHelper):
     @property
     def prefix(self):
         return KafkaHelper.TOPIC_SOURCE_PREFIX
+
+    @property
+    def shared_project(self):
+        return KafkaHelper.PROJECT_SHARED
 
     def create_insert_data(self, helper, featureset_name, drop_if_exist = False):
         """Create topic (composed of project name and feature name)
