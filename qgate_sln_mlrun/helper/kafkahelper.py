@@ -126,10 +126,10 @@ class KafkaHelper(BaseHelper):
                 admin_client.close()
 
     def helper_exist(self, helper) -> bool:
-        """Check, if topic (defined based on project name and feature name) exists
+        """Check, if topic exists (defined based on project name and feature name)
 
         :param helper:              topic name
-        :return:                    True - topic exist
+        :return:                    True - topic exist, False - topic not exist
         """
         consumer = existing_topic_list = None
         try:
