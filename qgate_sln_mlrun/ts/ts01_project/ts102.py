@@ -10,6 +10,7 @@ import glob
 import shutil
 from qgate_sln_mlrun.setup import ProjectDelete
 from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
+from qgate_sln_mlrun.helper.kafkahelper import KafkaHelper
 
 
 class TS102(TSBase):
@@ -35,8 +36,12 @@ class TS102(TSBase):
         # remove data from MySQL
         self._clean_mysql()
 
+        # remove data from Kafka
+        self._clean_kafka()
+
         # remove files
         self._clean_file()
+
 
     def _clean_mysql(self):
         # remove content of mysql
@@ -44,7 +49,17 @@ class TS102(TSBase):
         try:
             mysql = MySQLHelper(self.setup)
             if mysql.configured:
-                mysql.remove_helper(MySQLHelper.TABLE_SOURCE_PREFIX)
+                mysql.remove_helper(MySQLHelper.prefix)
+        except Exception:
+            pass
+
+    def _clean_kafka(self):
+        # remove content of kafka
+
+        try:
+            kafka = KafkaHelper(self.setup)
+            if kafka.configured:
+                kafka.remove_helper(KafkaHelper.prefix)
         except Exception:
             pass
 
