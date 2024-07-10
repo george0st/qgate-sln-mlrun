@@ -49,33 +49,36 @@ class KafkaHelper(BaseHelper):
          :param featureset_name:    featureset name
          :param drop_if_exist:      delete topic if exists
          """
-
-        producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
-
-        if drop_if_exist:
-            if self.helper_exist(helper):
+        create_topic = True
+        if self.helper_exist(helper):
+            create_topic = False
+            if drop_if_exist:
                 self._delete_topics([helper])
+                create_topic = True
 
-        # create possible file for load
-        source_file = os.path.join(os.getcwd(),
-                                   self.setup.model_definition,
-                                   "02-data",
-                                   self.setup.dataset_name,
-                                   f"*-{featureset_name}.csv.gz")
+        if create_topic:
+            # create possible file for load
+            source_file = os.path.join(os.getcwd(),
+                                       self.setup.model_definition,
+                                       "02-data",
+                                       self.setup.dataset_name,
+                                       f"*-{featureset_name}.csv.gz")
 
-        for file in glob.glob(source_file):
-            # ingest data with bundl/chunk
-            for data_frm in pd.read_csv(file,
-                                        sep=self.setup.csv_separator,
-                                        header="infer",
-                                        decimal=self.setup.csv_decimal,
-                                        compression="gzip",
-                                        encoding="utf-8",
-                                        chunksize=Setup.MAX_BUNDLE):
-                for row in data_frm.to_numpy().tolist():
-                    producer.send(helper, json.dumps(row).encode("utf-8"))
-                producer.flush()
-        producer.close()
+            for file in glob.glob(source_file):
+                producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
+
+                # ingest data with bundl/chunk
+                for data_frm in pd.read_csv(file,
+                                            sep=self.setup.csv_separator,
+                                            header="infer",
+                                            decimal=self.setup.csv_decimal,
+                                            compression="gzip",
+                                            encoding="utf-8",
+                                            chunksize=Setup.MAX_BUNDLE):
+                    for row in data_frm.to_numpy().tolist():
+                        producer.send(helper, json.dumps(row).encode("utf-8"))
+                    producer.flush()
+                producer.close()
 
     def _delete_topics(self, topic_names, timeout_ms=2000):
         """Delete requested topics
