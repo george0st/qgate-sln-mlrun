@@ -36,15 +36,12 @@ class TS206(TSBase):
             return
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # Create topic only in case, that topic does not exist
-            helper= self._kafka.create_helper(project_name, featureset_name)
-            #if not self._kafka.helper_exist(helper):
-            self._kafka.create_insert_data(helper, featureset_name,True)
+            # Create shared topic as data source
+            self._kafka.create_insert_data(self._kafka.create_helper(featureset_name), featureset_name,True)
 
             definition = self._fshelper.get_definition(project_name, featureset_name)
             if definition:
-                self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition,
-                                        self.name)
+                self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition, self.name)
 
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
@@ -52,7 +49,7 @@ class TS206(TSBase):
 
         # fstore.ingest(featureset,
         #               KafkaSource(brokers=self.setup.kafka,
-        #                         topics=[self._kafka.create_helper(project_name, featureset_name)]),
+        #                         topics=[self._kafka.create_helper(featureset_name)]),
         #               # overwrite=False,
         #               return_df=False,
         #               # infer_options=mlrun.data_types.data_types.InferOptions.Null)
