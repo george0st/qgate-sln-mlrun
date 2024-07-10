@@ -49,33 +49,36 @@ class KafkaHelper(BaseHelper):
          :param featureset_name:    featureset name
          :param drop_if_exist:      delete topic if exists
          """
-
-        producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
-
-        if drop_if_exist:
-            if self.helper_exist(helper):
+        create_topic = True
+        if self.helper_exist(helper):
+            create_topic = False
+            if drop_if_exist:
                 self._delete_topics([helper])
+                create_topic = True
 
-        # create possible file for load
-        source_file = os.path.join(os.getcwd(),
-                                   self.setup.model_definition,
-                                   "02-data",
-                                   self.setup.dataset_name,
-                                   f"*-{featureset_name}.csv.gz")
+        if create_topic:
+            # create possible file for load
+            source_file = os.path.join(os.getcwd(),
+                                       self.setup.model_definition,
+                                       "02-data",
+                                       self.setup.dataset_name,
+                                       f"*-{featureset_name}.csv.gz")
 
-        for file in glob.glob(source_file):
-            # ingest data with bundl/chunk
-            for data_frm in pd.read_csv(file,
-                                        sep=self.setup.csv_separator,
-                                        header="infer",
-                                        decimal=self.setup.csv_decimal,
-                                        compression="gzip",
-                                        encoding="utf-8",
-                                        chunksize=Setup.MAX_BUNDLE):
-                for row in data_frm.to_numpy().tolist():
-                    producer.send(helper, json.dumps(row).encode("utf-8"))
-                producer.flush()
-        producer.close()
+            for file in glob.glob(source_file):
+                producer = KafkaProducer(bootstrap_servers=self.setup.kafka)
+
+                # ingest data with bundl/chunk
+                for data_frm in pd.read_csv(file,
+                                            sep=self.setup.csv_separator,
+                                            header="infer",
+                                            decimal=self.setup.csv_decimal,
+                                            compression="gzip",
+                                            encoding="utf-8",
+                                            chunksize=Setup.MAX_BUNDLE):
+                    for row in data_frm.to_numpy().tolist():
+                        producer.send(helper, json.dumps(row).encode("utf-8"))
+                    producer.flush()
+                producer.close()
 
     def _delete_topics(self, topic_names, timeout_ms=2000):
         """Delete requested topics
@@ -123,11 +126,18 @@ class KafkaHelper(BaseHelper):
                 admin_client.close()
 
     def helper_exist(self, helper) -> bool:
-        """Check, if topic (defined based on project name and feature name) exists
+        """Check, if topic exists (defined based on project name and feature name)
 
         :param helper:              topic name
-        :return:                    True - topic exist
+        :return:                    True - topic exist, False - topic not exist
         """
+        if helper in self._get_topic_names():
+            return True
+        return False
+
+    def _get_topic_names(self):
+        """Return list of topic names"""
+
         consumer = existing_topic_list = None
         try:
             consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
@@ -138,8 +148,17 @@ class KafkaHelper(BaseHelper):
             if consumer:
                 consumer.close()
 
-        if existing_topic_list:
-            if helper in existing_topic_list:
-                return True
-        return False
+        return existing_topic_list
 
+    def remove_helper(self, start_with):
+        """Remove helper with specific prefix
+
+        :param start_with:      prefix of topic for remove
+        """
+        remove_list=[]
+        for topic in self._get_topic_names():
+            if topic.startswith(start_with):
+                remove_list.append(topic)
+
+        if len(remove_list)>0:
+            self._delete_topics(remove_list)

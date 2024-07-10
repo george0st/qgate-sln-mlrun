@@ -37,14 +37,16 @@ class TS205(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create table as data source
-            self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
+            self._mysql.create_insert_data(self._mysql.create_helper(featureset_name), featureset_name, False)
 
+            # Get definition for featureset
             definition = self._fshelper.get_definition(project_name, featureset_name)
             if definition:
                 self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition, self.name)
 
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
+        # Create feature set
         featureset = self._fshelper.create_featureset(project_name, definition, featureset_prefix)
 
         keys = ""
@@ -53,9 +55,9 @@ class TS205(TSBase):
 
         fstore.ingest(featureset,
                       SQLSource(name="tst",
-                                table_name=self._mysql.create_helper(project_name, featureset_name),
+                                table_name=self._mysql.create_helper(featureset_name),
                                 db_url=self.setup.mysql,
-                                key_field=keys[:-1].replace('-','_')),
+                                key_field=keys[:-1]),
                       # overwrite=False,
                       return_df=False,
                       #infer_options=mlrun.data_types.data_types.InferOptions.Null)
