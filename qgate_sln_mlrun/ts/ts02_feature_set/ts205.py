@@ -36,7 +36,7 @@ class TS205(TSBase):
             return
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # Create table as data source
+            # Create shared table as data source
             self._mysql.create_insert_data(self._mysql.create_helper(featureset_name), featureset_name, False)
 
             # Get definition for featureset
