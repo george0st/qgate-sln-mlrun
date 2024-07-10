@@ -43,7 +43,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS403: Ingest data & pipeline to feature set(s) from CSV source 
    - ✅ TS404: Ingest data & pipeline to feature set(s) from Parquet source
    - ✅ TS405: Ingest data & pipeline to feature set(s) from SQL source
-   - ❌ TS406: Ingest data & pipeline to feature set(s) from Kafka source
+   - ✔  TS406: Ingest data & pipeline to feature set(s) from Kafka source
    - ❌ TS407: Ingest data & pipeline to feature set(s) from HTTP source
  - **05 - Feature vector**
    - ✅ TS501: Create feature vector(s)

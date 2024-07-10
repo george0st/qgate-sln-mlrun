@@ -38,7 +38,7 @@ class TS102(TSBase):
 
         # remove data from Kafka
         self._clean_kafka()
-        
+
         # remove files
         self._clean_file()
 
