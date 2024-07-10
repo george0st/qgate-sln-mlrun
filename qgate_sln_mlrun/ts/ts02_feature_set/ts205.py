@@ -39,12 +39,14 @@ class TS205(TSBase):
             # Create table as data source
             self._mysql.create_insert_data(self._mysql.create_helper(project_name, featureset_name), featureset_name, True)
 
+            # Get definition for featureset
             definition = self._fshelper.get_definition(project_name, featureset_name)
             if definition:
                 self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition, self.name)
 
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
+        # Create feature set
         featureset = self._fshelper.create_featureset(project_name, definition, featureset_prefix)
 
         keys = ""
