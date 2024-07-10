@@ -36,10 +36,8 @@ class TS206(TSBase):
             return
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
-            # Create topic only in case, that topic does not exist
-            helper= self._kafka.create_helper(project_name, featureset_name)
-            #if not self._kafka.helper_exist(helper):
-            self._kafka.create_insert_data(helper, featureset_name,True)
+            # Create shared topic as data source
+            self._kafka.create_insert_data(self._kafka.create_helper(featureset_name), featureset_name,True)
 
             definition = self._fshelper.get_definition(project_name, featureset_name)
             if definition:
