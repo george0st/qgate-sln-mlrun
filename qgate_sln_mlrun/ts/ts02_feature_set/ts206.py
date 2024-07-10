@@ -49,7 +49,7 @@ class TS206(TSBase):
 
         # fstore.ingest(featureset,
         #               KafkaSource(brokers=self.setup.kafka,
-        #                         topics=[self._kafka.create_helper(project_name, featureset_name)]),
+        #                         topics=[self._kafka.create_helper(featureset_name)]),
         #               # overwrite=False,
         #               return_df=False,
         #               # infer_options=mlrun.data_types.data_types.InferOptions.Null)
