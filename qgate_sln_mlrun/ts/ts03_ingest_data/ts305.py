@@ -41,7 +41,7 @@ class TS305(TSBase):
 
     @TSBase.handler_testcase
     def _create_featureset_ingest(self, testcase_name, project_name, featureset_name):
-
+        # get existing feature set (feature set have to be created in previous test scenario)
         featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         keys = ""
