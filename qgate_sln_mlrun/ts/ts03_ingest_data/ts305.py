@@ -52,7 +52,7 @@ class TS305(TSBase):
                       SQLSource(name="tst",
                                 table_name=self._mysql.create_helper(featureset_name),
                                 db_url=self.setup.mysql,
-                                key_field=keys[:-1].replace('-','_')),
+                                key_field=keys[:-1]),
                       # overwrite=False,
                       return_df=False,
                       #infer_options=mlrun.data_types.data_types.InferOptions.Null)
