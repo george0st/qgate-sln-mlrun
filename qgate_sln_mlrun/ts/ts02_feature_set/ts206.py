@@ -41,8 +41,7 @@ class TS206(TSBase):
 
             definition = self._fshelper.get_definition(project_name, featureset_name)
             if definition:
-                self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition,
-                                        self.name)
+                self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition, self.name)
 
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
