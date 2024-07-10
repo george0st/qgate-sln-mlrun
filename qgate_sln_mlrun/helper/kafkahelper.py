@@ -131,6 +131,28 @@ class KafkaHelper(BaseHelper):
         :param helper:              topic name
         :return:                    True - topic exist, False - topic not exist
         """
+        if helper in self._get_topic_names():
+            return True
+        return False
+
+        # consumer = existing_topic_list = None
+        # try:
+        #     consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
+        #     existing_topic_list = consumer.topics()
+        # except:
+        #     pass
+        # finally:
+        #     if consumer:
+        #         consumer.close()
+        #
+        # if existing_topic_list:
+        #     if helper in existing_topic_list:
+        #         return True
+        # return False
+
+    def _get_topic_names(self):
+        """Return list of topic names"""
+        
         consumer = existing_topic_list = None
         try:
             consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
@@ -141,8 +163,11 @@ class KafkaHelper(BaseHelper):
             if consumer:
                 consumer.close()
 
-        if existing_topic_list:
-            if helper in existing_topic_list:
-                return True
-        return False
+        return existing_topic_list
 
+    def remove_helper(self, start_with):
+        """Remove helper with specific prefix
+
+        :param start_with:      prefix of tables for remove
+        """
+        pass
