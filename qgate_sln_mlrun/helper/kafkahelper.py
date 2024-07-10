@@ -155,7 +155,10 @@ class KafkaHelper(BaseHelper):
 
         :param start_with:      prefix of topic for remove
         """
+        remove_list=[]
         for topic in self._get_topic_names():
             if topic.startswith(start_with):
-                # TODO: remove topic
-                pass
+                remove_list.append(topic)
+
+        if len(remove_list)>0:
+            self._delete_topics(remove_list)
