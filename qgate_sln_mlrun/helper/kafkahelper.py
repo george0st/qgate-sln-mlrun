@@ -135,21 +135,6 @@ class KafkaHelper(BaseHelper):
             return True
         return False
 
-        # consumer = existing_topic_list = None
-        # try:
-        #     consumer=KafkaConsumer(bootstrap_servers=self.setup.kafka)
-        #     existing_topic_list = consumer.topics()
-        # except:
-        #     pass
-        # finally:
-        #     if consumer:
-        #         consumer.close()
-        #
-        # if existing_topic_list:
-        #     if helper in existing_topic_list:
-        #         return True
-        # return False
-
     def _get_topic_names(self):
         """Return list of topic names"""
 
