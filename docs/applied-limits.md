@@ -51,7 +51,7 @@ see detail below
    KafkaTarget was switch-off
 
 2. It is necessery to ingest sample data to featureset, before kafka ingest
-   - known issue from MLRun version v1.1.0, see **ML-2407** from [change log](https://docs.mlrun.org/en/latest/change-log/index.html#open-issues)
+   - known issue from MLRun version v1.1.0, see [ML-2407](https://docs.mlrun.org/en/latest/change-log/index.html#open-issues)
 
 ## CSVSource
 
