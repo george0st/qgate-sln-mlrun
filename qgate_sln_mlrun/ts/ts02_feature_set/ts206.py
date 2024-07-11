@@ -47,6 +47,10 @@ class TS206(TSBase):
     def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
         featureset = self._fshelper.create_featureset(project_name, definition, featureset_prefix)
 
+        # samples
+        #  https://github.com/mlrun/test-notebooks/tree/main/kafka_redis_fs
+        #  https://docs.mlrun.org/en/latest/feature-store/sources-targets.html#id1
+
         # fstore.ingest(featureset,
         #               KafkaSource(brokers=self.setup.kafka,
         #                         topics=[self._kafka.create_helper(featureset_name)]),
