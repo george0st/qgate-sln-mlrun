@@ -50,6 +50,9 @@ see detail below
    - it means, test scenarios TS401, TS501, TS502, TS601 and TS701 for
    KafkaTarget was switch-off
 
+2. It is necessery to ingest sample data to featureset, before kafka ingest
+   - known issue from MLRun version v1.1.0, see **ML-2407** from [change log](https://docs.mlrun.org/en/latest/change-log/index.html#open-issues)
+
 ## CSVSource
 
 1. CSVSource supports only default CSV setting, it means sep=',', decimal='.'. It is not
