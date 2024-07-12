@@ -21,7 +21,7 @@ Parquet | TSx04: Parquet    | ArrowTypeError: ("Expected bytes, got a 'datetime.
 Parquet | TSx05: SQL(MySQL) | Ok                                                                                                                                    | Ok
 
 
-## RedisTarget
+## RedisTarget - TBD.
 
  Target | Source             | InferOptions.default() | InferOptions.Null  | 
 --------|--------------------|------------------------|--------------------|
@@ -30,4 +30,10 @@ Redis   | TSx03: CSV         | ??                     | ??
 Redis   | TSx04: Parquet     | Ok                     | ??                 
 Redis   | TSx05: SQL(MySQL)  | ??                     | ??                 
 
-TBD.
+# SQLTarget (MySQL) - TBD.
+
+# SQLTarget (Postgres) - TBD.
+
+# CSVTarget - TBD.
+
+# KafkaTarget - TBD.
