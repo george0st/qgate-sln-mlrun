@@ -5,7 +5,7 @@ You can see detail changes in
    - [Iguazio change log](https://www.iguazio.com/docs/latest-release/release-notes/)
    - [Iguazio mng. change log](https://iguazio.github.io/igz-mgmt-sdk/changelog.html)
    - Legend
-     - 🚩 future version, ✅ current version 
+     - 🚩 future version, ✅ published version 
 
 ## MLRun
 
@@ -18,16 +18,16 @@ You can see detail changes in
  - Model monitoring/drifting for MLRun (available in free version also)
  - Available API Gateway (flexible configuration & Nuclio tuning)
  - Improve scaling for Nuclio (from version >= 1.13)
- - Support paging (ability to return longer data)
  - Support HDFS as data store (via WebHDFS)
 
 ### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
  - MLFlow integration (store artifact to MLRun, [see](https://docs.mlrun.org/en/latest/tutorials/mlflow.html))
  - Support Pandas 2.0 (improve performance)
+ - Support paging (ability to return longer data from 1.6.4)
  - Extend datastore profiles (addition providers)
 
-### 1.5 MLRun
+### ✅ 1.5 MLRun
  - Datastore profiles
  - Improve FeatureVector join
 
@@ -40,18 +40,18 @@ You can see detail changes in
  - Important announcement:
    - Future deprecation, citation 'V3IO NoSQL (key-value) and streams functionality will be deprecated in the next major release.' 
 
-### 3.5.5 Iguazio
+### ✅ 3.5.5 Iguazio
  - Supports self-signed docker-registries
  - Support full SSO with Keycloak (useful for end users)
  - K8s 1.28
 
-### 3.5.4 Iguazio
+### ✅ 3.5.4 Iguazio
  - Addition new role 'IT Admin Read Only'
  - Support the i3.2xlarge AWS
  - Deprecated python 3.6 and 3.7
  - K8s 1.26
 
-### 3.5.4 Iguazio
+### ✅ 3.5.4 Iguazio
  - JupyterLab 3.4.8
  - Support python 3.9
  - K8s 1.24

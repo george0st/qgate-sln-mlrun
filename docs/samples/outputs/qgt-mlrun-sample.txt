@@ -1,52 +1,52 @@
-# Quality report for MLRun 1.6.2
-# Report ID: 2024-04-30 x9220039600848 (PART)
+# Quality report MLRun 1.6.4
+# ID: 2024-07-12 x9213208 (PART)
 # Score: 100% (PART)
 # -----------------------
-Summary, test scenarios: 24 [TOTAL] (0/24 [ERR/DONE])
+Summary, test scenarios: 35 [TOTAL] (0/35 [ERR/DONE])
 # -----------------------
 TS101: Create project(s)
-  DONE ... agate-redis-csv/*: 'The A-GATE with redis and csv targets'
+  DONE ... agate-parquet/*: 'The A-GATE with parquet target'
 TS201: Create feature set(s)
-  DONE ... agate-redis-csv/basic-party
-  DONE ... agate-redis-csv/basic-contact
-  DONE ... agate-redis-csv/basic-relation
-  DONE ... agate-redis-csv/basic-account
-  DONE ... agate-redis-csv/basic-transaction
-  DONE ... agate-redis-csv/basic-event
-  DONE ... agate-redis-csv/basic-communication
-  DONE ... agate-redis-csv/aggregate-party
-  DONE ... agate-redis-csv/aggregate-account
-  DONE ... agate-redis-csv/aggregate-transaction
-  DONE ... agate-redis-csv/aggregate-circle
-TS202: Create feature set(s) & Ingest from DataFrame source (in one step)
-TS203: Create feature set(s) & Ingest from from CSV source (one step)
-TS204: Create feature set(s) & Ingest from Parquet source (one step)
+  DONE ... agate-parquet/basic_party
+  DONE ... agate-parquet/basic_contact
+  DONE ... agate-parquet/basic_relation
+  DONE ... agate-parquet/basic_account
+  DONE ... agate-parquet/basic_transaction
+  DONE ... agate-parquet/basic_event
+  DONE ... agate-parquet/basic_communication
+  DONE ... agate-parquet/aggregate_party
+  DONE ... agate-parquet/aggregate_account
+  DONE ... agate-parquet/aggregate_transaction
+  DONE ... agate-parquet/aggregate_circle
 TS205: Create feature set(s) & Ingest from SQL source (one step)
-TS301: Ingest data to feature set(s) from DataFrame source
-TS302: Ingest data to feature set(s) from CSV source 
-TS303: Ingest data to feature set(s) from Parquet source 
-TS304: Ingest data to feature set(s) from SQL source
-  DONE ... agate-redis-csv/basic-party
-  DONE ... agate-redis-csv/basic-contact
-  DONE ... agate-redis-csv/basic-relation
-  DONE ... agate-redis-csv/basic-account
-  DONE ... agate-redis-csv/basic-transaction
-  DONE ... agate-redis-csv/basic-event
-  DONE ... agate-redis-csv/basic-communication
-  DONE ... agate-redis-csv/aggregate-party
-  DONE ... agate-redis-csv/aggregate-account
-  DONE ... agate-redis-csv/aggregate-transaction
-  DONE ... agate-redis-csv/aggregate-circle
-TS401: Create feature vector(s)
-TS501: Get data from off-line feature vector(s)
-TS502: Get data from on-line feature vector(s)
-TS701: Build CART model
-TS801: Serving score from CART
+  DONE ... agate-parquet/basic_party
+  DONE ... agate-parquet/basic_contact
+  DONE ... agate-parquet/basic_relation
+  DONE ... agate-parquet/basic_account
+  DONE ... agate-parquet/basic_transaction
+  DONE ... agate-parquet/basic_event
+  DONE ... agate-parquet/basic_communication
+  DONE ... agate-parquet/aggregate_party
+  DONE ... agate-parquet/aggregate_account
+  DONE ... agate-parquet/aggregate_transaction
+  DONE ... agate-parquet/aggregate_circle
+TS305: Ingest data to feature set(s) from SQL source
+  DONE ... agate-parquet/basic_party
+  DONE ... agate-parquet/basic_contact
+  DONE ... agate-parquet/basic_relation
+  DONE ... agate-parquet/basic_account
+  DONE ... agate-parquet/basic_transaction
+  DONE ... agate-parquet/basic_event
+  DONE ... agate-parquet/basic_communication
+  DONE ... agate-parquet/aggregate_party
+  DONE ... agate-parquet/aggregate_account
+  DONE ... agate-parquet/aggregate_transaction
+  DONE ... agate-parquet/aggregate_circle
 TS102: Delete project(s)
-  DONE ... agate-redis-csv/*:
+  DONE ... agate-parquet/*:
 # -----------------------
-# MLRun: 1.6.2 (client)/1.6.2 (server), see https://docs.mlrun.org/en/latest/change-log/index.html
-# QGate: 0.2.1 (version)/0.2.3 (model)
+# MLRun: 1.6.4 (client)/1.6.4 (server), see https://docs.mlrun.org/en/latest/change-log/index.html
+# QGate: 0.2.6 (version)/0.3.8 (model)
 # Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]
 # System: Windows 10.0.22621 (Windows-10-10.0.22621-SP0)
 # Platform: AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)
@@ -55,19 +55,19 @@ TS102: Delete project(s)
 # QGATE_ANONYM_MODE: 'On' 
 # QGATE_DEFINITION: '../qgate-model' 
 # QGATE_DATASET: '01-size-100' 
-# QGATE_FILTER_PROJECTS: 'agate-redis-csv' 
-# QGATE_FILTER_SCENARIOS: 'TS101, TS102, TS201, TS304' 
+# QGATE_FILTER_PROJECTS: 'agate-parquet' 
+# QGATE_FILTER_SCENARIOS: 'TS101, TS102, TS201, TS205, TS305' 
 # QGATE_OUTPUT: './output' 
 # QGATE_OUTPUT_EXP: './output, ds://az-blob/jistcontainer01/test/' 
 # QGATE_DATA_STORE: 'az-blob, AzureBlobStorage, ./secrets/az_connection.env' 
 # QGATE_REDIS: 'redis://localhost:6379' 
 # QGATE_MYSQL: 'mysql+pymysql://testuser:testpwd@localhost:3306/test' 
 # QGATE_POSTGRES: 'postgresql+psycopg2://testuser:testpwd@localhost:5432/test' 
-# QGATE_KAFKA: 'localhost:9092, testtopic' 
+# QGATE_KAFKA: 'localhost:9092' 
 # DIR: 'C:\Python\qgate-sln-mlrun' 
 # -----------------------
 # CPU: 12
-# RAM total/free: 15.2 GB/2.2 GB
+# RAM total/free: 15.2 GB/1.0 GB
 # Host: Anonym/192.168.0.1
 # -----------------------
 # Source, see the Github https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
