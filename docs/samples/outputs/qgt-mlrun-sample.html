@@ -191,8 +191,8 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 				<a class="btn-percentage" style="background: grey;">PART</a>
 			</td>
 			<td style="border: 0px;" align="center">
-				<h2 style="margin: 0;">Quality report for <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank"><u>MLRun 1.6.2</u></a></h2>
-				<p style="margin: 0; padding: 6px 3px;">Report ID: <b>2024-04-30 x9220039600848</b></p>
+				<h2 style="margin: 0;">Quality report <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank"><u>MLRun 1.6.4</u></a></h2>
+				<p style="margin: 0; padding: 6px 3px;">ID: <b>2024-07-12 x9213208</b></p>
 			</td>
 			<td style="border: 0px; width: 90px;">
 				<a class="btn-percentage" style="background: green; color: white;">100%</a>
@@ -204,7 +204,7 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		<table style="border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 18px;">
 			<tr>
 				<td style="border: 0px; font-weight: bold;"><img class="img-check" src="">Report outputs ...</td>
-				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">24x TOTAL (24x DONE)</td>
+				<td style="border: 0px; font-size: 12px; vertical-align: bottom; padding: 4px 2px;">35x TOTAL (35x DONE)</td>
 			</tr>
 		</table>
 	</button>
@@ -213,51 +213,51 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 			<option>All</option><option>DONE</option><option>ERR</option>
 		</select>
 		<select id="myProject" oninput="filterAll('myState','myProject','keyOutputs')">
-			<option>All</option><option title='The A-GATE with redis and csv targets'>agate-redis-csv</option>
+			<option>All</option><option title='The A-GATE with parquet target'>agate-parquet</option>
 		</select>
 	</div>
 	<div id="myDIV3" style="display: none;" class="content">
 		<table id="keyOutputs">
 			<tr><td colspan="2"><b>TS101: Create project(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/*: 'The A-GATE with redis and csv targets'</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/*: 'The A-GATE with parquet target'</td></tr>
 			<tr><td colspan="2"><b>TS201: Create feature set(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-circle</td></tr>
-			<tr><td colspan="2"><b>TS202: Create feature set(s) & Ingest from DataFrame source (in one step)</b></td></tr>
-			<tr><td colspan="2"><b>TS203: Create feature set(s) & Ingest from from CSV source (one step)</b></td></tr>
-			<tr><td colspan="2"><b>TS204: Create feature set(s) & Ingest from Parquet source (one step)</b></td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_contact</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_relation</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_event</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_communication</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_circle</td></tr>
 			<tr><td colspan="2"><b>TS205: Create feature set(s) & Ingest from SQL source (one step)</b></td></tr>
-			<tr><td colspan="2"><b>TS301: Ingest data to feature set(s) from DataFrame source</b></td></tr>
-			<tr><td colspan="2"><b>TS302: Ingest data to feature set(s) from CSV source </b></td></tr>
-			<tr><td colspan="2"><b>TS303: Ingest data to feature set(s) from Parquet source </b></td></tr>
-			<tr><td colspan="2"><b>TS304: Ingest data to feature set(s) from SQL source</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-contact</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-relation</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-event</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/basic-communication</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-party</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-account</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-transaction</td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/aggregate-circle</td></tr>
-			<tr><td colspan="2"><b>TS401: Create feature vector(s)</b></td></tr>
-			<tr><td colspan="2"><b>TS501: Get data from off-line feature vector(s)</b></td></tr>
-			<tr><td colspan="2"><b>TS502: Get data from on-line feature vector(s)</b></td></tr>
-			<tr><td colspan="2"><b>TS701: Build CART model</b></td></tr>
-			<tr><td colspan="2"><b>TS801: Serving score from CART</b></td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_contact</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_relation</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_event</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_communication</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_circle</td></tr>
+			<tr><td colspan="2"><b>TS305: Ingest data to feature set(s) from SQL source</b></td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_contact</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_relation</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_event</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/basic_communication</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_party</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_account</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_transaction</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/aggregate_circle</td></tr>
 			<tr><td colspan="2"><b>TS102: Delete project(s)</b></td></tr>
-				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-redis-csv/*:</td></tr>
+				<tr><td>&nbsp;<img class="img-check" src="">DONE</td><td>agate-parquet/*:</td></tr>
 		</table>
 	</div>
 
@@ -265,8 +265,8 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 	<div id="myDIV" style="display: none;" class="content-tiny">
 		<p>
 			<b>System information:</b><br>
-			&nbsp;&nbsp;<b style="color:blue;">MLRun: 1.6.2 (client)/1.6.2 (server)</b>,  <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">Change log</a>, <a href="https://docs.mlrun.org/en/latest/change-log/index.html#open-issues" target="_blank">Issues</a>, <a href="https://docs.mlrun.org/en/latest/change-log/index.html#limitations" target="_blank">Limitations</a><br>
-			&nbsp;&nbsp;<b style="color:blue;">QGate: 0.2.1 (version)/0.2.3 (model)</b><br>
+			&nbsp;&nbsp;<b style="color:blue;">MLRun: 1.6.4 (client)/1.6.4 (server)</b>,  <a href="https://docs.mlrun.org/en/latest/change-log/index.html" target="_blank">Change log</a>, <a href="https://docs.mlrun.org/en/latest/change-log/index.html#open-issues" target="_blank">Issues</a>, <a href="https://docs.mlrun.org/en/latest/change-log/index.html#limitations" target="_blank">Limitations</a><br>
+			&nbsp;&nbsp;<b style="color:blue;">QGate: 0.2.6 (version)/0.3.8 (model)</b><br>
 			&nbsp;&nbsp;<b style="color:blue;">Python: 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]</b><br>
 			&nbsp;&nbsp;<b>System:</b> Windows 10.0.22621 (Windows-10-10.0.22621-SP0)<br>
 			&nbsp;&nbsp;<b>Platform:</b> AMD64 (AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD)<br>
@@ -277,21 +277,21 @@ function filterAll(comboBox1, comboBox2, filtrTable) {
 		 	&nbsp;&nbsp;<b>QGATE_ANONYM_MODE:</b> 'On'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_DEFINITION:</b> '../qgate-model'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_DATASET:</b> '01-size-100'<br> 
-		 	&nbsp;&nbsp;<b>QGATE_FILTER_PROJECTS:</b> 'agate-redis-csv'<br> 
-		 	&nbsp;&nbsp;<b>QGATE_FILTER_SCENARIOS:</b> 'TS101, TS102, TS201, TS304'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_FILTER_PROJECTS:</b> 'agate-parquet'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_FILTER_SCENARIOS:</b> 'TS101, TS102, TS201, TS205, TS305'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_OUTPUT:</b> './output'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_OUTPUT_EXP:</b> './output, ds://az-blob/jistcontainer01/test/'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_DATA_STORE:</b> 'az-blob, AzureBlobStorage, ./secrets/az_connection.env'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_REDIS:</b> 'redis://localhost:6379'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_MYSQL:</b> 'mysql+pymysql://testuser:testpwd@localhost:3306/test'<br> 
 		 	&nbsp;&nbsp;<b>QGATE_POSTGRES:</b> 'postgresql+psycopg2://testuser:testpwd@localhost:5432/test'<br> 
-		 	&nbsp;&nbsp;<b>QGATE_KAFKA:</b> 'localhost:9092, testtopic'<br> 
+		 	&nbsp;&nbsp;<b>QGATE_KAFKA:</b> 'localhost:9092'<br> 
 		 	&nbsp;&nbsp;<b>DIR:</b> 'C:\Python\qgate-sln-mlrun'<br> 
 		</p>
 		<p>
 			<b>Hardware information:</b><br>
 			&nbsp;&nbsp;<b>CPU:</b> 12 cores<br>
-			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/2.2 GB<br>
+			&nbsp;&nbsp;<b>RAM total/free:</b> 15.2 GB/1.0 GB<br>
 			&nbsp;&nbsp;<b>Host:</b> Anonym/192.168.0.1<br>
 		</p>
 	</div>
