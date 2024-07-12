@@ -6,9 +6,12 @@ source, target, setting for InferOption.default() or InferOption.Null.
 BTW: in case of InferOption.default(), the data types are defined based on discovery during
 the preview (it is operation before the own ingest).
 
-## ParquetTarget
+Experience from these test cases:
+ - TS201-205
+ - TS301-305
+ - TS401-405
 
-Experinece from TS301-305, TS401-405
+## ParquetTarget
 
  Target | Source     | InferOptions.default()                                                                                                                | InferOptions.Null | 
 --------|------------|---------------------------------------------------------------------------------------------------------------------------------------|--------|
