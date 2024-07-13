@@ -1,5 +1,7 @@
 # Postgres as on-line source/target
 
+NOTE: Postgres is not full ready for use, see [applied limits](applied-limits.md)
+
 ## 1. Preconditions for OS Windows
 
  - Install Desktop Docker, [see](./desktopdocker.md)
