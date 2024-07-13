@@ -1,4 +1,4 @@
-# MLRun/Iguazio, the KEY changes in a nutshell
+# MLRun/Iguazio, the KEY changes in a nutshell (from my selfish perspective)
 
 You can see detail changes in 
    - [MLRun change log](https://docs.mlrun.org/en/latest/change-log/index.html)
