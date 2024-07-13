@@ -10,7 +10,7 @@ You can see detail changes in
 ## MLRun
 
 ### 🚩1.8 MLRun (exp. 11-12/2024)
- - Focus on SourceSQL/TargetSQL improvements 
+ - Focus on SourceSQL/TargetSQL improvements, [see](https://github.com/mlrun/mlrun/issues/5238#issuecomment-2163887467)
  - Python 3.12 (till end of 2024)
  - TBD.
 
