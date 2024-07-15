@@ -37,6 +37,7 @@ class TS206(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create shared topic as data source
+            # TODO: drop_if_exist=False plus Remove content in case of project delete
             self._kafka.create_insert_data(self._kafka.create_helper(featureset_name), featureset_name,True)
 
             definition = self._fshelper.get_definition(project_name, featureset_name)
