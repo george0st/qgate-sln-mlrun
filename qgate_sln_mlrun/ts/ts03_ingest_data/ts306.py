@@ -26,7 +26,7 @@ class TS306(TSBase):
         return ("Ingest data to feature set(s) from Kafka source")
 
     def prj_exec(self, project_name):
-        """ Create featuresets & ingest"""
+        """ Data ingest"""
 
         # It can be executed only in case that configuration is fine
         if not self._kafka.configured:

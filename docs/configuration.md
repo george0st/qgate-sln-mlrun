@@ -55,5 +55,5 @@ The setup of Kafka for **on-line source** (valid for target 'kafka')
   - `QGATE_KAFKA = localhost:9092`
   - detail description, see [Kafka](./kafka.md)
 
-## Supported sources and targers in MLRun
- - [Sources-Targets from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html)
+## NOTES
+Supported [sources and targers](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html) in MLRun

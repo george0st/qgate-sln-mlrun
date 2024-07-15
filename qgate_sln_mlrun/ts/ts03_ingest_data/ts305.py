@@ -26,7 +26,7 @@ class TS305(TSBase):
         return "Ingest data to feature set(s) from SQL (MySQL) source"
 
     def prj_exec(self, project_name):
-        """ Create featuresets & ingest"""
+        """ Data ingest"""
 
         # It can be executed only in case that configuration is fine
         if not self._mysql.configured:

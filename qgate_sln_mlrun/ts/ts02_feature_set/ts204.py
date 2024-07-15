@@ -37,6 +37,7 @@ class TS204(TSBase):
 
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
+        # Create feature set
         featureset = self._fshelper.create_featureset(project_name, definition, featureset_prefix)
 
         source_file = os.path.join(os.getcwd(),
