@@ -4,13 +4,11 @@
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
-from mlrun.data_types.data_types import ValueType
 from mlrun.datastore.sources import KafkaSource
 import json
 from qgate_sln_mlrun.helper.kafkahelper import KafkaHelper
 import os
 import glob
-from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
 
 
 class TS306(TSBase):
