@@ -1,32 +1,29 @@
 """
-  TS206: Create feature set(s) & Ingest from Kafka source (one step)
+  TS306: Ingest data to feature set(s) from Kafka source
 """
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
-from mlrun.data_types.data_types import ValueType
 from mlrun.datastore.sources import KafkaSource
 import json
 from qgate_sln_mlrun.helper.kafkahelper import KafkaHelper
 import os
 import glob
-from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
 
 
-class TS206(TSBase):
+class TS306(TSBase):
 
     def __init__(self, solution):
         super().__init__(solution, self.__class__.__name__)
         self._kafka = KafkaHelper(self.setup)
-        self._fshelper = FeatureSetHelper(self._solution)
 
     @property
     def desc(self) -> str:
-        return "Create feature set(s) & Ingest from Kafka source (one step)"
+        return "Ingest data to feature set(s) from Kafka source"
 
     @property
     def long_desc(self):
-        return ("Create feature set(s) & Ingest from Kafka source (one step, without save and load featureset)")
+        return ("Ingest data to feature set(s) from Kafka source")
 
     def prj_exec(self, project_name):
         """ Create featuresets & ingest"""
@@ -37,16 +34,13 @@ class TS206(TSBase):
 
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create shared topic as data source
-            # TODO: drop_if_exist=False plus Remove content in case of project delete
             self._kafka.create_insert_data(self._kafka.create_helper(featureset_name), featureset_name,True)
-
-            definition = self._fshelper.get_definition(project_name, featureset_name)
-            if definition:
-                self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name, definition, self.name)
+            self._create_featureset(f'{project_name}/{featureset_name}', project_name, featureset_name)
 
     @TSBase.handler_testcase
-    def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
-        featureset = self._fshelper.create_featureset(project_name, definition, featureset_prefix)
+    def _create_featureset(self, testcase_name, project_name, featureset_name):
+        # get existing feature set (feature set have to be created in previous test scenario)
+        featureset = fstore.get_feature_set(f"{project_name}/{featureset_name}")
 
         # samples
         #  https://github.com/mlrun/test-notebooks/tree/main/kafka_redis_fs

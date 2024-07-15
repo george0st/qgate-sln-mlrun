@@ -1,8 +1,6 @@
 """
   TS305: Ingest data to feature set(s) from SQL source
 """
-
-
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
@@ -25,7 +23,7 @@ class TS305(TSBase):
 
     @property
     def long_desc(self):
-        return "Create feature set(s) & Ingest from SQL (MySQL) source"
+        return "Ingest data to feature set(s) from SQL (MySQL) source"
 
     def prj_exec(self, project_name):
         """ Create featuresets & ingest"""

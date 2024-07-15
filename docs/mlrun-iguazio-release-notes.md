@@ -33,6 +33,9 @@ You can see detail changes in
 
 ## Iguazio
 
+### 🚩 3.6.1 Iguazio (exp. 10-12/2024)
+ - ???
+
 ### ✅ 3.6.0 Iguazio
  - Supports Rocky Linux 8.x OS & Kubernetes 1.28 for on-prem vanilla 
  - Focused on fixes
