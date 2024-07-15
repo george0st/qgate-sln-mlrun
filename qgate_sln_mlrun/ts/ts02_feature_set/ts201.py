@@ -30,4 +30,5 @@ class TS201(TSBase):
 
     @TSBase.handler_testcase
     def _create_featureset(self, testcase_name, project_name, featureset_name, definition, featureset_prefix=None):
+        # Create feature set
         self._fshelper.create_featureset(project_name, definition, featureset_prefix)
