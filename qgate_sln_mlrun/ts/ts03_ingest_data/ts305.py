@@ -25,7 +25,7 @@ class TS305(TSBase):
 
     @property
     def long_desc(self):
-        return "Create feature set(s) & Ingest from SQL (MySQL) source"
+        return "Ingest data to feature set(s) from SQL (MySQL) source"
 
     def prj_exec(self, project_name):
         """ Create featuresets & ingest"""
