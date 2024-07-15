@@ -1,8 +1,6 @@
 """
   TS305: Ingest data to feature set(s) from SQL source
 """
-
-
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
