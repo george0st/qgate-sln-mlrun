@@ -1,14 +1,8 @@
 """
   TS703: Complex pipeline(s), mass operation
 """
-
 from qgate_sln_mlrun.ts.tsbase import TSBase
-from qgate_sln_mlrun.setup import Setup
-import mlrun.feature_store as fstore
 import mlrun
-import pandas as pd
-import glob
-import os
 
 
 class TS703(TSBase):
