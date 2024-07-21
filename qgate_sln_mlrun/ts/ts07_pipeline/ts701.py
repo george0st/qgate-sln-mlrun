@@ -1,14 +1,8 @@
 """
   TS701: Simple pipeline(s)
 """
-
 from qgate_sln_mlrun.ts.tsbase import TSBase
-from qgate_sln_mlrun.setup import Setup
-import mlrun.feature_store as fstore
 import mlrun
-import pandas as pd
-import glob
-import os
 
 
 class TS701(TSBase):
