@@ -23,8 +23,6 @@ class TS701Pipeline:
         else:
             data=event
         calc = data['a'] * data['b']
-
-#        data = {"calc": calc}
         data.clear()
         data['calc']=calc
 
