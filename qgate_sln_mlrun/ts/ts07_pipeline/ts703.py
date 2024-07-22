@@ -16,7 +16,7 @@ class TS703(TSBase):
 
     @property
     def long_desc(self):
-        return "Complex pipeline(s), mass operation"
+        return "Complex pipeline(s), mass operation without relation to featureset/ingest"
 
     def exec(self):
         self._complex(f"*/class_complex_mass (event)", True)
