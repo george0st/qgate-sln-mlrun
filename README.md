@@ -54,7 +54,6 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS701: Simple pipeline(s)
    - ✅ TS702: Complex pipeline(s)
    - ✅ TS703: Complex pipeline(s), mass operation
-   - ✔  TS704: Complex pipeline(s) for ingest
  - **08 - Build model**
    - ✅ TS801: Build CART model
    - ❌ TS802: Build XGBoost model
