@@ -16,7 +16,7 @@ class TS701(TSBase):
 
     @property
     def long_desc(self):
-        return "Simple pipeline(s), focus on full/partial event and tests under the Mock"
+        return "Simple pipeline(s), focus on full/partial event and tests under the Mock and without relation to featureset/data ingest"
 
     def exec(self):
         """Simple pipeline during ingest"""
