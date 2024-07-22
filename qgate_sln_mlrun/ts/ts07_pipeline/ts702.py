@@ -16,7 +16,7 @@ class TS702(TSBase):
 
     @property
     def long_desc(self):
-        return "Complex pipeline(s)"
+        return "Complex pipeline(s) without relation to featureset/data ingest"
 
     def exec(self):
         """Simple pipeline during ingest"""
