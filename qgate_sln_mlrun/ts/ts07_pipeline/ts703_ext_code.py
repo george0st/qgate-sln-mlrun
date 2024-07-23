@@ -89,6 +89,14 @@ class TS703Pipeline:
         data['calc'] = data['calc'] + 101
         return event
 
+    def step9(self, event):
+        if isinstance(event, mlrun.serving.server.MockEvent):
+            data = event.body
+        else:
+            data = event
+        data['calc'] = data['calc'] - 42
+        return event
+
 def step1(event):
     if isinstance(event, mlrun.serving.server.MockEvent):
         data = event.body
@@ -151,4 +159,12 @@ def step8(event):
     else:
         data=event
     data['calc'] = data['calc'] + 101
+    return event
+
+def step9(event):
+    if isinstance(event, mlrun.serving.server.MockEvent):
+        data = event.body
+    else:
+        data = event
+    data['calc'] = data['calc'] - 42
     return event
