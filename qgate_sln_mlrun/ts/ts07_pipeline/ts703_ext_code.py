@@ -23,6 +23,10 @@ class TS703Pipeline:
             self.step6(event)
         elif self.name=="step7":
             self.step7(event)
+        elif self.name=="step8":
+            self.step8(event)
+        elif self.name=="step9":
+            self.step9(event)
         return event
 
     def step1(self, event):
@@ -89,6 +93,14 @@ class TS703Pipeline:
         data['calc'] = data['calc'] + 101
         return event
 
+    def step9(self, event):
+        if isinstance(event, mlrun.serving.server.MockEvent):
+            data = event.body
+        else:
+            data = event
+        data['calc'] = data['calc'] - 42
+        return event
+
 def step1(event):
     if isinstance(event, mlrun.serving.server.MockEvent):
         data = event.body
@@ -151,4 +163,12 @@ def step8(event):
     else:
         data=event
     data['calc'] = data['calc'] + 101
+    return event
+
+def step9(event):
+    if isinstance(event, mlrun.serving.server.MockEvent):
+        data = event.body
+    else:
+        data = event
+    data['calc'] = data['calc'] - 42
     return event
