@@ -23,6 +23,10 @@ class TS703Pipeline:
             self.step6(event)
         elif self.name=="step7":
             self.step7(event)
+        elif self.name=="step8":
+            self.step8(event)
+        elif self.name=="step9":
+            self.step9(event)
         return event
 
     def step1(self, event):
