@@ -22,7 +22,7 @@ The list of projects for testing e.g. agate-1, agate-2, etc.
 Default is empty list (all projects will be tested)
   - `QGATE_FILTER_PROJECTS = agate-2`
 
-## 4. Filet scenarios
+## 4. Filter scenarios
 The list of test scenarios for testing e.g. TS201, etc. (it is 
 important to keep and know TS dependencies). Default is empty list (all test
 scenarios will be tested)
