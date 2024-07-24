@@ -9,13 +9,14 @@ You can see detail changes in
 
 ## MLRun
 
-### 🚩1.8 MLRun (exp. 11-12/2024)
+### 🚩1.8 MLRun (exp. Q4/2024)
  - Focus on SourceSQL/TargetSQL improvements, [see](https://github.com/mlrun/mlrun/issues/5238#issuecomment-2163887467)
- - Python 3.12 (till end of 2024)
+ - Python 3.12 (till end of 2024, see Slack discussion)
  - TBD.
 
-### 🚩1.7 MLRun (exp. 07-08/2024)
+### 🚩1.7 MLRun (exp. Q3/2024)
  - Model monitoring/drifting for MLRun (available in free version also)
+ - Support GenAI/LLM (see Langchain, GenAI tutorial, etc.)
  - Available API Gateway (flexible configuration & Nuclio tuning)
  - Improve scaling for Nuclio (from version >= 1.13)
  - Support HDFS as data store (via WebHDFS)
