@@ -16,10 +16,10 @@ You can see detail changes in
 
 ### 🚩1.7 MLRun (exp. 07-08/2024)
  - Model monitoring/drifting for MLRun (available in free version also)
+ - Support GenAI/LLM (see Langchain, GenAI tutorial, etc.)
  - Available API Gateway (flexible configuration & Nuclio tuning)
  - Improve scaling for Nuclio (from version >= 1.13)
  - Support HDFS as data store (via WebHDFS)
- - Support GenAI/LLM (see Langchain, GenAI tutorial, etc.)
 
 ### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
