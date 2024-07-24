@@ -3,26 +3,28 @@
 The view to setting of test configuration.
 
 ## 0. Anonym mode
-The switch for setup `On` or `Off` anonym mode. If anonym mode is `On` than 
+The switch for setup `On` or `Off` anonym mode (default is `Off`). If anonym mode is `On` than 
 the output file names in directory `QGATE_OUTPUT` are only with date information
-(without the time for file creation). The host variable `Host` in output file 
+(without the time detail for file creation). The host variable `Host` in output file 
 contains static information `Anonym/192.168.0.1` (not real host name and IP address).
  - `QGATE_ANONYM_MODE = On`
 
 ## 1. Model definition
-The path to the QGate model definition (the path can be relative or full) e.g. ../qgate-model
+The path to the [QGate model](https://github.com/george0st/qgate-model) definition (the path
+can be relative or full) e.g. ../qgate-model
   - `QGATE_DEFINITION = ../qgate-model`
 
 ## 2. Data set
-The name of data set for testing e.g. "01-size-100", "02-size-1K", etc.
+The name of data set (as directory name in model definition) for testing e.g. "01-size-100", "02-size-1K", etc.
+The directory contains CSV/GZ and Parquet files.
   - `QGATE_DATASET = 01-size-100`
 
 ## 3. Filter projects
 The list of projects for testing e.g. agate-1, agate-2, etc. 
 Default is empty list (all projects will be tested)
-  - `QGATE_FILTER_PROJECTS = agate-2`
+  - `QGATE_FILTER_PROJECTS = agate-2, agate-redis-parquet`
 
-## 4. Filet scenarios
+## 4. Filter scenarios
 The list of test scenarios for testing e.g. TS201, etc. (it is 
 important to keep and know TS dependencies). Default is empty list (all test
 scenarios will be tested)
