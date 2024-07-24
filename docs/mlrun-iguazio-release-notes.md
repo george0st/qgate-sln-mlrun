@@ -14,7 +14,7 @@ You can see detail changes in
  - Python 3.12 (till end of 2024, see Slack discussion)
  - TBD.
 
-### 🚩1.7 MLRun (exp. 07-08/2024)
+### 🚩1.7 MLRun (exp. Q3/2024)
  - Model monitoring/drifting for MLRun (available in free version also)
  - Support GenAI/LLM (see Langchain, GenAI tutorial, etc.)
  - Available API Gateway (flexible configuration & Nuclio tuning)
