@@ -5,7 +5,7 @@ The view to setting of test configuration.
 ## 0. Anonym mode
 The switch for setup `On` or `Off` anonym mode. If anonym mode is `On` than 
 the output file names in directory `QGATE_OUTPUT` are only with date information
-(without the time for file creation). The host variable `Host` in output file 
+(without the time detail for file creation). The host variable `Host` in output file 
 contains static information `Anonym/192.168.0.1` (not real host name and IP address).
  - `QGATE_ANONYM_MODE = On`
 
