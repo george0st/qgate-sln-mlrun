@@ -20,7 +20,7 @@ The name of data set for testing e.g. "01-size-100", "02-size-1K", etc.
 ## 3. Filter projects
 The list of projects for testing e.g. agate-1, agate-2, etc. 
 Default is empty list (all projects will be tested)
-  - `QGATE_FILTER_PROJECTS = agate-2`
+  - `QGATE_FILTER_PROJECTS = agate-2, agate-redis-parquet`
 
 ## 4. Filter scenarios
 The list of test scenarios for testing e.g. TS201, etc. (it is 
