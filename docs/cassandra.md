@@ -18,9 +18,9 @@
    - or create container with name 'mlrun-redis', use image 'redis:latest' and open ports 6379:6379
      - `docker run --name mlrun-cassandra -p 9042:9042 -d redis:cassandra`
 
-3. Test Redis in container
+3. Test Cassandra in container
    - interactive access to the container
-     - `docker exec -it mlrun-redis redis-cli`
+     - `docker exec -it mlrun-cassandra bash`
    - set key 'aa' to the value '100'
      - `set aa 100`
    - set key 'aa' to the value '100' with expiration 10 seconds
@@ -33,11 +33,6 @@
      - `del aa`
 
 
-## 3. Use Redis for tests
+## 3. Use Cassandra for tests
 
- - Update `qgate-sln-mlrun.env`, change setting for `QGATE_REDIS`
-   - pattern see `<redis|rediss>://<host>[:port]`
-   - real usage, see `QGATE_REDIS = redis://localhost:6379`
- - Note
-   - Port is based on container see **6379**, you can use also different 
-   protocol see **rediss**, more information see [Redis targes store from MLRun](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html#redis-target)
+   - TBD.
