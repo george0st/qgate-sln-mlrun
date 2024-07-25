@@ -21,7 +21,8 @@
 3. Test Cassandra in container
    - interactive access to the container
      - `docker exec -it mlrun-cassandra cqlsh`
-   - commands TBD.
+   - show keyspaces (databases)
+     - `SELECT * FROM system_schema.keyspaces;` 
 
 
 ## 3. Use Cassandra for tests
