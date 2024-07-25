@@ -15,8 +15,8 @@
 2. Run new container
    - create container with name 'mlrun-cassandra', use image 'cassandra:5.0-rc1' and open ports 9042:9042
      - `docker run --name mlrun-cassandra -p 9042:9042 -d cassandra:5.0-rc1`
-   - or create container with name 'mlrun-redis', use image 'redis:latest' and open ports 6379:6379
-     - `docker run --name mlrun-cassandra -p 9042:9042 -d redis:cassandra`
+   - or create container with name 'mlrun-cassandra', use image 'cassandra:latest' and open ports 9042:9042
+     - `docker run --name mlrun-cassandra -p 9042:9042 -d cassandra:latest`
 
 3. Test Cassandra in container
    - interactive access to the container
