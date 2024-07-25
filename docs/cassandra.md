@@ -33,7 +33,8 @@
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(1,'tiger', 'scott');`
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(2,'john', 'novak');`
    - select data
-     - 
+     - `SELECT * FROM test.tbl WHERE fn0=1;`
+     - `SELECT * FROM test.tbl WHERE fn2='novak' ALLOW FILTERING;`
 
 ## 3. Use Cassandra for tests
 
