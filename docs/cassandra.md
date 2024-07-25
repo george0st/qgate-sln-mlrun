@@ -7,10 +7,10 @@
 ## 2. Run Cassandra (in container)
 
 1. Get image from official source
-   - get specific redis image version 7.2 `docker pull redis:7.2`
-   - or get last redis image `docker pull redis:latest`
+   - get specific cassandra image version 5.0-rc1 `docker pull cassandra:5.0-rc1`
+   - or get last cassandra image `docker pull cassandra:latest`
    - Note
-     - available [versions](https://hub.docker.com/_/redis)/[tags](https://hub.docker.com/_/redis/tags)
+     - available [versions](https://hub.docker.com/_/cassandra)/[tags](https://hub.docker.com/_/cassandra/tags)
 
 2. Run new container
    - create container with name 'mlrun-redis', use image 'redis:7.2' and open ports 6379:6379
