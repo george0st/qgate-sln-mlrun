@@ -13,10 +13,10 @@
      - available [versions](https://hub.docker.com/_/cassandra)/[tags](https://hub.docker.com/_/cassandra/tags)
 
 2. Run new container
-   - create container with name 'mlrun-redis', use image 'redis:7.2' and open ports 6379:6379
-     - `docker run --name mlrun-redis -p 6379:6379 -d redis:7.2`
+   - create container with name 'mlrun-cassandra', use image 'cassandra:5.0-rc1' and open ports 9042:9042
+     - `docker run --name mlrun-cassandra -p 9042:9042 -d cassandra:5.0-rc1`
    - or create container with name 'mlrun-redis', use image 'redis:latest' and open ports 6379:6379
-     - `docker run --name mlrun-redis -p 6379:6379 -d redis:latest`
+     - `docker run --name mlrun-cassandra -p 9042:9042 -d redis:cassandra`
 
 3. Test Redis in container
    - interactive access to the container
