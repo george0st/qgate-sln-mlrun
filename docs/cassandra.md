@@ -22,13 +22,20 @@
    - interactive access to the container
      - `docker exec -it mlrun-cassandra cqlsh`
    - show keyspaces (databases)
-     - `SELECT * FROM system_schema.keyspaces;`
+     - `DESCRIBE KEYSPACES;`
+     - or `SELECT * FROM system_schema.keyspaces;`
    - create keyspace `test`
      - `CREATE KEYSPACE IF NOT EXISTS test WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};`
+   - describe detail about keyspace
+     - `DESCRIBE KEYSPACE test;`
    - choose keyspace `test`
      - `USE test;`
+   - show tables (in current keyspace)
+     - `DESCRIBE TABLES;` 
    - create table 'tbl'
      - `CREATE TABLE IF NOT EXISTS test.tbl (fn0 int, fn1 text, fn2 text, PRIMARY KEY (fn0, fn1));`
+   - describe table (full information about table structure and setting)
+     - `DESCRIBE TABLE test.tbl;`
    - insert data
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(1,'tiger', 'scott');`
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(2,'john', 'novak');`
