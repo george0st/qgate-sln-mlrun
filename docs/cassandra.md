@@ -27,6 +27,8 @@
      - `CREATE KEYSPACE IF NOT EXISTS test WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};`
    - choose keyspace `test`
      - `USE test;`
+   - create table 'tbl'
+     - `CREATE TABLE IF NOT EXISTS test.tbl (fn0 int, fn1 text, fn2 text, PRIMARY KEY (fn0, fn1));`
 
 ## 3. Use Cassandra for tests
 
