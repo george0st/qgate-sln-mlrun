@@ -20,17 +20,8 @@
 
 3. Test Cassandra in container
    - interactive access to the container
-     - `docker exec -it mlrun-cassandra bash`
-   - set key 'aa' to the value '100'
-     - `set aa 100`
-   - set key 'aa' to the value '100' with expiration 10 seconds
-     - `set key 100 ex 10`
-   - get key 'aa'
-     - `get aa`
-   - check if the key 'aa' exist
-     - `exists aa`
-   - delete key 'aa'
-     - `del aa`
+     - `docker exec -it mlrun-cassandra cqlsh`
+   - commands TBD.
 
 
 ## 3. Use Cassandra for tests
