@@ -1,26 +1,26 @@
-# Cassandra as on-line source/target
+# Scylla as on-line source/target
 
 ## 1. Preconditions for OS Windows
 
  - Install Desktop Docker, [see](./desktopdocker.md)
 
-## 2. Run Cassandra (in container)
+## 2. Run Scylla (in container)
 
 1. Get image from official source
-   - get specific cassandra image version 5.0-rc1 `docker pull cassandra:5.0-rc1`
-   - or get last cassandra image `docker pull cassandra:latest`
+   - get specific scylla image version 5.4 `docker pull scylladb/scylla:5.4`
+   - or get last scylla image `docker pull scylladb/scylla:latest`
    - Note
-     - available [versions](https://hub.docker.com/_/cassandra)/[tags](https://hub.docker.com/_/cassandra/tags)
+     - available [versions](https://hub.docker.com/r/scylladb/scylla)/[tags](https://hub.docker.com/r/scylladb/scylla/tags)
 
 2. Run new container
-   - create container with name 'mlrun-cassandra', use image 'cassandra:5.0-rc1' and open ports 9042:9042
-     - `docker run --name mlrun-cassandra -p 9042:9042 -d cassandra:5.0-rc1`
-   - or create container with name 'mlrun-cassandra', use image 'cassandra:latest' and open ports 9042:9042
-     - `docker run --name mlrun-cassandra -p 9042:9042 -d cassandra:latest`
+   - create container with name 'mlrun-scylla', use image 'scylladb/scylla:5.4' and open ports 9042:9042
+     - `docker run --name mlrun-scylla -p 9042:9042 -d scylladb/scylla:5.4`
+   - or create container with name 'mlrun-scylla', use image 'scylladb/scylla:latest' and open ports 9042:9042
+     - `docker run --name mlrun-scylla -p 9042:9042 -d scylladb/scylla:latest`
 
-3. Test Cassandra in container
+3. Test Scylla in container
    - interactive access to the container
-     - `docker exec -it mlrun-cassandra cqlsh`
+     - `docker exec -it mlrun-scylla cqlsh`
    - show keyspaces (databases)
      - `DESCRIBE KEYSPACES;`
      - or `SELECT * FROM system_schema.keyspaces;`
@@ -43,6 +43,6 @@
      - `SELECT * FROM test.tbl WHERE fn0=1;`
      - `SELECT * FROM test.tbl WHERE fn2='novak' ALLOW FILTERING;`
 
-## 3. Use Cassandra for tests
+## 3. Use Scylla for tests
 
    - TBD.
