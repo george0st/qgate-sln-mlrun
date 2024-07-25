@@ -22,8 +22,11 @@
    - interactive access to the container
      - `docker exec -it mlrun-cassandra cqlsh`
    - show keyspaces (databases)
-     - `SELECT * FROM system_schema.keyspaces;` 
-
+     - `SELECT * FROM system_schema.keyspaces;`
+   - create keyspace `test`
+     - `CREATE KEYSPACE IF NOT EXISTS test WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};`
+   - choose keyspace `test`
+     - `USE test;`
 
 ## 3. Use Cassandra for tests
 
