@@ -29,6 +29,11 @@
      - `USE test;`
    - create table 'tbl'
      - `CREATE TABLE IF NOT EXISTS test.tbl (fn0 int, fn1 text, fn2 text, PRIMARY KEY (fn0, fn1));`
+   - insert data
+     - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(1,'tiger', 'scott');`
+     - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(2,'john', 'novak');`
+   - select data
+     - 
 
 ## 3. Use Cassandra for tests
 
