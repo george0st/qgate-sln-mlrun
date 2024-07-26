@@ -43,6 +43,7 @@
      - `SELECT * FROM test.tbl WHERE fn0=1;`
      - `SELECT * FROM test.tbl WHERE fn2='novak' ALLOW FILTERING;`
 
+
 ## 3. Use Cassandra for tests
 
    - TBD.
