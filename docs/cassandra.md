@@ -36,7 +36,7 @@
      - `CREATE TABLE IF NOT EXISTS test.tbl (fn0 int, fn1 text, fn2 text, PRIMARY KEY (fn0, fn1));`
    - describe table (full information about table structure and setting)
      - `DESCRIBE TABLE test.tbl;`
-   - insert data with TTL 2 days (172800 seconds)
+   - insert data with TTL 2 days (172.800 seconds)
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(1,'tiger', 'scott') USING TTL 172800;`
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(2,'john', 'novak')  USING TTL 172800;`
    - select data
