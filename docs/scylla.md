@@ -38,7 +38,7 @@
      - `DESCRIBE TABLE test.tbl;`
    - insert data with TTL 2 days (172.800 seconds)
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(1,'tiger', 'scott') USING TTL 172800;`
-     - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(2,'john', 'novak')  USING TTL 172800;`
+     - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(2,'john', 'novak') USING TTL 172800;`
    - select data
      - `SELECT * FROM test.tbl WHERE fn0=1;`
      - `SELECT * FROM test.tbl WHERE fn2='novak' ALLOW FILTERING;`
