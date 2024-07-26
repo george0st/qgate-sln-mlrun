@@ -18,6 +18,6 @@ pymysql~=1.1
 psycopg2~=2.9
 
 # Coverage
-coverage>=7
+coverage~=7.5
 coverage-badge>=1
 
