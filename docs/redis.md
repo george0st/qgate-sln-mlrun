@@ -21,6 +21,8 @@
 3. Test Redis in container
    - interactive access to the container
      - `docker exec -it mlrun-redis redis-cli`
+   - get list of keys
+     - `keys *`
    - set key 'aa' to the value '100'
      - `set aa 100`
    - set key 'aa' to the value '100' with expiration 10 seconds
