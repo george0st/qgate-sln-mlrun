@@ -33,6 +33,9 @@
      - `exists aa`
    - delete key 'aa'
      - `del aa`
+   
+NOTE: MLRun stores the values with composite or hash keys (the decision is 
+based on unique key size/complexity)
 
 
 ## 3. Use Redis for tests
