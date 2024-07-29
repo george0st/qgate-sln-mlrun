@@ -21,6 +21,8 @@
 3. Test Redis in container
    - interactive access to the container
      - `docker exec -it mlrun-redis redis-cli`
+   - get list of keys
+     - `keys *`
    - set key 'aa' to the value '100'
      - `set aa 100`
    - set key 'aa' to the value '100' with expiration 10 seconds
@@ -31,6 +33,9 @@
      - `exists aa`
    - delete key 'aa'
      - `del aa`
+   
+NOTE: MLRun stores the values with composite or hash keys (the decision is 
+based on unique key size/complexity)
 
 
 ## 3. Use Redis for tests
