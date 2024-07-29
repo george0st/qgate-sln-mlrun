@@ -39,8 +39,9 @@
    - insert data with TTL 2 days (172.800 seconds)
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(1,'tiger', 'scott') USING TTL 172800;`
      - `INSERT INTO test.tbl (fn0, fn1, fn2) VALUES(2,'john', 'novak') USING TTL 172800;`
-   - select data
+   - select data with indexed column in WHERE 
      - `SELECT * FROM test.tbl WHERE fn0=1;`
+   - select data without indexed column in WHERE (allow filtering as low/bad query performance)
      - `SELECT * FROM test.tbl WHERE fn2='novak' ALLOW FILTERING;`
 
 
