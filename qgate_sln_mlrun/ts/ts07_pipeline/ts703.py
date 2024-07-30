@@ -30,6 +30,7 @@ class TS703(TSBase):
         echo_server=self._one_call_init(class_call)
         count=0
         try:
+            # generate testing data
             for a in range(1, 201):
                 a=a/100 if class_call else a/-100
                 for b in range(1, 31):
