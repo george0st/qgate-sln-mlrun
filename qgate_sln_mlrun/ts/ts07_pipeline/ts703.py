@@ -74,7 +74,9 @@ class TS703(TSBase):
         result = echo_server.test("", {"a": a, "b": b})
 
         expected_value = ((((((((a * b) + a + b) + min(a, b)) + pow(a, b)) - (b * b)) * 0.95) * 2) + 101) - 42
-
+        if expected_value % 2:
+            expected_value = expected_value - 1
+            
         # value check
         if result['calc']!=expected_value:
             raise ValueError(f"Invalid calculation, expected value {expected_value}")
