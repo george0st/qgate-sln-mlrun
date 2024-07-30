@@ -1,6 +1,8 @@
 """
   TS703: Complex pipeline(s), mass operation
 """
+import math
+
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 
@@ -53,7 +55,8 @@ class TS703(TSBase):
                     .to(class_name="TS703Pipeline", full_event=True, name="step7") \
                     .to(class_name="TS703Pipeline", full_event=True, name="step8") \
                     .to(class_name="TS703Pipeline", full_event=True, name="step9") \
-                    .to(class_name="TS703Pipeline", full_event=True, name="step10").respond()
+                    .to(class_name="TS703Pipeline", full_event=True, name="step10") \
+                    .to(class_name="TS703Pipeline", full_event=True, name="step11").respond()
         else:
             graph_echo.to(handler="step1", full_event=True, name="step1") \
                 .to(handler="step2", full_event=True, name="step2") \
@@ -64,7 +67,8 @@ class TS703(TSBase):
                 .to(handler="step7", full_event=True, name="step7") \
                 .to(handler="step8", full_event=True, name="step8") \
                 .to(handler="step9", full_event=True, name="step9") \
-                .to(handler="step10", full_event=True, name="step10").respond()
+                .to(handler="step10", full_event=True, name="step10") \
+                .to(handler="step11", full_event=True, name="step11").respond()
         echo_server = func.to_mock_server(current_function="*")
         return echo_server
 
@@ -74,7 +78,7 @@ class TS703(TSBase):
         result = echo_server.test("", {"a": a, "b": b})
 
         # similation of calculation in pipeline
-        expected_value = ((((((((a * b) + a + b) + min(a, b)) + pow(a, b)) - (b * b)) * 0.95) * 2) + 101) - 42
+        expected_value = math.sin(((((((((a * b) + a + b) + min(a, b)) + pow(a, b)) - (b * b)) * 0.95) * 2) + 101) - 42)
         if expected_value % 2:
             expected_value = expected_value - 1
 
