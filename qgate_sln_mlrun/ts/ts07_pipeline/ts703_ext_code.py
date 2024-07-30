@@ -1,3 +1,5 @@
+import datetime
+
 import mlrun
 
 
@@ -27,6 +29,8 @@ class TS703Pipeline:
             self.step8(event)
         elif self.name=="step9":
             self.step9(event)
+        elif self.name=="step10":
+            self.step10(event)
         return event
 
     def step1(self, event):
@@ -101,6 +105,15 @@ class TS703Pipeline:
         data['calc'] = data['calc'] - 42
         return event
 
+    def step10(self, event):
+        if isinstance(event, mlrun.serving.server.MockEvent):
+            data = event.body
+        else:
+            data = event
+        if data['calc'] % 2:
+            data['calc'] = data['calc'] - 1
+        return event
+
 def step1(event):
     if isinstance(event, mlrun.serving.server.MockEvent):
         data = event.body
@@ -171,4 +184,13 @@ def step9(event):
     else:
         data = event
     data['calc'] = data['calc'] - 42
+    return event
+
+def step10(event):
+    if isinstance(event, mlrun.serving.server.MockEvent):
+        data = event.body
+    else:
+        data = event
+    if data['calc'] % 2:
+        data['calc'] = data['calc'] - 1
     return event
