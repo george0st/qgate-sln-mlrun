@@ -19,4 +19,4 @@ Summary, test scenarios: {{ data.summary.count_testcases }} [TOTAL] ({{ data.sum
 # RAM total/free: {{ data.memory_total }}/{{ data.memory_free }}
 # Host: {{ data.host }}
 # -----------------------
-# Source, see the Github https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
+# Sources, see the Github https://github.com/george0st/qgate-sln-mlrun, https://github.com/george0st/qgate-model
