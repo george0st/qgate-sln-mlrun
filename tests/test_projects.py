@@ -29,6 +29,16 @@ class TestProjects(unittest.TestCase):
         report = QualityReport(stp, out)
         report.execute(ProjectDelete.PART_DELETE, True)
 
+    def test_template_file_without_exp(self):
+        # test based on external template files
+        stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
+                          None,
+                          {"QGATE_OUTPUT": "./tests_output/"})
+        out = output.Output(stp, ['./qgate_sln_mlrun/templates/qgt-mlrun.txt',
+                                  './qgate_sln_mlrun/templates/qgt-mlrun.html'])
+        report = QualityReport(stp, out)
+        report.execute(ProjectDelete.PART_DELETE, False)
+
     def test_template_embeded(self):
         # test based on embed templates
         stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
@@ -37,3 +47,12 @@ class TestProjects(unittest.TestCase):
         out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
         report = QualityReport(stp, out)
         report.execute(ProjectDelete.PART_DELETE, True)
+
+    def test_template_embeded_without_exp(self):
+        # test based on embed templates
+        stp = setup.Setup(["qgate-sln-mlrun-private.env", "qgate-sln-mlrun.env"],
+                          None,
+                          {"QGATE_OUTPUT": "./tests_output/"})
+        out = output.Output(stp, [output.Output.DEFAULT_TEMPLATE_HTML, output.Output.DEFAULT_TEMPLATE_TXT])
+        report = QualityReport(stp, out)
+        report.execute(ProjectDelete.PART_DELETE, False)
