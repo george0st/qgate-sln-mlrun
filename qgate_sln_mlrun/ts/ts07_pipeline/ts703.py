@@ -2,7 +2,6 @@
   TS703: Complex pipeline(s), mass operation
 """
 import math
-
 from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 

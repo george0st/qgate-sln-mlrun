@@ -5,6 +5,7 @@ from mlrun.serving.utils import StepToDict
 from mlrun.feature_store.steps import MLRunStep
 import uuid
 
+
 class GenerateId(StepToDict, MLRunStep):
     def __init__(self, namespace: str, features: List[str], **kwargs):
         """
