@@ -28,7 +28,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS204: Create feature set(s) & Ingest from Parquet source (one step)
    - ✅ TS205: Create feature set(s) & Ingest from SQL source (one step)
    - ✔  TS206: Create feature set(s) & Ingest from Kafka source (one step)
-   - ❌ TS207: Create feature set(s) & Ingest from HTTP source (one step)
+   - ✔  TS207: Create feature set(s) & Ingest from HTTP source (one step)
  - **03 - Ingest data**
    - ✅ TS301: Ingest data (Preview mode)
    - ✅ TS302: Ingest data to feature set(s) from DataFrame source
@@ -36,7 +36,7 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
    - ✅ TS304: Ingest data to feature set(s) from Parquet source
    - ✅ TS305: Ingest data to feature set(s) from SQL source
    - ✔  TS306: Ingest data to feature set(s) from Kafka source
-   - ❌ TS307: Ingest data to feature set(s) from HTTP source
+   - ✔  TS307: Ingest data to feature set(s) from HTTP source
  - **04 - Ingest data & pipeline**
    - ✅ TS401: Ingest data & pipeline (Preview mode)
    - ✅ TS402: Ingest data & pipeline to feature set(s) from DataFrame source

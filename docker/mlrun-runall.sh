@@ -11,6 +11,12 @@
 # redis
 ./mlrun-redis.sh
 
+# cassandra
+./mlrun-cassandra.sh
+
+# scylla
+#./mlrun-scylla.sh
+
 # kafka
 ./mlrun-kafka.sh
 
