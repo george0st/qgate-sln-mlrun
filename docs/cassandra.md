@@ -47,4 +47,4 @@
 
 ## 3. Use Cassandra for tests
 
-   - TBD.
+   - It is without MLRun Source/Target, but you can use your own python code
