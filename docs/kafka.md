@@ -4,7 +4,7 @@
 
  - Install Desktop Docker, [see](./desktopdocker.md)
 
-## 2. Run Kafka (in container, focus on conduktor solution)
+## 2. Run Kafka (in container, focus on Conduktor solution)
 
 1. Install kafka and zookeeper as docker-compose
  - run `./docker/mlrun-kafka.sh`
