@@ -10,7 +10,7 @@ from qgate_sln_mlrun.ts.ts06_get_data import ts601, ts602
 from qgate_sln_mlrun.ts.ts05_feature_vector import ts501
 from qgate_sln_mlrun.ts.ts04_ingest_data_pipeline import ts401, ts402, ts403, ts404, ts405
 from qgate_sln_mlrun.ts.ts03_ingest_data import ts301, ts302, ts303, ts304, ts305, ts306
-from qgate_sln_mlrun.ts.ts02_feature_set import ts201, ts202, ts203, ts204, ts205, ts206
+from qgate_sln_mlrun.ts.ts02_feature_set import ts201, ts202, ts203, ts204, ts205, ts206, ts207
 from qgate_sln_mlrun.ts.ts01_project import ts101, ts102
 from qgate_sln_mlrun.ts import tsbase
 import importlib.resources
@@ -22,7 +22,7 @@ class QualityReport:
     """
 
     TEST_SCENARIOS = [ts101.TS101,
-                      ts201.TS201, ts202.TS202, ts203.TS203, ts204.TS204, ts205.TS205, ts206.TS206,
+                      ts201.TS201, ts202.TS202, ts203.TS203, ts204.TS204, ts205.TS205, ts206.TS206, ts207.TS207,
                       ts301.TS301, ts302.TS302, ts303.TS303, ts304.TS304, ts305.TS305, ts306.TS306,
                       ts401.TS401, ts402.TS402, ts403.TS403, ts404.TS404, ts405.TS405,
                       ts501.TS501,
@@ -41,7 +41,7 @@ class QualityReport:
 
     # Test vs Only On/Off-line
     TEST_BOTH = ["TS101","TS102",
-                 "TS201", "TS202", "TS203", "TS204", "TS205", "TS206",
+                 "TS201", "TS202", "TS203", "TS204", "TS205", "TS206", "TS207",
                  "TS301", "TS302", "TS303", "TS304", "TS305", "TS306",
                  "TS401", "TS402", "TS403", "TS404", "TS405",
                  "TS501",
