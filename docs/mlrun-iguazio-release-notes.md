@@ -19,7 +19,7 @@ You can see detail changes in
  - Support GenAI/LLM (see Langchain, GenAI tutorial, etc.)
  - Available API Gateway (flexible configuration & Nuclio tuning)
  - Improve scaling for Nuclio (from version >= 1.13)
- - Support Hadoop/HDFS and Snowflake as data store (via WebHDFS)
+ - Support Hadoop/HDFS (via WebHDFS) and Snowflake as data store
 
 ### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
