@@ -3,7 +3,7 @@
 ## 1. MLRun installation
 
  - install MLRun under public IP (e.g. 192.168.0.150), relevant IP address see 
-command `ipconfig`
+command `ipconfig` (it is typically IP address with setting of `Default Gateway`)
 
 ## 2. Nuclio functions
 
