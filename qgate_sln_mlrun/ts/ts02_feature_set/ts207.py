@@ -5,11 +5,7 @@ from qgate_sln_mlrun.ts.tsbase import TSBase
 import mlrun
 import mlrun.feature_store as fstore
 from mlrun.data_types.data_types import ValueType
-from mlrun.datastore.sources import SQLSource
-import os
-import json
-import glob
-from qgate_sln_mlrun.helper.mysqlhelper import MySQLHelper
+from mlrun.datastore.sources import HttpSource
 from qgate_sln_mlrun.helper.featuresethelper import FeatureSetHelper
 
 
