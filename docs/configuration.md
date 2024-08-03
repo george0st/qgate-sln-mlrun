@@ -58,4 +58,5 @@ The setup of Kafka for **on-line source** (valid for target 'kafka')
   - detail description, see [Kafka](./kafka.md)
 
 ## NOTES
-Supported [sources and targers](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html) in MLRun
+ - [MLRun configuration](config_in_docker.md) include IP addresses for Target/Source
+ - Supported [sources and targers](https://docs.mlrun.org/en/latest/feature-store/sources-targets.html) in MLRun
