@@ -15,9 +15,9 @@ You can see detail changes in
  - TBD.
 
 ### 🚩1.7 MLRun (exp. Q3/2024)
- - Model monitoring/drifting for MLRun (available in free version also)
+ - **Model monitoring/drifting** for MLRun (available in free version also)
+ - **API Gateway** (flexible configuration & Nuclio tuning)
  - Support GenAI/LLM (see Langchain, GenAI tutorial, etc.)
- - Available API Gateway (flexible configuration & Nuclio tuning)
  - Improve scaling for Nuclio (from version >= 1.13)
  - Support Hadoop/HDFS (via WebHDFS) and Snowflake as data store
 
@@ -34,7 +34,7 @@ You can see detail changes in
 
 ## Iguazio
 
-### 🚩 3.6.1 Iguazio (exp. 10-12/2024)
+### 🚩 3.6.1 Iguazio (Q4/2024)
  - ???
 
 ### ✅ 3.6.0 Iguazio
