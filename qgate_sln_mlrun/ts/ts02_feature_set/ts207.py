@@ -29,7 +29,7 @@ class TS207(TSBase):
         pass
         for featureset_name in self.get_featuresets(self.project_specs.get(project_name)):
             # Create shared table as data source
-            self._mysql.create_insert_data(self._mysql.create_helper(featureset_name), featureset_name, False)
+            #self._mysql.create_insert_data(self._mysql.create_helper(featureset_name), featureset_name, False)
 
             # Get definition for featureset
             definition = self._fshelper.get_definition(project_name, featureset_name)
@@ -45,15 +45,15 @@ class TS207(TSBase):
         for entity in featureset.spec.entities:
             keys+=f"{entity.name},"
 
-        fstore.ingest(featureset,
-                      SQLSource(name="tst",
-                                table_name=self._mysql.create_helper(featureset_name),
-                                db_url=self.setup.mysql,
-                                key_field=keys[:-1]),
-                      # overwrite=False,
-                      return_df=False,
-                      #infer_options=mlrun.data_types.data_types.InferOptions.Null)
-                      infer_options=mlrun.data_types.data_types.InferOptions.default())
+        # fstore.ingest(featureset,
+        #               SQLSource(name="tst",
+        #                         table_name=self._mysql.create_helper(featureset_name),
+        #                         db_url=self.setup.mysql,
+        #                         key_field=keys[:-1]),
+        #               # overwrite=False,
+        #               return_df=False,
+        #               #infer_options=mlrun.data_types.data_types.InferOptions.Null)
+        #               infer_options=mlrun.data_types.data_types.InferOptions.default())
         # TODO: use InferOptions.Null with python 3.10 or focus on WSL
         # NOTE: option default, change types
         # NOTE: option Null, generate error with datetime in python 3.9
