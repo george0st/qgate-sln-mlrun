@@ -55,6 +55,12 @@ see detail below
 1. It is necessery to ingest sample data to featureset, before kafka ingest
    - known issue from MLRun version v1.1.0, see [ML-2407](https://docs.mlrun.org/en/latest/change-log/index.html#open-issues)
 
+## HttpSource
+
+1. It is necessery to ingest sample data to featureset, before http ingest
+   - see [issue](https://github.com/mlrun/mlrun/issues/6095) 
+   - it is similar such as [ML-2407](https://docs.mlrun.org/en/latest/change-log/index.html#open-issues)
+
 ## CSVSource
 
 1. CSVSource supports only default CSV setting, it means sep=',', decimal='.'. It is not
