@@ -4,7 +4,9 @@ The view to setting of test configuration.
 
 ## 1. Host IP
 The IP address for installation of MLRun. This env. variable can be used such as ${HOST_IP} 
-in env. file.
+in other variables in env. file. It is important to use not localhost, but relevant
+IP address, because the services in pod/node need to have access to valid end point
+of services.
 
 ## 2. Anonym mode
 The switch for setup `On` or `Off` anonym mode (default is `Off`). If anonym mode is `On` than 
@@ -41,24 +43,24 @@ The path to the output directory for **off-line storage** (valid for target 'par
 
 ## 8. Redis
 The setup of Redis for **on-line source/target** (valid for target 'redis')
-  - `QGATE_REDIS = redis://localhost:6379`
+  - `QGATE_REDIS = redis://${HOST_IP}:6379`
   - detail description, see [Redis](./redis.md)
 
 ## 9. MySQL
 The setup of MySQL for **on-line source/target** (valid for target 'mysql')
-  - `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@localhost:3306/test`
+  - `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@${HOST_IP}:3306/test`
   - detail description, see [MySQL](./mysql.md)
 
 ## 10. Postgres
 The setup of Postgres for **on-line source/target** (valid for target 'postgres')
-  - `QGATE_POSTGRES = postgresql+psycopg2://testuser:testpwd@localhost:5432/test`
+  - `QGATE_POSTGRES = postgresql+psycopg2://testuser:testpwd@${HOST_IP}:5432/test`
   - detail description, see [Postgres](./postgres.md)
   - NOTE: limited usage based on SqlTarget technical preview state
     (the main focus on MySQL)
 
 ## 11. Kafka
 The setup of Kafka for **on-line source** (valid for target 'kafka')
-  - `QGATE_KAFKA = localhost:9092`
+  - `QGATE_KAFKA = ${HOST_IP}:9092`
   - detail description, see [Kafka](./kafka.md)
 
 ## NOTES
