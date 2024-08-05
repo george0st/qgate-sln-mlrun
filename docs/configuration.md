@@ -4,9 +4,9 @@ The view to setting of test configuration.
 
 ## 1. Host IP
 The IP address for installation of MLRun. This env. variable can be used such as ${HOST_IP} 
-in other variables in env. file. It is important to use not localhost, but relevant
+in other variables in env. file. It is important to use not `localhost`, but relevant
 IP address, because the services in pod/node need to have access to valid end point
-of services.
+of the services (such as redis, kafka, etc.).
 
 ## 2. Anonym mode
 The switch for setup `On` or `Off` anonym mode (default is `Off`). If anonym mode is `On` than 
