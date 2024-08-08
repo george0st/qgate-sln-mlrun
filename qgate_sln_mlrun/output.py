@@ -254,7 +254,7 @@ class Output():
                 host = f"{host_name}/{ip}"
         return host
 
-    def _get_ip_addresses(family=socket.AF_INET, name_prefix=None):
+    def _get_ip_addresses(self, family=socket.AF_INET, name_prefix=None):
         """Return all IP addresses with interface name
 
         :param family:      type of address e.g. AF_INET, AF_INET6, etc.
