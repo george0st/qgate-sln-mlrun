@@ -130,6 +130,16 @@ class Setup(metaclass=Singleton):
         return self._variables.get('QGATE_KAFKA', None)
 
     @property
+    def host_ip(self):
+        """Return the host ip"""
+        return self._variables.get('HOST_IP', None)
+
+    @property
+    def host_ip_check(self):
+        """Return the host ip check"""
+        return self._variables.get('HOST_IP_CHECK', None)
+
+    @property
     def anonym_mode(self) -> bool:
         """Return the anonymous mode"""
         return True if self._variables.get('QGATE_ANONYM_MODE', "Off").lower() == "on" else False
