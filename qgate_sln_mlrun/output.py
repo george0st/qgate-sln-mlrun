@@ -241,7 +241,12 @@ class Output():
         return host
 
     def _get_ip_addresses(family=socket.AF_INET, name_prefix=None):
-        """Retrun all interface name and IP addresses from relevant family (e.g. AF_INET, AF_INET6, etc.)"""
+        """Return all IP addresses with interface name
+
+        :param family:      type of address e.g. AF_INET, AF_INET6, etc.
+        :param name_prefix: adapter name prefix e.g. "Wi-Fi", "Local", etc.
+        :return:            all IP addresses with interfaces
+        """
 
         for interface, snics in psutil.net_if_addrs().items():
             for snic in snics:
