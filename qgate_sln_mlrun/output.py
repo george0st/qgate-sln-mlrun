@@ -43,6 +43,7 @@ class Output():
         self._data = {}
         self._templates = templates
         self._system_info()
+        self._check_host_ip()
 
 # region TEST SCENARIOS
     def testscenario_new(self, ts_name, ts_description):
@@ -201,6 +202,16 @@ class Output():
         self._data["system"] = platform.system() + " " + platform.version() + " (" + platform.platform() + ")"
         self._data["platform"] = platform.machine() + " (" + platform.processor() + ")"
         self._data["variables"] = self._setup.variables
+
+    def _check_host_ip(self):
+        if self._setup.host_ip_check:
+            # from colorama import Fore, Back, Style
+            # print(Fore.RED + 'some red text')
+
+            addresses=list(self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check))
+
+            # TODO: check addresses
+            # self._setup.host_ip
 
     def _get_model_version(self):
         from qgate_sln_mlrun.ts.tsbase import TSBase
