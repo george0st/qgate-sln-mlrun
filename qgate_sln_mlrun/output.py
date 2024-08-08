@@ -8,6 +8,8 @@ from qgate_sln_mlrun.setup import Setup
 from contextlib import suppress
 from qgate_sln_mlrun.version import __version__
 from jinja2 import Template
+import socket
+import psutil
 
 
 class Singleton (type):
@@ -237,6 +239,18 @@ class Output():
                 ip = socket.gethostbyname(host_name)
                 host = f"{host_name}/{ip}"
         return host
+
+    def _get_ip_addresses(family=socket.AF_INET, name_prefix=None):
+        """Retrun all interface name and IP addresses from relevant family (e.g. AF_INET, AF_INET6, etc.)"""
+
+        for interface, snics in psutil.net_if_addrs().items():
+            for snic in snics:
+                if snic.family == family:
+                    if name_prefix:
+                        if interface.startswith(name_prefix):
+                            yield (interface, snic.address)
+                    else:
+                        yield (interface, snic.address)
 
     @property
     def datetime(self):
