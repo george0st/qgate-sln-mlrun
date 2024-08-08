@@ -205,13 +205,16 @@ class Output():
 
     def _check_host_ip(self):
         if self._setup.host_ip_check:
-            # from colorama import Fore, Back, Style
-            # print(Fore.RED + 'some red text')
+            check = False
 
             addresses=list(self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check))
-
-            # TODO: check addresses
-            # self._setup.host_ip
+            for addr in addresses:
+                if addr==self._setup.host_ip:
+                    check=True
+                    break
+            if not check:
+                from colorama import Fore, Back, Style
+                print(Fore.RED + 'some red text')
 
     def _get_model_version(self):
         from qgate_sln_mlrun.ts.tsbase import TSBase
