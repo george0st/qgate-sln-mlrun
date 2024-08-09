@@ -7,6 +7,7 @@ The IP address for installation of MLRun. This env. variable can be used such as
 in other variables in env. file. It is important to use not `localhost`, but relevant
 IP address, because the services in pod/node need to have access to valid end point
 of the services (such as redis, kafka, etc.).
+ - `HOST_IP = 192.168.0.150`
 
 ## 2. Check Host IP
 The check host IP, will check of HOST_IP based on compare with IP for network adapter
