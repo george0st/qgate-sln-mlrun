@@ -213,7 +213,7 @@ class Output():
                     break
             if not check:
                 from colorama import Fore, Style
-                print(Fore.RED + f"!!! HOST_IP address '{self._setup.host_ip}' does not match with adapter '{self._setup.host_ip_check}' !!!" + Style.RESET_ALL)
+                print(Fore.RED + f"!!! HOST_IP address '{self._setup.host_ip}' does not match with IP of adapter '{self._setup.host_ip_check}' !!!" + Style.RESET_ALL)
 
     def _get_model_version(self):
         from qgate_sln_mlrun.ts.tsbase import TSBase
