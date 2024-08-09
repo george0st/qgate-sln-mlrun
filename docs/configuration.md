@@ -8,6 +8,11 @@ in other variables in env. file. It is important to use not `localhost`, but rel
 IP address, because the services in pod/node need to have access to valid end point
 of the services (such as redis, kafka, etc.).
 
+## 2. Check Host IP
+The check host IP, will check of HOST_IP based on compare with IP for network adapter
+(name or prefix). In case of differences, it will generate warning during the run.
+ - `HOST_IP_CHECK = "wi-fi"`
+
 ## 2. Anonym mode
 The switch for setup `On` or `Off` anonym mode (default is `Off`). If anonym mode is `On` than 
 the output file names in directory `QGATE_OUTPUT` are only with date information
