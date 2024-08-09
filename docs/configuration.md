@@ -2,19 +2,19 @@
 
 The view to setting of test configuration.
 
-## 1. Host IP
+## 1. Host IP (optional)
 The IP address for installation of MLRun. This env. variable can be used such as ${HOST_IP} 
 in other variables in env. file. It is important to use not `localhost`, but relevant
 IP address, because the services in pod/node need to have access to valid end point
 of the services (such as redis, kafka, etc.).
  - `HOST_IP = 192.168.0.150`
 
-## 2. Check Host IP
+## 2. Check Host IP (optional)
 The check host IP, will check of HOST_IP based on compare with IP for network adapter
-(name or prefix). In case of differences, it will generate warning during the run.
+(name or prefix). In case of differences, it will generate warning during the run.  
  - `HOST_IP_CHECK = "wi-fi"`
 
-## 3. Anonym mode
+## 3. Anonym mode (optional)
 The switch for setup `On` or `Off` anonym mode (default is `Off`). If anonym mode is `On` than 
 the output file names in directory `QGATE_OUTPUT` are only with date information
 (without the time detail for file creation). The host variable `Host` in output file 
@@ -36,7 +36,7 @@ The list of projects for testing e.g. agate-1, agate-2, etc.
 Default is empty list (all projects will be tested)
   - `QGATE_FILTER_PROJECTS = agate-2, agate-redis-parquet`
 
-## 7. Filter scenarios
+## 7. Filter scenarios (optional)
 The list of test scenarios for testing e.g. TS201, etc. (it is 
 important to keep and know TS dependencies). Default is empty list (all test
 scenarios will be tested)
@@ -47,24 +47,24 @@ The path to the output directory for **off-line storage** (valid for target 'par
   - local file system `QGATE_OUTPUT = ./output`
   - object storage `QGATE_OUTPUT = TBD.`
 
-## 9. Redis
+## 9. Redis (optional)
 The setup of Redis for **on-line source/target** (valid for target 'redis')
   - `QGATE_REDIS = redis://${HOST_IP}:6379`
   - detail description, see [Redis](./redis.md)
 
-## 10. MySQL
+## 10. MySQL (optional)
 The setup of MySQL for **on-line source/target** (valid for target 'mysql')
   - `QGATE_MYSQL = mysql+pymysql://testuser:testpwd@${HOST_IP}:3306/test`
   - detail description, see [MySQL](./mysql.md)
 
-## 11. Postgres
+## 11. Postgres (optional)
 The setup of Postgres for **on-line source/target** (valid for target 'postgres')
   - `QGATE_POSTGRES = postgresql+psycopg2://testuser:testpwd@${HOST_IP}:5432/test`
   - detail description, see [Postgres](./postgres.md)
   - NOTE: limited usage based on SqlTarget technical preview state
     (the main focus on MySQL)
 
-## 12. Kafka
+## 12. Kafka (optional)
 The setup of Kafka for **on-line source** (valid for target 'kafka')
   - `QGATE_KAFKA = ${HOST_IP}:9092`
   - detail description, see [Kafka](./kafka.md)
