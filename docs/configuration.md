@@ -45,7 +45,8 @@ scenarios will be tested).
   - `QGATE_FILTER_SCENARIOS = TS101, TS102, TS205`
 
 ## 8. Output
-The path to the output directory for **off-line storage** (valid for target 'parquet', 'csv', etc.)
+The path to the output directory for **off-line storage** (valid for target 'parquet',
+'csv', etc.). Default value is `./output`.
   - local file system `QGATE_OUTPUT = ./output`
   - object storage `QGATE_OUTPUT = TBD.`
 
