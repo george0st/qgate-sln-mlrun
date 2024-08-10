@@ -207,8 +207,6 @@ class Output():
         if self._setup.host_ip_check and self._setup.host_ip:
             check = False
             addrs = []
-            #addresses=list(self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check))
-            #for addr in addresses:
             for addr in self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check):
                 addrs.append(addr[1])
                 if addr[1]==self._setup.host_ip:
@@ -250,7 +248,8 @@ class Output():
             host = "Anonym/192.168.0.1"
         else:
             if self._setup.host_ip_check:
-                # get IP from define IP adapter
+
+                # get IP from define IP adapter (if adapter was defined)
                 addr=list(self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check))
                 if len(addr)>0:
                     host=addr[0][1]
@@ -258,8 +257,6 @@ class Output():
             # get IP based on standard approach
             if len(host)==0:
                 with suppress(Exception):
-                    #import socket
-
                     host_name = socket.gethostname()
                     ip = socket.gethostbyname(host_name)
                     host = f"{host_name}/{ip}"
