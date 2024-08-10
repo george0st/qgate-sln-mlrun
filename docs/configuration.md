@@ -30,7 +30,7 @@ can be relative or full) e.g. ../qgate-model
 
 ## 5. Data set
 The name of data set (as directory name in model definition) for testing e.g. "01-size-100", "02-size-1K", etc.
-The directory contains CSV/GZ and Parquet files.
+The directory contains CSV/GZ and Parquet files. Default value is `01-size-100`.
   - `QGATE_DATASET = 01-size-100`
 
 ## 6. Filter projects (optional)
