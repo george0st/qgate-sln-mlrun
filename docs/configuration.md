@@ -28,7 +28,7 @@ The path to the [QGate model](https://github.com/george0st/qgate-model) definiti
 can be relative or full) e.g. ../qgate-model
   - `QGATE_DEFINITION = ../qgate-model`
 
-## 5. Data set
+## 5. Data set (optional)
 The name of data set (as directory name in model definition) for testing e.g. "01-size-100", "02-size-1K", etc.
 The directory contains CSV/GZ and Parquet files. Default value is `01-size-100`.
   - `QGATE_DATASET = 01-size-100`
@@ -44,7 +44,7 @@ important to keep and know TS dependencies). Default is empty list (all test
 scenarios will be tested).
   - `QGATE_FILTER_SCENARIOS = TS101, TS102, TS205`
 
-## 8. Output
+## 8. Output (optional)
 The path to the output directory for **off-line storage** (valid for target 'parquet',
 'csv', etc.). Default value is `./output`.
   - local file system `QGATE_OUTPUT = ./output`
