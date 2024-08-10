@@ -204,7 +204,7 @@ class Output():
         self._data["variables"] = self._setup.variables
 
     def _check_host_ip(self):
-        if self._setup.host_ip_check:
+        if self._setup.host_ip_check and self._setup.host_ip:
             check = False
             addrs = []
             addresses=list(self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check))
@@ -215,7 +215,8 @@ class Output():
                     break
             if not check:
                 from colorama import Fore, Style
-                print(Fore.RED + f"!!! HOST_IP address '{self._setup.host_ip}' does not match with IP of adapter '{self._setup.host_ip_check}/{str(addrs)}' !!!" + Style.RESET_ALL)
+                print(Fore.RED + f"!!! HOST_IP address '{self._setup.host_ip}' does not match with IP of "
+                                 f"adapter '{self._setup.host_ip_check}/{str(addrs)}' !!!" + Style.RESET_ALL)
 
     def _get_model_version(self):
         from qgate_sln_mlrun.ts.tsbase import TSBase
