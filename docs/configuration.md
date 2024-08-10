@@ -12,7 +12,8 @@ of the services (such as redis, kafka, etc.).
 ## 2. Check Host IP (optional)
 The check host IP, will check of HOST_IP based on compare with IP for network adapter
 (the network adapter is identified based on the name or the name prefix). In case of 
-differences, it will generate warning during the run.  
+differences, it will generate warning during the run. The valid values are e.g. "wi-fi"
+or "wi" or "WI" (value is case-insensitive)  
  - `HOST_IP_CHECK = "wi-fi"`
 
 ## 3. Anonym mode (optional)
