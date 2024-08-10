@@ -13,7 +13,7 @@ of the services (such as redis, kafka, etc.).
 The check host IP, will check of HOST_IP based on compare with IP for network adapter
 (the network adapter is identified based on the name or the name prefix). In case of 
 differences, it will generate warning during the run. The valid values are e.g. "wi-fi"
-or "wi" or "WI" (value is case-insensitive)  
+or "wi" or "WI" (value is case-insensitive). 
  - `HOST_IP_CHECK = "wi-fi"`
 
 ## 3. Anonym mode (optional)
@@ -28,24 +28,25 @@ The path to the [QGate model](https://github.com/george0st/qgate-model) definiti
 can be relative or full) e.g. ../qgate-model
   - `QGATE_DEFINITION = ../qgate-model`
 
-## 5. Data set
+## 5. Data set (optional)
 The name of data set (as directory name in model definition) for testing e.g. "01-size-100", "02-size-1K", etc.
-The directory contains CSV/GZ and Parquet files.
+The directory contains CSV/GZ and Parquet files. Default value is `01-size-100`.
   - `QGATE_DATASET = 01-size-100`
 
-## 6. Filter projects
+## 6. Filter projects (optional)
 The list of projects for testing e.g. agate-1, agate-2, etc. 
-Default is empty list (all projects will be tested)
+Default is empty list (all projects will be tested).
   - `QGATE_FILTER_PROJECTS = agate-2, agate-redis-parquet`
 
 ## 7. Filter scenarios (optional)
 The list of test scenarios for testing e.g. TS201, etc. (it is 
 important to keep and know TS dependencies). Default is empty list (all test
-scenarios will be tested)
+scenarios will be tested).
   - `QGATE_FILTER_SCENARIOS = TS101, TS102, TS205`
 
-## 8. Output
-The path to the output directory for **off-line storage** (valid for target 'parquet', 'csv', etc.)
+## 8. Output (optional)
+The path to the output directory for **off-line storage** (valid for target 'parquet',
+'csv', etc.). Default value is `./output`.
   - local file system `QGATE_OUTPUT = ./output`
   - object storage `QGATE_OUTPUT = TBD.`
 
