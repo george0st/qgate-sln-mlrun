@@ -207,8 +207,9 @@ class Output():
         if self._setup.host_ip_check and self._setup.host_ip:
             check = False
             addrs = []
-            addresses=list(self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check))
-            for addr in addresses:
+            #addresses=list(self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check))
+            #for addr in addresses:
+            for addr in self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check):
                 addrs.append(addr[1])
                 if addr[1]==self._setup.host_ip:
                     check=True
@@ -248,12 +249,17 @@ class Output():
         if self._setup.anonym_mode:
             host = "Anonym/192.168.0.1"
         else:
-            with suppress(Exception):
-                import socket
+            if self._setup.host_ip_check:
+                addr=self._get_ip_addresses(family=socket.AF_INET, name_prefix=self._setup.host_ip_check)
+                if len(addr)>0:
+                    host=addr[0][1]
+            if len(host)==0:
+                with suppress(Exception):
+                    import socket
 
-                host_name = socket.gethostname()
-                ip = socket.gethostbyname(host_name)
-                host = f"{host_name}/{ip}"
+                    host_name = socket.gethostname()
+                    ip = socket.gethostbyname(host_name)
+                    host = f"{host_name}/{ip}"
         return host
 
     def _get_ip_addresses(self, family=socket.AF_INET, name_prefix=None):
