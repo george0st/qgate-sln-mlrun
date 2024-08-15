@@ -19,11 +19,11 @@ class TS202(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Create feature set(s) & Ingest from pandas DataFrame source (in one step)"
+        return "Create feature set(s) & Ingest from DataFrame source (in one step)"
 
     @property
     def long_desc(self):
-        return ("Create feature set(s) & Ingest from DataFrame source (in one step, without save and load featureset)")
+        return ("Create feature set(s) & Ingest from Pandas DataFrame source (in one step, without save and load featureset)")
 
     def prj_exec(self, project_name):
         """ Create featuresets and ingest"""
