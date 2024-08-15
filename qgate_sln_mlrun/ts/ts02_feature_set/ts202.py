@@ -19,7 +19,7 @@ class TS202(TSBase):
 
     @property
     def desc(self) -> str:
-        return "Create feature set(s) & Ingest from DataFrame source (in one step)"
+        return "Create feature set(s) & Ingest from pandas DataFrame source (in one step)"
 
     @property
     def long_desc(self):

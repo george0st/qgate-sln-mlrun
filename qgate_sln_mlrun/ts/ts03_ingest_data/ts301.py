@@ -21,7 +21,7 @@ class TS301(TSBase):
 
     @property
     def long_desc(self):
-        return "Ingest data (in Preview mode) from DataFrame Source"
+        return "Ingest data (in Preview mode) from pandas DataFrame Source"
 
     def prj_exec(self, project_name):
         """Data ingest"""
