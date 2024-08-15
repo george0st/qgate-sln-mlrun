@@ -22,7 +22,7 @@ class TS401(TSBase):
 
     @property
     def long_desc(self):
-        return "Ingest data & pipeline (Preview mode) from DataFrame Source"
+        return "Ingest data & pipeline (Preview mode) from Pandas DataFrame Source"
 
     def prj_exec(self, project_name):
         """Data ingest"""

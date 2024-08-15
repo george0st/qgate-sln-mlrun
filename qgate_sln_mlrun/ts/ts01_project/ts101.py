@@ -17,7 +17,7 @@ class TS101(TSBase):
 
     @property
     def long_desc(self):
-        return "Create project with setting name, description and tags"
+        return "Create project with requested name, description and tags"
 
     def prj_exec(self, project_name):
         """ Create projects based on json definition"""
@@ -33,4 +33,3 @@ class TS101(TSBase):
         for lbl in lbls:
             prj.metadata.labels[lbl] = lbls[lbl]
         prj.save()
-        return True
