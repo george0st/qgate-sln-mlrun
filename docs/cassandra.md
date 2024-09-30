@@ -14,13 +14,17 @@
 
 2. Run new container
    - create container with name 'mlrun-cassandra', use image 'cassandra:5.0' and open ports 9042:9042
-     - `docker run --name mlrun-cassandra -p 9042:9042 -d cassandra:5.0`
+     - `docker run --name mlrun-cassandra -p 9042:9042 -p 7199:7199 -d cassandra:5.0`
    - or create container with name 'mlrun-cassandra', use image 'cassandra:latest' and open ports 9042:9042
-     - `docker run --name mlrun-cassandra -p 9042:9042 -d cassandra:latest`
+     - `docker run --name mlrun-cassandra -p 9042:9042 -p 7199:7199 -d cassandra:latest`
+   - NOTE:
+     - **port 9042** is used from cassandra listener
+     - **port 7199** is using from admin tools such as `nodetool`, etc.
 
 3. Test Cassandra in container
    - interactive access to the container
-     - `docker exec -it mlrun-cassandra cqlsh`
+     - `docker exec -it mlrun-cassandra cqlsh` 
+     - or `docker exec -it mlrun-cassandra bash`
    - show keyspaces (databases)
      - `DESCRIBE KEYSPACES;`
      - or `SELECT * FROM system_schema.keyspaces;`

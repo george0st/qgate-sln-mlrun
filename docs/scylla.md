@@ -14,13 +14,17 @@
 
 2. Run new container
    - create container with name 'mlrun-scylla', use image 'scylladb/scylla:6.1.1' and open ports 9042:9042
-     - `docker run --name mlrun-scylla -p 9042:9042 -d scylladb/scylla:6.1.1`
+     - `docker run --name mlrun-scylla -p 9042:9042 -p 7199:7199 -d scylladb/scylla:6.1.1`
    - or create container with name 'mlrun-scylla', use image 'scylladb/scylla:latest' and open ports 9042:9042
-     - `docker run --name mlrun-scylla -p 9042:9042 -d scylladb/scylla:latest`
-
+     - `docker run --name mlrun-scylla -p 9042:9042 -p 7199:7199 -d scylladb/scylla:latest`
+   - NOTE:
+     - **port 9042** is used from scylla listener
+     - **port 7199** is using from admin tools such as `nodetool`, etc.
+     
 3. Test Scylla in container
    - interactive access to the container
      - `docker exec -it mlrun-scylla cqlsh`
+     - or `docker exec -it mlrun-scylla bash`
    - show keyspaces (databases)
      - `DESCRIBE KEYSPACES;`
      - or `SELECT * FROM system_schema.keyspaces;`
