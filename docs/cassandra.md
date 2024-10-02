@@ -25,6 +25,7 @@
    - interactive access to the container
      - `docker exec -it mlrun-cassandra cqlsh` 
      - or `docker exec -it mlrun-cassandra bash`
+     - or `docker exec -it mlrun-cassandra sh`
    - show keyspaces (databases)
      - `DESCRIBE KEYSPACES;`
      - or `SELECT * FROM system_schema.keyspaces;`
