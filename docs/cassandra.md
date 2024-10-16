@@ -11,6 +11,15 @@
    - or get last cassandra image `docker pull cassandra:latest`
    - Note
      - available [versions](https://hub.docker.com/_/cassandra)/[tags](https://hub.docker.com/_/cassandra/tags)
+     - github for [cassandra image](https://github.com/docker-library/cassandra/blob/master/5.0/Dockerfile)
+     - main image setting
+       - ENV **CASSANDRA_HOME** /opt/cassandra 
+       - ENV **CASSANDRA_CONF** /etc/cassandra 
+       - ENV PATH $CASSANDRA_HOME/bin:$PATH 
+       - VOLUME **/var/lib/cassandra**
+       - and key configuration
+         - **CASSANDRA_CONF/cassandra.yaml**
+         - **CASSANDRA_CONF/cassandra-rackdc.properties**
 
 2. Run new container
    - create container with name 'mlrun-cassandra', use image 'cassandra:5.0.1' and open ports 9042:9042

@@ -9,7 +9,7 @@ You can see detail changes in
 
 ## MLRun
 
-### 🚩1.8 MLRun (exp. End/2024)
+### 🚩1.8 MLRun (exp. Q1/2025)
  - Focus on SourceSQL/TargetSQL improvements, [see](https://github.com/mlrun/mlrun/issues/5238#issuecomment-2163887467)
  - Python 3.12 (till end of 2024, see Slack discussion)
  - TBD.
@@ -34,8 +34,12 @@ You can see detail changes in
 
 ## Iguazio
 
-### 🚩 3.6.1 Iguazio (Q4/2024)
+### 🚩 3.6.2 Iguazio (Q4/2024)
  - ???
+
+### ✅ 3.6.1 Iguazio
+ - Supports Kubernetes 1.30 for GKS
+ - Bug fixing
 
 ### ✅ 3.6.0 Iguazio
  - Supports Rocky Linux 8.x OS & Kubernetes 1.28 for on-prem vanilla 
