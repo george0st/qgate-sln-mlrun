@@ -1,7 +1,9 @@
 # TODO list
 
 The list of expected/future improvements:
-  
+ 0. **Connection to CQL**
+    - Support Cassandra/Scylla
+    
  1. **Extend QGATE_OUTPUT as arraylist**
     - support more storages S3, BlobStorage
     - add secrets
