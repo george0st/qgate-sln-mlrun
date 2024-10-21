@@ -10,7 +10,7 @@ You can see detail changes in
 ## MLRun
 
 ### 🚩 1.9 MLRun (exp. Q2/2025)
- - Support newer Python version (3.11 or 3.12), [see](https://github.com/mlrun/mlrun/issues/6563)
+ - Support **newer Python version** (3.11 or 3.12), [see](https://github.com/mlrun/mlrun/issues/6563)
  - TBD.
 
 ### 🚩 1.8 MLRun (exp. Q1/2025)
