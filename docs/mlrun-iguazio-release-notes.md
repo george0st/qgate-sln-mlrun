@@ -9,14 +9,17 @@ You can see detail changes in
 
 ## MLRun
 
-### 🚩1.8 MLRun (exp. Q1/2025)
- - Focus on SourceSQL/TargetSQL improvements, [see](https://github.com/mlrun/mlrun/issues/5238#issuecomment-2163887467)
- - Python 3.12 (till end of 2024, see Slack discussion)
+### 🚩 1.9 MLRun (exp. Q2/2025)
+ - Support **newer Python version** (3.11 or 3.12), [see](https://github.com/mlrun/mlrun/issues/6563)
  - TBD.
 
-### 🚩1.7 MLRun (exp. 10/2024)
+### 🚩 1.8 MLRun (exp. Q1/2025)
+ - Focus on SourceSQL/TargetSQL improvements, [see](https://github.com/mlrun/mlrun/issues/5238#issuecomment-2163887467)
+ - TBD.
+
+### 🚩 1.7 MLRun (exp. 10/2024)
  - **Model monitoring/drifting** for MLRun (in free version), relation to MySQL
- - **API Gateway** (flexible configuration & Nuclio tuning)
+ - **API Gateway** (flexible configuration & Nuclio tuning, more endpoints, etc.)
  - Support GenAI/LLM (see Langchain, GenAI tutorial, etc.)
  - Improve scaling for Nuclio (from version >= 1.13)
  - Support Hadoop/HDFS (via WebHDFS) and Snowflake as data store
@@ -34,6 +37,10 @@ You can see detail changes in
 
 ## Iguazio
 
+### 🚩 3.7.0 Iguazio (2025)
+ - Remove V3IO NoSQL (key-value), focus on external KV solutions
+ - TBD.
+
 ### 🚩 3.6.2 Iguazio (Q4/2024)
  - ???
 
@@ -46,7 +53,8 @@ You can see detail changes in
  - Focused on fixes
    - All ingresses using secured traffic (SSL), periodic deletion of files on var/crash on app nodes, etc.
  - Important announcement:
-   - Future deprecation, citation 'V3IO NoSQL (key-value) and streams functionality will be deprecated in the next major release.' 
+   - Future deprecation, citation from release notes
+     - **'V3IO NoSQL (key-value) and streams functionality will be deprecated in the next major release.'** 
 
 ### ✅ 3.5.5 Iguazio
  - Supports self-signed docker-registries

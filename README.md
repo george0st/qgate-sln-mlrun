@@ -65,6 +65,10 @@ The quality gate covers these test scenarios (✅ done, ✔ in-progress, ❌ pla
  - **10 - Model monitoring/drifting**
    - ❌ TS1001: Real-time monitoring
    - ❌ TS1002: Batch monitoring
+ - **11 - Performance tests**
+   - ❌ TS1101: Simple pipeline
+   - ❌ TS1102: Complex pipeline(s)
+   - ❌ TS11xx: TBD.
    
 NOTE: Each test scenario contains addition specific test cases (e.g. with different
 targets for feature sets, etc.).
