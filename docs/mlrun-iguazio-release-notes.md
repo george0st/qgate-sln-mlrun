@@ -10,19 +10,20 @@ You can see detail changes in
 ## MLRun
 
 ### 🚩 1.9 MLRun (exp. Q2/2025)
- - Support **newer Python version** (3.11 or 3.12), [see](https://github.com/mlrun/mlrun/issues/6563)
+ - Support **newer Python version** (>=3.11), [see](https://github.com/mlrun/mlrun/issues/6563)
  - TBD.
 
 ### 🚩 1.8 MLRun (exp. Q1/2025)
  - Focus on SourceSQL/TargetSQL improvements, [see](https://github.com/mlrun/mlrun/issues/5238#issuecomment-2163887467)
  - TBD.
 
-### 🚩 1.7 MLRun (exp. 10/2024)
+### ✅ 1.7 MLRun
  - **Model monitoring/drifting** for MLRun (in free version), relation to MySQL
  - **API Gateway** (flexible configuration & Nuclio tuning, more endpoints, etc.)
  - Support GenAI/LLM (see Langchain, GenAI tutorial, etc.)
  - Improve scaling for Nuclio (from version >= 1.13)
  - Support Hadoop/HDFS (via WebHDFS) and Snowflake as data store
+ - Support only Kubernate installation (focus on MLRun CE)
 
 ### ✅ 1.6 MLRun
  - Model monitoring/drifting for Iguazio (V3IO support only)
