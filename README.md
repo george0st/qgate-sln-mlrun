@@ -117,7 +117,7 @@ see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 
 ## Tested with
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
- - **MLRun** (in Desktop Docker)
+ - **MLRun** (in Kubernates or Desktop Docker)
    - ❌ MLRun 1.8.0 (plan Q1/2025)
    - ❌ MLRun 1.7.0
    - ✅ MLRun 1.6.4, 1.6.3, 1.6.2, 1.6.1, 1.6.0

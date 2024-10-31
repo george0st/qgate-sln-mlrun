@@ -1,5 +1,4 @@
-# mlrun==1.7.0
-mlrun==1.6.4
+mlrun==1.7.0
 python-dotenv~=0.17.0
 jinja2~=3.1
 
