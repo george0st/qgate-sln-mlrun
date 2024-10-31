@@ -118,14 +118,15 @@ see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 ## Tested with
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - **MLRun** (in Desktop Docker)
-   - MLRun 1.7.0 (plan 10/2024)
-   - MLRun 1.6.4, 1.6.3, 1.6.2, 1.6.1, 1.6.0
-   - MLRun 1.5.2, 1.5.1, 1.5.0
-   - MLRun 1.4.1
-   - MLRun 1.3.0
+   - ❌ MLRun 1.8.0 (plan Q1/2025)
+   - ❌ MLRun 1.7.0
+   - ✅ MLRun 1.6.4, 1.6.3, 1.6.2, 1.6.1, 1.6.0
+   - ✅ MLRun 1.5.2, 1.5.1, 1.5.0
+   - ✅ MLRun 1.4.1
+   - ✅ MLRun 1.3.0
  - **Iguazio** (k8s, on-prem, VM on VMware)
-   - Iguazio 3.5.3 (with MLRun 1.4.1)
-   - Iguazio 3.5.1 (with MLRun 1.3.0)
+   - ✅ Iguazio 3.5.3 (with MLRun 1.4.1)
+   - ✅ Iguazio 3.5.1 (with MLRun 1.3.0)
 
 NOTE: Current state, only the last MLRun/Iguazio versions are tested 
 (the backward compatibility is based on MLRun/Iguazio, [see](https://docs.mlrun.org/en/latest/install.html#mlrun-client-backward-compatibility)).
