@@ -1,5 +1,6 @@
 #!/bin/sh
 
-# It is necessery to focus on Kubernates in Docker
+# Hack for local installation see https://github.com/mlrun/mlrun/blob/development/hack/local/README.md
+# or standard installation on Kubernates in Docker
 
 # TBD.
