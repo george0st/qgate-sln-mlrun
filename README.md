@@ -119,7 +119,7 @@ see official [installation steps](https://docs.mlrun.org/en/latest/install.html)
 The project was tested with these MLRun versions (see [change log](https://docs.mlrun.org/en/latest/change-log/index.html)):
  - **MLRun** (in Kubernates or Desktop Docker)
    - ❌ MLRun 1.8.0 (plan Q1/2025)
-   - ✔  MLRun 1.7.0
+   - ✔  MLRun 1.7.0 (? 1.7.1 ?)
    - ✅ MLRun 1.6.4, 1.6.3, 1.6.2, 1.6.1, 1.6.0
    - ✅ MLRun 1.5.2, 1.5.1, 1.5.0
    - ✅ MLRun 1.4.1
@@ -137,3 +137,4 @@ NOTE: Current state, only the last MLRun/Iguazio versions are tested
  - **How can you test the solution?**, you have to focus on Linux env. or 
  Windows with WSL2 ([see](./docs/testing.md) step by step tutorial)
  - **MLRun/Iguazio**, the key changes in a nutshell (customer view), [see](./docs/mlrun-iguazio-release-notes.md)
+ - **MLRun local installation**, [see the hack](https://github.com/mlrun/mlrun/blob/development/hack/local/README.md) 
