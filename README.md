@@ -137,3 +137,4 @@ NOTE: Current state, only the last MLRun/Iguazio versions are tested
  - **How can you test the solution?**, you have to focus on Linux env. or 
  Windows with WSL2 ([see](./docs/testing.md) step by step tutorial)
  - **MLRun/Iguazio**, the key changes in a nutshell (customer view), [see](./docs/mlrun-iguazio-release-notes.md)
+ - **MLRun local installation**, [see the hack](https://github.com/mlrun/mlrun/blob/development/hack/local/README.md) 
