@@ -7,14 +7,14 @@
 ## 2. Run Scylla (in container)
 
 1. Get image from official source
-   - get specific scylla image version 6.2.0 `docker pull scylladb/scylla:6.2.0`
+   - get specific scylla image version 2025.1.1 `docker pull scylladb/scylla:2025.1.1`
    - or get last scylla image `docker pull scylladb/scylla:latest`
    - Note
      - available [versions](https://hub.docker.com/r/scylladb/scylla)/[tags](https://hub.docker.com/r/scylladb/scylla/tags)
 
 2. Run new container
-   - create container with name 'mlrun-scylla', use image 'scylladb/scylla:6.2.0' and open ports 9042:9042
-     - `docker run --name mlrun-scylla -p 9042:9042 -p 7199:7199 -d scylladb/scylla:6.2.0`
+   - create container with name 'mlrun-scylla', use image 'scylladb/scylla:2025.1.1' and open ports 9042:9042
+     - `docker run --name mlrun-scylla -p 9042:9042 -p 7199:7199 -d scylladb/scylla:2025.1.1`
    - or create container with name 'mlrun-scylla', use image 'scylladb/scylla:latest' and open ports 9042:9042
      - `docker run --name mlrun-scylla -p 9042:9042 -p 7199:7199 -d scylladb/scylla:latest`
    - NOTE:

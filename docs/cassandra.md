@@ -7,7 +7,7 @@
 ## 2. Run Cassandra (in container)
 
 1. Get image from official source
-   - get specific cassandra image version 5.0.2 `docker pull cassandra:5.0.2`
+   - get specific cassandra image version 5.0.4 `docker pull cassandra:5.0.4`
    - or get last cassandra image `docker pull cassandra:latest`
    - Note
      - available [versions](https://hub.docker.com/_/cassandra)/[tags](https://hub.docker.com/_/cassandra/tags)
@@ -22,8 +22,8 @@
          - **CASSANDRA_CONF/cassandra-rackdc.properties**
 
 2. Run new container
-   - create container with name 'mlrun-cassandra', use image 'cassandra:5.0.2' and open ports 9042:9042
-     - `docker run --name mlrun-cassandra -p 9042:9042 -p 7199:7199 -d cassandra:5.0.2`
+   - create container with name 'mlrun-cassandra', use image 'cassandra:5.0.4' and open ports 9042:9042
+     - `docker run --name mlrun-cassandra -p 9042:9042 -p 7199:7199 -d cassandra:5.0.4`
    - or create container with name 'mlrun-cassandra', use image 'cassandra:latest' and open ports 9042:9042
      - `docker run --name mlrun-cassandra -p 9042:9042 -p 7199:7199 -d cassandra:latest`
    - NOTE:
