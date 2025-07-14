@@ -9,13 +9,17 @@ You can see detail changes in
 
 ## MLRun
 
-### 🚩 1.9 MLRun (exp. Q2/2025)
- - Support **newer Python version** (>=3.11), [see](https://github.com/mlrun/mlrun/issues/6563)
- - TBD.
+### 🚩 1.10 MLRun (exp. Q4/2025)
+ - Postgress support (not only MySQL) 
+ - Cleaning (remove obsolete/deprecated code)
+ - etc.
 
-### 🚩 1.8 MLRun (exp. Q1/2025)
+### ✅ 1.9 MLRun
+ - Support **newer Python version** (>=3.11) and support 3.9
+
+### ✅ 1.8 MLRun
  - Focus on SourceSQL/TargetSQL improvements, [see](https://github.com/mlrun/mlrun/issues/5238#issuecomment-2163887467)
- - TBD.
+ - GA for Monitoring
 
 ### ✅ 1.7 MLRun
  - **Model monitoring/drifting** for MLRun (in free version), relation to MySQL
@@ -38,12 +42,12 @@ You can see detail changes in
 
 ## Iguazio
 
-### 🚩 3.7.0 Iguazio (2025)
+### 🚩 3.7.0 Iguazio (exp. Q4/2025)
  - Remove V3IO NoSQL (key-value), focus on external KV solutions
  - TBD.
 
-### 🚩 3.6.2 Iguazio (Q4/2024)
- - ???
+### ✅ 3.6.2 Iguazio
+ - Support Spark 3.5.3, Spark operator 3.5.2, K8s 1.30.0
 
 ### ✅ 3.6.1 Iguazio
  - Supports Kubernetes 1.30 for GKS
