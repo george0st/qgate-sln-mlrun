@@ -8,7 +8,7 @@ scikit-learn==1.5.0
 redis~=5.0
 
 # SQLSource/SQLTarget
-sqlalchemy~=1.4
+sqlalchemy==2.0.41
 cryptography~=42.0
 
 # for MySQL
